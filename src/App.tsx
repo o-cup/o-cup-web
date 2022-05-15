@@ -1,8 +1,15 @@
 import React from "react";
 import "./App.css";
+import Content from "./pages/Content";
+import GlobalStyle from "./styles/gloabalStyle";
 
 function App() {
-  return <div className="App">오늘의 컵홀더</div>;
+  return (
+    <>
+      <GlobalStyle />
+      <Content />
+    </>
+  );
 }
 
 export default App;

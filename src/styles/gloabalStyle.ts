@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -8,9 +9,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    ${reset};
     font-family: 'Source Sans Pro', sans-serif;
-    width: 100%;
-    height: 100%;
+    padding: 0;
+    margin: 0;
   }
 `;
 

@@ -8,8 +8,17 @@
     "airbnb",
     "airbnb/hooks",
     "prettier/react",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
-  ]
+    "prettier/@typescript-eslint"
+  ],
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".tsx",
+          ".ts"
+        ]
+      }
+    ]
+  }
 }

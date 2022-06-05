@@ -1,10 +1,11 @@
 import React from "react";
 import Layout from "../components/layout";
+import { StyledMain } from "../styles/mainStyle";
 
 function Main() {
 	return (
 		<Layout>
-			<div>메인페이지입니다.</div>
+			<StyledMain>Content - Main</StyledMain>
 		</Layout>
 	);
 }

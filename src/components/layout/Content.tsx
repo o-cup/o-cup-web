@@ -1,12 +1,9 @@
 import React from "react";
-import Main from "../../pages/Main";
 
-function Content() {
-  return (
-    <div>
-      <Main />
-    </div>
-  );
-}
+type ContentProps = {
+	children: JSX.Element;
+};
+
+const Content: React.FC<ContentProps> = ({ children }) => <main>{children}</main>;
 
 export default Content;

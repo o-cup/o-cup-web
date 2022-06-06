@@ -1,17 +1,18 @@
-import Content from "./components/layout/Content";
-import Footer from "./components/layout/Footer";
-import Header from "./components/layout/Header";
+import React from "react";
+import { Helmet } from "react-helmet";
 import GlobalStyle from "./styles/gloabalStyle";
+import Main from "./pages/Main";
 
 function App() {
-  return (
-    <>
-      <GlobalStyle />
-      <Header />
-      <Content />
-      <Footer />
-    </>
-  );
+	return (
+		<>
+			<GlobalStyle />
+			<Helmet>
+				<title>🥤오늘의 컵홀더 | Home</title>
+			</Helmet>
+			<Main />
+		</>
+	);
 }
 
 export default App;

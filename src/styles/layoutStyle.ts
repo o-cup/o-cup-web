@@ -4,7 +4,7 @@ const StyledLayout = styled.div`
 	width: 100%;
 	min-width: 320px;
 	max-width: 480px;
-	height: 100vh;
+	min-height: 100vh;
 	/* border: 10px solid red; */
 	margin: 0 auto;
 	display: flex;
@@ -18,13 +18,15 @@ const StyledLayout = styled.div`
 	}
 
 	main {
-		height: 100%;
-		border: 10px solid pink;
+		/* height: 100%;
+		border: 10px solid pink; */
 	}
 
 	footer {
+		padding: 20px;
 		height: 100px;
-		border: 10px solid purple;
+		text-align: center;
+		/* border: 10px solid purple; */
 	}
 `;
 

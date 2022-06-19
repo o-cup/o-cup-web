@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Montserrat', 'Noto Sans', sans-serif;
     padding: 0;
     margin: 0;
+    background: #000000;
 
     & > div:first-child {
       display: flex;

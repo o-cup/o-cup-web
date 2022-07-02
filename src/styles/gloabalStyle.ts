@@ -2,17 +2,24 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
+  ${reset};
 
   *, *::before, *::after {
     box-sizing: border-box;
   }
 
   body {
-    ${reset};
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Montserrat', 'Noto Sans', sans-serif;
     padding: 0;
     margin: 0;
+    background: #000000;
+
+    & > div:first-child {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
   }
 `;
 

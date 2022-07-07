@@ -11,6 +11,7 @@ const StyledItem = styled.li`
 	margin-bottom: 20px;
 	position: relative;
 	box-shadow: 4px 4px 0 #000000;
+  cursor: pointer;
 
 	> div {
 		display: flex;

@@ -1,13 +1,17 @@
 import React from "react";
 import { StyledHeader } from "../../styles/headerStyle";
-import DateSeletor from "../header/DateSelector";
+import DateSelector from "../header/DateSelector";
 
-function Header() {
+type HeaderProps = {
+	dateSelector: boolean;
+};
+
+function Header({dateSelector}: HeaderProps) {
 	return (
 		<header>
 			<StyledHeader>
 				오컵
-				<DateSeletor />
+				{dateSelector && <DateSelector />}
 			</StyledHeader>
 		</header>
 	);

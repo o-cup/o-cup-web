@@ -2,18 +2,29 @@ import React from "react";
 import Header from "./Header";
 import Content from "./Content";
 import Footer from "./Footer";
-import { StyledLayout } from "../../styles/layoutStyle";
+import {StyledLayout} from "../../styles/layoutStyle";
 
 type LayoutProps = {
-	children: JSX.Element;
+    dateSelector?: boolean;
+    children: JSX.Element;
 };
 
-const Layout: React.FC<LayoutProps> = ({ children }) => (
-	<StyledLayout>
-		<Header />
-		<Content>{children}</Content>
-		<Footer />
-	</StyledLayout>
+/**
+ * @param dateSelector header 에 년/월 선택하는 컴포넌트 유무
+ *                     상세페이지에서도 동일 레이아웃 사용하기 위해 날짜 숨길 수 있도록 처리
+ * @param children
+ * */
+
+const Layout: React.FC<LayoutProps> = ({dateSelector, children}) => (
+    <StyledLayout>
+        <Header dateSelector={dateSelector || false}/>
+        <Content>{children}</Content>
+        <Footer/>
+    </StyledLayout>
 );
+
+Layout.defaultProps = {
+    dateSelector: false
+}
 
 export default Layout;

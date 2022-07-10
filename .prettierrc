@@ -3,6 +3,6 @@
   "parser": "typescript",
   "semi": true,
   "useTabs": true,
-  "printWidth": 120,
-  "jsxBracketSameLine": false
+  "tabWidth": 2,
+  "printWidth": 120
 }

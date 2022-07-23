@@ -28,6 +28,11 @@ const SelectList = styled.ul`
 		&:hover {
 			background-color: rgba(249, 243, 104, 0.3);
 		}
+
+		&.selected {
+			background-color: rgba(249, 243, 104, 0.3);
+			font-weight: bold;
+		}
 	}
 `;
 
@@ -80,7 +85,7 @@ const StyledDistrictSelector = styled.div`
 		}
 	}
 
-	.selected {
+	> .selected {
 		width: 100%;
 		height: 100px;
 		display: flex;
@@ -126,6 +131,7 @@ const Chip = styled.div`
 	border-radius: 30px;
 	gap: 8px;
 	padding: 0px 10px;
+	cursor: pointer;
 `;
 
 export { StyledDistrictSelector, Chip, SelectList };

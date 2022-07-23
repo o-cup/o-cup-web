@@ -6,7 +6,7 @@ import { StyledMain } from "../styles/mainStyle";
 
 function Main() {
 	return (
-		<Layout dateSelector>
+		<Layout>
 			<StyledMain>
 				<Filter />
 				<EventList />

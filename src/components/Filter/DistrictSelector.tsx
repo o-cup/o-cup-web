@@ -8,8 +8,6 @@ const DistrictSelector = () => {
 	const MAX_CHIP_LENGTH = 3;
 
 	useEffect(() => {
-		if (chips.length >= MAX_CHIP_LENGTH) return;
-
 		const isAllSelected = divisions.find((div) => div.index === 1 && div.selected);
 		if (isAllSelected) {
 			setChips(["전국"]);

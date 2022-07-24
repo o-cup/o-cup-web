@@ -2,75 +2,102 @@ import React, { useEffect, useState } from "react";
 import { Chip, SelectList, StyledDistrictSelector } from "../../styles/districtSelectorStyle";
 import { divisionList } from "./data";
 
-type DistrictType = {
-	index: number;
-	name: string;
-	selected: boolean;
-}[];
-
 const DistrictSelector = () => {
 	const [divisions, setDivisions] = useState(divisionList);
-	const [districts, setDistricts] = useState<DistrictType>([]);
-	const [chips, setChips] = useState([""]);
+	const [chips, setChips] = useState<string[]>([]);
 
 	useEffect(() => {
-		const divisionData = divisions.find((division) => division.selected);
-		if (divisionData) {
-			const districtData =
-				divisionData?.districts.map((district, index) => ({
-					index: index + 1,
-					name: district,
-					selected: false,
-				})) || [];
-			setDistricts(districtData);
+		const isAllSelected = divisions.find((div) => div.index === 1 && div.selected);
+		if (isAllSelected) {
+			setChips(["전국"]);
+			return;
 		}
+		const texts: string[] = [];
+		divisions.forEach((div) => {
+			div.districts.forEach((dist) => {
+				if (dist.selected) {
+					if (texts.includes(dist.name)) {
+						return;
+					}
+					const chipText = `${div.name} ${dist.name}`;
+					texts.push(chipText);
+				}
+			});
+		});
+		setChips(texts);
 	}, [divisions]);
 
-	useEffect(() => {
-		// const selectedDivisionName = divisions.find((division) => division.selected)?.name;
-		// const chipsText = districts
-		// 	.filter((district) => district.selected)
-		// 	?.map((district) => `${selectedDivisionName} ${district.name}`);
-		// console.log("chipsText", chipsText);
-		// setChips([...chips, ...chipsText]);
-	}, [districts, divisions]);
-
-	useEffect(() => {
-		// divisions selected 프로퍼티가 업데이트 되었을 때,
-		// chips에 하나만 더해주기?
-	}, []);
-
 	const handleDivisionClick = (index: number) => {
-		const updated = divisions.map((division) => {
-			if (division.index === index) {
+		const isAllSelected = index === 1;
+		if (isAllSelected) {
+			const newData = divisions.map((div) => {
+				const updated = div.districts.map((dist) => ({
+					...dist,
+					selected: false,
+				}));
 				return {
-					...division,
+					...div,
+					selected: div.index === 1,
+					districts: updated,
+				};
+			});
+			setDivisions(newData);
+			return;
+		}
+
+		const newData = divisions.map((div) => {
+			if (div.index === index) {
+				return {
+					...div,
 					selected: true,
 				};
 			}
-			return { ...division, selected: false };
+			return { ...div, selected: false };
 		});
-		setDivisions(updated);
+		setDivisions(newData);
 	};
 
 	const handleDistrictClick = (index: number) => {
 		if (chips.length >= 3) return;
 
-		const updated = districts.map((district) => {
-			if (district.index === index) {
+		const newData = divisions.map((div) => {
+			if (div.selected) {
+				const updatedDist = div.districts.map((dist) => {
+					if (dist.index === index) {
+						return {
+							...dist,
+							selected: true,
+						};
+					}
+					return { ...dist };
+				});
 				return {
-					...district,
-					selected: true,
+					...div,
+					districts: updatedDist,
 				};
 			}
-			return { ...district };
+			return { ...div };
 		});
-		setDistricts(updated);
+		setDivisions(newData);
+	};
 
-		const currentDivisionName = divisions.find((division) => division.selected)?.name;
-		const districtName = districts.find((district) => district.index === index)?.name;
-		const newChip = `${currentDivisionName} ${districtName}`;
-		setChips([...chips, newChip]);
+	const handleDeleteClick = (index: number) => {
+		const newData = divisions.map((div) => {
+			const updatedDist = div.districts.map((dist) => {
+				if (chips[index].includes(dist.name)) {
+					return {
+						...dist,
+						selected: false,
+					};
+				}
+				return dist;
+			});
+			return {
+				...div,
+				districts: updatedDist,
+			};
+		});
+		setDivisions(newData);
 	};
 
 	return (
@@ -101,25 +128,29 @@ const DistrictSelector = () => {
 				<div>
 					<h6>상세지역</h6>
 					<SelectList className="sub">
-						{districts.map((district) => (
-							<li
-								role="presentation"
-								key={district.name}
-								onClick={() => handleDistrictClick(district.index)}
-								className={district.selected ? "selected" : ""}
-							>
-								{district.name}
-							</li>
-						))}
+						{divisions
+							.find((div) => div.selected)
+							?.districts.map((dist) => (
+								<li
+									role="presentation"
+									key={dist.name}
+									onClick={() => handleDistrictClick(dist.index)}
+									className={dist.selected ? "selected" : ""}
+								>
+									{dist.name}
+								</li>
+							))}
 					</SelectList>
 				</div>
 			</div>
 			<div className="selected">
 				<div className="chipsContainer">
-					{chips.map((item) => (
+					{chips.map((item, index) => (
 						<Chip key={item}>
 							<span>{item}</span>
-							<span>X</span>
+							<span role="presentation" onClick={() => handleDeleteClick(index)}>
+								X
+							</span>
 						</Chip>
 					))}
 				</div>

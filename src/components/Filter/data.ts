@@ -30,16 +30,36 @@ export const divisionList = [
 			"종로구",
 			"중구",
 			"중랑구",
-		],
+		].map((el, index) => ({
+			index: index + 1,
+			name: el,
+			selected: false,
+		})),
 	},
 	{
 		index: 3,
 		name: "부산",
-		districts: ["강서구", "금정구", "남구", "동구", "동래구", "부산진구", "북구", "사상구", "사하구", "서구"],
+		districts: [
+			"전체",
+			"강서구",
+			"금정구",
+			"남구",
+			"동구",
+			"동래구",
+			"부산진구",
+			"북구",
+			"사상구",
+			"사하구",
+			"서구",
+		].map((el, index) => ({
+			index: index + 1,
+			name: el,
+			selected: false,
+		})),
 	},
 ].map((item) => ({
 	...item,
-	selected: false,
+	selected: item.index === 1,
 }));
 
 export default {};

@@ -5,8 +5,11 @@ import { divisionList } from "./data";
 const DistrictSelector = () => {
 	const [divisions, setDivisions] = useState(divisionList);
 	const [chips, setChips] = useState<string[]>([]);
+	const MAX_CHIP_LENGTH = 3;
 
 	useEffect(() => {
+		if (chips.length >= MAX_CHIP_LENGTH) return;
+
 		const isAllSelected = divisions.find((div) => div.index === 1 && div.selected);
 		if (isAllSelected) {
 			setChips(["전국"]);
@@ -25,7 +28,7 @@ const DistrictSelector = () => {
 			});
 		});
 		setChips(texts);
-	}, [divisions]);
+	}, [divisions, chips.length]);
 
 	const handleDivisionClick = (index: number) => {
 		const isAllSelected = index === 1;
@@ -45,11 +48,25 @@ const DistrictSelector = () => {
 			return;
 		}
 
+		if (chips.length >= MAX_CHIP_LENGTH) return;
 		const newData = divisions.map((div) => {
 			if (div.index === index) {
+				const updated = div.districts.map((dist) => {
+					if (dist.index === 1) {
+						return {
+							...dist,
+							selected: true,
+						};
+					}
+					return {
+						...dist,
+						selected: false,
+					};
+				});
 				return {
 					...div,
 					selected: true,
+					districts: updated,
 				};
 			}
 			return { ...div, selected: false };
@@ -58,7 +75,7 @@ const DistrictSelector = () => {
 	};
 
 	const handleDistrictClick = (index: number) => {
-		if (chips.length >= 3) return;
+		if (chips.length >= MAX_CHIP_LENGTH) return;
 
 		const newData = divisions.map((div) => {
 			if (div.selected) {

@@ -3,39 +3,40 @@ import { BiUserCircle, BiMap } from "react-icons/bi";
 import { FiCalendar } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { StyledItem } from "../../styles/eventListStyle";
-import { Event } from "../../types";
+import { EventType } from "../../types";
 
 type EventListItemProps = {
-  event: Event;
+	event: EventType;
 };
 
-function EventListItem({ event }: EventListItemProps) {
-  const navigate = useNavigate();
+const EventListItem = ({ event }: EventListItemProps) => {
+	const navigate = useNavigate();
 
-  return (
-    <StyledItem onClick={() => navigate(`/detail?id=${event.id}`)}>
-      <div>
-        <img alt="sample" src={event.images[0]} />
-      </div>
-      <div>
-        <h6>{event.place}</h6>
-        <span>{event.bias[0]}</span>
-      </div>
-      <p>
-        <BiUserCircle />
-        {event.organizer} {event.snsId}
-      </p>
-      <p>
-        <BiMap />
-        {event.district}
-      </p>
-      <p>
-        <FiCalendar />
-        {/* 2022.05.05 - 2022.05.12 */}
-        {event.startAt}-{event.endAt}
-      </p>
-    </StyledItem>
-  );
-}
+	const { id, place, images, bias, organizer, snsId, district, startAt, endAt } = event;
+
+	return (
+		<StyledItem onClick={() => navigate(`/detail/${id}`)}>
+			<div>
+				<img alt="sample" src={images[0]} />
+			</div>
+			<div>
+				<h6>{place}</h6>
+				<span>{bias[0]}</span>
+			</div>
+			<p>
+				<BiUserCircle />
+				{organizer} {snsId}
+			</p>
+			<p>
+				<BiMap />
+				{district}
+			</p>
+			<p>
+				<FiCalendar />
+				{startAt}-{endAt}
+			</p>
+		</StyledItem>
+	);
+};
 
 export default EventListItem;

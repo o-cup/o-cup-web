@@ -1,4 +1,4 @@
-export type Event = {
+export type EventType = {
 	id: number;
 	createdAt: string;
 	place: string;
@@ -9,4 +9,17 @@ export type Event = {
 	startAt: string;
 	endAt: string;
 	images: string[];
+};
+
+export type GoodsItemType = {
+	title: string;
+	items: string[];
+	type: "AND" | "OR";
+};
+
+export type DetailType = {
+	id: string;
+	address: string;
+	goods: GoodsItemType[];
+	hashTags: string[];
 };

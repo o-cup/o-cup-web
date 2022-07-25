@@ -25,6 +25,7 @@ const GlobalStyle = createGlobalStyle`
   select {
     -webkit-appearance: none;
 		-moz-appearance: none;
+    outline: 0;
   }
 `;
 

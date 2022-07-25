@@ -118,61 +118,63 @@ const DistrictSelector = () => {
 	return (
 		<StyledDistrictSelector>
 			<h2>지역</h2>
-			<div className="nations">
-				<h6>국가</h6>
-				<select>
-					<option value="korea">한국</option>
-				</select>
-			</div>
-			<div className="districts">
-				<div>
-					<h6>지역</h6>
-					<SelectList className="main">
-						{divisions.map((division) => (
-							<li
-								role="presentation"
-								key={division.name}
-								onClick={() => handleDivisionClick(division.index)}
-								className={division.selected ? "selected" : ""}
-							>
-								{division.name}
-							</li>
-						))}
-					</SelectList>
+			<div className="content">
+				<div className="nations">
+					<h6>국가</h6>
+					<select disabled>
+						<option value="korea">한국</option>
+					</select>
 				</div>
-				<div>
-					<h6>상세지역</h6>
-					<SelectList className="sub">
-						{divisions
-							.find((div) => div.selected)
-							?.districts.map((dist) => (
+				<div className="districts">
+					<div>
+						<h6>지역</h6>
+						<SelectList className="main">
+							{divisions.map((division) => (
 								<li
 									role="presentation"
-									key={dist.name}
-									onClick={() => handleDistrictClick(dist.index)}
-									className={dist.selected ? "selected" : ""}
+									key={division.name}
+									onClick={() => handleDivisionClick(division.index)}
+									className={division.selected ? "selected" : ""}
 								>
-									{dist.name}
+									{division.name}
 								</li>
 							))}
-					</SelectList>
+						</SelectList>
+					</div>
+					<div>
+						<h6>상세지역</h6>
+						<SelectList className="sub">
+							{divisions
+								.find((div) => div.selected)
+								?.districts.map((dist) => (
+									<li
+										role="presentation"
+										key={dist.name}
+										onClick={() => handleDistrictClick(dist.index)}
+										className={dist.selected ? "selected" : ""}
+									>
+										{dist.name}
+									</li>
+								))}
+						</SelectList>
+					</div>
 				</div>
-			</div>
-			<div className="selected">
-				<div className="chipsContainer">
-					{chips.map((item, index) => (
-						<Chip key={item}>
-							<span>{item}</span>
-							<span role="presentation" onClick={() => handleDeleteClick(index)}>
-								X
-							</span>
-						</Chip>
-					))}
+				<div className="selected">
+					<div className="chipsContainer">
+						{chips.map((item, index) => (
+							<Chip key={item}>
+								<span>{item}</span>
+								<span role="presentation" onClick={() => handleDeleteClick(index)}>
+									X
+								</span>
+							</Chip>
+						))}
+					</div>
+					<p>최대 3개까지 선택 가능합니다.</p>
 				</div>
-				<p>최대 3개까지 선택 가능합니다.</p>
-			</div>
-			<div>
-				<button type="button">선택 완료</button>
+				<div>
+					<button type="button">선택 완료</button>
+				</div>
 			</div>
 		</StyledDistrictSelector>
 	);

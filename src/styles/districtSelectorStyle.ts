@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const SelectList = styled.ul`
 	width: 220px;
-	height: 310px;
+	height: 292px;
 	padding: 0;
 	overflow: scroll;
 	background-color: #fff;
@@ -38,83 +38,90 @@ const SelectList = styled.ul`
 
 const StyledDistrictSelector = styled.div`
 	width: 100%;
-	height: 100vh;
-	padding: 20px;
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 
 	h2 {
-		line-height: 90px;
+		line-height: 80px;
 		font-size: 18px;
 		font-weight: bold;
-	}
-
-	h6 {
-		font-size: 12px;
-	}
-
-	.nations {
+		text-align: center;
 		width: 100%;
-		height: 100px;
+		border-bottom: 2px solid #000;
+	}
+
+	.content {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		gap: 8px;
+		align-items: center;
+		padding: 20px;
 
-		select {
-			width: 184px;
-			height: 44px;
-			border: 2px solid #000;
-			border-radius: 4px;
+		h6 {
 			font-size: 12px;
-			padding: 0px 10px;
 		}
-	}
 
-	.districts {
-		display: flex;
-		width: 100%;
-		height: 350px;
-
-		> div {
+		.nations {
+			width: 100%;
+			height: 100px;
 			display: flex;
 			flex-direction: column;
+			justify-content: center;
 			gap: 8px;
+
+			select {
+				width: 184px;
+				height: 44px;
+				border: 2px solid #000;
+				border-radius: 4px;
+				font-size: 12px;
+				padding: 0px 10px;
+			}
 		}
-	}
 
-	> .selected {
-		width: 100%;
-		height: 100px;
-		display: flex;
-		flex-direction: column;
-
-		.chipsContainer {
+		.districts {
 			display: flex;
-			align-items: center;
-			gap: 10px;
-			height: 80px;
+			width: 100%;
+			height: 328px;
+
+			> div {
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+			}
 		}
 
-		p {
-			color: #7a7a7a;
-			font-size: 10px;
-			margin: 10px 0;
-		}
-	}
+		> .selected {
+			width: 100%;
+			height: 95px;
+			display: flex;
+			flex-direction: column;
 
-	button:last-child {
-		width: 360px;
-		height: 72px;
-		background-color: #f9f368;
-		border: 2px solid #000;
-		border-radius: 40px;
-		box-shadow: 0 4px 0 #000000;
-		font-size: 18px;
-		font-weight: bold;
-		margin: 20px 0;
+			.chipsContainer {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				height: 80px;
+			}
+
+			p {
+				color: #7a7a7a;
+				font-size: 10px;
+				margin: 10px 0;
+			}
+		}
+
+		button:last-child {
+			width: 360px;
+			height: 72px;
+			background-color: #f9f368;
+			border: 2px solid #000;
+			border-radius: 40px;
+			box-shadow: 0 4px 0 #000000;
+			font-size: 18px;
+			font-weight: bold;
+			margin: 20px 0;
+		}
 	}
 `;
 

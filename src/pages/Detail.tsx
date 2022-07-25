@@ -26,7 +26,7 @@ const Detail = () => {
 
 	if (!event || !detail) return null;
 
-	const { place, bias, organizer, snsId, startAt, endAt } = event;
+	const { place, bias, organizer, snsId, startAt, endAt, images } = event;
 	const { address, goods, hashTags } = detail;
 
 	return (
@@ -40,6 +40,7 @@ const Detail = () => {
 					startAt={startAt}
 					endAt={endAt}
 					address={address}
+					images={images}
 				/>
 				<TwitterInfo organizer={organizer} snsId={snsId} hashTags={hashTags} />
 				<GoodsInfo goods={goods} />

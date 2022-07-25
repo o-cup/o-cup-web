@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledHeader } from "../../styles/headerStyle";
+import { StyledHeader } from "../../styles/layoutStyle";
 import DateSelector from "../header/DateSelector";
 
 type HeaderProps = {
@@ -8,12 +8,10 @@ type HeaderProps = {
 
 function Header({dateSelector}: HeaderProps) {
 	return (
-		<header>
 			<StyledHeader>
 				오컵
 				{dateSelector && <DateSelector />}
 			</StyledHeader>
-		</header>
 	);
 }
 

@@ -21,6 +21,12 @@ const GlobalStyle = createGlobalStyle`
       align-items: center;
     }
   }
+
+  select {
+    -webkit-appearance: none;
+		-moz-appearance: none;
+    outline: 0;
+  }
 `;
 
 export default GlobalStyle;

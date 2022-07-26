@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const StyledFilter = styled.div`
-
 	> .search_container {
 		display: flex;
 		padding: 18px 20px;
@@ -10,10 +9,11 @@ const StyledFilter = styled.div`
 			width: 36px;
 			height: 36px;
 			margin-left: 20px;
-			background: #FFFB8F;
+			background: #fffb8f;
 			border: 2px solid #000000;
 			border-radius: 50%;
 			padding: 0;
+			cursor: pointer;
 
 			> svg {
 				width: 24px;
@@ -22,7 +22,6 @@ const StyledFilter = styled.div`
 			}
 		}
 	}
-
 `;
 
 const StyledBiasList = styled.ul`
@@ -30,11 +29,11 @@ const StyledBiasList = styled.ul`
 	overflow-x: auto;
 	overflow-y: hidden;
 	-ms-overflow-style: none;
-    scrollbar-width: none;
+	scrollbar-width: none;
 
 	margin: 14px 0;
 
-    &::-webkit-scrollbar {
+	&::-webkit-scrollbar {
 		display: none;
 	}
 `;
@@ -53,7 +52,7 @@ const StyledBias = styled.li`
 	> div {
 		width: 72px;
 		height: 72px;
-		background: #FFFB8F;
+		background: #fffb8f;
 		border-radius: 50%;
 		position: relative;
 		z-index: 1;
@@ -62,7 +61,7 @@ const StyledBias = styled.li`
 			width: 100%;
 			height: 100%;
 			border-radius: 50%;
-			background: #FFFB8F;
+			background: #fffb8f;
 			object-fit: cover;
 		}
 
@@ -90,7 +89,7 @@ const StyledBias = styled.li`
 const StyledSearchInput = styled.div`
 	display: flex;
 	align-items: center;
-	background: #FFFFFF;
+	background: #ffffff;
 	border: 2px solid #000000;
 	border-radius: 32px;
 	flex: 1 1 0;

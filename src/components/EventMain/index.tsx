@@ -23,7 +23,7 @@ const EventMain = ({ place, bias, organizer, snsId, startAt, endAt, address, ima
         </div>
         <p>
           <BiUserCircle />
-          {organizer} {snsId}
+          {organizer} @{snsId}
         </p>
         <p>
           <BiMap />

@@ -91,6 +91,9 @@ function Admin() {
       address: ""
     });
     setGoods([]);
+
+    alert("등록되었습니다!");
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -135,6 +138,7 @@ function Admin() {
 
           <label htmlFor="district">
             <h4 className="required">카페 지역</h4>
+            <span className="help">⚠️ ❍❍시 ❍❍구로 입력해주세요(특별시, 광역시 등등 제외)</span>
             <input type="text" id="district" name="district"
                    placeholder="예: 서울시 마포구"
                    value={events.district}
@@ -164,6 +168,14 @@ function Admin() {
                    placeholder="예: https://pbs.twimg.com/media/abc, https://pbs.twimg.com/media/def"
                    value={events.images}
                    onChange={handleChangeEvents} />
+          </label>
+
+          <label htmlFor="address">
+            <h4 className="required">상세주소</h4>
+            <input type="text" id="address" name="address"
+                   placeholder="예: 서울시 마포구 동교로9길 36 1층"
+                   value={detail.address}
+                   onChange={handleChangeDetail} />
           </label>
 
           <label htmlFor="hashTags">
@@ -209,19 +221,12 @@ function Admin() {
                 특전 목록:
                 <span className="help">⚠️ 여러개 입력 가능, 한개 이상인 경우 &quot;, &quot;(쉼표 후 띄어쓰기)로 구분해주세요</span>
                 <input type="text" id="items" name="items"
+                       placeholder="예: 컵홀더, 포토카드"
                        value={item.items}
                        onChange={(e) => setItem({ ...item, items: e.target.value })} />
               </label>
               <button className="goodsSubmitBtn" type="button" onClick={handleSubmitGoods}>특전등록 ✓</button>
             </div>
-          </label>
-
-          <label htmlFor="address">
-            <h4 className="required">상세주소</h4>
-            <input type="text" id="address" name="address"
-                   placeholder="예: 서울시 마포구 동교로9길 36 1층"
-                   value={detail.address}
-                   onChange={handleChangeDetail} />
           </label>
 
           <button className="submitBtn" type="submit" onClick={handleSubmit}>등록</button>

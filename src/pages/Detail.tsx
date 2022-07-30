@@ -26,7 +26,7 @@ const Detail = () => {
 
 	if (!event || !detail) return null;
 
-	const { place, bias, organizer, snsId, startAt, endAt, images } = event;
+	const { place, bias, organizer, snsId, startAt, endAt, images, district } = event;
 	const { address, goods, hashTags } = detail;
 
 	return (
@@ -45,7 +45,7 @@ const Detail = () => {
 				<TwitterInfo organizer={organizer} snsId={snsId} hashTags={hashTags} />
 				<GoodsInfo goods={goods} />
 				<Location address={address} />
-				<EventNearHere />
+				<EventNearHere bias={bias} district={district}/>
 			</StyledDetail>
 		</Layout>
 	);

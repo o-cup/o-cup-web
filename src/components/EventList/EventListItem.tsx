@@ -25,7 +25,7 @@ const EventListItem = ({ event }: EventListItemProps) => {
 			</div>
 			<p>
 				<BiUserCircle />
-				{organizer} {snsId}
+				{organizer} @{snsId}
 			</p>
 			<p>
 				<BiMap />

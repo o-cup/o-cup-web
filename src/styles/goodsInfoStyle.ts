@@ -60,14 +60,22 @@ const StyledGoodsListItem = styled.div<{ type: "AND" | "OR" }>`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	gap: 10px;
-	height: 100px;
+	margin: 16px 0;
+	
+	h6 {
+		margin-bottom: 16px;
+	}
 
 	ul {
 		display: flex;
 		align-items: center;
-		height: 40px;
+		flex-wrap: wrap;
 
+		> li {
+			height: 30px;
+			margin-bottom: 8px;
+		}
+		
 		> li:not(:last-child):after {
 			${(props) =>
 				props.type === "AND"

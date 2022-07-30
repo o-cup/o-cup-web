@@ -3,12 +3,12 @@ import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 import { StyledList } from "../../styles/eventListStyle";
 import EventListItem from "./EventListItem";
-import { fetchEvents } from "../../apis";
+import { fetchEventsByInfiniteScroll } from "../../apis";
 import { ITEMS_PER_PAGE } from "../../shared/constants";
 
 const EventList = () => {
 	const { ref, inView } = useInView();
-	const { data, hasNextPage, fetchNextPage } = useInfiniteQuery("events", fetchEvents, {
+	const { data, hasNextPage, fetchNextPage } = useInfiniteQuery("events", fetchEventsByInfiniteScroll, {
 		getNextPageParam: (lastPage, pages) => {
 			if (lastPage && lastPage?.length < ITEMS_PER_PAGE) {
 				return null;

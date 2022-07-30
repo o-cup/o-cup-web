@@ -2,7 +2,7 @@ import { ITEMS_PER_PAGE } from "../shared/constants";
 import { supabase } from "../supabaseClient";
 import { EventType, DetailType } from "../types";
 
-const fetchEvents = async ({ pageParam = 1 }) => {
+const fetchEventsByInfiniteScroll = async ({ pageParam = 1 }) => {
 	const endAt = pageParam * ITEMS_PER_PAGE;
 	const startAt = endAt - ITEMS_PER_PAGE === 0 ? endAt - ITEMS_PER_PAGE : endAt - ITEMS_PER_PAGE + 1;
 
@@ -10,8 +10,7 @@ const fetchEvents = async ({ pageParam = 1 }) => {
 	return data;
 };
 
-// todo: fetchEvents와 getEvents 병합하기
-const getEvents = async () => {
+const fetchEvents = async () => {
 	const { data, error } = await supabase.from("events");
 	if (error) {
 		throw new Error(`${error.message}: ${error.details}`);
@@ -19,7 +18,7 @@ const getEvents = async () => {
 	return data;
 };
 
-const getDetail = async () => {
+const fetchDetail = async () => {
 	const { data, error } = await supabase.from("detail");
 	if (error) {
 		throw new Error(`${error.message}: ${error.details}`);
@@ -45,5 +44,5 @@ const insertDetail = async (detailData: Partial<DetailType>) => {
 	return data;
 };
 
-export { fetchEvents, getEvents, getDetail, insertEvent, insertDetail };
+export { fetchEventsByInfiniteScroll, fetchEvents, fetchDetail, insertEvent, insertDetail };
 export default {};

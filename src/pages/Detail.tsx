@@ -8,18 +8,18 @@ import TwitterInfo from "../components/TwitterInfo";
 import GoodsInfo from "../components/GoodsInfo";
 import Location from "../components/Location";
 import EventNearHere from "../components/EventsNearHere";
-import { getDetail, getEvents } from "../apis";
+import { fetchEvents, fetchDetail } from "../apis";
 
 const Detail = () => {
 	const { id } = useParams();
 
 	// todo: customHook으로 만들기 useGetDetail
-	const { data: event } = useQuery(["event", id], getEvents, {
+	const { data: event } = useQuery(["event", id], fetchEvents, {
 		enabled: !!id,
 		select: (data) => data?.find((item) => item.id === id),
 	});
 
-	const { data: detail } = useQuery(["detail", id], getDetail, {
+	const { data: detail } = useQuery(["detail", id], fetchDetail, {
 		enabled: !!id && !!event,
 		select: (data) => data?.find((item) => item.id === id),
 	});

@@ -1,6 +1,16 @@
+import { ITEMS_PER_PAGE } from "../shared/constants";
 import { supabase } from "../supabaseClient";
 import { EventType, DetailType } from "../types";
 
+const fetchEvents = async ({ pageParam = 1 }) => {
+	const endAt = pageParam * ITEMS_PER_PAGE;
+	const startAt = endAt - ITEMS_PER_PAGE === 0 ? endAt - ITEMS_PER_PAGE : endAt - ITEMS_PER_PAGE + 1;
+
+	const { data } = await supabase.from("events").select("*").range(startAt, endAt);
+	return data;
+};
+
+// todo: fetchEvents와 getEvents 병합하기
 const getEvents = async () => {
 	const { data, error } = await supabase.from("events");
 	if (error) {
@@ -35,5 +45,5 @@ const insertDetail = async (detailData: Partial<DetailType>) => {
 	return data;
 };
 
-export { getEvents, getDetail, insertEvent, insertDetail };
+export { fetchEvents, getEvents, getDetail, insertEvent, insertDetail };
 export default {};

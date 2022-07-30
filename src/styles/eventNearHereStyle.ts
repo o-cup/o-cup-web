@@ -35,6 +35,7 @@ const StyledEventNearHereList = styled.li`
   display: inline-block;
   min-width: 120px;
   width: 120px;
+  cursor: pointer;
 
   &:first-child {
     margin-left: 20px;

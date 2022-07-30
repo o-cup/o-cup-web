@@ -18,29 +18,21 @@ const getDetail = async () => {
 };
 
 const insertEvent = async (eventData: Partial<EventType>) => {
-  const { data, error } = await supabase.from("events")
-    .insert([
-      { ...eventData }
-    ]);
+	const { data, error } = await supabase.from("events").insert([{ ...eventData }]);
 
-  if (error) {
-    throw new Error(`${error.message}: ${error.details}`);
-  }
-  console.log(data)
-  return data;
+	if (error) {
+		throw new Error(`${error.message}: ${error.details}`);
+	}
+	return data;
 };
 
 const insertDetail = async (detailData: Partial<DetailType>) => {
-  const { data, error } = await supabase.from("detail")
-    .insert([
-      { ...detailData }
-    ]);
+	const { data, error } = await supabase.from("detail").insert([{ ...detailData }]);
 
-  if (error) {
-    throw new Error(`${error.message}: ${error.details}`);
-  }
-  console.log(data)
-  return data;
+	if (error) {
+		throw new Error(`${error.message}: ${error.details}`);
+	}
+	return data;
 };
 
 export { getEvents, getDetail, insertEvent, insertDetail };

@@ -13,15 +13,13 @@ import { fetchEvents, fetchDetail } from "../apis";
 const Detail = () => {
 	const { id } = useParams();
 
-	// todo: customHook으로 만들기 useGetDetail
-	const { data: event } = useQuery(["event", id], fetchEvents, {
+	const { data: event } = useQuery(["event", id], () => fetchEvents({ infinite: true }), {
 		enabled: !!id,
 		select: (data) => data?.find((item) => item.id === id),
 	});
 
-	const { data: detail } = useQuery(["detail", id], fetchDetail, {
+	const { data: detail } = useQuery(["detail", id], () => fetchDetail({ id }), {
 		enabled: !!id && !!event,
-		select: (data) => data?.find((item) => item.id === id),
 	});
 
 	if (!event || !detail) return null;
@@ -45,7 +43,7 @@ const Detail = () => {
 				<TwitterInfo organizer={organizer} snsId={snsId} hashTags={hashTags} />
 				<GoodsInfo goods={goods} />
 				<Location address={address} />
-				<EventNearHere bias={bias} district={district}/>
+				<EventNearHere bias={bias} district={district} />
 			</StyledDetail>
 		</Layout>
 	);

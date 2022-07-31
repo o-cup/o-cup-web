@@ -2,28 +2,24 @@ import { ITEMS_PER_PAGE } from "../shared/constants";
 import { supabase } from "../supabaseClient";
 import { EventType, DetailType } from "../types";
 
-const fetchEventsByInfiniteScroll = async ({ pageParam = 1 }) => {
-	const endAt = pageParam * ITEMS_PER_PAGE;
-	const startAt = endAt - ITEMS_PER_PAGE === 0 ? endAt - ITEMS_PER_PAGE : endAt - ITEMS_PER_PAGE + 1;
+const fetchEvents = async ({ pageParam = 1, infinite = false }: { pageParam?: number; infinite?: boolean }) => {
+	let query = supabase.from("events").select("*");
 
-	const { data } = await supabase.from("events").select("*").range(startAt, endAt);
+	if (infinite) {
+		const endAt = pageParam * ITEMS_PER_PAGE;
+		const startAt = endAt - ITEMS_PER_PAGE === 0 ? endAt - ITEMS_PER_PAGE : endAt - ITEMS_PER_PAGE + 1;
+		query = query.range(startAt, endAt);
+	}
+	const { data } = await query;
 	return data;
 };
 
-const fetchEvents = async () => {
-	const { data, error } = await supabase.from("events");
+const fetchDetail = async ({ id }: { id?: string }) => {
+	const { data, error } = await supabase.from("detail").select("*").eq("id", id);
 	if (error) {
 		throw new Error(`${error.message}: ${error.details}`);
 	}
-	return data;
-};
-
-const fetchDetail = async () => {
-	const { data, error } = await supabase.from("detail");
-	if (error) {
-		throw new Error(`${error.message}: ${error.details}`);
-	}
-	return data;
+	return data?.[0];
 };
 
 const insertEvent = async (eventData: Partial<EventType>) => {
@@ -44,5 +40,5 @@ const insertDetail = async (detailData: Partial<DetailType>) => {
 	return data;
 };
 
-export { fetchEventsByInfiniteScroll, fetchEvents, fetchDetail, insertEvent, insertDetail };
+export { fetchEvents, fetchDetail, insertEvent, insertDetail };
 export default {};

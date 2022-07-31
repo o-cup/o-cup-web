@@ -1,7 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import { ThemeType } from "./theme";
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<ThemeType>`
   ${reset};
 
   *, *::before, *::after {
@@ -12,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Montserrat', 'Noto Sans', sans-serif;
     padding: 0;
     margin: 0;
-    background: #000000;
+    background: "#fcfbf7";
 
     & > div:first-child {
       display: flex;

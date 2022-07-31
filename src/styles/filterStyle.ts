@@ -9,7 +9,7 @@ const StyledFilter = styled.div`
 			width: 36px;
 			height: 36px;
 			margin-left: 20px;
-			background: #fffb8f;
+			background: ${({ theme }) => theme.colors.primary};
 			border: 2px solid #000000;
 			border-radius: 50%;
 			padding: 0;
@@ -52,7 +52,8 @@ const StyledBias = styled.li`
 	> div {
 		width: 72px;
 		height: 72px;
-		background: #fffb8f;
+		background: ${({ theme }) => theme.colors.primary};
+
 		border-radius: 50%;
 		position: relative;
 		z-index: 1;
@@ -61,7 +62,7 @@ const StyledBias = styled.li`
 			width: 100%;
 			height: 100%;
 			border-radius: 50%;
-			background: #fffb8f;
+			background: ${({ theme }) => theme.colors.primary};
 			object-fit: cover;
 		}
 
@@ -69,7 +70,7 @@ const StyledBias = styled.li`
 			content: "";
 			width: 72px;
 			height: 72px;
-			background: #000000;
+			background: ${({ theme }) => theme.colors.black};
 			border-radius: 50%;
 			position: absolute;
 			z-index: -1;
@@ -89,7 +90,7 @@ const StyledBias = styled.li`
 const StyledSearchInput = styled.div`
 	display: flex;
 	align-items: center;
-	background: #ffffff;
+	background: ${({ theme }) => theme.colors.white};
 	border: 2px solid #000000;
 	border-radius: 32px;
 	flex: 1 1 0;

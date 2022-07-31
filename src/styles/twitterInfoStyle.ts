@@ -7,7 +7,7 @@ export const StyledTwitterInfo = styled.div`
 
 	.account {
 		display: inline-block;
-		background: #ffffff;
+		background: ${({ theme }) => theme.colors.white};
 		border: 2px solid #000000;
 		padding: 16px;
 		margin-left: 16px;

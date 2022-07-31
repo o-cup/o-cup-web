@@ -1,17 +1,22 @@
 import React from "react";
-import {StyledEventNearHereList} from "../../styles/eventNearHereStyle";
+import { useNavigate } from "react-router-dom";
+import { StyledEventNearHereList } from "../../styles/eventNearHereStyle";
+import { EventType } from "../../types";
 
+function EventNearHereList({ id, images, place, organizer }: Partial<EventType>) {
 
-function EventNearHereList() {
-    return (
-        <StyledEventNearHereList>
-            <img alt="sample" src="https://pbs.twimg.com/media/FWgAyjfaIAEHkKO?format=jpg&name=4096x4096"/>
-            <div>
-                <h6>열글자 넘는 카페이름</h6>
-                <p>호시 by TILL THE TOP</p>
-            </div>
-        </StyledEventNearHereList>
-    )
+  const navigate = useNavigate();
+  const previewUrl = (images && images[0]) || "";
+
+  return (
+    <StyledEventNearHereList onClick={() => navigate(`/detail/${id}`)}>
+      {previewUrl && <img alt={previewUrl} src={previewUrl} />}
+      <div>
+        <h6>{place}</h6>
+        <p>{organizer}</p>
+      </div>
+    </StyledEventNearHereList>
+  );
 }
 
 export default EventNearHereList;

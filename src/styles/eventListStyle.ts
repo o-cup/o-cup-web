@@ -5,13 +5,13 @@ const StyledList = styled.ul`
 `;
 
 const StyledItem = styled.li`
-	background: #FFFFFF;
+	background: ${(props) => props.theme.colors.white};
 	border: 2px solid #000000;
 	padding: 16px;
 	margin-bottom: 20px;
 	position: relative;
 	box-shadow: 4px 4px 0 #000000;
-  cursor: pointer;
+	cursor: pointer;
 
 	> div {
 		display: flex;
@@ -37,15 +37,15 @@ const StyledItem = styled.li`
 			font-size: 13px;
 			line-height: 17px;
 			font-weight: 700;
-			color: #FFFFFF;
-			background: #000000;
+			color: ${({ theme }) => theme.colors.white};
+			background: ${({ theme }) => theme.colors.black};
 			padding: 4px 12px;
 			border-radius: 24px;
 		}
 	}
 
 	> p {
-		color: #7A7A7A;
+		color: ${({ theme }) => theme.colors.gray};
 		font-size: 14px;
 		line-height: 20px;
 		font-weight: 400;
@@ -62,7 +62,5 @@ const StyledItem = styled.li`
 		}
 	}
 `;
-
-
 
 export { StyledList, StyledItem };

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BiMap } from "react-icons/bi";
 import { StyledFilter } from "../../styles/filterStyle";
 import BiasList from "./BiasList";
-import CustomBottomSheet from "./BottomSheet";
+import CustomBottomSheet from "./BottomSheet/CustomBottomSheet";
 import SearchInput from "./SearchInput";
 
 function Filter() {

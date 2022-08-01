@@ -13,14 +13,14 @@ const StyledGoodsInfo = styled.div`
 		font-weight: 500;
 		font-size: 12px;
 		line-height: 16px;
-		color: #7a7a7a;
+		color: ${({ theme }) => theme.colors.gray};
 	}
 
 	> button {
 		display: block;
 		margin-left: auto;
 		margin-top: 20px;
-		background: #f9f368;
+		background: ${({ theme }) => theme.colors.primary};
 		border: 1px solid #000000;
 		border-radius: 30px;
 		box-shadow: 0 4px 0 #000000;
@@ -45,7 +45,7 @@ const Chip = styled.span`
 	width: fit-content;
 	height: 30px;
 
-	background: #ffffff;
+	background: ${({ theme }) => theme.colors.white};
 	border: 1px solid #000000;
 	border-radius: 30px;
 	box-shadow: 0 4px 0 #000000;

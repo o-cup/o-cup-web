@@ -13,7 +13,7 @@
 
 		/* custom */
 		width: 100%;
-		max-width: 480px;
+		max-width: 720px;
 		min-width: 320px;
 		max-height: calc(100vh - 64px - env(safe-area-inset-top));
 	}

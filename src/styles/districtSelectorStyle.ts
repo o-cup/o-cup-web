@@ -5,7 +5,7 @@ const SelectList = styled.ul`
 	height: 292px;
 	padding: 0;
 	overflow: scroll;
-	background-color: #fff;
+	background-color: ${({ theme }) => theme.colors.white};
 
 	&.main {
 		border: 2px solid #000;
@@ -55,7 +55,6 @@ const StyledDistrictSelector = styled.div`
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		padding: 20px;
 
 		h6 {
 			font-size: 12px;
@@ -114,7 +113,7 @@ const StyledDistrictSelector = styled.div`
 		button:last-child {
 			width: 360px;
 			height: 72px;
-			background-color: #f9f368;
+			background-color: ${({ theme }) => theme.colors.primary};
 			border: 2px solid #000;
 			border-radius: 40px;
 			box-shadow: 0 4px 0 #000000;
@@ -130,7 +129,7 @@ const Chip = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	height: 36px;
-	background-color: #f9f368;
+	background-color: ${({ theme }) => theme.colors.primay};
 	width: fit-content;
 	border: 2px solid #000;
 	font-size: 12px;

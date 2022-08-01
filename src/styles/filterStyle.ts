@@ -40,6 +40,12 @@ const StyledBiasList = styled.ul`
 
 const StyledBias = styled.li`
 	margin: 0 12px;
+  opacity: 0.5;
+  cursor: pointer;
+  
+  &.active {
+    opacity: 1;
+  }
 
 	&:first-child {
 		margin-left: 20px;

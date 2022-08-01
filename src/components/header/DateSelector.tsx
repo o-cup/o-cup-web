@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { monthState } from "../../state/atoms";
 
-function DateSeletor() {
+function DateSelector() {
+  const [month, setMonth] = useRecoilState(monthState);
 
 	const today = new Date();
 
@@ -8,24 +11,21 @@ function DateSeletor() {
 
 	const year = selectedDate.getFullYear();
 
-	const getMonthString = (month: number): string => {
-		if (month < 10) {
-			return `0${month}`;
-		}
-		return `${month}`;
-	}
-	const month = getMonthString(selectedDate.getMonth() + 1);
-
-	function getPrevMonth() {
-		const prev = new Date(year, selectedDate.getMonth() - 1, 1)
-		setSelectedDate(prev)
-	}
+  function getPrevMonth() {
+    const prev = new Date(year, selectedDate.getMonth() - 1, 1);
+    setSelectedDate(prev);
+  }
 
 	function getNextMonth() {
 		const next = new Date(year, selectedDate.getMonth() + 1, 1)
 		setSelectedDate(next)
 	}
 
+  useEffect(() => {
+    const newMonth: number = selectedDate.getMonth() + 1;
+    const currentMonthString: string = newMonth < 10 ? `0${newMonth}` : `${newMonth}`;
+    setMonth(currentMonthString);
+  }, [selectedDate]);
 
 	return (
 		<div className="date_selector">
@@ -44,4 +44,4 @@ function DateSeletor() {
 	);
 }
 
-export default DateSeletor;
+export default DateSelector;

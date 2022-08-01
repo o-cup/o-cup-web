@@ -23,3 +23,11 @@ export type DetailType = {
 	goods: GoodsItemType[];
 	hashTags: string[];
 };
+
+export type PeopleType = {
+	id: string;
+	createdAt: string;
+	name: string;
+	birthday: string;
+	profilePic: string;
+};

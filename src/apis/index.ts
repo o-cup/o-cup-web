@@ -22,6 +22,14 @@ const fetchDetail = async ({ id }: { id?: string }) => {
 	return data?.[0];
 };
 
+const fetchPeople = async () => {
+	const { data, error } = await supabase.from("people").select("*");
+	if (error) {
+		throw new Error(`${error.message}: ${error.details}`);
+	}
+	return data;
+};
+
 const insertEvent = async (eventData: Partial<EventType>) => {
 	const { data, error } = await supabase.from("events").insert([{ ...eventData }]);
 
@@ -40,5 +48,5 @@ const insertDetail = async (detailData: Partial<DetailType>) => {
 	return data;
 };
 
-export { fetchEvents, fetchDetail, insertEvent, insertDetail };
+export { fetchEvents, fetchDetail, fetchPeople, insertEvent, insertDetail };
 export default {};

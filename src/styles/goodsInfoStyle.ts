@@ -28,6 +28,7 @@ const StyledGoodsInfo = styled.div`
 		font-size: 16px;
 		line-height: 22px;
 		padding: 10px 20px;
+		cursor: pointer;
 	}
 `;
 

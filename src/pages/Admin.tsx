@@ -3,6 +3,8 @@ import Layout from "../components/layout";
 import { StyledAdmin } from "../styles/adminStyle";
 import { insertEvent, insertDetail } from "../apis";
 
+// todo: 추후 컴포넌트 분리
+
 function Admin() {
 
   const [events, setEvents] = useState({
@@ -19,8 +21,10 @@ function Admin() {
   const [detail, setDetail] = useState({
     hashTags: "", // 배열로 변환 후 전송
     // goods: "",
-    address: ""
+    address: "",
+    tweetUrl: ""
   });
+
   const [goods, setGoods] = useState([] as any[]);
   const [item, setItem] = useState({
     type: "AND",
@@ -55,7 +59,7 @@ function Admin() {
   };
 
   const handleSubmit = async () => {
-    if (!events.place || !events.bias || !events.district || !events.startAt || !events.endAt || !detail.address) {
+    if (!events.place || !events.bias || !events.district || !events.startAt || !events.endAt || !detail.address|| !detail.tweetUrl) {
       alert("필수값 채워주세요!");
       return;
     }
@@ -71,7 +75,8 @@ function Admin() {
         id: eventData[0].id,
         hashTags: detail.hashTags.split(", "),
         goods,
-        address: detail.address
+        address: detail.address,
+        tweetUrl: detail.tweetUrl
       });
     }
 
@@ -88,7 +93,8 @@ function Admin() {
     });
     setDetail({
       hashTags: "",
-      address: ""
+      address: "",
+      tweetUrl: ""
     });
     setGoods([]);
 
@@ -185,6 +191,14 @@ function Admin() {
             <input type="text" id="hashTags" name="hashTags"
                    placeholder="예: happy_o-cup_day, 8월을_축하해"
                    value={detail.hashTags}
+                   onChange={handleChangeDetail} />
+          </label>
+
+          <label htmlFor="tweetUrl">
+            <h4 className="required">트윗링크</h4>
+            <input type="text" id="tweetUrl" name="tweetUrl"
+                   placeholder="예: https://twitter.com/account/status/1234567890?s=20&t=abcdefg"
+                   value={detail.tweetUrl}
                    onChange={handleChangeDetail} />
           </label>
 

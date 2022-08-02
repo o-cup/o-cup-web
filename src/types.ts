@@ -22,4 +22,5 @@ export type DetailType = {
 	address: string;
 	goods: GoodsItemType[];
 	hashTags: string[];
+	tweetUrl: string;
 };

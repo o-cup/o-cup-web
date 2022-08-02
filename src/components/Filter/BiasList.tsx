@@ -1,20 +1,26 @@
 import React from "react";
+import { useQuery } from "react-query";
+import { useRecoilState } from "recoil";
+import { monthState } from "../../state/atoms";
+import { fetchPeople } from "../../apis";
 import { StyledBiasList } from "../../styles/filterStyle";
 import Bias from "./Bias";
 
 function BiasList() {
+  const [month] = useRecoilState(monthState);
 
-    return (
-        <StyledBiasList>
-            <Bias />
-            <Bias />
-            <Bias />
-            <Bias />
-            <Bias />
-            <Bias />
-            <Bias />
-        </StyledBiasList>
-    )
+  const { data: people } = useQuery(["people"], () => fetchPeople(), {
+    select: (data) => data?.filter((item) => item.birthday.slice(4, 6) === month)
+  });
+
+  return (
+    <StyledBiasList>
+      {people?.map((person) =>
+        <Bias key={person.id}
+              name={person.name}
+              profilePic={person.profilePic} />)}
+    </StyledBiasList>
+  );
 }
 
 export default BiasList;

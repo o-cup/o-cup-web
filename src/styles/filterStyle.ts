@@ -10,6 +10,7 @@ const StyledFilter = styled.div`
 			height: 40px;
 			margin-left: 20px;
 			background: ${({ theme }) => theme.colors.primary};
+			color: ${({ theme }) => theme.colors.black};
 			border: 2px solid #000000;
 			border-radius: 50%;
 			padding: 0;
@@ -40,12 +41,12 @@ const StyledBiasList = styled.ul`
 
 const StyledBias = styled.li`
 	margin: 0 12px;
-  opacity: 0.5;
-  cursor: pointer;
-  
-  &.active {
-    opacity: 1;
-  }
+	opacity: 0.5;
+	cursor: pointer;
+
+	&.active {
+		opacity: 1;
+	}
 
 	&:first-child {
 		margin-left: 20px;
@@ -114,7 +115,7 @@ const StyledSearchInput = styled.div`
 		line-height: 24px;
 		border: none;
 		outline: none;
-    padding: 0;
+		padding: 0;
 	}
 `;
 

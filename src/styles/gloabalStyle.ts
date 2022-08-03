@@ -7,6 +7,7 @@ const GlobalStyle = createGlobalStyle<ThemeType>`
 
   *, *::before, *::after {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
@@ -23,11 +24,19 @@ const GlobalStyle = createGlobalStyle<ThemeType>`
     }
   }
 
-  select {
+  input, textarea, select {
     -webkit-appearance: none;
 		-moz-appearance: none;
     outline: 0;
   }
+
+  button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+  }
+
 `;
 
 export default GlobalStyle;

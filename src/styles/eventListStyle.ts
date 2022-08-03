@@ -7,10 +7,11 @@ const StyledList = styled.ul`
     display: flex;
     flex-wrap: wrap;
     
-    > div {
+    > li, > div {
       width: calc(50% - 10px);
     }
     
+    > li:nth-child(2n),
     > div:nth-child(2n) {
       margin-left: 20px;
     }

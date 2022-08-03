@@ -12,6 +12,10 @@ const theme: DefaultTheme = {
 		black: "#000",
 		gray: "#7a7a7a",
 	},
+	device: {
+		mobile: "screen and (max-width: 720px)",
+		desktop: "screen and (min-width: 721px)"
+	}
 };
 
 export type ThemeType = { theme: typeof theme };

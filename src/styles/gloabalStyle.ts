@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle<ThemeType>`
     font-family: 'Montserrat', 'Noto Sans', sans-serif;
     padding: 0;
     margin: 0;
-    background: "#fcfbf7";
+    background: #fcfbf7;
 
     & > div:first-child {
       display: flex;

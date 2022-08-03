@@ -13,16 +13,16 @@ const StyledAdmin = styled.div`
   label {
     display: block;
     margin-bottom: 32px;
-    
+
     h4 {
       font-weight: 500;
     }
-    
+
     h4.required:after {
       content: "*";
       color: red;
     }
-    
+
     span.help {
       display: block;
       font-size: 12px;
@@ -31,7 +31,6 @@ const StyledAdmin = styled.div`
       padding: 8px;
       border-radius: 8px;
       margin-top: 8px;
-      white-space: pre;
     }
 
     .goodsPreview {
@@ -78,7 +77,6 @@ const StyledAdmin = styled.div`
     .goodsContainer {
       margin-top: 8px;
       font-size: 14px;
-
       border: 1px solid #000000;
       border-radius: 8px;
       padding: 16px;
@@ -102,8 +100,9 @@ const StyledAdmin = styled.div`
     }
   }
 
-  .submitBtn{
+  .submitBtn {
     width: 100%;
+    padding: 10px;
   }
 `;
 

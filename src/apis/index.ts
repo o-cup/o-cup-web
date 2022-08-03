@@ -19,14 +19,48 @@ const fetchEvents = async ({ pageParam = 1, infinite = false, keyword }: FetchEv
 	return data;
 };
 
-const fetchDetail = async ({ id }: { id?: string }) => {
-	const { data, error } = await supabase.from("detail").select("*").eq("id", id);
-	if (error) {
-		throw new Error(`${error.message}: ${error.details}`);
-	}
-	return data?.[0];
+/**
+ * 아이디가 일치하는 event 데이터 반환
+ * @param {string} id
+ * @returns {EventType}
+ */
+const fetchEvent = async ({ id }: { id?: string }) => {
+  const { data, error } = await supabase.from("events").select("*").eq("id", id);
+  if (error) {
+    throw new Error(`${error.message}: ${error.details}`);
+  }
+  return data?.[0];
 };
 
+/**
+ * 아이디가 일치하는 detail 데이터 반환
+ * @param {string} id
+ * @returns {DetailType}
+ */
+const fetchDetail = async ({ id }: { id?: string }) => {
+  const { data, error } = await supabase.from("detail").select("*").eq("id", id);
+  if (error) {
+    throw new Error(`${error.message}: ${error.details}`);
+  }
+  return data?.[0];
+};
+
+/**
+ * 아이디가 일치하는 { ...event, ...detail } 데이터 통합하여 반환
+ * @param {string} id
+ * @returns {EventType & DetailType}
+ */
+const fetchEventDetail = async ({ id }: { id?: string }) => {
+  const event = await fetchEvent({ id });
+  const detail = await fetchDetail({ id });
+
+  return { ...event, ...detail };
+};
+
+/**
+ * 인물 데이터 반환
+ * @returns {PeopleType}
+ */
 const fetchPeople = async () => {
 	const { data, error } = await supabase.from("people").select("*");
 	if (error) {
@@ -37,7 +71,6 @@ const fetchPeople = async () => {
 
 const insertEvent = async (eventData: Partial<EventType>) => {
 	const { data, error } = await supabase.from("events").insert([{ ...eventData }]);
-
 	if (error) {
 		throw new Error(`${error.message}: ${error.details}`);
 	}
@@ -46,12 +79,11 @@ const insertEvent = async (eventData: Partial<EventType>) => {
 
 const insertDetail = async (detailData: Partial<DetailType>) => {
 	const { data, error } = await supabase.from("detail").insert([{ ...detailData }]);
-
 	if (error) {
 		throw new Error(`${error.message}: ${error.details}`);
 	}
 	return data;
 };
 
-export { fetchEvents, fetchDetail, fetchPeople, insertEvent, insertDetail };
+export { fetchEvents, fetchEventDetail, fetchPeople, insertEvent, insertDetail };
 export default {};

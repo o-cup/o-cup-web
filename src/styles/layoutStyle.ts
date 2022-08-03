@@ -3,13 +3,20 @@ import styled from "styled-components";
 const StyledLayout = styled.div`
 	width: 100%;
 	min-width: 320px;
-	max-width: 720px;
 	min-height: 100vh;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
 	background: ${({ theme }) => theme.colors.background};
 	/* box-shadow: 0 0 20px rgb(0 0 0 / 5%); */
+
+  @media ${({ theme }) => theme.device.mobile} {
+    max-width: 720px;
+  }
+
+  @media ${({ theme }) => theme.device.desktop} {
+    max-width: 1280px;
+  }
 `;
 
 const StyledHeader = styled.header`

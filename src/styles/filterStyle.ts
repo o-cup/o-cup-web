@@ -6,8 +6,8 @@ const StyledFilter = styled.div`
 		padding: 18px 20px;
 
 		> button {
-			width: 36px;
-			height: 36px;
+			width: 40px;
+			height: 40px;
 			margin-left: 20px;
 			background: ${({ theme }) => theme.colors.primary};
 			border: 2px solid #000000;
@@ -100,7 +100,7 @@ const StyledSearchInput = styled.div`
 	border: 2px solid #000000;
 	border-radius: 32px;
 	flex: 1 1 0;
-	padding: 4px;
+	padding: 6px;
 
 	> svg {
 		width: 24px;
@@ -111,9 +111,10 @@ const StyledSearchInput = styled.div`
 	> input {
 		width: 100%;
 		font-size: 16px;
-		line-height: 20px;
+		line-height: 24px;
 		border: none;
 		outline: none;
+    padding: 0;
 	}
 `;
 

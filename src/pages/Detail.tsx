@@ -8,24 +8,32 @@ import TwitterInfo from "../components/TwitterInfo";
 import GoodsInfo from "../components/GoodsInfo";
 import Location from "../components/Location";
 import EventNearHere from "../components/EventsNearHere";
-import { fetchEvents, fetchDetail } from "../apis";
+import { fetchEventDetail } from "../apis";
+import { EventType, DetailType } from "../types";
 
 const Detail = () => {
-	const { id } = useParams();
+  const { id } = useParams();
 
-	const { data: event } = useQuery(["event", id], () => fetchEvents({ infinite: true }), {
-		enabled: !!id,
-		select: (data) => data?.find((item) => item.id === id),
-	});
+  const { data: combinedDetail }: EventType & DetailType | any = useQuery(["detail", id], () => fetchEventDetail({ id }), {
+    enabled: !!id
+  });
 
-	const { data: detail } = useQuery(["detail", id], () => fetchDetail({ id }), {
-		enabled: !!id && !!event,
-	});
-
-	if (!event || !detail) return null;
-
-	const { place, bias, organizer, snsId, startAt, endAt, images, district } = event;
-	const { address, goods, hashTags, tweetUrl } = detail;
+  if (!combinedDetail) return null;
+	console.log(combinedDetail)
+  const {
+    place,
+    bias,
+    organizer,
+    snsId,
+    startAt,
+    endAt,
+    images,
+    district,
+    address,
+    goods,
+    hashTags,
+    tweetUrl
+  } = combinedDetail;
 
 	return (
 		<Layout>

@@ -1,14 +1,27 @@
 import styled from "styled-components";
 
 const StyledList = styled.ul`
-	margin: 10px 20px;
+	padding: 10px 20px;
+
+  @media ${({ theme }) => theme.device.desktop} {
+    display: flex;
+    flex-wrap: wrap;
+    
+    > div {
+      width: calc(50% - 10px);
+    }
+    
+    > div:nth-child(2n) {
+      margin-left: 20px;
+    }
+  }
 `;
 
 const StyledItem = styled.li`
 	background: ${(props) => props.theme.colors.white};
 	border: 2px solid #000000;
 	padding: 16px;
-	margin-bottom: 20px;
+	margin-bottom: 24px;
 	position: relative;
 	box-shadow: 4px 4px 0 #000000;
 	cursor: pointer;

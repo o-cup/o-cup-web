@@ -21,6 +21,7 @@ const StyledGoodsInfo = styled.div`
 		margin-left: auto;
 		margin-top: 20px;
 		background: ${({ theme }) => theme.colors.primary};
+		color: ${({ theme }) => theme.colors.black};
 		border: 1px solid #000000;
 		border-radius: 30px;
 		box-shadow: 0 4px 0 #000000;
@@ -62,7 +63,7 @@ const StyledGoodsListItem = styled.div<{ type: "AND" | "OR" }>`
 	flex-direction: column;
 	justify-content: center;
 	margin: 16px 0;
-	
+
 	h6 {
 		margin-bottom: 16px;
 	}
@@ -76,7 +77,7 @@ const StyledGoodsListItem = styled.div<{ type: "AND" | "OR" }>`
 			height: 30px;
 			margin-bottom: 8px;
 		}
-		
+
 		> li:not(:last-child):after {
 			${(props) =>
 				props.type === "AND"

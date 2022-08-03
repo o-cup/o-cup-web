@@ -32,3 +32,9 @@ export type PeopleType = {
 	birthday: string;
 	profilePic: string;
 };
+
+export type FetchEventParams = {
+	pageParam?: number;
+	infinite?: boolean;
+	keyword?: string;
+};

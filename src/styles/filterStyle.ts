@@ -101,7 +101,8 @@ const StyledSearchInput = styled.div`
 	border: 2px solid #000000;
 	border-radius: 32px;
 	flex: 1 1 0;
-	padding: 6px;
+	padding: 4px;
+  height: 40px;
 
 	> svg {
 		width: 24px;

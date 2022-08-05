@@ -25,9 +25,12 @@ const GlobalStyle = createGlobalStyle<ThemeType>`
   }
 
   input, textarea, select {
+    outline: 0;
+  }
+  
+  select {
     -webkit-appearance: none;
 		-moz-appearance: none;
-    outline: 0;
   }
 
   button {

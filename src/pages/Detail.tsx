@@ -19,7 +19,7 @@ const Detail = () => {
   });
 
   if (!combinedDetail) return null;
-	console.log(combinedDetail)
+  console.log(combinedDetail);
   const {
     place,
     bias,
@@ -35,26 +35,28 @@ const Detail = () => {
     tweetUrl
   } = combinedDetail;
 
-	return (
-		<Layout>
-			<StyledDetail>
-				<EventMain
-					place={place}
-					bias={bias}
-					organizer={organizer}
-					snsId={snsId}
-					startAt={startAt}
-					endAt={endAt}
-					address={address}
-					images={images}
-				/>
-				<TwitterInfo organizer={organizer} snsId={snsId} hashTags={hashTags} />
-				<GoodsInfo goods={goods} tweetUrl={tweetUrl}/>
-				<Location address={address} />
-				<EventNearHere bias={bias} district={district} />
-			</StyledDetail>
-		</Layout>
-	);
+  return (
+    <Layout>
+      <StyledDetail>
+        <EventMain
+          place={place}
+          bias={bias}
+          organizer={organizer}
+          snsId={snsId}
+          startAt={startAt}
+          endAt={endAt}
+          address={address}
+          images={images}
+        />
+        <div>
+          <TwitterInfo organizer={organizer} snsId={snsId} hashTags={hashTags} />
+          <GoodsInfo goods={goods} tweetUrl={tweetUrl} />
+          <Location address={address} />
+          <EventNearHere bias={bias} district={district} />
+        </div>
+      </StyledDetail>
+    </Layout>
+  );
 };
 
 export default Detail;

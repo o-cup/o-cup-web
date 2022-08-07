@@ -12,7 +12,20 @@ const fetchEvents = async ({ pageParam = 1, infinite = false, keyword }: FetchEv
 	}
 
 	if (keyword) {
-		query = query.textSearch("place", keyword);
+		const { data: events } = await query;
+		const data = events?.filter((event) => {
+			const { bias, place, organizer, district } = event;
+			if (
+				bias.includes(keyword) ||
+				place.includes(keyword) ||
+				organizer.includes(keyword) ||
+				district.includes(keyword)
+			) {
+				return true;
+			}
+			return false;
+		});
+		return data;
 	}
 
 	const { data } = await query;
@@ -25,11 +38,11 @@ const fetchEvents = async ({ pageParam = 1, infinite = false, keyword }: FetchEv
  * @returns {EventType}
  */
 const fetchEvent = async ({ id }: { id?: string }) => {
-  const { data, error } = await supabase.from("events").select("*").eq("id", id);
-  if (error) {
-    throw new Error(`${error.message}: ${error.details}`);
-  }
-  return data?.[0];
+	const { data, error } = await supabase.from("events").select("*").eq("id", id);
+	if (error) {
+		throw new Error(`${error.message}: ${error.details}`);
+	}
+	return data?.[0];
 };
 
 /**
@@ -38,11 +51,11 @@ const fetchEvent = async ({ id }: { id?: string }) => {
  * @returns {DetailType}
  */
 const fetchDetail = async ({ id }: { id?: string }) => {
-  const { data, error } = await supabase.from("detail").select("*").eq("id", id);
-  if (error) {
-    throw new Error(`${error.message}: ${error.details}`);
-  }
-  return data?.[0];
+	const { data, error } = await supabase.from("detail").select("*").eq("id", id);
+	if (error) {
+		throw new Error(`${error.message}: ${error.details}`);
+	}
+	return data?.[0];
 };
 
 /**
@@ -51,10 +64,10 @@ const fetchDetail = async ({ id }: { id?: string }) => {
  * @returns {EventType & DetailType}
  */
 const fetchEventDetail = async ({ id }: { id?: string }) => {
-  const event = await fetchEvent({ id });
-  const detail = await fetchDetail({ id });
+	const event = await fetchEvent({ id });
+	const detail = await fetchDetail({ id });
 
-  return { ...event, ...detail };
+	return { ...event, ...detail };
 };
 
 /**

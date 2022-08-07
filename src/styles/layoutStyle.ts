@@ -15,7 +15,7 @@ const StyledLayout = styled.div`
   }
 
   @media ${({ theme }) => theme.device.desktop} {
-    max-width: 1280px;
+    max-width: 1080px;
   }
 `;
 

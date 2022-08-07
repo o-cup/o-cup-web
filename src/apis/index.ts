@@ -1,8 +1,9 @@
 import { ITEMS_PER_PAGE } from "../shared/constants";
 import { supabase } from "../supabaseClient";
 import { EventType, DetailType, FetchEventParams } from "../types";
+import { isOpenToday } from "../shared/dateHandlers";
 
-const fetchEvents = async ({ pageParam = 1, infinite = false, keyword }: FetchEventParams) => {
+const fetchEvents = async ({ pageParam = 1, infinite = false, keyword, date }: FetchEventParams) => {
 	let query = supabase.from("events").select("*");
 
 	if (infinite) {
@@ -26,6 +27,18 @@ const fetchEvents = async ({ pageParam = 1, infinite = false, keyword }: FetchEv
 			return false;
 		});
 		return data;
+	}
+
+	if (date) {
+		const { data: events } = await query;
+		const filteredData = events?.filter((event) => {
+			const { startAt, endAt } = event;
+			if (isOpenToday(date, startAt,endAt)) {
+				return true;
+			}
+			return false;
+		});
+		return filteredData;
 	}
 
 	const { data } = await query;

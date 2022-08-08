@@ -17,8 +17,8 @@ const StyledFilter = styled.div`
 			cursor: pointer;
 
 			> svg {
-				width: 24px;
-				height: 24px;
+				width: 19px;
+				height: 19px;
 				margin: 2px 0 -2px;
 			}
 		}
@@ -102,11 +102,11 @@ const StyledSearchInput = styled.div`
 	border-radius: 32px;
 	flex: 1 1 0;
 	padding: 4px;
-  height: 40px;
+	height: 40px;
 
 	> svg {
-		width: 24px;
-		height: 24px;
+		width: 17px;
+		height: 17px;
 		margin: 0 8px;
 	}
 

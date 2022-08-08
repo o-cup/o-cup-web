@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BiMap } from "react-icons/bi";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import { StyledFilter } from "../../styles/filterStyle";
 import BiasList from "./BiasList";
 import CustomBottomSheet from "./BottomSheet/CustomBottomSheet";
@@ -15,7 +15,7 @@ function Filter() {
 				<div className="search_container">
 					<SearchInput />
 					<button type="button" onClick={() => setOpen(true)}>
-						<BiMap />
+						<FaMapMarkerAlt />
 					</button>
 				</div>
 			</StyledFilter>

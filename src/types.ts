@@ -37,4 +37,5 @@ export type FetchEventParams = {
 	pageParam?: number;
 	infinite?: boolean;
 	keyword?: string;
+	date?: string;
 };

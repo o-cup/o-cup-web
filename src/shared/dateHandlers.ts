@@ -9,8 +9,8 @@ const convertStringToDate = (dateString: string) => {
   let date = 0;
   if (dateString.length === 8) {
     year = parseInt(dateString.slice(0, 4), 10);
-    month = parseInt(dateString.slice(5, 6), 10);
-    date = parseInt(dateString.slice(7, 8), 10);
+    month = parseInt(dateString.slice(4, 6), 10);
+    date = parseInt(dateString.slice(6, 8), 10);
   }
   return new Date(year, month - 1, date);
 };
@@ -43,10 +43,11 @@ const convertDateToString = (dateObj: Date) => {
  * @returns {boolean}
  */
 const isOpenToday = (today: string, startAt: string, endAt: string) => {
-  if (today === startAt || today === endAt) {
-    return true;
-  }
-  if (convertStringToDate(startAt) <= convertStringToDate(today) && convertStringToDate(today) <= convertStringToDate(endAt)) {
+  if (
+    today === startAt ||
+    today === endAt ||
+    (convertStringToDate(startAt) < convertStringToDate(today) && convertStringToDate(today) < convertStringToDate(endAt))
+  ) {
     return true;
   }
   return false;

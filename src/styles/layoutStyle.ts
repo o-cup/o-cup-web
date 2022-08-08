@@ -10,13 +10,13 @@ const StyledLayout = styled.div`
 	background: ${({ theme }) => theme.colors.background};
 	/* box-shadow: 0 0 20px rgb(0 0 0 / 5%); */
 
-  @media ${({ theme }) => theme.device.mobile} {
-    max-width: 720px;
-  }
+	@media ${({ theme }) => theme.device.mobile} {
+		max-width: 720px;
+	}
 
-  @media ${({ theme }) => theme.device.desktop} {
-    max-width: 1080px;
-  }
+	@media ${({ theme }) => theme.device.desktop} {
+		max-width: 1080px;
+	}
 `;
 
 const StyledHeader = styled.header`
@@ -65,11 +65,13 @@ const StyledFooter = styled.footer`
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	padding: 32px 20px 50px;
+	/* padding: 32px 20px 50px; */
+	padding: 100px 0 50px 0;
 	text-align: center;
 
 	> ul {
-		display: flex;
+		/* display: flex; */
+		display: none;
 		justify-content: center;
 		align-items: center;
 		margin-bottom: 20px;

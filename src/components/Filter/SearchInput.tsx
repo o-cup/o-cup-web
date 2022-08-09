@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RiSearchLine } from "react-icons/ri";
+import { FaSearch } from "react-icons/fa";
 import { useRecoilState } from "recoil";
 import { StyledSearchInput } from "../../styles/filterStyle";
 import { keywordAtom } from "../../state/atoms";
@@ -14,7 +14,7 @@ function SearchInput() {
 
 	return (
 		<StyledSearchInput>
-			<RiSearchLine />
+			<FaSearch />
 			<input value={keyword} onChange={handleInputChange} />
 		</StyledSearchInput>
 	);

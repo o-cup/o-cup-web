@@ -33,7 +33,8 @@ const StyledHeader = styled.header`
 		font-weight: 700;
 
 		> p {
-			margin: 0 10px;
+      width: 150px;
+      text-align: center;
 		}
 
 		> button {

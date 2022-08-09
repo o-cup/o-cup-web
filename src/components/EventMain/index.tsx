@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { FaUserCircle, FaTwitter, FaMapMarkerAlt, FaCalendar } from "react-icons/fa";
 import { StyledEventMain } from "../../styles";
 import { EventType, DetailType } from "../../types";
+import { convertDateWithDots } from "../../shared/dateHandlers";
 
 type EventMainProps = Partial<EventType> & Partial<DetailType>;
 
@@ -16,57 +17,58 @@ const EventMain = ({ place, bias, organizer, snsId, startAt, endAt, address, ima
 		</span>
 	);
 
-	return (
-		<StyledEventMain>
-			<div className="textContainer">
-				<div>
-					<h6>{place}</h6>
-					<span className="biasChip">{bias}</span>
-				</div>
-				<p>
-					<FaUserCircle />
-					{organizer}
-				</p>
-				<p>
-					<FaTwitter />@{snsId}
-				</p>
-
-				<p>
-					<FaMapMarkerAlt />
-					{address}
-				</p>
-				<p>
-					<FaCalendar />
-					{startAt} - {endAt}
-				</p>
-			</div>
-			<div className="imgContainer">
-				{images?.length === 1 ? (
-					/* 이미지 갯수 하나인경우 슬라이드 되지 않음 */
-					<div className="slick-slider">
-						<img alt={images[0]} src={images[0]} />
-						<ul className="slick-dots">
-							<li className="slick-active">
-								<span>1 / 1</span>
-							</li>
-						</ul>
-					</div>
-				) : (
-					<Slider
-						dots
-						infinite
-						slidesToShow={1}
-						slidesToScroll={1}
-						arrows={false}
-						adaptiveHeight={false}
-						customPaging={customPaging}
-					>
-						{images?.length && images?.map((img) => <img alt={img} src={img} key={img} />)}
-					</Slider>
-				)}
-			</div>
-		</StyledEventMain>
-	);
+  return (
+    <StyledEventMain>
+      <div className="textContainer">
+        <div>
+          <h6>{place}</h6>
+          <div className="biasChips">
+            {bias?.map((b) => <span className="biasChip" key={b}>{b}</span>)}
+          </div>
+        </div>
+        <p>
+          <FaUserCircle />
+          {organizer}
+        </p>
+        <p>
+          <FaTwitter />@{snsId}
+        </p>
+        <p>
+          <FaMapMarkerAlt />
+          {address}
+        </p>
+        <p>
+          <FaCalendar />
+          {startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
+        </p>
+      </div>
+      <div className="imgContainer">
+        {images?.length === 1 ? (
+          /* 이미지 갯수 하나인경우 슬라이드 되지 않음 */
+          <div className="slick-slider">
+            <img alt={images[0]} src={images[0]} />
+            <ul className="slick-dots">
+              <li className="slick-active">
+                <span>1 / 1</span>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <Slider
+            dots
+            infinite
+            slidesToShow={1}
+            slidesToScroll={1}
+            arrows={false}
+            adaptiveHeight={false}
+            customPaging={customPaging}
+          >
+            {images?.length && images?.map((img) => <img alt={img} src={img} key={img} />)}
+          </Slider>
+        )}
+      </div>
+    </StyledEventMain>
+  );
 };
 
 export default EventMain;

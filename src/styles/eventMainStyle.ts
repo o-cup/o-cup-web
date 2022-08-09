@@ -27,15 +27,22 @@ export const StyledEventMain = styled.div`
 				font-weight: 700;
 			}
 
-			> span.biasChip {
-				font-size: 13px;
-				line-height: 17px;
-				font-weight: 700;
-				color: ${({ theme }) => theme.colors.white};
-				background: ${({ theme }) => theme.colors.black};
-				padding: 4px 12px;
-				border-radius: 24px;
-			}
+      > div.biasChips {
+        > span.biasChip {
+          font-size: 13px;
+          line-height: 17px;
+          font-weight: 700;
+          color: ${({ theme }) => theme.colors.white};
+          background: ${({ theme }) => theme.colors.black};
+          padding: 4px 12px;
+          border-radius: 24px;
+        }
+        
+        > span.biasChip:not(:first-child) {
+          margin-left: 4px;
+        }
+      }
+      
 		}
 
 		> p {

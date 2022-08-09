@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FaUserCircle, FaTwitter, FaMapMarkerAlt, FaCalendar } from "react-icons/fa";
 import { StyledItem } from "../../styles/eventListStyle";
 import { EventType } from "../../types";
+import { convertDateWithDots } from "../../shared/dateHandlers";
 
 type EventListItemProps = {
 	event: EventType;
@@ -37,7 +38,7 @@ const EventListItem = ({ event }: EventListItemProps) => {
 			</p>
 			<p>
 				<FaCalendar />
-				{startAt}-{endAt}
+				{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
 			</p>
 		</StyledItem>
 	);

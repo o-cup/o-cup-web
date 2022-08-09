@@ -3,6 +3,7 @@ export type EventType = {
 	createdAt: string;
 	place: string;
 	bias: string[];
+	biasId: number[];
 	organizer: string;
 	snsId: string;
 	district: string;

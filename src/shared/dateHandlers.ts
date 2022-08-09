@@ -53,5 +53,17 @@ const isOpenToday = (today: string, startAt: string, endAt: string) => {
   return false;
 };
 
-export { convertStringToDate, addZero, convertDateToString, isOpenToday };
+/**
+ * YYYY.MM.DD 형식으로 변환
+ * @param {string} dateString YYYYMMDD 형식
+ * @return {string} YYYY.MM.DD 형식
+ */
+const convertDateWithDots = (dateString: string) => {
+  if (dateString.length === 8) {
+    return `${dateString.slice(0, 4)}.${dateString.slice(4, 6)}.${dateString.slice(6, 8)}`;
+  }
+  return dateString;
+};
+
+export { convertStringToDate, addZero, convertDateToString, isOpenToday, convertDateWithDots };
 export default {};

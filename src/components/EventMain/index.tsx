@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { FaUserCircle, FaTwitter, FaMapMarkerAlt, FaCalendar } from "react-icons/fa";
 import { StyledEventMain } from "../../styles";
 import { EventType, DetailType } from "../../types";
+import { convertDateWithDots } from "../../shared/dateHandlers";
 
 type EventMainProps = Partial<EventType> & Partial<DetailType>;
 
@@ -38,7 +39,7 @@ const EventMain = ({ place, bias, organizer, snsId, startAt, endAt, address, ima
         </p>
         <p>
           <FaCalendar />
-          {startAt} - {endAt}
+          {startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
         </p>
       </div>
       <div className="imgContainer">

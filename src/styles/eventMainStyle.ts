@@ -42,12 +42,11 @@ export const StyledEventMain = styled.div`
 			font-size: 14px;
 			line-height: 20px;
 			font-weight: 400;
+			display: flex;
+			align-items: center;
 
 			> svg {
-				width: 16px;
-				height: 16px;
 				margin-right: 4px;
-				vertical-align: middle;
 			}
 
 			&:not(:last-child) {

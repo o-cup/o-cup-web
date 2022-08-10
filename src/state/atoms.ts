@@ -13,6 +13,11 @@ export const biasFilterAtom = atom({
 	default: [] as number[],
 });
 
+export const openedBiasAtom = atom({
+	key: "openedBiasAtom",
+	default: [] as number[],
+});
+
 export const keywordAtom = atom({
 	key: "keywordAtom",
 	default: "",

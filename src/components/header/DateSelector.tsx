@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { dateFilterState } from "../../state/atoms";
+import { dateFilterAtom } from "../../state/atoms";
 import { addZero, convertDateToString, convertStringToDate } from "../../shared/dateHandlers";
 
 function DateSelector() {
-  const [dateFilter, setDateFilter] = useRecoilState(dateFilterState);
+  const [dateFilter, setDateFilter] = useRecoilState(dateFilterAtom);
   const [selectedDate, setSelectedDate] = useState(convertStringToDate(dateFilter));
 
   const year = selectedDate.getFullYear();

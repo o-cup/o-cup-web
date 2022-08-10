@@ -1,52 +1,50 @@
-import React, { useEffect } from "react";
-import { useInfiniteQuery, useQuery } from "react-query";
-import { useInView } from "react-intersection-observer";
-import { useRecoilValue } from "recoil";
+import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { StyledList } from "../../styles/eventListStyle";
 import EventListItem from "./EventListItem";
 import { fetchEvents } from "../../apis";
-import { ITEMS_PER_PAGE } from "../../shared/constants";
-import { dateFilterState, keywordAtom } from "../../state/atoms";
+import { openedBiasAtom, dateFilterAtom, biasFilterAtom } from "../../state/atoms";
 
+// todo: useInfiniteQuery 리팩토링 후 추가
 const EventList = () => {
-  const { ref, inView } = useInView();
-  const keyword = useRecoilValue(keywordAtom);
-  const dateFilter = useRecoilValue(dateFilterState);
 
-  const {
-    data: events,
-    hasNextPage,
-    fetchNextPage
-  } = useInfiniteQuery(["events", dateFilter], () => fetchEvents({ infinite: true, date: dateFilter }), {
-    getNextPageParam: (lastPage, pages) => {
-      if (lastPage && lastPage?.length < ITEMS_PER_PAGE) {
-        return null;
-      }
-      return pages.length + 1;
-    }
-  });
-  const { data: searchedEvents } = useQuery(["searchedEvents", keyword, dateFilter], () => fetchEvents({
-    keyword,
+  const dateFilter = useRecoilValue(dateFilterAtom);
+  const biasFilter = useRecoilValue(biasFilterAtom);
+  const setOpenedBias = useSetRecoilState(openedBiasAtom);
+
+  const { data: events } = useQuery(["events", dateFilter], () => fetchEvents({
     date: dateFilter
   }));
 
-  useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage();
-    }
-  }, [inView, hasNextPage, fetchNextPage]);
+  const [biasFilteredEvents, setBiasFilteredEvents] = useState(events ? [...events] : []);
 
-  // todo: flat()으로 리팩토링 또는 데이터 구조 변경
+  /** 이벤트 목록에서 인물 id 추출 */
+  useEffect(() => {
+    const biasArr: number[] = [];
+    if (events) {
+      events.forEach((event) => biasArr.push(...event.biasId));
+    }
+    const biasSet = new Set(biasArr);
+    setOpenedBias(Array.from(biasSet));
+  }, [events]);
+
+  /** 이벤트 목록에 인물 필터 적용 */
+  useEffect(() => {
+    if (events && biasFilter) {
+      if (biasFilter.length === 0) {
+        setBiasFilteredEvents(events);
+      } else {
+        const filtered = events.filter((event) =>
+          event.biasId.find((bias: number) => biasFilter.includes(bias)));
+        setBiasFilteredEvents(filtered);
+      }
+    }
+  }, [biasFilter, events]);
+
   return (
     <StyledList>
-      {searchedEvents?.map((event) => <EventListItem event={event} key={event.id} />) ||
-        events?.pages.map((page) =>
-          page?.map((item) => (
-            <div key={item.id} ref={ref}>
-              <EventListItem event={item} key={item.id} />
-            </div>
-          ))
-        )}
+      {biasFilteredEvents?.map((event) => <EventListItem event={event} key={event.id} />)}
     </StyledList>
   );
 };

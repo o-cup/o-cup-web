@@ -6,15 +6,15 @@ import EventNearHereList from "./EventNearHereLIst";
 import { fetchEvents } from "../../apis";
 import { EventType } from "../../types";
 
-function EventNearHere({ bias, district }: Partial<EventType>) {
+function EventNearHere({ biasesId, district }: Partial<EventType>) {
 	const { id } = useParams();
 
 	const { data: nearEvent } = useQuery(["event", id], fetchEvents, {
 		enabled: !!id,
 		select: (data) =>
 			data?.filter((item) => {
-				if (bias && bias[0]) {
-					return item.id !== id && item.district === district && item.bias[0] === bias[0];
+				if (biasesId && biasesId[0]) {
+					return item.id !== id && item.district === district && item.biasesId[0] === biasesId[0];
 				}
 				return null;
 			}),

@@ -27,7 +27,7 @@ export type DetailType = {
 };
 
 export type PeopleType = {
-	id: string;
+	id: number;
 	createdAt: string;
 	name: string;
 	birthday: string;

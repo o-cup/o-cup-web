@@ -3,14 +3,14 @@ import { convertDateToString } from "../shared/dateHandlers";
 
 const today = new Date();
 
-export const dateFilterState = atom({
-	key: "dateFilterState",
+export const dateFilterAtom = atom({
+	key: "dateFilterAtom",
 	default: convertDateToString(today),
 });
 
-export const biasState = atom({
-	key: "biasState",
-	default: "",
+export const biasFilterAtom = atom({
+	key: "biasFilterAtom",
+	default: [] as number[],
 });
 
 export const keywordAtom = atom({

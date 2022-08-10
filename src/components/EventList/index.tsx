@@ -6,12 +6,12 @@ import { StyledList } from "../../styles/eventListStyle";
 import EventListItem from "./EventListItem";
 import { fetchEvents } from "../../apis";
 import { ITEMS_PER_PAGE } from "../../shared/constants";
-import { dateFilterState, keywordAtom } from "../../state/atoms";
+import { dateFilterAtom, keywordAtom } from "../../state/atoms";
 
 const EventList = () => {
   const { ref, inView } = useInView();
   const keyword = useRecoilValue(keywordAtom);
-  const dateFilter = useRecoilValue(dateFilterState);
+  const dateFilter = useRecoilValue(dateFilterAtom);
 
   const {
     data: events,

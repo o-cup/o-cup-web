@@ -4,6 +4,7 @@ import { FaUserCircle, FaTwitter, FaMapMarkerAlt, FaCalendar } from "react-icons
 import { StyledItem } from "../../styles/eventListStyle";
 import { EventType } from "../../types";
 import { convertDateWithDots } from "../../shared/dateHandlers";
+import BiasChip from "../../shared/components/BiasChip/BiasChip";
 
 type EventListItemProps = {
 	event: EventType;
@@ -11,7 +12,7 @@ type EventListItemProps = {
 
 const EventListItem = ({ event }: EventListItemProps) => {
 	const navigate = useNavigate();
-	const { id, place, images, bias, organizer, snsId, district, startAt, endAt } = event;
+	const { id, place, images, biasesId, organizer, snsId, district, startAt, endAt } = event;
 
 	return (
 		<StyledItem onClick={() => navigate(`/detail/${id}`)}>
@@ -20,10 +21,9 @@ const EventListItem = ({ event }: EventListItemProps) => {
 			</div>
 			<div>
 				<h6>{place}</h6>
-				<span>
-					{bias[0]}
-					{bias.length > 1 && "..."}
-				</span>
+				{biasesId.map((biasId) => (
+					<BiasChip id={biasId} key={biasId} />
+				))}
 			</div>
 			<p>
 				<FaUserCircle />

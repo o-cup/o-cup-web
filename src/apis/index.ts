@@ -4,7 +4,7 @@ import { EventType, DetailType, FetchEventParams } from "../types";
 import { isOpenToday } from "../shared/dateHandlers";
 
 const fetchEvents = async ({ pageParam = 1, infinite = false, keyword, date }: FetchEventParams) => {
-	let query = supabase.from("events").select("*");
+	let query = supabase.from("random_sort").select("*");
 
 	if (infinite) {
 		const endAt = pageParam * ITEMS_PER_PAGE;
@@ -33,7 +33,7 @@ const fetchEvents = async ({ pageParam = 1, infinite = false, keyword, date }: F
 		const { data: events } = await query;
 		const filteredData = events?.filter((event) => {
 			const { startAt, endAt } = event;
-			if (isOpenToday(date, startAt,endAt)) {
+			if (isOpenToday(date, startAt, endAt)) {
 				return true;
 			}
 			return false;

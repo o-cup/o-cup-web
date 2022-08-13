@@ -1,6 +1,6 @@
 import React from "react";
-import DateSelector from "../header/DateSelector";
-import { StyledHeader } from "./styles/layoutStyle";
+import { StyledHeader } from "../styles/layoutStyle";
+import DateSelector from "./DateSelector";
 
 type HeaderProps = {
 	dateSelector: boolean;

@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { convertDateToString } from "../shared/dateHandlers";
+import { convertDateToString } from "../shared/utils/dateHandlers";
 
 const today = new Date();
 

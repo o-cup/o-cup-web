@@ -1,11 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
-import Layout from "../components/layout";
 import { fetchEventDetail } from "../apis";
 import { EventType, DetailType } from "../types";
 import { StyledDetail } from "../components/detail/styles/detailStyle";
 import { EventMain, EventNearHere, GoodsInfo, TwitterInfo, Location } from "../components/detail";
+import Layout from "../shared/components/layout";
 
 const Detail = () => {
 	const { id } = useParams();

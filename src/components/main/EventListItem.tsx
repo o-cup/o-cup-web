@@ -2,9 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle, FaTwitter, FaMapMarkerAlt, FaCalendar } from "react-icons/fa";
 import { EventType } from "../../types";
-import { convertDateWithDots } from "../../shared/dateHandlers";
-import BiasChip from "../../shared/components/BiasChip/BiasChip";
+import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { StyledItem } from "./styles/mainStyle";
+import BiasChip from "../../shared/components/biasChip";
 
 type EventListItemProps = {
 	event: EventType;

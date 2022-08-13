@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { fetchBiases } from "../../../apis";
-import { StyledBiasChip } from "./BiasChipStyle";
+import { StyledBiasChip } from "./biasChipStyle";
 
 type BiasChipProps = {
 	id: number;

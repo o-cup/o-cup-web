@@ -1,7 +1,7 @@
 import React from "react";
 import { FaTwitter } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
-import { StyledFooter } from "./styles/layoutStyle";
+import { StyledFooter } from "../styles/layoutStyle";
 
 function Footer() {
 	return (

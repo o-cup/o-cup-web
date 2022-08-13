@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Layout from "../components/layout";
 import { BiasList, CustomBottomSheet, SearchInput, EventList } from "../components/main";
 import { StyledMain } from "../components/main/styles/mainStyle";
+import Layout from "../shared/components/layout";
 
 function Main() {
 	const [open, setOpen] = useState(false);

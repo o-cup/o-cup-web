@@ -10,6 +10,10 @@ const StyledLayout = styled.div`
 	background: ${({ theme }) => theme.colors.background};
 	/* box-shadow: 0 0 20px rgb(0 0 0 / 5%); */
 
+  main {
+    padding-top: 90px;
+  }
+  
 	@media ${({ theme }) => theme.device.mobile} {
 		max-width: 720px;
 	}
@@ -23,8 +27,18 @@ const StyledHeader = styled.header`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 20px;
-
+	padding: 17px 20px;
+  background: rgba(252, 251, 247, 0.9);
+  position: fixed;
+  width: 100%;
+  max-width: 1080px;
+  z-index: 99;
+  height: 90px;
+  
+  img#logo {
+    height: 56px;
+  }
+  
 	> .date_selector {
 		display: flex;
 		align-items: center;

@@ -88,13 +88,13 @@ const StyledSearchInput = styled.div`
 		line-height: 24px;
 		border: none;
 		outline: none;
-		padding: 0;
 		background: ${({ theme }) => theme.colors.white};
 		border: 2px solid #000000;
 		border-radius: 32px;
 		flex: 1 1 0;
 		padding: 4px;
 		height: 40px;
+		padding-left: 42px;
 	}
 
 	> svg {

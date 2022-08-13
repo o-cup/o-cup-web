@@ -4,10 +4,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { FaUserCircle, FaTwitter, FaMapMarkerAlt, FaCalendar } from "react-icons/fa";
-import { StyledEventMain } from "../../styles";
 import { EventType, DetailType } from "../../types";
 import { convertDateWithDots } from "../../shared/dateHandlers";
 import BiasChip from "../../shared/components/BiasChip/BiasChip";
+import { StyledEventMain } from "./styles/eventMainStyle";
 
 type EventMainProps = Partial<EventType> & Partial<DetailType>;
 

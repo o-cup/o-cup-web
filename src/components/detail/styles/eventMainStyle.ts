@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledEventMain = styled.div`
+const StyledEventMain = styled.div`
 	position: relative;
 	padding-top: 18px;
 	padding-bottom: 18px;
@@ -26,8 +26,8 @@ export const StyledEventMain = styled.div`
 				line-height: 32px;
 				font-weight: 700;
 			}
-    }
-    
+		}
+
 		> p {
 			font-size: 14px;
 			line-height: 20px;
@@ -103,4 +103,5 @@ export const StyledEventMain = styled.div`
 	}
 `;
 
+export { StyledEventMain };
 export default {};

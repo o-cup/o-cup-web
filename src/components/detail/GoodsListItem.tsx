@@ -1,6 +1,6 @@
 import React from "react";
-import { Chip, StyledGoodsListItem } from "../../styles";
 import { GoodsItemType } from "../../types";
+import { Chip, StyledGoodsListItem } from "./styles/goodsInfoStyle";
 
 const GoodsListItem = ({ goodsListItem }: { goodsListItem: GoodsItemType }) => {
 	const { title, items, type } = goodsListItem;

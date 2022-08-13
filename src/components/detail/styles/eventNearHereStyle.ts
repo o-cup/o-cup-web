@@ -25,17 +25,17 @@ const StyledEventNearHere = styled.div`
 	}
 `;
 
-const StyledEventNearHereList = styled.li`
-  background: ${({ theme }) => theme.colors.white};
-  border: 2px solid #000000;
-  margin-right: 20px;
-  margin-bottom: 4px;
-  position: relative;
-  box-shadow: 4px 4px 0 #000000;
-  display: inline-block;
-  min-width: 120px;
-  width: 120px;
-  cursor: pointer;
+const EventNearHereList = styled.li`
+	background: ${({ theme }) => theme.colors.white};
+	border: 2px solid #000000;
+	margin-right: 20px;
+	margin-bottom: 4px;
+	position: relative;
+	box-shadow: 4px 4px 0 #000000;
+	display: inline-block;
+	min-width: 120px;
+	width: 120px;
+	cursor: pointer;
 
 	&:first-child {
 		margin-left: 20px;
@@ -76,5 +76,5 @@ const StyledEventNearHereList = styled.li`
 	}
 `;
 
-export { StyledEventNearHere, StyledEventNearHereList };
+export { StyledEventNearHere, EventNearHereList };
 export default {};

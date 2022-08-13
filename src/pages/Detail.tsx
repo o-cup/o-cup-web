@@ -2,14 +2,10 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import Layout from "../components/layout";
-import EventMain from "../components/EventMain";
-import { StyledDetail } from "../styles/detailStyle";
-import TwitterInfo from "../components/TwitterInfo";
-import GoodsInfo from "../components/GoodsInfo";
-import Location from "../components/Location";
-import EventNearHere from "../components/EventsNearHere";
 import { fetchEventDetail } from "../apis";
 import { EventType, DetailType } from "../types";
+import { StyledDetail } from "../components/detail/styles/detailStyle";
+import { EventMain, EventNearHere, GoodsInfo, TwitterInfo, Location } from "../components/detail";
 
 const Detail = () => {
 	const { id } = useParams();

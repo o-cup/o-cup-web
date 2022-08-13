@@ -4,7 +4,7 @@ import { FaUserCircle, FaTwitter, FaMapMarkerAlt, FaCalendar } from "react-icons
 import { EventType } from "../../types";
 import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { StyledItem } from "./styles/mainStyle";
-import BiasChip from "../../shared/components/biasChip";
+import BiasChip from "../../shared/components/BiasChip";
 
 type EventListItemProps = {
 	event: EventType;
@@ -21,9 +21,7 @@ const EventListItem = ({ event }: EventListItemProps) => {
 			</div>
 			<div>
 				<h6>{place}</h6>
-				{biasesId.map((biasId) => (
-					<BiasChip id={biasId} key={biasId} />
-				))}
+				<BiasChip id={biasesId[0]} key={biasesId[0]} dots={biasesId.length > 1}/>
 			</div>
 			<p>
 				<FaUserCircle />

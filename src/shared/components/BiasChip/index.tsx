@@ -10,7 +10,7 @@ type BiasChipProps = {
 const BiasChip = ({ id }: BiasChipProps) => {
 	const { data: name } = useQuery(["bias", id], () => fetchBiases({ id }));
 
-	return <StyledBiasChip>{name}</StyledBiasChip>;
+	return <StyledBiasChip>{name || id}</StyledBiasChip>;
 };
 
 export default BiasChip;

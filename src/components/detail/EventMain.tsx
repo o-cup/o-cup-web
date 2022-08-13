@@ -23,9 +23,11 @@ const EventMain = ({ place, biasesId, organizer, snsId, startAt, endAt, address,
 			<div className="textContainer">
 				<div>
 					<h6>{place}</h6>
-					{biasesId?.map((biasId) => (
-						<BiasChip id={biasId} key={biasId} />
-					))}
+					<div>
+						{biasesId?.map((biasId) => (
+							<BiasChip id={biasId} key={biasId} />
+						))}
+					</div>
 				</div>
 				<p>
 					<FaUserCircle />

@@ -7,7 +7,7 @@ import { FaUserCircle, FaTwitter, FaMapMarkerAlt, FaCalendar } from "react-icons
 import { EventType, DetailType } from "../../types";
 import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { StyledEventMain } from "./styles/eventMainStyle";
-import BiasChip from "../../shared/components/biasChip";
+import BiasChip from "../../shared/components/BiasChip";
 
 type EventMainProps = Partial<EventType> & Partial<DetailType>;
 

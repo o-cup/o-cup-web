@@ -1,7 +1,7 @@
 import { ITEMS_PER_PAGE } from "../shared/constants";
+import { isOpenToday } from "../shared/utils/dateHandlers";
 import { supabase } from "../supabaseClient";
 import { EventType, DetailType, FetchEventParams } from "../types";
-import { isOpenToday } from "../shared/dateHandlers";
 
 const fetchEvents = async ({ pageParam = 1, infinite = false, keyword, date }: FetchEventParams) => {
 	let query = supabase.from("random_sort").select("*");

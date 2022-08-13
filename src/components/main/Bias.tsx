@@ -1,8 +1,8 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { biasFilterAtom } from "../../../state/atoms";
-import { StyledBias } from "../../../styles/filterStyle";
-import { PeopleType } from "../../../types";
+import { biasFilterAtom } from "../../state/atoms";
+import { PeopleType } from "../../types";
+import { StyledBias } from "./styles/mainStyle";
 
 function Bias({ id, name, profilePic }: Partial<PeopleType>) {
 	const [biasFilter, setBiasFilter] = useRecoilState(biasFilterAtom);

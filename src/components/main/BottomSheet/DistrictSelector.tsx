@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Chip, SelectList, StyledDistrictSelector } from "../../../../styles/districtSelectorStyle";
+import { Chip, SelectList, StyledDistrictSelector } from "../../../styles/districtSelectorStyle";
 import { divisionList } from "./data";
 
 const DistrictSelector = () => {

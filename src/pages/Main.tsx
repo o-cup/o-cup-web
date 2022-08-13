@@ -1,16 +1,21 @@
-import React from "react";
-import EventList from "../components/EventList";
+import React, { useState } from "react";
 import Layout from "../components/layout";
-import Filter from "../components/main/Filter";
-import { StyledMain } from "../styles/mainStyle";
+import { BiasList, CustomBottomSheet, SearchInput, EventList } from "../components/main";
+import { StyledMain } from "../components/main/styles/mainStyle";
 
 function Main() {
+	const [open, setOpen] = useState(false);
+
 	return (
 		<Layout dateSelector>
-			<StyledMain>
-				<Filter />
-				<EventList />
-			</StyledMain>
+			<>
+				<StyledMain>
+					<BiasList />
+					<SearchInput setOpen={setOpen} />
+					<EventList />
+				</StyledMain>
+				{open && <CustomBottomSheet setOpen={setOpen} />}
+			</>
 		</Layout>
 	);
 }

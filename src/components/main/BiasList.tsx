@@ -1,10 +1,10 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
-import { fetchPeople } from "../../../apis";
-import { openedBiasAtom } from "../../../state/atoms";
-import { StyledBiasList } from "../../../styles/filterStyle";
+import { fetchPeople } from "../../apis";
+import { openedBiasAtom } from "../../state/atoms";
 import Bias from "./Bias";
+import { StyledBiasList } from "./styles/mainStyle";
 
 function BiasList() {
 	const [openedBias] = useRecoilState(openedBiasAtom);

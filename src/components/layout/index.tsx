@@ -2,11 +2,11 @@ import React from "react";
 import Header from "./Header";
 import Content from "./Content";
 import Footer from "./Footer";
-import {StyledLayout} from "../../styles/layoutStyle";
+import { StyledLayout } from "./styles/layoutStyle";
 
 type LayoutProps = {
-    dateSelector?: boolean;
-    children: JSX.Element;
+	dateSelector?: boolean;
+	children: JSX.Element;
 };
 
 /**
@@ -15,16 +15,16 @@ type LayoutProps = {
  * @param children
  * */
 
-const Layout: React.FC<LayoutProps> = ({dateSelector, children}) => (
-    <StyledLayout>
-        <Header dateSelector={dateSelector || false}/>
-        <Content>{children}</Content>
-        <Footer/>
-    </StyledLayout>
+const Layout: React.FC<LayoutProps> = ({ dateSelector, children }) => (
+	<StyledLayout>
+		<Header dateSelector={dateSelector || false} />
+		<Content>{children}</Content>
+		<Footer />
+	</StyledLayout>
 );
 
 Layout.defaultProps = {
-    dateSelector: false
-}
+	dateSelector: false,
+};
 
 export default Layout;

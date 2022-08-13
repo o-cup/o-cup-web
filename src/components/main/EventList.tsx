@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { StyledList } from "../../styles/eventListStyle";
-import EventListItem from "./EventListItem";
 import { fetchEvents } from "../../apis";
 import { openedBiasAtom, dateFilterAtom, biasFilterAtom } from "../../state/atoms";
+import EventListItem from "./EventListItem";
+import { StyledList } from "./styles/mainStyle";
 
 // todo: useInfiniteQuery 리팩토링 후 추가
 const EventList = () => {

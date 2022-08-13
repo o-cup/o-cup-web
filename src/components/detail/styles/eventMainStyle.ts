@@ -52,7 +52,7 @@ const StyledEventMain = styled.div`
 		background: ${({ theme }) => theme.colors.white};
 		box-sizing: content-box !important;
 		border: 2px solid #000000;
-		z-index: 99;
+		z-index: 10;
 		margin-top: -74px;
 		margin-left: 16px;
 		margin-right: 16px;

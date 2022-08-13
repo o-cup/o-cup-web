@@ -26,7 +26,8 @@ export const StyledEventMain = styled.div`
 				line-height: 32px;
 				font-weight: 700;
 			}
-
+    }
+    
 		> p {
 			font-size: 14px;
 			line-height: 20px;

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { useRecoilState } from "recoil";
-import { StyledSearchInput } from "../../styles/filterStyle";
-import { keywordAtom } from "../../state/atoms";
+import { keywordAtom } from "../../../state/atoms";
+import { StyledSearchInput } from "../../../styles/filterStyle";
 
 function SearchInput() {
 	const [keyword, setKeyword] = useRecoilState(keywordAtom);

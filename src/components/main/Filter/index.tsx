@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { StyledFilter } from "../../styles/filterStyle";
+import { StyledFilter } from "../../../styles/filterStyle";
 import BiasList from "./BiasList";
 import CustomBottomSheet from "./BottomSheet/CustomBottomSheet";
 import SearchInput from "./SearchInput";

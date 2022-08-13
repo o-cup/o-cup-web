@@ -3,6 +3,7 @@ import styled from "styled-components";
 const StyledMain = styled.div`
 	display: flex;
 	flex-direction: column;
+	gap: 15px;
 `;
 
 const StyledBiasList = styled.ul`
@@ -11,8 +12,8 @@ const StyledBiasList = styled.ul`
 	overflow-y: hidden;
 	-ms-overflow-style: none;
 	scrollbar-width: none;
-
-	margin: 14px 0;
+	height: 100px;
+	align-items: center;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -77,18 +78,9 @@ const StyledBias = styled.li`
 const StyledSearchInput = styled.div`
 	display: flex;
 	align-items: center;
-	background: ${({ theme }) => theme.colors.white};
-	border: 2px solid #000000;
-	border-radius: 32px;
-	flex: 1 1 0;
-	padding: 4px;
-	height: 40px;
+	position: relative;
 
-	> svg {
-		width: 17px;
-		height: 17px;
-		margin: 0 8px;
-	}
+	padding: 0 20px;
 
 	> input {
 		width: 100%;
@@ -97,6 +89,22 @@ const StyledSearchInput = styled.div`
 		border: none;
 		outline: none;
 		padding: 0;
+		background: ${({ theme }) => theme.colors.white};
+		border: 2px solid #000000;
+		border-radius: 32px;
+		flex: 1 1 0;
+		padding: 4px;
+		height: 40px;
+	}
+
+	> svg {
+		width: 17px;
+		height: 17px;
+		margin: 0 8px;
+		transform: translateY(-50%);
+		position: absolute;
+		top: 50%;
+		left: 30px;
 	}
 
 	> button {

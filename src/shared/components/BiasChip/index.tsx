@@ -8,7 +8,7 @@ type BiasChipProps = {
 };
 
 const BiasChip = ({ id }: BiasChipProps) => {
-	const { data: name } = useQuery(["bias", id], () => fetchBiases({ id }));
+	const { data: name } = useQuery(["bias", id], () => fetchBiases({ id }), { enabled: !!id });
 
 	return <StyledBiasChip>{name || id}</StyledBiasChip>;
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import { GoodsItemType } from "../../types";
-import { Chip, StyledGoodsListItem } from "./styles/goodsInfoStyle";
+import { StyledGoodsListItem } from "./styles/goodsInfoStyle";
+import GoodsChip from "../../shared/components/GoodsChip";
 
 const GoodsListItem = ({ goodsListItem }: { goodsListItem: GoodsItemType }) => {
 	const { title, items, type } = goodsListItem;
@@ -11,7 +12,7 @@ const GoodsListItem = ({ goodsListItem }: { goodsListItem: GoodsItemType }) => {
 			<ul>
 				{items.map((item) => (
 					<li key={item}>
-						<Chip key={item}>{item}</Chip>
+						<GoodsChip key={item} value={item}/>
 					</li>
 				))}
 			</ul>

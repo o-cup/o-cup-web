@@ -10,8 +10,8 @@ function GoodsInfo({ goods, tweetUrl }: Partial<DetailType>) {
 			{goods?.map((item) => (
 				<GoodsListItem goodsListItem={item} key={item.title} />
 			))}
-			<p>수량 등 특전에 관한 자세한 사항은 포스터 내 공지를 확인하세요.</p>
-			<button type="button" onClick={() => tweetUrl && window.open(tweetUrl)}>
+			<p className="notice">수량 등 특전에 관한 자세한 사항은 포스터 내 공지를 확인하세요.</p>
+			<button className="tweetOpenBtn" type="button" onClick={() => tweetUrl && window.open(tweetUrl)}>
 				특전 자세히 보기
 			</button>
 		</StyledGoodsInfo>

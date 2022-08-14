@@ -3,6 +3,7 @@ export type EventType = {
 	createdAt: string;
 	place: string;
 	bias: string[];
+	biasesId: number[];
 	organizer: string;
 	snsId: string;
 	district: string;
@@ -26,7 +27,7 @@ export type DetailType = {
 };
 
 export type PeopleType = {
-	id: string;
+	id: number;
 	createdAt: string;
 	name: string;
 	birthday: string;
@@ -37,4 +38,5 @@ export type FetchEventParams = {
 	pageParam?: number;
 	infinite?: boolean;
 	keyword?: string;
+	date?: string;
 };

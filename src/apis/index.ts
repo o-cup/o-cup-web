@@ -1,9 +1,10 @@
 import { ITEMS_PER_PAGE } from "../shared/constants";
+import { isOpenToday } from "../shared/utils/dateHandlers";
 import { supabase } from "../supabaseClient";
 import { EventType, DetailType, FetchEventParams } from "../types";
 
-const fetchEvents = async ({ pageParam = 1, infinite = false, keyword }: FetchEventParams) => {
-	let query = supabase.from("events").select("*");
+const fetchEvents = async ({ pageParam = 1, infinite = false, keyword, date }: FetchEventParams) => {
+	let query = supabase.from("random_sort").select("*");
 
 	if (infinite) {
 		const endAt = pageParam * ITEMS_PER_PAGE;
@@ -26,6 +27,18 @@ const fetchEvents = async ({ pageParam = 1, infinite = false, keyword }: FetchEv
 			return false;
 		});
 		return data;
+	}
+
+	if (date) {
+		const { data: events } = await query;
+		const filteredData = events?.filter((event) => {
+			const { startAt, endAt } = event;
+			if (isOpenToday(date, startAt, endAt)) {
+				return true;
+			}
+			return false;
+		});
+		return filteredData;
 	}
 
 	const { data } = await query;
@@ -98,5 +111,46 @@ const insertDetail = async (detailData: Partial<DetailType>) => {
 	return data;
 };
 
-export { fetchEvents, fetchEventDetail, fetchPeople, insertEvent, insertDetail };
+/**
+ * events의 bias ["이름1", "이름2"] 에 맞춰 biasId [13, 4] 입력
+ * 로직 개선 필요
+ */
+const updateBiasesIds = async () => {
+	const { data: events } = await supabase.from("events").select("*");
+	const people = await fetchPeople();
+
+	events?.map(async (event) => {
+		const biasesId: any[] = [];
+		event.bias.forEach((b: any) => {
+			const peopleObj = people?.find((p) => p.name === b);
+			if (peopleObj) {
+				biasesId.push(peopleObj.id);
+			} else {
+				biasesId.push(0);
+			}
+		});
+
+		const { data, error } = await supabase.from("events").update({ biasesId }).match({ id: event.id });
+		if (error) {
+			throw new Error(`${error.message}: ${error.details}`);
+		}
+		console.log(data);
+	});
+};
+
+export type People = {
+	id: number;
+	created_at: string;
+	team: string[];
+	name: string;
+	birthday: number;
+	profilPic: string;
+};
+
+const fetchBiases = async ({ id }: { id: number }) => {
+	const { data: bias } = await supabase.from("people").select("name").eq("id", id).single();
+	return bias?.name;
+};
+
+export { fetchEvents, fetchEventDetail, fetchPeople, insertEvent, insertDetail, updateBiasesIds, fetchBiases };
 export default {};

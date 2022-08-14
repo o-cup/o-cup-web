@@ -4,14 +4,7 @@ const StyledRequest = styled.div`
 	width: 100%;
 	height: 100%;
 	padding: 20px;
-
 	display: flex;
-
-	.previewField {
-		width: 50%;
-		height: 100vh;
-		border: 1px solid blue;
-	}
 `;
 
 const StyledEntry = styled.div`
@@ -20,7 +13,6 @@ const StyledEntry = styled.div`
 	flex-direction: column;
 	align-items: center;
 
-	border: 1px solid red;
 	.notice {
 		display: flex;
 		flex-direction: column;
@@ -44,5 +36,11 @@ const StyledEntry = styled.div`
 	}
 `;
 
-export { StyledRequest, StyledEntry };
+const StyledPreview = styled.div`
+	width: 50%;
+	display: flex;
+	justify-content: center;
+`;
+
+export { StyledRequest, StyledEntry, StyledPreview };
 export default {};

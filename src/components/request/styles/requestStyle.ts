@@ -3,8 +3,24 @@ import styled from "styled-components";
 const StyledRequest = styled.div`
 	width: 100%;
 	height: 100%;
-	padding: 0 20px;
+	padding: 20px;
 
+	display: flex;
+
+	.previewField {
+		width: 50%;
+		height: 100vh;
+		border: 1px solid blue;
+	}
+`;
+
+const StyledEntry = styled.div`
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	border: 1px solid red;
 	.notice {
 		display: flex;
 		flex-direction: column;
@@ -28,5 +44,5 @@ const StyledRequest = styled.div`
 	}
 `;
 
-export { StyledRequest };
+export { StyledRequest, StyledEntry };
 export default {};

@@ -71,6 +71,31 @@ const Entry = () => {
 		}));
 	};
 
+	const handleChangeArtist = (bias: string, team: string, index: number) => {
+		const artistInputsData = artistInputs.map((artist) => {
+			if (artist.id === index) {
+				return {
+					...artist,
+					bias,
+					team
+				};
+			}
+			return artist;
+		});
+		setArtistInputs(artistInputsData);
+	}
+
+	const handleClickAddArtist = () => {
+		setArtistInputs([
+			...artistInputs,
+			{
+				id: artistInputs.length + 1,
+				bias: "",
+				team: ""
+			}
+		])
+	};
+
 	return (
 		<StyledEntry>
 			<div className="notice">
@@ -84,7 +109,12 @@ const Entry = () => {
 
 			<div className="inputsWrapper">
 				<PlaceInput value={placeInputs} setValue={setPlaceInputs}/>
-				<ArtistInput value={artistInputs} setValue={setArtistInputs}/>
+				<div className="artistInputContainer">
+					{artistInputs.map((artist) =>
+						<ArtistInput key={artist.id} value={artist} handleChangeArtist={handleChangeArtist}/>)}
+					<button type="button" onClick={handleClickAddArtist}>다른 아티스트 추가하기</button>
+				</div>
+				{/* <ArtistInput value={artistInputs} setValue={setArtistInputs}/> */}
 				<BasicInput
 					label="주최자 닉네임"
 					value={organizer}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Label, StyledBasicInput } from "./styles/basicInputStyle";
+import { InputWrapper, Label, StyledBasicInput } from "./styles/basicInputStyle";
 
 export type InputProps = {
 	value: string;
@@ -15,9 +15,9 @@ const BasicInput = ({ value, label, id, placeholder, handleInputChange, hideLabe
 		<Label htmlFor={id} hideLabel={hideLabel}>
 			{!hideLabel && label}
 		</Label>
-		<div className={`inputWrapper ${id}`}>
+		<InputWrapper className={`inputWrapper ${id}`} hasValue={!!value}>
 			<input type="text" value={value} id={id} placeholder={placeholder} onChange={handleInputChange} className={id} />
-		</div>
+		</InputWrapper>
 	</StyledBasicInput>
 );
 

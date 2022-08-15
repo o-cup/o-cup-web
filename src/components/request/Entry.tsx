@@ -3,8 +3,14 @@ import Button from "../../shared/components/Button";
 import Icon from "../../shared/components/Icon/Icons";
 import BasicInput from "./BasicInput";
 import { StyledEntry } from "./styles/requestStyle";
+import PlaceInput from "./PlaceInput";
 
 const Entry = () => {
+	const [placeInput, setPlaceInputs] = useState({
+		place: "",
+		district: "",
+		address: ""
+	})
 	const [basicInputs, setBasicInput] = useState({ organizer: "", snsId: "", link: "" });
 	const { organizer, snsId, link } = basicInputs;
 	const [hashTags, setHashTags] = useState([{ id: 1, text: "" }]);
@@ -50,6 +56,7 @@ const Entry = () => {
 			</div>
 
 			<div className="inputsWrapper">
+				<PlaceInput value={placeInput} setValue={setPlaceInputs}/>
 				<BasicInput
 					label="주최자 닉네임"
 					value={organizer}

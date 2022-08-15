@@ -11,27 +11,33 @@ const StyledEntry = styled.div`
 	width: 50%;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	gap: 30px;
 
-	.notice {
+	.inputWrapper {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
 
-		p:first-child {
-			width: 133px;
-			height: 28px;
-			background-color: ${({ theme }) => theme.colors.black};
-			color: ${({ theme }) => theme.colors.white};
+		.notice {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
 			font-size: 12px;
-			font-weight: bold;
-			border-radius: 30px;
-			text-align: center;
-			line-height: 28px;
-		}
 
-		p:not(:first-child) {
-			line-height: 20px;
+			p:first-child {
+				width: 133px;
+				height: 28px;
+				background-color: ${({ theme }) => theme.colors.black};
+				color: ${({ theme }) => theme.colors.white};
+				font-weight: bold;
+				border-radius: 30px;
+				text-align: center;
+				line-height: 28px;
+			}
+
+			p:not(:first-child) {
+				line-height: 16px;
+			}
 		}
 	}
 `;

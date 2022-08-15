@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "../../shared/components/Button";
 import BasicInput from "./BasicInput";
 import { StyledEntry } from "./styles/requestStyle";
 
@@ -12,9 +13,10 @@ const Entry = () => {
 			[id]: e.currentTarget.value,
 		});
 	};
+
 	return (
 		<StyledEntry>
-			<div>
+			<div className="inputWrapper">
 				<div className="notice">
 					<p>장소 등록 시 주의사항</p>
 					<p>
@@ -53,6 +55,7 @@ const Entry = () => {
 					handleInputChange={(e) => handleInputChange(e, "link")}
 				/>
 			</div>
+			<Button customStyle={{ width: "380px", fontWeight: "bold" }}>제출하기</Button>
 		</StyledEntry>
 	);
 };

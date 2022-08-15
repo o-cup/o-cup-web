@@ -11,11 +11,11 @@ export type InputProps = {
 };
 
 const BasicInput = ({ value, label, id, placeholder, handleInputChange, hideLabel = false }: InputProps) => (
-	<StyledBasicInput isSnsId={id === "snsId"} isHashTag={id === "hashTag"}>
+	<StyledBasicInput>
 		<Label htmlFor={id} hideLabel={hideLabel}>
 			{!hideLabel && label}
 		</Label>
-		<div className="inputWrapper">
+		<div className={`inputWrapper ${id}`}>
 			<input type="text" value={value} id={id} placeholder={placeholder} onChange={handleInputChange} className={id} />
 		</div>
 	</StyledBasicInput>

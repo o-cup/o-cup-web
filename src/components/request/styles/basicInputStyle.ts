@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-const StyledBasicInput = styled.div<{ isSnsId: boolean; isHashTag: boolean }>`
+const StyledBasicInput = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -13,28 +13,24 @@ const StyledBasicInput = styled.div<{ isSnsId: boolean; isHashTag: boolean }>`
 		width: 100%;
 		gap: 6px;
 
-		${(props) =>
-			props.isSnsId &&
-			css`
-				&:after {
-					content: "@";
-					position: absolute;
-					top: 16px;
-					left: 10px;
-				}
-			`};
+		&.snsId {
+			&:after {
+				content: "@";
+				position: absolute;
+				top: 16px;
+				left: 10px;
+			}
+		}
 
-		${(props) =>
-			props.isHashTag &&
-			css`
-				&:after {
-					content: "#";
-					position: absolute;
-					top: 17px;
-					left: 11px;
-					font-size: 16px;
-				}
-			`};
+		&.hashTag {
+			&:after {
+				content: "#";
+				position: absolute;
+				top: 17px;
+				left: 11px;
+				font-size: 16px;
+			}
+		}
 
 		input {
 			width: 100%;

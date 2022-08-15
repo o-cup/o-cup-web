@@ -7,17 +7,17 @@ import PlaceInput from "./PlaceInput";
 import ArtistInput from "./ArtistInput";
 
 const Entry = () => {
-	const [placeInput, setPlaceInputs] = useState({
+	const [placeInputs, setPlaceInputs] = useState({
 		place: "",
 		district: "",
 		address: ""
 	})
-	const [artistInput, setArtistInputs] = useState([{
+	const [artistInputs, setArtistInputs] = useState([{
 		id: 1,
 		bias: "",
 		team: ""
 	}])
-	const [basicInputs, setBasicInput] = useState({ organizer: "", snsId: "", link: "" });
+	const [basicInputs, setBasicInputs] = useState({ organizer: "", snsId: "", link: "" });
 	const { organizer, snsId, link } = basicInputs;
 	const [hashTags, setHashTags] = useState([{ id: 1, text: "" }]);
 
@@ -39,7 +39,7 @@ const Entry = () => {
 			return;
 		}
 
-		setBasicInput({
+		setBasicInputs({
 			...basicInputs,
 			[id]: e.currentTarget.value,
 		});
@@ -48,6 +48,27 @@ const Entry = () => {
 	const handleAddHashTag = () => {
 		if (hashTags.length > 3) return;
 		setHashTags((prev) => [...prev, { id: hashTags.length + 1, text: "" }]);
+	};
+
+	const handleInputDelete = (e: React.MouseEvent, id: string, hashTagId?: number) => {
+		if (id === "hashTag") {
+			const hashTagsData = hashTags.map((tag) => {
+				if (tag.id === hashTagId) {
+					return {
+						...tag,
+						text: "",
+					};
+				}
+				return tag;
+			});
+			setHashTags(hashTagsData);
+			return;
+		}
+
+		setBasicInputs((prev) => ({
+			...prev,
+			[id]: "",
+		}));
 	};
 
 	return (
@@ -62,14 +83,15 @@ const Entry = () => {
 			</div>
 
 			<div className="inputsWrapper">
-				<PlaceInput value={placeInput} setValue={setPlaceInputs}/>
-				<ArtistInput value={artistInput} setValue={setArtistInputs}/>
+				<PlaceInput value={placeInputs} setValue={setPlaceInputs}/>
+				<ArtistInput value={artistInputs} setValue={setArtistInputs}/>
 				<BasicInput
 					label="주최자 닉네임"
 					value={organizer}
 					id="organizer"
 					placeholder="오늘의 컵홀더"
 					handleInputChange={(e) => handleInputChange(e, "organizer")}
+					handleInputDelete={(e) => handleInputDelete(e, "organizer")}
 				/>
 				<BasicInput
 					label="주최자 트위터 계정"
@@ -77,6 +99,7 @@ const Entry = () => {
 					id="snsId"
 					placeholder="ocup"
 					handleInputChange={(e) => handleInputChange(e, "snsId")}
+					handleInputDelete={(e) => handleInputDelete(e, "snsId")}
 				/>
 				<div className="hashTags">
 					{hashTags.map((t) => (
@@ -87,6 +110,7 @@ const Entry = () => {
 							id="hashTag"
 							placeholder={t.id === 1 ? "해피_오컵_데이" : ""}
 							handleInputChange={(e) => handleInputChange(e, "hashTag", t.id)}
+							handleInputDelete={(e) => handleInputDelete(e, "hashTag", t.id)}
 							hideLabel={t.id !== 1}
 						/>
 					))}
@@ -100,6 +124,7 @@ const Entry = () => {
 					id="link"
 					placeholder="이벤트 정보가 담긴 트윗 링크를 남겨주세요."
 					handleInputChange={(e) => handleInputChange(e, "link")}
+					handleInputDelete={(e) => handleInputDelete(e, "link")}
 				/>
 			</div>
 			<Button customStyle={{ width: "380px", fontWeight: "bold" }}>제출하기</Button>

@@ -9,7 +9,7 @@ type HeaderProps = {
 function Header({ dateSelector }: HeaderProps) {
 	return (
 		<StyledHeader>
-			<img src="/logo_primary.png" alt="o-cup" id="logo"/>
+			<img src="images/logo_primary.png" alt="o-cup" id="logo" />
 			{dateSelector && <DateSelector />}
 		</StyledHeader>
 	);

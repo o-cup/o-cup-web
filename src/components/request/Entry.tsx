@@ -1,31 +1,40 @@
 import React, { useState } from "react";
 import Button from "../../shared/components/Button";
+import Icon from "../../shared/components/Icon/Icons";
 import BasicInput from "./BasicInput";
 import { StyledEntry } from "./styles/requestStyle";
 
 const Entry = () => {
-	const [basicInputs, setBasicInput] = useState({ organizer: "", snsId: "", link: "", hashTag: "" });
-	const { organizer, snsId, hashTag, link } = basicInputs;
+	const [basicInputs, setBasicInput] = useState({ organizer: "", snsId: "", link: "" });
+	const { organizer, snsId, link } = basicInputs;
+	const [hashTags, setHashTags] = useState([{ id: 1, text: "" }]);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
+		const { value } = e.currentTarget;
+
 		setBasicInput({
 			...basicInputs,
 			[id]: e.currentTarget.value,
 		});
 	};
 
+	const handleAddHashTag = () => {
+		if (hashTags.length > 3) return;
+		setHashTags((prev) => [...prev, { id: hashTags.length + 1, text: "" }]);
+	};
+
 	return (
 		<StyledEntry>
-			<div className="inputWrapper">
-				<div className="notice">
-					<p>장소 등록 시 주의사항</p>
-					<p>
-						오늘의 컵홀더는 특전 증정이 있는 이벤트에 한해 정보를 제공합니다.
-						<br />
-						따라서 특전이 없는 포토부스, 옥외 광고 등의 이벤트는 승인되지 않습니다.
-					</p>
-				</div>
+			<div className="notice">
+				<p>장소 등록 시 주의사항</p>
+				<p>
+					오늘의 컵홀더는 특전 증정이 있는 이벤트에 한해 정보를 제공합니다.
+					<br />
+					따라서 특전이 없는 포토부스, 옥외 광고 등의 이벤트는 승인되지 않습니다.
+				</p>
+			</div>
 
+			<div className="inputsWrapper">
 				<BasicInput
 					label="주최자 닉네임"
 					value={organizer}
@@ -40,13 +49,22 @@ const Entry = () => {
 					placeholder="ocup"
 					handleInputChange={(e) => handleInputChange(e, "snsId")}
 				/>
-				<BasicInput
-					label="이벤트 해시태그"
-					value={hashTag}
-					id="hashTag"
-					placeholder="해피_오컵_데이"
-					handleInputChange={(e) => handleInputChange(e, "hashTag")}
-				/>
+				<div className="hashTags">
+					{hashTags.map((t) => (
+						<BasicInput
+							key={t.id}
+							label="이벤트 해시태그"
+							value={t.text}
+							id="hashTag"
+							placeholder={t.id === 1 ? "해피_오컵_데이" : ""}
+							handleInputChange={(e) => handleInputChange(e, "hashTag")}
+							hideLabel={t.id !== 1}
+						/>
+					))}
+					<div className="iconWrapper">
+						<Icon name="plus-circle" handleClick={handleAddHashTag} />
+					</div>
+				</div>
 				<BasicInput
 					label="이벤트 트윗 링크"
 					value={link}

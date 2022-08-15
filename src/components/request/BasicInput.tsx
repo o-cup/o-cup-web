@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Label, StyledBasicInput } from "./styles/basicInputStyle";
+import { Label, StyledBasicInput } from "./styles/basicInputStyle";
 
 export type InputProps = {
 	value: string;
@@ -7,23 +7,22 @@ export type InputProps = {
 	id: string;
 	placeholder: string;
 	handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	hideLabel?: boolean;
 };
 
-const BasicInput = ({ value, label, id, placeholder, handleInputChange }: InputProps) => (
-	<StyledBasicInput>
-		<Label htmlFor={id} isSnsId={id === "snsId"} isHashTag={id === "hashTag"}>
-			{label}
+const BasicInput = ({ value, label, id, placeholder, handleInputChange, hideLabel = false }: InputProps) => (
+	<StyledBasicInput isSnsId={id === "snsId"} isHashTag={id === "hashTag"}>
+		<Label htmlFor={id} hideLabel={hideLabel}>
+			{!hideLabel && label}
 		</Label>
-		<Input
-			type="text"
-			value={value}
-			id={id}
-			placeholder={placeholder}
-			isSnsId={id === "snsId"}
-			isHashTag={id === "hashTag"}
-			onChange={handleInputChange}
-		/>
+		<div className="inputWrapper">
+			<input type="text" value={value} id={id} placeholder={placeholder} onChange={handleInputChange} className={id} />
+		</div>
 	</StyledBasicInput>
 );
+
+BasicInput.defaultProps = {
+	hideLabel: false,
+};
 
 export default BasicInput;

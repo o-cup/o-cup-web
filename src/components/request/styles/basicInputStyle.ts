@@ -18,8 +18,9 @@ const InputWrapper = styled.div<{ hasValue: boolean }>`
 		&:before {
 			content: "@";
 			position: absolute;
-			top: 16px;
+			top: 50%;
 			left: 10px;
+			transform: translateY(-50%);
 		}
 	}
 
@@ -27,24 +28,12 @@ const InputWrapper = styled.div<{ hasValue: boolean }>`
 		&:before {
 			content: "#";
 			position: absolute;
-			top: 17px;
+			top: 50%;
 			left: 11px;
+			transform: translateY(-50%);
 			font-size: 16px;
 		}
 	}
-
-	// TODO: url로 변경
-	${(props) =>
-		props.hasValue &&
-		css`
-			&:after {
-				content: "X";
-				position: absolute;
-				top: 17px;
-				right: 12px;
-				font-size: 16px;
-			}
-		`}
 
 	input {
 		width: 100%;
@@ -69,5 +58,16 @@ const Label = styled.label<{ hideLabel: boolean }>`
 	display: ${(props) => (props.hideLabel ? "none" : "")};
 `;
 
-export { StyledBasicInput, Label, InputWrapper };
+const DeleteBtn = styled.button`
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 50%;
+	right: 8px;
+	transform: translateY(-50%);
+	background: url("/images/icons/delete.png") no-repeat 50% / contain;
+	cursor: default;
+`;
+
+export { StyledBasicInput, Label, InputWrapper, DeleteBtn };
 export default {};

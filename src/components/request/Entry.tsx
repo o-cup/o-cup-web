@@ -4,6 +4,7 @@ import Icon from "../../shared/components/Icon/Icons";
 import BasicInput from "./BasicInput";
 import { StyledEntry } from "./styles/requestStyle";
 import PlaceInput from "./PlaceInput";
+import ArtistInput from "./ArtistInput";
 
 const Entry = () => {
 	const [placeInput, setPlaceInputs] = useState({
@@ -11,6 +12,11 @@ const Entry = () => {
 		district: "",
 		address: ""
 	})
+	const [artistInput, setArtistInputs] = useState([{
+		id: 1,
+		bias: "",
+		team: ""
+	}])
 	const [basicInputs, setBasicInput] = useState({ organizer: "", snsId: "", link: "" });
 	const { organizer, snsId, link } = basicInputs;
 	const [hashTags, setHashTags] = useState([{ id: 1, text: "" }]);
@@ -57,6 +63,7 @@ const Entry = () => {
 
 			<div className="inputsWrapper">
 				<PlaceInput value={placeInput} setValue={setPlaceInputs}/>
+				<ArtistInput value={artistInput} setValue={setArtistInputs}/>
 				<BasicInput
 					label="주최자 닉네임"
 					value={organizer}

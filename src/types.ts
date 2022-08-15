@@ -30,6 +30,7 @@ export type PeopleType = {
 	id: number;
 	createdAt: string;
 	name: string;
+	team: string[];
 	birthday: string;
 	profilePic: string;
 };

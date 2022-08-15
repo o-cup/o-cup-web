@@ -9,8 +9,23 @@ const Entry = () => {
 	const { organizer, snsId, link } = basicInputs;
 	const [hashTags, setHashTags] = useState([{ id: 1, text: "" }]);
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, id: string, hashTagId?: number) => {
 		const { value } = e.currentTarget;
+
+		if (id === "hashTag") {
+			// TODO: 띄어쓰기 입력 시 자동으로 _ 입력되도록 구현 검토
+			const hashTagsData = hashTags.map((tag) => {
+				if (tag.id === hashTagId) {
+					return {
+						...tag,
+						text: value,
+					};
+				}
+				return tag;
+			});
+			setHashTags(hashTagsData);
+			return;
+		}
 
 		setBasicInput({
 			...basicInputs,
@@ -57,7 +72,7 @@ const Entry = () => {
 							value={t.text}
 							id="hashTag"
 							placeholder={t.id === 1 ? "해피_오컵_데이" : ""}
-							handleInputChange={(e) => handleInputChange(e, "hashTag")}
+							handleInputChange={(e) => handleInputChange(e, "hashTag", t.id)}
 							hideLabel={t.id !== 1}
 						/>
 					))}

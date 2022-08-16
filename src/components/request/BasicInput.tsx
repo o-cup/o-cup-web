@@ -1,5 +1,6 @@
-import React, { Dispatch, SetStateAction } from "react";
-import { DeleteBtn, InputWrapper, Label, StyledBasicInput } from "./styles/basicInputStyle";
+import React from "react";
+import { DeleteBtn, InputWrapper, StyledBasicInput } from "./styles/basicInputStyle";
+import { Label } from "./styles/requestStyle";
 
 export type InputProps = {
 	value: string;

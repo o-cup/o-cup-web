@@ -5,6 +5,7 @@ import BasicInput from "./BasicInput";
 import { StyledEntry } from "./styles/requestStyle";
 import PlaceInput from "./PlaceInput";
 import ArtistInput from "./ArtistInput";
+import DateRangeInput from "./DateRangeInput";
 
 const Entry = () => {
 	const [placeInputs, setPlaceInputs] = useState({
@@ -114,7 +115,6 @@ const Entry = () => {
 						<ArtistInput key={artist.id} value={artist} handleChangeArtist={handleChangeArtist}/>)}
 					<button type="button" onClick={handleClickAddArtist}>다른 아티스트 추가하기</button>
 				</div>
-				{/* <ArtistInput value={artistInputs} setValue={setArtistInputs}/> */}
 				<BasicInput
 					label="주최자 닉네임"
 					value={organizer}
@@ -131,6 +131,7 @@ const Entry = () => {
 					handleInputChange={(e) => handleInputChange(e, "snsId")}
 					handleInputDelete={(e) => handleInputDelete(e, "snsId")}
 				/>
+				<DateRangeInput/>
 				<div className="hashTags">
 					{hashTags.map((t) => (
 						<BasicInput

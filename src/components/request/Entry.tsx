@@ -3,8 +3,20 @@ import Button from "../../shared/components/Button";
 import Icon from "../../shared/components/Icon/Icons";
 import BasicInput from "./BasicInput";
 import { StyledEntry } from "./styles/requestStyle";
+import PlaceInput from "./PlaceInput";
+import ArtistInput from "./ArtistInput";
 
 const Entry = () => {
+	const [placeInputs, setPlaceInputs] = useState({
+		place: "",
+		district: "",
+		address: ""
+	})
+	const [artistInputs, setArtistInputs] = useState([{
+		id: 1,
+		bias: "",
+		team: ""
+	}])
 	const [basicInputs, setBasicInputs] = useState({ organizer: "", snsId: "", link: "" });
 	const { organizer, snsId, link } = basicInputs;
 	const [hashTags, setHashTags] = useState([{ id: 1, text: "" }]);
@@ -59,6 +71,31 @@ const Entry = () => {
 		}));
 	};
 
+	const handleChangeArtist = (bias: string, team: string, index: number) => {
+		const artistInputsData = artistInputs.map((artist) => {
+			if (artist.id === index) {
+				return {
+					...artist,
+					bias,
+					team
+				};
+			}
+			return artist;
+		});
+		setArtistInputs(artistInputsData);
+	}
+
+	const handleClickAddArtist = () => {
+		setArtistInputs([
+			...artistInputs,
+			{
+				id: artistInputs.length + 1,
+				bias: "",
+				team: ""
+			}
+		])
+	};
+
 	return (
 		<StyledEntry>
 			<div className="notice">
@@ -71,6 +108,13 @@ const Entry = () => {
 			</div>
 
 			<div className="inputsWrapper">
+				<PlaceInput value={placeInputs} setValue={setPlaceInputs}/>
+				<div className="artistInputContainer">
+					{artistInputs.map((artist) =>
+						<ArtistInput key={artist.id} value={artist} handleChangeArtist={handleChangeArtist}/>)}
+					<button type="button" onClick={handleClickAddArtist}>다른 아티스트 추가하기</button>
+				</div>
+				{/* <ArtistInput value={artistInputs} setValue={setArtistInputs}/> */}
 				<BasicInput
 					label="주최자 닉네임"
 					value={organizer}

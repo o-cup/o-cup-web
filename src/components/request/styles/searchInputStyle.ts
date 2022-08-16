@@ -42,8 +42,10 @@ const InputWrapper = styled.div`
 `;
 
 const Label = styled.label`
-  line-height: 20px;
   position: relative;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
 `;
 
 export { StyledSearchInput, InputWrapper, Label };

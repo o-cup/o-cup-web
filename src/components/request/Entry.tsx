@@ -21,6 +21,10 @@ const Entry = () => {
 	const [basicInputs, setBasicInputs] = useState({ organizer: "", snsId: "", link: "" });
 	const { organizer, snsId, link } = basicInputs;
 	const [hashTags, setHashTags] = useState([{ id: 1, text: "" }]);
+	const [dateRange, setDateRange] = useState({
+		startAt: "",
+		endAt: ""
+	})
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, id: string, hashTagId?: number) => {
 		const { value } = e.currentTarget;
@@ -131,7 +135,7 @@ const Entry = () => {
 					handleInputChange={(e) => handleInputChange(e, "snsId")}
 					handleInputDelete={(e) => handleInputDelete(e, "snsId")}
 				/>
-				<DateRangeInput/>
+				<DateRangeInput value={dateRange} setValue={setDateRange}/>
 				<div className="hashTags">
 					{hashTags.map((t) => (
 						<BasicInput

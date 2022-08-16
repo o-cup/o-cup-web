@@ -7,7 +7,6 @@
     color: #000000;
     font-size: 12px;
     line-height: 16px;
-    border: 2px solid #000000;
     border-radius: 4px;
 }
 
@@ -17,6 +16,8 @@
     height: 50px;
     /* padding-top: 10px; */
     background: #f9f368;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
 .rdrMonthAndYearPickers{

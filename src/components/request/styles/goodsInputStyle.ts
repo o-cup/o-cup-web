@@ -19,7 +19,7 @@ const StyledGoodsInput = styled.div`
 `;
 
 
-const SelectWrapper = styled.div`
+const StyledSelectWrapper = styled.div`
   position: relative;
   height: 48px;
   width: 100%;
@@ -38,6 +38,7 @@ const SelectWrapper = styled.div`
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
+    color: #000000;
   }
 
   input[disabled] {
@@ -54,5 +55,30 @@ const SelectWrapper = styled.div`
   }
 `;
 
-export { StyledGoodsInput, SelectWrapper };
+const StyledChipContainer = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+
+  > button.chipAddButton {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    background: ${({ theme }) => theme.colors.white};
+    border: 1px solid #000000;
+    border-radius: 30px;
+    box-shadow: 0 4px 0 #000000;
+    padding: 11px 7px;
+
+    > i.plus {
+      background: url("/images/icons/plus.png") no-repeat;
+      background-size: contain;
+      height: 14px;
+      width: 14px;
+    }
+  }
+`;
+
+export { StyledGoodsInput, StyledSelectWrapper, StyledChipContainer };
 export default {};

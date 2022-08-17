@@ -113,7 +113,7 @@ const Entry = () => {
   //
   // }
 
-  const handleClickAddGoods = () => {
+  const handleClickAddGoodsTitle = () => {
     setGoodsList([
       ...goodsList,
       {
@@ -186,7 +186,7 @@ const Entry = () => {
         />
         <div className="goodsInputContainer">
           {goodsList.map((goodsObj) => <GoodsInput key={goodsObj.id} value={goodsObj}/>)}
-          <button type="button" onClick={handleClickAddGoods}>다른 특전 추가하기</button>
+          <button type="button" onClick={handleClickAddGoodsTitle}>다른 특전 추가하기</button>
         </div>
       </div>
       <div className="ctaContainer">

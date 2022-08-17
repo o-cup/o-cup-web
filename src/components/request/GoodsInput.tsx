@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { StyledGoodsInput, SelectWrapper } from "./styles/goodsInputStyle";
+import { StyledGoodsInput, StyledSelectWrapper, StyledChipContainer } from "./styles/goodsInputStyle";
 import { StyledSearchListContainer, StyledSearchList } from "./styles/searchListStyle";
+import EditableGoodsChip from "../../shared/components/EditableGoodsChip";
 
 type GoodsValues = {
   id: number;
@@ -43,10 +44,10 @@ const GoodsInput = ({ value }: InputProps) => {
   return (
     <StyledGoodsInput>
       {value.id === 1 && <span className="label">특전 정보</span>}
-      <SelectWrapper>
+      <StyledSelectWrapper>
         <input value={titleOption} disabled placeholder="특전 종류 선택하기" />
-        <button type="button" onClick={()=>setSelectOpen(!isSelectOpen)}/>
-      </SelectWrapper>
+        <button type="button" onClick={() => setSelectOpen(!isSelectOpen)} />
+      </StyledSelectWrapper>
       {isSelectOpen && <StyledSearchListContainer>
         <StyledSearchList>
           {options.map((o) =>
@@ -54,11 +55,19 @@ const GoodsInput = ({ value }: InputProps) => {
               <div>
                 <p>{o.value}</p>
               </div>
-              <button type="button" onClick={() => setTitleOption(o.value)}>선택</button>
+              <button type="button" onClick={() => {
+                setTitleOption(o.value);
+                setSelectOpen(false);
+              }}>선택
+              </button>
             </li>
           )}
         </StyledSearchList>
       </StyledSearchListContainer>}
+      <StyledChipContainer>
+        {value.goods.map((g) => <EditableGoodsChip key={g.id} value={g.text} />)}
+        <button type="button" className="chipAddButton"><i className="plus"/></button>
+      </StyledChipContainer>
     </StyledGoodsInput>
   );
 };

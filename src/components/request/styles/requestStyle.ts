@@ -83,6 +83,10 @@ const StyledEntry = styled.div`
       margin-top: 10px;
     }
   }
+  
+  .goodsInputContainer {
+    gap: 30px;
+  }
 
   > .ctaContainer {
     display: flex;

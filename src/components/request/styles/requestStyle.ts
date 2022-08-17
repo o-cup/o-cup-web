@@ -9,15 +9,17 @@ const StyledRequest = styled.div`
 
 const StyledEntry = styled.div`
 	width: 50%;
-	max-width: 520px;
-	min-width: 380px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 30px;
 	padding: 0 24px;
+  
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 100%;
+  }
 
-	.notice {
+  .notice {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
@@ -88,6 +90,11 @@ const StyledPreview = styled.div`
 	max-width: 520px;
 	display: flex;
 	justify-content: center;
+  
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
+
 `;
 
 export { StyledRequest, StyledEntry, StyledPreview };

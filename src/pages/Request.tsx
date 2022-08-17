@@ -1,6 +1,5 @@
 import React from "react";
 import Entry from "../components/request/Entry";
-import Preview from "../components/request/Preview";
 import { StyledRequest } from "../components/request/styles/requestStyle";
 import Layout from "../shared/components/layout";
 
@@ -10,7 +9,6 @@ const Request = () => (
 	<Layout title="장소 등록">
 		<StyledRequest>
 			<Entry />
-			<Preview />
 		</StyledRequest>
 	</Layout>
 );

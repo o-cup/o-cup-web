@@ -115,30 +115,30 @@ const Entry = () => {
     ]);
   };
 
-	const handleChangeArtist = (bias: string, team: string, index: number) => {
-		const artistInputsData = artistInputs.map((artist) => {
-			if (artist.id === index) {
-				return {
-					...artist,
-					bias,
-					team,
-				};
-			}
-			return artist;
-		});
-		setArtistInputs(artistInputsData);
-	};
+  const handleChangeGoods = (title: string, goods: GoodsValues[], index: number) => {
+    const goodsData = goodsList.map((g) => {
+      if (g.id === index) {
+        return {
+          ...g,
+          title,
+          goods
+        };
+      }
+      return g;
+    });
+    setGoodsList(goodsData);
+  }
 
-	const handleClickAddArtist = () => {
-		setArtistInputs([
-			...artistInputs,
-			{
-				id: artistInputs.length + 1,
-				bias: "",
-				team: "",
-			},
-		]);
-	};
+  const handleClickAddGoodsTitle = () => {
+    setGoodsList([
+      ...goodsList,
+      {
+        id: goodsList[goodsList.length - 1].id + 1,
+        title: "",
+        goods: [{ id: 1, text: "" }]
+      }
+    ]);
+  };
 
   return (
     <StyledEntry>

@@ -1,84 +1,109 @@
 import styled from "styled-components";
 
 const StyledRequest = styled.div`
-	width: 100%;
-	height: 100%;
-	padding: 20px;
-	display: flex;
-	justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  display: flex;
 `;
 
 const StyledEntry = styled.div`
-	width: 100%;
-	max-width: 380px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 30px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 0 24px;
 
-	.notice {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-		font-size: 12px;
-		width: 100%;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 100%;
+  }
 
-		p:first-child {
-			width: 133px;
-			height: 28px;
-			background-color: ${({ theme }) => theme.colors.black};
-			color: ${({ theme }) => theme.colors.white};
-			font-weight: bold;
-			border-radius: 30px;
-			text-align: center;
-			line-height: 28px;
-		}
+  .notice {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 12px;
+    width: 100%;
 
-		p:not(:first-child) {
-			line-height: 16px;
-		}
-	}
+    p:first-child {
+      width: 133px;
+      height: 28px;
+      background-color: ${({ theme }) => theme.colors.black};
+      color: ${({ theme }) => theme.colors.white};
+      font-weight: bold;
+      border-radius: 30px;
+      text-align: center;
+      line-height: 28px;
+    }
 
-	.inputsWrapper {
-		display: flex;
-		flex-direction: column;
-		gap: 30px;
-		width: 100%;
+    p:not(:first-child) {
+      line-height: 16px;
+    }
+  }
 
-		.hashTags {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			gap: 10px;
+  .inputsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
 
-			.iconWrapper {
-				display: flex;
-				width: 100%;
-				justify-content: center;
-			}
-		}
-	}
+    .hashTags {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
 
-	.artistInputContainer {
-		display: flex;
-		flex-direction: column;
-		gap: 6px;
+      .iconWrapper {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  }
 
-		> button {
-			background: ${({ theme }) => theme.colors.primary};
-			color: ${({ theme }) => theme.colors.black};
-			border: 2px solid #000000;
-			border-radius: 70px;
-			box-shadow: 0 4px 0 #000000;
-			font-weight: 500;
-			font-size: 12px;
-			line-height: 16px;
-			padding: 10px 16px;
-			display: inline-block;
-			margin-left: auto;
-			margin-top: 10px;
-		}
-	}
+  .artistInputContainer,
+  .goodsInputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    > button {
+      background: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.black};
+      border: 2px solid #000000;
+      border-radius: 70px;
+      box-shadow: 0 4px 0 #000000;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 16px;
+      padding: 10px 16px;
+      display: inline-block;
+      margin-left: auto;
+      margin-top: 10px;
+    }
+  }
+  
+  .goodsInputContainer {
+    gap: 30px;
+
+    > button {
+      margin-top: -16px;
+    }
+  }
+
+  > .ctaContainer {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    margin-top: 64px;
+
+    @media ${({ theme }) => theme.device.desktop} {
+      > button:first-child {
+        display: none;
+      }
+    }
+  }
 `;
 
 const Label = styled.label<{ hideLabel?: boolean }>`
@@ -88,10 +113,14 @@ const Label = styled.label<{ hideLabel?: boolean }>`
 `;
 
 const StyledPreview = styled.div`
-	max-width: 520px;
-	display: flex;
-	justify-content: center;
-	width: 100%;
+  width: 50%;
+  max-width: 520px;
+  display: flex;
+  justify-content: center;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 `;
 
 export { StyledRequest, StyledEntry, StyledPreview, Label };

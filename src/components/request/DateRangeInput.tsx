@@ -4,7 +4,7 @@ import { ko } from "date-fns/locale";
 import "react-date-range-ts/dist/styles.css";
 import "./styles/request-calendar-custom.css";
 
-import { StyledDateRangeInput, StyledCalendarContainer } from "./dateRangeInputStyle";
+import { StyledDateRangeInput, StyledCalendarContainer } from "./styles/dateRangeInputStyle";
 import { convertDateToString, convertDateWithDots, convertStringToDate } from "../../shared/utils/dateHandlers";
 
 type DateRangeValues = {

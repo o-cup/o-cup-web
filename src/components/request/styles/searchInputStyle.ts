@@ -19,7 +19,7 @@ const InputWrapper = styled.div`
   input {
     width: 100%;
     height: 100%;
-    padding: 0 10px;
+    padding: 0 16px;
     border: 0;
     font-weight: 400;
     font-size: 12px;

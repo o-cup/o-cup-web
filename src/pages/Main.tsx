@@ -11,7 +11,7 @@ function Main() {
 			<>
 				<StyledMain>
 					<BiasList />
-					<SearchInput setOpen={setOpen} />
+					{/* <SearchInput setOpen={setOpen} /> */}
 					<EventList />
 				</StyledMain>
 				{open && <CustomBottomSheet setOpen={setOpen} />}

@@ -1,120 +1,122 @@
 import styled from "styled-components";
 
 const StyledLayout = styled.div`
-	width: 100%;
-	min-width: 320px;
-	min-height: 100vh;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
-	background: ${({ theme }) => theme.colors.background};
-	/* box-shadow: 0 0 20px rgb(0 0 0 / 5%); */
-
-  main {
-    padding-top: 90px;
-  }
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: ${({ theme }) => theme.colors.background};
   
-	@media ${({ theme }) => theme.device.mobile} {
-		max-width: 720px;
-	}
+  main {
+    /* header 높이와 맞추기 */
+    padding-top: 76px;
+  }
 
-	@media ${({ theme }) => theme.device.desktop} {
-		max-width: 1080px;
-	}
+  @media ${({ theme }) => theme.device.mobile} {
+    max-width: 720px;
+  }
+
+  @media ${({ theme }) => theme.device.desktop} {
+    max-width: 1080px;
+  }
 `;
 
 const StyledHeader = styled.header`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 17px 20px;
-  background: rgba(252, 251, 247, 0.9);
   position: fixed;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 1080px;
   z-index: 99;
-  height: 90px;
+  background: rgba(252, 251, 247, 0.9);
+  backdrop-filter: blur(4px);
   
-  img#logo {
-    height: 56px;
+  > div#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1080px;
+    height: 76px;
+    padding: 0 24px;
+
+    img#logo {
+      height: 56px;
+    }
+
+    .headerContents {
+      display: flex;
+      align-items: center;
+    }
+    
+    .date_selector {
+      display: flex;
+      align-items: center;
+      margin-right: 24px;
+
+      > p {
+        text-align: center;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 27px;
+        margin-right: 8px;
+        white-space: nowrap;
+      }
+
+      > button.calendarOpenButton {
+        background: none;
+        outline: none;
+
+        &.active {
+          transform: rotate(180deg);
+        }
+      }
+    }
   }
-  
-	> .date_selector {
-		display: flex;
-		align-items: center;
-		font-size: 24px;
-		line-height: 30px;
-		font-weight: 700;
-
-		> p {
-      width: 150px;
-      text-align: center;
-		}
-
-		> button {
-			width: 24px;
-			height: 24px;
-			background: ${({ theme }) => theme.colors.white};
-			border: 1px solid #000000;
-			border-radius: 50%;
-			padding: 0;
-			position: relative;
-			cursor: pointer;
-
-			&:last-child {
-				transform: rotate(180deg);
-			}
-
-			> svg {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-65%, -50%);
-			}
-		}
-	}
 `;
 
 const StyledFooter = styled.footer`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	/* padding: 32px 20px 50px; */
-	padding: 100px 0 50px 0;
-	text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* padding: 32px 20px 50px; */
+  padding: 100px 0 50px 0;
+  text-align: center;
 
-	> ul {
-		/* display: flex; */
-		display: none;
-		justify-content: center;
-		align-items: center;
-		margin-bottom: 20px;
+  > ul {
+    /* display: flex; */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
 
-		> li {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: 52px;
-			height: 52px;
-			background: ${({ theme }) => theme.colors.primary};
-			border: 2px solid #000000;
-			border-radius: 35px;
-			font-size: 20px;
-			cursor: pointer;
-		}
+    > li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 52px;
+      height: 52px;
+      background: ${({ theme }) => theme.colors.primary};
+      border: 2px solid #000000;
+      border-radius: 35px;
+      font-size: 20px;
+      cursor: pointer;
+    }
 
-		> li:not(:last-child) {
-			margin-right: 32px;
-		}
-	}
+    > li:not(:last-child) {
+      margin-right: 32px;
+    }
+  }
 
-	> p {
-		font-weight: 500;
-		font-size: 12px;
-		line-height: 15px;
-		text-align: center;
-	}
+  > p {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+  }
 `;
 
 export { StyledLayout, StyledHeader, StyledFooter };

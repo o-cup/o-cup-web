@@ -162,7 +162,10 @@ const Entry = () => {
 					handleInputDelete={(e) => handleInputDelete(e, "link")}
 				/>
 			</div>
-			<Button customStyle={{ width: "100%", fontWeight: "bold" }}>제출하기</Button>
+      <div className="buttonContainer">
+        <Button customStyle={{ width: "100%", fontWeight: "bold" }}>미리보기</Button>
+        <Button customStyle={{ width: "100%", fontWeight: "bold" }}>제출하기</Button>
+      </div>
 		</StyledEntry>
 	);
 };

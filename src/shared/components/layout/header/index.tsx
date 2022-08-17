@@ -6,25 +6,31 @@ import HeaderCalendar from "./HeaderCalendar";
 import Icon from "../../Icon/Icons";
 
 type HeaderProps = {
-  dateSelector: boolean;
+	title?: string;
 };
+function Header({ title }: HeaderProps) {
+	const navigate = useNavigate();
+	const [isCalendarOpen, setCalendarOpen] = useState(false);
+	const mainPage = !title;
 
-function Header({ dateSelector }: HeaderProps) {
-  const navigate = useNavigate();
-  const [isCalendarOpen, setCalendarOpen] = useState(false);
+	return (
+		<StyledHeader mainPage={mainPage}>
+			<div id="header">
+				<Icon name="logo" handleClick={() => navigate("/")} />
+				{title && <h1>{title}</h1>}
 
-  return (
-    <StyledHeader>
-      <div id="header">
-        <Icon name="logo" handleClick={() => navigate("/")} />
-        <div className="headerContents">
-          {dateSelector && <DateSelector isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen} />}
-          <Icon name="search" handleClick={() => navigate("/search")} />
-        </div>
-      </div>
-      {isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}
-    </StyledHeader>
-  );
+				<div>
+					{mainPage && <DateSelector isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen} />}
+					{isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}
+					<Icon name="search" handleClick={() => navigate("/search")} />
+				</div>
+			</div>
+		</StyledHeader>
+	);
 }
+
+Header.defaultProps = {
+	title: "",
+};
 
 export default Header;

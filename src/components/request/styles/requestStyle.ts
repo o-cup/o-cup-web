@@ -5,12 +5,12 @@ const StyledRequest = styled.div`
 	height: 100%;
 	padding: 20px;
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 `;
 
 const StyledEntry = styled.div`
-	width: 380px;
-	min-width: 380px;
+	width: 100%;
+	max-width: 380px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

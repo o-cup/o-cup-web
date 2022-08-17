@@ -106,6 +106,12 @@ const StyledEntry = styled.div`
   }
 `;
 
+const Label = styled.label<{ hideLabel?: boolean }>`
+	line-height: 20px;
+	position: relative;
+	display: ${(props) => (props.hideLabel ? "none" : "")};
+`;
+
 const StyledPreview = styled.div`
   width: 50%;
   max-width: 520px;
@@ -117,5 +123,5 @@ const StyledPreview = styled.div`
   }
 `;
 
-export { StyledRequest, StyledEntry, StyledPreview };
+export { StyledRequest, StyledEntry, StyledPreview, Label };
 export default {};

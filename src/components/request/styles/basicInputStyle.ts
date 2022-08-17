@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const StyledBasicInput = styled.div`
 	display: flex;
@@ -52,12 +52,6 @@ const InputWrapper = styled.div<{ hasValue: boolean }>`
 	}
 `;
 
-const Label = styled.label<{ hideLabel: boolean }>`
-	line-height: 20px;
-	position: relative;
-	display: ${(props) => (props.hideLabel ? "none" : "")};
-`;
-
 const DeleteBtn = styled.button`
 	position: absolute;
 	width: 20px;
@@ -69,5 +63,5 @@ const DeleteBtn = styled.button`
 	cursor: default;
 `;
 
-export { StyledBasicInput, Label, InputWrapper, DeleteBtn };
+export { StyledBasicInput, InputWrapper, DeleteBtn };
 export default {};

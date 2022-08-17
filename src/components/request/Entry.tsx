@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "../../shared/components/Button";
 import Icon from "../../shared/components/Icon/Icons";
 import BasicInput from "./BasicInput";
+import PosterUploader from "./PosterUploader";
 import { StyledEntry } from "./styles/requestStyle";
 import PlaceInput from "./PlaceInput";
 import ArtistInput from "./ArtistInput";
@@ -114,30 +115,30 @@ const Entry = () => {
     ]);
   };
 
-  const handleChangeGoods = (title: string, goods: GoodsValues[], index: number) => {
-    const goodsData = goodsList.map((g) => {
-      if (g.id === index) {
-        return {
-          ...g,
-          title,
-          goods
-        };
-      }
-      return g;
-    });
-    setGoodsList(goodsData);
-  }
+	const handleChangeArtist = (bias: string, team: string, index: number) => {
+		const artistInputsData = artistInputs.map((artist) => {
+			if (artist.id === index) {
+				return {
+					...artist,
+					bias,
+					team,
+				};
+			}
+			return artist;
+		});
+		setArtistInputs(artistInputsData);
+	};
 
-  const handleClickAddGoodsTitle = () => {
-    setGoodsList([
-      ...goodsList,
-      {
-        id: goodsList[goodsList.length - 1].id + 1,
-        title: "",
-        goods: [{ id: 1, text: "" }]
-      }
-    ]);
-  };
+	const handleClickAddArtist = () => {
+		setArtistInputs([
+			...artistInputs,
+			{
+				id: artistInputs.length + 1,
+				bias: "",
+				team: "",
+			},
+		]);
+	};
 
   return (
     <StyledEntry>
@@ -174,6 +175,7 @@ const Entry = () => {
           handleInputDelete={(e) => handleInputDelete(e, "snsId")}
         />
         <DateRangeInput value={dateRange} setValue={setDateRange} />
+        <PosterUploader />
         <div className="hashTags">
           {hashTags.map((t) => (
             <BasicInput

@@ -62,7 +62,8 @@ const StyledEntry = styled.div`
     }
   }
 
-  .artistInputContainer {
+  .artistInputContainer,
+  .goodsInputContainer {
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -83,7 +84,7 @@ const StyledEntry = styled.div`
     }
   }
 
-  .buttonContainer {
+  > .ctaContainer {
     display: flex;
     width: 100%;
     gap: 20px;

@@ -3,7 +3,8 @@ import { FaSearch, FaTimes } from "react-icons/fa";
 import { useQuery } from "react-query";
 import { fetchPeople } from "../../apis";
 import { StyledArtistInput } from "./styles/artistInputStyle";
-import { StyledPlaceContainer, StyledPlaceList } from "./styles/placeInputStyle";
+import { StyledSearchListContainer, StyledSearchList } from "./styles/searchListStyle";
+
 import SearchInput from "./SearchInput";
 import { PeopleType } from "../../types";
 import BasicInput from "./BasicInput";
@@ -71,7 +72,7 @@ const ArtistInput = ({ value, handleChangeArtist }: InputProps) => {
                    label="아티스트 이름"
                    hideLabel={value.id > 1} />
 
-      {isSearchOpen && <StyledPlaceContainer>
+      {isSearchOpen && <StyledSearchListContainer>
         <div className="inputContainer">
           <input value={keyword} onChange={(e) => setKeyword(e.target.value)} />
           <div className="buttonContainer">
@@ -79,7 +80,7 @@ const ArtistInput = ({ value, handleChangeArtist }: InputProps) => {
             <FaSearch />
           </div>
         </div>
-        <StyledPlaceList>
+        <StyledSearchList>
           {people?.map((bias) =>
             <li key={bias.id}>
               <div>
@@ -97,8 +98,8 @@ const ArtistInput = ({ value, handleChangeArtist }: InputProps) => {
             }}>선택
             </button>
           </li>
-        </StyledPlaceList>
-      </StyledPlaceContainer>}
+        </StyledSearchList>
+      </StyledSearchListContainer>}
 
       {isInputOpen && <div className="customInputContainer">
         <BasicInput label="" hideLabel

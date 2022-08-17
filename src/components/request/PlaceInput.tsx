@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
-import { StyledPlaceContainer, StyledPlaceInput, StyledPlaceList } from "./styles/placeInputStyle";
+import { StyledPlaceInput } from "./styles/placeInputStyle";
+import { StyledSearchListContainer, StyledSearchList } from "./styles/searchListStyle";
 import SearchInput from "./SearchInput";
 
 type PlaceValues = {
@@ -66,7 +67,7 @@ const PlaceInput = ({ value, setValue }: InputProps) => {
     <StyledPlaceInput>
       <SearchInput value={value.place} handleClickSearchBtn={() => setSearchOpen(!isSearchOpen)}
                    id="place" placeholder="카페이름" label="장소" />
-      {isSearchOpen && <StyledPlaceContainer>
+      {isSearchOpen && <StyledSearchListContainer>
         <div className="inputContainer">
           <input value={keyword} onChange={(e) => setKeyword(e.target.value)} />
           <div className="buttonContainer">
@@ -74,7 +75,7 @@ const PlaceInput = ({ value, setValue }: InputProps) => {
             <FaSearch />
           </div>
         </div>
-        {placeList.length > 0 && <StyledPlaceList>
+        {placeList.length > 0 && <StyledSearchList>
           {placeList.map((place) =>
             <li key={place.id}>
               <div>
@@ -83,8 +84,8 @@ const PlaceInput = ({ value, setValue }: InputProps) => {
               </div>
               <button type="button" onClick={() => handleClickSelect(place)}>선택</button>
             </li>)}
-        </StyledPlaceList>}
-      </StyledPlaceContainer>}
+        </StyledSearchList>}
+      </StyledSearchListContainer>}
       <SearchInput value={value.address} id="address" placeholder="주소" label="" hideLabel hideButton />
     </StyledPlaceInput>
   );

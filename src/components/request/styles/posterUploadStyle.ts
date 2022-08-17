@@ -28,7 +28,29 @@ const Poster = styled.div`
 		display: none;
 	}
 
-	img {
+	.imgWrapper {
+		width: 100%;
+		height: 100%;
+		position: relative;
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
+
+		i.delete-circle-white {
+			position: absolute;
+			top: 3px;
+			right: 3px;
+		}
+	}
+
+	.imgWrapper::before {
+		content: "";
+		background: linear-gradient(#000000, transparent);
+		opacity: 30%;
+		display: block;
+		position: absolute;
 		width: 100%;
 		height: 100%;
 	}

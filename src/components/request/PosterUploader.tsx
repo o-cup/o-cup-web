@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Icon from "../../shared/components/Icon/Icons";
 import { Poster, StyledPosterUpload } from "./styles/posterUploadStyle";
 import { Label } from "./styles/requestStyle";
 
 const PosterUploader = () => {
 	const [posters, setPosters] = useState([{ id: 1, url: "" }]);
+
+	useEffect(() => {
+		const allHasUrl = posters.every((poster) => poster.url);
+
+		if (posters.length === 2 && allHasUrl) {
+			setPosters([...posters, { id: posters.length + 1, url: "" }]);
+		}
+	}, [posters]);
 
 	const handleUploadClick = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
 		const { files } = e.target;
@@ -33,6 +41,14 @@ const PosterUploader = () => {
 		};
 	};
 
+	const handleDeletePoster = (id: number) => {
+		const postersData = posters
+			.filter((poster) => poster.id !== id)
+			.map((poster, index) => ({ ...poster, id: index + 1 }));
+
+		setPosters(postersData);
+	};
+
 	return (
 		<StyledPosterUpload>
 			<Label>포스터 업로드</Label>
@@ -43,7 +59,10 @@ const PosterUploader = () => {
 					return (
 						<Poster key={key}>
 							{p.url ? (
-								<img src={p.url} alt={key} />
+								<div className="imgWrapper">
+									<img src={p.url} alt={key} />
+									<Icon name="delete-circle-white" handleClick={() => handleDeletePoster(p.id)} />
+								</div>
 							) : (
 								<label htmlFor="uploader">
 									<Icon name="plus-circle" />

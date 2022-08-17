@@ -86,12 +86,17 @@ const StyledEntry = styled.div`
   
   .goodsInputContainer {
     gap: 30px;
+
+    > button {
+      margin-top: -16px;
+    }
   }
 
   > .ctaContainer {
     display: flex;
     width: 100%;
     gap: 20px;
+    margin-top: 64px;
 
     @media ${({ theme }) => theme.device.desktop} {
       > button:first-child {

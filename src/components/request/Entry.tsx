@@ -8,6 +8,11 @@ import ArtistInput from "./ArtistInput";
 import DateRangeInput from "./DateRangeInput";
 import GoodsInput from "./GoodsInput";
 
+type GoodsValues = {
+  id: number;
+  text: string;
+}
+
 const Entry = () => {
   const [placeInputs, setPlaceInputs] = useState({
     place: "",
@@ -102,22 +107,32 @@ const Entry = () => {
     setArtistInputs([
       ...artistInputs,
       {
-        id: artistInputs.length + 1,
+        id: artistInputs[artistInputs.length - 1].id + 1,
         bias: "",
         team: ""
       }
     ]);
   };
 
-  // const handleChangeGoods = () => {
-  //
-  // }
+  const handleChangeGoods = (title: string, goods: GoodsValues[], index: number) => {
+    const goodsData = goodsList.map((g) => {
+      if (g.id === index) {
+        return {
+          ...g,
+          title,
+          goods
+        };
+      }
+      return g;
+    });
+    setGoodsList(goodsData);
+  }
 
   const handleClickAddGoodsTitle = () => {
     setGoodsList([
       ...goodsList,
       {
-        id: goodsList.length + 1,
+        id: goodsList[goodsList.length - 1].id + 1,
         title: "",
         goods: [{ id: 1, text: "" }]
       }
@@ -185,7 +200,7 @@ const Entry = () => {
           handleInputDelete={(e) => handleInputDelete(e, "link")}
         />
         <div className="goodsInputContainer">
-          {goodsList.map((goodsObj) => <GoodsInput key={goodsObj.id} value={goodsObj}/>)}
+          {goodsList.map((goodsObj) => <GoodsInput key={goodsObj.id} value={goodsObj} handleChangeGoods={handleChangeGoods}/>)}
           <button type="button" onClick={handleClickAddGoodsTitle}>다른 특전 추가하기</button>
         </div>
       </div>

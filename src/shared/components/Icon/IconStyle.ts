@@ -18,6 +18,14 @@ export const StyledIcon = styled.i`
 		height: 24px;
 		width: 24px;
 	}
+  
+  &.delete {
+    display: flex;
+    background: url("/images/icons/delete.png") no-repeat;
+    background-size: contain;
+    height: 24px;
+    width: 24px;
+  }
 
   &.search {
     display: flex;

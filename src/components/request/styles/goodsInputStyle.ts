@@ -13,7 +13,7 @@ const StyledGoodsInput = styled.div`
     line-height: 20px;
   }
 
-  > div:nth-child(3) {
+  > .goodsOptionList {
     margin-top: -8px;
   }
 `;
@@ -55,6 +55,34 @@ const StyledSelectWrapper = styled.div`
   }
 `;
 
+const StyledInputWrapper = styled.div`
+  position: relative;
+  height: 48px;
+  width: 100%;
+  display: flex;
+  border: 2px solid ${({ theme }) => theme.colors.black};
+  border-radius: 4px;
+  align-items: center;
+  padding: 0 16px;
+  background: #FFFFFF;
+
+  input {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #000000;
+  }
+
+  > .iconContainer {
+    display: flex;
+    gap: 10px;
+  }
+`;
+
 const StyledChipContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
@@ -80,5 +108,5 @@ const StyledChipContainer = styled.ul`
   }
 `;
 
-export { StyledGoodsInput, StyledSelectWrapper, StyledChipContainer };
+export { StyledGoodsInput, StyledSelectWrapper, StyledInputWrapper, StyledChipContainer };
 export default {};

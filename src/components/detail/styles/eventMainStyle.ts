@@ -48,6 +48,7 @@ const StyledEventMain = styled.div`
 	.imgContainer {
 		width: calc(100% - 32px);
 		height: 264px;
+		height: fit-content;
 		position: relative;
 		background: ${({ theme }) => theme.colors.white};
 		box-sizing: content-box !important;

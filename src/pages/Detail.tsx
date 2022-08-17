@@ -19,29 +19,33 @@ const Detail = () => {
 	);
 
 	if (!combinedDetail) return null;
-	console.log(combinedDetail);
 	const { place, biasesId, organizer, snsId, startAt, endAt, images, district, address, goods, hashTags, tweetUrl } =
 		combinedDetail;
 
+	// TODO: props하나로 묶어서 전달할 수 있도록 리팩토링
 	return (
 		<Layout>
 			<StyledDetail>
-				<EventMain
-					place={place}
-					biasesId={biasesId}
-					organizer={organizer}
-					snsId={snsId}
-					startAt={startAt}
-					endAt={endAt}
-					address={address}
-					images={images}
-				/>
 				<div>
-					<TwitterInfo organizer={organizer} snsId={snsId} hashTags={hashTags} />
-					<GoodsInfo goods={goods} tweetUrl={tweetUrl} />
-					<Location address={address} />
-					<EventNearHere biasesId={biasesId} district={district} />
+					<div className="mainInfo">
+						<EventMain
+							place={place}
+							biasesId={biasesId}
+							organizer={organizer}
+							snsId={snsId}
+							startAt={startAt}
+							endAt={endAt}
+							address={address}
+							images={images}
+						/>
+					</div>
+					<div className="subInfo">
+						<TwitterInfo organizer={organizer} snsId={snsId} hashTags={hashTags} />
+						<GoodsInfo goods={goods} tweetUrl={tweetUrl} />
+						<Location address={address} />
+					</div>
 				</div>
+				<EventNearHere biasesId={biasesId} district={district} />
 			</StyledDetail>
 		</Layout>
 	);

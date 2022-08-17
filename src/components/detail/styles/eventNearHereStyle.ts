@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const StyledEventNearHere = styled.div`
 	padding: 32px 0;
+	width: 100%;
 
 	> h4 {
 		padding: 0 20px;

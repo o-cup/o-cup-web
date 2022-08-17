@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { DateRange } from "react-date-range-ts";
 import { ko } from "date-fns/locale";
 import "react-date-range-ts/dist/styles.css";
-import "./styles/react-date-range-custom.css";
+import "./styles/request-calendar-custom.css";
 
 import { StyledDateRangeInput, StyledCalendarContainer } from "./dateRangeInputStyle";
 import { convertDateToString, convertDateWithDots, convertStringToDate } from "../../shared/utils/dateHandlers";
@@ -50,6 +50,7 @@ const DateRangeInput = ({ value, setValue }: InputProps) => {
 
       {isCalendarOpen && <StyledCalendarContainer>
         <DateRange
+          className="request-calendar"
           editableDateInputs
           moveRangeOnFirstSelection={false}
           ranges={[selectedRange]}

@@ -8,6 +8,7 @@ import PlaceInput from "./PlaceInput";
 import ArtistInput from "./ArtistInput";
 import DateRangeInput from "./DateRangeInput";
 import GoodsInput from "./GoodsInput";
+import { insertDetail, insertEvent } from "../../apis";
 
 type GoodsValues = {
   id: number;
@@ -28,7 +29,7 @@ const Entry = () => {
   }]);
   const [basicInputs, setBasicInputs] = useState({ organizer: "", snsId: "", link: "" });
   const { organizer, snsId, link } = basicInputs;
-  const [posterUrls, setPosterUrls] = useState([] as string[])
+  const [posterUrls, setPosterUrls] = useState([] as string[]);
   const [hashTags, setHashTags] = useState([{ id: 1, text: "" }]);
   const [dateRange, setDateRange] = useState({
     startAt: "",
@@ -38,7 +39,7 @@ const Entry = () => {
     {
       id: 1,
       title: "",
-      goods: [{ id: 1, text: "" }]
+      items: [{ id: 1, text: "" }]
     }
   ]);
 
@@ -92,7 +93,7 @@ const Entry = () => {
     }));
   };
 
-  const handleChangeArtist = (peopleId:number, bias: string, team: string, index: number) => {
+  const handleChangeArtist = (peopleId: number, bias: string, team: string, index: number) => {
     const artistInputsData = artistInputs.map((artist) => {
       if (artist.id === index) {
         return {
@@ -119,19 +120,19 @@ const Entry = () => {
     ]);
   };
 
-  const handleChangeGoods = (title: string, goods: GoodsValues[], index: number) => {
+  const handleChangeGoods = (title: string, items: GoodsValues[], index: number) => {
     const goodsData = goodsList.map((g) => {
       if (g.id === index) {
         return {
           ...g,
           title,
-          goods
+          items
         };
       }
       return g;
     });
     setGoodsList(goodsData);
-  }
+  };
 
   const handleClickAddGoodsTitle = () => {
     setGoodsList([
@@ -139,14 +140,52 @@ const Entry = () => {
       {
         id: goodsList[goodsList.length - 1].id + 1,
         title: "",
-        goods: [{ id: 1, text: "" }]
+        items: [{ id: 1, text: "" }]
       }
     ]);
   };
 
-  // const handleSubmit = async () => {
-  //
-  // }
+  const handleSubmit = async () => {
+    // todo: 필수값 비워져 있을 때 경고 팝업
+
+    const eventParams = {
+      place: placeInputs.place,
+      organizer,
+      snsId,
+      district: placeInputs.district,
+      startAt: dateRange.startAt,
+      endAt: dateRange.endAt,
+      images: posterUrls,
+      requestedBiases: artistInputs.map((artist) => ({
+        peopleId: artist.peopleId,
+        bias: artist.bias,
+        team: artist.team
+      })),
+      isRequested: true,
+      isApproved: false
+    };
+
+    const detailParams = {
+      // id: 0,
+      address: placeInputs.address,
+      hashTags: hashTags.map((h) => h.text),
+      goods: goodsList.map((goodsObj) => ({
+        title: goodsObj.title,
+        items: goodsObj.items.map((i) => i.text)
+      })),
+      tweetUrl: link
+    };
+
+    const eventData = await insertEvent(eventParams);
+    if (eventData) {
+      await insertDetail({
+        id: eventData[0].id,
+        ...detailParams,
+      });
+    }
+
+    alert("// todo: 팝업!!");
+  };
 
   return (
     <StyledEntry>
@@ -183,7 +222,7 @@ const Entry = () => {
           handleInputDelete={(e) => handleInputDelete(e, "snsId")}
         />
         <DateRangeInput value={dateRange} setValue={setDateRange} />
-        <PosterUploader setPosterUrls={setPosterUrls}/>
+        <PosterUploader setPosterUrls={setPosterUrls} />
         <div className="hashTags">
           {hashTags.map((t) => (
             <BasicInput
@@ -210,13 +249,14 @@ const Entry = () => {
           handleInputDelete={(e) => handleInputDelete(e, "link")}
         />
         <div className="goodsInputContainer">
-          {goodsList.map((goodsObj) => <GoodsInput key={goodsObj.id} value={goodsObj} handleChangeGoods={handleChangeGoods}/>)}
+          {goodsList.map((goodsObj) => <GoodsInput key={goodsObj.id} value={goodsObj}
+                                                   handleChangeGoods={handleChangeGoods} />)}
           <button type="button" onClick={handleClickAddGoodsTitle}>다른 특전 추가하기</button>
         </div>
       </div>
       <div className="ctaContainer">
         <Button customStyle={{ width: "100%", fontWeight: "bold" }}>미리보기</Button>
-        <Button customStyle={{ width: "100%", fontWeight: "bold" }}>제출하기</Button>
+        <Button customStyle={{ width: "100%", fontWeight: "bold" }} handleClick={handleSubmit}>제출하기</Button>
       </div>
     </StyledEntry>
   );

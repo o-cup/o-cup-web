@@ -4,7 +4,7 @@ import { supabase } from "../supabaseClient";
 import { EventType, DetailType, FetchEventParams } from "../types";
 
 const fetchEvents = async ({ pageParam = 1, infinite = false, keyword, date }: FetchEventParams) => {
-  let query = supabase.from("random_sort").select("*");
+  let query = supabase.from("random_sort").select("*").eq("isApproved", true);
 
   if (infinite) {
     const endAt = pageParam * ITEMS_PER_PAGE;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Icon from "../../shared/components/Icon/Icons";
 import { Poster, StyledPosterUpload } from "./styles/posterUploadStyle";
 import { Label } from "./styles/requestStyle";
+import { uploadPoster } from "../../apis";
 
 const PosterUploader = () => {
 	const [posters, setPosters] = useState([{ id: 1, url: "" }]);
@@ -33,10 +34,13 @@ const PosterUploader = () => {
 				return poster;
 			});
 
+			uploadPoster(files[0]);
+
 			if (posters.length === 3) {
 				setPosters(postersData);
 				return;
 			}
+			console.log([...postersData, { id: posters.length + 1, url: "" }])
 			setPosters([...postersData, { id: posters.length + 1, url: "" }]);
 		};
 	};

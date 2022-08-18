@@ -9,6 +9,7 @@ import ArtistInput from "./ArtistInput";
 import DateRangeInput from "./DateRangeInput";
 import GoodsInput from "./GoodsInput";
 import { insertDetail, insertEvent } from "../../apis";
+import Modal from "./Modal";
 
 type GoodsValues = {
   id: number;
@@ -16,6 +17,7 @@ type GoodsValues = {
 }
 
 const Entry = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
   const [placeInputs, setPlaceInputs] = useState({
     place: "",
     district: "",
@@ -147,6 +149,10 @@ const Entry = () => {
 
   const handleSubmit = async () => {
     // todo: 필수값 비워져 있을 때 경고 팝업
+    if (!placeInputs.place) {
+      alert("필수값 채워주세요!");
+      return;
+    }
 
     const eventParams = {
       place: placeInputs.place,
@@ -180,14 +186,42 @@ const Entry = () => {
     if (eventData) {
       await insertDetail({
         id: eventData[0].id,
-        ...detailParams,
+        ...detailParams
       });
     }
 
-    alert("// todo: 팝업!!");
+    setModalOpen(true);
   };
 
-  return (
+  const resetAllStates = () => {
+    setPlaceInputs({
+      place: "",
+      district: "",
+      address: ""
+    });
+    setArtistInputs([{
+      id: 1,
+      peopleId: 0,
+      bias: "",
+      team: ""
+    }]);
+    setBasicInputs({ organizer: "", snsId: "", link: "" });
+    setPosterUrls([]);
+    setHashTags([{ id: 1, text: "" }]);
+    setDateRange({
+      startAt: "",
+      endAt: ""
+    });
+    setGoodsList([
+      {
+        id: 1,
+        title: "",
+        items: [{ id: 1, text: "" }]
+      }
+    ]);
+  };
+
+  return (<>
     <StyledEntry>
       <div className="notice">
         <p>장소 등록 시 주의사항</p>
@@ -259,7 +293,8 @@ const Entry = () => {
         <Button customStyle={{ width: "100%", fontWeight: "bold" }} handleClick={handleSubmit}>제출하기</Button>
       </div>
     </StyledEntry>
-  );
+    {isModalOpen && <Modal setModalOpen={setModalOpen} resetAllStates={resetAllStates} />}
+  </>);
 };
 
 export default Entry;

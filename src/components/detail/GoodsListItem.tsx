@@ -7,7 +7,7 @@ const GoodsListItem = ({ goodsListItem }: { goodsListItem: GoodsItemType }) => {
 	const { title, items, type } = goodsListItem;
 
 	return (
-		<StyledGoodsListItem type={type}>
+		<StyledGoodsListItem type={type || "AND"}>
 			<h6>{title}</h6>
 			<ul>
 				{items.map((item) => (

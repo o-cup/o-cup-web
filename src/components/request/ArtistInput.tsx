@@ -11,13 +11,14 @@ import BasicInput from "./BasicInput";
 
 export type ArtistValues = {
   id: number;
+  peopleId: number;
   bias: string;
   team: string;
 }
 
 type InputProps = {
   value: ArtistValues;
-  handleChangeArtist: (bias: string, team: string, index: number) => void;
+  handleChangeArtist: (peopleId:number, bias: string, team: string, index: number) => void;
 };
 
 const ArtistInput = ({ value, handleChangeArtist }: InputProps) => {
@@ -37,7 +38,7 @@ const ArtistInput = ({ value, handleChangeArtist }: InputProps) => {
   });
 
   const handleClickSelect = (biasInfo: PeopleType) => {
-    handleChangeArtist(biasInfo.name, biasInfo.team.join(", "), value.id);
+    handleChangeArtist(biasInfo.id, biasInfo.name, biasInfo.team.join(", "), value.id);
     setKeyword("");
     setSearchOpen(false);
   };
@@ -57,7 +58,7 @@ const ArtistInput = ({ value, handleChangeArtist }: InputProps) => {
   };
 
   useEffect(() => {
-    handleChangeArtist(customArtist.bias, customArtist.team, value.id);
+    handleChangeArtist(0, customArtist.bias, customArtist.team, value.id);
   }, [customArtist]);
 
   return (

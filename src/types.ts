@@ -10,12 +10,15 @@ export type EventType = {
 	startAt: string;
 	endAt: string;
 	images: string[];
+	requestedBiases?: any[];
+	isRequested: boolean;
+	isApproved: boolean;
 };
 
 export type GoodsItemType = {
 	title: string;
 	items: string[];
-	type: "AND" | "OR";
+	type?: "AND" | "OR";
 };
 
 export type DetailType = {

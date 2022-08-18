@@ -17,12 +17,12 @@ type GoodsValues = {
 type GoodsListValues = {
   id: number;
   title: string;
-  goods: GoodsValues[];
+  items: GoodsValues[];
 }
 
 type InputProps = {
   value: GoodsListValues;
-  handleChangeGoods: (title: string, goods: GoodsValues[], index: number) => void;
+  handleChangeGoods: (title: string, items: GoodsValues[], index: number) => void;
 };
 
 const options = [
@@ -47,7 +47,7 @@ const GoodsInput = ({ value, handleChangeGoods }: InputProps) => {
 
   /** 특전 제목 변경 */
   const setGoodsTitle = (title: string) => {
-    handleChangeGoods(title, value.goods, value.id);
+    handleChangeGoods(title, value.items, value.id);
   };
 
   const handleSelectTitle = (item: { id: number; value: string; }) => {
@@ -69,7 +69,7 @@ const GoodsInput = ({ value, handleChangeGoods }: InputProps) => {
 
   /** 특전 목록 변경 */
   const setGoodsContent = (text: string, index: number) => {
-    const goodsData = value.goods.map((g) => {
+    const goodsData = value.items.map((g) => {
       if (g.id === index) {
         return {
           ...g,
@@ -78,14 +78,15 @@ const GoodsInput = ({ value, handleChangeGoods }: InputProps) => {
       }
       return g;
     });
+    console.log(value.title, goodsData, value.id)
     handleChangeGoods(value.title, goodsData, value.id);
   };
 
   const addGoodsContent = () => {
     const goodsData = [
-      ...value.goods,
+      ...value.items,
       {
-        id: value.goods[value.goods.length - 1].id + 1,
+        id: value.items[value.items.length - 1].id + 1,
         text: ""
       }
     ];
@@ -93,7 +94,7 @@ const GoodsInput = ({ value, handleChangeGoods }: InputProps) => {
   };
 
   const deleteGoodsChip = (index: number) => {
-    const goodsData = value.goods.filter((g) => g.id !== index);
+    const goodsData = value.items.filter((g) => g.id !== index);
     handleChangeGoods(value.title, goodsData, value.id);
   };
 
@@ -133,7 +134,7 @@ const GoodsInput = ({ value, handleChangeGoods }: InputProps) => {
         </StyledSearchList>
       </StyledSearchListContainer>}
       <StyledChipContainer>
-        {value.goods.map((g) =>
+        {value.items.map((g) =>
           <EditableGoodsChip key={g.id} index={g.id} value={g.text} handleChange={setGoodsContent}
                              handleDelete={deleteGoodsChip} />)}
         <button type="button" className="chipAddButton" onClick={addGoodsContent}>

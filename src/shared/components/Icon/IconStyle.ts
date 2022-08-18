@@ -18,14 +18,14 @@ export const StyledIcon = styled.i`
 		height: 24px;
 		width: 24px;
 	}
-  
-  &.delete {
-    display: flex;
-    background: url("/images/icons/delete.png") no-repeat;
-    background-size: contain;
-    height: 24px;
-    width: 24px;
-  }
+
+	&.delete {
+		display: flex;
+		background: url("/images/icons/delete.png") no-repeat;
+		background-size: contain;
+		height: 24px;
+		width: 24px;
+	}
 
 	&.delete-circle-white {
 		display: flex;
@@ -38,6 +38,14 @@ export const StyledIcon = styled.i`
 	&.search {
 		display: flex;
 		background: url("/images/icons/search.png") no-repeat;
+		background-size: contain;
+		height: 24px;
+		width: 24px;
+	}
+
+	&.sort {
+		display: flex;
+		background: url("/images/icons/sort.png") no-repeat;
 		background-size: contain;
 		height: 24px;
 		width: 24px;

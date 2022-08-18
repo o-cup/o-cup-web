@@ -14,7 +14,7 @@ const StyledBiasList = styled.ul`
 	scrollbar-width: none;
 	height: 124px;
 	align-items: center;
-  padding: 12px 0;
+	padding: 12px 0;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -73,57 +73,6 @@ const StyledBias = styled.li`
 		font-size: 14px;
 		line-height: 16px;
 		margin-top: 8px;
-	}
-`;
-
-const StyledSearchInput = styled.div`
-	display: flex;
-	align-items: center;
-	position: relative;
-
-	padding: 0 20px;
-
-	> input {
-		width: 100%;
-		font-size: 16px;
-		line-height: 24px;
-		border: none;
-		outline: none;
-		background: ${({ theme }) => theme.colors.white};
-		border: 2px solid #000000;
-		border-radius: 32px;
-		flex: 1 1 0;
-		padding: 4px;
-		height: 40px;
-		padding-left: 42px;
-	}
-
-	> svg {
-		width: 17px;
-		height: 17px;
-		margin: 0 8px;
-		transform: translateY(-50%);
-		position: absolute;
-		top: 50%;
-		left: 30px;
-	}
-
-	> button {
-		width: 40px;
-		height: 40px;
-		margin-left: 20px;
-		background: ${({ theme }) => theme.colors.primary};
-		color: ${({ theme }) => theme.colors.black};
-		border: 2px solid #000000;
-		border-radius: 50%;
-		padding: 0;
-		cursor: pointer;
-
-		> svg {
-			width: 19px;
-			height: 19px;
-			margin: 2px 0 -2px;
-		}
 	}
 `;
 
@@ -199,5 +148,5 @@ const StyledItem = styled.li`
 	}
 `;
 
-export { StyledMain, StyledBiasList, StyledBias, StyledSearchInput, StyledList, StyledItem };
+export { StyledMain, StyledBiasList, StyledBias, StyledList, StyledItem };
 export default {};

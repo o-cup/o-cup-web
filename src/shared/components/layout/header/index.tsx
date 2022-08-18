@@ -18,13 +18,12 @@ function Header({ title }: HeaderProps) {
 			<div id="header">
 				<Icon name="logo" handleClick={() => navigate("/")} />
 				{title && <h1>{title}</h1>}
-
 				<div>
 					{mainPage && <DateSelector isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen} />}
-					{isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}
 					<Icon name="search" handleClick={() => navigate("/search")} />
 				</div>
 			</div>
+			{isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}
 		</StyledHeader>
 	);
 }

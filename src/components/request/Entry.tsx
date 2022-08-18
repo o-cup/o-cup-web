@@ -22,6 +22,7 @@ const Entry = () => {
   });
   const [artistInputs, setArtistInputs] = useState([{
     id: 1,
+    peopleId: 0,
     bias: "",
     team: ""
   }]);
@@ -91,11 +92,12 @@ const Entry = () => {
     }));
   };
 
-  const handleChangeArtist = (bias: string, team: string, index: number) => {
+  const handleChangeArtist = (peopleId:number, bias: string, team: string, index: number) => {
     const artistInputsData = artistInputs.map((artist) => {
       if (artist.id === index) {
         return {
           ...artist,
+          peopleId,
           bias,
           team
         };
@@ -110,6 +112,7 @@ const Entry = () => {
       ...artistInputs,
       {
         id: artistInputs[artistInputs.length - 1].id + 1,
+        peopleId: 0,
         bias: "",
         team: ""
       }
@@ -140,6 +143,10 @@ const Entry = () => {
       }
     ]);
   };
+
+  // const handleSubmit = async () => {
+  //
+  // }
 
   return (
     <StyledEntry>

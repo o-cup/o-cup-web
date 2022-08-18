@@ -27,6 +27,7 @@ const Entry = () => {
   }]);
   const [basicInputs, setBasicInputs] = useState({ organizer: "", snsId: "", link: "" });
   const { organizer, snsId, link } = basicInputs;
+  const [posterUrls, setPosterUrls] = useState([] as string[])
   const [hashTags, setHashTags] = useState([{ id: 1, text: "" }]);
   const [dateRange, setDateRange] = useState({
     startAt: "",
@@ -175,7 +176,7 @@ const Entry = () => {
           handleInputDelete={(e) => handleInputDelete(e, "snsId")}
         />
         <DateRangeInput value={dateRange} setValue={setDateRange} />
-        <PosterUploader />
+        <PosterUploader setPosterUrls={setPosterUrls}/>
         <div className="hashTags">
           {hashTags.map((t) => (
             <BasicInput

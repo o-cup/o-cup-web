@@ -107,7 +107,9 @@ const StyledEntry = styled.div`
 `;
 
 const Label = styled.label<{ hideLabel?: boolean }>`
-	line-height: 20px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
 	position: relative;
 	display: ${(props) => (props.hideLabel ? "none" : "")};
 `;

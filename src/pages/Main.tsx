@@ -7,7 +7,7 @@ function Main() {
 	const [open, setOpen] = useState(false);
 
 	return (
-		<Layout dateSelector>
+		<Layout>
 			<>
 				<StyledMain>
 					<BiasList />

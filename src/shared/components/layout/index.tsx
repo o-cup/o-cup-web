@@ -5,8 +5,8 @@ import Footer from "./footer";
 import { StyledLayout } from "./styles/layoutStyle";
 
 type LayoutProps = {
-	dateSelector?: boolean;
 	children: JSX.Element;
+	title?: string;
 };
 
 /**
@@ -15,16 +15,16 @@ type LayoutProps = {
  * @param children
  * */
 
-const Layout: React.FC<LayoutProps> = ({ dateSelector, children }) => (
+const Layout: React.FC<LayoutProps> = ({ children, title }) => (
 	<StyledLayout>
-		<Header dateSelector={dateSelector || false} />
+		<Header title={title} />
 		<Content>{children}</Content>
 		<Footer />
 	</StyledLayout>
 );
 
 Layout.defaultProps = {
-	dateSelector: false,
+	title: "",
 };
 
 export default Layout;

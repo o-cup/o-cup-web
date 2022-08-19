@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledMain = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 15px;
+	//gap: 15px;
 `;
 
 const StyledBiasList = styled.ul`
@@ -12,8 +12,9 @@ const StyledBiasList = styled.ul`
 	overflow-y: hidden;
 	-ms-overflow-style: none;
 	scrollbar-width: none;
-	height: 100px;
+	height: 124px;
 	align-items: center;
+  padding: 12px 0;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -165,10 +166,9 @@ const StyledItem = styled.li`
 
 		> img {
 			width: 100%;
-			height: 230px;
+			height: 270px;
 			object-fit: cover;
 			object-position: top;
-			//border: 2px solid #000000;
 		}
 
 		> h6 {

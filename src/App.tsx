@@ -10,6 +10,7 @@ import Main from "./pages/Main";
 import Detail from "./pages/Detail";
 import Admin from "./pages/Admin";
 import theme from "./styles/theme";
+import Request from "./pages/Request";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ function App() {
 							<Route path="/" element={<Main />} />
 							<Route path="/detail/:id" element={<Detail />} />
 							<Route path="/admin" element={<Admin />} />
+							<Route path="/request" element={<Request />} />
 						</Routes>
 					</RecoilRoot>
 				</BrowserRouter>

@@ -1,0 +1,217 @@
+/**
+'react-date-range-ts/dist/theme/default.css' 의 커스텀 파일
+커스텀에 필요한 className만 가져와서 작업함
+ */
+
+.header-calendar.rdrCalendarWrapper{
+    color: #000000;
+    font-size: 12px;
+    width: 100%;
+    background-color: transparent;
+}
+
+/* todo: desktop 일 때 달력 넓이 조절 필요 */
+@media screen and (min-width: 721px) {
+    .header-calendar.rdrCalendarWrapper{
+        padding: 0 48px;
+    }
+}
+
+.header-calendar .rdrMonthAndYearWrapper {
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    /* padding-top: 10px; */
+}
+
+.header-calendar .rdrMonthAndYearPickers{
+    font-weight: 600;
+    flex: 0 1 auto;
+    width: 64px;
+}
+
+.header-calendar .rdrNextPrevButton {
+    display: block;
+    width: 18px;
+    height: 18px;
+    margin: 0 0.833em;
+    padding: 0;
+    border: 2px solid #000000;
+    border-radius: 100px;
+    background: #FFFFFF;
+}
+
+.header-calendar .rdrNextPrevButton i {
+    display: block;
+    width: 0;
+    height: 0;
+    padding: 0;
+    text-align: center;
+    border-style: solid;
+    margin: auto;
+    transform: translate(-3px, 0px);
+}
+
+.header-calendar .rdrPprevButton i {
+    border-width: 4px 6px 4px 4px;
+    border-color: transparent #000000 transparent transparent;
+    transform: translate(-3px, 0px);
+}
+
+.header-calendar .rdrNextButton i {
+    margin: 0 0 0 2px;
+    border-width: 4px 4px 4px 6px;
+    border-color: transparent transparent transparent #000000;
+    transform: translate(3px, 0px);
+}
+
+.header-calendar .rdrWeekDays {
+    padding: 0 0.833em;
+}
+
+.header-calendar .rdrMonth{
+    padding: 0 0.833em 1.666em 0.833em;
+}
+
+.header-calendar .rdrMonth .rdrWeekDays {
+    padding: 0;
+}
+
+
+.header-calendar .rdrWeekDay {
+    font-weight: 400;
+    line-height: 48px;
+    color: #000000;
+    height: 48px;
+}
+
+.header-calendar .rdrDay {
+    background: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 0;
+    padding: 0;
+    line-height: 48px;
+    height: 48px;
+    text-align: center;
+    color: #000000;
+    font-weight: 300;
+}
+
+.header-calendar .rdrDay:focus {
+    outline: 0;
+}
+
+.header-calendar .rdrDayNumber {
+    outline: 0;
+    font-weight: 300;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 5px;
+    bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-calendar .rdrDayToday .rdrDayNumber span{
+    font-weight: 500
+}
+
+.header-calendar .rdrDayToday .rdrDayNumber span:after{
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 16px;
+    height: 2px;
+    border-radius: 2px;
+    background: #7ADFBB;
+}
+
+.header-calendar .rdrDayToday:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span:after,
+.header-calendar .rdrDayToday:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span:after,
+.header-calendar .rdrDayToday:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span:after,
+.header-calendar .rdrDayToday:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span:after{
+    background: #fff;
+}
+
+.header-calendar .rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span,
+.header-calendar .rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span,
+.header-calendar .rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span,
+.header-calendar .rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span{
+    /*color: rgba(255, 255, 255, 0.85);*/
+    font-weight: 500;
+}
+
+.header-calendar .rdrSelected{
+    /*background: rgba(249, 243, 104, 0.5);*/
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 4px;
+    right: 4px;
+    border-radius: 1.042em;
+}
+
+.header-calendar .rdrSelected:after {
+    content: "";
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background: #F9F368;
+    border: 1px solid #000000;
+    border-radius: 100px;
+}
+
+.header-calendar .rdrCalendarWrapper:not(.rdrDateRangeWrapper) .rdrDayHovered .rdrDayNumber:after{
+    content: '';
+    border: 1px solid currentColor;
+    border-radius: 1.333em;
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    left: 0px;
+    right: 0px;
+    background: transparent;
+}
+
+.header-calendar .rdrDayPassive{
+    pointer-events: none;
+}
+
+.header-calendar .rdrDayPassive .rdrDayNumber span{
+    color: #7A7A7A;
+}
+
+.header-calendar .rdrDayPassive .rdrInRange,
+.header-calendar .rdrDayPassive .rdrStartEdge,
+.header-calendar .rdrDayPassive .rdrEndEdge,
+.header-calendar .rdrDayPassive .rdrSelected,
+.header-calendar .rdrDayPassive .rdrDayStartPreview,
+.header-calendar .rdrDayPassive .rdrDayInPreview,
+.header-calendar .rdrDayPassive .rdrDayEndPreview{
+    display: none;
+}
+
+.header-calendar .rdrDayDisabled {
+    /*background-color: rgb(248, 248, 248);*/
+}
+
+.header-calendar .rdrDayDisabled .rdrDayNumber span{
+    color: #C4C4C4;
+}
+
+.header-calendar .rdrDayDisabled .rdrInRange,
+.header-calendar .rdrDayDisabled .rdrStartEdge,
+.header-calendar .rdrDayDisabled .rdrEndEdge,
+.header-calendar .rdrDayDisabled .rdrSelected,
+.header-calendar .rdrDayDisabled .rdrDayStartPreview,
+.header-calendar .rdrDayDisabled .rdrDayInPreview,
+.header-calendar .rdrDayDisabled .rdrDayEndPreview{
+    filter: grayscale(100%) opacity(60%);
+}

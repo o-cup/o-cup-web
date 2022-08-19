@@ -8,12 +8,12 @@ const StyledLayout = styled.div`
 	display: flex;
 	flex-direction: column;
 	background: ${({ theme }) => theme.colors.background};
-	/* box-shadow: 0 0 20px rgb(0 0 0 / 5%); */
 
-  main {
-    padding-top: 90px;
-  }
-  
+	main {
+		/* header 높이와 맞추기 */
+		padding-top: 76px;
+	}
+
 	@media ${({ theme }) => theme.device.mobile} {
 		max-width: 720px;
 	}
@@ -23,53 +23,63 @@ const StyledLayout = styled.div`
 	}
 `;
 
-const StyledHeader = styled.header`
+const StyledHeader = styled.header<{ mainPage: boolean }>`
+	position: fixed;
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 17px 20px;
-  background: rgba(252, 251, 247, 0.9);
-  position: fixed;
-  width: 100%;
-  max-width: 1080px;
-  z-index: 99;
-  height: 90px;
-  
-  img#logo {
-    height: 56px;
-  }
-  
-	> .date_selector {
-		display: flex;
-		align-items: center;
-		font-size: 24px;
-		line-height: 30px;
-		font-weight: 700;
+	flex-direction: column;
+	width: 100%;
+	max-width: 1080px;
+	z-index: 99;
+	background: rgba(252, 251, 247, 0.9);
+	backdrop-filter: blur(4px);
 
-		> p {
-      width: 150px;
-      text-align: center;
+	> div#header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		max-width: 1080px;
+		height: 76px;
+		padding: 0 24px;
+		border-bottom: ${(props) => (props.mainPage ? "" : "2px solid #000")};
+
+		h1 {
+			font-size: 18px;
+			font-weight: bold;
 		}
 
-		> button {
-			width: 24px;
-			height: 24px;
-			background: ${({ theme }) => theme.colors.white};
-			border: 1px solid #000000;
-			border-radius: 50%;
-			padding: 0;
-			position: relative;
-			cursor: pointer;
+		> div {
+			width: fit-content;
+			display: flex;
+			height: 100%;
+			align-items: center;
+			gap: 22px;
+		}
 
-			&:last-child {
-				transform: rotate(180deg);
+		img#logo {
+			height: 56px;
+		}
+
+		.date_selector {
+			display: flex;
+			align-items: center;
+
+			> p {
+				text-align: center;
+				font-weight: 700;
+				font-size: 22px;
+				line-height: 27px;
+				margin-right: 8px;
+				white-space: nowrap;
 			}
 
-			> svg {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-65%, -50%);
+			> button.calendarOpenButton {
+				background: none;
+				outline: none;
+
+				&.active {
+					transform: rotate(180deg);
+				}
 			}
 		}
 	}

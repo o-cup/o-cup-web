@@ -7,11 +7,11 @@ function Main() {
 	const [open, setOpen] = useState(false);
 
 	return (
-		<Layout dateSelector>
+		<Layout>
 			<>
 				<StyledMain>
 					<BiasList />
-					<SearchInput setOpen={setOpen} />
+					{/* <SearchInput setOpen={setOpen} /> */}
 					<EventList />
 				</StyledMain>
 				{open && <CustomBottomSheet setOpen={setOpen} />}

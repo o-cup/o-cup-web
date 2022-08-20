@@ -19,8 +19,58 @@ export const openedBiasAtom = atom({
 });
 
 export const keywordAtom = atom({
-	key: "keywordAtom",
-	default: "",
+  key: "keywordAtom",
+  default: ""
+});
+
+export const requestPlaceAtom = atom({
+  key: "requestPlaceAtom",
+  default: { place: "", district: "", address: "" }
+});
+
+export const requestArtistsAtom = atom({
+  key: "requestArtistsAtom",
+  default: [
+    {
+      id: 1,
+      peopleId: 0,
+      bias: "",
+      team: ""
+    }
+  ]
+});
+
+export const requestBasicAtom = atom({
+  key: "requestBasicAtom",
+  default: { organizer: "", snsId: "", link: "" }
+});
+
+export const requestPosterUrlsAtom = atom({
+  key: "requestPosterUrlsAtom",
+  default: [] as string[]
+});
+
+export const requestHashTagsAtom = atom({
+  key: "requestHashTagsAtom",
+  default: [
+    { id: 1, text: "" }
+  ]
+});
+
+export const requestDateRangeAtom = atom({
+  key: "requestDateRangeAtom",
+  default: { startAt: "", endAt: "" }
+});
+
+export const requestGoodsListAtom = atom({
+  key: "requestGoodsListAtom",
+  default: [
+    {
+      id: 1,
+      title: "",
+      items: [{ id: 1, text: "" }],
+    },
+  ]
 });
 
 export default {};

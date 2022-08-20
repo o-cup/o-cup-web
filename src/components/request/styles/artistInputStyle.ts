@@ -1,5 +1,27 @@
 import styled from "styled-components";
 
+const StyledArtistContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  > button {
+    background: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.black};
+    border: 2px solid #000000;
+    border-radius: 70px;
+    box-shadow: 0 4px 0 #000000;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 10px 16px;
+    display: inline-block;
+    margin-left: auto;
+    margin-top: 10px;
+  }
+`
+
 const StyledArtistInput = styled.div`
   display: flex;
   flex-direction: column;
@@ -73,5 +95,5 @@ const StyledArtistInput = styled.div`
   }
 `;
 
-export { StyledArtistInput };
+export { StyledArtistContainer, StyledArtistInput };
 export default {};

@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const StyledGoodsInfo = styled.div`
 	padding: 32px 24px;
@@ -33,7 +33,7 @@ const StyledGoodsInfo = styled.div`
 	}
 `;
 
-const StyledGoodsListItem = styled.div<{ type: "AND" | "OR" }>`
+const StyledGoodsListItem = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -51,18 +51,7 @@ const StyledGoodsListItem = styled.div<{ type: "AND" | "OR" }>`
 		> li {
 			height: 30px;
 			margin-bottom: 8px;
-		}
-
-		> li:not(:last-child):after {
-			${(props) =>
-				props.type === "AND"
-					? css`
-							content: "+";
-					  `
-					: css`
-							content: "|";
-					  `}
-			margin: 14px;
+      margin-right: 8px;
 		}
 	}
 `;

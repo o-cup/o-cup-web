@@ -4,10 +4,10 @@ import { StyledGoodsListItem } from "./styles/goodsInfoStyle";
 import GoodsChip from "../../shared/components/GoodsChip";
 
 const GoodsListItem = ({ goodsListItem }: { goodsListItem: GoodsItemType }) => {
-	const { title, items, type } = goodsListItem;
+	const { title, items } = goodsListItem;
 
 	return (
-		<StyledGoodsListItem type={type || "AND"}>
+		<StyledGoodsListItem>
 			<h6>{title}</h6>
 			<ul>
 				{items.map((item) => (

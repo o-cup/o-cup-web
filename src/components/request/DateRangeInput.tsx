@@ -41,11 +41,11 @@ const DateRangeInput = ({ value, setValue }: InputProps) => {
     <StyledDateRangeInput>
       <div className="dateInputContainer">
         <span>이벤트 기간</span>
-        <div className="inputWrapper">
+        <button type="button" className="calendarOpenInput" onClick={() => setCalendarOpen(!isCalendarOpen)} >
           <input disabled id="dateRange" type="text" placeholder="날짜 선택하기"
                  value={(value.startAt && value.endAt) ? `${convertDateWithDots(value.startAt)} - ${convertDateWithDots(value.endAt)}` : ""} />
-          <button id="calendar" type="button" onClick={() => setCalendarOpen(!isCalendarOpen)} />
-        </div>
+          <i id="calendar"/>
+        </button>
       </div>
 
       {isCalendarOpen && <StyledCalendarContainer>

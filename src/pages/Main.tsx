@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BiasList, CustomBottomSheet, SearchInput, EventList } from "../components/main";
+import { BiasList, CustomBottomSheet, EventList } from "../components/main";
 import { StyledMain } from "../components/main/styles/mainStyle";
 import Layout from "../shared/components/layout";
 
@@ -11,7 +11,6 @@ function Main() {
 			<>
 				<StyledMain>
 					<BiasList />
-					{/* <SearchInput setOpen={setOpen} /> */}
 					<EventList />
 				</StyledMain>
 				{open && <CustomBottomSheet setOpen={setOpen} />}

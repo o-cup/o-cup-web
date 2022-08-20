@@ -66,4 +66,9 @@ export const convertDateWithDots = (dateString: string) => {
 	return dateString;
 };
 
+export const getBirthMonth = (birthday: string) => {
+	const month = birthday.substring(4, 6);
+	return Number(month.replace(/(^0+)/, ""));
+};
+
 export default {};

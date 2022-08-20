@@ -4,6 +4,7 @@ import { biasFilterAtom } from "../../state/atoms";
 import { PeopleType } from "../../types";
 import { StyledBias } from "./styles/mainStyle";
 
+// todo: 공통 컴포넌트로 만들기
 function Bias({ id, name, profilePic }: Partial<PeopleType>) {
 	const [biasFilter, setBiasFilter] = useRecoilState(biasFilterAtom);
 

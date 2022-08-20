@@ -14,8 +14,11 @@ const theme: DefaultTheme = {
 	},
 	device: {
 		mobile: "screen and (max-width: 720px)",
-		desktop: "screen and (min-width: 721px)"
-	}
+		desktop: "screen and (min-width: 721px)",
+	},
+	style: {
+		shadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+	},
 };
 
 export type ThemeType = { theme: typeof theme };

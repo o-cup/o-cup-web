@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { StyledHeader } from "../styles/layoutStyle";
 import DateSelector from "./DateSelector";
 import HeaderCalendar from "./HeaderCalendar";
 import Icon from "../../Icon/Icons";
+import { Share, StyledHeader } from "./headerStyle";
 
 type Titles = {
 	[key: string]: string;
@@ -35,7 +35,12 @@ const Header = ({ page, share }: HeaderProps) => {
 				<div>
 					{mainPage && <DateSelector isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen} />}
 					{page !== "search" && <Icon name="search" handleClick={() => navigate("/search")} />}
-					{share && <Icon name="share" />}
+					{share && (
+						<Share>
+							<Icon name="share" />
+							<span className="tooltip">트위터에 공유하기</span>
+						</Share>
+					)}
 				</div>
 			</div>
 			{isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}

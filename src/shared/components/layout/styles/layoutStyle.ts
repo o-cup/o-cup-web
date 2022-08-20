@@ -43,13 +43,18 @@ const StyledHeader = styled.header<{ mainPage: boolean }>`
 		padding: 0 24px;
 		border-bottom: ${(props) => (props.mainPage ? "" : "2px solid #000")};
 
+		position: relative;
+
 		h1 {
 			font-size: 18px;
 			font-weight: bold;
+			position: absolute;
+			left: 0;
+			right: 0;
+			text-align: center;
 		}
 
 		> div {
-			width: fit-content;
 			display: flex;
 			height: 100%;
 			align-items: center;
@@ -67,8 +72,8 @@ const StyledHeader = styled.header<{ mainPage: boolean }>`
 			> p {
 				text-align: center;
 				font-weight: 700;
-        font-size: 20px;
-        line-height: 24px;
+				font-size: 20px;
+				line-height: 24px;
 				margin-right: 8px;
 				white-space: nowrap;
 			}
@@ -90,12 +95,10 @@ const StyledFooter = styled.footer`
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	/* padding: 32px 20px 50px; */
 	padding: 100px 0 50px 0;
 	text-align: center;
 
 	> ul {
-		/* display: flex; */
 		display: none;
 		justify-content: center;
 		align-items: center;

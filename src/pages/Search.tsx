@@ -29,7 +29,7 @@ const Search = () => {
 	});
 
 	return (
-		<Layout title="검색하기">
+		<Layout page="search">
 			<StyledSearch>
 				<div className="input">
 					<SearchInput keyword={keyword} setKeyword={setKeyword} />

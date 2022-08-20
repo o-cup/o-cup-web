@@ -5,31 +5,40 @@ import DateSelector from "./DateSelector";
 import HeaderCalendar from "./HeaderCalendar";
 import Icon from "../../Icon/Icons";
 
-type HeaderProps = {
-	title?: string;
+type Titles = {
+	[key: string]: string;
+	request: string;
+	search: string;
 };
-function Header({ title }: HeaderProps) {
+
+const titles = {
+	request: "장소 등록",
+	search: "검색하기",
+} as Titles;
+
+type HeaderProps = {
+	page: string;
+};
+
+const Header = ({ page }: HeaderProps) => {
 	const navigate = useNavigate();
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
-	const mainPage = !title;
+	const mainPage = page === "main";
 
 	return (
 		<StyledHeader mainPage={mainPage}>
 			<div id="header">
-				<Icon name="logo" handleClick={() => navigate("/")} />
-				{title && <h1>{title}</h1>}
+				{page === "search" ? <Icon name="arrow-left" /> : <Icon name="logo" handleClick={() => navigate("/")} />}
+
+				{page && <h1>{titles[page]}</h1>}
 				<div>
 					{mainPage && <DateSelector isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen} />}
-					<Icon name="search" handleClick={() => navigate("/search")} />
+					{page !== "search" && <Icon name="search" handleClick={() => navigate("/search")} />}
 				</div>
 			</div>
 			{isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}
 		</StyledHeader>
 	);
-}
-
-Header.defaultProps = {
-	title: "",
 };
 
 export default Header;

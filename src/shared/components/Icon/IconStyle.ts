@@ -50,6 +50,14 @@ export const StyledIcon = styled.i`
 		height: 24px;
 		width: 24px;
 	}
+
+	&.arrow-left {
+		display: flex;
+		background: url("/images/icons/arrow-left.png") no-repeat;
+		background-size: contain;
+		height: 24px;
+		width: 24px;
+	}
 `;
 
 export default {};

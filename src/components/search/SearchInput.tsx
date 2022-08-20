@@ -12,10 +12,12 @@ const SearchInput = ({ keyword, setKeyword }: SearchInputProps) => {
 		const { value } = e.currentTarget;
 		setKeyword(value);
 	};
+
 	return (
 		<StyledSearchInput>
 			<input value={keyword} placeholder="카페 이름, 아티스트 이름, ..." onChange={handleInputChange} />
 			<Icon name="search" />
+			{keyword && <Icon name="delete" handleClick={() => setKeyword("")} />}
 		</StyledSearchInput>
 	);
 };

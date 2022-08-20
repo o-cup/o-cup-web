@@ -85,10 +85,9 @@ const Label = styled.label<{ hideLabel?: boolean }>`
 
 const StyledPreview = styled.div`
   width: 50%;
-  max-width: 520px;
   display: flex;
-  justify-content: center;
-  padding: 32px 24px;
+  flex-direction: column;
+  padding: 14px 0;
 
   @media ${({ theme }) => theme.device.mobile} {
     display: none;

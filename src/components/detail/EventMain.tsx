@@ -8,10 +8,11 @@ import { EventType, DetailType } from "../../types";
 import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { StyledEventMain } from "./styles/eventMainStyle";
 import BiasChip from "../../shared/components/BiasChip";
+import { StyledBiasChip } from "../../shared/components/BiasChip/biasChipStyle";
 
 type EventMainProps = Partial<EventType> & Partial<DetailType>;
 
-const EventMain = ({ place, biasesId, organizer, snsId, startAt, endAt, address, images }: EventMainProps) => {
+const EventMain = ({ place, biasesId, organizer, snsId, startAt, endAt, address, images, requestedBiases }: EventMainProps) => {
 	const customPaging = (i: number) => (
 		<span>
 			{i + 1} / {images?.length}
@@ -24,9 +25,11 @@ const EventMain = ({ place, biasesId, organizer, snsId, startAt, endAt, address,
 				<div>
 					<h6>{place}</h6>
 					<div>
-						{biasesId?.map((biasId) => (
-							<BiasChip id={biasId} key={biasId} />
-						))}
+						{requestedBiases
+              ? requestedBiases.map((bias) => bias.bias ? <StyledBiasChip key={bias.id}>{bias.bias}</StyledBiasChip> : null)
+						 : biasesId?.map((biasId) => (
+								<BiasChip id={biasId} key={biasId} />
+							))}
 					</div>
 				</div>
 				<p>
@@ -45,7 +48,7 @@ const EventMain = ({ place, biasesId, organizer, snsId, startAt, endAt, address,
 					{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
 				</p>
 			</div>
-			<div className="imgContainer">
+      {images && images.length > 0 && <div className="imgContainer">
 				{images?.length === 1 ? (
 					/* 이미지 갯수 하나인경우 슬라이드 되지 않음 */
 					<div className="slick-slider">
@@ -69,7 +72,7 @@ const EventMain = ({ place, biasesId, organizer, snsId, startAt, endAt, address,
 						{images?.length && images?.map((img) => <img alt={img} src={img} key={img} />)}
 					</Slider>
 				)}
-			</div>
+			</div>}
 		</StyledEventMain>
 	);
 };

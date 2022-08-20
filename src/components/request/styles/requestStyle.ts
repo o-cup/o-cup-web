@@ -92,6 +92,10 @@ const StyledPreview = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
+  
+  .previewContent {
+    width: 100%;
+  }
 `;
 
 export { StyledRequest, StyledEntry, StyledPreview, Label };

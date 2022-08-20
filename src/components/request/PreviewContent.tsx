@@ -10,7 +10,7 @@ import {
 import { StyledPreview } from "./styles/requestStyle";
 import { EventMain, GoodsInfo, Location, TwitterInfo } from "../detail";
 
-const Preview = () => {
+const PreviewContent = () => {
   const placeInputs = useRecoilValue(requestPlaceAtom);
   const artistInputs = useRecoilValue(requestArtistsAtom);
   const basicInputs = useRecoilValue(requestBasicAtom);
@@ -20,7 +20,7 @@ const Preview = () => {
   const dateRange = useRecoilValue(requestDateRangeAtom);
   const goodsList = useRecoilValue(requestGoodsListAtom);
 
-  return (<StyledPreview>
+  return (<div className="previewContent">
     <EventMain
       place={placeInputs.place || "카페이름"}
       biasesId={[]}
@@ -39,7 +39,7 @@ const Preview = () => {
         items: goodsObj.items.map((i) => i.text).filter((i) => i !== ""),
       }))} tweetUrl={link} />}
     <Location address={placeInputs.address} />
-  </StyledPreview>);
+  </div>);
 };
 
-export default Preview;
+export default PreviewContent;

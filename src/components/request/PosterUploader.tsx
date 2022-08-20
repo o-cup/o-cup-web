@@ -14,7 +14,7 @@ const PosterUploader = ({ setPosterUrls }: InputProps) => {
   useEffect(() => {
     const allHasUrl = posters.every((poster) => poster.url);
 
-    if (posters.length === 2 && allHasUrl) {
+    if (posters.length === 3 && allHasUrl) {
       setPosters([...posters, { id: posters.length + 1, url: "", publicUrl: "" }]);
     }
   }, [posters]);
@@ -48,7 +48,7 @@ const PosterUploader = ({ setPosterUrls }: InputProps) => {
         return poster;
       });
 
-      if (posters.length === 3) {
+      if (posters.length === 4) {
         setPosters(postersData);
         return;
       }
@@ -95,6 +95,8 @@ const PosterUploader = ({ setPosterUrls }: InputProps) => {
           );
         })}
       </div>
+
+      <p className="caption">최대 4장까지 업로드 가능합니다.</p>
     </StyledPosterUpload>
   );
 };

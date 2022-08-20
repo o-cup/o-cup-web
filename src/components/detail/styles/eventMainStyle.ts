@@ -9,7 +9,7 @@ const StyledEventMain = styled.div`
 		background: ${({ theme }) => theme.colors.white};
 		border: 2px solid #000000;
 		padding: 16px 16px 68px;
-		margin-left: 10px;
+		margin-left: 24px;
 		margin-right: 44px;
 		margin-bottom: 20px;
 		position: relative;
@@ -46,17 +46,16 @@ const StyledEventMain = styled.div`
 	}
 
 	.imgContainer {
-		width: calc(100% - 32px);
-		height: 264px;
-		height: fit-content;
+		width: calc(100% - 54px);
+		//height: 264px;
+		height: 100%;
 		position: relative;
 		background: ${({ theme }) => theme.colors.white};
-		box-sizing: content-box !important;
 		border: 2px solid #000000;
 		z-index: 10;
 		margin-top: -74px;
-		margin-left: 16px;
-		margin-right: 16px;
+		margin-left: 30px;
+		margin-right: 24px;
 
 		.slick-slider,
 		.slick-list,
@@ -97,9 +96,10 @@ const StyledEventMain = styled.div`
 
 		img {
 			width: 100%;
-			height: inherit !important;
+			height: 100% !important;
 			object-fit: cover;
 			object-position: top;
+      vertical-align : bottom;
 		}
 	}
 `;

@@ -20,13 +20,16 @@ const StyledDateRangeInput = styled.div`
       line-height: 20px;
     }
 
-    > div.inputWrapper {
+    > button.calendarOpenInput {
       display: flex;
+      justify-content: center;
+      align-items: center;
       position: relative;
       background: #FFFFFF;
       border: 2px solid #000000;
       border-radius: 4px;
       height: 48px;
+      cursor: pointer;
 
       > input {
         width: 100%;
@@ -42,7 +45,7 @@ const StyledDateRangeInput = styled.div`
         }
       }
 
-      > button#calendar {
+      > i#calendar {
         position: absolute;
         top: 50%;
         right: 16px;

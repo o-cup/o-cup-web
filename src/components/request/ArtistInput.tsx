@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useQuery } from "react-query";
 import { fetchPeople } from "../../apis";
 import { StyledArtistInput } from "./styles/artistInputStyle";
 import { StyledSearchListContainer, StyledSearchList } from "./styles/searchListStyle";
-
+import { DeleteBtn } from "./styles/basicInputStyle";
 import SearchInput from "./SearchInput";
 import { PeopleType } from "../../types";
-import BasicInput from "./BasicInput";
 
 export type ArtistValues = {
   id: number;
@@ -18,7 +17,7 @@ export type ArtistValues = {
 
 type InputProps = {
   value: ArtistValues;
-  handleChangeArtist: (peopleId:number, bias: string, team: string, index: number) => void;
+  handleChangeArtist: (peopleId: number, bias: string, team: string, index: number) => void;
 };
 
 const ArtistInput = ({ value, handleChangeArtist }: InputProps) => {
@@ -57,9 +56,10 @@ const ArtistInput = ({ value, handleChangeArtist }: InputProps) => {
     }));
   };
 
-  useEffect(() => {
+  const handleConfirmCustomInput = () => {
     handleChangeArtist(0, customArtist.bias, customArtist.team, value.id);
-  }, [customArtist]);
+    setInputOpen(false);
+  };
 
   return (
     <StyledArtistInput>
@@ -103,20 +103,28 @@ const ArtistInput = ({ value, handleChangeArtist }: InputProps) => {
       </StyledSearchListContainer>}
 
       {isInputOpen && <div className="customInputContainer">
-        <BasicInput label="" hideLabel
-                    id="bias"
-                    placeholder="아티스트 (한글명)"
-                    value={customArtist.bias}
-                    handleInputChange={handleInputChange}
-                    handleInputDelete={(e) => handleInputDelete(e, "bias")} />
-        <BasicInput label="" hideLabel
-                    id="team"
-                    placeholder="소속 그룹 (한글명, 선택사항)"
-                    value={customArtist.team}
-                    handleInputChange={handleInputChange}
-                    handleInputDelete={(e) => handleInputDelete(e, "team")} />
+        <div className="customInputs">
+          <div>
+            <input id="bias"
+                   value={customArtist.bias}
+                   placeholder="아티스트 (한글명)"
+                   onChange={handleInputChange} />
+            {!!customArtist.bias && <DeleteBtn onClick={(e) => handleInputDelete(e, "bias")} />}
+          </div>
+          <div>
+            <input id="team"
+                   value={customArtist.team}
+                   placeholder="소속 그룹 (한글명, 선택사항)"
+                   onChange={handleInputChange} />
+            {!!customArtist.team && <DeleteBtn onClick={(e) => handleInputDelete(e, "team")} />}
+          </div>
+        </div>
+        <div className="customConfirm">
+          <input value={customArtist.team ? `${customArtist.bias} (${customArtist.team})` : customArtist.bias}
+                 disabled />
+          <button type="button" onClick={handleConfirmCustomInput}>입력완료</button>
+        </div>
       </div>}
-
     </StyledArtistInput>
   );
 };

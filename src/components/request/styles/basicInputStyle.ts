@@ -19,8 +19,10 @@ const InputWrapper = styled.div<{ hasValue: boolean }>`
 			content: "@";
 			position: absolute;
 			top: 50%;
-			left: 10px;
+			left: 16px;
 			transform: translateY(-50%);
+      font-size: 14px;
+      line-height: 15px;
 		}
 	}
 
@@ -29,9 +31,10 @@ const InputWrapper = styled.div<{ hasValue: boolean }>`
 			content: "#";
 			position: absolute;
 			top: 50%;
-			left: 11px;
+			left: 16px;
 			transform: translateY(-50%);
-			font-size: 16px;
+      font-size: 14px;
+      line-height: 15px;
 		}
 	}
 
@@ -40,14 +43,16 @@ const InputWrapper = styled.div<{ hasValue: boolean }>`
 		height: 100%;
 		border: 2px solid ${({ theme }) => theme.colors.black};
 		border-radius: 4px;
-		padding: 0 10px;
+		padding: 16px;
+    font-size: 14px;
+    line-height: 15px;
 
 		&.snsId {
-			padding-left: 30px;
+			padding-left: 32px;
 		}
 
 		&.hashTag {
-			padding-left: 25px;
+			padding-left: 26px;
 		}
 	}
 `;
@@ -57,7 +62,7 @@ const DeleteBtn = styled.button`
 	width: 20px;
 	height: 20px;
 	top: 50%;
-	right: 8px;
+	right: 16px;
 	transform: translateY(-50%);
 	background: url("/images/icons/delete.png") no-repeat 50% / contain;
 	cursor: default;

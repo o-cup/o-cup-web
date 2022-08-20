@@ -31,11 +31,11 @@ const StyledBias = styled.li`
 	}
 
 	&:first-child {
-		margin-left: 20px;
+		margin-left: 24px;
 	}
 
 	&:last-child {
-		margin-right: 20px;
+		margin-right: 24px;
 	}
 
 	> div {
@@ -77,7 +77,7 @@ const StyledBias = styled.li`
 `;
 
 const StyledList = styled.ul`
-	padding: 10px 20px;
+	padding: 10px 24px;
 
 	@media ${({ theme }) => theme.device.desktop} {
 		display: flex;

@@ -8,8 +8,67 @@ const StyledArtistInput = styled.div`
   gap: 6px;
 
   .customInputContainer {
-    > div:last-child {
-      margin-top: -2px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 4px;
+    border: 2px solid ${({ theme }) => theme.colors.black};
+
+    > div.customInputs {
+      display: flex;
+      border-bottom: 2px solid ${({ theme }) => theme.colors.black};
+
+      > div {
+        position: relative;
+        height: 48px;
+        width: 100%;
+
+        > input {
+          width: 100%;
+          height: 100%;
+          border-radius: 4px;
+          padding: 16px;
+          font-size: 12px;
+          line-height: 15px;
+        }
+      }
+
+      > div:first-child {
+        border-right: 2px solid ${({ theme }) => theme.colors.black};
+      }
+    }
+
+    > div.customConfirm {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 16px;
+      position: relative;
+      background: ${({ theme }) => theme.colors.white};
+
+      > input {
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+        font-size: 12px;
+        line-height: 15px;
+      }
+
+      > input[disabled] {
+        background: ${({ theme }) => theme.colors.white};
+      }
+
+      > button {
+        background: ${({ theme }) => theme.colors.black};
+        border-radius: 4px;
+        color: ${({ theme }) => theme.colors.white};
+        white-space: nowrap;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 16px;
+        padding: 7px 12px;
+        margin-left: 8px;
+      }
     }
   }
 `;

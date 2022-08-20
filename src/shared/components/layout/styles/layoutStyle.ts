@@ -67,8 +67,8 @@ const StyledHeader = styled.header<{ mainPage: boolean }>`
 			> p {
 				text-align: center;
 				font-weight: 700;
-				font-size: 22px;
-				line-height: 27px;
+        font-size: 20px;
+        line-height: 24px;
 				margin-right: 8px;
 				white-space: nowrap;
 			}

@@ -36,7 +36,7 @@ const StyledSelectWrapper = styled.div`
     padding: 0;
     border: 0;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 16px;
     color: #000000;
   }
@@ -62,6 +62,7 @@ const StyledInputWrapper = styled.div`
   display: flex;
   border: 2px solid ${({ theme }) => theme.colors.black};
   border-radius: 4px;
+  justify-content: center;
   align-items: center;
   padding: 0 16px;
   background: #FFFFFF;
@@ -72,13 +73,15 @@ const StyledInputWrapper = styled.div`
     padding: 0;
     border: 0;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 16px;
     color: #000000;
   }
 
   > .iconContainer {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 10px;
   }
 `;

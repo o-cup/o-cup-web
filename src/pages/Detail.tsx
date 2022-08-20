@@ -26,7 +26,7 @@ const Detail = () => {
 	return (
 		<Layout>
 			<StyledDetail>
-				<div>
+				<div className="detailInfo">
 					<div className="mainInfo">
 						<EventMain
 							place={place}

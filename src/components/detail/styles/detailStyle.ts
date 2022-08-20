@@ -5,22 +5,24 @@ const StyledDetail = styled.div`
 	flex-direction: column;
 	width: 100%;
 
-	> div:first-child {
+	> div.detailInfo {
 		display: flex;
 		flex-direction: column;
 		width: 100%;
 
+    div.mainInfo,
+    div.subInfo {
+      width: 100%;
+      max-width: 720px;
+    }
+    
 		@media ${({ theme }) => theme.device.desktop} {
 			flex-direction: row;
 
-			> div {
+      div.mainInfo,
+      div.subInfo {
 				width: 50%;
 			}
-		}
-
-		.mainInfo,
-		.subInfo {
-			max-width: 540px;
 		}
 	}
 `;

@@ -5,7 +5,7 @@ const StyledEventNearHere = styled.div`
 	width: 100%;
 
 	> h4 {
-		padding: 0 20px;
+		padding: 0 24px;
 		font-weight: 700;
 		font-size: 20px;
 		line-height: 27px;
@@ -39,11 +39,11 @@ const EventNearHereList = styled.li`
 	cursor: pointer;
 
 	&:first-child {
-		margin-left: 20px;
+		margin-left: 24px;
 	}
 
 	&:last-child {
-		margin-right: 20px;
+		margin-right: 24px;
 	}
 
 	> img {

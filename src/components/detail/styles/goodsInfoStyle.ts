@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 const StyledGoodsInfo = styled.div`
-	padding: 32px 20px;
+	padding: 32px 24px;
 
 	> h4 {
 		font-weight: 700;

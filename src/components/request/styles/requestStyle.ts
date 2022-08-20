@@ -3,7 +3,6 @@ import styled from "styled-components";
 const StyledRequest = styled.div`
   width: 100%;
   height: 100%;
-  padding: 20px;
   display: flex;
 `;
 
@@ -119,6 +118,7 @@ const StyledPreview = styled.div`
   max-width: 520px;
   display: flex;
   justify-content: center;
+  padding: 0 24px;
 
   @media ${({ theme }) => theme.device.mobile} {
     display: none;

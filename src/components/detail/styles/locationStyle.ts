@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledLocation = styled.div`
-	padding: 32px 20px;
+	padding: 32px 24px;
 
 	> h4 {
 		font-weight: 700;

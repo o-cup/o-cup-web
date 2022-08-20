@@ -7,6 +7,7 @@ import { StyledSearch } from "../components/search/styles/searchStyle";
 import BiasProfile from "../shared/components/BiasProfile";
 import Icon from "../shared/components/Icon/Icons";
 import Layout from "../shared/components/layout";
+import Sort from "../shared/components/Sort";
 import { getBirthMonth } from "../shared/utils/dateHandlers";
 
 const Search = () => {
@@ -25,7 +26,8 @@ const Search = () => {
 				</div>
 				<div className="filter">
 					<MonthSelector selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
-					<Icon name="sort" />
+					{/* <Icon name="sort" /> */}
+					<Sort />
 				</div>
 
 				{/* todo: 스크린 크기 별 정렬 확인  */}

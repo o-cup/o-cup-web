@@ -22,7 +22,7 @@ const InputWrapper = styled.div`
     padding: 0 16px;
     border: 0;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 16px;
   }
 

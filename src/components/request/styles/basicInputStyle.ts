@@ -21,7 +21,7 @@ const InputWrapper = styled.div<{ hasValue: boolean }>`
 			top: 50%;
 			left: 16px;
 			transform: translateY(-50%);
-      font-size: 12px;
+      font-size: 14px;
       line-height: 15px;
 		}
 	}
@@ -33,7 +33,7 @@ const InputWrapper = styled.div<{ hasValue: boolean }>`
 			top: 50%;
 			left: 16px;
 			transform: translateY(-50%);
-      font-size: 12px;
+      font-size: 14px;
       line-height: 15px;
 		}
 	}
@@ -44,7 +44,7 @@ const InputWrapper = styled.div<{ hasValue: boolean }>`
 		border: 2px solid ${({ theme }) => theme.colors.black};
 		border-radius: 4px;
 		padding: 16px;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 15px;
 
 		&.snsId {

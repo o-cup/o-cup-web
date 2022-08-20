@@ -5,10 +5,15 @@ import MonthSelector from "../components/search/MonthSelector";
 import SearchInput from "../components/search/SearchInput";
 import { StyledSearch } from "../components/search/styles/searchStyle";
 import BiasProfile from "../shared/components/BiasProfile";
-import Icon from "../shared/components/Icon/Icons";
 import Layout from "../shared/components/layout";
 import Sort from "../shared/components/Sort";
 import { getBirthMonth } from "../shared/utils/dateHandlers";
+
+const sortOptions = {
+	alphabetAsc: "가나다순",
+	birthdayAsc: "생일: 1일부터",
+	birthdayDsc: "생일: 말일부터",
+};
 
 const Search = () => {
 	const [keyword, setKeyword] = useState("");
@@ -26,8 +31,7 @@ const Search = () => {
 				</div>
 				<div className="filter">
 					<MonthSelector selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
-					{/* <Icon name="sort" /> */}
-					<Sort />
+					<Sort options={sortOptions} />
 				</div>
 
 				{/* todo: 스크린 크기 별 정렬 확인  */}

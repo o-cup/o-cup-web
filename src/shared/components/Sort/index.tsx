@@ -2,31 +2,25 @@ import React, { useState } from "react";
 import Icon from "../Icon/Icons";
 import StyledSort from "./sortStyle";
 
-type Options = {
-	alphabetAsc: string;
-	dateAsc: string;
-	dateDsc: string;
+type SortProps = {
+	options: Record<string, string>;
 };
 
-const Sort = () => {
+const Sort = ({ options }: SortProps) => {
 	const [isOpened, setIsOpened] = useState(false);
 
-	const options = {
-		alphabetAsc: "가나다순",
-		dateAsc: "날짜 빠른 순",
-		dateDsc: "날짜: 느린 순",
-	};
-
-	const optionKeys = Object.keys(options) as Array<keyof Options>;
+	const optionKeys = Object.keys(options) as Array<keyof SortProps["options"]>;
 
 	return (
 		<StyledSort onClick={() => setIsOpened(!isOpened)}>
 			<Icon name="sort" />
-			<ul>
-				{optionKeys.map((option) => (
-					<li key={option}>{options[option]}</li>
-				))}
-			</ul>
+			{isOpened && (
+				<ul>
+					{optionKeys.map((option) => (
+						<li key={option}>{options[option]}</li>
+					))}
+				</ul>
+			)}
 		</StyledSort>
 	);
 };

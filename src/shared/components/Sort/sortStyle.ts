@@ -7,12 +7,9 @@ const StyledSort = styled.div`
 
 	ul {
 		width: 120px;
-		/* height: 146px; */
-
 		position: absolute;
 		bottom: -120px;
 		right: 0;
-
 		z-index: 1;
 		box-shadow: ${({ theme }) => theme.style.shadow};
 		background-color: ${({ theme }) => theme.colors.background};

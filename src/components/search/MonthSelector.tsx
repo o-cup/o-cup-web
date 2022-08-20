@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { SetStateAction, useState, Dispatch } from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { Month, StyledMonthSelector } from "./styles/monthSelectorStyle";
 
-const MonthSelector = () => {
+type MonthSelectorProps = {
+	selectedMonth: number;
+	setSelectedMonth: Dispatch<SetStateAction<number>>;
+};
+
+const MonthSelector = ({ selectedMonth, setSelectedMonth }: MonthSelectorProps) => {
 	const [toggle, setToggle] = useState(false);
-	const [selectedMonth, setSelectedMonth] = useState<number>(8);
 
 	const handleToggleClick = () => setToggle(!toggle);
 

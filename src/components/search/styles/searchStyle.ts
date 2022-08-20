@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledSearch = styled.div`
+export const StyledSearch = styled.div`
 	width: 100%;
 	height: 100%;
 	padding: 20px;
@@ -25,7 +25,13 @@ const StyledSearch = styled.div`
 			right: 0;
 		}
 	}
+
+	.biases {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+		padding: 12px 0;
+	}
 `;
 
-export { StyledSearch };
 export default {};

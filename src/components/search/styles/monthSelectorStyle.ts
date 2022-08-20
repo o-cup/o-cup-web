@@ -44,6 +44,8 @@ export const StyledMonthSelector = styled.div`
 		gap: 10px;
 		flex-wrap: wrap;
 		padding: 10px;
+		background-color: ${({ theme }) => theme.colors.white};
+		z-index: 1;
 	}
 `;
 

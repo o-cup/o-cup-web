@@ -29,7 +29,7 @@ const StyledHeader = styled.header<{ mainPage: boolean }>`
 	flex-direction: column;
 	width: 100%;
 	max-width: 1080px;
-	z-index: 99;
+	z-index: 90;
 	background: rgba(252, 251, 247, 0.9);
 	backdrop-filter: blur(4px);
 

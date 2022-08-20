@@ -1,14 +1,6 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useRecoilState } from "recoil";
-import {
-  requestArtistsAtom,
-  requestBasicAtom,
-  requestDateRangeAtom,
-  requestGoodsListAtom,
-  requestHashTagsAtom,
-  requestPlaceAtom,
-  requestPosterUrlsAtom
-} from "../../state/atoms";
+import { requestBasicAtom } from "../../state/atoms";
 import Button from "../../shared/components/Button";
 import BasicInput from "./BasicInput";
 import PosterUploader from "./PosterUploader";
@@ -17,110 +9,33 @@ import PlaceInput from "./PlaceInput";
 import ArtistInputContainer from "./ArtistInputContainer";
 import DateRangeInput from "./DateRangeInput";
 import GoodsInputContainer from "./GoodsInputContainer";
-import { insertDetail, insertEvent } from "../../apis";
-import Modal from "./Modal";
 import HashTagsContainer from "./HashTagsContainer";
+import Modal from "./Modal";
 
-const Entry = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
+type EntryProps = {
+  isModalOpen: boolean;
+  setModalOpen: Dispatch<SetStateAction<boolean>>;
+  setBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
+  handleSubmit: () => void;
+  resetAllStates: () => void;
+}
 
-  const [placeInputs, setPlaceInputs] = useRecoilState(requestPlaceAtom);
-  const [artistInputs, setArtistInputs] = useRecoilState(requestArtistsAtom);
+const Entry = ({ isModalOpen, setModalOpen, setBottomSheetOpen, handleSubmit, resetAllStates }: EntryProps) => {
   const [basicInputs, setBasicInputs] = useRecoilState(requestBasicAtom);
   const { organizer, snsId, link } = basicInputs;
-  const [posterUrls, setPosterUrls] = useRecoilState(requestPosterUrlsAtom);
-  const [hashTags, setHashTags] = useRecoilState(requestHashTagsAtom);
-  const [dateRange, setDateRange] = useRecoilState(requestDateRangeAtom);
-  const [goodsList, setGoodsList] = useRecoilState(requestGoodsListAtom);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
     setBasicInputs({
       ...basicInputs,
-      [id]: e.currentTarget.value
+      [id]: e.currentTarget.value,
     });
   };
 
   const handleInputDelete = (e: React.MouseEvent, id: string) => {
     setBasicInputs((prev) => ({
       ...prev,
-      [id]: ""
+      [id]: "",
     }));
-  };
-
-  const handleSubmit = async () => {
-    // todo: 필수값 비워져 있을 때 경고 팝업
-    if (!placeInputs.place) {
-      alert("필수값 채워주세요!");
-      return;
-    }
-
-    const eventParams = {
-      place: placeInputs.place,
-      organizer,
-      snsId,
-      district: placeInputs.district,
-      startAt: dateRange.startAt,
-      endAt: dateRange.endAt,
-      images: posterUrls,
-      requestedBiases: artistInputs.map((artist) => ({
-        peopleId: artist.peopleId,
-        bias: artist.bias,
-        team: artist.team
-      })),
-      isRequested: true,
-      isApproved: false
-    };
-
-    const detailParams = {
-      // id: 0,
-      address: placeInputs.address,
-      hashTags: hashTags.map((h) => h.text),
-      goods: goodsList.map((goodsObj) => ({
-        title: goodsObj.title,
-        items: goodsObj.items.map((i) => i.text)
-      })),
-      tweetUrl: link
-    };
-
-    const eventData = await insertEvent(eventParams);
-    if (eventData) {
-      await insertDetail({
-        id: eventData[0].id,
-        ...detailParams
-      });
-    }
-
-    setModalOpen(true);
-  };
-
-  const resetAllStates = () => {
-    setPlaceInputs({
-      place: "",
-      district: "",
-      address: ""
-    });
-    setArtistInputs([
-      {
-        id: 1,
-        peopleId: 0,
-        bias: "",
-        team: ""
-      }
-    ]);
-    setBasicInputs({ organizer: "", snsId: "", link: "" });
-    setPosterUrls([]);
-    setHashTags([{ id: 1, text: "" }]);
-    setDateRange({
-      startAt: "",
-      endAt: ""
-    });
-    setGoodsList([
-      {
-        id: 1,
-        title: "",
-        items: [{ id: 1, text: "" }]
-      }
-    ]);
   };
 
   return (<>
@@ -153,8 +68,8 @@ const Entry = () => {
           handleInputChange={(e) => handleInputChange(e, "snsId")}
           handleInputDelete={(e) => handleInputDelete(e, "snsId")}
         />
-        <DateRangeInput value={dateRange} setValue={setDateRange} />
-        <PosterUploader setPosterUrls={setPosterUrls} />
+        <DateRangeInput />
+        <PosterUploader />
         <HashTagsContainer />
         <BasicInput
           label="이벤트 트윗 링크"
@@ -168,14 +83,14 @@ const Entry = () => {
       </div>
 
       <div className="ctaContainer">
-        <Button customStyle={{ width: "100%", fontWeight: "bold" }}>미리보기</Button>
-        <Button customStyle={{ width: "100%", fontWeight: "bold" }} handleClick={handleSubmit}>
-          제출하기
-        </Button>
+        <Button customStyle={{ width: "100%", fontWeight: "bold" }}
+                handleClick={() => setBottomSheetOpen(true)}>미리보기</Button>
+        <Button customStyle={{ width: "100%", fontWeight: "bold" }}
+                handleClick={handleSubmit}>제출하기</Button>
       </div>
     </StyledEntry>
 
-    {isModalOpen && <Modal setModalOpen={setModalOpen} resetAllStates={resetAllStates} />}
+    {isModalOpen && <Modal setModalOpen={setModalOpen} setBottomSheetOpen={setBottomSheetOpen} resetAllStates={resetAllStates} />}
   </>);
 };
 

@@ -51,7 +51,7 @@ const StyledGoodsListItem = styled.div`
 		> li {
 			height: 30px;
 			margin-bottom: 8px;
-      margin-right: 8px;
+      margin-right: 12px;
 		}
 	}
 `;

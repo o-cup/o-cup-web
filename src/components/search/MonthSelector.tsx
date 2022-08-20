@@ -3,8 +3,8 @@ import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { Month, StyledMonthSelector } from "./styles/monthSelectorStyle";
 
 type MonthSelectorProps = {
-	selectedMonth: number;
-	setSelectedMonth: Dispatch<SetStateAction<number>>;
+	selectedMonth: number | null;
+	setSelectedMonth: Dispatch<SetStateAction<number | null>>;
 };
 
 const MonthSelector = ({ selectedMonth, setSelectedMonth }: MonthSelectorProps) => {

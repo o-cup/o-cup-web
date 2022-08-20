@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { fetchPeople } from "../apis";
 import MonthSelector from "../components/search/MonthSelector";
@@ -17,7 +17,12 @@ const sortOptions = {
 
 const Search = () => {
 	const [keyword, setKeyword] = useState("");
-	const [selectedMonth, setSelectedMonth] = useState<number>(8);
+	const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
+
+	useEffect(() => {
+		const today = new Date();
+		setSelectedMonth(today.getMonth() + 1);
+	}, []);
 
 	const { data: people } = useQuery(["people"], () => fetchPeople(), {
 		select: (data) => data?.filter((item) => getBirthMonth(item.birthday) === selectedMonth),

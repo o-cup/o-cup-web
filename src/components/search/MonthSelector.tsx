@@ -10,13 +10,18 @@ type MonthSelectorProps = {
 const MonthSelector = ({ selectedMonth, setSelectedMonth }: MonthSelectorProps) => {
 	const [toggle, setToggle] = useState(false);
 
+	const months = Array.from({ length: 12 }, (_, i) => i + 1);
+
 	const handleToggleClick = () => setToggle(!toggle);
 
-	const months = Array.from({ length: 12 }, (_, i) => i + 1);
+	const handleMonthClick = (month: number) => {
+		setSelectedMonth(month);
+		setToggle(!toggle);
+	};
 
 	return (
 		<StyledMonthSelector>
-			<h2>8월 생일 아티스트를 찾아보세요.</h2>
+			<h2>{`${selectedMonth}월 생일 아티스트를 찾아보세요.`}</h2>
 			<div className="toggle">
 				<p>다른 생일 달 아티스트 찾아보기</p>
 				{toggle ? <FaCaretUp onClick={handleToggleClick} /> : <FaCaretDown onClick={handleToggleClick} />}
@@ -28,7 +33,7 @@ const MonthSelector = ({ selectedMonth, setSelectedMonth }: MonthSelectorProps) 
 						<Month
 							key={month}
 							isActive={selectedMonth === month}
-							onClick={() => setSelectedMonth(month)}
+							onClick={() => handleMonthClick(month)}
 						>{`${month}월`}</Month>
 					))}
 				</div>

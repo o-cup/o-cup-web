@@ -58,6 +58,22 @@ export const StyledIcon = styled.i`
 		height: 24px;
 		width: 24px;
 	}
+
+	&.place {
+		display: flex;
+		background: url("/images/icons/place.png") no-repeat;
+		background-size: contain;
+		height: 24px;
+		width: 24px;
+	}
+
+	&.filter {
+		display: flex;
+		background: url("/images/icons/filter.png") no-repeat;
+		background-size: contain;
+		height: 24px;
+		width: 24px;
+	}
 `;
 
 export default {};

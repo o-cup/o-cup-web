@@ -11,8 +11,10 @@ export const StyledSearch = styled.div`
 		align-items: center;
 		width: 100%;
 	}
+`;
 
-	.filter {
+export const StyledFilter = styled.div`
+	.months {
 		height: 104px;
 		display: flex;
 		align-items: center;

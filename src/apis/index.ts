@@ -26,6 +26,7 @@ const fetchEvents = async ({ pageParam = 1, infinite = false, keyword, date }: F
 			}
 			return false;
 		});
+
 		return data;
 	}
 

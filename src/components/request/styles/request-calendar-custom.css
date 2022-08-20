@@ -96,6 +96,7 @@
     text-align: center;
     color: #000000;
     font-weight: 300;
+    position: relative;
 }
 
 .request-calendar .rdrDay:focus {
@@ -146,37 +147,40 @@
     font-weight: 500;
 }
 
+/* 선택 된 날짜 배경 옅은 노랑 컬러 */
 .request-calendar .rdrSelected,
 .request-calendar .rdrInRange,
 .request-calendar .rdrStartEdge,
 .request-calendar .rdrEndEdge{
     background: rgba(249, 243, 104, 0.5);
     position: absolute;
-    top: 2px;
-    left: 0;
-    right: 0;
-    bottom: 2px;
+    width: 100%;
+    height: 32px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.request-calendar .rdrSelected{
-    left: 2px;
-    right: 2px;
-}
-
+/* 선택 된 첫 날짜 좌측 배경컬러 지우기 */
 .request-calendar .rdrStartEdge{
     border-top-left-radius: 100px;
     border-bottom-left-radius: 100px;
-    left: 8px;
-    margin-left: 8px;
+    background-image: linear-gradient(to right, white 50%, transparent 50%);
 }
 
+/* 선택 된 마지막 날짜 우측 배경컬러 지우기 */
 .request-calendar .rdrEndEdge{
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
-    right: 8px;
-    margin-right: 8px;
+    background-image: linear-gradient(to left, white 50%, transparent 50%);
 }
 
+/* 날짜 하나만 선택 되었을 경우(시작하는 날이면서 마지막 날) 배경컬러 전부 지우기 */
+.request-calendar .rdrStartEdge.rdrEndEdge{
+    background-image: linear-gradient(to right, white 50%, white 50%);
+}
+
+/* 첫 날짜, 마지막 날짜 원 표시 */
 .request-calendar .rdrStartEdge:after,
 .request-calendar .rdrEndEdge:after {
     content: "";
@@ -187,20 +191,9 @@
     border: 1px solid #000000;
     border-radius: 100px;
     position: absolute;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-}
-
-.request-calendar .rdrStartEdge:after {
-    margin: 0 8px 0 -8px;
-}
-
-.request-calendar .rdrEndEdge:after {
-    margin: 0 -8px 0 8px;
-}
-
-.request-calendar .rdrStartEdge.rdrEndEdge:after {
-    margin: 0;
+    transform: translate(-50%, -50%);
 }
 
 .request-calendar .rdrSelected{
@@ -213,7 +206,6 @@
 .request-calendar .rdrDayStartOfWeek .rdrEndEdge{
     border-top-left-radius: 1.042em;
     border-bottom-left-radius: 1.042em;
-    left: 2px;
 }
 
 .request-calendar .rdrDayEndOfMonth .rdrInRange,
@@ -222,7 +214,6 @@
 .request-calendar .rdrDayEndOfWeek .rdrStartEdge{
     border-top-right-radius: 1.042em;
     border-bottom-right-radius: 1.042em;
-    right: 2px;
 }
 
 .request-calendar .rdrCalendarWrapper:not(.rdrDateRangeWrapper) .rdrDayHovered .rdrDayNumber:after{

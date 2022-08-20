@@ -19,7 +19,7 @@ const Result = ({ keyword }: ResultProps) => {
 			<div>
 				<p>{`검색 결과 총 ${events?.length}개`}</p>
 				<div>
-					<Icon name="place " />
+					{/* <Icon name="place " /> */}
 					<Icon name="filter" />
 					<Icon name="sort" />
 				</div>

@@ -74,6 +74,14 @@ export const StyledIcon = styled.i`
 		height: 24px;
 		width: 24px;
 	}
+
+	&.share {
+		display: flex;
+		background: url("/images/icons/share.png") no-repeat;
+		background-size: contain;
+		height: 24px;
+		width: 24px;
+	}
 `;
 
 export default {};

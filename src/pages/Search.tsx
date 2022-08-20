@@ -51,7 +51,7 @@ const Search = () => {
 	};
 
 	return (
-		<Layout page="search">
+		<Layout page="search" share={!!viewResult}>
 			<StyledSearch>
 				<div className="input">
 					<SearchInput keyword={keyword} setKeyword={setKeyword} setSearched={setSearched} />

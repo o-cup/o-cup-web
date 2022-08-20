@@ -7,14 +7,19 @@ import { StyledLayout } from "./styles/layoutStyle";
 type LayoutProps = {
 	children: JSX.Element;
 	page: string;
+	share?: boolean;
 };
 
-const Layout: React.FC<LayoutProps> = ({ children, page }) => (
+const Layout: React.FC<LayoutProps> = ({ children, page, share }) => (
 	<StyledLayout>
-		<Header page={page} />
+		<Header page={page} share={share} />
 		<Content>{children}</Content>
 		<Footer />
 	</StyledLayout>
 );
+
+Layout.defaultProps = {
+	share: false,
+};
 
 export default Layout;

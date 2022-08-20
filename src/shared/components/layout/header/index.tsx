@@ -18,9 +18,10 @@ const titles = {
 
 type HeaderProps = {
 	page: string;
+	share?: boolean;
 };
 
-const Header = ({ page }: HeaderProps) => {
+const Header = ({ page, share }: HeaderProps) => {
 	const navigate = useNavigate();
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
 	const mainPage = page === "main";
@@ -34,11 +35,16 @@ const Header = ({ page }: HeaderProps) => {
 				<div>
 					{mainPage && <DateSelector isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen} />}
 					{page !== "search" && <Icon name="search" handleClick={() => navigate("/search")} />}
+					{share && <Icon name="share" />}
 				</div>
 			</div>
 			{isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}
 		</StyledHeader>
 	);
+};
+
+Header.defaultProps = {
+	share: false,
 };
 
 export default Header;

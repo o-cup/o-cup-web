@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import Modal from "../../shared/components/Modal";
 import Calendar from "../../shared/components/Calendar";
+import DistrictSelector from "./DistrictSelector";
 
 type SearchModalProps = {
 	type: "calendar" | "districtSelector";
-	handleCloseModal: () => void;
+	setCalendarOpen: Dispatch<SetStateAction<boolean>>;
+	setDisctrictSelectorOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const SearchModal = ({ type, handleCloseModal }: SearchModalProps) => {
+const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: SearchModalProps) => {
 	const [selectedRange, setSelectedRange] = useState({
 		startDate: new Date(),
 		endDate: new Date(),
@@ -21,10 +23,11 @@ const SearchModal = ({ type, handleCloseModal }: SearchModalProps) => {
 	const conditionalRender = () => {
 		let elements;
 
+		// TODO: 날짜 범위 선택
 		switch (type) {
 			case "calendar":
 				elements = (
-					<Modal handleClose={handleCloseModal}>
+					<Modal handleClose={() => setCalendarOpen(false)}>
 						<Calendar
 							selectedRange={selectedRange}
 							handleSelectRange={handleSelectRange}
@@ -35,6 +38,11 @@ const SearchModal = ({ type, handleCloseModal }: SearchModalProps) => {
 				break;
 
 			case "districtSelector":
+				elements = (
+					<Modal handleClose={() => setDisctrictSelectorOpen(false)}>
+						<DistrictSelector />
+					</Modal>
+				);
 				break;
 
 			default:

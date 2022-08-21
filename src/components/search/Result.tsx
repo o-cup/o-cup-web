@@ -38,12 +38,10 @@ const Result = ({ keyword }: ResultProps) => {
 		}
 	}, [filterOpen]);
 
-	const closeModal = () => {
-		setCalendarOpen(false);
-		setDistrictSelectorOpen(false);
-	};
-
 	const isModalOpen = calendarOpen || districtSelectorOpen;
+	console.log("districtSelectorOpen", districtSelectorOpen);
+
+	// console.log("isModalOpen", isModalOpen);
 
 	// TODO: 데스크탑 반응형 처리
 	return (
@@ -74,7 +72,11 @@ const Result = ({ keyword }: ResultProps) => {
 			</div>
 
 			{isModalOpen && (
-				<SearchModal type={calendarOpen ? "calendar" : "districtSelector"} handleCloseModal={closeModal} />
+				<SearchModal
+					type={calendarOpen ? "calendar" : "districtSelector"}
+					setCalendarOpen={setCalendarOpen}
+					setDisctrictSelectorOpen={setDistrictSelectorOpen}
+				/>
 			)}
 		</StyledResult>
 	);

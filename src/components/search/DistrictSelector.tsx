@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Chip, SelectList, StyledDistrictSelector } from "../styles/districtSelectorStyle";
+import { FaCaretDown } from "react-icons/fa";
 import { divisionList } from "./data";
+import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
 
 const DistrictSelector = () => {
 	const [divisions, setDivisions] = useState(divisionList);
@@ -28,7 +29,11 @@ const DistrictSelector = () => {
 		setChips(texts);
 	}, [divisions, chips.length]);
 
-	const handleDivisionClick = (index: number) => {
+	const handleDivisionClick = (e: React.MouseEvent, index: number) => {
+		console.log("?????");
+
+		e.preventDefault();
+
 		const isAllSelected = index === 1;
 		if (isAllSelected) {
 			const newData = divisions.map((div) => {
@@ -117,63 +122,54 @@ const DistrictSelector = () => {
 
 	return (
 		<StyledDistrictSelector>
-			<h2>지역</h2>
 			<div className="content">
-				<div className="nations">
-					<h6>국가</h6>
-					<select disabled>
-						<option value="korea">한국</option>
-					</select>
-				</div>
+				<h2 className="nations">
+					대한민국
+					<FaCaretDown />
+				</h2>
 				<div className="districts">
-					<div>
-						<h6>지역</h6>
-						<SelectList className="main">
-							{divisions.map((division) => (
+					<ul className="main">
+						{divisions.map((division) => (
+							<li
+								role="presentation"
+								key={division.name}
+								onClick={(e) => handleDivisionClick(e, division.index)}
+								className={division.selected ? "selected" : ""}
+							>
+								{division.name}
+							</li>
+						))}
+					</ul>
+					<ul className="sub">
+						{divisions
+							.find((div) => div.selected)
+							?.districts.map((dist) => (
 								<li
 									role="presentation"
-									key={division.name}
-									onClick={() => handleDivisionClick(division.index)}
-									className={division.selected ? "selected" : ""}
+									key={dist.name}
+									onClick={() => handleDistrictClick(dist.index)}
+									className={dist.selected ? "selected" : ""}
 								>
-									{division.name}
+									{dist.name}
 								</li>
 							))}
-						</SelectList>
-					</div>
-					<div>
-						<h6>상세지역</h6>
-						<SelectList className="sub">
-							{divisions
-								.find((div) => div.selected)
-								?.districts.map((dist) => (
-									<li
-										role="presentation"
-										key={dist.name}
-										onClick={() => handleDistrictClick(dist.index)}
-										className={dist.selected ? "selected" : ""}
-									>
-										{dist.name}
-									</li>
-								))}
-						</SelectList>
-					</div>
+					</ul>
 				</div>
-				<div className="selected">
-					<div className="chipsContainer">
+				<div className="result">
+					<div className="chips">
 						{chips.map((item, index) => (
-							<Chip key={item}>
+							<span className="chip" key={item}>
 								<span>{item}</span>
 								<span role="presentation" onClick={() => handleDeleteClick(index)}>
 									X
 								</span>
-							</Chip>
+							</span>
 						))}
 					</div>
-					<p>최대 3개까지 선택 가능합니다.</p>
-				</div>
-				<div>
-					<button type="button">선택 완료</button>
+					<div className="submit">
+						<p>최대 3개까지 선택 가능합니다.</p>
+						<button type="button">적용</button>
+					</div>
 				</div>
 			</div>
 		</StyledDistrictSelector>

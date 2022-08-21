@@ -1,20 +1,15 @@
-import React, { useState } from "react";
-import { BiasList, CustomBottomSheet, EventList } from "../components/main";
+import React from "react";
+import { BiasList, EventList } from "../components/main";
 import { StyledMain } from "../components/main/styles/mainStyle";
 import Layout from "../shared/components/layout";
 
 function Main() {
-	const [open, setOpen] = useState(false);
-
 	return (
 		<Layout page="main">
-			<>
-				<StyledMain>
-					<BiasList />
-					<EventList />
-				</StyledMain>
-				{open && <CustomBottomSheet setOpen={setOpen} />}
-			</>
+			<StyledMain>
+				<BiasList />
+				<EventList />
+			</StyledMain>
 		</Layout>
 	);
 }

@@ -18,6 +18,7 @@ const Search = () => {
 	const [keyword, setKeyword] = useState("");
 	const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 	const [searched, setSearched] = useState(false);
+	const [searchSortOpen, setSearchSortOpen] = useState(false);
 	const viewResult = keyword && searched;
 
 	useEffect(() => {
@@ -38,7 +39,7 @@ const Search = () => {
 			<StyledFilter>
 				<div className="months">
 					<MonthSelector selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
-					<SortIcon options={sortOptions} />
+					<SortIcon options={sortOptions} isOpened={searchSortOpen} setIsOpened={setSearchSortOpen} />
 				</div>
 
 				<ul className="biases">

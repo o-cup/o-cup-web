@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { fetchEvents } from "../../apis";
 import { StyledResult } from "./styles/resultStyle";
@@ -17,7 +17,22 @@ const sortOptions = {
 };
 
 const Result = ({ keyword }: ResultProps) => {
+	const [sortOpen, setSortOpen] = useState(false);
+	const [filterOpen, setFilterOpen] = useState(false);
+
 	const { data: events } = useQuery("resultEvents", () => fetchEvents({ keyword }));
+
+	useEffect(() => {
+		if (sortOpen) {
+			setFilterOpen(false);
+		}
+	}, [sortOpen]);
+
+	useEffect(() => {
+		if (filterOpen) {
+			setSortOpen(false);
+		}
+	}, [filterOpen]);
 
 	// TODO: 데스크탑 반응형 처리
 	return (
@@ -26,8 +41,8 @@ const Result = ({ keyword }: ResultProps) => {
 				<p>{`검색 결과 총 ${events?.length}개`}</p>
 				<div className="icons">
 					{/* <Icon name="place " /> */}
-					<FilterIcon />
-					<SortIcon options={sortOptions} />
+					<FilterIcon isOpened={filterOpen} setIsOpened={setFilterOpen} />
+					<SortIcon options={sortOptions} isOpened={sortOpen} setIsOpened={setSortOpen} />
 				</div>
 			</div>
 

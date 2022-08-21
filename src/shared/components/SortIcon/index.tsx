@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import Icon from "../Icon/Icons";
 import StyledSortIcon from "./sortIconStyle";
 
 type SortProps = {
 	options: Record<string, string>;
+	isOpened: boolean;
+	setIsOpened: Dispatch<SetStateAction<boolean>>;
 };
 
-const SortIcon = ({ options }: SortProps) => {
-	const [isOpened, setIsOpened] = useState(false);
+const SortIcon = ({ options, isOpened, setIsOpened }: SortProps) => {
 	const optionKeys = Object.keys(options) as Array<keyof SortProps["options"]>;
 
 	return (

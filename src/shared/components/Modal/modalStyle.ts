@@ -10,8 +10,9 @@ export const StyledModal = styled.div`
 	justify-content: center;
 	align-items: center;
 	width: 380px;
-	border: 2px solid #000000;
 	background-color: ${({ theme }) => theme.colors.white};
+	border-radius: 4px;
+	border: 2px solid #000;
 `;
 
 export default {};

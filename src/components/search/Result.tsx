@@ -5,10 +5,7 @@ import { StyledResult } from "./styles/resultStyle";
 import Event from "./Event";
 import Button from "../../shared/components/Button";
 import { FilterIcon, SortIcon } from "../../shared/components";
-import Modal from "../../shared/components/Modal";
-import DateSelector from "../../shared/components/layout/header/DateSelector";
-import HeaderCalendar from "../../shared/components/layout/header/HeaderCalendar";
-import { StyledCalendar } from "./styles/calendarStyle";
+import SearchModal from "./SearchModal";
 
 type ResultProps = {
 	keyword: string;
@@ -25,6 +22,7 @@ const Result = ({ keyword }: ResultProps) => {
 	const [filterOpen, setFilterOpen] = useState(false);
 
 	const [calendarOpen, setCalendarOpen] = useState(false);
+	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
 
 	const { data: events } = useQuery("resultEvents", () => fetchEvents({ keyword }));
 
@@ -40,23 +38,12 @@ const Result = ({ keyword }: ResultProps) => {
 		}
 	}, [filterOpen]);
 
-	const renderModal = () => {
-		if (calendarOpen) {
-			return (
-				<Modal>
-					{/* <DateSelector isCalendarOpen={calendarOpen} setCalendarOpen={setCalendarOpen} /> */}
-					<StyledCalendar>
-						<HeaderCalendar setCalendarOpen={setCalendarOpen} />
-						<div className="submit">
-							<p>2022.08.26 ~ 2022.08.18</p>
-							<button type="button">적용</button>
-						</div>
-					</StyledCalendar>
-				</Modal>
-			);
-		}
-		return null;
+	const closeModal = () => {
+		setCalendarOpen(false);
+		setDistrictSelectorOpen(false);
 	};
+
+	const isModalOpen = calendarOpen || districtSelectorOpen;
 
 	// TODO: 데스크탑 반응형 처리
 	return (
@@ -65,7 +52,12 @@ const Result = ({ keyword }: ResultProps) => {
 				<p>{`검색 결과 총 ${events?.length}개`}</p>
 				<div className="icons">
 					{/* <Icon name="place " /> */}
-					<FilterIcon isOpened={filterOpen} setIsOpened={setFilterOpen} setCalendarOpen={setCalendarOpen} />
+					<FilterIcon
+						isOpened={filterOpen}
+						setIsOpened={setFilterOpen}
+						setCalendarOpen={setCalendarOpen}
+						setDistrictSelectorOpen={setDistrictSelectorOpen}
+					/>
 					<SortIcon options={sortOptions} isOpened={sortOpen} setIsOpened={setSortOpen} />
 				</div>
 			</div>
@@ -81,7 +73,9 @@ const Result = ({ keyword }: ResultProps) => {
 				<Button customStyle={{ fontWeight: "bold", width: "178px", height: "50px" }}>이벤트 등록하기</Button>
 			</div>
 
-			{renderModal()}
+			{isModalOpen && (
+				<SearchModal type={calendarOpen ? "calendar" : "districtSelector"} handleCloseModal={closeModal} />
+			)}
 		</StyledResult>
 	);
 };

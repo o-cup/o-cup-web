@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledModalBackground = styled.div`
 	display: block;
 	position: fixed;
-	z-index: 99;
+	z-index: 0;
 	left: 0;
 	top: 0;
 	width: 100%;

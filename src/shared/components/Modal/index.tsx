@@ -4,11 +4,11 @@ import { StyledModal } from "./modalStyle";
 
 type ModalProps = {
 	children: React.ReactNode;
-	handleClose: () => void;
 };
 
-const Modal = ({ children, handleClose }: ModalProps) => (
-	<StyledModalBackground onClick={handleClose}>
+const Modal = ({ children }: ModalProps) => (
+	// <StyledModalBackground onClick={handleClose}>
+	<StyledModalBackground>
 		<StyledModal>{children}</StyledModal>
 	</StyledModalBackground>
 );

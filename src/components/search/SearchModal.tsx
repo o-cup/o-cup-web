@@ -20,6 +20,17 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 		setSelectedRange(ranges.selection);
 	};
 
+	const handleSubmit = ({ modal }: { modal: "district" | "dateRange" }) => {
+		if (modal === "dateRange") {
+			setCalendarOpen(false);
+			return;
+		}
+
+		if (modal === "district") {
+			setDisctrictSelectorOpen(false);
+		}
+	};
+
 	const conditionalRender = () => {
 		let elements;
 
@@ -27,11 +38,11 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 		switch (type) {
 			case "calendar":
 				elements = (
-					<Modal handleClose={() => setCalendarOpen(false)}>
+					<Modal>
 						<Calendar
 							selectedRange={selectedRange}
 							handleSelectRange={handleSelectRange}
-							handleClickSubmit={() => console.log("---")}
+							handleClickSubmit={() => handleSubmit({ modal: "dateRange" })}
 						/>
 					</Modal>
 				);
@@ -39,8 +50,8 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 
 			case "districtSelector":
 				elements = (
-					<Modal handleClose={() => setDisctrictSelectorOpen(false)}>
-						<DistrictSelector />
+					<Modal>
+						<DistrictSelector handleSubmit={() => handleSubmit({ modal: "district" })} />
 					</Modal>
 				);
 				break;

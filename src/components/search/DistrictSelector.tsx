@@ -3,7 +3,11 @@ import { FaCaretDown } from "react-icons/fa";
 import { divisionList } from "./data";
 import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
 
-const DistrictSelector = () => {
+type DistrictSelectorProps = {
+	handleSubmit: () => void;
+};
+
+const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
 	const [divisions, setDivisions] = useState(divisionList);
 	const [chips, setChips] = useState<string[]>([]);
 	const MAX_CHIP_LENGTH = 3;
@@ -168,7 +172,9 @@ const DistrictSelector = () => {
 					</div>
 					<div className="submit">
 						<p>최대 3개까지 선택 가능합니다.</p>
-						<button type="button">적용</button>
+						<button type="button" onClick={handleSubmit}>
+							적용
+						</button>
 					</div>
 				</div>
 			</div>

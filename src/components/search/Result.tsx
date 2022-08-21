@@ -1,13 +1,19 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { fetchEvents } from "../../apis";
-import Icon from "../../shared/components/Icon/Icons";
 import { StyledResult } from "./styles/resultStyle";
 import Event from "./Event";
 import Button from "../../shared/components/Button";
+import { FilterIcon, SortIcon } from "../../shared/components";
 
 type ResultProps = {
 	keyword: string;
+};
+
+const sortOptions = {
+	dateAsc: "날짜: 빠른 순",
+	dateDsc: "날짜: 느린 순",
+	alphabetAsc: "카페: 가나다순",
 };
 
 const Result = ({ keyword }: ResultProps) => {
@@ -16,12 +22,12 @@ const Result = ({ keyword }: ResultProps) => {
 	// TODO: 데스크탑 반응형 처리
 	return (
 		<StyledResult>
-			<div>
+			<div className="menu">
 				<p>{`검색 결과 총 ${events?.length}개`}</p>
-				<div>
+				<div className="icons">
 					{/* <Icon name="place " /> */}
-					<Icon name="filter" />
-					<Icon name="sort" />
+					<FilterIcon />
+					<SortIcon options={sortOptions} />
 				</div>
 			</div>
 

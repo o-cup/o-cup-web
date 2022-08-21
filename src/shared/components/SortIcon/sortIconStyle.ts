@@ -1,14 +1,13 @@
 import styled from "styled-components";
 
-const StyledSort = styled.div`
-	i.sort {
-		position: relative;
-	}
+const StyledSortIcon = styled.div`
+	position: relative;
+	width: 100%;
 
 	ul {
 		width: 120px;
 		position: absolute;
-		bottom: -120px;
+		bottom: -130px;
 		right: 0;
 		z-index: 1;
 		box-shadow: ${({ theme }) => theme.style.shadow};
@@ -26,4 +25,4 @@ const StyledSort = styled.div`
 	}
 `;
 
-export default StyledSort;
+export default StyledSortIcon;

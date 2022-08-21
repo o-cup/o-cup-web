@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import Icon from "../Icon/Icons";
-import StyledSort from "./sortStyle";
+import StyledSortIcon from "./sortIconStyle";
 
 type SortProps = {
 	options: Record<string, string>;
 };
 
-const Sort = ({ options }: SortProps) => {
+const SortIcon = ({ options }: SortProps) => {
 	const [isOpened, setIsOpened] = useState(false);
-
 	const optionKeys = Object.keys(options) as Array<keyof SortProps["options"]>;
 
 	return (
-		<StyledSort onClick={() => setIsOpened(!isOpened)}>
+		<StyledSortIcon onClick={() => setIsOpened(!isOpened)} className="sort">
 			<Icon name="sort" />
 			{isOpened && (
 				<ul>
@@ -21,8 +20,8 @@ const Sort = ({ options }: SortProps) => {
 					))}
 				</ul>
 			)}
-		</StyledSort>
+		</StyledSortIcon>
 	);
 };
 
-export default Sort;
+export default SortIcon;

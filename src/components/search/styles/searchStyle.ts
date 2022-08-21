@@ -17,14 +17,14 @@ export const StyledFilter = styled.div`
 	.months {
 		height: 104px;
 		display: flex;
-		align-items: center;
-		padding: 16px 0;
+		padding: 16px 0 16px 0;
 		position: relative;
+		width: 100%;
 
-		i.sort {
-			position: absolute;
-			bottom: 16px;
-			right: 0;
+		div.sort {
+			display: flex;
+			justify-content: flex-end;
+			align-items: flex-end;
 		}
 	}
 

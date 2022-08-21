@@ -7,7 +7,7 @@ export const StyledResult = styled.div`
 	flex-direction: column;
 	gap: 10px;
 
-	& > div:first-child {
+	.menu {
 		display: flex;
 		justify-content: space-between;
 		height: 40px;
@@ -19,9 +19,9 @@ export const StyledResult = styled.div`
 			width: 100%;
 		}
 
-		& > div {
+		.icons {
 			display: flex;
-			width: 100%;
+			width: fit-content;
 			justify-content: flex-end;
 			align-items: center;
 			gap: 10px;

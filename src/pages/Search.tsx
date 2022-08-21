@@ -5,7 +5,7 @@ import { MonthSelector, Result, SearchInput } from "../components/search";
 import { StyledFilter, StyledSearch } from "../components/search/styles/searchStyle";
 import BiasProfile from "../shared/components/BiasProfile";
 import Layout from "../shared/components/layout";
-import Sort from "../shared/components/Sort";
+import SortIcon from "../shared/components/SortIcon";
 import { getBirthMonth } from "../shared/utils/dateHandlers";
 
 const sortOptions = {
@@ -38,7 +38,7 @@ const Search = () => {
 			<StyledFilter>
 				<div className="months">
 					<MonthSelector selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
-					<Sort options={sortOptions} />
+					<SortIcon options={sortOptions} />
 				</div>
 
 				<ul className="biases">

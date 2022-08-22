@@ -25,6 +25,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
+    "react-spring-bottom-sheet": "^3.4.1",
     "recoil": "^0.7.4",
     "recoil-persist": "^4.2.0",
     "slick-carousel": "^1.8.1",

@@ -1,5 +1,27 @@
 import styled from "styled-components";
 
+const StyledGoodsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  > button {
+    background: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.black};
+    border: 2px solid #000000;
+    border-radius: 70px;
+    box-shadow: 0 4px 0 #000000;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 10px 16px;
+    display: inline-block;
+    margin-left: auto;
+    margin-top: -16px;
+  }
+`
+
 const StyledGoodsInput = styled.div`
   display: flex;
   flex-direction: column;
@@ -111,5 +133,5 @@ const StyledChipContainer = styled.ul`
   }
 `;
 
-export { StyledGoodsInput, StyledSelectWrapper, StyledInputWrapper, StyledChipContainer };
+export { StyledGoodsContainer, StyledGoodsInput, StyledSelectWrapper, StyledInputWrapper, StyledChipContainer };
 export default {};

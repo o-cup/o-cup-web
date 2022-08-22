@@ -47,7 +47,7 @@ const StyledEventMain = styled.div`
 
 	.imgContainer {
 		width: calc(100% - 54px);
-		//height: 264px;
+		min-height: 264px;
 		height: 100%;
 		position: relative;
 		background: ${({ theme }) => theme.colors.white};
@@ -97,6 +97,7 @@ const StyledEventMain = styled.div`
 		img {
 			width: 100%;
 			height: 100% !important;
+      min-height: 264px;
 			object-fit: cover;
 			object-position: top;
       vertical-align : bottom;

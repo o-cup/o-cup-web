@@ -1,30 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
+import { useRecoilState } from "recoil";
+import { requestPlaceAtom } from "../../state/atoms";
 import { StyledPlaceInput } from "./styles/placeInputStyle";
 import { StyledSearchListContainer, StyledSearchList } from "./styles/searchListStyle";
 import SearchInput from "./SearchInput";
 
-type PlaceValues = {
-  place: string;
-  district: string;
-  address: string;
-}
-
-type InputProps = {
-  value: PlaceValues;
-  setValue: React.Dispatch<React.SetStateAction<PlaceValues>>;
-};
-
-type kakaoResult = {
+type KakaoResult = {
   id: string; // "1376253571"
   place_name: string; // "로우앤슬로우"
   road_address_name: string; // "서울 용산구 보광로 126"
 }
 
-const PlaceInput = ({ value, setValue }: InputProps) => {
+const PlaceInput = () => {
+  const [placeInputs, setPlaceInputs] = useRecoilState(requestPlaceAtom);
+
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [keyword, setKeyword] = useState("");
-  const [placeList, setPlaceList] = useState([] as kakaoResult[]);
+  const [placeList, setPlaceList] = useState([] as KakaoResult[]);
 
   const { kakao } = window as any;
 
@@ -52,9 +45,9 @@ const PlaceInput = ({ value, setValue }: InputProps) => {
     }
   }, [keyword]);
 
-  const handleClickSelect = (placeInfo: kakaoResult) => {
+  const handleClickSelect = (placeInfo: KakaoResult) => {
     const districtArr = placeInfo.road_address_name.split(" ");
-    setValue({
+    setPlaceInputs({
       place: placeInfo.place_name,
       district: `${districtArr[0]} ${districtArr[1]}`,
       address: placeInfo.road_address_name
@@ -65,7 +58,7 @@ const PlaceInput = ({ value, setValue }: InputProps) => {
 
   return (
     <StyledPlaceInput>
-      <SearchInput value={value.place} handleClickSearchBtn={() => setSearchOpen(!isSearchOpen)}
+      <SearchInput value={placeInputs.place} handleClickSearchBtn={() => setSearchOpen(!isSearchOpen)}
                    id="place" placeholder="카페이름" label="장소" />
       {isSearchOpen && <StyledSearchListContainer>
         <div className="inputContainer">
@@ -86,7 +79,7 @@ const PlaceInput = ({ value, setValue }: InputProps) => {
             </li>)}
         </StyledSearchList>}
       </StyledSearchListContainer>}
-      <SearchInput value={value.address} id="address" placeholder="주소" label="" hideLabel hideButton />
+      <SearchInput value={placeInputs.address} id="address" placeholder="주소" label="" hideLabel hideButton />
     </StyledPlaceInput>
   );
 };

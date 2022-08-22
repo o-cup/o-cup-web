@@ -4,21 +4,24 @@ import { StyledModalBackground, StyledModal } from "./styles/modalStyle";
 
 type ModalProps = {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setBottomSheetOpen: React.Dispatch<React.SetStateAction<boolean>>;
   resetAllStates: any;
 };
 
-const Modal = ({ setModalOpen, resetAllStates }: ModalProps) => {
+const Modal = ({ setModalOpen, setBottomSheetOpen, resetAllStates }: ModalProps) => {
   const navigate = useNavigate();
 
   const handleClickContinue = () => {
-    resetAllStates()
-    setModalOpen(false)
-  }
+    resetAllStates();
+    setModalOpen(false);
+    setBottomSheetOpen(false);
+  };
 
   const handleClickFinish = () => {
     navigate("/");
-    setModalOpen(false)
-  }
+    setModalOpen(false);
+    setBottomSheetOpen(false);
+  };
 
   return (<StyledModalBackground>
     <StyledModal>

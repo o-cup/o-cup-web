@@ -1,27 +1,20 @@
 import React, { useState } from "react";
 import { DateRange } from "react-date-range-ts";
 import { ko } from "date-fns/locale";
+import { useRecoilState } from "recoil";
+import { requestDateRangeAtom } from "../../state/atoms";
 import "react-date-range-ts/dist/styles.css";
 import "./styles/request-calendar-custom.css";
-
 import { StyledDateRangeInput, StyledCalendarContainer } from "./styles/dateRangeInputStyle";
 import { convertDateToString, convertDateWithDots, convertStringToDate } from "../../shared/utils/dateHandlers";
 
-type DateRangeValues = {
-	startAt: string;
-	endAt: string;
-};
+const DateRangeInput = () => {
+	const [dateRange, setDateRange] = useRecoilState(requestDateRangeAtom);
 
-type InputProps = {
-	value: DateRangeValues;
-	setValue: React.Dispatch<React.SetStateAction<DateRangeValues>>;
-};
-
-const DateRangeInput = ({ value, setValue }: InputProps) => {
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
 	const [selectedRange, setSelectedRange] = useState({
-		startDate: value.startAt ? convertStringToDate(value.startAt) : new Date(),
-		endDate: value.endAt ? convertStringToDate(value.endAt) : new Date(),
+		startDate: dateRange.startAt ? convertStringToDate(dateRange.startAt) : new Date(),
+		endDate: dateRange.endAt ? convertStringToDate(dateRange.endAt) : new Date(),
 		key: "selection",
 	});
 
@@ -30,14 +23,13 @@ const DateRangeInput = ({ value, setValue }: InputProps) => {
 	};
 
 	const handleClickSubmit = () => {
-		setValue({
+		setDateRange({
 			startAt: convertDateToString(selectedRange.startDate),
 			endAt: convertDateToString(selectedRange.endDate),
 		});
 		setCalendarOpen(false);
 	};
 
-	// TODO: Calendar 컴포넌트 shared로 옮기기
 	return (
 		<StyledDateRangeInput>
 			<div className="dateInputContainer">
@@ -49,8 +41,8 @@ const DateRangeInput = ({ value, setValue }: InputProps) => {
 						type="text"
 						placeholder="날짜 선택하기"
 						value={
-							value.startAt && value.endAt
-								? `${convertDateWithDots(value.startAt)} - ${convertDateWithDots(value.endAt)}`
+							dateRange.startAt && dateRange.endAt
+								? `${convertDateWithDots(dateRange.startAt)} - ${convertDateWithDots(dateRange.endAt)}`
 								: ""
 						}
 					/>

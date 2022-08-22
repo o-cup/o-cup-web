@@ -23,79 +23,15 @@ const StyledLayout = styled.div`
 	}
 `;
 
-const StyledHeader = styled.header<{ mainPage: boolean }>`
-	position: fixed;
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	max-width: 1080px;
-	z-index: 90;
-	background: rgba(252, 251, 247, 0.9);
-	backdrop-filter: blur(4px);
-
-	> div#header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		width: 100%;
-		max-width: 1080px;
-		height: 76px;
-		padding: 0 24px;
-		border-bottom: ${(props) => (props.mainPage ? "" : "2px solid #000")};
-
-		h1 {
-			font-size: 18px;
-			font-weight: bold;
-		}
-
-		> div {
-			width: fit-content;
-			display: flex;
-			height: 100%;
-			align-items: center;
-			gap: 22px;
-		}
-
-		img#logo {
-			height: 56px;
-		}
-
-		.date_selector {
-			display: flex;
-			align-items: center;
-
-			> p {
-				text-align: center;
-				font-weight: 700;
-        font-size: 20px;
-        line-height: 24px;
-				margin-right: 8px;
-				white-space: nowrap;
-			}
-
-			> button.calendarOpenButton {
-				background: none;
-				outline: none;
-
-				&.active {
-					transform: rotate(180deg);
-				}
-			}
-		}
-	}
-`;
-
 const StyledFooter = styled.footer`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	/* padding: 32px 20px 50px; */
 	padding: 100px 0 50px 0;
 	text-align: center;
 
 	> ul {
-		/* display: flex; */
 		display: none;
 		justify-content: center;
 		align-items: center;
@@ -127,5 +63,5 @@ const StyledFooter = styled.footer`
 	}
 `;
 
-export { StyledLayout, StyledHeader, StyledFooter };
+export { StyledLayout, StyledFooter };
 export default {};

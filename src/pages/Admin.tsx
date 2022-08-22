@@ -112,7 +112,7 @@ function Admin() {
 	};
 
 	return (
-		<Layout>
+		<Layout page="admin">
 			<StyledAdmin>
 				<div className="adminContainer">
 					<h1>o-cup admin</h1>

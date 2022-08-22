@@ -9,30 +9,32 @@ import { dateFilterAtom } from "../../../../../state/atoms";
 import { convertDateToString, convertStringToDate } from "../../../../utils/dateHandlers";
 
 type StateProps = {
-  setCalendarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	setCalendarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function HeaderCalendar({ setCalendarOpen }: StateProps) {
-  const [dateFilter, setDateFilter] = useRecoilState(dateFilterAtom);
+	const [dateFilter, setDateFilter] = useRecoilState(dateFilterAtom);
 
-  const handleChangeDate = (date: Date) => {
-    setDateFilter(convertDateToString(date));
-    setCalendarOpen(false);
-  };
+	const handleChangeDate = (date: Date) => {
+		setDateFilter(convertDateToString(date));
+		setCalendarOpen(false);
+	};
 
-  return (
-    <div>
-      <RCalendar className="header-calendar"
-                 locale={ko}
-                 date={convertStringToDate(dateFilter)}
-                 onChange={handleChangeDate}
-                 showMonthAndYearPickers={false}
-                 showDateDisplay={false}
-                 minDate={new Date(2022, 7, 1)}
-                 monthDisplayFormat="yyyy.MMM"
-                 dateDisplayFormat="yyyy.MM.dd" />
-    </div>
-  );
+	return (
+		<div className="calendar">
+			<RCalendar
+				className="header-calendar"
+				locale={ko}
+				date={convertStringToDate(dateFilter)}
+				onChange={handleChangeDate}
+				showMonthAndYearPickers={false}
+				showDateDisplay={false}
+				minDate={new Date(2022, 7, 1)}
+				monthDisplayFormat="yyyy.MMM"
+				dateDisplayFormat="yyyy.MM.dd"
+			/>
+		</div>
+	);
 }
 
 export default HeaderCalendar;

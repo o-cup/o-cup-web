@@ -26,6 +26,13 @@ export const StyledSearchInput = styled.div`
 		right: 17px;
 	}
 
+	i.delete {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		right: 40px;
+	}
+
 	> button {
 		width: 40px;
 		height: 40px;

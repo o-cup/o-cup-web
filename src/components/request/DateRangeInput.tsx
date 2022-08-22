@@ -9,59 +9,75 @@ import { StyledDateRangeInput, StyledCalendarContainer } from "./styles/dateRang
 import { convertDateToString, convertDateWithDots, convertStringToDate } from "../../shared/utils/dateHandlers";
 
 const DateRangeInput = () => {
-  const [dateRange, setDateRange] = useRecoilState(requestDateRangeAtom);
+	const [dateRange, setDateRange] = useRecoilState(requestDateRangeAtom);
 
-  const [isCalendarOpen, setCalendarOpen] = useState(false);
-  const [selectedRange, setSelectedRange] = useState({
-    startDate: dateRange.startAt ? convertStringToDate(dateRange.startAt) : new Date(),
-    endDate: dateRange.endAt ? convertStringToDate(dateRange.endAt) : new Date(),
-    key: "selection"
-  });
+	const [isCalendarOpen, setCalendarOpen] = useState(false);
+	const [selectedRange, setSelectedRange] = useState({
+		startDate: dateRange.startAt ? convertStringToDate(dateRange.startAt) : new Date(),
+		endDate: dateRange.endAt ? convertStringToDate(dateRange.endAt) : new Date(),
+		key: "selection",
+	});
 
-  const handleSelectRange = (ranges: any) => {
-    setSelectedRange(ranges.selection);
-  };
+	const handleSelectRange = (ranges: any) => {
+		setSelectedRange(ranges.selection);
+	};
 
-  const handleClickSubmit = () => {
-    setDateRange({
-      startAt: convertDateToString(selectedRange.startDate),
-      endAt: convertDateToString(selectedRange.endDate)
-    });
-    setCalendarOpen(false);
-  };
+	const handleClickSubmit = () => {
+		setDateRange({
+			startAt: convertDateToString(selectedRange.startDate),
+			endAt: convertDateToString(selectedRange.endDate),
+		});
+		setCalendarOpen(false);
+	};
 
-  return (
-    <StyledDateRangeInput>
-      <div className="dateInputContainer">
-        <span>이벤트 기간</span>
-        <button type="button" className="calendarOpenInput" onClick={() => setCalendarOpen(!isCalendarOpen)} >
-          <input disabled id="dateRange" type="text" placeholder="날짜 선택하기"
-                 value={(dateRange.startAt && dateRange.endAt) ? `${convertDateWithDots(dateRange.startAt)} - ${convertDateWithDots(dateRange.endAt)}` : ""} />
-          <i id="calendar"/>
-        </button>
-      </div>
+	return (
+		<StyledDateRangeInput>
+			<div className="dateInputContainer">
+				<span>이벤트 기간</span>
+				<button type="button" className="calendarOpenInput" onClick={() => setCalendarOpen(!isCalendarOpen)}>
+					<input
+						disabled
+						id="dateRange"
+						type="text"
+						placeholder="날짜 선택하기"
+						value={
+							dateRange.startAt && dateRange.endAt
+								? `${convertDateWithDots(dateRange.startAt)} - ${convertDateWithDots(dateRange.endAt)}`
+								: ""
+						}
+					/>
+					<i id="calendar" />
+				</button>
+			</div>
 
-      {isCalendarOpen && <StyledCalendarContainer>
-        <DateRange
-          className="request-calendar"
-          editableDateInputs
-          moveRangeOnFirstSelection={false}
-          ranges={[selectedRange]}
-          onChange={handleSelectRange}
-          locale={ko}
-          showMonthAndYearPickers={false}
-          showDateDisplay={false}
-          minDate={new Date(2022, 7, 1)}
-          monthDisplayFormat="yyyy.MMM"
-          dateDisplayFormat="yyyy.MM.dd"
-        />
-        <div className="dateCheckContainer">
-          <p>{convertDateWithDots(convertDateToString(selectedRange.startDate))} - {convertDateWithDots(convertDateToString(selectedRange.endDate))}</p>
-          <button type="button" onClick={handleClickSubmit}>적용</button>
-        </div>
-      </StyledCalendarContainer>}
-    </StyledDateRangeInput>
-  );
+			{isCalendarOpen && (
+				<StyledCalendarContainer>
+					<DateRange
+						className="request-calendar"
+						editableDateInputs
+						moveRangeOnFirstSelection={false}
+						ranges={[selectedRange]}
+						onChange={handleSelectRange}
+						locale={ko}
+						showMonthAndYearPickers={false}
+						showDateDisplay={false}
+						minDate={new Date(2022, 7, 1)}
+						monthDisplayFormat="yyyy.MMM"
+						dateDisplayFormat="yyyy.MM.dd"
+					/>
+					<div className="dateCheckContainer">
+						<p>
+							{convertDateWithDots(convertDateToString(selectedRange.startDate))} -{" "}
+							{convertDateWithDots(convertDateToString(selectedRange.endDate))}
+						</p>
+						<button type="button" onClick={handleClickSubmit}>
+							적용
+						</button>
+					</div>
+				</StyledCalendarContainer>
+			)}
+		</StyledDateRangeInput>
+	);
 };
 
 export default DateRangeInput;

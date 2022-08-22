@@ -7,12 +7,22 @@ import { FaUserCircle, FaTwitter, FaMapMarkerAlt, FaCalendar } from "react-icons
 import { EventType, DetailType } from "../../types";
 import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { StyledEventMain } from "./styles/eventMainStyle";
-import BiasChip from "../../shared/components/BiasChip";
 import { StyledBiasChip } from "../../shared/components/BiasChip/biasChipStyle";
+import BiasChip from "../../shared/components/BiasChip";
 
 type EventMainProps = Partial<EventType> & Partial<DetailType>;
 
-const EventMain = ({ place, biasesId, organizer, snsId, startAt, endAt, address, images, requestedBiases }: EventMainProps) => {
+const EventMain = ({
+	place,
+	biasesId,
+	organizer,
+	snsId,
+	startAt,
+	endAt,
+	address,
+	images,
+	requestedBiases,
+}: EventMainProps) => {
 	const customPaging = (i: number) => (
 		<span>
 			{i + 1} / {images?.length}
@@ -26,10 +36,10 @@ const EventMain = ({ place, biasesId, organizer, snsId, startAt, endAt, address,
 					<h6>{place}</h6>
 					<div>
 						{requestedBiases
-              ? requestedBiases.map((bias) => bias.bias ? <StyledBiasChip key={bias.id}>{bias.bias}</StyledBiasChip> : null)
-						 : biasesId?.map((biasId) => (
-								<BiasChip id={biasId} key={biasId} />
-							))}
+							? requestedBiases.map((bias) =>
+									bias.bias ? <StyledBiasChip key={bias.id}>{bias.bias}</StyledBiasChip> : null
+							  )
+							: biasesId?.map((biasId) => <BiasChip id={biasId} key={biasId} />)}
 					</div>
 				</div>
 				<p>
@@ -48,31 +58,33 @@ const EventMain = ({ place, biasesId, organizer, snsId, startAt, endAt, address,
 					{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
 				</p>
 			</div>
-      {images && images.length > 0 && <div className="imgContainer">
-				{images?.length === 1 ? (
-					/* 이미지 갯수 하나인경우 슬라이드 되지 않음 */
-					<div className="slick-slider">
-						<img alt={images[0]} src={images[0]} />
-						<ul className="slick-dots">
-							<li className="slick-active">
-								<span>1 / 1</span>
-							</li>
-						</ul>
-					</div>
-				) : (
-					<Slider
-						dots
-						infinite
-						slidesToShow={1}
-						slidesToScroll={1}
-						arrows={false}
-						adaptiveHeight={false}
-						customPaging={customPaging}
-					>
-						{images?.length && images?.map((img) => <img alt={img} src={img} key={img} />)}
-					</Slider>
-				)}
-			</div>}
+			{images && images.length > 0 && (
+				<div className="imgContainer">
+					{images?.length === 1 ? (
+						/* 이미지 갯수 하나인경우 슬라이드 되지 않음 */
+						<div className="slick-slider">
+							<img alt={images[0]} src={images[0]} />
+							<ul className="slick-dots">
+								<li className="slick-active">
+									<span>1 / 1</span>
+								</li>
+							</ul>
+						</div>
+					) : (
+						<Slider
+							dots
+							infinite
+							slidesToShow={1}
+							slidesToScroll={1}
+							arrows={false}
+							adaptiveHeight={false}
+							customPaging={customPaging}
+						>
+							{images?.length && images?.map((img) => <img alt={img} src={img} key={img} />)}
+						</Slider>
+					)}
+				</div>
+			)}
 		</StyledEventMain>
 	);
 };

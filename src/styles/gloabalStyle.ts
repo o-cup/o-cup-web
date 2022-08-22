@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle<ThemeType>`
     margin: 0;
     background: #fcfbf7;
 
-    & > div:first-child {
+    div#root {
       display: flex;
       flex-direction: column;
       justify-content: center;

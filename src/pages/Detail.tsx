@@ -24,7 +24,7 @@ const Detail = () => {
 
 	// TODO: props하나로 묶어서 전달할 수 있도록 리팩토링
 	return (
-		<Layout>
+		<Layout page="detail">
 			<StyledDetail>
 				<div className="detailInfo">
 					<div className="mainInfo">

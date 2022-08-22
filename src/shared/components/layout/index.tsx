@@ -6,25 +6,20 @@ import { StyledLayout } from "./styles/layoutStyle";
 
 type LayoutProps = {
 	children: JSX.Element;
-	title?: string;
+	page: string;
+	share?: boolean;
 };
 
-/**
- * @param dateSelector header 에 년/월 선택하는 컴포넌트 유무
- *                     상세페이지에서도 동일 레이아웃 사용하기 위해 날짜 숨길 수 있도록 처리
- * @param children
- * */
-
-const Layout: React.FC<LayoutProps> = ({ children, title }) => (
+const Layout: React.FC<LayoutProps> = ({ children, page, share }) => (
 	<StyledLayout>
-		<Header title={title} />
+		<Header page={page} share={share} />
 		<Content>{children}</Content>
 		<Footer />
 	</StyledLayout>
 );
 
 Layout.defaultProps = {
-	title: "",
+	share: false,
 };
 
 export default Layout;

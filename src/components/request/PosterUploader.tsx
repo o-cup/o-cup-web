@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { requestPosterUrlsAtom } from "../../state/atoms";
 import Icon from "../../shared/components/Icon/Icons";
 import { Poster, StyledPosterUpload } from "./styles/posterUploadStyle";
 import { Label } from "./styles/requestStyle";
 import { uploadPoster } from "../../apis";
 
-type InputProps = {
-  setPosterUrls: React.Dispatch<React.SetStateAction<string[]>>;
-};
-
-const PosterUploader = ({ setPosterUrls }: InputProps) => {
+const PosterUploader = () => {
   const [posters, setPosters] = useState([{ id: 1, url: "", publicUrl: "" }]);
+  const [posterUrls, setPosterUrls] = useRecoilState(requestPosterUrlsAtom);
 
   useEffect(() => {
     const allHasUrl = posters.every((poster) => poster.url);

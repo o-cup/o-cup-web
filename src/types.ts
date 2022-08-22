@@ -1,3 +1,10 @@
+export type RequestBias = {
+	id?: number;
+	peopleId: number;
+	bias: string;
+	team: string;
+}
+
 export type EventType = {
 	id: number;
 	createdAt: string;
@@ -10,7 +17,7 @@ export type EventType = {
 	startAt: string;
 	endAt: string;
 	images: string[];
-	requestedBiases?: any[];
+	requestedBiases?: RequestBias[];
 	isRequested: boolean;
 	isApproved: boolean;
 };

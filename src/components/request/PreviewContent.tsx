@@ -32,7 +32,7 @@ const PreviewContent = () => {
       startAt={dateRange.startAt || "20220000"}
       endAt={dateRange.endAt || "20220000"}
       address={placeInputs.address || "이벤트 주소"}
-      images={posterUrls[0] ? posterUrls : [DEFAULT_POSTER_URL]}
+      images={posterUrls[0].publicUrl ? posterUrls.map((poster) => poster.publicUrl) : [DEFAULT_POSTER_URL]}
     />
     <TwitterInfo organizer={organizer || "주최자 닉네임"}
                  snsId={snsId || "ocup_official"}

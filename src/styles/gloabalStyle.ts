@@ -22,6 +22,10 @@ const GlobalStyle = createGlobalStyle<ThemeType>`
       justify-content: center;
       align-items: center;
     }
+
+    &.fixed {
+      overflow: hidden;
+    }
   }
 
   input, textarea, select {

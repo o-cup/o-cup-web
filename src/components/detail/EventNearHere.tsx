@@ -33,7 +33,7 @@ function EventNearHere({ biasesId, district }: Partial<EventType>) {
 						const { id: eventId, images, place, organizer } = event;
 						const previewUrl = (images && images[0]) || "";
 						return (
-							<EventNearHereList key={eventId} onClick={() => navigate(`/detail/${id}`)}>
+							<EventNearHereList key={eventId} onClick={() => navigate(`/detail/${eventId}`)}>
 								{previewUrl && <img alt={previewUrl} src={previewUrl} />}
 								<div>
 									<h6>{place}</h6>

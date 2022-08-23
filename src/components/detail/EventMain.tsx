@@ -3,12 +3,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { FaUserCircle, FaTwitter, FaMapMarkerAlt, FaCalendar } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
 import { EventType, DetailType } from "../../types";
 import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { StyledEventMain } from "./styles/eventMainStyle";
 import { StyledBiasChip } from "../../shared/components/BiasChip/biasChipStyle";
 import BiasChip from "../../shared/components/BiasChip";
+import { DEFAULT_POSTER_URL } from "../../shared/constants";
 
 type EventMainProps = Partial<EventType> & Partial<DetailType>;
 
@@ -29,6 +30,11 @@ const EventMain = ({
 		</span>
 	);
 
+	const imageOnErrorHandler = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+		e.currentTarget.src = DEFAULT_POSTER_URL;
+		e.currentTarget.className = "error";
+	};
+
 	return (
 		<StyledEventMain>
 			<div className="textContainer">
@@ -43,18 +49,18 @@ const EventMain = ({
 					</div>
 				</div>
 				<p>
-					<FaUserCircle />
+					<img src="/images/icons/host.png" alt="host"/>
 					{organizer}
 				</p>
 				<p>
 					<FaTwitter />@{snsId}
 				</p>
 				<p>
-					<FaMapMarkerAlt />
+					<img src="/images/icons/place.png" alt="place"/>
 					{address}
 				</p>
 				<p>
-					<FaCalendar />
+					<img src="/images/icons/calendar.png" alt="calendar"/>
 					{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
 				</p>
 			</div>
@@ -63,7 +69,7 @@ const EventMain = ({
 					{images?.length === 1 ? (
 						/* 이미지 갯수 하나인경우 슬라이드 되지 않음 */
 						<div className="slick-slider">
-							<img alt={images[0]} src={images[0]} />
+							<img alt={images[0]} src={images[0]} onError={imageOnErrorHandler} />
 							<ul className="slick-dots">
 								<li className="slick-active">
 									<span>1 / 1</span>
@@ -80,7 +86,7 @@ const EventMain = ({
 							adaptiveHeight={false}
 							customPaging={customPaging}
 						>
-							{images?.length && images?.map((img) => <img alt={img} src={img} key={img} />)}
+							{images?.length && images?.map((img) => <img alt={img} src={img} key={img} onError={imageOnErrorHandler} />)}
 						</Slider>
 					)}
 				</div>

@@ -113,12 +113,22 @@ const StyledItem = styled.li`
 		align-items: center;
 		padding-bottom: 12px;
 
-		> img {
-			width: 100%;
-			height: 270px;
-			object-fit: cover;
-			object-position: top;
-		}
+    > .lazy-image {
+      width: 100%;
+      height: 270px;
+      
+      img {
+        width: 100%;
+        height: 270px;
+        object-fit: cover;
+        object-position: top;
+      }
+      
+      /* Error image */
+      img.error {
+        object-position: center;
+      }
+    }
 
 		> h6 {
 			font-size: 20px;
@@ -137,9 +147,15 @@ const StyledItem = styled.li`
 		font-weight: 400;
 		display: flex;
 		align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
-		> svg {
+    > img,
+    > svg {
 			margin-right: 4px;
+      width: 14px;
+      min-width: 14px;
 		}
 
 		&:not(:last-child) {

@@ -2,12 +2,6 @@ import { atom } from "recoil";
 import { convertDateToString } from "../shared/utils/dateHandlers";
 import { sessionAtom } from "./recoilUtils";
 
-export const savedPageAtom = atom<number | null>({
-  key: "savedPageAtom",
-  default: null,
-  effects: [sessionAtom],
-});
-
 const today = new Date();
 
 export const dateFilterAtom = atom({
@@ -55,9 +49,9 @@ export const requestBasicAtom = atom<{ organizer: string, snsId: string, link: s
   effects: [sessionAtom],
 });
 
-export const requestPosterUrlsAtom = atom<string[]>({
+export const requestPosterUrlsAtom = atom<{ id: number, publicUrl: string }[]>({
   key: "requestPosterUrlsAtom",
-  default: [] as string[],
+  default: [{ id: 1, publicUrl: "" }],
   effects: [sessionAtom],
 });
 

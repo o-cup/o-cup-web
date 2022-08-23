@@ -34,10 +34,16 @@ const StyledEventMain = styled.div`
 			font-weight: 400;
 			display: flex;
 			align-items: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
-			> svg {
-				margin-right: 4px;
-			}
+      > img,
+      > svg {
+        margin-right: 4px;
+        width: 14px;
+        min-width: 14px;
+      }
 
 			&:not(:last-child) {
 				margin-bottom: 8px;

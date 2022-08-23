@@ -7,16 +7,15 @@ import { Label } from "./styles/requestStyle";
 import { uploadPoster } from "../../apis";
 
 const PosterUploader = () => {
-  const [posters, setPosters] = useState([{ id: 1, url: "", publicUrl: "" }]);
   const [posterUrls, setPosterUrls] = useRecoilState(requestPosterUrlsAtom);
 
   useEffect(() => {
-    const allHasUrl = posters.every((poster) => poster.url);
+    const allHasUrl = posterUrls.every((poster) => poster.publicUrl);
 
-    if (posters.length === 3 && allHasUrl) {
-      setPosters([...posters, { id: posters.length + 1, url: "", publicUrl: "" }]);
+    if (posterUrls.length === 3 && allHasUrl) {
+      setPosterUrls([...posterUrls, { id: posterUrls.length + 1, publicUrl: "" }]);
     }
-  }, [posters]);
+  }, [posterUrls]);
 
   const handleUploadClick = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
     const { files } = e.target;
@@ -26,7 +25,6 @@ const PosterUploader = () => {
     reader.readAsDataURL(files[0]);
 
     reader.onloadend = async () => {
-
       let publicUrl = "";
       await uploadPoster(files[0])
         .then((data) => {
@@ -35,53 +33,45 @@ const PosterUploader = () => {
           }
         });
 
-      const data = reader.result as string;
-      const postersData = posters.map((poster) => {
+      const postersData = posterUrls.map((poster) => {
         if (poster.id === id) {
           return {
             ...poster,
-            url: data,
             publicUrl
           };
         }
         return poster;
       });
 
-      if (posters.length === 4) {
-        setPosters(postersData);
+      if (posterUrls.length === 4) {
+        setPosterUrls(postersData);
         return;
       }
-      console.log([...postersData, { id: posters.length + 1, url: "", publicUrl: "" }]);
-      setPosters([...postersData, { id: posters.length + 1, url: "", publicUrl: "" }]);
+      // console.log([...postersData, { id: posterUrls.length + 1, publicUrl: "" }]);
+      setPosterUrls([...postersData, { id: posterUrls.length + 1, publicUrl: "" }]);
     };
   };
 
   const handleDeletePoster = (id: number) => {
-    const postersData = posters
+    const postersData = posterUrls
       .filter((poster) => poster.id !== id)
       .map((poster, index) => ({ ...poster, id: index + 1 }));
 
-    setPosters(postersData);
+    setPosterUrls(postersData);
   };
-
-  useEffect(() => {
-    const urls = posters.map((p) => p.publicUrl).filter((p) => p !== "");
-
-    setPosterUrls(urls);
-  }, [posters]);
 
   return (
     <StyledPosterUpload>
       <Label>이벤트 포스터 이미지</Label>
 
       <div className="posterWrapper">
-        {posters.map((p, index) => {
+        {posterUrls.map((p, index) => {
           const key = `poster ${index + 1}`;
           return (
             <Poster key={key}>
-              {p.url ? (
+              {p.publicUrl ? (
                 <div className="imgWrapper">
-                  <img src={p.url} alt={key} />
+                  <img src={p.publicUrl} alt={key} />
                   <Icon name="delete-circle-white" handleClick={() => handleDeletePoster(p.id)} />
                 </div>
               ) : (

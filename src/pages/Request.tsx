@@ -46,7 +46,7 @@ const Request = () => {
 			district: placeInputs.district,
 			startAt: dateRange.startAt,
 			endAt: dateRange.endAt,
-			images: posterUrls,
+			images: posterUrls.map((poster) => poster.publicUrl),
 			requestedBiases: artistInputs.map((artist) => ({
 				peopleId: artist.peopleId,
 				bias: artist.bias,
@@ -93,7 +93,7 @@ const Request = () => {
 			},
 		]);
 		setBasicInputs({ organizer: "", snsId: "", link: "" });
-		setPosterUrls([]);
+		setPosterUrls([{ id: 1, publicUrl: "" }]);
 		setHashTags([{ id: 1, text: "" }]);
 		setDateRange({
 			startAt: "",

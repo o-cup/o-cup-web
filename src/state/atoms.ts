@@ -2,12 +2,6 @@ import { atom } from "recoil";
 import { convertDateToString } from "../shared/utils/dateHandlers";
 import { sessionAtom } from "./recoilUtils";
 
-export const savedPageAtom = atom<number | null>({
-  key: "savedPageAtom",
-  default: null,
-  effects: [sessionAtom],
-});
-
 const today = new Date();
 
 export const dateFilterAtom = atom({

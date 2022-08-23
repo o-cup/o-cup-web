@@ -8,7 +8,7 @@ function Location({ address }: Partial<DetailType>) {
 		<StyledLocation>
 			<h4>위치</h4>
 			<Map address={address} />
-			<p>{address}</p>
+			<p>{address || "카페 주소"}</p>
 		</StyledLocation>
 	);
 }

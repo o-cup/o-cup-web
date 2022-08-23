@@ -7,11 +7,13 @@ function Map({ address }: Partial<DetailType>) {
 
 	const container = useRef<HTMLDivElement>(null);
 
+	const searchAddress = address || "서울 중구 세종대로 110";
+
 	const onLoadKakaoMap = () => {
 		kakao.maps.load(() => {
 			const mapOption = {
 				center: new kakao.maps.LatLng(127.044754852849, 37.5491962171866), // 지도의 중심좌표
-				level: 2, // 지도의 확대 레벨
+				level: address ? 2 : 40, // 지도의 확대 레벨
 			};
 
 			// 지도를 생성합니다
@@ -21,7 +23,7 @@ function Map({ address }: Partial<DetailType>) {
 			const geocoder = new kakao.maps.services.Geocoder();
 
 			// 주소로 좌표를 검색합니다
-			geocoder.addressSearch(address, (result: any, status: any) => {
+			geocoder.addressSearch(searchAddress, (result: any, status: any) => {
 				// 정상적으로 검색이 완료됐으면
 				if (status === kakao.maps.services.Status.OK) {
 					const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -35,7 +37,7 @@ function Map({ address }: Partial<DetailType>) {
 					// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 					map.setCenter(coords);
 				} else {
-					console.log(result, status);
+					console.log("Kakao Map:", result);
 				}
 			});
 		});

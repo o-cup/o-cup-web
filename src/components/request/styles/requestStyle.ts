@@ -24,13 +24,14 @@ const StyledEntry = styled.div`
     gap: 10px;
     font-size: 12px;
     width: 100%;
+    font-weight: 400;
 
     p:first-child {
       width: 133px;
       height: 28px;
       background-color: ${({ theme }) => theme.colors.black};
       color: ${({ theme }) => theme.colors.white};
-      font-weight: bold;
+      font-weight: 700;
       border-radius: 30px;
       text-align: center;
       line-height: 28px;
@@ -39,6 +40,10 @@ const StyledEntry = styled.div`
     p:not(:first-child) {
       line-height: 16px;
     }
+
+    b {
+      font-weight: 700;
+    }
   }
 
   .inputsWrapper {
@@ -46,19 +51,6 @@ const StyledEntry = styled.div`
     flex-direction: column;
     gap: 30px;
     width: 100%;
-
-    .hashTags {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-
-      .iconWrapper {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-      }
-    }
   }
 
   > .ctaContainer {
@@ -79,8 +71,8 @@ const Label = styled.label<{ hideLabel?: boolean }>`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-	position: relative;
-	display: ${(props) => (props.hideLabel ? "none" : "")};
+  position: relative;
+  display: ${(props) => (props.hideLabel ? "none" : "")};
 `;
 
 const StyledPreview = styled.div`
@@ -92,7 +84,7 @@ const StyledPreview = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
-  
+
   .previewContent {
     width: 100%;
   }
@@ -112,7 +104,7 @@ const StyledRequestModal = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
   border-radius: 4px;
   padding: 20px;
-  
+
   > h4 {
     font-weight: 700;
     font-size: 24px;
@@ -143,7 +135,7 @@ const StyledRequestModal = styled.div`
       padding: 6px 12px;
     }
   }
-`
+`;
 
 export { StyledRequest, StyledEntry, StyledPreview, Label, StyledRequestModal };
 export default {};

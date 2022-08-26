@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import { requestHashTagsAtom } from "../../state/atoms";
 import BasicInput from "./BasicInput";
 import Icon from "../../shared/components/Icon/Icons";
+import { StyledHashTagsInputsContainer } from "./styles/hashTagsStyle";
 
 const HashTagsContainer = () => {
   const [hashTags, setHashTags] = useRecoilState(requestHashTagsAtom);
@@ -15,7 +16,7 @@ const HashTagsContainer = () => {
       if (tag.id === hashTagId) {
         return {
           ...tag,
-          text: value
+          text: value,
         };
       }
       return tag;
@@ -25,7 +26,7 @@ const HashTagsContainer = () => {
 
   const handleAddHashTag = () => {
     if (hashTags.length > 3) return;
-    setHashTags((prev) => [...prev, { id: hashTags.length + 1, text: "" }]);
+    setHashTags((prev) => [...prev, { id: hashTags[hashTags.length - 1].id + 1, text: "" }]);
   };
 
   const handleInputDelete = (e: React.MouseEvent, hashTagId?: number) => {
@@ -33,7 +34,7 @@ const HashTagsContainer = () => {
       if (tag.id === hashTagId) {
         return {
           ...tag,
-          text: ""
+          text: "",
         };
       }
       return tag;
@@ -41,24 +42,29 @@ const HashTagsContainer = () => {
     setHashTags(hashTagsData);
   };
 
+  const handleDeleteHashTag = (hashTagId: number) => {
+    const hashTagsData = hashTags.filter((tag) => tag.id !== hashTagId);
+    setHashTags(hashTagsData);
+  };
+
   return (
-    <div className="hashTags">
-      {hashTags.map((t) => (
+    <StyledHashTagsInputsContainer>
+      {hashTags.map((t) => (<div key={t.id} className="hashTagsInputs">
         <BasicInput
-          key={t.id}
           label="이벤트 해시태그"
           value={t.text}
           id="hashTag"
-          placeholder={t.id === 1 ? "해피_오컵_데이" : ""}
+          placeholder="해피_오컵_데이"
           handleInputChange={(e) => handleInputChange(e, t.id)}
           handleInputDelete={(e) => handleInputDelete(e, t.id)}
           hideLabel={t.id !== 1}
         />
-      ))}
-      <div className="iconWrapper">
+        {t.id !== 1 && <Icon name="minus-circle" handleClick={() => handleDeleteHashTag(t.id)} />}
+      </div>))}
+      {hashTags.length < 4 && <div className="iconWrapper">
         <Icon name="plus-circle" handleClick={handleAddHashTag} />
-      </div>
-    </div>
+      </div>}
+    </StyledHashTagsInputsContainer>
   );
 };
 

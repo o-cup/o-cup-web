@@ -59,6 +59,10 @@ const Result = ({ keyword }: ResultProps) => {
 
 			<div className="chips">
 				<Chip text="안녕하세요." bgColor="primary" handleDelete={() => console.log("hi")} />
+				<Chip text="안녕하세요." bgColor="primary" handleDelete={() => console.log("hi")} />
+				<Chip text="안녕하세요." bgColor="primary" handleDelete={() => console.log("hi")} />
+				<Chip text="안녕하세요." bgColor="primary" handleDelete={() => console.log("hi")} />
+				<Chip text="안녕하세요." bgColor="primary" handleDelete={() => console.log("hi")} />
 			</div>
 
 			<div className="events">

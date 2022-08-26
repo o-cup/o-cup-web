@@ -29,11 +29,17 @@ export const StyledResult = styled.div`
 	}
 
 	.chips {
-		border: 1px solid red;
 		height: 58px;
 
 		display: flex;
 		align-items: center;
+		gap: 10px;
+
+		overflow-x: scroll;
+
+		::-webkit-scrollbar {
+			display: none;
+		}
 	}
 
 	.events {

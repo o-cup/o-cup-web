@@ -23,6 +23,7 @@ export const StyledChip = styled.span.attrs(({ customStyle }: StyledChipProps) =
 	align-items: center;
 
 	background-color: ${(props) => props.theme.colors[props.bgColor]};
+	white-space: nowrap;
 
 	i.delete {
 		width: 14px;

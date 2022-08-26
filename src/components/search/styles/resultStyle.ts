@@ -29,12 +29,9 @@ export const StyledResult = styled.div`
 	}
 
 	.chips {
-		height: 58px;
-
 		display: flex;
-		align-items: center;
 		gap: 10px;
-
+		padding: 5px 0;
 		overflow-x: scroll;
 
 		::-webkit-scrollbar {

@@ -57,3 +57,9 @@ export type FetchEventParams = {
 export type CustomStyleType = ReturnType<typeof css> | React.CSSProperties;
 
 export type ColorsType = "white" | "black" | "gray" | "primary";
+
+export type DateRangeType = {
+	startDate: Date;
+	endDate: Date;
+	key: string;
+};

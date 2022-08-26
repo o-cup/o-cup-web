@@ -1,27 +1,34 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { format } from "date-fns";
 import Modal from "../../shared/components/Modal";
 import Calendar from "../../shared/components/Calendar";
 import DistrictSelector from "./DistrictSelector";
-
-type SearchModalProps = {
-	type: "calendar" | "districtSelector";
-	setCalendarOpen: Dispatch<SetStateAction<boolean>>;
-	setDisctrictSelectorOpen: Dispatch<SetStateAction<boolean>>;
-};
+import { DateRangeType } from "../../types";
+import { SearchModalProps } from "./types";
+import { dateRangeAtom } from "../../state";
 
 const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: SearchModalProps) => {
-	const [selectedRange, setSelectedRange] = useState({
+	const setDateRange = useSetRecoilState(dateRangeAtom);
+	const [selectedRange, setSelectedRange] = useState<DateRangeType>({
 		startDate: new Date(),
 		endDate: new Date(),
 		key: "selection",
 	});
 
-	const handleSelectRange = (ranges: any) => {
-		setSelectedRange(ranges.selection);
+	const handleSelectRange = ({ selection }: { selection: DateRangeType }) => {
+		setSelectedRange(selection);
 	};
 
 	const handleSubmit = ({ modal }: { modal: "district" | "dateRange" }) => {
 		if (modal === "dateRange") {
+			const { startDate, endDate } = selectedRange;
+
+			setDateRange((prev) => ({
+				...prev,
+				startDate: format(startDate, "yyyyMMdd"),
+				endDate: format(endDate, "yyyyMMdd"),
+			}));
 			setCalendarOpen(false);
 			return;
 		}
@@ -34,7 +41,6 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 	const conditionalRender = () => {
 		let elements;
 
-		// TODO: 날짜 범위 선택
 		switch (type) {
 			case "calendar":
 				elements = (

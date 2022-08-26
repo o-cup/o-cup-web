@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { fetchEvents } from "../../apis";
 import { StyledResult } from "./styles/resultStyle";
 import Event from "./Event";
@@ -7,6 +8,8 @@ import Button from "../../shared/components/Button";
 import { FilterIcon, SortIcon } from "../../shared/components";
 import SearchModal from "./SearchModal";
 import Chip from "../../shared/components/Chip";
+import { dateRangeAtom } from "../../state";
+import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 
 type ResultProps = {
 	keyword: string;
@@ -19,13 +22,25 @@ const sortOptions = {
 };
 
 const Result = ({ keyword }: ResultProps) => {
+	const [dateRange, setDateRange] = useRecoilState(dateRangeAtom);
+	const { startDate, endDate } = dateRange;
 	const [sortOpen, setSortOpen] = useState(false);
 	const [filterOpen, setFilterOpen] = useState(false);
-
 	const [calendarOpen, setCalendarOpen] = useState(false);
 	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
+	const isModalOpen = calendarOpen || districtSelectorOpen;
+	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
+
+	const [chips, setChips] = useState({ dateChip: "", distChips: [] });
 
 	const { data: events } = useQuery("resultEvents", () => fetchEvents({ keyword }));
+
+	useEffect(() => {
+		if (!startDate) return;
+
+		const dateText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
+		setChips((prev) => ({ ...prev, dateChip: dateText }));
+	}, [startDate, endDate]);
 
 	useEffect(() => {
 		if (sortOpen) {
@@ -39,7 +54,16 @@ const Result = ({ keyword }: ResultProps) => {
 		}
 	}, [filterOpen]);
 
-	const isModalOpen = calendarOpen || districtSelectorOpen;
+	const handleDeleteChip = ({ type }: { type: "date" | "district" }) => {
+		if (type === "date") {
+			setChips((prev) => ({ ...prev, dateChip: "" }));
+			setDateRange((prev) => ({ ...prev, startDate: "", endDate: "" }));
+		}
+	};
+
+	// TODO: 날짜 검색 결과 적용
+
+	const chip = chips.dateChip || chips.distChips.length > 0;
 
 	return (
 		<StyledResult>
@@ -57,13 +81,13 @@ const Result = ({ keyword }: ResultProps) => {
 				</div>
 			</div>
 
-			<div className="chips">
-				<Chip text="안녕하세요." bgColor="primary" handleDelete={() => console.log("hi")} />
-				<Chip text="안녕하세요." bgColor="primary" handleDelete={() => console.log("hi")} />
-				<Chip text="안녕하세요." bgColor="primary" handleDelete={() => console.log("hi")} />
-				<Chip text="안녕하세요." bgColor="primary" handleDelete={() => console.log("hi")} />
-				<Chip text="안녕하세요." bgColor="primary" handleDelete={() => console.log("hi")} />
-			</div>
+			{chip && (
+				<div className="chips">
+					{chips.dateChip && (
+						<Chip text={dateChipText} bgColor="primary" handleDelete={() => handleDeleteChip({ type: "date" })} />
+					)}
+				</div>
+			)}
 
 			<div className="events">
 				{events?.map((event) => (

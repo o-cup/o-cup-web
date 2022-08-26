@@ -8,15 +8,15 @@ import { StyledHashTagsInputsContainer } from "./styles/hashTagsStyle";
 const HashTagsContainer = () => {
   const [hashTags, setHashTags] = useRecoilState(requestHashTagsAtom);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, hashTagId?: number) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, hashTagId: number) => {
     const { value } = e.currentTarget;
+    const addDash = value.replace(/\s+/g, "_");
 
-    // TODO: 띄어쓰기 입력 시 자동으로 _ 입력되도록 구현 검토
     const hashTagsData = hashTags.map((tag) => {
       if (tag.id === hashTagId) {
         return {
           ...tag,
-          text: value,
+          text: addDash,
         };
       }
       return tag;
@@ -29,7 +29,7 @@ const HashTagsContainer = () => {
     setHashTags((prev) => [...prev, { id: hashTags[hashTags.length - 1].id + 1, text: "" }]);
   };
 
-  const handleInputDelete = (e: React.MouseEvent, hashTagId?: number) => {
+  const handleInputDelete = (e: React.MouseEvent, hashTagId: number) => {
     const hashTagsData = hashTags.map((tag) => {
       if (tag.id === hashTagId) {
         return {

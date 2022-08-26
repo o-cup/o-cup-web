@@ -1,7 +1,8 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+import { CustomStyleType } from "../../../types";
 
 type ButtonProps = {
-	customStyle?: ReturnType<typeof css> | React.CSSProperties;
+	customStyle?: CustomStyleType;
 };
 
 export const StyledButton = styled.button.attrs(({ customStyle }: ButtonProps) => ({

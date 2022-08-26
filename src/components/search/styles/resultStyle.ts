@@ -28,6 +28,14 @@ export const StyledResult = styled.div`
 		}
 	}
 
+	.chips {
+		border: 1px solid red;
+		height: 58px;
+
+		display: flex;
+		align-items: center;
+	}
+
 	.events {
 		display: flex;
 		gap: 10px;

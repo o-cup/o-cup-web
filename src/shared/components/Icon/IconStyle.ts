@@ -35,15 +35,15 @@ export const StyledIcon = styled.i`
 		width: 20px;
 	}
 
-  &.delete-circle-black {
-    display: flex;
-    background: url("/images/icons/delete-circle_black.png") no-repeat;
-    background-size: contain;
-    height: 20px;
-    width: 20px;
-  }
+	&.delete-circle-black {
+		display: flex;
+		background: url("/images/icons/delete-circle_black.png") no-repeat;
+		background-size: contain;
+		height: 20px;
+		width: 20px;
+	}
 
-  &.search {
+	&.search {
 		display: flex;
 		background: url("/images/icons/search.png") no-repeat;
 		background-size: contain;

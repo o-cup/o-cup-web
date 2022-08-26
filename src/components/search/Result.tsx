@@ -6,6 +6,7 @@ import Event from "./Event";
 import Button from "../../shared/components/Button";
 import { FilterIcon, SortIcon } from "../../shared/components";
 import SearchModal from "./SearchModal";
+import Chip from "../../shared/components/Chip";
 
 type ResultProps = {
 	keyword: string;
@@ -39,15 +40,11 @@ const Result = ({ keyword }: ResultProps) => {
 	}, [filterOpen]);
 
 	const isModalOpen = calendarOpen || districtSelectorOpen;
-	console.log("districtSelectorOpen", districtSelectorOpen);
 
-	// console.log("isModalOpen", isModalOpen);
-
-	// TODO: 데스크탑 반응형 처리
 	return (
 		<StyledResult>
 			<div className="menu">
-				<p>{`검색 결과 총 ${events?.length}개`}</p>
+				<p>{`검색 결과 총 ${events?.length || 0}개`}</p>
 				<div className="icons">
 					{/* <Icon name="place " /> */}
 					<FilterIcon
@@ -58,6 +55,10 @@ const Result = ({ keyword }: ResultProps) => {
 					/>
 					<SortIcon options={sortOptions} isOpened={sortOpen} setIsOpened={setSortOpen} />
 				</div>
+			</div>
+
+			<div className="chips">
+				<Chip text="안녕하세요." bgColor="primary" handleDelete={() => console.log("hi")} />
 			</div>
 
 			<div className="events">

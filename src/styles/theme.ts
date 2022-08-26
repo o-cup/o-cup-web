@@ -22,6 +22,12 @@ const theme: DefaultTheme = {
 	heights: {
 		header: "76px",
 	},
+	zIndex: {
+		imageCarousel: 9,
+		header: 10,
+		bottomSheet: 89, // memo: css 파일에 있어서 직접 입력함
+		modal: 99,
+	},
 };
 
 export type ThemeType = { theme: typeof theme };

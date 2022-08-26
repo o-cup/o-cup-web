@@ -98,5 +98,52 @@ const StyledPreview = styled.div`
   }
 `;
 
-export { StyledRequest, StyledEntry, StyledPreview, Label };
+const StyledRequestModal = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 340px;
+  border: 2px solid #000;
+  background-color: ${({ theme }) => theme.colors.primary};
+  border-radius: 4px;
+  padding: 20px;
+  
+  > h4 {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+  }
+
+  > p {
+    margin-top: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+  }
+
+  .modalBtnContainer {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+
+    > button {
+      background: ${({ theme }) => theme.colors.white};
+      border: 1px solid #000000;
+      border-radius: 30px;
+      box-shadow: 0 4px 0 #000000;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+      padding: 6px 12px;
+    }
+  }
+`
+
+export { StyledRequest, StyledEntry, StyledPreview, Label, StyledRequestModal };
 export default {};

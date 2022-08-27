@@ -26,11 +26,6 @@ const GlobalStyle = createGlobalStyle<ThemeType>`
     &.fixed {
       overflow: hidden;
     }
-
-    &::-webkit-scrollbar {
-			display: none;
-		}
-
   }
 
   input, textarea, select {

@@ -1,4 +1,3 @@
-import { dateRangeAtom } from "./atoms";
+import { dateRangeAtom, districtAtom } from "./atoms";
 
-export { dateRangeAtom };
-export default {};
+export { dateRangeAtom, districtAtom };

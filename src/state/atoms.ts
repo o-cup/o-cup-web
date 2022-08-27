@@ -88,4 +88,9 @@ export const dateRangeAtom = atom<{ startDate: string; endDate: string }>({
 	},
 });
 
+export const districtAtom = atom<string[]>({
+	key: "districtAtom",
+	default: [],
+});
+
 export default {};

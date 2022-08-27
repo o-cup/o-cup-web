@@ -11,6 +11,7 @@ const theme: DefaultTheme = {
 		white: "#fff",
 		black: "#000",
 		gray: "#7a7a7a",
+		red: "#CF0000",
 	},
 	device: {
 		mobile: "screen and (max-width: 720px)",

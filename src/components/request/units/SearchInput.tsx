@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledSearchInput, InputWrapper, Label } from "./styles/searchInputStyle";
+import { StyledSearchInput, InputWrapper, Label } from "./searchInputStyle";
 
 export type InputProps = {
 	value: string;

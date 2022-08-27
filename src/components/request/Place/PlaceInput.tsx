@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useRecoilState } from "recoil";
-import { requestPlaceAtom } from "../../state/atoms";
-import { StyledPlaceInput } from "./styles/placeInputStyle";
-import { StyledSearchListContainer, StyledSearchList } from "./styles/searchListStyle";
-import SearchInput from "./SearchInput";
+import { requestPlaceAtom } from "../../../state/atoms";
+import { StyledPlaceInput } from "./placeInputStyle";
+import { StyledSearchListContainer, StyledSearchList } from "../units/searchListStyle";
+import SearchInput from "../units/SearchInput";
 
 type KakaoResult = {
   id: string; // "1376253571"

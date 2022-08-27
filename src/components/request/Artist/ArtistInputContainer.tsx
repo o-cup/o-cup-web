@@ -1,7 +1,7 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { requestArtistsAtom } from "../../state/atoms";
-import { StyledArtistContainer } from "./styles/artistInputStyle";
+import { requestArtistsAtom } from "../../../state/atoms";
+import { StyledArtistContainer } from "./artistInputStyle";
 import ArtistInput from "./ArtistInput";
 
 const ArtistInputContainer = () => {

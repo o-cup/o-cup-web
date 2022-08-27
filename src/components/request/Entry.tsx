@@ -2,16 +2,17 @@ import React, { Dispatch, SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { requestBasicAtom } from "../../state/atoms";
-import Button from "../../shared/components/Button";
-import BasicInput from "./BasicInput";
-import PosterUploader from "./PosterUploader";
 import { StyledEntry, StyledRequestModal } from "./styles/requestStyle";
-import PlaceInput from "./PlaceInput";
-import ArtistInputContainer from "./ArtistInputContainer";
-import GoodsInputContainer from "./GoodsInputContainer";
-import HashTagsContainer from "./HashTagsContainer";
-import DateRangeInput from "./DateRangeInput";
+import Button from "../../shared/components/Button";
+import BasicInput from "./units/BasicInput";
+import PosterUploader from "./Poster/PosterUploader";
+import PlaceInput from "./Place/PlaceInput";
+import ArtistInputContainer from "./Artist/ArtistInputContainer";
+import GoodsInputContainer from "./Goods/GoodsInputContainer";
+import HashTagsContainer from "./HashTags/HashTagsContainer";
+import DateRangeInput from "./DateRange/DateRangeInput";
 import Modal from "../../shared/components/Modal";
+import FcfsGoodsInput from "./FcfsGoods/FcfsGoodsInput";
 
 type EntryProps = {
 	isModalOpen: boolean;
@@ -94,6 +95,7 @@ const Entry = ({ isModalOpen, setModalOpen, setBottomSheetOpen, handleSubmit, re
 						handleInputChange={(e) => handleInputChange(e, "link")}
 						handleInputDelete={(e) => handleInputDelete(e, "link")}
 					/>
+					<FcfsGoodsInput />
 					<GoodsInputContainer />
 				</div>
 

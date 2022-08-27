@@ -110,6 +110,7 @@ const StyledInputWrapper = styled.div`
 
 const StyledChipContainer = styled.ul`
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 6px;

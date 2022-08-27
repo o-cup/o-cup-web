@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useQuery } from "react-query";
-import { fetchPeople } from "../../apis";
-import { StyledArtistInput } from "./styles/artistInputStyle";
-import { StyledSearchListContainer, StyledSearchList } from "./styles/searchListStyle";
-import { DeleteBtn } from "./styles/basicInputStyle";
-import SearchInput from "./SearchInput";
-import { PeopleType } from "../../types";
+import { fetchPeople } from "../../../apis";
+import { StyledArtistInput } from "./artistInputStyle";
+import { StyledSearchListContainer, StyledSearchList } from "../units/searchListStyle";
+import { DeleteBtn } from "../units/basicInputStyle";
+import SearchInput from "../units/SearchInput";
+import { PeopleType } from "../../../types";
 
 export type ArtistValues = {
   id: number;

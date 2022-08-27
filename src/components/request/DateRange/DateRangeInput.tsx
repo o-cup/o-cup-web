@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { DateRange } from "react-date-range-ts";
 import { ko } from "date-fns/locale";
 import { useRecoilState } from "recoil";
-import { requestDateRangeAtom } from "../../state/atoms";
+import { requestDateRangeAtom } from "../../../state/atoms";
 import "react-date-range-ts/dist/styles.css";
-import "./styles/request-calendar-custom.css";
-import { StyledDateRangeInput, StyledCalendarContainer } from "./styles/dateRangeInputStyle";
-import { convertDateToString, convertDateWithDots, convertStringToDate } from "../../shared/utils/dateHandlers";
+import "./request-calendar-custom.css";
+import { StyledDateRangeInput, StyledCalendarContainer } from "./dateRangeInputStyle";
+import { convertDateToString, convertDateWithDots, convertStringToDate } from "../../../shared/utils/dateHandlers";
 
 const DateRangeInput = () => {
 	const [dateRange, setDateRange] = useRecoilState(requestDateRangeAtom);

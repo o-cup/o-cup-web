@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { requestPosterUrlsAtom } from "../../state/atoms";
-import Icon from "../../shared/components/Icon/Icons";
-import { Poster, StyledPosterUpload } from "./styles/posterUploadStyle";
-import { Label } from "./styles/requestStyle";
-import { uploadPoster } from "../../apis";
+import { requestPosterUrlsAtom } from "../../../state/atoms";
+import Icon from "../../../shared/components/Icon/Icons";
+import { Poster, StyledPosterUpload } from "./posterUploadStyle";
+import { Label } from "../styles/requestStyle";
+import { uploadPoster } from "../../../apis";
 
 const PosterUploader = () => {
   const [posterUrls, setPosterUrls] = useRecoilState(requestPosterUrlsAtom);

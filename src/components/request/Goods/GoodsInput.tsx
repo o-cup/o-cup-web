@@ -4,10 +4,10 @@ import {
   StyledSelectWrapper,
   StyledInputWrapper,
   StyledChipContainer
-} from "./styles/goodsInputStyle";
-import { StyledSearchListContainer, StyledSearchList } from "./styles/searchListStyle";
-import EditableGoodsChip from "../../shared/components/EditableGoodsChip";
-import Icon from "../../shared/components/Icon/Icons";
+} from "./goodsInputStyle";
+import { StyledSearchListContainer, StyledSearchList } from "../units/searchListStyle";
+import EditableGoodsChip from "../../../shared/components/EditableGoodsChip";
+import Icon from "../../../shared/components/Icon/Icons";
 
 type GoodsValues = {
   id: number;
@@ -32,11 +32,11 @@ const options = [
   },
   {
     id: 2,
-    value: "선착특전"
+    value: "스페셜특전"
   },
   {
     id: 3,
-    value: "스페셜특전"
+    value: "기념일특전(생일특전, 당일특전 등)"
   }
 ];
 
@@ -100,7 +100,7 @@ const GoodsInput = ({ value, handleChangeGoods }: InputProps) => {
 
   return (
     <StyledGoodsInput>
-      {value.id === 1 && <span className="label">특전 정보</span>}
+      {value.id === 1 && <span className="label">일반특전</span>}
       {isDirectInputOpen ?
         <StyledInputWrapper>
           <input value={value.title} placeholder="특전 종류를 입력해주세요. (예: 마카롱특전)"

@@ -98,6 +98,30 @@ export const StyledIcon = styled.i`
 		height: 24px;
 		width: 24px;
 	}
+
+  &.check_true {
+    display: flex;
+    background: url("/images/icons/check_true.png") no-repeat;
+    background-size: contain;
+    height: 20px;
+    width: 20px;
+  }
+  
+  &.check_false {
+    display: flex;
+    background: url("/images/icons/check_false.png") no-repeat;
+    background-size: contain;
+    height: 20px;
+    width: 20px;
+  }
+  
+  &.check_blank {
+    display: flex;
+    background: url("/images/icons/check_blank.png") no-repeat;
+    background-size: contain;
+    height: 20px;
+    width: 20px;
+  }
 `;
 
 export default {};

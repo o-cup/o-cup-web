@@ -1,9 +1,9 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { requestHashTagsAtom } from "../../state/atoms";
-import BasicInput from "./BasicInput";
-import Icon from "../../shared/components/Icon/Icons";
-import { StyledHashTagsInputsContainer } from "./styles/hashTagsStyle";
+import { requestHashTagsAtom } from "../../../state/atoms";
+import BasicInput from "../units/BasicInput";
+import Icon from "../../../shared/components/Icon/Icons";
+import { StyledHashTagsInputsContainer } from "./hashTagsStyle";
 
 const HashTagsContainer = () => {
   const [hashTags, setHashTags] = useRecoilState(requestHashTagsAtom);

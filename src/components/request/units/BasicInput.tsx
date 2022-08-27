@@ -1,6 +1,6 @@
 import React from "react";
-import { DeleteBtn, InputWrapper, StyledBasicInput } from "./styles/basicInputStyle";
-import { Label } from "./styles/requestStyle";
+import { DeleteBtn, InputWrapper, StyledBasicInput } from "./basicInputStyle";
+import { Label } from "../styles/requestStyle";
 
 export type InputProps = {
 	value: string;

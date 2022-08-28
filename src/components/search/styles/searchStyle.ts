@@ -19,6 +19,7 @@ export const StyledFilter = styled.div`
 		display: flex;
 		padding: 16px 0 16px 0;
 		position: relative;
+		justify-content: space-between;
 
 		div.sort {
 			display: flex;

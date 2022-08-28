@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { StyledFcfsGoodsInput } from "./fcfsGoodsInputStyle";
+import {
+  StyledFcfsContentContainer,
+  StyledFcfsGoodsInput,
+  StyledFcfsTitle,
+  StyledFcfsTypeSelector,
+} from "./fcfsGoodsInputStyle";
 import { requestDateRangeAtom } from "../../../state/atoms";
 import Icons from "../../../shared/components/Icon/Icons";
 import { getDatesInRange } from "../../../shared/utils/dateHandlers";
-import { StyledChipContainer } from "../Goods/goodsInputStyle";
 import EditableGoodsChip from "../../../shared/components/EditableGoodsChip";
 
 const TYPE = [
@@ -13,48 +17,58 @@ const TYPE = [
   { key: "C", content: "기념일에만\n달라요" },
 ];
 
-// 선착 타입 A: 매일 같음
-const DefaultTypeA = { type: "A", items: [{ id: 1, text: "" }] };
+const TYPE_C = { others: "매일", dDay: "기념일" };
 
-// 선착 타입 B: 날짜별로 다름
-const DefaultTypeB = { type: "B", data: [{ day: 0, items: [{ id: 1, text: "" }] }] };
-
-// 선착 타입 C: 기념일만 다름
-const DefaultTypeC = { type: "C", items: { dDay: [{ id: 1, text: "" }], others: [{ id: 1, text: "" }] } };
-
-type items = {
+type ItemsType = {
   id: number,
   text: string
 }
 
-type typeA = {
-  type: "A"
-  items: items[]
+type DataType = {
+  key?: string,
+  day?: number,
+  items: ItemsType[]
 }
 
-type typeB = {
-  type: "B"
-  data: { day: number, items: items[] }[]
+type FcfsType = {
+  type: "A" | "B" | "C",
+  data: DataType[]
 }
 
-type typeC = {
-  type: "C"
-  items: { dDay: items[], others: items[] }
-}
+// 선착 타입 A: 매일 같음
+const DefaultTypeA: FcfsType = {
+  type: "A",
+  data: [{ items: [{ id: 1, text: "" }] }],
+};
+
+// 선착 타입 B: 날짜별로 다름
+const DefaultTypeB: FcfsType = {
+  type: "B",
+  data: [{ day: 0, items: [{ id: 1, text: "" }] }],
+};
+
+// 선착 타입 C: 기념일만 다름
+const DefaultTypeC: FcfsType = {
+  type: "C",
+  data: [
+    { key: "others", items: [{ id: 1, text: "" }] },
+    { key: "dDay", items: [{ id: 1, text: "" }] },
+  ],
+};
 
 const FcfsGoodsInput = () => {
   const dateRange = useRecoilValue(requestDateRangeAtom);
 
   const [hasDateRange, setHasDateRange] = useState(dateRange.startAt && dateRange.endAt);
+
   /**
    * A: 매일 동일해요
    * B: 날짜별로 달라요
    * C: 기념일에만 달라요
-   * X: 선착특전 없음(DB에 데이터 전송 시 선착순 정보 빈 배열로 처리)
+   * X: 선착특전 없음(fcfsList === {})
    * */
   const [type, setType] = useState(""); // "A" | "B" | "C" | "X"
-
-  const [tempState, setTempState] = useState({} as typeA | typeB | typeC);
+  const [fcfsList, setFcfsList] = useState({} as FcfsType);
 
   // 날짜 변경에 맞춰 DefaultTypeB에 날짜입력
   useEffect(() => {
@@ -71,9 +85,24 @@ const FcfsGoodsInput = () => {
       <Icons name="check_false" />;
   };
 
+  useEffect(() => {
+    if (type === "A") {
+      setFcfsList(DefaultTypeA);
+    }
+    if (type === "B") {
+      setFcfsList(DefaultTypeB);
+    }
+    if (type === "C") {
+      setFcfsList(DefaultTypeC);
+    }
+    if (type === "X") {
+      setFcfsList({} as FcfsType);
+    }
+  }, [type]);
+
   return (
     <StyledFcfsGoodsInput>
-      <div className="fcfsTitle">
+      <StyledFcfsTitle>
         <span className="label">선착특전</span>
         <div className={`checkOpen ${hasDateRange ? "active" : ""} ${type === "X" ? "selected" : "notSelected"}`}>
           <button type="button" onClick={() => type === "X" ? setType("") : setType("X")}>
@@ -81,9 +110,9 @@ const FcfsGoodsInput = () => {
             선착특전 없음
           </button>
         </div>
-      </div>
+      </StyledFcfsTitle>
 
-      <div className={`typeSelector ${hasDateRange ? "active" : ""}`}>
+      <StyledFcfsTypeSelector className={`${hasDateRange ? "active" : ""}`}>
         {TYPE.map((t) =>
           <button type="button" key={t.key}
                   className={`typeButton ${type === t.key ? "selected" : "notSelected"}`}
@@ -91,19 +120,60 @@ const FcfsGoodsInput = () => {
             {renderCheckbox(t.key)}
             {t.content}
           </button>)}
-      </div>
+      </StyledFcfsTypeSelector>
 
-      {type === "A" && <StyledChipContainer>
-        <span className="highlight">매일</span>
-        {/* {tempState.type === "A" &&
-          tempState.items.map((g) =>
-            <EditableGoodsChip key={g.id} index={g.id} value={g.text}
-                               handleChange={(e) => console.log(e)}
-                               handleDelete={() => console.log("ddd")} />)} */}
-        <button type="button" className="chipAddButton">
-          <i className="plus" />
-        </button>
-      </StyledChipContainer>}
+      {/** 매일 동일해요 */}
+      {fcfsList.type === "A" && fcfsList.data && fcfsList.data[0] &&
+        <StyledFcfsContentContainer>
+          <div className="highlight">매일</div>
+          <div className="chipContainer">
+            {fcfsList.data[0].items.map((g) =>
+              <EditableGoodsChip key={g.id} index={g.id} value={g.text}
+                                 handleChange={(e) => console.log(e)}
+                                 handleDelete={() => console.log("delete")} />)
+            }
+            <button type="button" className="chipAddButton">
+              <i className="plus" />
+            </button>
+          </div>
+        </StyledFcfsContentContainer>
+      }
+
+      {/** 날짜별로 달라요 */}
+      {fcfsList.type === "B" && fcfsList.data &&
+        fcfsList.data.map((obj) =>
+          <StyledFcfsContentContainer key={obj.day}>
+            <div className="highlight">{obj.day}일</div>
+            <div className="chipContainer">
+              {obj.items.map((g) =>
+                <EditableGoodsChip key={g.id} index={g.id} value={g.text}
+                                   handleChange={(e) => console.log(e)}
+                                   handleDelete={() => console.log("delete")} />)}
+              <button type="button" className="chipAddButton">
+                <i className="plus" />
+              </button>
+            </div>
+          </StyledFcfsContentContainer>,
+        )
+      }
+
+      {/** 기념일에만 달라요 */}
+      {fcfsList.type === "C" && fcfsList.data &&
+        fcfsList.data.map((obj: DataType) =>
+          <StyledFcfsContentContainer key={obj.key}>
+            <div className="highlight">{(obj.key === "dDay" || obj.key === "others") && TYPE_C[obj.key]}</div>
+            <div className="chipContainer">
+              {obj.items.map((g) =>
+                <EditableGoodsChip key={g.id} index={g.id} value={g.text}
+                                   handleChange={(e) => console.log(e)}
+                                   handleDelete={() => console.log("delete")} />)}
+              <button type="button" className="chipAddButton">
+                <i className="plus" />
+              </button>
+            </div>
+          </StyledFcfsContentContainer>,
+        )
+      }
 
       <div className="fcfsNotice">
         {!hasDateRange &&

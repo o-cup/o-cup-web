@@ -1,5 +1,4 @@
 import { atom } from "recoil";
-import { DateRangeType } from "../types";
 import { convertDateToString } from "../shared/utils/dateHandlers";
 import { sessionAtom } from "./recoilUtils";
 import {
@@ -33,12 +32,12 @@ export const keywordAtom = atom({
 	default: "",
 });
 
-export const dateRangeAtom = atom<DateRangeType>({
-	key: "dateRangeAtom",
-	default: {
-		startDate: "",
-		endDate: "",
-	},
+export const dateRangeAtom = atom<{ startDate: string; endDate: string; }>({
+  key: "dateRangeAtom",
+  default: {
+    startDate: "",
+    endDate: "",
+  },
 });
 
 export const districtAtom = atom<string[]>({

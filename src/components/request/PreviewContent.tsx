@@ -37,12 +37,7 @@ const PreviewContent = () => {
     <TwitterInfo organizer={organizer || "주최자 닉네임"}
                  snsId={snsId || "ocup_official"}
                  hashTags={hashTags[0].text ? hashTags.map((h) => h.text) : ["해피_오컵_데이"]} />
-    {goodsList[0].title ?
-      <GoodsInfo goods={goodsList.map((goodsObj) => ({
-        title: goodsObj.title,
-        items: goodsObj.items.map((i) => i.text).filter((i) => i !== ""),
-      }))} tweetUrl={link} />
-      : <GoodsInfo goods={[{ title: "특전종류", items: [""] }]} tweetUrl={link} />}
+    <GoodsInfo goodsList={{extra: [{ index: 1, title: "특전종류", items: [""] }]}} tweetUrl={link} />
     <Location address={placeInputs.address} />
   </div>);
 };

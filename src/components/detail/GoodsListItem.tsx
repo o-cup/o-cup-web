@@ -1,9 +1,8 @@
 import React from "react";
-import { GoodsItemType } from "../../types";
 import { StyledGoodsListItem } from "./styles/goodsInfoStyle";
 import GoodsChip from "../../shared/components/GoodsChip";
 
-const GoodsListItem = ({ goodsListItem }: { goodsListItem: GoodsItemType }) => {
+const GoodsListItem = ({ goodsListItem }: { goodsListItem: { title: string; items: string[]; }}) => {
 	const { title, items } = goodsListItem;
 
 	return (

@@ -19,8 +19,7 @@ const Detail = () => {
 	);
 
 	if (!combinedDetail) return null;
-	const { place, biasesId, organizer, snsId, startAt, endAt, images, district, address, goods, hashTags, tweetUrl } =
-		combinedDetail;
+	const { place, biasesId, organizer, snsId, startAt, endAt, images, district, address, goodsList, hashTags, tweetUrl } = combinedDetail;
 
 	// TODO: props하나로 묶어서 전달할 수 있도록 리팩토링
 	return (
@@ -41,7 +40,7 @@ const Detail = () => {
 					</div>
 					<div className="subInfo">
 						<TwitterInfo organizer={organizer} snsId={snsId} hashTags={hashTags} />
-						<GoodsInfo goods={goods} tweetUrl={tweetUrl} />
+						<GoodsInfo goodsList={goodsList} tweetUrl={tweetUrl} />
 						<Location address={address} />
 					</div>
 				</div>

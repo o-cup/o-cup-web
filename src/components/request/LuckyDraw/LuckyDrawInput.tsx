@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import React, { useState } from "react";
 import {
   StyledLuckyInput,
   StyledLuckyTitle,
@@ -8,7 +7,6 @@ import {
 import Icons from "../../../shared/components/Icon/Icons";
 import { ItemsType } from "../requestType";
 import EditableGoodsChip from "../../../shared/components/EditableGoodsChip";
-import Icon from "../../../shared/components/Icon/Icons";
 
 const LuckyDrawInput = () => {
 
@@ -50,11 +48,11 @@ const LuckyDrawInput = () => {
                                  handleDelete={() => console.log("delete")} />
             </div>
             {luck.id !== 1 && luck.id === luckyList.length &&
-              <Icon name="subtraction" handleClick={handleDeleteLuck} />}
+              <Icons name="subtraction" handleClick={handleDeleteLuck} />}
           </StyledLuckyContentContainer>)}
 
         <div className="iconWrapper">
-          <Icon name="plus-circle" handleClick={handleAddLuck} />
+          <Icons name="plus-circle" handleClick={handleAddLuck} />
         </div>
       </div>
 

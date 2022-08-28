@@ -1,23 +1,22 @@
 import React from "react";
-import { css } from "styled-components";
+import { CustomStyleType } from "../../../types";
 import { StyledButton } from "./buttonStyle";
 
 type ButtonProps = {
-  children: string;
-  customStyle?: ReturnType<typeof css> | React.CSSProperties;
-  handleClick?: (e: React.FormEvent<HTMLButtonElement>) => void;
+	children: string;
+	customStyle?: CustomStyleType;
+	handleClick?: (e: React.FormEvent<HTMLButtonElement>) => void;
 };
 
 const Button = ({ children, customStyle, handleClick }: ButtonProps) => (
-  <StyledButton customStyle={customStyle}
-                onClick={handleClick}>
-    {children}
-  </StyledButton>
+	<StyledButton customStyle={customStyle} onClick={handleClick}>
+		{children}
+	</StyledButton>
 );
 
 Button.defaultProps = {
-  customStyle: {},
-  handleClick: () => console.log("click!")
+	customStyle: {},
+	handleClick: () => null,
 };
 
 export default Button;

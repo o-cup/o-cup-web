@@ -1,9 +1,11 @@
+import { css } from "styled-components";
+
 export type RequestBias = {
 	id?: number;
 	peopleId: number;
 	bias: string;
 	team: string;
-}
+};
 
 export type EventType = {
 	id: number;
@@ -50,4 +52,14 @@ export type FetchEventParams = {
 	infinite?: boolean;
 	keyword?: string;
 	date?: string;
+};
+
+export type CustomStyleType = ReturnType<typeof css> | React.CSSProperties;
+
+export type ColorsType = "white" | "black" | "gray" | "primary";
+
+export type DateRangeType = {
+	startDate: Date;
+	endDate: Date;
+	key: string;
 };

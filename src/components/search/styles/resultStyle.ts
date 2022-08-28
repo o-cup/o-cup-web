@@ -28,6 +28,17 @@ export const StyledResult = styled.div`
 		}
 	}
 
+	.chips {
+		display: flex;
+		gap: 10px;
+		padding: 5px 0;
+		overflow-x: scroll;
+
+		::-webkit-scrollbar {
+			display: none;
+		}
+	}
+
 	.events {
 		display: flex;
 		gap: 10px;

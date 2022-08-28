@@ -1,40 +1,53 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { format } from "date-fns";
 import Modal from "../../shared/components/Modal";
 import Calendar from "../../shared/components/Calendar";
 import DistrictSelector from "./DistrictSelector";
-
-type SearchModalProps = {
-	type: "calendar" | "districtSelector";
-	setCalendarOpen: Dispatch<SetStateAction<boolean>>;
-	setDisctrictSelectorOpen: Dispatch<SetStateAction<boolean>>;
-};
+import { DateRangeType } from "../../types";
+import { SearchModalProps } from "./types";
+import { dateRangeAtom, districtAtom } from "../../state";
 
 const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: SearchModalProps) => {
-	const [selectedRange, setSelectedRange] = useState({
+	const setDateRange = useSetRecoilState(dateRangeAtom);
+	const setDistricts = useSetRecoilState(districtAtom);
+	const [selectedRange, setSelectedRange] = useState<DateRangeType>({
 		startDate: new Date(),
 		endDate: new Date(),
 		key: "selection",
 	});
+	const [selectedDist, setSelectedDist] = useState<string[]>([]);
 
-	const handleSelectRange = (ranges: any) => {
-		setSelectedRange(ranges.selection);
+	const handleSelectRange = ({ selection }: { selection: DateRangeType }) => {
+		setSelectedRange(selection);
 	};
 
-	const handleSubmit = ({ modal }: { modal: "district" | "dateRange" }) => {
-		if (modal === "dateRange") {
-			setCalendarOpen(false);
-			return;
-		}
+	const handleSubmit = ({ modal }: { modal: "dateRange" | "district" }) => {
+		const { startDate, endDate } = selectedRange;
 
-		if (modal === "district") {
-			setDisctrictSelectorOpen(false);
+		switch (modal) {
+			case "dateRange":
+				setDateRange((prev) => ({
+					...prev,
+					startDate: format(startDate, "yyyyMMdd"),
+					endDate: format(endDate, "yyyyMMdd"),
+				}));
+				setCalendarOpen(false);
+				break;
+
+			case "district":
+				setDistricts(selectedDist);
+				setDisctrictSelectorOpen(false);
+				break;
+
+			default:
+				break;
 		}
 	};
 
 	const conditionalRender = () => {
 		let elements;
 
-		// TODO: 날짜 범위 선택
 		switch (type) {
 			case "calendar":
 				elements = (
@@ -51,7 +64,11 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 			case "districtSelector":
 				elements = (
 					<Modal>
-						<DistrictSelector handleSubmit={() => handleSubmit({ modal: "district" })} />
+						<DistrictSelector
+							selectedDist={selectedDist}
+							setSelectedDist={setSelectedDist}
+							handleSubmit={() => handleSubmit({ modal: "district" })}
+						/>
 					</Modal>
 				);
 				break;

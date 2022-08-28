@@ -9,8 +9,7 @@ export const StyledEvent = styled.div`
 	position: relative;
 	background-color: #fff;
 	box-shadow: 4px 4px 0 #000000;
-
-	min-width: 440px;
+	min-width: 320x;
 
 	img {
 		width: 110px;

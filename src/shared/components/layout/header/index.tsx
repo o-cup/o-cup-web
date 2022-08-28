@@ -30,7 +30,7 @@ const Header = ({ page, share }: HeaderProps) => {
 		<StyledHeader mainPage={mainPage}>
 			<div id="header">
 				{page === "search" || page === "request" ? (
-					<Icon name="arrow-left" />
+					<Icon name="arrow-left" handleClick={() => navigate(-1)} />
 				) : (
 					<Icon name="logo" handleClick={() => navigate("/")} />
 				)}

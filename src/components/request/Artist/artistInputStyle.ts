@@ -28,6 +28,12 @@ const StyledArtistInput = styled.div`
   justify-content: center;
   width: 100%;
   gap: 6px;
+  
+  > div.artistInputContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 
   .customInputContainer {
     display: flex;

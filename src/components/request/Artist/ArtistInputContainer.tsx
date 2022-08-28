@@ -34,10 +34,16 @@ const ArtistInputContainer = () => {
     ]);
   };
 
+  const handleDeleteArtist = (artistId: number) => {
+    const data = artistInputs.filter((artist) => artist.id !== artistId);
+    setArtistInputs(data);
+  };
+
   return (
     <StyledArtistContainer>
       {artistInputs.map((artist) => (
-        <ArtistInput key={artist.id} value={artist} handleChangeArtist={handleChangeArtist} />
+        <ArtistInput key={artist.id} value={artist} handleChangeArtist={handleChangeArtist}
+                     handleDeleteArtist={handleDeleteArtist}/>
       ))}
       <button type="button" onClick={handleClickAddArtist}>
         다른 아티스트 추가하기

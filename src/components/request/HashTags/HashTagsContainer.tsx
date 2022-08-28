@@ -59,7 +59,7 @@ const HashTagsContainer = () => {
           handleInputDelete={(e) => handleInputDelete(e, t.id)}
           hideLabel={t.id !== 1}
         />
-        {t.id !== 1 && <Icon name="minus-circle" handleClick={() => handleDeleteHashTag(t.id)} />}
+        {t.id !== 1 && <Icon name="subtraction" handleClick={() => handleDeleteHashTag(t.id)} />}
       </div>))}
       {hashTags.length < 4 && <div className="iconWrapper">
         <Icon name="plus-circle" handleClick={handleAddHashTag} />

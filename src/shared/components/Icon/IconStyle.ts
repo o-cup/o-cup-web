@@ -27,6 +27,14 @@ export const StyledIcon = styled.i`
     width: 24px;
   }
 
+  &.subtraction {
+    display: flex;
+    background: url("/images/icons/subtraction.png") no-repeat;
+    background-size: contain;
+    height: 24px;
+    width: 24px;
+  }
+
 	&.delete {
 		display: flex;
 		background: url("/images/icons/delete.png") no-repeat;

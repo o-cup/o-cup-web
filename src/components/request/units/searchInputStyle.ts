@@ -24,6 +24,8 @@ const InputWrapper = styled.div`
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
   }
 
   input[disabled] {
@@ -38,6 +40,12 @@ const InputWrapper = styled.div`
     font-size: 12px;
     line-height: 16px;
     white-space: nowrap;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    
+    &.shortBtn {
+      padding: 0 33px;
+    }
   }
 `;
 

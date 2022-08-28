@@ -10,6 +10,7 @@ import { requestDateRangeAtom } from "../../../state/atoms";
 import Icons from "../../../shared/components/Icon/Icons";
 import { getDatesInRange } from "../../../shared/utils/dateHandlers";
 import EditableGoodsChip from "../../../shared/components/EditableGoodsChip";
+import { FcfsDataType, RequestFcfsType } from "../requestType";
 
 const TYPE = [
   { key: "A", content: "매일\n동일해요" },
@@ -19,36 +20,20 @@ const TYPE = [
 
 const TYPE_C = { others: "매일", dDay: "기념일" };
 
-type ItemsType = {
-  id: number,
-  text: string
-}
-
-type DataType = {
-  key?: string,
-  day?: number,
-  items: ItemsType[]
-}
-
-type FcfsType = {
-  type: "A" | "B" | "C",
-  data: DataType[]
-}
-
 // 선착 타입 A: 매일 같음
-const DefaultTypeA: FcfsType = {
+const DefaultTypeA: RequestFcfsType = {
   type: "A",
   data: [{ items: [{ id: 1, text: "" }] }],
 };
 
 // 선착 타입 B: 날짜별로 다름
-const DefaultTypeB: FcfsType = {
+const DefaultTypeB: RequestFcfsType = {
   type: "B",
   data: [{ day: 0, items: [{ id: 1, text: "" }] }],
 };
 
 // 선착 타입 C: 기념일만 다름
-const DefaultTypeC: FcfsType = {
+const DefaultTypeC: RequestFcfsType = {
   type: "C",
   data: [
     { key: "others", items: [{ id: 1, text: "" }] },
@@ -68,7 +53,7 @@ const FcfsGoodsInput = () => {
    * X: 선착특전 없음(fcfsList === {})
    * */
   const [type, setType] = useState(""); // "A" | "B" | "C" | "X"
-  const [fcfsList, setFcfsList] = useState({} as FcfsType);
+  const [fcfsList, setFcfsList] = useState({} as RequestFcfsType);
 
   // 날짜 변경에 맞춰 DefaultTypeB에 날짜입력
   useEffect(() => {
@@ -96,7 +81,7 @@ const FcfsGoodsInput = () => {
       setFcfsList(DefaultTypeC);
     }
     if (type === "X") {
-      setFcfsList({} as FcfsType);
+      setFcfsList({} as RequestFcfsType);
     }
   }, [type]);
 
@@ -159,7 +144,7 @@ const FcfsGoodsInput = () => {
 
       {/** 기념일에만 달라요 */}
       {fcfsList.type === "C" && fcfsList.data &&
-        fcfsList.data.map((obj: DataType) =>
+        fcfsList.data.map((obj: FcfsDataType) =>
           <StyledFcfsContentContainer key={obj.key}>
             <div className="highlight">{(obj.key === "dDay" || obj.key === "others") && TYPE_C[obj.key]}</div>
             <div className="chipContainer">

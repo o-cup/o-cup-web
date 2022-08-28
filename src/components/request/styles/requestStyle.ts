@@ -12,7 +12,7 @@ const StyledEntry = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  padding: 32px 24px;
+  padding: 32px 20px;
 
   @media ${({ theme }) => theme.device.mobile} {
     width: 100%;

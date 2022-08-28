@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { StyledModalBackground } from "../../../components/request/styles/modalStyle";
-import { StyledModal } from "./modalStyle";
+import { StyledModalBackground, StyledModal } from "./modalStyle";
 
 type ModalProps = {
 	children: React.ReactNode;

@@ -11,6 +11,7 @@ const theme: DefaultTheme = {
 		white: "#fff",
 		black: "#000",
 		gray: "#7a7a7a",
+		red: "#CF0000",
 	},
 	device: {
 		mobile: "screen and (max-width: 720px)",
@@ -21,6 +22,12 @@ const theme: DefaultTheme = {
 	},
 	heights: {
 		header: "76px",
+	},
+	zIndex: {
+		imageCarousel: 9,
+		header: 10,
+		bottomSheet: 89, // memo: css 파일에 있어서 직접 입력함
+		modal: 99,
 	},
 };
 

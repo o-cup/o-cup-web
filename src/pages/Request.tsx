@@ -15,9 +15,8 @@ import PreviewContent from "../components/request/PreviewContent";
 import { StyledPreview, StyledRequest } from "../components/request/styles/requestStyle";
 import BottomSheet from "../shared/components/BottomSheet";
 import useMediaQuery from "../hooks/useMediaQuery";
-import { insertDetail, insertEvent } from "../apis";
+import { resetReqData, sendReqData } from "../components/request/requestApi";
 
-// todo: handleSubmit과 resetAllStates 함수 다른 파일에 분리하는 방법 찾아보기
 const Request = () => {
 	const [isModalOpen, setModalOpen] = useState(false);
 	const [isBottomSheetOpen, setBottomSheetOpen] = useState(false);
@@ -32,81 +31,15 @@ const Request = () => {
 	const [dateRange, setDateRange] = useRecoilState(requestDateRangeAtom);
 	const [goodsList, setGoodsList] = useRecoilState(requestGoodsListAtom);
 
-	const handleSubmit = async () => {
-		// todo: 필수값 비워져 있을 때 경고 팝업 필요
-		if (!placeInputs.place) {
-			alert("필수값 채워주세요!");
-			return;
-		}
+  const handleSubmit = () =>
+    sendReqData({
+      placeInputs, organizer, snsId, dateRange, posterUrls, artistInputs, hashTags, goodsList, link, setModalOpen,
+    });
 
-		const eventParams = {
-			place: placeInputs.place,
-			organizer,
-			snsId,
-			district: placeInputs.district,
-			startAt: dateRange.startAt,
-			endAt: dateRange.endAt,
-			images: posterUrls.map((poster) => poster.publicUrl),
-			requestedBiases: artistInputs.map((artist) => ({
-				peopleId: artist.peopleId,
-				bias: artist.bias,
-				team: artist.team,
-			})),
-			isRequested: true,
-			isApproved: false,
-		};
-
-		const detailParams = {
-			// id: 0,
-			address: placeInputs.address,
-			hashTags: hashTags.map((h) => h.text),
-			goods: goodsList.map((goodsObj) => ({
-				title: goodsObj.title,
-				items: goodsObj.items.map((i) => i.text),
-			})),
-			tweetUrl: link,
-		};
-
-		const eventData = await insertEvent(eventParams);
-		if (eventData) {
-			await insertDetail({
-				id: eventData[0].id,
-				...detailParams,
-			});
-		}
-
-		setModalOpen(true);
-	};
-
-	const resetAllStates = () => {
-		setPlaceInputs({
-			place: "",
-			district: "",
-			address: "",
-		});
-		setArtistInputs([
-			{
-				id: 1,
-				peopleId: 0,
-				bias: "",
-				team: "",
-			},
-		]);
-		setBasicInputs({ organizer: "", snsId: "", link: "" });
-		setPosterUrls([{ id: 1, publicUrl: "" }]);
-		setHashTags([{ id: 1, text: "" }]);
-		setDateRange({
-			startAt: "",
-			endAt: "",
-		});
-		setGoodsList([
-			{
-				id: 1,
-				title: "",
-				items: [{ id: 1, text: "" }],
-			},
-		]);
-	};
+  const resetAllStates = () =>
+    resetReqData({
+      setPlaceInputs, setArtistInputs, setBasicInputs, setPosterUrls, setHashTags, setDateRange, setGoodsList,
+    });
 
 	return (
 		<>

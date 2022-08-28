@@ -12,7 +12,7 @@ const StyledEntry = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  padding: 32px 24px;
+  padding: 32px 20px;
 
   @media ${({ theme }) => theme.device.mobile} {
     width: 100%;
@@ -24,13 +24,14 @@ const StyledEntry = styled.div`
     gap: 10px;
     font-size: 12px;
     width: 100%;
+    font-weight: 400;
 
     p:first-child {
       width: 133px;
       height: 28px;
       background-color: ${({ theme }) => theme.colors.black};
       color: ${({ theme }) => theme.colors.white};
-      font-weight: bold;
+      font-weight: 700;
       border-radius: 30px;
       text-align: center;
       line-height: 28px;
@@ -39,6 +40,10 @@ const StyledEntry = styled.div`
     p:not(:first-child) {
       line-height: 16px;
     }
+
+    b {
+      font-weight: 700;
+    }
   }
 
   .inputsWrapper {
@@ -46,19 +51,6 @@ const StyledEntry = styled.div`
     flex-direction: column;
     gap: 30px;
     width: 100%;
-
-    .hashTags {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-
-      .iconWrapper {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-      }
-    }
   }
 
   > .ctaContainer {
@@ -79,8 +71,8 @@ const Label = styled.label<{ hideLabel?: boolean }>`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-	position: relative;
-	display: ${(props) => (props.hideLabel ? "none" : "")};
+  position: relative;
+  display: ${(props) => (props.hideLabel ? "none" : "")};
 `;
 
 const StyledPreview = styled.div`
@@ -92,11 +84,58 @@ const StyledPreview = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     display: none;
   }
-  
+
   .previewContent {
     width: 100%;
   }
 `;
 
-export { StyledRequest, StyledEntry, StyledPreview, Label };
+const StyledRequestModal = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 340px;
+  border: 2px solid #000;
+  background-color: ${({ theme }) => theme.colors.primary};
+  border-radius: 4px;
+  padding: 20px;
+
+  > h4 {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+  }
+
+  > p {
+    margin-top: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+  }
+
+  .modalBtnContainer {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+
+    > button {
+      background: ${({ theme }) => theme.colors.white};
+      border: 1px solid #000000;
+      border-radius: 30px;
+      box-shadow: 0 4px 0 #000000;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+      padding: 6px 12px;
+    }
+  }
+`;
+
+export { StyledRequest, StyledEntry, StyledPreview, Label, StyledRequestModal };
 export default {};

@@ -1,16 +1,19 @@
 import React, { Dispatch, SetStateAction } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { requestBasicAtom } from "../../state/atoms";
+import { StyledEntry, StyledRequestModal } from "./styles/requestStyle";
 import Button from "../../shared/components/Button";
-import BasicInput from "./BasicInput";
-import PosterUploader from "./PosterUploader";
-import { StyledEntry } from "./styles/requestStyle";
-import PlaceInput from "./PlaceInput";
-import ArtistInputContainer from "./ArtistInputContainer";
-import GoodsInputContainer from "./GoodsInputContainer";
-import HashTagsContainer from "./HashTagsContainer";
-import Modal from "./Modal";
-import DateRangeInput from "./DateRangeInput";
+import BasicInput from "./units/BasicInput";
+import PosterUploader from "./Poster/PosterUploader";
+import PlaceInput from "./Place/PlaceInput";
+import ArtistInputContainer from "./Artist/ArtistInputContainer";
+import GoodsInputContainer from "./Goods/GoodsInputContainer";
+import HashTagsContainer from "./HashTags/HashTagsContainer";
+import DateRangeInput from "./DateRange/DateRangeInput";
+import Modal from "../../shared/components/Modal";
+import FcfsGoodsInput from "./FcfsGoods/FcfsGoodsInput";
+import LuckyDrawInput from "./LuckyDraw/LuckyDrawInput";
 
 type EntryProps = {
 	isModalOpen: boolean;
@@ -21,6 +24,8 @@ type EntryProps = {
 };
 
 const Entry = ({ isModalOpen, setModalOpen, setBottomSheetOpen, handleSubmit, resetAllStates }: EntryProps) => {
+	const navigate = useNavigate();
+
 	const [basicInputs, setBasicInputs] = useRecoilState(requestBasicAtom);
 	const { organizer, snsId, link } = basicInputs;
 
@@ -38,6 +43,18 @@ const Entry = ({ isModalOpen, setModalOpen, setBottomSheetOpen, handleSubmit, re
 		}));
 	};
 
+	const handleClickModalContinue = () => {
+		resetAllStates();
+		setModalOpen(false);
+		setBottomSheetOpen(false);
+	};
+
+	const handleClickModalFinish = () => {
+		navigate("/");
+		setModalOpen(false);
+		setBottomSheetOpen(false);
+	};
+
 	return (
 		<>
 			<StyledEntry>
@@ -45,8 +62,7 @@ const Entry = ({ isModalOpen, setModalOpen, setBottomSheetOpen, handleSubmit, re
 					<p>장소 등록 시 주의사항</p>
 					<p>
 						오늘의 컵홀더는 특전 증정이 있는 이벤트에 한해 정보를 제공합니다.
-						<br />
-						따라서 특전이 없는 포토부스, 옥외 광고 등의 이벤트는 승인되지 않습니다.
+						<b> 따라서 특전 증정이 없는 포토부스, 옥외광고 등의 이벤트는 승인되지 않습니다.</b>
 					</p>
 				</div>
 
@@ -80,7 +96,9 @@ const Entry = ({ isModalOpen, setModalOpen, setBottomSheetOpen, handleSubmit, re
 						handleInputChange={(e) => handleInputChange(e, "link")}
 						handleInputDelete={(e) => handleInputDelete(e, "link")}
 					/>
+					<FcfsGoodsInput />
 					<GoodsInputContainer />
+					<LuckyDrawInput />
 				</div>
 
 				<div className="ctaContainer">
@@ -94,7 +112,16 @@ const Entry = ({ isModalOpen, setModalOpen, setBottomSheetOpen, handleSubmit, re
 			</StyledEntry>
 
 			{isModalOpen && (
-				<Modal setModalOpen={setModalOpen} setBottomSheetOpen={setBottomSheetOpen} resetAllStates={resetAllStates} />
+				<Modal>
+					<StyledRequestModal>
+						<h4>제출 완료!</h4>
+						<p>내용 검토 후 1-4일 이내 업로드 됩니다.</p>
+						<div className="modalBtnContainer">
+							<button type="button" onClick={handleClickModalContinue}>다른 카페 등록하기</button>
+							<button type="button" onClick={handleClickModalFinish}>메인으로 돌아가기</button>
+						</div>
+					</StyledRequestModal>
+				</Modal>
 			)}
 		</>
 	);

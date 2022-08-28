@@ -10,8 +10,7 @@ const StyledLayout = styled.div`
 	background: ${({ theme }) => theme.colors.background};
 
 	main {
-		/* header 높이와 맞추기 */
-		padding-top: 76px;
+		padding-top: ${({ theme }) => theme.heights.header};
 	}
 
 	@media ${({ theme }) => theme.device.mobile} {

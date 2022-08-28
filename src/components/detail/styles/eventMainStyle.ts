@@ -58,7 +58,7 @@ const StyledEventMain = styled.div`
 		position: relative;
 		background: ${({ theme }) => theme.colors.white};
 		border: 2px solid #000000;
-		z-index: 10;
+		z-index: ${({ theme }) => theme.zIndex.imageCarousel};
 		margin-top: -74px;
 		margin-left: 30px;
 		margin-right: 24px;

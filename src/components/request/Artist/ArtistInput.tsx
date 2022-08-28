@@ -1,26 +1,22 @@
 import React, { useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useQuery } from "react-query";
-import { fetchPeople } from "../../apis";
-import { StyledArtistInput } from "./styles/artistInputStyle";
-import { StyledSearchListContainer, StyledSearchList } from "./styles/searchListStyle";
-import { DeleteBtn } from "./styles/basicInputStyle";
-import SearchInput from "./SearchInput";
-import { PeopleType } from "../../types";
-
-export type ArtistValues = {
-  id: number;
-  peopleId: number;
-  bias: string;
-  team: string;
-}
+import { fetchPeople } from "../../../apis";
+import { StyledArtistInput } from "./artistInputStyle";
+import { StyledSearchListContainer, StyledSearchList } from "../units/searchListStyle";
+import { DeleteBtn } from "../units/basicInputStyle";
+import SearchInput from "../units/SearchInput";
+import { PeopleType } from "../../../types";
+import { RequestArtistType } from "../requestType";
+import Icon from "../../../shared/components/Icon/Icons";
 
 type InputProps = {
-  value: ArtistValues;
+  value: RequestArtistType;
   handleChangeArtist: (peopleId: number, bias: string, team: string, index: number) => void;
+  handleDeleteArtist: (artistId: number) => void;
 };
 
-const ArtistInput = ({ value, handleChangeArtist }: InputProps) => {
+const ArtistInput = ({ value, handleChangeArtist, handleDeleteArtist }: InputProps) => {
   const resultString = value.bias ? `${value.bias}${value.team ? ` (${value.team})` : ""}` : "";
 
   const [isSearchOpen, setSearchOpen] = useState(false);
@@ -29,11 +25,11 @@ const ArtistInput = ({ value, handleChangeArtist }: InputProps) => {
   const [isInputOpen, setInputOpen] = useState(false);
   const [customArtist, setCustomArtist] = useState({
     bias: "",
-    team: ""
+    team: "",
   });
 
   const { data: people } = useQuery(["people"], () => fetchPeople(), {
-    select: (data) => data?.filter((item) => item.name.includes(keyword))
+    select: (data) => data?.filter((item) => item.name.includes(keyword)),
   });
 
   const handleClickSelect = (biasInfo: PeopleType) => {
@@ -45,14 +41,14 @@ const ArtistInput = ({ value, handleChangeArtist }: InputProps) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCustomArtist({
       ...customArtist,
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value,
     });
   };
 
   const handleInputDelete = (e: React.MouseEvent, id: string) => {
     setCustomArtist((prev) => ({
       ...prev,
-      [id]: ""
+      [id]: "",
     }));
   };
 
@@ -63,15 +59,19 @@ const ArtistInput = ({ value, handleChangeArtist }: InputProps) => {
 
   return (
     <StyledArtistInput>
-      <SearchInput value={resultString}
-                   handleClickSearchBtn={() => {
-                     setSearchOpen(!isSearchOpen);
-                     setInputOpen(false);
-                   }}
-                   id="artist"
-                   placeholder="아티스트 이름"
-                   label="아티스트 이름"
-                   hideLabel={value.id > 1} />
+      <div className="artistInputContainer">
+        <SearchInput value={resultString}
+                     handleClickSearchBtn={() => {
+                       setSearchOpen(!isSearchOpen);
+                       setInputOpen(false);
+                     }}
+                     id="artist"
+                     placeholder="아티스트 이름"
+                     label="아티스트 이름"
+                     hideLabel={value.id > 1}
+                     shortBtn={value.id > 1} />
+        {value.id !== 1 && <Icon name="subtraction" handleClick={() => handleDeleteArtist(value.id)} />}
+      </div>
 
       {isSearchOpen && <StyledSearchListContainer>
         <div className="inputContainer">

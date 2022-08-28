@@ -1,7 +1,7 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { requestGoodsListAtom } from "../../state/atoms";
-import { StyledGoodsContainer } from "./styles/goodsInputStyle";
+import { requestGoodsListAtom } from "../../../state/atoms";
+import { StyledGoodsContainer } from "./goodsInputStyle";
 import GoodsInput from "./GoodsInput";
 
 type GoodsValues = {

@@ -19,20 +19,23 @@ export const StyledFilter = styled.div`
 		display: flex;
 		padding: 16px 0 16px 0;
 		position: relative;
-		width: 100%;
 
 		div.sort {
 			display: flex;
 			justify-content: flex-end;
 			align-items: flex-end;
+			width: fit-content;
+			margin-left: 10px;
 		}
 	}
 
 	.biases {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 20px;
+		row-gap: 20px;
+		column-gap: 15px;
 		padding: 12px 0;
+		justify-content: space-between;
 	}
 `;
 

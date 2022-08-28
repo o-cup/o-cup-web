@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledMonthSelector = styled.div`
 	max-width: 311px;
-	min-width: 311px;
+	min-width: 270px;
 	height: 72px;
 	border: 2px solid #000;
 	width: 100%;
@@ -25,7 +25,6 @@ export const StyledMonthSelector = styled.div`
 		display: flex;
 		align-items: center;
 		gap: 5px;
-
 		p {
 			font-size: 14px;
 			line-height: 19px;

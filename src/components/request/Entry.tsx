@@ -13,6 +13,7 @@ import HashTagsContainer from "./HashTags/HashTagsContainer";
 import DateRangeInput from "./DateRange/DateRangeInput";
 import Modal from "../../shared/components/Modal";
 import FcfsGoodsInput from "./FcfsGoods/FcfsGoodsInput";
+import LuckyDrawInput from "./LuckyDraw/LuckyDrawInput";
 
 type EntryProps = {
 	isModalOpen: boolean;
@@ -97,6 +98,7 @@ const Entry = ({ isModalOpen, setModalOpen, setBottomSheetOpen, handleSubmit, re
 					/>
 					<FcfsGoodsInput />
 					<GoodsInputContainer />
+					<LuckyDrawInput />
 				</div>
 
 				<div className="ctaContainer">

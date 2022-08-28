@@ -1,32 +1,34 @@
 import styled from "styled-components";
 
-export const StyledFcfsGoodsInput = styled.div`
+export const StyledLuckyInput = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
   gap: 6px;
+  
+  > .noLuck {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 
-  > div.fcfsNotice {
+  .luckyNotice {
     margin-top: 8px;
-
-    .dateNotice {
-      font-weight: 400;
-      font-size: 12px;
-      line-height: 15px;
-      color: ${({ theme }) => theme.colors.red};
-    }
-
-    .notice {
-      font-weight: 400;
-      font-size: 10px;
-      line-height: 14px;
-      color: ${({ theme }) => theme.colors.gray};
-    }
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    color: ${({ theme }) => theme.colors.gray};
+  }
+  
+  .iconWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 16px;
   }
 `;
 
-export const StyledFcfsTitle = styled.div`
+export const StyledLuckyTitle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -37,15 +39,7 @@ export const StyledFcfsTitle = styled.div`
     line-height: 20px;
   }
 
-  > .checkOpen {
-    opacity: 0.5;
-    pointer-events: none;
-
-    &.active {
-      opacity: 1;
-      pointer-events: inherit;
-    }
-
+  > .hasLucky {
     > button {
       display: flex;
       align-items: center;
@@ -55,56 +49,18 @@ export const StyledFcfsTitle = styled.div`
       font-size: 12px;
       line-height: 16px;
     }
-
-    &.notSelected {
-      opacity: 0.5;
-    }
   }
 `;
 
-export const StyledFcfsTypeSelector = styled.li`
+export const StyledLuckyContentContainer = styled.ul`
   display: flex;
-  pointer-events: none;
-  gap: 6px;
-
-  &.active {
-    opacity: 1;
-    pointer-events: inherit;
-  }
-
-  > button.typeButton {
-    flex: 1 1 33%;
-    display: flex;
-    align-items: center;
-    text-align: left;
-    background: ${({ theme }) => theme.colors.white};
-    border: 2px solid ${({ theme }) => theme.colors.black};
-    border-radius: 10px;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
-    padding: 8px;
-    white-space: pre;
-
-    &.selected {
-      background: ${({ theme }) => theme.colors.primary};
-    }
-
-    &.notSelected {
-      opacity: 0.5;
-    }
-
-    > i {
-      margin-right: 6px;
-    }
-  }
-`;
-
-export const StyledFcfsContentContainer = styled.ul`
-  display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 8px;
   margin-top: 12px;
+  
+  i {
+    margin-left: auto;
+  }
 
   > .highlight {
     font-weight: 600;

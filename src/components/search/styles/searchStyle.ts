@@ -21,6 +21,17 @@ export const StyledFilter = styled.div`
 		position: relative;
 		justify-content: space-between;
 
+		div:first-child:after {
+			content: "";
+			background: url("/images/bread.png") no-repeat;
+			background-size: auto 72px;
+			position: absolute;
+			top: -2px;
+			right: -10px;
+			height: 104px;
+			width: 20px;
+		}
+
 		div.sort {
 			display: flex;
 			justify-content: flex-end;

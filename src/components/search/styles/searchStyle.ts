@@ -20,6 +20,7 @@ export const StyledFilter = styled.div`
 		padding: 16px 0 16px 0;
 		position: relative;
 		justify-content: space-between;
+		gap: 20px;
 
 		div:first-child:after {
 			content: "";
@@ -37,7 +38,6 @@ export const StyledFilter = styled.div`
 			justify-content: flex-end;
 			align-items: flex-end;
 			width: fit-content;
-			margin-left: 10px;
 		}
 	}
 

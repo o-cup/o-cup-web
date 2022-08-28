@@ -34,7 +34,7 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 			display: flex;
 			height: 100%;
 			align-items: center;
-			gap: 22px;
+			gap: 10px;
 		}
 
 		img#logo {

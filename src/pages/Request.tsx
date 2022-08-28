@@ -43,7 +43,7 @@ const Request = () => {
 
 	return (
 		<>
-			<Layout page="장소 등록">
+			<Layout page="request">
 				<StyledRequest>
 					<Entry
 						isModalOpen={isModalOpen}

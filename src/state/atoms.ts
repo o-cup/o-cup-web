@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { DateRangeType } from "../types";
 import { convertDateToString } from "../shared/utils/dateHandlers";
 import { sessionAtom } from "./recoilUtils";
 import {
@@ -28,8 +29,21 @@ export const openedBiasAtom = atom({
 });
 
 export const keywordAtom = atom({
-  key: "keywordAtom",
-  default: "",
+	key: "keywordAtom",
+	default: "",
+});
+
+export const dateRangeAtom = atom<DateRangeType>({
+	key: "dateRangeAtom",
+	default: {
+		startDate: "",
+		endDate: "",
+	},
+});
+
+export const districtAtom = atom<string[]>({
+	key: "districtAtom",
+	default: [],
 });
 
 export const requestPlaceAtom = atom<RequestPlaceType>({
@@ -77,16 +91,16 @@ export const requestDateRangeAtom = atom<RequestDateRangeType>({
   effects: [sessionAtom],
 });
 
-export const requestGoodsListAtom = atom<{ id: number, title: string, items: { id: number, text: string }[] }[]>({
-  key: "requestGoodsListAtom",
-  default: [
-    {
-      id: 1,
-      title: "",
-      items: [{ id: 1, text: "" }],
-    },
-  ],
-  effects: [sessionAtom],
+export const requestGoodsListAtom = atom<{ id: number; title: string; items: { id: number; text: string }[] }[]>({
+	key: "requestGoodsListAtom",
+	default: [
+		{
+			id: 1,
+			title: "",
+			items: [{ id: 1, text: "" }],
+		},
+	],
+	effects: [sessionAtom],
 });
 
 export default {};

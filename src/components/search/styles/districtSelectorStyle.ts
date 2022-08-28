@@ -39,6 +39,10 @@ const StyledDistrictSelector = styled.div`
 				overflow: scroll;
 				background-color: ${({ theme }) => theme.colors.white};
 
+				::-webkit-scrollbar {
+					display: none;
+				}
+
 				li {
 					line-height: 36px;
 					font-size: 12px;

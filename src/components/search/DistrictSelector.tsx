@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import { divisionList } from "./data";
 import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
 
 type DistrictSelectorProps = {
 	handleSubmit: () => void;
+	selectedDist: string[];
+	setSelectedDist: Dispatch<SetStateAction<string[]>>;
 };
 
-const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
+const MAX_CHIP_LENGTH = 3;
+
+const DistrictSelector = ({ handleSubmit, selectedDist, setSelectedDist }: DistrictSelectorProps) => {
 	const [divisions, setDivisions] = useState(divisionList);
-	const [chips, setChips] = useState<string[]>([]);
-	const MAX_CHIP_LENGTH = 3;
 
 	useEffect(() => {
 		const isAllSelected = divisions.find((div) => div.index === 1 && div.selected);
 		if (isAllSelected) {
-			setChips(["전국"]);
+			setSelectedDist(["전국"]);
 			return;
 		}
 		const texts: string[] = [];
@@ -30,12 +32,10 @@ const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
 				}
 			});
 		});
-		setChips(texts);
-	}, [divisions, chips.length]);
+		setSelectedDist(texts);
+	}, [divisions, selectedDist.length, setSelectedDist]);
 
 	const handleDivisionClick = (e: React.MouseEvent, index: number) => {
-		console.log("?????");
-
 		e.preventDefault();
 
 		const isAllSelected = index === 1;
@@ -55,7 +55,7 @@ const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
 			return;
 		}
 
-		if (chips.length >= MAX_CHIP_LENGTH) return;
+		if (selectedDist.length >= MAX_CHIP_LENGTH) return;
 		const newData = divisions.map((div) => {
 			if (div.index === index) {
 				const updated = div.districts.map((dist) => {
@@ -82,7 +82,7 @@ const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
 	};
 
 	const handleDistrictClick = (index: number) => {
-		if (chips.length >= MAX_CHIP_LENGTH) return;
+		if (selectedDist.length >= MAX_CHIP_LENGTH) return;
 
 		const newData = divisions.map((div) => {
 			if (div.selected) {
@@ -108,7 +108,7 @@ const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
 	const handleDeleteClick = (index: number) => {
 		const newData = divisions.map((div) => {
 			const updatedDist = div.districts.map((dist) => {
-				if (chips[index].includes(dist.name)) {
+				if (selectedDist[index].includes(dist.name)) {
 					return {
 						...dist,
 						selected: false,
@@ -131,6 +131,7 @@ const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
 					대한민국
 					<FaCaretDown />
 				</h2>
+
 				<div className="districts">
 					<ul className="main">
 						{divisions.map((division) => (
@@ -159,9 +160,10 @@ const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
 							))}
 					</ul>
 				</div>
+
 				<div className="result">
 					<div className="chips">
-						{chips.map((item, index) => (
+						{selectedDist.map((item, index) => (
 							<span className="chip" key={item}>
 								<span>{item}</span>
 								<span role="presentation" onClick={() => handleDeleteClick(index)}>

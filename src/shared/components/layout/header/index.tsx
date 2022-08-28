@@ -38,7 +38,7 @@ const Header = ({ page, share }: HeaderProps) => {
 				{page && <h1>{titles[page]}</h1>}
 				<div>
 					{mainPage && <DateSelector isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen} />}
-					{page === "main" || (page === "detail" && <Icon name="search" handleClick={() => navigate("/search")} />)}
+					{(mainPage || page === "detail") && <Icon name="search" handleClick={() => navigate("/search")} />}
 					{share && (
 						<Share>
 							<Icon name="share" />

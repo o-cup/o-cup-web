@@ -7,22 +7,18 @@ import {
 } from "./goodsInputStyle";
 import { StyledSearchListContainer, StyledSearchList } from "../units/searchListStyle";
 import EditableGoodsChip from "../../../shared/components/EditableGoodsChip";
-import Icon from "../../../shared/components/Icon/Icons";
-
-type GoodsValues = {
-  id: number;
-  text: string;
-}
+import Icons from "../../../shared/components/Icon/Icons";
+import { ItemsType } from "../requestType";
 
 type GoodsListValues = {
   id: number;
   title: string;
-  items: GoodsValues[];
+  items: ItemsType[];
 }
 
 type InputProps = {
   value: GoodsListValues;
-  handleChangeGoods: (title: string, items: GoodsValues[], index: number) => void;
+  handleChangeGoods: (title: string, items: ItemsType[], index: number) => void;
 };
 
 const options = [
@@ -106,8 +102,8 @@ const GoodsInput = ({ value, handleChangeGoods }: InputProps) => {
           <input value={value.title} placeholder="특전 종류를 입력해주세요. (예: 마카롱특전)"
                  onChange={(e) => setGoodsTitle(e.target.value)} />
           <div className="iconContainer">
-            {value.title !== "" && <Icon name="delete" handleClick={() => setGoodsTitle("")} />}
-            <Icon name="search" handleClick={handleClickSearch} />
+            {value.title !== "" && <Icons name="delete" handleClick={() => setGoodsTitle("")} />}
+            <Icons name="search" handleClick={handleClickSearch} />
           </div>
         </StyledInputWrapper>
         : <StyledSelectWrapper>

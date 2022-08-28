@@ -1,19 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { requestPosterUrlsAtom } from "../../../state/atoms";
-import Icon from "../../../shared/components/Icon/Icons";
+import { requestInputsAtom } from "../../../state/atoms";
+import Icons from "../../../shared/components/Icon/Icons";
 import { Poster, StyledPosterUpload } from "./posterUploadStyle";
 import { Label } from "../styles/requestStyle";
 import { uploadPoster } from "../../../apis";
 
 const PosterUploader = () => {
-  const [posterUrls, setPosterUrls] = useRecoilState(requestPosterUrlsAtom);
+  const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
+  const { posterUrls } = requestInputs;
 
   useEffect(() => {
     const allHasUrl = posterUrls.every((poster) => poster.publicUrl);
 
     if (posterUrls.length === 3 && allHasUrl) {
-      setPosterUrls([...posterUrls, { id: posterUrls.length + 1, publicUrl: "" }]);
+      setRequestInputs({
+        ...requestInputs,
+        posterUrls: [...posterUrls, { id: posterUrls.length + 1, publicUrl: "" }],
+      });
     }
   }, [posterUrls]);
 
@@ -37,18 +41,24 @@ const PosterUploader = () => {
         if (poster.id === id) {
           return {
             ...poster,
-            publicUrl
+            publicUrl,
           };
         }
         return poster;
       });
 
       if (posterUrls.length === 4) {
-        setPosterUrls(postersData);
+        setRequestInputs({
+          ...requestInputs,
+          posterUrls: postersData,
+        });
         return;
       }
       // console.log([...postersData, { id: posterUrls.length + 1, publicUrl: "" }]);
-      setPosterUrls([...postersData, { id: posterUrls.length + 1, publicUrl: "" }]);
+      setRequestInputs({
+        ...requestInputs,
+        posterUrls: [...postersData, { id: posterUrls.length + 1, publicUrl: "" }],
+      });
     };
   };
 
@@ -57,7 +67,10 @@ const PosterUploader = () => {
       .filter((poster) => poster.id !== id)
       .map((poster, index) => ({ ...poster, id: index + 1 }));
 
-    setPosterUrls(postersData);
+    setRequestInputs({
+      ...requestInputs,
+      posterUrls: postersData,
+    });
   };
 
   return (
@@ -72,11 +85,11 @@ const PosterUploader = () => {
               {p.publicUrl ? (
                 <div className="imgWrapper">
                   <img src={p.publicUrl} alt={key} />
-                  <Icon name="delete-circle-white" handleClick={() => handleDeletePoster(p.id)} />
+                  <Icons name="delete-circle-white" handleClick={() => handleDeletePoster(p.id)} />
                 </div>
               ) : (
                 <label htmlFor="uploader">
-                  <Icon name="plus-circle" />
+                  <Icons name="plus-circle" />
                   <input type="file" id="uploader" accept="image/*" onChange={(e) => handleUploadClick(e, p.id)} />
                 </label>
               )}

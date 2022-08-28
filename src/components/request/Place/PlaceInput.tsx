@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useRecoilState } from "recoil";
-import { requestPlaceAtom } from "../../../state/atoms";
+import { requestInputsAtom } from "../../../state/atoms";
 import { StyledPlaceInput } from "./placeInputStyle";
 import { StyledSearchListContainer, StyledSearchList } from "../units/searchListStyle";
 import SearchInput from "../units/SearchInput";
@@ -13,7 +13,7 @@ type KakaoResult = {
 }
 
 const PlaceInput = () => {
-  const [placeInputs, setPlaceInputs] = useRecoilState(requestPlaceAtom);
+  const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
 
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [keyword, setKeyword] = useState("");
@@ -47,10 +47,13 @@ const PlaceInput = () => {
 
   const handleClickSelect = (placeInfo: KakaoResult) => {
     const districtArr = placeInfo.road_address_name.split(" ");
-    setPlaceInputs({
-      place: placeInfo.place_name,
-      district: `${districtArr[0]} ${districtArr[1]}`,
-      address: placeInfo.road_address_name
+    setRequestInputs({
+      ...requestInputs,
+      place: {
+        place: placeInfo.place_name,
+        district: `${districtArr[0]} ${districtArr[1]}`,
+        address: placeInfo.road_address_name,
+      },
     });
     setKeyword("");
     setSearchOpen(false);
@@ -58,7 +61,7 @@ const PlaceInput = () => {
 
   return (
     <StyledPlaceInput>
-      <SearchInput value={placeInputs.place} handleClickSearchBtn={() => setSearchOpen(!isSearchOpen)}
+      <SearchInput value={requestInputs.place.place} handleClickSearchBtn={() => setSearchOpen(!isSearchOpen)}
                    id="place" placeholder="카페이름" label="장소" />
       {isSearchOpen && <StyledSearchListContainer>
         <div className="inputContainer">
@@ -79,7 +82,7 @@ const PlaceInput = () => {
             </li>)}
         </StyledSearchList>}
       </StyledSearchListContainer>}
-      <SearchInput value={placeInputs.address} id="address" placeholder="주소" label="" hideLabel hideButton />
+      <SearchInput value={requestInputs.place.address} id="address" placeholder="주소" label="" hideLabel hideButton />
     </StyledPlaceInput>
   );
 };

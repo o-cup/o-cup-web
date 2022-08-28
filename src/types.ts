@@ -53,7 +53,7 @@ export type GoodsListType = {
 export type DetailType = {
 	id: string;
 	address: string;
-  goodsList: GoodsListType;
+  goods: GoodsListType;
 	hashTags: string[];
 	tweetUrl: string;
 };

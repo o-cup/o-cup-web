@@ -1,12 +1,13 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { requestHashTagsAtom } from "../../../state/atoms";
+import { requestInputsAtom } from "../../../state/atoms";
 import BasicInput from "../units/BasicInput";
-import Icon from "../../../shared/components/Icon/Icons";
+import Icons from "../../../shared/components/Icon/Icons";
 import { StyledHashTagsInputsContainer } from "./hashTagsStyle";
 
 const HashTagsContainer = () => {
-  const [hashTags, setHashTags] = useRecoilState(requestHashTagsAtom);
+  const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
+  const { hashTags } = requestInputs;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, hashTagId: number) => {
     const { value } = e.currentTarget;
@@ -21,12 +22,21 @@ const HashTagsContainer = () => {
       }
       return tag;
     });
-    setHashTags(hashTagsData);
+    setRequestInputs({
+      ...requestInputs,
+      hashTags: hashTagsData,
+    });
   };
 
   const handleAddHashTag = () => {
     if (hashTags.length > 3) return;
-    setHashTags((prev) => [...prev, { id: hashTags[hashTags.length - 1].id + 1, text: "" }]);
+    setRequestInputs({
+      ...requestInputs,
+      hashTags: [
+        ...hashTags,
+        { id: hashTags[hashTags.length - 1].id + 1, text: "" },
+      ],
+    });
   };
 
   const handleInputDelete = (e: React.MouseEvent, hashTagId: number) => {
@@ -39,12 +49,18 @@ const HashTagsContainer = () => {
       }
       return tag;
     });
-    setHashTags(hashTagsData);
+    setRequestInputs({
+      ...requestInputs,
+      hashTags: hashTagsData,
+    });
   };
 
   const handleDeleteHashTag = (hashTagId: number) => {
     const hashTagsData = hashTags.filter((tag) => tag.id !== hashTagId);
-    setHashTags(hashTagsData);
+    setRequestInputs({
+      ...requestInputs,
+      hashTags: hashTagsData,
+    });
   };
 
   return (
@@ -59,10 +75,10 @@ const HashTagsContainer = () => {
           handleInputDelete={(e) => handleInputDelete(e, t.id)}
           hideLabel={t.id !== 1}
         />
-        {t.id !== 1 && <Icon name="subtraction" handleClick={() => handleDeleteHashTag(t.id)} />}
+        {t.id !== 1 && <Icons name="subtraction" handleClick={() => handleDeleteHashTag(t.id)} />}
       </div>))}
       {hashTags.length < 4 && <div className="iconWrapper">
-        <Icon name="plus-circle" handleClick={handleAddHashTag} />
+        <Icons name="plus-circle" handleClick={handleAddHashTag} />
       </div>}
     </StyledHashTagsInputsContainer>
   );

@@ -19,20 +19,35 @@ export const StyledFilter = styled.div`
 		display: flex;
 		padding: 16px 0 16px 0;
 		position: relative;
-		width: 100%;
+		justify-content: space-between;
+		gap: 20px;
+
+		div:first-child:after {
+			content: "";
+			background: url("/images/bread.png") no-repeat;
+			background-size: auto 72px;
+			position: absolute;
+			top: -2px;
+			right: -10px;
+			height: 104px;
+			width: 20px;
+		}
 
 		div.sort {
 			display: flex;
 			justify-content: flex-end;
 			align-items: flex-end;
+			width: fit-content;
 		}
 	}
 
 	.biases {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 20px;
+		row-gap: 20px;
+		column-gap: 15px;
 		padding: 12px 0;
+		justify-content: space-between;
 	}
 `;
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledBiasProfile = styled.li`
-	width: 75px;
+	width: 68px;
 	height: 100%;
 	z-index: 0;
 	cursor: pointer;
@@ -12,8 +12,8 @@ export const StyledBiasProfile = styled.li`
 		position: relative;
 
 		img {
-			width: 72px;
-			height: 72px;
+			width: 65px;
+			height: 65px;
 			object-fit: cover;
 			border-radius: 50%;
 		}
@@ -34,8 +34,8 @@ export const StyledBiasProfile = styled.li`
 
 	div:after {
 		content: "";
-		width: 72px;
-		height: 72px;
+		width: 65px;
+		height: 65px;
 		background: ${({ theme }) => theme.colors.black};
 		border-radius: 50%;
 		position: absolute;

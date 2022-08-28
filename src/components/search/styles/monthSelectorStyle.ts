@@ -34,6 +34,7 @@ export const StyledMonthSelector = styled.div`
 	}
 
 	.selectBox {
+		min-width: 320px;
 		width: 380px;
 		height: 96px;
 		border: 2px solid #000;
@@ -48,6 +49,11 @@ export const StyledMonthSelector = styled.div`
 		padding: 10px;
 		background-color: ${({ theme }) => theme.colors.white};
 		z-index: 1;
+
+		@media all and (max-width: 420px) {
+			width: 320px;
+			gap: 4px;
+		}
 	}
 `;
 

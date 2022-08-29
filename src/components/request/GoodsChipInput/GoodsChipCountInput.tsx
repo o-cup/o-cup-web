@@ -5,8 +5,9 @@ type GoodsChipProps = {
   index: number;
   value: string;
   count: number;
-  handleChange: (value: string, luckyId: number, key: "text" | "count") => void;
-  handleDeleteChip?: (index: number) => void;
+  dayKey?: string | number | undefined;
+  handleChange: (value: string, luckyId: number, name: "text" | "count", dayKey?: string | number | undefined) => void;
+  handleDeleteChip?: (index: number, dayKey?: string | number | undefined) => void;
   handleDeleteValue?: (index: number) => void;
 };
 
@@ -14,13 +15,14 @@ const GoodsChipCountInput = ({
                                index,
                                value,
                                count,
+                               dayKey,
                                handleChange,
                                handleDeleteChip,
                                handleDeleteValue,
                              }: GoodsChipProps) => {
-  const [textWidth, setTextWidth] = useState(0);
+  const [textWidth, setTextWidth] = useState(94);
   const textRef = useRef<HTMLSpanElement>(null);
-  const [countWidth, setCountWidth] = useState(0);
+  const [countWidth, setCountWidth] = useState(10);
   const countRef = useRef<HTMLSpanElement>(null);
 
   /** input width 자동 맞춤 */
@@ -37,7 +39,7 @@ const GoodsChipCountInput = ({
   useEffect(() => {
     if (countRef.current) {
       if (!count) {
-        setCountWidth(8); // placeholder width
+        setCountWidth(10); // placeholder width
       } else {
         setCountWidth(countRef.current.offsetWidth + 2);
       }
@@ -49,7 +51,7 @@ const GoodsChipCountInput = ({
       <span className="hide" ref={textRef}>{value}</span>
       <input style={{ width: textWidth }}
              value={value}
-             onChange={(e) => handleChange(e.target.value, index, "text")}
+             onChange={(e) => handleChange(e.target.value, index, "text", dayKey)}
              placeholder="특전 내용 (예: 액자)" />
       <div style={{ marginLeft: "4px" }}>
         (
@@ -57,7 +59,7 @@ const GoodsChipCountInput = ({
         <input style={{ width: countWidth }}
                className="countInput"
                value={count !== 0 ? count : ""} type="number"
-               onChange={(e) => handleChange(e.target.value, index, "count")}
+               onChange={(e) => handleChange(e.target.value, index, "count", dayKey)}
                placeholder="0" />
         명 )
       </div>
@@ -67,7 +69,7 @@ const GoodsChipCountInput = ({
             handleDeleteValue(index);
           }
           if (handleDeleteChip) {
-            handleDeleteChip(index);
+            handleDeleteChip(index, dayKey);
           }
         }} />}
     </StyledGoodsChipInput>
@@ -75,6 +77,7 @@ const GoodsChipCountInput = ({
 };
 
 GoodsChipCountInput.defaultProps = {
+  dayKey: undefined,
   handleDeleteChip: () => console.log("delete"),
   handleDeleteValue: () => console.log("delete"),
 };

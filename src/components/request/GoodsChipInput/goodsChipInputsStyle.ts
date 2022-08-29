@@ -29,8 +29,9 @@ const StyledGoodsChipInput = styled.div`
     padding: 0;
     
     &.countInput {
-      min-width: 8px;
+      min-width: 10px;
       margin-left: 2px;
+      text-align: center;
 
       &::-webkit-outer-spin-button,
       &::-webkit-inner-spin-button {

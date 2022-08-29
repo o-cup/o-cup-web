@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import {
-  StyledFcfsContentContainer,
   StyledFcfsGoodsInput,
   StyledFcfsTitle,
   StyledFcfsTypeSelector,
@@ -9,9 +8,8 @@ import {
 import { requestInputsAtom } from "../../../state/atoms";
 import Icons from "../../../shared/components/Icon/Icons";
 import { getDatesInRange } from "../../../shared/utils/dateHandlers";
-import GoodsChipInput from "../GoodsChipInput/GoodsChipInput";
-import { FcfsDataType, RequestFcfsType } from "../requestType";
-import FcfsTypeA from "./chipContents/FcfsTypeA";
+import { RequestFcfsType } from "../requestType";
+import FcfsContent from "./chipContents/FcfsContent";
 
 const TYPE = [
   { key: "A", content: "매일\n동일해요" },
@@ -28,7 +26,7 @@ const DefaultTypeA: RequestFcfsType = {
 };
 
 // 선착 타입 B: 날짜별로 다름
-const DefaultTypeB: RequestFcfsType = {
+let DefaultTypeB: RequestFcfsType = {
   type: "B",
   data: [{ day: 0, items: [{ id: 1, text: "", count: 0 }] }],
 };
@@ -56,13 +54,6 @@ const FcfsGoodsInput = () => {
    * */
   const [type, setType] = useState(firstCome?.type || ""); // "A" | "B" | "C" | "X"
 
-  // 날짜 변경에 맞춰 DefaultTypeB에 날짜입력
-  useEffect(() => {
-    setHasDateRange(dateRange.startAt && dateRange.endAt);
-    const date = getDatesInRange(dateRange.startAt, dateRange.endAt);
-    DefaultTypeB.data = date.map((d) => ({ day: d.getDate(), items: [{ id: 1, text: "", count: 0 }] }));
-  }, [dateRange]);
-
   const renderCheckbox = (checkType: string) => {
     if (!hasDateRange) {
       return (<Icons name="check_blank" />);
@@ -81,21 +72,6 @@ const FcfsGoodsInput = () => {
     });
   };
 
-  const handleFirstComeData = (data: FcfsDataType[]) => {
-    if (type === "A" || type === "B" || type === "C") {
-      setRequestInputs({
-        ...requestInputs,
-        goods: {
-          ...goods,
-          firstCome: {
-            type,
-            data,
-          },
-        },
-      });
-    }
-  };
-
   useEffect(() => {
     if (type === "A") {
       handleFirstCome(DefaultTypeA);
@@ -110,6 +86,20 @@ const FcfsGoodsInput = () => {
       handleFirstCome({} as RequestFcfsType);
     }
   }, [type]);
+
+  /* 날짜 변경에 맞춰 DefaultTypeB에 날짜입력 */
+  useEffect(() => {
+    setHasDateRange(dateRange.startAt && dateRange.endAt);
+    const date = getDatesInRange(dateRange.startAt, dateRange.endAt);
+    DefaultTypeB = {
+      type: "B",
+      data: date.map((d) => ({ day: d.getDate(), items: [{ id: 1, text: "", count: 0 }] }))
+    };
+
+    if(firstCome?.type === "B") {
+      handleFirstCome(DefaultTypeB);
+    }
+  }, [dateRange]);
 
   return (
     <StyledFcfsGoodsInput>
@@ -133,45 +123,19 @@ const FcfsGoodsInput = () => {
           </button>)}
       </StyledFcfsTypeSelector>
 
-      {/** 매일 동일해요 */}
-      {firstCome?.type === "A" && firstCome?.data &&
-        <FcfsTypeA firstCome={firstCome} handleFirstComeData={handleFirstComeData} />
-      }
-
-      {/** 날짜별로 달라요 */}
-      {firstCome?.type === "B" && firstCome?.data &&
-        firstCome.data.map((obj) =>
-          <StyledFcfsContentContainer key={obj.day}>
-            <div className="highlight">{obj.day}일</div>
-            <div className="chipContainer">
-              {obj.items.map((g) =>
-                <GoodsChipInput key={g.id} index={g.id} value={g.text}
-                                handleChange={(e) => console.log(e)}
-                                handleDelete={() => console.log("delete")} />)}
-              <button type="button" className="chipAddButton">
-                <i className="plus" />
-              </button>
-            </div>
-          </StyledFcfsContentContainer>,
-        )
-      }
-
-      {/** 기념일에만 달라요 */}
-      {firstCome?.type === "C" && firstCome?.data &&
-        firstCome.data.map((obj: FcfsDataType) =>
-          <StyledFcfsContentContainer key={obj.key}>
-            <div className="highlight">{(obj.key === "dDay" || obj.key === "others") && TYPE_C[obj.key]}</div>
-            <div className="chipContainer">
-              {obj.items.map((g) =>
-                <GoodsChipInput key={g.id} index={g.id} value={g.text}
-                                handleChange={(e) => console.log(e)}
-                                handleDelete={() => console.log("delete")} />)}
-              <button type="button" className="chipAddButton">
-                <i className="plus" />
-              </button>
-            </div>
-          </StyledFcfsContentContainer>,
-        )
+      {firstCome?.type && firstCome?.data &&
+        firstCome.data.map((dataObj, i) => {
+          let highlight = "매일";
+          if (dataObj.day) {
+            highlight = `${dataObj.day}일`;
+          }
+          if (dataObj.key === "others" || dataObj.key === "dDay") {
+            highlight = TYPE_C[dataObj.key];
+          }
+          return (
+            <FcfsContent dataObj={dataObj} highlight={highlight} key={dataObj.day || dataObj.key || i}/>
+          );
+        })
       }
 
       <div className="fcfsNotice">

@@ -9,7 +9,7 @@ type GoodsChipProps = {
 };
 
 const GoodsChipInput = ({ value, index, handleChange, handleDelete }: GoodsChipProps) => {
-  const [width, setWidth] = useState(0);
+  const [width, setWidth] = useState(150);
   const span = useRef<HTMLSpanElement>(null);
 
   /** input width 자동 맞춤 */

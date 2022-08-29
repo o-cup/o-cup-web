@@ -60,11 +60,12 @@ export const requestInputsAtom = atom<RequestType>({
   effects: [sessionAtom],
 });
 
-export const requestGoodsListAtom = atom<{ id: number; title: string; items: { id: number; text: string }[] }[]>({
+export const requestGoodsListAtom = atom<{ id: number; title: string; key: string; items: { id: number; text: string }[] }[]>({
 	key: "requestGoodsListAtom",
 	default: [
 		{
 			id: 1,
+      key: "",
 			title: "",
 			items: [{ id: 1, text: "" }],
 		},

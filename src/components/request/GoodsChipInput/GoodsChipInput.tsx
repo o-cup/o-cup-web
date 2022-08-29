@@ -25,7 +25,7 @@ const GoodsChipInput = ({ value, index, handleChange, handleDelete }: GoodsChipP
 
   return (
     <StyledGoodsChipInput>
-      <span id="hide" ref={span}>{value}</span>
+      <span className="hide" ref={span}>{value}</span>
       <input style={{ width }}
              value={value}
              onChange={(e) => handleChange(e.target.value, index)}

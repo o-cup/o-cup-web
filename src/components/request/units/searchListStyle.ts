@@ -35,7 +35,7 @@ const StyledSearchListContainer = styled.div`
       }
     }
   }
-  
+
   ul:nth-child(2) {
     border-top: 2px solid #000000;
   }
@@ -48,7 +48,7 @@ const StyledSearchList = styled.ul`
   height: auto;
   max-height: 300px;
   overflow-y: auto;
-  
+
   > li {
     display: flex;
     justify-content: space-between;
@@ -70,6 +70,10 @@ const StyledSearchList = styled.ul`
       > h4 {
         font-weight: 700;
       }
+
+      > p > span {
+        color: ${({ theme }) => theme.colors.gray};
+      }
     }
 
     > button {
@@ -82,6 +86,11 @@ const StyledSearchList = styled.ul`
       line-height: 16px;
       padding: 7px 12px;
       margin-left: 8px;
+      
+      &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
     }
   }
 `;

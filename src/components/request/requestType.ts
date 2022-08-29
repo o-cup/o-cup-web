@@ -50,12 +50,12 @@ export type RequestExtraGoodsType = {
 }
 
 export type RequestGoodsType = {
-  all?: ItemsType[];
-  random?: ItemsType[];
-  dDay?: ItemsType[];
+  // all?: ItemsType[];
+  // random?: ItemsType[];
+  // dDay?: ItemsType[];
   firstCome?: RequestFcfsType;
   lucky?: ItemsCountType[];
-  extra?: RequestExtraGoodsType[];
+  // extra?: RequestExtraGoodsType[];
 }
 
 export type RequestType = {

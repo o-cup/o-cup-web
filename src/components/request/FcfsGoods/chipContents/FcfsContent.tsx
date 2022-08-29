@@ -72,7 +72,7 @@ const FcfsContent = ({ dataObj, highlight }: FcfsContentProps) => {
       if (items) {
         handleFirstComeData([{
           ...firstCome.data[0],
-          items: [...items, { id: items[items.length - 1].id + 1, text: "", count: 0 }],
+          items: [...items, { id: (items[items.length - 1]?.id || 0) + 1, text: "", count: 0 }],
         }]);
       }
     }
@@ -82,7 +82,7 @@ const FcfsContent = ({ dataObj, highlight }: FcfsContentProps) => {
       const updatedData = firstCome?.data?.map((data) => {
         if (data.day === dayKey || data.key === dayKey) {
           const { items } = data;
-          const updatedItems = [...items, { id: items[items.length - 1].id + 1, text: "", count: 0 }];
+          const updatedItems = [...items, { id: (items[items.length - 1]?.id || 0) + 1, text: "", count: 0 }];
           return { ...data, items: updatedItems };
         }
         return data;

@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { DateRange } from "react-date-range-ts";
 import { ko } from "date-fns/locale";
 import { useRecoilState } from "recoil";
-import { requestDateRangeAtom } from "../../../state/atoms";
+import { requestInputsAtom } from "../../../state/atoms";
 import "react-date-range-ts/dist/styles.css";
 import "./request-calendar-custom.css";
 import { StyledDateRangeInput, StyledCalendarContainer } from "./dateRangeInputStyle";
 import { convertDateToString, convertDateWithDots, convertStringToDate } from "../../../shared/utils/dateHandlers";
 
 const DateRangeInput = () => {
-	const [dateRange, setDateRange] = useRecoilState(requestDateRangeAtom);
+	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
+  const { dateRange } = requestInputs;
 
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
 	const [selectedRange, setSelectedRange] = useState({
@@ -23,10 +24,13 @@ const DateRangeInput = () => {
 	};
 
 	const handleClickSubmit = () => {
-		setDateRange({
-			startAt: convertDateToString(selectedRange.startDate),
-			endAt: convertDateToString(selectedRange.endDate),
-		});
+    setRequestInputs({
+      ...requestInputs,
+      dateRange: {
+        startAt: convertDateToString(selectedRange.startDate),
+        endAt: convertDateToString(selectedRange.endDate),
+      },
+    });
 		setCalendarOpen(false);
 	};
 

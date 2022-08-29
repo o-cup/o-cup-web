@@ -7,7 +7,7 @@ function GoodsInfo({ goods, tweetUrl }: Partial<DetailType>) {
 	return (
 		<StyledGoodsInfo>
 			<h4>특전</h4>
-			{goods?.map((item) => (
+			{goods?.extra?.map((item) => (
 				<GoodsListItem goodsListItem={item} key={item.title} />
 			))}
 			<p className="notice">수량 등 특전에 관한 자세한 사항은 포스터 내 공지를 확인하세요.</p>

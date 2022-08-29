@@ -16,12 +16,6 @@ export type RequestPlaceType = {
   address: string;
 }
 
-export type RequestBasicType = {
-  organizer: string;
-  snsId: string;
-  link: string;
-}
-
 export type RequestPosterType = {
   id: number;
   publicUrl: string;
@@ -41,6 +35,33 @@ export type FcfsDataType = {
 export type RequestFcfsType = {
   type: "A" | "B" | "C";
   data: FcfsDataType[];
+}
+
+export type RequestExtraGoodsType = {
+  index: number;
+  title: string;
+  items: ItemsType[];
+}
+
+export type RequestGoodsType = {
+  all?: ItemsType[];
+  random?: ItemsType[];
+  dDay?: ItemsType[];
+  firstCome?: RequestFcfsType;
+  lucky?: ItemsType[];
+  extra?: RequestExtraGoodsType[];
+}
+
+export type RequestType = {
+  place: RequestPlaceType;
+  artist: RequestArtistType[];
+  organizer: string;
+  snsId: string;
+  link: string;
+  posterUrls: RequestPosterType[];
+  hashTags: ItemsType[];
+  dateRange: RequestDateRangeType;
+  goods: RequestGoodsType;
 }
 
 export default {};

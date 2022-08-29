@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { requestBasicAtom } from "../../state/atoms";
+import { requestInputsAtom } from "../../state/atoms";
 import { StyledEntry, StyledRequestModal } from "./styles/requestStyle";
 import Button from "../../shared/components/Button";
 import BasicInput from "./units/BasicInput";
@@ -26,18 +26,18 @@ type EntryProps = {
 const Entry = ({ isModalOpen, setModalOpen, setBottomSheetOpen, handleSubmit, resetAllStates }: EntryProps) => {
 	const navigate = useNavigate();
 
-	const [basicInputs, setBasicInputs] = useRecoilState(requestBasicAtom);
-	const { organizer, snsId, link } = basicInputs;
+	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
+	const { organizer, snsId, link } = requestInputs;
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
-		setBasicInputs({
-			...basicInputs,
+		setRequestInputs({
+			...requestInputs,
 			[id]: e.currentTarget.value,
 		});
 	};
 
 	const handleInputDelete = (e: React.MouseEvent, id: string) => {
-		setBasicInputs((prev) => ({
+		setRequestInputs((prev) => ({
 			...prev,
 			[id]: "",
 		}));

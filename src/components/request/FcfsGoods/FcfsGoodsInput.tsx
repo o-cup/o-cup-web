@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import {
   StyledFcfsContentContainer,
   StyledFcfsGoodsInput,
   StyledFcfsTitle,
   StyledFcfsTypeSelector,
 } from "./fcfsGoodsInputStyle";
-import { requestDateRangeAtom } from "../../../state/atoms";
+import { requestInputsAtom } from "../../../state/atoms";
 import Icons from "../../../shared/components/Icon/Icons";
 import { getDatesInRange } from "../../../shared/utils/dateHandlers";
 import EditableGoodsChip from "../../../shared/components/EditableGoodsChip";
@@ -42,7 +42,8 @@ const DefaultTypeC: RequestFcfsType = {
 };
 
 const FcfsGoodsInput = () => {
-  const dateRange = useRecoilValue(requestDateRangeAtom);
+  const [requestInputs] = useRecoilState(requestInputsAtom);
+  const { dateRange } = requestInputs;
 
   const [hasDateRange, setHasDateRange] = useState(dateRange.startAt && dateRange.endAt);
 

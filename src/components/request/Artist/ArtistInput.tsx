@@ -8,7 +8,7 @@ import { DeleteBtn } from "../units/basicInputStyle";
 import SearchInput from "../units/SearchInput";
 import { PeopleType } from "../../../types";
 import { RequestArtistType } from "../requestType";
-import Icon from "../../../shared/components/Icon/Icons";
+import Icons from "../../../shared/components/Icon/Icons";
 
 type InputProps = {
   value: RequestArtistType;
@@ -70,7 +70,7 @@ const ArtistInput = ({ value, handleChangeArtist, handleDeleteArtist }: InputPro
                      label="아티스트 이름"
                      hideLabel={value.id > 1}
                      shortBtn={value.id > 1} />
-        {value.id !== 1 && <Icon name="subtraction" handleClick={() => handleDeleteArtist(value.id)} />}
+        {value.id !== 1 && <Icons name="subtraction" handleClick={() => handleDeleteArtist(value.id)} />}
       </div>
 
       {isSearchOpen && <StyledSearchListContainer>

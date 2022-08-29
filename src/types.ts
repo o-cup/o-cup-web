@@ -24,16 +24,36 @@ export type EventType = {
 	isApproved: boolean;
 };
 
-export type GoodsItemType = {
-	title: string;
-	items: string[];
-	type?: "AND" | "OR";
-};
+export type FirstComeType = {
+  type: "A" | "B" | "C",
+  data: [
+    {
+      key?: string;
+      day: number;
+      items: string[];
+    }
+  ]
+}
+
+export type ExtraGoodsType = {
+  index: number;
+  title: string;
+  items: string[];
+}
+
+export type GoodsListType = {
+  all?: string[];
+  random?: string[];
+  dDay?: string[];
+  firstCome?: FirstComeType;
+  lucky?: string[];
+  extra?: ExtraGoodsType[];
+}
 
 export type DetailType = {
 	id: string;
 	address: string;
-	goods: GoodsItemType[];
+  goods: GoodsListType;
 	hashTags: string[];
 	tweetUrl: string;
 };

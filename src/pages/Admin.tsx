@@ -1,9 +1,10 @@
+/*
 import React, { ChangeEvent, useState } from "react";
 import { insertEvent, insertDetail } from "../apis";
 import { StyledAdmin } from "../components/admin/styles/adminStyle";
 import Layout from "../shared/components/layout";
 
-// todo: 추후 컴포넌트 분리
+// todo: 추후 삭제!
 
 function Admin() {
 	const [events, setEvents] = useState({
@@ -89,7 +90,7 @@ function Admin() {
 			});
 		}
 
-		/* reset */
+		/!* reset *!/
 		setEvents({
 			place: "",
 			bias: "",
@@ -332,3 +333,6 @@ function Admin() {
 }
 
 export default Admin;
+*/
+
+export default {};

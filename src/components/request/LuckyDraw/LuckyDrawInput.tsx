@@ -68,6 +68,27 @@ const LuckyDrawInput = () => {
     });
   };
 
+  const handleDeleteValue = (luckyId: number) => {
+    const luckyData = goods.lucky?.map((luck) => {
+      if (luck.id === luckyId) {
+        return {
+          ...luck,
+          text: "",
+          count: 0,
+        };
+      }
+      return luck;
+    });
+
+    setRequestInputs({
+      ...requestInputs,
+      goods: {
+        ...goods,
+        lucky: luckyData,
+      },
+    });
+  };
+
   const handleAddLuck = () => {
     if (goods.lucky) {
       setRequestInputs({
@@ -116,7 +137,7 @@ const LuckyDrawInput = () => {
             <div className="chipContainer">
               <GoodsChipCountInput index={luck.id} value={luck.text} count={luck.count}
                                    handleChange={handleInputChange}
-                                   handleDelete={() => console.log("delete")} />
+                                   handleDeleteValue={handleDeleteValue} />
             </div>
             {luck.id !== 1 && luck.id === goods.lucky?.length &&
               <Icons name="subtraction" handleClick={handleDeleteLuck} />}

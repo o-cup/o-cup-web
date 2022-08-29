@@ -11,6 +11,7 @@ import Icons from "../../../shared/components/Icon/Icons";
 import { getDatesInRange } from "../../../shared/utils/dateHandlers";
 import GoodsChipInput from "../GoodsChipInput/GoodsChipInput";
 import { FcfsDataType, RequestFcfsType } from "../requestType";
+import FcfsTypeA from "./chipContents/FcfsTypeA";
 
 const TYPE = [
   { key: "A", content: "매일\n동일해요" },
@@ -23,27 +24,27 @@ const TYPE_C = { others: "매일", dDay: "기념일" };
 // 선착 타입 A: 매일 같음
 const DefaultTypeA: RequestFcfsType = {
   type: "A",
-  data: [{ items: [{ id: 1, text: "" }] }],
+  data: [{ items: [{ id: 1, text: "", count: 0 }] }],
 };
 
 // 선착 타입 B: 날짜별로 다름
 const DefaultTypeB: RequestFcfsType = {
   type: "B",
-  data: [{ day: 0, items: [{ id: 1, text: "" }] }],
+  data: [{ day: 0, items: [{ id: 1, text: "", count: 0 }] }],
 };
 
 // 선착 타입 C: 기념일만 다름
 const DefaultTypeC: RequestFcfsType = {
   type: "C",
   data: [
-    { key: "others", items: [{ id: 1, text: "" }] },
-    { key: "dDay", items: [{ id: 1, text: "" }] },
+    { key: "others", items: [{ id: 1, text: "", count: 0 }] },
+    { key: "dDay", items: [{ id: 1, text: "", count: 0 }] },
   ],
 };
 
 const FcfsGoodsInput = () => {
-  const [requestInputs] = useRecoilState(requestInputsAtom);
-  const { dateRange } = requestInputs;
+  const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
+  const { dateRange, goods, goods: { firstCome } } = requestInputs;
 
   const [hasDateRange, setHasDateRange] = useState(dateRange.startAt && dateRange.endAt);
 
@@ -53,14 +54,13 @@ const FcfsGoodsInput = () => {
    * C: 기념일에만 달라요
    * X: 선착특전 없음(fcfsList === {})
    * */
-  const [type, setType] = useState(""); // "A" | "B" | "C" | "X"
-  const [fcfsList, setFcfsList] = useState({} as RequestFcfsType);
+  const [type, setType] = useState(firstCome?.type || ""); // "A" | "B" | "C" | "X"
 
   // 날짜 변경에 맞춰 DefaultTypeB에 날짜입력
   useEffect(() => {
     setHasDateRange(dateRange.startAt && dateRange.endAt);
     const date = getDatesInRange(dateRange.startAt, dateRange.endAt);
-    DefaultTypeB.data = date.map((d) => ({ day: d.getDate(), items: [{ id: 1, text: "" }] }));
+    DefaultTypeB.data = date.map((d) => ({ day: d.getDate(), items: [{ id: 1, text: "", count: 0 }] }));
   }, [dateRange]);
 
   const renderCheckbox = (checkType: string) => {
@@ -71,18 +71,43 @@ const FcfsGoodsInput = () => {
       <Icons name="check_false" />;
   };
 
+  const handleFirstCome = (fcfs: RequestFcfsType) => {
+    setRequestInputs({
+      ...requestInputs,
+      goods: {
+        ...goods,
+        firstCome: fcfs,
+      },
+    });
+  };
+
+  const handleFirstComeData = (data: FcfsDataType[]) => {
+    if (type === "A" || type === "B" || type === "C") {
+      setRequestInputs({
+        ...requestInputs,
+        goods: {
+          ...goods,
+          firstCome: {
+            type,
+            data,
+          },
+        },
+      });
+    }
+  };
+
   useEffect(() => {
     if (type === "A") {
-      setFcfsList(DefaultTypeA);
+      handleFirstCome(DefaultTypeA);
     }
     if (type === "B") {
-      setFcfsList(DefaultTypeB);
+      handleFirstCome(DefaultTypeB);
     }
     if (type === "C") {
-      setFcfsList(DefaultTypeC);
+      handleFirstCome(DefaultTypeC);
     }
     if (type === "X") {
-      setFcfsList({} as RequestFcfsType);
+      handleFirstCome({} as RequestFcfsType);
     }
   }, [type]);
 
@@ -109,32 +134,20 @@ const FcfsGoodsInput = () => {
       </StyledFcfsTypeSelector>
 
       {/** 매일 동일해요 */}
-      {fcfsList.type === "A" && fcfsList.data && fcfsList.data[0] &&
-        <StyledFcfsContentContainer>
-          <div className="highlight">매일</div>
-          <div className="chipContainer">
-            {fcfsList.data[0].items.map((g) =>
-              <GoodsChipInput key={g.id} index={g.id} value={g.text}
-                                 handleChange={(e) => console.log(e)}
-                                 handleDelete={() => console.log("delete")} />)
-            }
-            <button type="button" className="chipAddButton">
-              <i className="plus" />
-            </button>
-          </div>
-        </StyledFcfsContentContainer>
+      {firstCome?.type === "A" && firstCome?.data &&
+        <FcfsTypeA firstCome={firstCome} handleFirstComeData={handleFirstComeData} />
       }
 
       {/** 날짜별로 달라요 */}
-      {fcfsList.type === "B" && fcfsList.data &&
-        fcfsList.data.map((obj) =>
+      {firstCome?.type === "B" && firstCome?.data &&
+        firstCome.data.map((obj) =>
           <StyledFcfsContentContainer key={obj.day}>
             <div className="highlight">{obj.day}일</div>
             <div className="chipContainer">
               {obj.items.map((g) =>
                 <GoodsChipInput key={g.id} index={g.id} value={g.text}
-                                   handleChange={(e) => console.log(e)}
-                                   handleDelete={() => console.log("delete")} />)}
+                                handleChange={(e) => console.log(e)}
+                                handleDelete={() => console.log("delete")} />)}
               <button type="button" className="chipAddButton">
                 <i className="plus" />
               </button>
@@ -144,15 +157,15 @@ const FcfsGoodsInput = () => {
       }
 
       {/** 기념일에만 달라요 */}
-      {fcfsList.type === "C" && fcfsList.data &&
-        fcfsList.data.map((obj: FcfsDataType) =>
+      {firstCome?.type === "C" && firstCome?.data &&
+        firstCome.data.map((obj: FcfsDataType) =>
           <StyledFcfsContentContainer key={obj.key}>
             <div className="highlight">{(obj.key === "dDay" || obj.key === "others") && TYPE_C[obj.key]}</div>
             <div className="chipContainer">
               {obj.items.map((g) =>
                 <GoodsChipInput key={g.id} index={g.id} value={g.text}
-                                   handleChange={(e) => console.log(e)}
-                                   handleDelete={() => console.log("delete")} />)}
+                                handleChange={(e) => console.log(e)}
+                                handleDelete={() => console.log("delete")} />)}
               <button type="button" className="chipAddButton">
                 <i className="plus" />
               </button>

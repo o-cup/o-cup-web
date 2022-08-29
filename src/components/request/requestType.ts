@@ -35,7 +35,7 @@ export type RequestDateRangeType = {
 export type FcfsDataType = {
   key?: string;
   day?: number;
-  items: ItemsType[];
+  items: ItemsCountType[];
 }
 
 export type RequestFcfsType = {

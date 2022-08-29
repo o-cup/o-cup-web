@@ -6,10 +6,18 @@ type GoodsChipProps = {
   value: string;
   count: number;
   handleChange: (value: string, luckyId: number, key: "text" | "count") => void;
-  handleDelete: (index: number) => void;
+  handleDeleteChip?: (index: number) => void;
+  handleDeleteValue?: (index: number) => void;
 };
 
-const GoodsChipCountInput = ({ index, value, count, handleChange, handleDelete }: GoodsChipProps) => {
+const GoodsChipCountInput = ({
+                               index,
+                               value,
+                               count,
+                               handleChange,
+                               handleDeleteChip,
+                               handleDeleteValue,
+                             }: GoodsChipProps) => {
   const [textWidth, setTextWidth] = useState(0);
   const textRef = useRef<HTMLSpanElement>(null);
   const [countWidth, setCountWidth] = useState(0);
@@ -48,14 +56,27 @@ const GoodsChipCountInput = ({ index, value, count, handleChange, handleDelete }
         <span className="hide" ref={countRef}>{`${count}`}</span>
         <input style={{ width: countWidth }}
                className="countInput"
-               value={count} type="number"
+               value={count !== 0 ? count : ""} type="number"
                onChange={(e) => handleChange(e.target.value, index, "count")}
                placeholder="0" />
-        명)
+        명 )
       </div>
-      {value !== "" && <button type="button" onClick={() => handleDelete(index)} />}
+      {value !== "" &&
+        <button type="button" onClick={() => {
+          if (handleDeleteValue) {
+            handleDeleteValue(index);
+          }
+          if (handleDeleteChip) {
+            handleDeleteChip(index);
+          }
+        }} />}
     </StyledGoodsChipInput>
   );
+};
+
+GoodsChipCountInput.defaultProps = {
+  handleDeleteChip: () => console.log("delete"),
+  handleDeleteValue: () => console.log("delete"),
 };
 
 export default GoodsChipCountInput;

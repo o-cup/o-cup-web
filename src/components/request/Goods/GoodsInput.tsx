@@ -6,7 +6,7 @@ import {
   StyledChipContainer
 } from "./goodsInputStyle";
 import { StyledSearchListContainer, StyledSearchList } from "../units/searchListStyle";
-import EditableGoodsChip from "../../../shared/components/EditableGoodsChip";
+import GoodsChipInput from "../GoodsChipInput/GoodsChipInput";
 import Icons from "../../../shared/components/Icon/Icons";
 import { ItemsType } from "../requestType";
 
@@ -131,7 +131,7 @@ const GoodsInput = ({ value, handleChangeGoods }: InputProps) => {
       </StyledSearchListContainer>}
       <StyledChipContainer>
         {value.items.map((g) =>
-          <EditableGoodsChip key={g.id} index={g.id} value={g.text} handleChange={setGoodsContent}
+          <GoodsChipInput key={g.id} index={g.id} value={g.text} handleChange={setGoodsContent}
                              handleDelete={deleteGoodsChip} />)}
         <button type="button" className="chipAddButton" onClick={addGoodsContent}>
           <i className="plus" />

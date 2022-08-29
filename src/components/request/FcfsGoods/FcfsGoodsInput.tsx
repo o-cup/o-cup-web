@@ -9,7 +9,7 @@ import {
 import { requestInputsAtom } from "../../../state/atoms";
 import Icons from "../../../shared/components/Icon/Icons";
 import { getDatesInRange } from "../../../shared/utils/dateHandlers";
-import EditableGoodsChip from "../../../shared/components/EditableGoodsChip";
+import GoodsChipInput from "../GoodsChipInput/GoodsChipInput";
 import { FcfsDataType, RequestFcfsType } from "../requestType";
 
 const TYPE = [
@@ -114,7 +114,7 @@ const FcfsGoodsInput = () => {
           <div className="highlight">매일</div>
           <div className="chipContainer">
             {fcfsList.data[0].items.map((g) =>
-              <EditableGoodsChip key={g.id} index={g.id} value={g.text}
+              <GoodsChipInput key={g.id} index={g.id} value={g.text}
                                  handleChange={(e) => console.log(e)}
                                  handleDelete={() => console.log("delete")} />)
             }
@@ -132,7 +132,7 @@ const FcfsGoodsInput = () => {
             <div className="highlight">{obj.day}일</div>
             <div className="chipContainer">
               {obj.items.map((g) =>
-                <EditableGoodsChip key={g.id} index={g.id} value={g.text}
+                <GoodsChipInput key={g.id} index={g.id} value={g.text}
                                    handleChange={(e) => console.log(e)}
                                    handleDelete={() => console.log("delete")} />)}
               <button type="button" className="chipAddButton">
@@ -150,7 +150,7 @@ const FcfsGoodsInput = () => {
             <div className="highlight">{(obj.key === "dDay" || obj.key === "others") && TYPE_C[obj.key]}</div>
             <div className="chipContainer">
               {obj.items.map((g) =>
-                <EditableGoodsChip key={g.id} index={g.id} value={g.text}
+                <GoodsChipInput key={g.id} index={g.id} value={g.text}
                                    handleChange={(e) => console.log(e)}
                                    handleDelete={() => console.log("delete")} />)}
               <button type="button" className="chipAddButton">

@@ -3,6 +3,12 @@ export type ItemsType = {
   text: string;
 }
 
+export type ItemsCountType = {
+  id: number;
+  text: string;
+  count: number;
+}
+
 export type RequestArtistType = {
   id: number;
   peopleId: number;
@@ -48,7 +54,7 @@ export type RequestGoodsType = {
   random?: ItemsType[];
   dDay?: ItemsType[];
   firstCome?: RequestFcfsType;
-  lucky?: ItemsType[];
+  lucky?: ItemsCountType[];
   extra?: RequestExtraGoodsType[];
 }
 

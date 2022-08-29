@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { StyledGoodsChip } from "./editableGoodsChipStyle";
+import { StyledGoodsChipInput } from "./goodsChipInputsStyle";
 
 type GoodsChipProps = {
   value: string;
@@ -8,7 +8,7 @@ type GoodsChipProps = {
   handleDelete: (index: number) => void;
 };
 
-const EditableGoodsChip = ({ value, index, handleChange, handleDelete }: GoodsChipProps) => {
+const GoodsChipInput = ({ value, index, handleChange, handleDelete }: GoodsChipProps) => {
   const [width, setWidth] = useState(0);
   const span = useRef<HTMLSpanElement>(null);
 
@@ -24,15 +24,15 @@ const EditableGoodsChip = ({ value, index, handleChange, handleDelete }: GoodsCh
   }, [span, span.current, value]);
 
   return (
-    <StyledGoodsChip>
+    <StyledGoodsChipInput>
       <span id="hide" ref={span}>{value}</span>
       <input style={{ width }}
              value={value}
              onChange={(e) => handleChange(e.target.value, index)}
              placeholder="특전 내용 입력하기 (예: 컵홀더)" />
       {value !== "" && <button type="button" onClick={() => handleDelete(index)} />}
-    </StyledGoodsChip>
+    </StyledGoodsChipInput>
   );
 };
 
-export default EditableGoodsChip;
+export default GoodsChipInput;

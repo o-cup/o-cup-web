@@ -25,12 +25,12 @@ export const keywordAtom = atom({
 	default: "",
 });
 
-export const dateRangeAtom = atom<{ startDate: string; endDate: string; }>({
-  key: "dateRangeAtom",
-  default: {
-    startDate: "",
-    endDate: "",
-  },
+export const dateRangeAtom = atom<{ startDate: string; endDate: string }>({
+	key: "dateRangeAtom",
+	default: {
+		startDate: "",
+		endDate: "",
+	},
 });
 
 export const districtAtom = atom<string[]>({
@@ -39,25 +39,19 @@ export const districtAtom = atom<string[]>({
 });
 
 export const requestInputsAtom = atom<RequestType>({
-  key: "requestInputsAtom",
-  default: {
-    place: { place: "", district: "", address: "" },
-    artist: [
-      { id: 1, peopleId: 0, bias: "", team: "" },
-    ],
-    organizer: "",
-    snsId: "",
-    link: "",
-    posterUrls: [
-      { id: 1, publicUrl: "" }
-    ],
-    hashTags: [
-      { id: 1, text: "" },
-    ],
-    dateRange:{ startAt: "", endAt: "" },
-    goods: {},
-  },
-  effects: [sessionAtom],
+	key: "requestInputsAtom",
+	default: {
+		place: { place: "", district: "", address: "" },
+		artist: [{ id: 1, peopleId: 0, bias: "", team: "" }],
+		organizer: "",
+		snsId: "",
+		link: "",
+		posterUrls: [{ id: 1, publicUrl: "" }],
+		hashTags: [{ id: 1, text: "" }],
+		dateRange: { startAt: "", endAt: "" },
+		goods: {},
+	},
+	effects: [sessionAtom],
 });
 
 export const requestGoodsListAtom = atom<{ id: number; title: string; items: { id: number; text: string }[] }[]>({

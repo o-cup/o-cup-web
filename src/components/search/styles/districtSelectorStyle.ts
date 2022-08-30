@@ -39,6 +39,8 @@ const StyledDistrictSelector = styled.div`
 				overflow: scroll;
 				background-color: ${({ theme }) => theme.colors.white};
 
+				-ms-overflow-style: none;
+
 				::-webkit-scrollbar {
 					display: none;
 				}
@@ -48,10 +50,6 @@ const StyledDistrictSelector = styled.div`
 					font-size: 12px;
 					padding: 0 20px;
 					cursor: pointer;
-
-					&:hover {
-						background-color: rgba(249, 243, 104, 0.3);
-					}
 
 					&.selected {
 						background-color: rgba(249, 243, 104, 0.3);

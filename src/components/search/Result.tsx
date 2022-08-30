@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { fetchEvents } from "../../apis";
 import { StyledResult } from "./styles/resultStyle";
 import Event from "./Event";

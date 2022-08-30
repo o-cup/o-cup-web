@@ -1,127 +1,42 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
-import { divisionList } from "./data";
 import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
+import { useRegCodes } from "../../hooks";
+import { RegCodeItem } from "../../types";
 
 type DistrictSelectorProps = {
 	handleSubmit: () => void;
-	selectedDist: string[];
-	setSelectedDist: Dispatch<SetStateAction<string[]>>;
 };
 
-const MAX_CHIP_LENGTH = 3;
+const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
+	const [selectedDiv, setSelectedDiv] = useState<RegCodeItem>({ code: "1100000000", name: "서울특별시" });
+	const [selectedDist, setSelectedDist] = useState<RegCodeItem[]>([{ code: "1100000000", name: "서울특별시 전체" }]);
 
-const DistrictSelector = ({ handleSubmit, selectedDist, setSelectedDist }: DistrictSelectorProps) => {
-	const [divisions, setDivisions] = useState(divisionList);
+	// const [districtList, setDistrictList] = useState([]);
 
-	useEffect(() => {
-		const isAllSelected = divisions.find((div) => div.index === 1 && div.selected);
-		if (isAllSelected) {
-			setSelectedDist(["전국"]);
-			return;
+	const { divisionData, districtData } = useRegCodes({ divCode: selectedDiv.code });
+
+	const handleDivClick = (div: RegCodeItem) => {
+		setSelectedDiv(div);
+
+		const isDuplicated = selectedDist.find((dist) => dist.code === "all");
+		if (div.code === "all" && !isDuplicated) {
+			setSelectedDist([{ code: "all", name: "전국" }, ...selectedDist]);
 		}
-		const texts: string[] = [];
-		divisions.forEach((div) => {
-			div.districts.forEach((dist) => {
-				if (dist.selected) {
-					if (texts.includes(dist.name)) {
-						return;
-					}
-					const chipText = `${div.name} ${dist.name}`;
-					texts.push(chipText);
-				}
-			});
-		});
-		setSelectedDist(texts);
-	}, [divisions, selectedDist.length, setSelectedDist]);
-
-	const handleDivisionClick = (e: React.MouseEvent, index: number) => {
-		e.preventDefault();
-
-		const isAllSelected = index === 1;
-		if (isAllSelected) {
-			const newData = divisions.map((div) => {
-				const updated = div.districts.map((dist) => ({
-					...dist,
-					selected: false,
-				}));
-				return {
-					...div,
-					selected: div.index === 1,
-					districts: updated,
-				};
-			});
-			setDivisions(newData);
-			return;
-		}
-
-		if (selectedDist.length >= MAX_CHIP_LENGTH) return;
-		const newData = divisions.map((div) => {
-			if (div.index === index) {
-				const updated = div.districts.map((dist) => {
-					if (dist.index === 1) {
-						return {
-							...dist,
-							selected: true,
-						};
-					}
-					return {
-						...dist,
-						selected: false,
-					};
-				});
-				return {
-					...div,
-					selected: true,
-					districts: updated,
-				};
-			}
-			return { ...div, selected: false };
-		});
-		setDivisions(newData);
 	};
 
-	const handleDistrictClick = (index: number) => {
-		if (selectedDist.length >= MAX_CHIP_LENGTH) return;
+	const handleDistClick = (dist: RegCodeItem) => {
+		const isDuplicated = selectedDist.find((item) => item.code === dist.code);
+		if (isDuplicated) return;
 
-		const newData = divisions.map((div) => {
-			if (div.selected) {
-				const updatedDist = div.districts.map((dist) => {
-					if (dist.index === index) {
-						return {
-							...dist,
-							selected: true,
-						};
-					}
-					return { ...dist };
-				});
-				return {
-					...div,
-					districts: updatedDist,
-				};
-			}
-			return { ...div };
-		});
-		setDivisions(newData);
+		const allDist = dist.code.substring(2, 4) === "00";
+		if (allDist) {
+			setSelectedDist([...selectedDist, { code: dist.code, name: `${selectedDiv.name} ${dist.name}` }]);
+		}
 	};
 
-	const handleDeleteClick = (index: number) => {
-		const newData = divisions.map((div) => {
-			const updatedDist = div.districts.map((dist) => {
-				if (selectedDist[index].includes(dist.name)) {
-					return {
-						...dist,
-						selected: false,
-					};
-				}
-				return dist;
-			});
-			return {
-				...div,
-				districts: updatedDist,
-			};
-		});
-		setDivisions(newData);
+	const handleDeleteClick = (code: string) => {
+		console.log(code);
 	};
 
 	return (
@@ -134,7 +49,17 @@ const DistrictSelector = ({ handleSubmit, selectedDist, setSelectedDist }: Distr
 
 				<div className="districts">
 					<ul className="main">
-						{divisions.map((division) => (
+						{divisionData?.map((div: RegCodeItem) => (
+							<li
+								key={div.code}
+								role="presentation"
+								onClick={() => handleDivClick(div)}
+								className={div.code === selectedDiv.code ? "selected" : ""}
+							>
+								{div.name}
+							</li>
+						))}
+						{/* {divisions.map((division) => (
 							<li
 								role="presentation"
 								key={division.name}
@@ -143,10 +68,20 @@ const DistrictSelector = ({ handleSubmit, selectedDist, setSelectedDist }: Distr
 							>
 								{division.name}
 							</li>
-						))}
+						))} */}
 					</ul>
 					<ul className="sub">
-						{divisions
+						{districtData.map((dist: RegCodeItem) => (
+							<li
+								key={dist.code}
+								role="presentation"
+								onClick={() => handleDistClick(dist)}
+								className={dist.selected ? "selected" : ""}
+							>
+								{dist.name}
+							</li>
+						))}
+						{/* {divisions
 							.find((div) => div.selected)
 							?.districts.map((dist) => (
 								<li
@@ -157,16 +92,16 @@ const DistrictSelector = ({ handleSubmit, selectedDist, setSelectedDist }: Distr
 								>
 									{dist.name}
 								</li>
-							))}
+							))} */}
 					</ul>
 				</div>
 
 				<div className="result">
 					<div className="chips">
-						{selectedDist.map((item, index) => (
-							<span className="chip" key={item}>
-								<span>{item}</span>
-								<span role="presentation" onClick={() => handleDeleteClick(index)}>
+						{selectedDist.map((dist) => (
+							<span className="chip" key={dist.code}>
+								<span>{dist.name}</span>
+								<span role="presentation" onClick={() => handleDeleteClick(dist.code)}>
 									X
 								</span>
 							</span>

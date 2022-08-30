@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import axios from "axios";
 import { fetchPeople } from "../apis";
 import { MonthSelector, Result, SearchInput } from "../components/search";
 import { StyledFilter, StyledSearch } from "../components/search/styles/searchStyle";

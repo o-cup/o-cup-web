@@ -64,11 +64,7 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 			case "districtSelector":
 				elements = (
 					<Modal>
-						<DistrictSelector
-							selectedDist={selectedDist}
-							setSelectedDist={setSelectedDist}
-							handleSubmit={() => handleSubmit({ modal: "district" })}
-						/>
+						<DistrictSelector handleSubmit={() => handleSubmit({ modal: "district" })} />
 					</Modal>
 				);
 				break;

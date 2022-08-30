@@ -24,15 +24,15 @@ export type EventType = {
 	isApproved: boolean;
 };
 
+export type FirstComeDataType = {
+	key?: string;
+	day?: number;
+	items: string[];
+};
+
 export type FirstComeType = {
 	type: "A" | "B" | "C";
-	data: [
-		{
-			key?: string;
-			day: number;
-			items: string[];
-		}
-	];
+	data: FirstComeDataType[];
 };
 
 export type ExtraGoodsType = {

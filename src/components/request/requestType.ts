@@ -3,6 +3,12 @@ export type ItemsType = {
   text: string;
 }
 
+export type ItemsCountType = {
+  id: number;
+  text: string;
+  count: number;
+}
+
 export type RequestArtistType = {
   id: number;
   peopleId: number;
@@ -29,7 +35,7 @@ export type RequestDateRangeType = {
 export type FcfsDataType = {
   key?: string;
   day?: number;
-  items: ItemsType[];
+  items: ItemsCountType[];
 }
 
 export type RequestFcfsType = {
@@ -37,19 +43,20 @@ export type RequestFcfsType = {
   data: FcfsDataType[];
 }
 
-export type RequestExtraGoodsType = {
-  index: number;
-  title: string;
-  items: ItemsType[];
+export type RequestGoodsType = {
+  // all?: ItemsType[];
+  // random?: ItemsType[];
+  // dDay?: ItemsType[];
+  firstCome?: RequestFcfsType;
+  lucky?: ItemsCountType[];
+  // extra?: RequestExtraGoodsType[];
 }
 
-export type RequestGoodsType = {
-  all?: ItemsType[];
-  random?: ItemsType[];
-  dDay?: ItemsType[];
-  firstCome?: RequestFcfsType;
-  lucky?: ItemsType[];
-  extra?: RequestExtraGoodsType[];
+export type RequestGoodsListType = {
+  id: number;
+  title: string;
+  key: string;
+  items: ItemsType[]
 }
 
 export type RequestType = {

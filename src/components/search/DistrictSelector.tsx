@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
 import { useRegCodes } from "../../hooks";
@@ -10,11 +10,19 @@ type DistrictSelectorProps = {
 
 const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
 	const [selectedDiv, setSelectedDiv] = useState<RegCodeItem>({ code: "1100000000", name: "서울특별시" });
-	const [selectedDist, setSelectedDist] = useState<RegCodeItem[]>([{ code: "1100000000", name: "서울특별시 전체" }]);
+	const [districtList, setDistrictList] = useState<RegCodeItem[]>([]);
+	const [selectedDist, setSelectedDist] = useState<RegCodeItem[]>([]);
 
-	// const [districtList, setDistrictList] = useState([]);
+	const { divisionData, districtData } = useRegCodes({ div: selectedDiv });
 
-	const { divisionData, districtData } = useRegCodes({ divCode: selectedDiv.code });
+	useEffect(() => {
+		setDistrictList(districtData);
+	}, [districtData]);
+
+	useEffect(() => {
+		const selected = districtList.filter((dist) => dist.selected);
+		setSelectedDist([...selectedDist, ...selected]);
+	}, [districtList]);
 
 	const handleDivClick = (div: RegCodeItem) => {
 		setSelectedDiv(div);
@@ -29,11 +37,17 @@ const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
 		const isDuplicated = selectedDist.find((item) => item.code === dist.code);
 		if (isDuplicated) return;
 
-		const allDist = dist.code.substring(2, 4) === "00";
-		if (allDist) {
-			setSelectedDist([...selectedDist, { code: dist.code, name: `${selectedDiv.name} ${dist.name}` }]);
-		}
+		console.log("dist", dist);
+
+		const newList = districtList.map((item: RegCodeItem) => ({
+			...item,
+			selected: item.code === dist.code,
+		}));
+
+		setDistrictList(newList);
 	};
+
+	console.log("districtList", districtList);
 
 	const handleDeleteClick = (code: string) => {
 		console.log(code);
@@ -59,19 +73,9 @@ const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
 								{div.name}
 							</li>
 						))}
-						{/* {divisions.map((division) => (
-							<li
-								role="presentation"
-								key={division.name}
-								onClick={(e) => handleDivisionClick(e, division.index)}
-								className={division.selected ? "selected" : ""}
-							>
-								{division.name}
-							</li>
-						))} */}
 					</ul>
 					<ul className="sub">
-						{districtData.map((dist: RegCodeItem) => (
+						{districtList.map((dist: RegCodeItem) => (
 							<li
 								key={dist.code}
 								role="presentation"
@@ -81,18 +85,6 @@ const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
 								{dist.name}
 							</li>
 						))}
-						{/* {divisions
-							.find((div) => div.selected)
-							?.districts.map((dist) => (
-								<li
-									role="presentation"
-									key={dist.name}
-									onClick={() => handleDistrictClick(dist.index)}
-									className={dist.selected ? "selected" : ""}
-								>
-									{dist.name}
-								</li>
-							))} */}
 					</ul>
 				</div>
 
@@ -100,7 +92,7 @@ const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
 					<div className="chips">
 						{selectedDist.map((dist) => (
 							<span className="chip" key={dist.code}>
-								<span>{dist.name}</span>
+								<span>{`${selectedDiv.name} ${dist.name}`}</span>
 								<span role="presentation" onClick={() => handleDeleteClick(dist.code)}>
 									X
 								</span>

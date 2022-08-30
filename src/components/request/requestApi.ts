@@ -10,7 +10,7 @@ type ReqType = {
 }
 
 /** all, random, dDay, firstCome, lucky, extra 형식에 맞추기 */
-const getGoodsObj = (requestInputs: RequestType, goodsList: RequestGoodsListType[]) => {
+export const getGoodsObj = (requestInputs: RequestType, goodsList: RequestGoodsListType[]) => {
   const result = {
     extra: []
   } as GoodsListType;

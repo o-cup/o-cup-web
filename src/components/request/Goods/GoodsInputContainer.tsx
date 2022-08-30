@@ -3,23 +3,24 @@ import { useRecoilState } from "recoil";
 import { requestGoodsListAtom } from "../../../state/atoms";
 import { StyledGoodsContainer } from "./goodsInputStyle";
 import GoodsInput from "./GoodsInput";
+import { ItemsType } from "../requestType";
 
-type GoodsValues = {
-  id: number;
-  text: string;
-};
-
+/*
+*  화면 표현을 위해
+*  [{ id: 1, key: "", title: "", items: [{ id: 1, text: "" }] }];
+*  requestGoodsListAtom에 저장 후
+*  데이터 전송 시 all, random, dDay, extra 분리
+* */
 const GoodsInputContainer = () => {
   const [goodsList, setGoodsList] = useRecoilState(requestGoodsListAtom);
 
-  const handleChangeGoods = (title: string, items: GoodsValues[], index: number) => {
+  const handleChangeGoods = (index: number, title: string, items: ItemsType[], key?: string) => {
     const goodsData = goodsList.map((g) => {
       if (g.id === index) {
-        return {
-          ...g,
-          title,
-          items,
-        };
+        if (key !== undefined) {
+          return { ...g, title, key, items };
+        }
+        return { ...g, title, items };
       }
       return g;
     });
@@ -30,7 +31,8 @@ const GoodsInputContainer = () => {
     setGoodsList([
       ...goodsList,
       {
-        id: goodsList[goodsList.length - 1].id + 1,
+        id: (goodsList[goodsList.length - 1]?.id || 0) + 1,
+        key: "",
         title: "",
         items: [{ id: 1, text: "" }],
       },
@@ -46,7 +48,7 @@ const GoodsInputContainer = () => {
         다른 특전 추가하기
       </button>
     </StyledGoodsContainer>
-  )
+  );
 };
 
 export default GoodsInputContainer;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledGoodsChip = styled.div`
+const StyledGoodsChipInput = styled.div`
   display: flex;
   align-items: center;
   height: 30px;
@@ -9,8 +9,11 @@ const StyledGoodsChip = styled.div`
   border-radius: 30px;
   box-shadow: 0 4px 0 #000000;
   padding: 6px 12px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
 
-  > span#hide {
+  span.hide {
     position: absolute;
     opacity: 0;
     font-size: 12px;
@@ -18,13 +21,24 @@ const StyledGoodsChip = styled.div`
     z-index: -1;
   }
 
-  > input {
-    //width: auto;
+  input {
     min-width: 24px;
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
     padding: 0;
+    
+    &.countInput {
+      min-width: 10px;
+      margin-left: 2px;
+      text-align: center;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
   }
 
   > button {
@@ -36,5 +50,5 @@ const StyledGoodsChip = styled.div`
 `;
 
 
-export { StyledGoodsChip };
+export { StyledGoodsChipInput };
 export default {};

@@ -1,29 +1,121 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { requestInputsAtom } from "../../../state/atoms";
 import {
   StyledLuckyInput,
   StyledLuckyTitle,
   StyledLuckyContentContainer,
 } from "./luckyInputStyle";
 import Icons from "../../../shared/components/Icon/Icons";
-import { ItemsType } from "../requestType";
-import EditableGoodsChip from "../../../shared/components/EditableGoodsChip";
+import GoodsChipCountInput from "../GoodsChipInput/GoodsChipCountInput";
 
 const LuckyDrawInput = () => {
+  const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
+  const { goods } = requestInputs;
 
   const [hasLucky, setHasLucky] = useState(true);
-  const [luckyList, setLuckyList] = useState([{ id: 1, text: "" }, { id: 2, text: "" }] as ItemsType[]);
+
+  /** "럭키드로우 없음" 선택하는 경우 값 초기화 */
+  useEffect(() => {
+    if (!hasLucky) {
+      setRequestInputs({
+        ...requestInputs,
+        goods: {
+          ...goods,
+          lucky: [],
+        },
+      });
+    } else {
+      setRequestInputs({
+        ...requestInputs,
+        goods: {
+          ...goods,
+          lucky: [
+            { id: 1, text: "", count: 0 },
+            { id: 2, text: "", count: 0 },
+          ],
+        },
+      });
+    }
+  }, [hasLucky]);
+
+  const handleInputChange = (value: string, luckyId: number, key: "text" | "count") => {
+    const luckyData = goods.lucky?.map((luck) => {
+      if (luck.id === luckyId) {
+        if (key === "text") {
+          return {
+            ...luck,
+            text: value,
+          };
+        }
+        if (key === "count") {
+          console.log(value);
+          return {
+            ...luck,
+            count: parseInt(value, 10),
+          };
+        }
+      }
+      return luck;
+    });
+
+    setRequestInputs({
+      ...requestInputs,
+      goods: {
+        ...goods,
+        lucky: luckyData,
+      },
+    });
+  };
+
+  const handleDeleteValue = (luckyId: number) => {
+    const luckyData = goods.lucky?.map((luck) => {
+      if (luck.id === luckyId) {
+        return {
+          ...luck,
+          text: "",
+          count: 0,
+        };
+      }
+      return luck;
+    });
+
+    setRequestInputs({
+      ...requestInputs,
+      goods: {
+        ...goods,
+        lucky: luckyData,
+      },
+    });
+  };
 
   const handleAddLuck = () => {
-    setLuckyList([
-      ...luckyList,
-      { id: luckyList.length + 1, text: "" },
-    ]);
+    if (goods.lucky) {
+      setRequestInputs({
+        ...requestInputs,
+        goods: {
+          ...goods,
+          lucky: [
+            ...goods.lucky,
+            { id: goods.lucky.length + 1, text: "", count: 0 },
+          ],
+        },
+      });
+    }
   };
 
   const handleDeleteLuck = () => {
-    const popLuck = luckyList.slice();
-    popLuck.pop();
-    setLuckyList(popLuck);
+    if (goods.lucky && goods.lucky.length > 0) {
+      const popLuck = goods.lucky.slice();
+      popLuck.pop();
+      setRequestInputs({
+        ...requestInputs,
+        goods: {
+          ...goods,
+          lucky: popLuck,
+        },
+      });
+    }
   };
 
   return (
@@ -39,15 +131,15 @@ const LuckyDrawInput = () => {
       </StyledLuckyTitle>
 
       <div className={hasLucky ? "" : "noLuck"}>
-        {luckyList.map((luck) =>
+        {goods.lucky?.map((luck) =>
           <StyledLuckyContentContainer key={luck.id}>
             <div className="highlight">{luck.id}등</div>
             <div className="chipContainer">
-              <EditableGoodsChip index={luck.id} value={luck.text}
-                                 handleChange={(e) => console.log(e)}
-                                 handleDelete={() => console.log("delete")} />
+              <GoodsChipCountInput index={luck.id} value={luck.text} count={luck.count}
+                                   handleChange={handleInputChange}
+                                   handleDeleteValue={handleDeleteValue} />
             </div>
-            {luck.id !== 1 && luck.id === luckyList.length &&
+            {luck.id !== 1 && luck.id === goods.lucky?.length &&
               <Icons name="subtraction" handleClick={handleDeleteLuck} />}
           </StyledLuckyContentContainer>)}
 

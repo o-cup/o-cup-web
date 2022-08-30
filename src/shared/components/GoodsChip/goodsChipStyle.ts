@@ -13,6 +13,7 @@ const StyledGoodsChip = styled.span`
   line-height: 16px;
   text-align: center;
   padding: 6px 12px;
+  white-space: nowrap;
 `;
 
 

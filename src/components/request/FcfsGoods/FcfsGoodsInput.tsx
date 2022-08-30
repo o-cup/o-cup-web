@@ -52,7 +52,7 @@ const FcfsGoodsInput = () => {
    * C: 기념일에만 달라요
    * X: 선착특전 없음(fcfsList === {})
    * */
-  const [type, setType] = useState(firstCome?.type || ""); // "A" | "B" | "C" | "X"
+  const [type, setType] = useState(""); // "A" | "B" | "C" | "X"
 
   const renderCheckbox = (checkType: string) => {
     if (!hasDateRange) {
@@ -71,6 +71,12 @@ const FcfsGoodsInput = () => {
       },
     });
   };
+
+  useEffect(() => {
+    if (firstCome?.type) {
+      setType(firstCome.type);
+    }
+  }, [firstCome]);
 
   useEffect(() => {
     if (type === "A") {
@@ -93,10 +99,10 @@ const FcfsGoodsInput = () => {
     const date = getDatesInRange(dateRange.startAt, dateRange.endAt);
     DefaultTypeB = {
       type: "B",
-      data: date.map((d) => ({ day: d.getDate(), items: [{ id: 1, text: "", count: 0 }] }))
+      data: date.map((d) => ({ day: d.getDate(), items: [{ id: 1, text: "", count: 0 }] })),
     };
 
-    if(firstCome?.type === "B") {
+    if (firstCome?.type === "B") {
       handleFirstCome(DefaultTypeB);
     }
   }, [dateRange]);
@@ -133,7 +139,7 @@ const FcfsGoodsInput = () => {
             highlight = TYPE_C[dataObj.key];
           }
           return (
-            <FcfsContent dataObj={dataObj} highlight={highlight} key={dataObj.day || dataObj.key || i}/>
+            <FcfsContent dataObj={dataObj} highlight={highlight} key={dataObj.day || dataObj.key || i} />
           );
         })
       }

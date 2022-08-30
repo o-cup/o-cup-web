@@ -43,12 +43,6 @@ export type RequestFcfsType = {
   data: FcfsDataType[];
 }
 
-export type RequestExtraGoodsType = {
-  index: number;
-  title: string;
-  items: ItemsType[];
-}
-
 export type RequestGoodsType = {
   // all?: ItemsType[];
   // random?: ItemsType[];
@@ -56,6 +50,13 @@ export type RequestGoodsType = {
   firstCome?: RequestFcfsType;
   lucky?: ItemsCountType[];
   // extra?: RequestExtraGoodsType[];
+}
+
+export type RequestGoodsListType = {
+  id: number;
+  title: string;
+  key: string;
+  items: ItemsType[]
 }
 
 export type RequestType = {

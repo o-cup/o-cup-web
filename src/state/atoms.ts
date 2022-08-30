@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 import { convertDateToString } from "../shared/utils/dateHandlers";
 import { sessionAtom } from "./recoilUtils";
-import { RequestType } from "../components/request/requestType";
+import { RequestGoodsListType, RequestType } from "../components/request/requestType";
 
 const today = new Date();
 
@@ -60,7 +60,7 @@ export const requestInputsAtom = atom<RequestType>({
   effects: [sessionAtom],
 });
 
-export const requestGoodsListAtom = atom<{ id: number; title: string; key: string; items: { id: number; text: string }[] }[]>({
+export const requestGoodsListAtom = atom<RequestGoodsListType[]>({
 	key: "requestGoodsListAtom",
 	default: [
 		{

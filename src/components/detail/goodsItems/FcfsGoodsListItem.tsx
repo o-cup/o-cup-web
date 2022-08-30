@@ -21,7 +21,7 @@ const FcfsGoodsListItem = ({ fcfs }: FcfsProps) => {
             if (d.key === "others" || d.key === "dDay") {
               return (
                 <StyledHighLightItem key={d.key}>
-                  <div className={`labelContainer length_${d.key.length}`}>
+                  <div className={`labelContainer length_${TYPE_C[d.key].length}`}>
                     <p className="highlight">{TYPE_C[d.key]}</p>
                   </div>
                   <div className="chipContainer">

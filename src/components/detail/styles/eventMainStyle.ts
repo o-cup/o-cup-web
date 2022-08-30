@@ -9,8 +9,8 @@ const StyledEventMain = styled.div`
 		background: ${({ theme }) => theme.colors.white};
 		border: 2px solid #000000;
 		padding: 16px 16px 68px;
-		margin-left: 24px;
-		margin-right: 44px;
+		margin-left: 14px;
+		margin-right: 40px;
 		margin-bottom: 20px;
 		position: relative;
 		box-shadow: 6px 6px 0 #000000;
@@ -52,7 +52,7 @@ const StyledEventMain = styled.div`
 	}
 
 	.imgContainer {
-		width: calc(100% - 54px);
+		width: calc(100% - 40px);
 		min-height: 264px;
 		height: 100%;
 		position: relative;
@@ -60,8 +60,8 @@ const StyledEventMain = styled.div`
 		border: 2px solid #000000;
 		z-index: ${({ theme }) => theme.zIndex.imageCarousel};
 		margin-top: -74px;
-		margin-left: 30px;
-		margin-right: 24px;
+		margin-left: 20px;
+		margin-right: 20px;
 
 		.slick-slider,
 		.slick-list,

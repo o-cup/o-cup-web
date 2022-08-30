@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 const StyledEventNearHere = styled.div`
-	padding: 32px 0;
+	padding: 64px 0 32px;
 	width: 100%;
 
 	> h4 {
-		padding: 0 24px;
+		padding: 0 20px;
 		font-weight: 700;
 		font-size: 20px;
 		line-height: 27px;
@@ -39,11 +39,11 @@ const EventNearHereList = styled.li`
 	cursor: pointer;
 
 	&:first-child {
-		margin-left: 24px;
+		margin-left: 20px;
 	}
 
 	&:last-child {
-		margin-right: 24px;
+		margin-right: 20px;
 	}
 
 	> img {

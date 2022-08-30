@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledTwitterInfo = styled.div`
 	position: relative;
-	padding: 24px;
+	padding: 20px;
 
 	.account {
 		display: inline-block;

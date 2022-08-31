@@ -3,54 +3,73 @@ import { FaCaretDown } from "react-icons/fa";
 import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
 import { useRegCodes } from "../../hooks";
 import { RegCodeItem } from "../../types";
+import { MAX_DISTRICT_CHIPS } from "../../shared/constants";
 
 type DistrictSelectorProps = {
 	handleSubmit: () => void;
 };
 
+const isAllDist = (code: string) => code.substring(2, 4) === "00";
+
 const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
 	const [selectedDiv, setSelectedDiv] = useState<RegCodeItem>({ code: "1100000000", name: "서울특별시" });
 	const [districtList, setDistrictList] = useState<RegCodeItem[]>([]);
-	const [selectedDist, setSelectedDist] = useState<RegCodeItem[]>([]);
+	const [chips, setChips] = useState<RegCodeItem[]>([]);
 
 	const { divisionData, districtData } = useRegCodes({ div: selectedDiv });
 
 	useEffect(() => {
-		setDistrictList(districtData);
+		if (districtData.length) {
+			setDistrictList(districtData);
+		}
 	}, [districtData]);
 
 	useEffect(() => {
+		if (!districtList.length) return;
+
 		const selected = districtList.filter((dist) => dist.selected);
-		setSelectedDist([...selectedDist, ...selected]);
-	}, [districtList]);
+		setChips(selected);
+	}, [districtData, districtList]);
 
 	const handleDivClick = (div: RegCodeItem) => {
+		if (chips.length >= MAX_DISTRICT_CHIPS) return;
+
 		setSelectedDiv(div);
 
-		const isDuplicated = selectedDist.find((dist) => dist.code === "all");
+		const isDuplicated = chips.find((dist) => dist.code === "all");
 		if (div.code === "all" && !isDuplicated) {
-			setSelectedDist([{ code: "all", name: "전국" }, ...selectedDist]);
+			setChips([{ code: "all", name: "전국" }, ...chips]);
 		}
 	};
 
 	const handleDistClick = (dist: RegCodeItem) => {
-		const isDuplicated = selectedDist.find((item) => item.code === dist.code);
+		if (chips.length >= MAX_DISTRICT_CHIPS) return;
+
+		const isDuplicated = chips.find((item) => item.code === dist.code);
 		if (isDuplicated) return;
 
-		console.log("dist", dist);
-
-		const newList = districtList.map((item: RegCodeItem) => ({
-			...item,
-			selected: item.code === dist.code,
-		}));
+		const newList = districtList.map((item: RegCodeItem) => {
+			if (!isAllDist(dist.code) && isAllDist(item.code)) {
+				return {
+					...item,
+					selected: false,
+				};
+			}
+			return {
+				...item,
+				selected: item.code === dist.code ? true : item.selected,
+			};
+		});
 
 		setDistrictList(newList);
 	};
 
-	console.log("districtList", districtList);
-
-	const handleDeleteClick = (code: string) => {
-		console.log(code);
+	const handleDeleteClick = (dist: RegCodeItem) => {
+		const newList = districtList.map((item) => ({
+			...item,
+			selected: item.code === dist.code ? false : item.selected,
+		}));
+		setDistrictList(newList);
 	};
 
 	return (
@@ -90,10 +109,10 @@ const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
 
 				<div className="result">
 					<div className="chips">
-						{selectedDist.map((dist) => (
+						{chips.map((dist) => (
 							<span className="chip" key={dist.code}>
 								<span>{`${selectedDiv.name} ${dist.name}`}</span>
-								<span role="presentation" onClick={() => handleDeleteClick(dist.code)}>
+								<span role="presentation" onClick={() => handleDeleteClick(dist)}>
 									X
 								</span>
 							</span>

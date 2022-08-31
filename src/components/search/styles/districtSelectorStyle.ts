@@ -69,10 +69,12 @@ const StyledDistrictSelector = styled.div`
 
 			.chips {
 				display: flex;
-				gap: 10px;
+				row-gap: 6px;
+				column-gap: 10px;
 				height: 100%;
 				flex-wrap: wrap;
 				justify-content: flex-start;
+				padding: 0;
 
 				.chip {
 					display: flex;

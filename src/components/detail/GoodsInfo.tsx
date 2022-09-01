@@ -17,7 +17,7 @@ function GoodsInfo({ goods, tweetUrl }: Partial<DetailType>) {
 			{goods?.extra?.map((item) => (
 				<ExtraGoodsListItem goodsListItem={item} key={item.title} />
 			))}
-			{goods?.lucky && <LuckyGoodsListItem lucky={goods.lucky}/>}
+			{goods?.lucky && goods?.lucky[0] && <LuckyGoodsListItem lucky={goods.lucky}/>}
 
 			<p className="notice">
 				상기 특전에 관한 내용은 실제와 다를 수 있으니 반드시 주최 측 포스터 및 트위터 공지를 확인하세요.

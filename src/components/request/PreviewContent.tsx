@@ -1,6 +1,7 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
 import { requestGoodsListAtom, requestInputsAtom } from "../../state/atoms";
+import { getGoodsObj } from "./requestApi";
 import { EventMain, GoodsInfo, Location, TwitterInfo } from "../detail";
 import { DEFAULT_POSTER_URL } from "../../shared/constants";
 import { getGoodsObj } from "./requestApi";

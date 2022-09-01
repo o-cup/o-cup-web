@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
 import { useRegCodes } from "../../hooks";
@@ -7,14 +7,15 @@ import { MAX_DISTRICT_CHIPS } from "../../shared/constants";
 
 type DistrictSelectorProps = {
 	handleSubmit: () => void;
+	selectedDist: RegCodeItem[];
+	setSelectedDist: Dispatch<SetStateAction<RegCodeItem[]>>;
 };
 
 const isAllDist = (code: string) => code.substring(2, 4) === "00";
 
-const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
+const DistrictSelector = ({ handleSubmit, selectedDist, setSelectedDist }: DistrictSelectorProps) => {
 	const [selectedDiv, setSelectedDiv] = useState<RegCodeItem>({ code: "1100000000", name: "서울특별시" });
 	const [districtList, setDistrictList] = useState<RegCodeItem[]>([]);
-	const [chips, setChips] = useState<RegCodeItem[]>([]);
 
 	const { divisionData, districtData } = useRegCodes({ div: selectedDiv });
 
@@ -28,24 +29,30 @@ const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
 		if (!districtList.length) return;
 
 		const selected = districtList.filter((dist) => dist.selected);
-		setChips(selected);
-	}, [districtData, districtList]);
+		setSelectedDist(selected);
+	}, [districtData, districtList, setSelectedDist]);
 
 	const handleDivClick = (div: RegCodeItem) => {
-		if (chips.length >= MAX_DISTRICT_CHIPS) return;
+		if (selectedDist.length >= MAX_DISTRICT_CHIPS) return;
 
 		setSelectedDiv(div);
 
-		const isDuplicated = chips.find((dist) => dist.code === "all");
+		const isDuplicated = selectedDist.find((dist) => dist.code === "all");
 		if (div.code === "all" && !isDuplicated) {
-			setChips([{ code: "all", name: "전국" }, ...chips]);
+			setSelectedDist([{ code: "all", name: "전국" }, ...selectedDist]);
 		}
 	};
 
 	const handleDistClick = (dist: RegCodeItem) => {
-		if (chips.length >= MAX_DISTRICT_CHIPS) return;
+		if (isAllDist(dist.code) && selectedDist.length > 0) {
+			const newList = districtList.map((item) => ({ ...item, selected: item.code === dist.code }));
+			setDistrictList(newList);
+			return;
+		}
 
-		const isDuplicated = chips.find((item) => item.code === dist.code);
+		if (selectedDist.length >= MAX_DISTRICT_CHIPS) return;
+
+		const isDuplicated = selectedDist.find((item) => item.code === dist.code);
 		if (isDuplicated) return;
 
 		const newList = districtList.map((item: RegCodeItem) => {
@@ -109,7 +116,7 @@ const DistrictSelector = ({ handleSubmit }: DistrictSelectorProps) => {
 
 				<div className="result">
 					<div className="chips">
-						{chips.map((dist) => (
+						{selectedDist.map((dist) => (
 							<span className="chip" key={dist.code}>
 								<span>{`${selectedDiv.name} ${dist.name}`}</span>
 								<span role="presentation" onClick={() => handleDeleteClick(dist)}>

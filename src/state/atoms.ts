@@ -1,7 +1,8 @@
 import { atom } from "recoil";
+import { RequestGoodsListType, RequestType } from "../components/request/requestType";
 import { convertDateToString } from "../shared/utils/dateHandlers";
 import { sessionAtom } from "./recoilUtils";
-import { RequestGoodsListType, RequestType } from "../components/request/requestType";
+import { RegCodeItem } from "../types";
 
 const today = new Date();
 
@@ -33,7 +34,7 @@ export const dateRangeAtom = atom<{ startDate: string; endDate: string }>({
 	},
 });
 
-export const districtAtom = atom<string[]>({
+export const districtAtom = atom<RegCodeItem[]>({
 	key: "districtAtom",
 	default: [],
 });
@@ -59,7 +60,7 @@ export const requestGoodsListAtom = atom<RequestGoodsListType[]>({
 	default: [
 		{
 			id: 1,
-      key: "",
+			key: "",
 			title: "",
 			items: [{ id: 1, text: "" }],
 		},

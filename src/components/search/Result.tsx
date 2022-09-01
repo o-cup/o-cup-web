@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { fetchEvents } from "../../apis";
 import { StyledResult } from "./styles/resultStyle";
 import Event from "./Event";
@@ -29,17 +29,22 @@ type ChipType = {
 const Result = ({ keyword }: ResultProps) => {
 	const [dateRange, setDateRange] = useRecoilState(dateRangeAtom);
 	const { startDate, endDate } = dateRange;
-	const [districts, setDistricts] = useRecoilState(districtAtom);
+	const districts = useRecoilValue(districtAtom);
 	const [sortOpen, setSortOpen] = useState(false);
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
 	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
+	const [chips, setChips] = useState<ChipType>({ dateChip: "", distChips: [] });
+
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
-	const [chips, setChips] = useState<ChipType>({ dateChip: "", distChips: [] });
+	// console.log("keyword", keyword);
 
-	const { data: events } = useQuery("resultEvents", () => fetchEvents({ keyword }));
+	const { data: events } = useQuery(["resultEvents", keyword], () => fetchEvents({ keyword }));
+	console.log("events", events);
+
+	// console.log("districts", districts);
 
 	useEffect(() => {
 		if (!startDate) return;
@@ -47,12 +52,6 @@ const Result = ({ keyword }: ResultProps) => {
 		const dateText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 		setChips((prev) => ({ ...prev, dateChip: dateText }));
 	}, [startDate, endDate]);
-
-	useEffect(() => {
-		if (districts.length) {
-			setChips((prev) => ({ ...prev, distChips: districts }));
-		}
-	}, [districts, setDistricts]);
 
 	useEffect(() => {
 		if (sortOpen) {

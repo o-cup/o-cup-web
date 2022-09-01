@@ -17,7 +17,7 @@ function BiasList() {
 	return (
 		<StyledBiasList>
 			{people?.map((person) => (
-				<Bias key={person.id} id={person.id} name={person.name} profilePic={person.profilePic} />
+				<Bias key={person.id} id={person.id} name={person.name} profilePic={person.profilePic} birthday={person.birthday} />
 			))}
 		</StyledBiasList>
 	);

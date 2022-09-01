@@ -42,7 +42,6 @@ const StyledBias = styled.li`
 		width: 72px;
 		height: 72px;
 		background: ${({ theme }) => theme.colors.primary};
-
 		border-radius: 50%;
 		position: relative;
 		z-index: 1;
@@ -203,5 +202,14 @@ const StyledEmptyMain = styled.div`
   }
 `;
 
-export { StyledMain, StyledBiasList, StyledBias, StyledList, StyledItem,StyledEmptyMain };
+const StyledBirthDayHat = styled.span`
+  background: ${props => `url("/images/hats/${props.color}.png") no-repeat 50% / contain`};
+  position: absolute;
+  width: 34px;
+  height: 35px;
+  top: -12px;
+  right: -3px;
+`
+
+export { StyledMain, StyledBiasList, StyledBias, StyledList, StyledItem, StyledEmptyMain, StyledBirthDayHat };
 export default {};

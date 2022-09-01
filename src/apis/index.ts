@@ -12,24 +12,6 @@ const fetchEvents = async ({ pageParam = 1, infinite = false, keyword, date }: F
 		query = query.range(startAt, endAt);
 	}
 
-	if (keyword) {
-		const { data: events } = await query;
-		const data = events?.filter((event) => {
-			const { bias, place, organizer, district } = event;
-			if (
-				bias.includes(keyword) ||
-				place.includes(keyword) ||
-				organizer.includes(keyword) ||
-				district.includes(keyword)
-			) {
-				return true;
-			}
-			return false;
-		});
-
-		return data;
-	}
-
 	if (date) {
 		const { data: events } = await query;
 		const filteredData = events?.filter((event) => {

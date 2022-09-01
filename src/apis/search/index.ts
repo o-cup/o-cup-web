@@ -16,7 +16,7 @@ export type FetchSearchedEventParams = {
 export const fetchSearchedEvent = async ({ keyword, date }: FetchSearchedEventParams) => {
 	const { startDate, endDate } = date!;
 
-	const query = supabase.from("events").select("*");
+	const query = supabase.from("place_sort").select("*").eq("isApproved", true);
 	let data;
 
 	if (!keyword) return data;

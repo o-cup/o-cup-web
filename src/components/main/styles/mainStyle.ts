@@ -42,7 +42,6 @@ const StyledBias = styled.li`
 		width: 72px;
 		height: 72px;
 		background: ${({ theme }) => theme.colors.primary};
-
 		border-radius: 50%;
 		position: relative;
 		z-index: 1;
@@ -164,5 +163,53 @@ const StyledItem = styled.li`
 	}
 `;
 
-export { StyledMain, StyledBiasList, StyledBias, StyledList, StyledItem };
+const StyledEmptyMain = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &.default {
+    padding: 96px 0;
+
+    > div > img {
+      width: 316px;
+      margin-bottom: 12px;
+    }
+  }
+
+  &.small {
+    padding: 64px 0;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      > p {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 22px;
+      }
+
+      > img {
+        width: 68px;
+        height: 102px;
+        margin: 20px;
+      }
+    }
+  }
+`;
+
+const StyledBirthDayHat = styled.span`
+  background: ${props => `url("/images/hats/${props.color}.png") no-repeat 50% / contain`};
+  position: absolute;
+  width: 34px;
+  height: 35px;
+  top: -12px;
+  right: -3px;
+`
+
+export { StyledMain, StyledBiasList, StyledBias, StyledList, StyledItem, StyledEmptyMain, StyledBirthDayHat };
 export default {};

@@ -37,7 +37,7 @@ const DateRangeInput = () => {
 	return (
 		<StyledDateRangeInput>
 			<div className="dateInputContainer">
-				<span>이벤트 기간</span>
+				<span>이벤트 기간 *</span>
 				<button type="button" className="calendarOpenInput" onClick={() => setCalendarOpen(!isCalendarOpen)}>
 					<input
 						disabled

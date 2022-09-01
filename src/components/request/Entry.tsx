@@ -16,14 +16,16 @@ import FcfsGoodsInput from "./FcfsGoods/FcfsGoodsInput";
 import LuckyDrawInput from "./LuckyDraw/LuckyDrawInput";
 
 type EntryProps = {
-	isModalOpen: boolean;
-	setModalOpen: Dispatch<SetStateAction<boolean>>;
+	isConfirmModalOpen: boolean;
+	setConfirmModalOpen: Dispatch<SetStateAction<boolean>>;
+	isAlertOpen: boolean;
+	setAlertOpen: Dispatch<SetStateAction<boolean>>;
 	setBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
 	handleSubmit: () => void;
 	resetAllStates: () => void;
 };
 
-const Entry = ({ isModalOpen, setModalOpen, setBottomSheetOpen, handleSubmit, resetAllStates }: EntryProps) => {
+const Entry = ({ isConfirmModalOpen, setConfirmModalOpen, isAlertOpen, setAlertOpen, setBottomSheetOpen, handleSubmit, resetAllStates }: EntryProps) => {
 	const navigate = useNavigate();
 
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
@@ -45,13 +47,14 @@ const Entry = ({ isModalOpen, setModalOpen, setBottomSheetOpen, handleSubmit, re
 
 	const handleClickModalContinue = () => {
 		resetAllStates();
-		setModalOpen(false);
+		setConfirmModalOpen(false);
 		setBottomSheetOpen(false);
+		window.scrollTo(0, 0);
 	};
 
 	const handleClickModalFinish = () => {
 		navigate("/");
-		setModalOpen(false);
+		setConfirmModalOpen(false);
 		setBottomSheetOpen(false);
 	};
 
@@ -59,7 +62,7 @@ const Entry = ({ isModalOpen, setModalOpen, setBottomSheetOpen, handleSubmit, re
 		<>
 			<StyledEntry>
 				<div className="notice">
-					<p>장소 등록 시 주의사항</p>
+					<p>이벤트 등록 시 주의사항</p>
 					<p>
 						오늘의 컵홀더는 특전 증정이 있는 이벤트에 한해 정보를 제공합니다.
 						<b> 따라서 특전 증정이 없는 포토부스, 옥외광고 등의 이벤트는 승인되지 않습니다.</b>
@@ -70,7 +73,7 @@ const Entry = ({ isModalOpen, setModalOpen, setBottomSheetOpen, handleSubmit, re
 					<PlaceInput />
 					<ArtistInputContainer />
 					<BasicInput
-						label="주최자 닉네임"
+						label="주최자 닉네임 *"
 						value={organizer}
 						id="organizer"
 						placeholder="오늘의 컵홀더"
@@ -89,10 +92,10 @@ const Entry = ({ isModalOpen, setModalOpen, setBottomSheetOpen, handleSubmit, re
 					<PosterUploader />
 					<HashTagsContainer />
 					<BasicInput
-						label="이벤트 트윗 링크"
+						label="이벤트 트윗 링크 *"
 						value={link}
 						id="link"
-						placeholder="이벤트 정보가 담긴 트윗 링크를 남겨주세요."
+						placeholder="이벤트 정보가 담긴 트윗(또는 게시글) 링크를 남겨주세요."
 						handleInputChange={(e) => handleInputChange(e, "link")}
 						handleInputDelete={(e) => handleInputDelete(e, "link")}
 					/>
@@ -111,7 +114,7 @@ const Entry = ({ isModalOpen, setModalOpen, setBottomSheetOpen, handleSubmit, re
 				</div>
 			</StyledEntry>
 
-			{isModalOpen && (
+			{isConfirmModalOpen && (
 				<Modal>
 					<StyledRequestModal>
 						<h4>제출 완료!</h4>
@@ -119,6 +122,18 @@ const Entry = ({ isModalOpen, setModalOpen, setBottomSheetOpen, handleSubmit, re
 						<div className="modalBtnContainer">
 							<button type="button" onClick={handleClickModalContinue}>다른 카페 등록하기</button>
 							<button type="button" onClick={handleClickModalFinish}>메인으로 돌아가기</button>
+						</div>
+					</StyledRequestModal>
+				</Modal>
+			)}
+
+			{isAlertOpen && (
+				<Modal>
+					<StyledRequestModal>
+						<p>*표시 항목은 필수 입력 항목입니다.</p>
+						<div className="modalBtnContainer">
+							<button className="alertBtn"
+								type="button" onClick={() => setAlertOpen(false)}>확인</button>
 						</div>
 					</StyledRequestModal>
 				</Modal>

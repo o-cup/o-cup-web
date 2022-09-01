@@ -75,7 +75,7 @@ const PosterUploader = () => {
 
   return (
     <StyledPosterUpload>
-      <Label>이벤트 포스터 이미지</Label>
+      <Label>이벤트 포스터 이미지 *</Label>
 
       <div className="posterWrapper">
         {posterUrls.map((p, index) => {

@@ -67,7 +67,7 @@ const ArtistInput = ({ value, handleChangeArtist, handleDeleteArtist }: InputPro
                      }}
                      id="artist"
                      placeholder="아티스트 이름"
-                     label="아티스트 이름"
+                     label="아티스트 이름 *"
                      hideLabel={value.id > 1}
                      shortBtn={value.id > 1} />
         {value.id !== 1 && <Icons name="subtraction" handleClick={() => handleDeleteArtist(value.id)} />}
@@ -85,7 +85,7 @@ const ArtistInput = ({ value, handleChangeArtist, handleDeleteArtist }: InputPro
           {people?.map((bias) =>
             <li key={bias.id}>
               <div>
-                <p>{bias.name} ({bias.team.join(", ")})</p>
+                <p>{bias.name} ({bias.team?.join(", ")})</p>
               </div>
               <button type="button" onClick={() => handleClickSelect(bias)}>선택</button>
             </li>)}

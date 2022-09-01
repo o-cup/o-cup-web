@@ -7,19 +7,23 @@ const StyledLayout = styled.div`
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	background: ${({ theme }) => theme.colors.background};
 
-	main {
-		padding-top: ${({ theme }) => theme.heights.header};
-	}
+	max-width: ${({ theme }) => theme.maxWidths.layout};
 
-	@media ${({ theme }) => theme.device.mobile} {
+	/* @media ${({ theme }) => theme.device.mobile} {
 		max-width: 720px;
 	}
 
 	@media ${({ theme }) => theme.device.desktop} {
 		max-width: 1080px;
-	}
+	} */
+`;
+
+const StyledContent = styled.main`
+	width: 100%;
+	padding-top: ${({ theme }) => theme.heights.header};
 `;
 
 const StyledFooter = styled.footer`
@@ -62,5 +66,5 @@ const StyledFooter = styled.footer`
 	}
 `;
 
-export { StyledLayout, StyledFooter };
+export { StyledLayout, StyledContent, StyledFooter };
 export default {};

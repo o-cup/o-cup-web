@@ -5,7 +5,7 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	max-width: 1080px;
+	max-width: ${({ theme }) => theme.maxWidths.layout};
 	z-index: ${({ theme }) => theme.zIndex.header};
 	background: rgba(252, 251, 247, 0.9);
 	backdrop-filter: blur(4px);
@@ -15,10 +15,8 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
-		max-width: 1080px;
 		height: ${({ theme }) => theme.heights.header};
 		padding: 0 24px;
-		/* border-bottom: ${(props) => (props.mainPage ? "" : "2px solid #000")}; */
 		position: relative;
 
 		h1 {

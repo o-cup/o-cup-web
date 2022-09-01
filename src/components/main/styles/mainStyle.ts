@@ -3,7 +3,8 @@ import styled from "styled-components";
 const StyledMain = styled.div`
 	display: flex;
 	flex-direction: column;
-	//gap: 15px;
+	gap: 10px;
+	width: 100%;
 `;
 
 const StyledBiasList = styled.ul`
@@ -76,9 +77,7 @@ const StyledBias = styled.li`
 `;
 
 const StyledList = styled.ul`
-	padding: 10px 24px;
-
-	@media ${({ theme }) => theme.device.desktop} {
+	/* @media ${({ theme }) => theme.device.desktop} {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 20px;
@@ -87,7 +86,12 @@ const StyledList = styled.ul`
 		> div {
 			width: calc(25% - 16px);
 		}
-	}
+	} */
+
+	display: flex;
+	flex-direction: column;
+	padding: 0 20px;
+	gap: 20px;
 `;
 
 const StyledItem = styled.li`
@@ -98,13 +102,13 @@ const StyledItem = styled.li`
 	box-shadow: 4px 4px 0 #000000;
 	cursor: pointer;
 
-	@media ${({ theme }) => theme.device.mobile} {
+	/* @media ${({ theme }) => theme.device.mobile} {
 		margin-bottom: 24px;
 	}
 
 	@media ${({ theme }) => theme.device.desktop} {
 		margin-bottom: 4px;
-	}
+	} */
 
 	> div {
 		display: flex;
@@ -112,22 +116,22 @@ const StyledItem = styled.li`
 		align-items: center;
 		padding-bottom: 12px;
 
-    > .lazy-image {
-      width: 100%;
-      height: 270px;
-      
-      img {
-        width: 100%;
-        height: 270px;
-        object-fit: cover;
-        object-position: top;
-      }
-      
-      /* Error image */
-      img.error {
-        object-position: center;
-      }
-    }
+		> .lazy-image {
+			width: 100%;
+			height: 270px;
+
+			img {
+				width: 100%;
+				height: 270px;
+				object-fit: cover;
+				object-position: top;
+			}
+
+			/* Error image */
+			img.error {
+				object-position: center;
+			}
+		}
 
 		> h6 {
 			font-size: 20px;
@@ -146,15 +150,15 @@ const StyledItem = styled.li`
 		font-weight: 400;
 		display: flex;
 		align-items: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 
-    > img,
-    > svg {
+		> img,
+		> svg {
 			margin-right: 4px;
-      width: 14px;
-      min-width: 14px;
+			width: 14px;
+			min-width: 14px;
 		}
 
 		&:not(:last-child) {
@@ -164,52 +168,52 @@ const StyledItem = styled.li`
 `;
 
 const StyledEmptyMain = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 
-  &.default {
-    padding: 96px 0;
+	&.default {
+		padding: 96px 0;
 
-    > div > img {
-      width: 316px;
-      margin-bottom: 12px;
-    }
-  }
+		> div > img {
+			width: 316px;
+			margin-bottom: 12px;
+		}
+	}
 
-  &.small {
-    padding: 64px 0;
+	&.small {
+		padding: 64px 0;
 
-    > div {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+		> div {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
 
-      > p {
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 22px;
-      }
+			> p {
+				font-weight: 500;
+				font-size: 16px;
+				line-height: 22px;
+			}
 
-      > img {
-        width: 68px;
-        height: 102px;
-        margin: 20px;
-      }
-    }
-  }
+			> img {
+				width: 68px;
+				height: 102px;
+				margin: 20px;
+			}
+		}
+	}
 `;
 
 const StyledBirthDayHat = styled.span`
-  background: ${props => `url("/images/hats/${props.color}.png") no-repeat 50% / contain`};
-  position: absolute;
-  width: 34px;
-  height: 35px;
-  top: -12px;
-  right: -3px;
-`
+	background: ${(props) => `url("/images/hats/${props.color}.png") no-repeat 50% / contain`};
+	position: absolute;
+	width: 34px;
+	height: 35px;
+	top: -12px;
+	right: -3px;
+`;
 
 export { StyledMain, StyledBiasList, StyledBias, StyledList, StyledItem, StyledEmptyMain, StyledBirthDayHat };
 export default {};

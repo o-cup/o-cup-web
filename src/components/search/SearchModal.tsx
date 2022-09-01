@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { format } from "date-fns";
 import Modal from "../../shared/components/Modal";
 import Calendar from "../../shared/components/Calendar";
 import DistrictSelector from "./DistrictSelector";
-import { DateRangeType } from "../../types";
+import { DateRangeType, RegCodeItem } from "../../types";
 import { SearchModalProps } from "./types";
 import { dateRangeAtom, districtAtom } from "../../state";
 
@@ -16,7 +16,7 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 		endDate: new Date(),
 		key: "selection",
 	});
-	const [selectedDist, setSelectedDist] = useState<string[]>([]);
+	const [selectedDist, setSelectedDist] = useState<RegCodeItem[]>([]);
 
 	const handleSelectRange = ({ selection }: { selection: DateRangeType }) => {
 		setSelectedRange(selection);

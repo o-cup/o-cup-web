@@ -17,7 +17,7 @@ const FcfsGoodsListItem = ({ fcfs }: FcfsProps) => {
     <StyledGoodsListItem>
       <h6>선착특전</h6>
       <ul className="fcfs">
-        {data.map((d) => {
+        {data.filter(d => d.items.length > 0).map((d) => {
             if (d.key === "others" || d.key === "dDay") {
               return (
                 <StyledHighLightItem key={d.key}>

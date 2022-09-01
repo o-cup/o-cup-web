@@ -65,7 +65,6 @@ const GoodsInput = ({ value, handleChangeGoods }: InputProps) => {
       }
       return g;
     });
-    console.log(value.title, goodsData);
     handleChangeGoods(value.id, value.title, goodsData);
   };
 

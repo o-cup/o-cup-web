@@ -49,7 +49,6 @@ const LuckyDrawInput = () => {
           };
         }
         if (key === "count") {
-          console.log(value);
           return {
             ...luck,
             count: parseInt(value, 10),

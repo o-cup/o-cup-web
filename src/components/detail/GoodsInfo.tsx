@@ -10,14 +10,14 @@ function GoodsInfo({ goods, tweetUrl }: Partial<DetailType>) {
 	return (
 		<StyledGoodsInfo>
 			<h4>특전</h4>
-			{goods?.firstCome && <FcfsGoodsListItem fcfs={goods.firstCome}/>}
-			{goods?.all && <GoodsListItem title="all" items={goods.all}/>}
-			{goods?.random && <GoodsListItem title="random" items={goods.random}/>}
-			{goods?.dDay && <GoodsListItem title="dDay" items={goods.dDay}/>}
+			{goods?.firstCome && goods.firstCome.type && <FcfsGoodsListItem fcfs={goods.firstCome} />}
+			{goods?.all && goods.all.length > 0 && <GoodsListItem title="all" items={goods.all} />}
+			{goods?.random && goods.random.length > 0 && <GoodsListItem title="random" items={goods.random} />}
+			{goods?.dDay && goods.dDay.length > 0 && <GoodsListItem title="dDay" items={goods.dDay} />}
 			{goods?.extra?.map((item) => (
 				<ExtraGoodsListItem goodsListItem={item} key={item.title} />
 			))}
-			{goods?.lucky && goods?.lucky[0] && <LuckyGoodsListItem lucky={goods.lucky}/>}
+			{goods?.lucky && goods.lucky.length > 0 && <LuckyGoodsListItem lucky={goods.lucky} />}
 
 			<p className="notice">
 				상기 특전에 관한 내용은 실제와 다를 수 있으니 반드시 주최 측 포스터 및 트위터 공지를 확인하세요.

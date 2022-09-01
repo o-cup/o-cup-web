@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { fetchEvents } from "../../apis";
+import { useRecoilState } from "recoil";
 import { StyledResult } from "./styles/resultStyle";
 import Event from "./Event";
 import Button from "../../shared/components/Button";
 import { FilterIcon, SortIcon } from "../../shared/components";
 import SearchModal from "./SearchModal";
 import Chip from "../../shared/components/Chip";
-import { dateRangeAtom, districtAtom } from "../../state";
+import { dateRangeAtom } from "../../state";
 import { convertDateWithDots } from "../../shared/utils/dateHandlers";
+import { fetchSearchedEvent } from "../../apis/search";
 
 type ResultProps = {
 	keyword: string;
@@ -29,17 +29,20 @@ type ChipType = {
 const Result = ({ keyword }: ResultProps) => {
 	const [dateRange, setDateRange] = useRecoilState(dateRangeAtom);
 	const { startDate, endDate } = dateRange;
-	const [districts, setDistricts] = useRecoilState(districtAtom);
+	// const districts = useRecoilValue(districtAtom);
 	const [sortOpen, setSortOpen] = useState(false);
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
 	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
+	const [chips, setChips] = useState<ChipType>({ dateChip: "", distChips: [] });
+
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
-	const [chips, setChips] = useState<ChipType>({ dateChip: "", distChips: [] });
-
-	const { data: events } = useQuery("resultEvents", () => fetchEvents({ keyword }));
+	// TODO: infinitequery로 변경하기
+	const { data: events } = useQuery(["resultEvents", keyword, dateRange], () =>
+		fetchSearchedEvent({ keyword, date: { startDate, endDate } })
+	);
 
 	useEffect(() => {
 		if (!startDate) return;
@@ -47,12 +50,6 @@ const Result = ({ keyword }: ResultProps) => {
 		const dateText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 		setChips((prev) => ({ ...prev, dateChip: dateText }));
 	}, [startDate, endDate]);
-
-	useEffect(() => {
-		if (districts.length) {
-			setChips((prev) => ({ ...prev, distChips: districts }));
-		}
-	}, [districts, setDistricts]);
 
 	useEffect(() => {
 		if (sortOpen) {

@@ -28,32 +28,32 @@ export type FirstComeDataType = {
 	key?: string;
 	day?: number;
 	items: string[];
-}
+};
 
 export type FirstComeType = {
-  type: "A" | "B" | "C",
-  data: FirstComeDataType[]
-}
+	type: "A" | "B" | "C";
+	data: FirstComeDataType[];
+};
 
 export type ExtraGoodsType = {
-  index: number;
-  title: string;
-  items: string[];
-}
+	index: number;
+	title: string;
+	items: string[];
+};
 
 export type GoodsListType = {
-  all?: string[];
-  random?: string[];
-  dDay?: string[];
-  firstCome?: FirstComeType;
-  lucky?: string[];
-  extra?: ExtraGoodsType[];
-}
+	all?: string[];
+	random?: string[];
+	dDay?: string[];
+	firstCome?: FirstComeType;
+	lucky?: string[];
+	extra?: ExtraGoodsType[];
+};
 
 export type DetailType = {
 	id: string;
 	address: string;
-  goods: GoodsListType;
+	goods: GoodsListType;
 	hashTags: string[];
 	tweetUrl: string;
 };
@@ -82,4 +82,10 @@ export type DateRangeType = {
 	startDate: Date;
 	endDate: Date;
 	key: string;
+};
+
+export type RegCodeItem = {
+	code: string;
+	name: string;
+	selected?: boolean;
 };

@@ -112,33 +112,6 @@ const insertDetail = async (detailData: Partial<DetailType>) => {
 	return data;
 };
 
-/**
- * events의 bias ["이름1", "이름2"] 에 맞춰 biasId [13, 4] 입력
- * 로직 개선 필요
- */
-const updateBiasesIds = async () => {
-	const { data: events } = await supabase.from("events").select("*");
-	const people = await fetchPeople();
-
-	events?.map(async (event) => {
-		const biasesId: any[] = [];
-		event.bias.forEach((b: any) => {
-			const peopleObj = people?.find((p) => p.name === b);
-			if (peopleObj) {
-				biasesId.push(peopleObj.id);
-			} else {
-				biasesId.push(0);
-			}
-		});
-
-		const { data, error } = await supabase.from("events").update({ biasesId }).match({ id: event.id });
-		if (error) {
-			throw new Error(`${error.message}: ${error.details}`);
-		}
-		console.log(data);
-	});
-};
-
 const fetchBiases = async ({ id }: { id: number }) => {
 	const { data: bias } = await supabase.from("people").select("name").eq("id", id).single();
 	return bias?.name;
@@ -166,7 +139,6 @@ export {
 	fetchPeople,
 	insertEvent,
 	insertDetail,
-	updateBiasesIds,
 	fetchBiases,
 	uploadPoster,
 };

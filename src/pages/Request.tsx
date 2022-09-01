@@ -10,14 +10,15 @@ import useMediaQuery from "../hooks/useMediaQuery";
 import { sendReqData } from "../components/request/requestApi";
 
 const Request = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isConfirmModalOpen, setConfirmModalOpen] = useState(false);
+  const [isAlertOpen, setAlertOpen] = useState(false);
   const [isBottomSheetOpen, setBottomSheetOpen] = useState(false);
   const isMobile = useMediaQuery("(max-width: 720px)");
 
   const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
   const [goodsList, setGoodsList] = useRecoilState(requestGoodsListAtom);
 
-  const handleSubmit = () => sendReqData({ requestInputs, goodsList, setModalOpen });
+  const handleSubmit = () => sendReqData({ requestInputs, goodsList, setConfirmModalOpen, setAlertOpen });
 
   const resetAllStates = () => {
     setRequestInputs({
@@ -52,8 +53,10 @@ const Request = () => {
       <Layout page="request">
         <StyledRequest>
           <Entry
-            isModalOpen={isModalOpen}
-            setModalOpen={setModalOpen}
+            isConfirmModalOpen={isConfirmModalOpen}
+            setConfirmModalOpen={setConfirmModalOpen}
+            isAlertOpen={isAlertOpen}
+            setAlertOpen={setAlertOpen}
             setBottomSheetOpen={setBottomSheetOpen}
             handleSubmit={handleSubmit}
             resetAllStates={resetAllStates}

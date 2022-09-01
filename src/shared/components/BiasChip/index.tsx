@@ -5,17 +5,24 @@ import { StyledBiasChip } from "./biasChipStyle";
 
 type BiasChipProps = {
 	id: number;
-  dots?: boolean;
+	previewName?: string;
+	dots?: boolean;
 };
 
-const BiasChip = ({ id, dots = false }: BiasChipProps) => {
+const BiasChip = ({ id, previewName, dots = false }: BiasChipProps) => {
 	const { data: name } = useQuery(["bias", id], () => fetchBiases({ id }), { enabled: !!id });
 
-	return <StyledBiasChip>{name || id}{dots && "..."}</StyledBiasChip>;
+	return (
+		<StyledBiasChip>
+			{name || previewName || id}
+			{dots && "..."}
+		</StyledBiasChip>
+	);
 };
 
 BiasChip.defaultProps = {
-	dots: false
-}
+	previewName: "",
+	dots: false,
+};
 
 export default BiasChip;

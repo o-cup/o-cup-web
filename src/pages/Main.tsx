@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import { BiasList, CustomBottomSheet, SearchInput, EventList } from "../components/main";
+import React, { useEffect } from "react";
+import { BiasList, EventList } from "../components/main";
 import { StyledMain } from "../components/main/styles/mainStyle";
 import Layout from "../shared/components/layout";
 
 function Main() {
-	const [open, setOpen] = useState(false);
 
-	return (
-		<Layout>
-			<>
-				<StyledMain>
-					<BiasList />
-					{/* <SearchInput setOpen={setOpen} /> */}
-					<EventList />
-				</StyledMain>
-				{open && <CustomBottomSheet setOpen={setOpen} />}
-			</>
-		</Layout>
-	);
+  // 이벤트 등록 session 정보 초기화
+  useEffect(() => {
+    sessionStorage.clear();
+  }, []);
+
+  return (
+    <Layout page="main">
+      <StyledMain>
+        <BiasList />
+        <EventList />
+      </StyledMain>
+    </Layout>
+  );
 }
 
 export default Main;

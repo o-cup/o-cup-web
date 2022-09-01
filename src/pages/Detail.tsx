@@ -19,14 +19,13 @@ const Detail = () => {
 	);
 
 	if (!combinedDetail) return null;
-	const { place, biasesId, organizer, snsId, startAt, endAt, images, district, address, goods, hashTags, tweetUrl } =
-		combinedDetail;
+	const { place, biasesId, organizer, snsId, startAt, endAt, images, district, address, goods, hashTags, tweetUrl } = combinedDetail;
 
 	// TODO: props하나로 묶어서 전달할 수 있도록 리팩토링
 	return (
-		<Layout>
+		<Layout page="detail">
 			<StyledDetail>
-				<div>
+				<div className="detailInfo">
 					<div className="mainInfo">
 						<EventMain
 							place={place}

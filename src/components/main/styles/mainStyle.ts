@@ -14,7 +14,7 @@ const StyledBiasList = styled.ul`
 	scrollbar-width: none;
 	height: 124px;
 	align-items: center;
-  padding: 12px 0;
+	padding: 12px 0;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -31,18 +31,17 @@ const StyledBias = styled.li`
 	}
 
 	&:first-child {
-		margin-left: 20px;
+		margin-left: 24px;
 	}
 
 	&:last-child {
-		margin-right: 20px;
+		margin-right: 24px;
 	}
 
 	> div {
 		width: 72px;
 		height: 72px;
 		background: ${({ theme }) => theme.colors.primary};
-
 		border-radius: 50%;
 		position: relative;
 		z-index: 1;
@@ -76,59 +75,8 @@ const StyledBias = styled.li`
 	}
 `;
 
-const StyledSearchInput = styled.div`
-	display: flex;
-	align-items: center;
-	position: relative;
-
-	padding: 0 20px;
-
-	> input {
-		width: 100%;
-		font-size: 16px;
-		line-height: 24px;
-		border: none;
-		outline: none;
-		background: ${({ theme }) => theme.colors.white};
-		border: 2px solid #000000;
-		border-radius: 32px;
-		flex: 1 1 0;
-		padding: 4px;
-		height: 40px;
-		padding-left: 42px;
-	}
-
-	> svg {
-		width: 17px;
-		height: 17px;
-		margin: 0 8px;
-		transform: translateY(-50%);
-		position: absolute;
-		top: 50%;
-		left: 30px;
-	}
-
-	> button {
-		width: 40px;
-		height: 40px;
-		margin-left: 20px;
-		background: ${({ theme }) => theme.colors.primary};
-		color: ${({ theme }) => theme.colors.black};
-		border: 2px solid #000000;
-		border-radius: 50%;
-		padding: 0;
-		cursor: pointer;
-
-		> svg {
-			width: 19px;
-			height: 19px;
-			margin: 2px 0 -2px;
-		}
-	}
-`;
-
 const StyledList = styled.ul`
-	padding: 10px 20px;
+	padding: 10px 24px;
 
 	@media ${({ theme }) => theme.device.desktop} {
 		display: flex;
@@ -164,12 +112,22 @@ const StyledItem = styled.li`
 		align-items: center;
 		padding-bottom: 12px;
 
-		> img {
-			width: 100%;
-			height: 270px;
-			object-fit: cover;
-			object-position: top;
-		}
+    > .lazy-image {
+      width: 100%;
+      height: 270px;
+      
+      img {
+        width: 100%;
+        height: 270px;
+        object-fit: cover;
+        object-position: top;
+      }
+      
+      /* Error image */
+      img.error {
+        object-position: center;
+      }
+    }
 
 		> h6 {
 			font-size: 20px;
@@ -188,9 +146,15 @@ const StyledItem = styled.li`
 		font-weight: 400;
 		display: flex;
 		align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
-		> svg {
+    > img,
+    > svg {
 			margin-right: 4px;
+      width: 14px;
+      min-width: 14px;
 		}
 
 		&:not(:last-child) {
@@ -199,5 +163,53 @@ const StyledItem = styled.li`
 	}
 `;
 
-export { StyledMain, StyledBiasList, StyledBias, StyledSearchInput, StyledList, StyledItem };
+const StyledEmptyMain = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &.default {
+    padding: 96px 0;
+
+    > div > img {
+      width: 316px;
+      margin-bottom: 12px;
+    }
+  }
+
+  &.small {
+    padding: 64px 0;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      > p {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 22px;
+      }
+
+      > img {
+        width: 68px;
+        height: 102px;
+        margin: 20px;
+      }
+    }
+  }
+`;
+
+const StyledBirthDayHat = styled.span`
+  background: ${props => `url("/images/hats/${props.color}.png") no-repeat 50% / contain`};
+  position: absolute;
+  width: 34px;
+  height: 35px;
+  top: -12px;
+  right: -3px;
+`
+
+export { StyledMain, StyledBiasList, StyledBias, StyledList, StyledItem, StyledEmptyMain, StyledBirthDayHat };
 export default {};

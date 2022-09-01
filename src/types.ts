@@ -1,3 +1,12 @@
+import { css } from "styled-components";
+
+export type RequestBias = {
+	id?: number;
+	peopleId: number;
+	bias: string;
+	team: string;
+};
+
 export type EventType = {
 	id: number;
 	createdAt: string;
@@ -10,21 +19,41 @@ export type EventType = {
 	startAt: string;
 	endAt: string;
 	images: string[];
-	requestedBiases?: any[];
+	requestedBiases?: RequestBias[];
 	isRequested: boolean;
 	isApproved: boolean;
 };
 
-export type GoodsItemType = {
+export type FirstComeDataType = {
+	key?: string;
+	day?: number;
+	items: string[];
+};
+
+export type FirstComeType = {
+	type: "A" | "B" | "C";
+	data: FirstComeDataType[];
+};
+
+export type ExtraGoodsType = {
+	index: number;
 	title: string;
 	items: string[];
-	type?: "AND" | "OR";
+};
+
+export type GoodsListType = {
+	all?: string[];
+	random?: string[];
+	dDay?: string[];
+	firstCome?: FirstComeType;
+	lucky?: string[];
+	extra?: ExtraGoodsType[];
 };
 
 export type DetailType = {
 	id: string;
 	address: string;
-	goods: GoodsItemType[];
+	goods: GoodsListType;
 	hashTags: string[];
 	tweetUrl: string;
 };
@@ -43,4 +72,20 @@ export type FetchEventParams = {
 	infinite?: boolean;
 	keyword?: string;
 	date?: string;
+};
+
+export type CustomStyleType = ReturnType<typeof css> | React.CSSProperties;
+
+export type ColorsType = "white" | "black" | "gray" | "primary";
+
+export type DateRangeType = {
+	startDate: Date;
+	endDate: Date;
+	key: string;
+};
+
+export type RegCodeItem = {
+	code: string;
+	name: string;
+	selected?: boolean;
 };

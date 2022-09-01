@@ -66,4 +66,26 @@ export const convertDateWithDots = (dateString: string) => {
 	return dateString;
 };
 
+export const getBirthMonth = (birthday: string) => {
+	const month = birthday.substring(4, 6);
+	return Number(month.replace(/(^0+)/, ""));
+};
+
+export const getDatesInRange = (startAt: string, endAt: string) => {
+	const date = new Date(convertStringToDate(startAt).getTime());
+	const dates = [];
+	while (date <= convertStringToDate(endAt)) {
+		dates.push(new Date(date));
+		date.setDate(date.getDate() + 1);
+	}
+	return dates;
+};
+
+export const isDateRangeOverlaps = (start: string, end: string, eventStart: string, eventEnd: string) => {
+	if (start <= eventStart && eventStart <= end) return true;
+	if (start <= eventEnd && eventEnd <= end) return true;
+	if (eventStart < start && end < eventEnd) return true;
+	return false;
+};
+
 export default {};

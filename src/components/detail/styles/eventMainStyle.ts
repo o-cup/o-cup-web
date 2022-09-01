@@ -9,8 +9,8 @@ const StyledEventMain = styled.div`
 		background: ${({ theme }) => theme.colors.white};
 		border: 2px solid #000000;
 		padding: 16px 16px 68px;
-		margin-left: 10px;
-		margin-right: 44px;
+		margin-left: 14px;
+		margin-right: 40px;
 		margin-bottom: 20px;
 		position: relative;
 		box-shadow: 6px 6px 0 #000000;
@@ -34,10 +34,16 @@ const StyledEventMain = styled.div`
 			font-weight: 400;
 			display: flex;
 			align-items: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
-			> svg {
-				margin-right: 4px;
-			}
+      > img,
+      > svg {
+        margin-right: 4px;
+        width: 14px;
+        min-width: 14px;
+      }
 
 			&:not(:last-child) {
 				margin-bottom: 8px;
@@ -46,17 +52,16 @@ const StyledEventMain = styled.div`
 	}
 
 	.imgContainer {
-		width: calc(100% - 32px);
-		height: 264px;
-		height: fit-content;
+		width: calc(100% - 40px);
+		min-height: 264px;
+		height: 100%;
 		position: relative;
 		background: ${({ theme }) => theme.colors.white};
-		box-sizing: content-box !important;
 		border: 2px solid #000000;
-		z-index: 10;
+		z-index: ${({ theme }) => theme.zIndex.imageCarousel};
 		margin-top: -74px;
-		margin-left: 16px;
-		margin-right: 16px;
+		margin-left: 20px;
+		margin-right: 20px;
 
 		.slick-slider,
 		.slick-list,
@@ -97,9 +102,11 @@ const StyledEventMain = styled.div`
 
 		img {
 			width: 100%;
-			height: inherit !important;
+			height: 100% !important;
+      min-height: 264px;
 			object-fit: cover;
 			object-position: top;
+      vertical-align : bottom;
 		}
 	}
 `;

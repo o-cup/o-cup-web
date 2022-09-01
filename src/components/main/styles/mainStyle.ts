@@ -164,5 +164,44 @@ const StyledItem = styled.li`
 	}
 `;
 
-export { StyledMain, StyledBiasList, StyledBias, StyledList, StyledItem };
+const StyledEmptyMain = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &.default {
+    padding: 96px 0;
+
+    > div > img {
+      width: 316px;
+      margin-bottom: 12px;
+    }
+  }
+
+  &.small {
+    padding: 64px 0;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      > p {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 22px;
+      }
+
+      > img {
+        width: 68px;
+        height: 102px;
+        margin: 20px;
+      }
+    }
+  }
+`;
+
+export { StyledMain, StyledBiasList, StyledBias, StyledList, StyledItem,StyledEmptyMain };
 export default {};

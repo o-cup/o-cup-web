@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { fetchEvents } from "../../apis";
+import { useRecoilState } from "recoil";
 import { StyledResult } from "./styles/resultStyle";
 import Event from "./Event";
 import Button from "../../shared/components/Button";
 import { FilterIcon, SortIcon } from "../../shared/components";
 import SearchModal from "./SearchModal";
 import Chip from "../../shared/components/Chip";
-import { dateRangeAtom, districtAtom } from "../../state";
+import { dateRangeAtom } from "../../state";
 import { convertDateWithDots } from "../../shared/utils/dateHandlers";
+import { fetchSearchedEvent } from "../../apis/search";
 
 type ResultProps = {
 	keyword: string;
@@ -29,7 +29,7 @@ type ChipType = {
 const Result = ({ keyword }: ResultProps) => {
 	const [dateRange, setDateRange] = useRecoilState(dateRangeAtom);
 	const { startDate, endDate } = dateRange;
-	const districts = useRecoilValue(districtAtom);
+	// const districts = useRecoilValue(districtAtom);
 	const [sortOpen, setSortOpen] = useState(false);
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
@@ -39,12 +39,10 @@ const Result = ({ keyword }: ResultProps) => {
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
-	// console.log("keyword", keyword);
-
-	const { data: events } = useQuery(["resultEvents", keyword], () => fetchEvents({ keyword }));
-	console.log("events", events);
-
-	// console.log("districts", districts);
+	// TODO: infinitequery로 변경하기
+	const { data: events } = useQuery(["resultEvents", keyword, dateRange], () =>
+		fetchSearchedEvent({ keyword, date: { startDate, endDate } })
+	);
 
 	useEffect(() => {
 		if (!startDate) return;

@@ -17,7 +17,7 @@ const Event = ({ event }: EventProps) => {
 			<img src={images[0]} alt={place} />
 			<div>
 				<h2>{place}</h2>
-				{biasesId.map((biasId) => (
+				{biasesId?.map((biasId) => (
 					<BiasChip id={biasId} key={biasId} />
 				))}
 

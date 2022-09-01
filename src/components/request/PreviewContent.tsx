@@ -4,12 +4,13 @@ import { requestGoodsListAtom, requestInputsAtom } from "../../state/atoms";
 import { getGoodsObj } from "./requestApi";
 import { EventMain, GoodsInfo, Location, TwitterInfo } from "../detail";
 import { DEFAULT_POSTER_URL } from "../../shared/constants";
+import { getGoodsObj } from "./requestApi";
 
 const PreviewContent = () => {
   const requestInputs = useRecoilValue(requestInputsAtom);
   const goodsList = useRecoilValue(requestGoodsListAtom);
 
-  const { place, artist, organizer, snsId, link, posterUrls, hashTags, dateRange } = requestInputs;
+  const { place, artist, organizer, snsId, link, posterUrls, hashTags, dateRange, goods } = requestInputs;
 
   return (<div className="previewContent">
     <EventMain

@@ -69,21 +69,30 @@ const StyledGoodsListItem = styled.div`
 const StyledHighLightItem = styled.li`
   display: flex;
   align-items: center;
-  gap: 8px;
   margin-top: 12px;
 
-  > .highlight {
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 26px;
-    height: 26px;
-    background: url("/images/icons/highlight.png") no-repeat center;
-    background-size: 100% 20px;
-    padding: 2px 4px 1px 0;
-    margin-right: 4px;
-    margin-bottom: 6px;
-    position: relative;
-    white-space: nowrap;
+  > .labelContainer {
+    &.length_2 {
+      width: 36px;
+    }
+
+    &.length_3 {
+      width: 48px;
+    }
+    
+    .highlight {
+      width: fit-content;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 26px;
+      height: 26px;
+      background: url("/images/icons/highlight.png") no-repeat center;
+      background-size: 100% 20px;
+      padding: 2px 4px 1px 0;
+      margin-bottom: 6px;
+      position: relative;
+      white-space: nowrap;
+    }
   }
 
   > .chipContainer {

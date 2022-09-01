@@ -1,12 +1,15 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { requestInputsAtom } from "../../state/atoms";
+import { requestGoodsListAtom, requestInputsAtom } from "../../state/atoms";
+import { getGoodsObj } from "./requestApi";
 import { EventMain, GoodsInfo, Location, TwitterInfo } from "../detail";
 import { DEFAULT_POSTER_URL } from "../../shared/constants";
 
 const PreviewContent = () => {
   const requestInputs = useRecoilValue(requestInputsAtom);
-  const { place, artist, organizer, snsId, link, posterUrls, hashTags, dateRange, goods } = requestInputs;
+  const goodsList = useRecoilValue(requestGoodsListAtom);
+
+  const { place, artist, organizer, snsId, link, posterUrls, hashTags, dateRange } = requestInputs;
 
   return (<div className="previewContent">
     <EventMain
@@ -23,7 +26,7 @@ const PreviewContent = () => {
     <TwitterInfo organizer={organizer || "주최자 닉네임"}
                  snsId={snsId || "ocup_official"}
                  hashTags={hashTags[0].text ? hashTags.map((h) => h.text) : ["해피_오컵_데이"]} />
-    <GoodsInfo goods={{extra: [{ index: 1, title: "특전종류", items: [""] }]}} tweetUrl={link} />
+    <GoodsInfo goods={getGoodsObj(requestInputs, goodsList)} tweetUrl={link} />
     <Location address={place.address} />
   </div>);
 };

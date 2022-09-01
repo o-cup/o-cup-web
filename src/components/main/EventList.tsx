@@ -5,6 +5,7 @@ import { fetchEvents } from "../../apis";
 import { openedBiasAtom, dateFilterAtom, biasFilterAtom } from "../../state/atoms";
 import EventListItem from "./EventListItem";
 import { StyledList } from "./styles/mainStyle";
+import EmptyDefault from "./EmptyDefault";
 
 // todo: useInfiniteQuery 리팩토링 후 추가
 const EventList = () => {
@@ -42,12 +43,13 @@ const EventList = () => {
 		}
 	}, [biasFilter, events]);
 
-	return (
+	return (<>
 		<StyledList>
 			{biasFilteredEvents?.map((event) => (
 				<EventListItem event={event} key={event.id} />
 			))}
 		</StyledList>
-	);
+		<EmptyDefault size={biasFilteredEvents.length > 0 ? "small" : "default"} />
+	</>);
 };
 export default EventList;

@@ -72,9 +72,12 @@ const FcfsGoodsInput = () => {
     });
   };
 
+  // sessionStorage 초기화 시 type 초기화
   useEffect(() => {
     if (firstCome?.type) {
       setType(firstCome.type);
+    } else {
+      setType("");
     }
   }, [firstCome]);
 

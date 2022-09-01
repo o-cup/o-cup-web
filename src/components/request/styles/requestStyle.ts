@@ -27,7 +27,7 @@ const StyledEntry = styled.div`
     font-weight: 400;
 
     p:first-child {
-      width: 133px;
+      width: 140px;
       height: 28px;
       background-color: ${({ theme }) => theme.colors.black};
       color: ${({ theme }) => theme.colors.white};
@@ -133,6 +133,10 @@ const StyledRequestModal = styled.div`
       line-height: 16px;
       text-align: center;
       padding: 6px 12px;
+      
+      &.alertBtn {
+        width: 72px;
+      }
     }
   }
 `;

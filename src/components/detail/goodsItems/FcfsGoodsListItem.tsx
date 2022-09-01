@@ -21,7 +21,9 @@ const FcfsGoodsListItem = ({ fcfs }: FcfsProps) => {
             if (d.key === "others" || d.key === "dDay") {
               return (
                 <StyledHighLightItem key={d.key}>
-                  <p className="highlight">{TYPE_C[d.key]}</p>
+                  <div className={`labelContainer length_${TYPE_C[d.key].length}`}>
+                    <p className="highlight">{TYPE_C[d.key]}</p>
+                  </div>
                   <div className="chipContainer">
                     {d.items.map((item) => <GoodsChip key={item} value={item} />)}
                   </div>
@@ -31,7 +33,9 @@ const FcfsGoodsListItem = ({ fcfs }: FcfsProps) => {
             if (d.day) {
               return (
                 <StyledHighLightItem key={d.day}>
-                  <p className="highlight">{d.day}일</p>
+                  <div className="labelContainer length_2">
+                    <p className="highlight">{d.day}일</p>
+                  </div>
                   <div className="chipContainer">
                     {d.items.map((item) => <GoodsChip key={item} value={item} />)}
                   </div>
@@ -40,7 +44,9 @@ const FcfsGoodsListItem = ({ fcfs }: FcfsProps) => {
             }
             return (
               <StyledHighLightItem key="typeA">
-                <p className="highlight">매일</p>
+                <div className="labelContainer length_2">
+                  <p className="highlight">매일</p>
+                </div>
                 <div className="chipContainer">
                   {d.items.map((item) => <GoodsChip key={item} value={item} />)}
                 </div>

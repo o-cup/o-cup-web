@@ -43,13 +43,13 @@ const EventList = () => {
 		}
 	}, [biasFilter, events]);
 
-	return (
+	return (<>
 		<StyledList>
 			{biasFilteredEvents?.map((event) => (
 				<EventListItem event={event} key={event.id} />
 			))}
-      <EmptyDefault size={biasFilteredEvents.length > 0 ? "small" : "default"} />
 		</StyledList>
-	);
+		<EmptyDefault size={biasFilteredEvents.length > 0 ? "small" : "default"} />
+	</>);
 };
 export default EventList;

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import axios from "axios";
 import { fetchPeople } from "../apis";
 import { MonthSelector, Result, SearchInput } from "../components/search";
 import { StyledFilter, StyledSearch } from "../components/search/styles/searchStyle";
@@ -22,14 +21,19 @@ const Search = () => {
 	const [searchSortOpen, setSearchSortOpen] = useState(false);
 	const viewResult = keyword && searched;
 
+	const { data: people } = useQuery(["people"], () => fetchPeople(), {
+		select: (data) => data?.filter((item) => getBirthMonth(item.birthday) === selectedMonth),
+	});
+
 	useEffect(() => {
 		const today = new Date();
 		setSelectedMonth(today.getMonth() + 1);
 	}, []);
 
-	const { data: people } = useQuery(["people"], () => fetchPeople(), {
-		select: (data) => data?.filter((item) => getBirthMonth(item.birthday) === selectedMonth),
-	});
+	const handleBiasClick = (biasName: string) => {
+		setKeyword(biasName);
+		setSearched(true);
+	};
 
 	const conditionalRender = () => {
 		if (viewResult) {
@@ -45,7 +49,12 @@ const Search = () => {
 
 				<ul className="biases">
 					{people?.map((bias) => (
-						<BiasProfile key={bias.name} biasName={bias.name} imgUrl={bias.profilePic} />
+						<BiasProfile
+							key={bias.name}
+							biasName={bias.name}
+							imgUrl={bias.profilePic}
+							handleClick={() => handleBiasClick(bias.name)}
+						/>
 					))}
 				</ul>
 			</StyledFilter>

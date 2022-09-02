@@ -19,6 +19,7 @@ const Search = () => {
 	const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 	const [searched, setSearched] = useState(false);
 	const [searchSortOpen, setSearchSortOpen] = useState(false);
+	const [selectedBiasId, setSelectedBiasId] = useState<number | null>(null);
 	const viewResult = keyword && searched;
 
 	const { data: people } = useQuery(["people"], () => fetchPeople(), {
@@ -30,14 +31,15 @@ const Search = () => {
 		setSelectedMonth(today.getMonth() + 1);
 	}, []);
 
-	const handleBiasClick = (biasName: string) => {
-		setKeyword(biasName);
+	const handleBiasClick = ({ name, id }: { name: string; id: number }) => {
+		setKeyword(name);
+		setSelectedBiasId(id);
 		setSearched(true);
 	};
 
 	const conditionalRender = () => {
 		if (viewResult) {
-			return <Result keyword={keyword} />;
+			return <Result keyword={keyword} biasId={selectedBiasId!} />;
 		}
 
 		return (
@@ -53,7 +55,7 @@ const Search = () => {
 							key={bias.name}
 							biasName={bias.name}
 							imgUrl={bias.profilePic}
-							handleClick={() => handleBiasClick(bias.name)}
+							handleClick={() => handleBiasClick({ name: bias.name, id: bias.id })}
 						/>
 					))}
 				</ul>
@@ -65,7 +67,12 @@ const Search = () => {
 		<Layout page="search" share={!!viewResult}>
 			<StyledSearch>
 				<div className="input">
-					<SearchInput keyword={keyword} setKeyword={setKeyword} setSearched={setSearched} />
+					<SearchInput
+						keyword={keyword}
+						setKeyword={setKeyword}
+						setSearched={setSearched}
+						setSelectedBiasId={setSelectedBiasId}
+					/>
 				</div>
 
 				{conditionalRender()}

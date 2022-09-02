@@ -13,7 +13,7 @@ import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { fetchSearchedEvent } from "../../apis/search";
 
 type ResultProps = {
-	keyword?: string;
+	keyword: string;
 	biasId?: number;
 };
 
@@ -44,10 +44,6 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 	const { data: events } = useQuery(["resultEvents", keyword, dateRange, biasId], () =>
 		fetchSearchedEvent({ keyword, date: { startDate, endDate }, biasId })
 	);
-
-	console.log("keyword", keyword);
-
-	console.log("events", events);
 
 	useEffect(() => {
 		if (!startDate) return;
@@ -140,7 +136,6 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 };
 
 Result.defaultProps = {
-	keyword: "",
 	biasId: null,
 };
 

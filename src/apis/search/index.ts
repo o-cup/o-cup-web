@@ -20,9 +20,14 @@ const fetchSearchedEvent = async ({ keyword, date, biasId }: FetchSearchedEventP
 	const query = supabase.from("place_sort").select("*").eq("isApproved", true);
 	let data;
 
-	if (!keyword) return data;
-
 	const { data: events } = await query;
+
+	if (biasId) {
+		data = events?.filter((event) => event.biasesId.includes(biasId));
+		return data;
+	}
+
+	if (!keyword) return data;
 
 	data = events?.filter((event) => {
 		const { bias, place, organizer, district } = event;

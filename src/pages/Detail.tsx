@@ -8,6 +8,8 @@ import { EventMain, EventNearHere, GoodsInfo, TwitterInfo, Location } from "../c
 import Layout from "../shared/components/layout";
 
 const Detail = () => {
+	window.scrollTo(0, 0);
+
 	const { id } = useParams();
 
 	const { data: combinedDetail }: (EventType & DetailType) | any = useQuery(

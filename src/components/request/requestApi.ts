@@ -6,7 +6,7 @@ import { GoodsListType } from "../../types";
 type ReqType = {
   requestInputs: RequestType;
   goodsList: RequestGoodsListType[];
-  setConfirmModalOpen: Dispatch<React.SetStateAction<boolean>>;
+  setSubmitModalOpen: Dispatch<React.SetStateAction<boolean>>;
   setAlertOpen: Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -79,7 +79,7 @@ const hasGoods = (requestInputs: RequestType, goodsList: RequestGoodsListType[])
 };
 
 /** 신청 데이터 등록 */
-export const sendReqData = async ({ requestInputs, goodsList, setConfirmModalOpen, setAlertOpen }: ReqType) => {
+export const sendReqData = async ({ requestInputs, goodsList, setSubmitModalOpen, setAlertOpen }: ReqType) => {
 
   const { place, artist, organizer, snsId, link, posterUrls, hashTags, dateRange } = requestInputs;
 
@@ -125,7 +125,7 @@ export const sendReqData = async ({ requestInputs, goodsList, setConfirmModalOpe
     });
   }
 
-  setConfirmModalOpen(true);
+  setSubmitModalOpen(true);
 };
 
 export default {};

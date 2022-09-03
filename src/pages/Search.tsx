@@ -22,7 +22,7 @@ const Search = () => {
 	const [selectedBiasId, setSelectedBiasId] = useState<number | null>(null);
 	const viewResult = keyword && searched;
 
-	const { data: people } = useQuery(["people"], () => fetchPeople(), {
+	const { data: people } = useQuery(["people"], fetchPeople, {
 		select: (data) => data?.filter((item) => getBirthMonth(item.birthday) === selectedMonth),
 	});
 
@@ -56,6 +56,7 @@ const Search = () => {
 							biasName={bias.name}
 							imgUrl={bias.profilePic}
 							handleClick={() => handleBiasClick({ name: bias.name, id: bias.id })}
+							id={bias.id}
 						/>
 					))}
 				</ul>

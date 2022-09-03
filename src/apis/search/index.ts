@@ -15,17 +15,15 @@ export type FetchSearchedEventParams = {
 };
 
 const fetchSearchedEvent = async ({ keyword, date, biasId }: FetchSearchedEventParams) => {
-	const { startDate, endDate } = date!;
-
-	const query = supabase.from("place_sort").select("*").eq("isApproved", true);
-	let data;
-
-	const { data: events } = await query;
+	let query = supabase.from("place_sort").select("*").eq("isApproved", true);
 
 	if (biasId) {
-		data = events?.filter((event) => event.biasesId.includes(biasId));
-		return data;
+		query = query.contains("biasesId", [biasId]);
 	}
+
+	const { data: events } = await query;
+	let data;
+	data = events;
 
 	if (!keyword) return data;
 
@@ -42,6 +40,7 @@ const fetchSearchedEvent = async ({ keyword, date, biasId }: FetchSearchedEventP
 		return false;
 	});
 
+	const { startDate, endDate } = date!;
 	if (!startDate) return data;
 
 	data = data?.filter((event) => {

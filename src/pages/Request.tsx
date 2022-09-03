@@ -18,10 +18,6 @@ const Request = () => {
   const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
   const [goodsList, setGoodsList] = useRecoilState(requestGoodsListAtom);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const handleSubmit = () => sendReqData({ requestInputs, goodsList, setConfirmModalOpen, setAlertOpen });
 
   const resetAllStates = () => {
@@ -52,6 +48,16 @@ const Request = () => {
     ]);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    return () => {
+      // 이벤트 등록 session 정보 초기화
+      resetAllStates();
+      sessionStorage.clear();
+    }
+  }, []);
+  
   return (
     <>
       <Layout page="request">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
+import { EventType } from "@testing-library/react";
 import { StyledResult } from "./styles/resultStyle";
 import Event from "./Event";
 import Button from "../../shared/components/Button";
@@ -13,6 +14,7 @@ import { fetchSearchedEvent } from "../../apis/search";
 
 type ResultProps = {
 	keyword: string;
+	biasId?: number;
 };
 
 const sortOptions = {
@@ -26,7 +28,7 @@ type ChipType = {
 	distChips: string[];
 };
 
-const Result = ({ keyword }: ResultProps) => {
+const Result = ({ keyword, biasId }: ResultProps) => {
 	const [dateRange, setDateRange] = useRecoilState(dateRangeAtom);
 	const { startDate, endDate } = dateRange;
 	// const districts = useRecoilValue(districtAtom);
@@ -39,9 +41,8 @@ const Result = ({ keyword }: ResultProps) => {
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
-	// TODO: infinitequery로 변경하기
-	const { data: events } = useQuery(["resultEvents", keyword, dateRange], () =>
-		fetchSearchedEvent({ keyword, date: { startDate, endDate } })
+	const { data: events } = useQuery(["resultEvents", keyword, dateRange, biasId], () =>
+		fetchSearchedEvent({ keyword, date: { startDate, endDate }, biasId })
 	);
 
 	useEffect(() => {
@@ -132,6 +133,10 @@ const Result = ({ keyword }: ResultProps) => {
 			)}
 		</StyledResult>
 	);
+};
+
+Result.defaultProps = {
+	biasId: null,
 };
 
 export default Result;

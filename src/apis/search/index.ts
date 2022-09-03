@@ -2,26 +2,30 @@ import axios from "axios";
 import { isDateRangeOverlaps } from "../../shared/utils/dateHandlers";
 import { supabase } from "../../supabaseClient";
 
-export const fetchRegcodes = async (code?: string) => {
+const fetchRegcodes = async (code?: string) => {
 	const param = !code ? "*00000000" : `${code.split("0")[0]}*000000`;
 	const res = await axios.get(`https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=${param}`);
 	return res;
 };
 
 export type FetchSearchedEventParams = {
-	keyword: string;
+	keyword?: string;
 	date?: { startDate: string; endDate: string };
+	biasId?: number;
 };
 
-export const fetchSearchedEvent = async ({ keyword, date }: FetchSearchedEventParams) => {
-	const { startDate, endDate } = date!;
+const fetchSearchedEvent = async ({ keyword, date, biasId }: FetchSearchedEventParams) => {
+	let query = supabase.from("place_sort").select("*").eq("isApproved", true);
 
-	const query = supabase.from("place_sort").select("*").eq("isApproved", true);
-	let data;
-
-	if (!keyword) return data;
+	if (biasId) {
+		query = query.contains("biasesId", [biasId]);
+	}
 
 	const { data: events } = await query;
+	let data;
+	data = events;
+
+	if (!keyword) return data;
 
 	data = events?.filter((event) => {
 		const { bias, place, organizer, district } = event;
@@ -36,6 +40,7 @@ export const fetchSearchedEvent = async ({ keyword, date }: FetchSearchedEventPa
 		return false;
 	});
 
+	const { startDate, endDate } = date!;
 	if (!startDate) return data;
 
 	data = data?.filter((event) => {
@@ -47,4 +52,4 @@ export const fetchSearchedEvent = async ({ keyword, date }: FetchSearchedEventPa
 	return data;
 };
 
-export default {};
+export { fetchRegcodes, fetchSearchedEvent };

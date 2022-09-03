@@ -6,9 +6,10 @@ type SearchInputProps = {
 	keyword: string;
 	setKeyword: Dispatch<SetStateAction<string>>;
 	setSearched: Dispatch<SetStateAction<boolean>>;
+	setSelectedBiasId: Dispatch<SetStateAction<null | number>>;
 };
 
-const SearchInput = ({ keyword, setKeyword, setSearched }: SearchInputProps) => {
+const SearchInput = ({ keyword, setKeyword, setSearched, setSelectedBiasId }: SearchInputProps) => {
 	const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
 		const { value } = e.currentTarget;
 		setKeyword(value);
@@ -22,6 +23,11 @@ const SearchInput = ({ keyword, setKeyword, setSearched }: SearchInputProps) => 
 		setSearched(true);
 	};
 
+	const handleDeleteClick = () => {
+		setKeyword("");
+		setSelectedBiasId(null);
+	};
+
 	return (
 		<StyledSearchInput>
 			<input
@@ -31,7 +37,7 @@ const SearchInput = ({ keyword, setKeyword, setSearched }: SearchInputProps) => 
 				onKeyDown={handleEnter}
 			/>
 			<Icon name="search" handleClick={() => setSearched(true)} />
-			{keyword && <Icon name="delete" handleClick={() => setKeyword("")} />}
+			{keyword && <Icon name="delete" handleClick={handleDeleteClick} />}
 		</StyledSearchInput>
 	);
 };

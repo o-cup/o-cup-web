@@ -54,10 +54,7 @@ export const StyledFcfsTitle = styled.div`
       font-weight: 500;
       font-size: 12px;
       line-height: 16px;
-    }
-
-    &.notSelected {
-      opacity: 0.5;
+      outline: none;
     }
   }
 `;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { requestGoodsListAtom, requestInputsAtom } from "../state/atoms";
 import Layout from "../shared/components/layout";
@@ -17,6 +17,10 @@ const Request = () => {
 
   const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
   const [goodsList, setGoodsList] = useRecoilState(requestGoodsListAtom);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = () => sendReqData({ requestInputs, goodsList, setConfirmModalOpen, setAlertOpen });
 

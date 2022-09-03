@@ -44,7 +44,7 @@ export const StyledLuckyTitle = styled.div`
 			font-weight: 500;
 			font-size: 12px;
 			line-height: 16px;
-
+      outline: none;
 			display: flex;
 			align-items: center;
 		}

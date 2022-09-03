@@ -10,7 +10,7 @@ const LuckyDrawInput = () => {
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
 	const { goods } = requestInputs;
 
-	const [hasLucky, setHasLucky] = useState(true);
+	const [hasLucky, setHasLucky] = useState(false);
 	const [isFurtherNotice, setIsFurtherNotice] = useState(false);
 
 	/** "럭키드로우 없음" 선택하는 경우 값 초기화 */
@@ -36,6 +36,30 @@ const LuckyDrawInput = () => {
 			});
 		}
 	}, [hasLucky]);
+
+	/** "추후 공지 예정" 선택하는 경우 값 변경 */
+	useEffect(() => {
+		if (isFurtherNotice) {
+			setRequestInputs({
+				...requestInputs,
+				goods: {
+					...goods,
+					lucky: [{ id: 1, text: "추후 공지 예정", count: 0 }],
+				},
+			});
+		} else {
+			setRequestInputs({
+				...requestInputs,
+				goods: {
+					...goods,
+					lucky: [
+						{ id: 1, text: "", count: 0 },
+						{ id: 2, text: "", count: 0 },
+					],
+				},
+			});
+		}
+	}, [isFurtherNotice]);
 
 	const handleInputChange = (value: string, luckyId: number, key: "text" | "count") => {
 		const luckyData = goods.lucky?.map((luck) => {
@@ -155,10 +179,18 @@ const LuckyDrawInput = () => {
 			<StyledLuckyTitle>
 				<span className="label">럭키드로우</span>
 				<div className="options">
-					<button type="button" onClick={() => setIsFurtherNotice(!isFurtherNotice)}>
+					<button type="button" onClick={() => {
+            if (!isFurtherNotice) {
+              setHasLucky(true);
+            }
+            setIsFurtherNotice(!isFurtherNotice);
+          }}>
 						{isFurtherNotice ? <Icons name="check_true" /> : <Icons name="check_false" />} <span>추후 공지 예정</span>
 					</button>
-					<button type="button" onClick={() => setHasLucky(!hasLucky)}>
+					<button type="button" onClick={() => {
+            setIsFurtherNotice(false);
+            setHasLucky(!hasLucky);
+          }}>
 						{hasLucky ? <Icons name="check_false" /> : <Icons name="check_true" />}
 						<span>럭키드로우 없음</span>
 					</button>

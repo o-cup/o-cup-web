@@ -63,21 +63,27 @@ const StyledGoodsListItem = styled.div`
   ul.lucky {
     flex-direction: column;
     align-items: flex-start;
+
+    > li {
+      height: fit-content !important;
+    }
   }
 `;
 
 const StyledHighLightItem = styled.li`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 12px;
 
   > .labelContainer {
     &.length_2 {
       width: 36px;
+      min-width: 36px;
     }
 
     &.length_3 {
       width: 48px;
+      min-width: 48px;
     }
     
     .highlight {
@@ -100,6 +106,7 @@ const StyledHighLightItem = styled.li`
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
+    height: fit-content;
   }
 }
 `;

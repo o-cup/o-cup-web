@@ -41,7 +41,6 @@ const Search = () => {
 		if (viewResult) {
 			return <Result keyword={keyword} biasId={selectedBiasId!} />;
 		}
-
 		return (
 			<StyledFilter>
 				<div className="months">

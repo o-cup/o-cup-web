@@ -18,7 +18,6 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 		max-width: 1080px;
 		height: ${({ theme }) => theme.heights.header};
 		padding: 0 24px;
-		/* border-bottom: ${(props) => (props.mainPage ? "" : "2px solid #000")}; */
 		position: relative;
 
 		h1 {
@@ -27,7 +26,8 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 			position: absolute;
 			left: 0;
 			right: 0;
-			text-align: center;
+			margin: 0 auto;
+			width: fit-content;
 		}
 
 		> div {

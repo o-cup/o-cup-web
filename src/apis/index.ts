@@ -3,7 +3,7 @@ import { isOpenToday } from "../shared/utils/dateHandlers";
 import { supabase } from "../supabaseClient";
 import { EventType, DetailType, FetchEventParams } from "../types";
 
-const fetchEvents = async ({ pageParam = 1, infinite = false, keyword, date }: FetchEventParams) => {
+const fetchEvents = async ({ pageParam = 1, infinite = false, date }: FetchEventParams) => {
 	let query = supabase.from("place_sort").select("*").eq("isApproved", true);
 
 	if (infinite) {
@@ -115,13 +115,5 @@ const uploadPoster = async (file: any) => {
 	return publicURL;
 };
 
-export {
-	fetchEvents,
-	fetchEventDetail,
-	fetchPeople,
-	insertEvent,
-	insertDetail,
-	fetchBiases,
-	uploadPoster,
-};
+export { fetchEvents, fetchEventDetail, fetchPeople, insertEvent, insertDetail, fetchBiases, uploadPoster };
 export default {};

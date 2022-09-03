@@ -12,6 +12,7 @@ type Titles = {
 };
 
 const titles = {
+	detail: "상세보기",
 	request: "이벤트 등록",
 	search: "검색하기",
 } as Titles;
@@ -29,7 +30,7 @@ const Header = ({ page, share }: HeaderProps) => {
 	return (
 		<StyledHeader mainPage={mainPage}>
 			<div id="header">
-				{page === "search" || page === "request" ? (
+				{page !== "main" ? (
 					<Icon name="arrow-left" handleClick={() => navigate(-1)} />
 				) : (
 					<Icon name="logo" handleClick={() => navigate("/")} />

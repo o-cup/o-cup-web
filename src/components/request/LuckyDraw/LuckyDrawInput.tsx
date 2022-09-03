@@ -13,6 +13,14 @@ const LuckyDrawInput = () => {
 	const [hasLucky, setHasLucky] = useState(false);
 	const [isFurtherNotice, setIsFurtherNotice] = useState(false);
 
+  /** 데이터 초기화 시 체크박스 초기화 */
+	useEffect(() => {
+		if(!goods.lucky) {
+      setHasLucky(false);
+      setIsFurtherNotice(false);
+    }
+	}, [requestInputs])
+
 	/** "럭키드로우 없음" 선택하는 경우 값 초기화 */
 	useEffect(() => {
 		if (!hasLucky) {

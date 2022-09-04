@@ -51,6 +51,11 @@ export const StyledEvent = styled.div`
 			}
 		}
 
+		.biases {
+			display: flex;
+			gap: 5px;
+		}
+
 		.extraInfo {
 			height: 100%;
 			display: flex;

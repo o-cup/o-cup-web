@@ -23,9 +23,12 @@ const Event = ({ event }: EventProps) => {
 					<h2>{place}</h2>
 					{isDuringEvent && <span />}
 				</div>
-				{biasesId?.map((biasId) => (
-					<BiasChip id={biasId} key={biasId} />
-				))}
+
+				<div className="biases">
+					{biasesId?.map((biasId) => (
+						<BiasChip id={biasId} key={biasId} />
+					))}
+				</div>
 
 				<div className="extraInfo">
 					<p>

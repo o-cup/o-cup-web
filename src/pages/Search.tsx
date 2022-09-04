@@ -39,7 +39,7 @@ const Search = () => {
 
 	const conditionalRender = () => {
 		if (viewResult) {
-			return <Result keyword={keyword} biasId={selectedBiasId!} />;
+			return <Result keyword={keyword} biasId={selectedBiasId} />;
 		}
 		return (
 			<StyledFilter>

@@ -19,8 +19,8 @@ export const StyledFcfsGoodsInput = styled.div`
 
     .notice {
       font-weight: 400;
-      font-size: 10px;
-      line-height: 14px;
+      font-size: 12px;
+      line-height: 16px;
       color: ${({ theme }) => theme.colors.gray};
     }
   }
@@ -54,10 +54,7 @@ export const StyledFcfsTitle = styled.div`
       font-weight: 500;
       font-size: 12px;
       line-height: 16px;
-    }
-
-    &.notSelected {
-      opacity: 0.5;
+      outline: none;
     }
   }
 `;

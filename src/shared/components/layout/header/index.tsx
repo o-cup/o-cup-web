@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import DateSelector from "./DateSelector";
 import HeaderCalendar from "./HeaderCalendar";
 import Icon from "../../Icon/Icons";
@@ -24,8 +24,21 @@ type HeaderProps = {
 
 const Header = ({ page, share }: HeaderProps) => {
 	const navigate = useNavigate();
+	const location = useLocation();
+
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
 	const mainPage = page === "main";
+
+	const shareTwitter = () => {
+		const sendText = "오늘의 컵홀더"; // 전달할 텍스트
+		const sendUrl = `${window.origin}${location.pathname}`; // 전달할 URL
+		window.open(`https://twitter.com/intent/tweet?text=${sendText}&url=${sendUrl}`, "popup", "width=600, height=360");
+	};
+
+	const handleLogoClick = () => {
+		navigate("/");
+		window.scrollTo({ top: 0 });
+	};
 
 	return (
 		<StyledHeader mainPage={mainPage}>
@@ -33,16 +46,16 @@ const Header = ({ page, share }: HeaderProps) => {
 				{page !== "main" ? (
 					<Icon name="arrow-left" handleClick={() => navigate(-1)} />
 				) : (
-					<Icon name="logo" handleClick={() => navigate("/")} />
+					<Icon name="logo" handleClick={handleLogoClick} />
 				)}
 
 				{page && <h1>{titles[page]}</h1>}
-				<div>
+				<div className="rightIcons">
 					{mainPage && <DateSelector isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen} />}
-					{(mainPage || page === "detail") && <Icon name="search" handleClick={() => navigate("/search")} />}
+					{(mainPage || page === "detail") && <Icon name="search_header" handleClick={() => navigate("/search")} />}
 					{share && (
 						<Share>
-							<Icon name="share" />
+							<Icon name="share" handleClick={shareTwitter} />
 							<span className="tooltip">트위터에 공유하기</span>
 						</Share>
 					)}

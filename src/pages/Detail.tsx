@@ -8,6 +8,8 @@ import { EventMain, EventNearHere, GoodsInfo, TwitterInfo, Location } from "../c
 import Layout from "../shared/components/layout";
 
 const Detail = () => {
+	window.scrollTo(0, 0);
+
 	const { id } = useParams();
 
 	const { data: combinedDetail }: (EventType & DetailType) | any = useQuery(
@@ -23,7 +25,7 @@ const Detail = () => {
 
 	// TODO: props하나로 묶어서 전달할 수 있도록 리팩토링
 	return (
-		<Layout page="detail">
+		<Layout page="detail" share>
 			<StyledDetail>
 				<div className="detailInfo">
 					<div className="mainInfo">

@@ -67,6 +67,14 @@ export const StyledIcon = styled.i`
 		background-size: contain;
 		height: 20px;
 		width: 20px;
+	}	
+  
+  &.search_header {
+		display: flex;
+		background: url("/images/icons/search.png") no-repeat;
+		background-size: contain;
+		height: 24px;
+		width: 24px;
 	}
 
 	&.sort {
@@ -128,6 +136,12 @@ export const StyledIcon = styled.i`
 		background-size: contain;
 		height: 20px;
 		width: 20px;
+	}
+
+	&.reset {
+		display: flex;
+		background: url("/images/icons/reset.png") no-repeat;
+		background-size: contain;
 	}
 `;
 

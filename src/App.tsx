@@ -22,7 +22,7 @@ function App() {
 				<BrowserRouter>
 					<HelmetProvider>
 						<Helmet>
-							<title>🥤오늘의 컵홀더 | Home</title>
+							<title>오늘의 컵홀더 | Home</title>
 						</Helmet>
 					</HelmetProvider>
 					<RecoilRoot>

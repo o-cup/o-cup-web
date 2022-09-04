@@ -12,6 +12,8 @@ export const StyledEvent = styled.div`
 	min-width: 320x;
 	width: 100%;
 
+	cursor: pointer;
+
 	@media all and (max-width: 400px) {
 		gap: 15px;
 	}
@@ -47,6 +49,11 @@ export const StyledEvent = styled.div`
 				display: inline-block;
 				border-radius: 50%;
 			}
+		}
+
+		.biases {
+			display: flex;
+			gap: 5px;
 		}
 
 		.extraInfo {

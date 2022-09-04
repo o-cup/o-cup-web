@@ -9,9 +9,9 @@ export const StyledLuckyInput = styled.div`
 
 	.luckyNotice {
 		margin-top: 8px;
-		font-weight: 400;
-		font-size: 10px;
-		line-height: 14px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
 		color: ${({ theme }) => theme.colors.gray};
 	}
 
@@ -19,7 +19,7 @@ export const StyledLuckyInput = styled.div`
 		display: flex;
 		width: 100%;
 		justify-content: center;
-		margin-top: 16px;
+		margin: 16px 0;
 	}
 `;
 
@@ -44,7 +44,7 @@ export const StyledLuckyTitle = styled.div`
 			font-weight: 500;
 			font-size: 12px;
 			line-height: 16px;
-
+      outline: none;
 			display: flex;
 			align-items: center;
 		}

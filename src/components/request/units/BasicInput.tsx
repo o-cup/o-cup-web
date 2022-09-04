@@ -22,9 +22,7 @@ const BasicInput = ({
 	hideLabel = false,
 }: InputProps) => (
 	<StyledBasicInput>
-		<Label htmlFor={id} hideLabel={hideLabel}>
-			{!hideLabel && label}
-		</Label>
+		{!hideLabel && <Label htmlFor={id}>{label}</Label>}
 		<InputWrapper className={`inputWrapper ${id}`} hasValue={!!value}>
 			<input type="text" value={value} id={id} placeholder={placeholder} onChange={handleInputChange} className={id} />
 			{!!value && <DeleteBtn onClick={handleInputDelete} />}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DateRange } from "react-date-range-ts";
 import { ko } from "date-fns/locale";
 import { useRecoilState } from "recoil";
@@ -14,10 +14,18 @@ const DateRangeInput = () => {
 
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
 	const [selectedRange, setSelectedRange] = useState({
-		startDate: dateRange.startAt ? convertStringToDate(dateRange.startAt) : new Date(),
-		endDate: dateRange.endAt ? convertStringToDate(dateRange.endAt) : new Date(),
+		startDate: new Date(),
+		endDate: new Date(),
 		key: "selection",
 	});
+
+	useEffect(() => {
+		setSelectedRange({
+			startDate: dateRange.startAt ? convertStringToDate(dateRange.startAt) : new Date(),
+			endDate: dateRange.endAt ? convertStringToDate(dateRange.endAt) : new Date(),
+			key: "selection",
+		});
+	}, [dateRange]);
 
 	const handleSelectRange = (ranges: any) => {
 		setSelectedRange(ranges.selection);

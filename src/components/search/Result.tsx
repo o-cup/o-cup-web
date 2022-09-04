@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { StyledResult } from "./styles/resultStyle";
 import Event from "./Event";
 import Button from "../../shared/components/Button";
@@ -78,7 +78,6 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 				break;
 
 			case "district":
-				// setChips((prev) => ({ ...prev, distChips: newDistChips }));
 				setDistricts(newDistChips);
 				break;
 

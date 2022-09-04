@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { FaCaretDown } from "react-icons/fa";
+// import { FaCaretDown } from "react-icons/fa";
 import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
 import { useRegCodes } from "../../hooks";
 import { RegCodeItem } from "../../types";
@@ -12,11 +12,17 @@ type DistrictSelectorProps = {
 	handleSubmit: () => void;
 	selectedDists: RegCodeItem[];
 	setSelectedDists: Dispatch<SetStateAction<RegCodeItem[]>>;
+	setDisctrictSelectorOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const isAllDist = (code: string) => code.substring(2, 4) === "00";
 
-const DistrictSelector = ({ handleSubmit, selectedDists, setSelectedDists }: DistrictSelectorProps) => {
+const DistrictSelector = ({
+	handleSubmit,
+	selectedDists,
+	setSelectedDists,
+	setDisctrictSelectorOpen,
+}: DistrictSelectorProps) => {
 	const [divisionList, setDivisionList] = useState<RegCodeItem[]>([]);
 	const [districtList, setDistrictList] = useState<RegCodeItem[]>([]);
 
@@ -92,65 +98,68 @@ const DistrictSelector = ({ handleSubmit, selectedDists, setSelectedDists }: Dis
 		setDistrictList(newData);
 	};
 
+	const handleResetClick = () => {
+		const newDistrictData = districtList.map((dist) => ({ ...dist, selected: isAllDist(dist.code) }));
+		setDistrictList(newDistrictData);
+	};
+
 	return (
 		<StyledDistrictSelector>
-			<div className="content">
-				<div className="title">
-					<ResetModalBtn>
-						<Icon name="reset" />
-						<span>초기화</span>
-					</ResetModalBtn>
-					<h2 className="nations">
-						대한민국
-						{/* <FaCaretDown /> */}
-					</h2>
-					<Icon name="delete-circle-black" />
-				</div>
+			<div className="title">
+				<ResetModalBtn onClick={handleResetClick}>
+					<Icon name="reset" />
+					<span>초기화</span>
+				</ResetModalBtn>
+				<h2 className="nations">
+					대한민국
+					{/* <FaCaretDown /> */}
+				</h2>
+				<Icon name="delete-circle-black" handleClick={() => setDisctrictSelectorOpen(false)} />
+			</div>
 
-				<div className="districts">
-					<ul className="main">
-						{divisionData?.map((div: RegCodeItem) => (
-							<li
-								key={div.code}
-								role="presentation"
-								onClick={() => handleDivClick(div)}
-								className={div.code === selectedDiv.code ? "selected" : ""}
-							>
-								{div.name}
-							</li>
-						))}
-					</ul>
-					<ul className="sub">
-						{districtList.map((dist: RegCodeItem) => (
-							<li
-								key={dist.code}
-								role="presentation"
-								onClick={() => handleDistClick(dist)}
-								className={dist.selected ? "selected" : ""}
-							>
-								{dist.name}
-							</li>
-						))}
-					</ul>
-				</div>
+			<div className="districts">
+				<ul className="main">
+					{divisionData?.map((div: RegCodeItem) => (
+						<li
+							key={div.code}
+							role="presentation"
+							onClick={() => handleDivClick(div)}
+							className={div.code === selectedDiv.code ? "selected" : ""}
+						>
+							{div.name}
+						</li>
+					))}
+				</ul>
+				<ul className="sub">
+					{districtList.map((dist: RegCodeItem) => (
+						<li
+							key={dist.code}
+							role="presentation"
+							onClick={() => handleDistClick(dist)}
+							className={dist.selected ? "selected" : ""}
+						>
+							{dist.name}
+						</li>
+					))}
+				</ul>
+			</div>
 
-				<div className="result">
-					<div className="chips">
-						{selectedDists.map((dist) => (
-							<span className="chip" key={dist.code}>
-								<span>{dist.name}</span>
-								<span role="presentation" onClick={() => handleDeleteClick(dist)}>
-									X
-								</span>
+			<div className="result">
+				<div className="chips">
+					{selectedDists.map((dist) => (
+						<span className="chip" key={dist.code}>
+							<span>{dist.name}</span>
+							<span role="presentation" onClick={() => handleDeleteClick(dist)}>
+								X
 							</span>
-						))}
-					</div>
-					<div className="submit">
-						<p>최대 3개까지 선택 가능합니다.</p>
-						<button type="button" onClick={handleSubmit}>
-							적용
-						</button>
-					</div>
+						</span>
+					))}
+				</div>
+				<div className="submit">
+					<p>최대 3개까지 선택 가능합니다.</p>
+					<button type="button" onClick={handleSubmit}>
+						적용
+					</button>
 				</div>
 			</div>
 		</StyledDistrictSelector>

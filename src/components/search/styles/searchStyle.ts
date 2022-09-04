@@ -54,6 +54,7 @@ export const ResetModalBtn = styled.div`
 	align-items: center;
 	font-size: 10px;
 	gap: 3px;
+	cursor: pointer;
 
 	i.reset {
 		width: 16px;

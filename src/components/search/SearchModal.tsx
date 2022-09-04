@@ -68,6 +68,7 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 							selectedDists={selectedDists}
 							setSelectedDists={setSelectedDists}
 							handleSubmit={() => handleSubmit({ modal: "district" })}
+							setDisctrictSelectorOpen={setDisctrictSelectorOpen}
 						/>
 					</Modal>
 				);

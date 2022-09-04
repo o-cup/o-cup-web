@@ -31,7 +31,7 @@ type ChipType = {
 const Result = ({ keyword, biasId }: ResultProps) => {
 	const [dateRange, setDateRange] = useRecoilState(dateRangeAtom);
 	const { startDate, endDate } = dateRange;
-	const districts = useRecoilValue(districtAtom);
+	const [districts, setDistricts] = useRecoilState(districtAtom);
 	const [sortOpen, setSortOpen] = useState(false);
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
@@ -41,11 +41,9 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
-	const { data: events } = useQuery(["resultEvents", keyword, dateRange, biasId], () =>
-		fetchSearchedEvent({ keyword, date: { startDate, endDate }, biasId })
+	const { data: events } = useQuery(["resultEvents", keyword, dateRange, biasId, districts], () =>
+		fetchSearchedEvent({ keyword, date: { startDate, endDate }, biasId, districts })
 	);
-
-	// atom district name에 "서울 용산구"라고 저장되어야 함
 
 	useEffect(() => {
 		if (!startDate) return;
@@ -55,9 +53,7 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 	}, [startDate, endDate]);
 
 	useEffect(() => {
-		if (districts.length) {
-			setChips((prev) => ({ ...prev, distChips: districts }));
-		}
+		setChips((prev) => ({ ...prev, distChips: districts }));
 	}, [districts]);
 
 	useEffect(() => {
@@ -72,7 +68,9 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 		}
 	}, [filterOpen]);
 
-	const handleDeleteChip = ({ type }: { type: "date" | "district" }) => {
+	const handleDeleteChip = ({ type, code }: { type: "date" | "district"; code?: string }) => {
+		const newDistChips = chips.distChips.filter((chip) => chip.code !== code);
+
 		switch (type) {
 			case "date":
 				setChips((prev) => ({ ...prev, dateChip: "" }));
@@ -80,6 +78,8 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 				break;
 
 			case "district":
+				// setChips((prev) => ({ ...prev, distChips: newDistChips }));
+				setDistricts(newDistChips);
 				break;
 
 			default:
@@ -115,7 +115,7 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 							key={dist.code}
 							text={dist.name}
 							bgColor="primary"
-							handleDelete={() => handleDeleteChip({ type: "district" })}
+							handleDelete={() => handleDeleteChip({ type: "district", code: dist.code })}
 						/>
 					))}
 				</div>

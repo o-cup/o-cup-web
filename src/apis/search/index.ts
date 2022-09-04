@@ -1,4 +1,5 @@
 import axios from "axios";
+import { RegCodeItem } from "../../types";
 import { isDateRangeOverlaps } from "../../shared/utils/dateHandlers";
 import { supabase } from "../../supabaseClient";
 
@@ -12,9 +13,10 @@ export type FetchSearchedEventParams = {
 	keyword?: string;
 	date?: { startDate: string; endDate: string };
 	biasId?: number;
+	districts?: RegCodeItem[];
 };
 
-const fetchSearchedEvent = async ({ keyword, date, biasId }: FetchSearchedEventParams) => {
+const fetchSearchedEvent = async ({ keyword, date, biasId, districts }: FetchSearchedEventParams) => {
 	let query = supabase.from("place_sort").select("*").eq("isApproved", true);
 
 	if (biasId) {
@@ -40,15 +42,20 @@ const fetchSearchedEvent = async ({ keyword, date, biasId }: FetchSearchedEventP
 		return false;
 	});
 
-	const { startDate, endDate } = date!;
-	if (!startDate) return data;
+	if (date?.startDate) {
+		const { startDate, endDate } = date;
 
-	data = data?.filter((event) => {
-		const isOverLap = isDateRangeOverlaps(startDate, endDate, event.startAt, event.endAt);
-		return isOverLap;
-	});
+		data = data?.filter((event) => {
+			const isOverLap = isDateRangeOverlaps(startDate, endDate, event.startAt, event.endAt);
+			return isOverLap;
+		});
+	}
 
-	// TODO: district 테이블 코드로 변경 후 적용
+	if (districts?.length) {
+		const codes = districts.map((dist) => dist.code);
+		data = data?.filter((event) => codes.includes(event.newDistricts.code));
+	}
+
 	return data;
 };
 

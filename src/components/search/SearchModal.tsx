@@ -51,7 +51,7 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 		switch (type) {
 			case "calendar":
 				elements = (
-					<Modal>
+					<Modal maxWidth={380} minWidth={330}>
 						<Calendar
 							selectedRange={selectedRange}
 							handleSelectRange={handleSelectRange}
@@ -63,7 +63,7 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 
 			case "districtSelector":
 				elements = (
-					<Modal>
+					<Modal maxWidth={380} minWidth={330}>
 						<DistrictSelector
 							selectedDists={selectedDists}
 							setSelectedDists={setSelectedDists}

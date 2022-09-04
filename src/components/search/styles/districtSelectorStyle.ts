@@ -7,15 +7,35 @@ const StyledDistrictSelector = styled.div`
 	align-items: center;
 	background-color: ${({ theme }) => theme.colors.primary};
 
-	h2 {
-		line-height: 50px;
-		font-size: 14px;
-		font-weight: bold;
-		text-align: center;
-
+	.title {
 		display: flex;
+		width: 100%;
+		justify-content: space-between;
+		position: relative;
+		padding: 0 10px;
 		align-items: center;
-		gap: 3px;
+		height: 50px;
+
+		h2 {
+			font-size: 14px;
+			font-weight: bold;
+			text-align: center;
+
+			display: flex;
+			align-items: center;
+			gap: 3px;
+
+			position: absolute;
+			left: 0;
+			right: 0;
+			margin: 0 auto;
+			width: fit-content;
+		}
+
+		i.delete-circle-black {
+			width: 18px;
+			height: 18px;
+		}
 	}
 
 	.content {

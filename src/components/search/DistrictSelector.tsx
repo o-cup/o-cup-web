@@ -5,6 +5,8 @@ import { useRegCodes } from "../../hooks";
 import { RegCodeItem } from "../../types";
 import { MAX_DISTRICT_CHIPS } from "../../shared/constants";
 import divisionData from "./divisions";
+import { Icon } from "../../shared/components";
+import { ResetModalBtn } from "./styles/searchStyle";
 
 type DistrictSelectorProps = {
 	handleSubmit: () => void;
@@ -93,10 +95,17 @@ const DistrictSelector = ({ handleSubmit, selectedDists, setSelectedDists }: Dis
 	return (
 		<StyledDistrictSelector>
 			<div className="content">
-				<h2 className="nations">
-					대한민국
-					<FaCaretDown />
-				</h2>
+				<div className="title">
+					<ResetModalBtn>
+						<Icon name="reset" />
+						<span>초기화</span>
+					</ResetModalBtn>
+					<h2 className="nations">
+						대한민국
+						{/* <FaCaretDown /> */}
+					</h2>
+					<Icon name="delete-circle-black" />
+				</div>
 
 				<div className="districts">
 					<ul className="main">

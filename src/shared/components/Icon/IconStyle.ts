@@ -129,6 +129,12 @@ export const StyledIcon = styled.i`
 		height: 20px;
 		width: 20px;
 	}
+
+	&.reset {
+		display: flex;
+		background: url("/images/icons/reset.png") no-repeat;
+		background-size: contain;
+	}
 `;
 
 export default {};

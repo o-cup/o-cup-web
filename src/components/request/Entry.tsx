@@ -25,7 +25,15 @@ type EntryProps = {
 	resetAllStates: () => void;
 };
 
-const Entry = ({ isConfirmModalOpen, setConfirmModalOpen, isAlertOpen, setAlertOpen, setBottomSheetOpen, handleSubmit, resetAllStates }: EntryProps) => {
+const Entry = ({
+	isConfirmModalOpen,
+	setConfirmModalOpen,
+	isAlertOpen,
+	setAlertOpen,
+	setBottomSheetOpen,
+	handleSubmit,
+	resetAllStates,
+}: EntryProps) => {
 	const navigate = useNavigate();
 
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
@@ -115,25 +123,30 @@ const Entry = ({ isConfirmModalOpen, setConfirmModalOpen, isAlertOpen, setAlertO
 			</StyledEntry>
 
 			{isConfirmModalOpen && (
-				<Modal>
+				<Modal maxWidth={305} minWidth={305}>
 					<StyledRequestModal>
 						<h4>제출 완료!</h4>
 						<p>내용 검토 후 1-4일 이내 업로드 됩니다.</p>
 						<div className="modalBtnContainer">
-							<button type="button" onClick={handleClickModalContinue}>다른 카페 등록하기</button>
-							<button type="button" onClick={handleClickModalFinish}>메인으로 돌아가기</button>
+							<button type="button" onClick={handleClickModalContinue}>
+								다른 카페 등록하기
+							</button>
+							<button type="button" onClick={handleClickModalFinish}>
+								메인으로 돌아가기
+							</button>
 						</div>
 					</StyledRequestModal>
 				</Modal>
 			)}
 
 			{isAlertOpen && (
-				<Modal>
+				<Modal maxWidth={316} minWidth={316}>
 					<StyledRequestModal>
 						<p>*표시 항목은 필수 입력 항목입니다.</p>
 						<div className="modalBtnContainer">
-							<button className="alertBtn"
-								type="button" onClick={() => setAlertOpen(false)}>확인</button>
+							<button className="alertBtn" type="button" onClick={() => setAlertOpen(false)}>
+								확인
+							</button>
 						</div>
 					</StyledRequestModal>
 				</Modal>

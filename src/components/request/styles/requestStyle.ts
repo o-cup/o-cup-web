@@ -99,7 +99,7 @@ const StyledRequestModal = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 340px;
+	width: 100%;
 	border: 2px solid #000;
 	background-color: ${({ theme }) => theme.colors.primary};
 	border-radius: 4px;

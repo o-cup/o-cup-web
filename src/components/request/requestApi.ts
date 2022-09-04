@@ -101,6 +101,7 @@ export const sendReqData = async ({ requestInputs, goodsList, setSubmitModalOpen
     organizer,
     snsId,
     district: place.district,
+    newDistrict: place.newDistrict,
     startAt: dateRange.startAt,
     endAt: dateRange.endAt,
     images,

@@ -12,7 +12,7 @@ const fetchRegcodes = async (code?: string) => {
 export type FetchSearchedEventParams = {
 	keyword?: string;
 	date?: { startDate: string; endDate: string };
-	biasId?: number;
+	biasId?: number | null;
 	districts?: RegCodeItem[];
 };
 
@@ -27,20 +27,41 @@ const fetchSearchedEvent = async ({ keyword, date, biasId, districts }: FetchSea
 	let data;
 	data = events;
 
+	if (biasId && keyword) return data;
 	if (!keyword) return data;
 
-	data = events?.filter((event) => {
-		const { bias, place, organizer, district } = event;
-		if (
-			(bias && bias.includes(keyword)) ||
-			(place && place.includes(keyword)) ||
-			(organizer && organizer.includes(keyword)) ||
-			(district && district.includes(keyword))
-		) {
-			return true;
-		}
-		return false;
-	});
+	const { data: biasData } = await supabase
+		.from("people")
+		.select("*")
+		.or(`name.eq.${keyword},enName.eq.${keyword},koName.eq.${keyword},realName.eq.${keyword}`);
+
+	const isNameKeyword = !!biasData?.length;
+
+	if (isNameKeyword) {
+		const biasesId = biasData?.map((bias) => bias.id);
+		// TODO: 추후 동명이인 처리를 고려하여 fetchEventsByBiasId를 사용하지 않음
+
+		const { data: biasEvents } = await supabase
+			.from("place_sort")
+			.select("*")
+			.eq("isApproved", true)
+			.contains("biasesId", [biasesId]);
+
+		data = biasEvents;
+	} else {
+		data = events?.filter((event) => {
+			const { bias, place, organizer, district } = event;
+			if (
+				(bias && bias.includes(keyword)) ||
+				(place && place.includes(keyword)) ||
+				(organizer && organizer.includes(keyword)) ||
+				(district && district.includes(keyword))
+			) {
+				return true;
+			}
+			return false;
+		});
+	}
 
 	if (date?.startDate) {
 		const { startDate, endDate } = date;
@@ -63,4 +84,10 @@ const fetchSearchedEvent = async ({ keyword, date, biasId, districts }: FetchSea
 	return data;
 };
 
-export { fetchRegcodes, fetchSearchedEvent };
+const fetchEventsByBiasId = async (id: number) => {
+	const query = supabase.from("place_sort").select("*").eq("isApproved", true).contains("biasesId", [id]);
+	const { data } = await query;
+	return data;
+};
+
+export { fetchRegcodes, fetchSearchedEvent, fetchEventsByBiasId };

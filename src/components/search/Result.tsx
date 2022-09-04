@@ -14,7 +14,7 @@ import { RegCodeItem } from "../../types";
 
 type ResultProps = {
 	keyword: string;
-	biasId?: number;
+	biasId?: number | null;
 };
 
 const sortOptions = {

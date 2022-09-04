@@ -52,8 +52,12 @@ const fetchSearchedEvent = async ({ keyword, date, biasId, districts }: FetchSea
 	}
 
 	if (districts?.length) {
-		const codes = districts.map((dist) => dist.code);
-		data = data?.filter((event) => codes.includes(event.newDistricts.code));
+		const codes = districts.map((dist) => dist.code.substring(0, 4));
+
+		data = data?.filter((event) => {
+			const distCode = event.newDistrict.code.substring(0, 4);
+			return codes.includes(distCode);
+		});
 	}
 
 	return data;

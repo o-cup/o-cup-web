@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useRecoilState } from "recoil";
-import { EventType } from "@testing-library/react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { StyledResult } from "./styles/resultStyle";
 import Event from "./Event";
 import Button from "../../shared/components/Button";
 import { FilterIcon, SortIcon } from "../../shared/components";
 import SearchModal from "./SearchModal";
 import Chip from "../../shared/components/Chip";
-import { dateRangeAtom } from "../../state";
+import { dateRangeAtom, districtAtom } from "../../state";
 import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { fetchSearchedEvent } from "../../apis/search";
+import { RegCodeItem } from "../../types";
 
 type ResultProps = {
 	keyword: string;
@@ -25,13 +25,13 @@ const sortOptions = {
 
 type ChipType = {
 	dateChip: string;
-	distChips: string[];
+	distChips: RegCodeItem[];
 };
 
 const Result = ({ keyword, biasId }: ResultProps) => {
 	const [dateRange, setDateRange] = useRecoilState(dateRangeAtom);
 	const { startDate, endDate } = dateRange;
-	// const districts = useRecoilValue(districtAtom);
+	const districts = useRecoilValue(districtAtom);
 	const [sortOpen, setSortOpen] = useState(false);
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
@@ -45,12 +45,20 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 		fetchSearchedEvent({ keyword, date: { startDate, endDate }, biasId })
 	);
 
+	// atom district name에 "서울 용산구"라고 저장되어야 함
+
 	useEffect(() => {
 		if (!startDate) return;
 
 		const dateText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 		setChips((prev) => ({ ...prev, dateChip: dateText }));
 	}, [startDate, endDate]);
+
+	useEffect(() => {
+		if (districts.length) {
+			setChips((prev) => ({ ...prev, distChips: districts }));
+		}
+	}, [districts]);
 
 	useEffect(() => {
 		if (sortOpen) {
@@ -104,8 +112,8 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 					)}
 					{chips.distChips.map((dist) => (
 						<Chip
-							key={dist}
-							text={dist}
+							key={dist.code}
+							text={dist.name}
 							bgColor="primary"
 							handleDelete={() => handleDeleteChip({ type: "district" })}
 						/>

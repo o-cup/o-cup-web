@@ -16,7 +16,7 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 		endDate: new Date(),
 		key: "selection",
 	});
-	const [selectedDist, setSelectedDist] = useState<RegCodeItem[]>([]);
+	const [selectedDists, setSelectedDists] = useState<RegCodeItem[]>([]);
 
 	const handleSelectRange = ({ selection }: { selection: DateRangeType }) => {
 		setSelectedRange(selection);
@@ -36,7 +36,7 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 				break;
 
 			case "district":
-				setDistricts(selectedDist);
+				setDistricts(selectedDists);
 				setDisctrictSelectorOpen(false);
 				break;
 
@@ -65,8 +65,8 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 				elements = (
 					<Modal>
 						<DistrictSelector
-							selectedDist={selectedDist}
-							setSelectedDist={setSelectedDist}
+							selectedDists={selectedDists}
+							setSelectedDists={setSelectedDists}
 							handleSubmit={() => handleSubmit({ modal: "district" })}
 						/>
 					</Modal>

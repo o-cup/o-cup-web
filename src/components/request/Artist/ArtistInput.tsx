@@ -33,7 +33,7 @@ const ArtistInput = ({ value, handleChangeArtist, handleDeleteArtist }: InputPro
   });
 
   const handleClickSelect = (biasInfo: PeopleType) => {
-    handleChangeArtist(biasInfo.id, biasInfo.name, biasInfo.team.join(", "), value.id);
+    handleChangeArtist(biasInfo.id, biasInfo.name, biasInfo.team?.join(", ") || "", value.id);
     setKeyword("");
     setSearchOpen(false);
   };
@@ -85,7 +85,7 @@ const ArtistInput = ({ value, handleChangeArtist, handleDeleteArtist }: InputPro
           {people?.map((bias) =>
             <li key={bias.id}>
               <div>
-                <p>{bias.name} ({bias.team?.join(", ")})</p>
+                <p>{bias.name}{bias.team ? ` (${bias.team?.join(", ")})` : ""}</p>
               </div>
               <button type="button" onClick={() => handleClickSelect(bias)}>선택</button>
             </li>)}

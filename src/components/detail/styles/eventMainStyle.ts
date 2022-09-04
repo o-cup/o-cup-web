@@ -18,7 +18,7 @@ const StyledEventMain = styled.div`
 		> div {
 			display: flex;
 			justify-content: space-between;
-			align-items: center;
+			align-items: flex-start;
 			padding-bottom: 12px;
 
 			> h6 {
@@ -26,6 +26,14 @@ const StyledEventMain = styled.div`
 				line-height: 32px;
 				font-weight: 700;
 			}
+      
+      > .chipContainer {
+        height: 32px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-left: 8px;
+      }
 		}
 
 		> p {

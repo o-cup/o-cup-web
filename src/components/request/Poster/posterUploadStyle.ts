@@ -23,9 +23,9 @@ const StyledPosterUpload = styled.div`
 	}
   
   > p.caption {
-    font-weight: 500;
+    font-weight: 400;
     font-size: 12px;
-    line-height: 14px;
+    line-height: 16px;
     color: #7A7A7A;
     margin-top: 4px;
   }

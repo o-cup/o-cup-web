@@ -52,7 +52,7 @@ const FcfsGoodsInput = () => {
    * C: 기념일에만 달라요
    * X: 선착특전 없음(fcfsList === {})
    * */
-  const [type, setType] = useState(""); // "A" | "B" | "C" | "X"
+  const [type, setType] = useState(""); // "A" | "B" | "C" | ""
 
   const renderCheckbox = (checkType: string) => {
     if (!hasDateRange) {
@@ -91,7 +91,7 @@ const FcfsGoodsInput = () => {
     if (type === "C") {
       handleFirstCome(DefaultTypeC);
     }
-    if (type === "X") {
+    if (type === "") {
       handleFirstCome({} as RequestFcfsType);
     }
   }, [type]);
@@ -114,9 +114,9 @@ const FcfsGoodsInput = () => {
     <StyledFcfsGoodsInput>
       <StyledFcfsTitle>
         <span className="label">선착특전</span>
-        <div className={`checkOpen ${hasDateRange ? "active" : ""} ${type === "X" ? "selected" : "notSelected"}`}>
-          <button type="button" onClick={() => type === "X" ? setType("") : setType("X")}>
-            {renderCheckbox("X")}
+        <div className={`checkOpen ${hasDateRange ? "active" : ""} ${type === "" ? "selected" : "notSelected"}`}>
+          <button type="button" onClick={() => setType("")}>
+            {renderCheckbox("")}
             선착특전 없음
           </button>
         </div>

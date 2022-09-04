@@ -62,7 +62,7 @@ const PlaceInput = () => {
   return (
     <StyledPlaceInput>
       <SearchInput value={requestInputs.place.place} handleClickSearchBtn={() => setSearchOpen(!isSearchOpen)}
-                   id="place" placeholder="카페이름" label="장소 *" />
+                   id="place" placeholder="장소이름" label="장소 *" />
       {isSearchOpen && <StyledSearchListContainer>
         <div className="inputContainer">
           <input value={keyword} onChange={(e) => setKeyword(e.target.value)} />

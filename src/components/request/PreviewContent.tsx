@@ -22,7 +22,7 @@ const PreviewContent = () => {
 				startAt={dateRange.startAt || "20220000"}
 				endAt={dateRange.endAt || "20220000"}
 				address={place.address || "이벤트 주소"}
-				images={posterUrls[0].publicUrl ? posterUrls.map((poster) => poster.publicUrl) : [DEFAULT_POSTER_URL]}
+				images={posterUrls[0].publicUrl ? posterUrls.filter((poster) => poster.publicUrl !== "").map((poster) => poster.publicUrl) : [DEFAULT_POSTER_URL]}
 			/>
 			<TwitterInfo
 				organizer={organizer || "주최자 닉네임"}

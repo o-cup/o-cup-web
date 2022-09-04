@@ -12,7 +12,7 @@ export const StyledModalBackground = styled.div`
 	background-color: rgba(0, 0, 0, 0.4);
 `;
 
-export const StyledModal = styled.div`
+export const StyledModal = styled.div<{ width?: number }>`
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -21,7 +21,7 @@ export const StyledModal = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 380px;
+	width: ${props => (props.width ? `${props.width}px` : "380px")};
 	background-color: ${({ theme }) => theme.colors.white};
 	border-radius: 4px;
 	border: 2px solid #000;

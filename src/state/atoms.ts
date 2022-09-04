@@ -42,7 +42,7 @@ export const districtAtom = atom<RegCodeItem[]>({
 export const requestInputsAtom = atom<RequestType>({
 	key: "requestInputsAtom",
 	default: {
-		place: { place: "", district: "", address: "" },
+		place: { place: "", district: "", address: "", newDistrict: { code: "", name: "" } },
 		artist: [{ id: 1, peopleId: 0, bias: "", team: "" }],
 		organizer: "",
 		snsId: "",

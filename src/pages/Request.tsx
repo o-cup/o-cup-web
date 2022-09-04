@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { requestGoodsListAtom, requestInputsAtom } from "../state/atoms";
 import Layout from "../shared/components/layout";
@@ -8,9 +9,15 @@ import { StyledPreview, StyledRequest } from "../components/request/styles/reque
 import BottomSheet from "../shared/components/BottomSheet";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { sendReqData } from "../components/request/requestApi";
+import ConfirmModal from "../components/request/Modals/ConfirmModal";
+import SubmitModal from "../components/request/Modals/SubmitModal";
+import AlertModal from "../components/request/Modals/AlertModal";
 
 const Request = () => {
+  const navigate = useNavigate();
+
   const [isConfirmModalOpen, setConfirmModalOpen] = useState(false);
+  const [isSubmitModalOpen, setSubmitModalOpen] = useState(false);
   const [isAlertOpen, setAlertOpen] = useState(false);
   const [isBottomSheetOpen, setBottomSheetOpen] = useState(false);
   const isMobile = useMediaQuery("(max-width: 720px)");
@@ -18,11 +25,17 @@ const Request = () => {
   const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
   const [goodsList, setGoodsList] = useRecoilState(requestGoodsListAtom);
 
-  const handleSubmit = () => sendReqData({ requestInputs, goodsList, setConfirmModalOpen, setAlertOpen });
+  const handleSubmit = () =>
+    sendReqData({
+      requestInputs,
+      goodsList,
+      setSubmitModalOpen,
+      setAlertOpen,
+    });
 
   const resetAllStates = () => {
     setRequestInputs({
-      place: { place: "", district: "", address: "" },
+      place: { place: "", district: "", address: "", newDistrict: { code: "", name: "" } },
       artist: [
         { id: 1, peopleId: 0, bias: "", team: "" },
       ],
@@ -48,24 +61,50 @@ const Request = () => {
     ]);
   };
 
+  const handleClickContinue = () => {
+    resetAllStates();
+    setSubmitModalOpen(false);
+    setBottomSheetOpen(false);
+    window.scrollTo(0, 0);
+  };
+
+  const handleClickFinish = () => {
+    navigate("/");
+    setSubmitModalOpen(false);
+    setBottomSheetOpen(false);
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    return () => {
+      // 이벤트 등록 session 정보 초기화
+      resetAllStates();
+      sessionStorage.clear();
+    };
+  }, []);
+
   return (
     <>
       <Layout page="request">
         <StyledRequest>
           <Entry
-            isConfirmModalOpen={isConfirmModalOpen}
             setConfirmModalOpen={setConfirmModalOpen}
-            isAlertOpen={isAlertOpen}
-            setAlertOpen={setAlertOpen}
             setBottomSheetOpen={setBottomSheetOpen}
-            handleSubmit={handleSubmit}
-            resetAllStates={resetAllStates}
           />
           <StyledPreview>
             <PreviewContent />
           </StyledPreview>
         </StyledRequest>
       </Layout>
+
+      {isConfirmModalOpen &&
+        <ConfirmModal setConfirmModalOpen={setConfirmModalOpen} handleSubmit={handleSubmit} />}
+
+      {isSubmitModalOpen &&
+        <SubmitModal handleClickContinue={handleClickContinue} handleClickFinish={handleClickFinish} />}
+
+      {isAlertOpen && <AlertModal setAlertOpen={setAlertOpen} />}
 
       {isMobile && (
         <BottomSheet
@@ -76,7 +115,7 @@ const Request = () => {
           slider
           buttons={{
             title: "제출하기",
-            handleClick: handleSubmit,
+            handleClick: () => setConfirmModalOpen(true),
           }}
         >
           <div>

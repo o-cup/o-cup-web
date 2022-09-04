@@ -43,7 +43,7 @@ const InputWrapper = styled.div<{ hasValue: boolean }>`
 		height: 100%;
 		border: 2px solid ${({ theme }) => theme.colors.black};
 		border-radius: 4px;
-		padding: 16px;
+		padding: 16px 36px 16px 16px;
     font-size: 14px;
     line-height: 15px;
 

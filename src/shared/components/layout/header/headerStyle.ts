@@ -30,11 +30,11 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 			width: fit-content;
 		}
 
-		> div {
+		> div.rightIcons {
 			display: flex;
 			height: 100%;
 			align-items: center;
-			gap: 10px;
+			gap: 18px;
 		}
 
 		img#logo {

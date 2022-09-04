@@ -20,6 +20,7 @@ export type RequestPlaceType = {
   place: string;
   district: string;
   address: string;
+  newDistrict: { code: string; name: string; }
 }
 
 export type RequestPosterType = {

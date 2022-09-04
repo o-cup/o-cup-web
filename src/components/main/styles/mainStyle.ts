@@ -83,11 +83,20 @@ const StyledList = styled.ul`
 		flex-wrap: wrap;
 		gap: 20px;
 
-		> li,
-		> div {
+		> li, > div {
 			width: calc(25% - 16px);
 		}
 	}
+
+  @media screen and (min-width: 721px) and (max-width: 1000px) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    > li, > div {
+      width: calc(33% - 12px);
+    }
+  }
 `;
 
 const StyledItem = styled.li`

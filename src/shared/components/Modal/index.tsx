@@ -3,10 +3,11 @@ import { StyledModalBackground, StyledModal } from "./modalStyle";
 
 type ModalProps = {
 	children: React.ReactNode;
-	width?: number;
+	maxWidth: number;
+	minWidth: number;
 };
 
-const Modal = ({ children, width }: ModalProps) => {
+const Modal = ({ children, maxWidth, minWidth }: ModalProps) => {
 	useEffect(() => {
 		document.body.classList.add("fixed");
 
@@ -17,13 +18,11 @@ const Modal = ({ children, width }: ModalProps) => {
 
 	return (
 		<StyledModalBackground>
-			<StyledModal width={width || 380}>{children}</StyledModal>
+			<StyledModal maxWidth={maxWidth} minWidth={minWidth}>
+				{children}
+			</StyledModal>
 		</StyledModalBackground>
 	);
-};
-
-Modal.defaultProps = {
-	width: 380,
 };
 
 export default Modal;

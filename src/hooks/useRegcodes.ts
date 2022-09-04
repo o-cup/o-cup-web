@@ -2,17 +2,20 @@ import { useQuery } from "react-query";
 import { fetchRegcodes } from "../apis/search";
 import { RegCodeItem } from "../types";
 
-const useRegCodes = ({ div }: { div: RegCodeItem }) => {
-	const { data: divisionData } = useQuery("divisions", () => fetchRegcodes(), {
-		select: (data) => [{ code: "all", name: "전국" }, ...data.data.regcodes],
-	});
+const getDivCode = (code: string) => code.substring(0, 2);
 
+const useRegCodes = (div: RegCodeItem) => {
 	const { data: districtData } = useQuery(["district", div.code], () => fetchRegcodes(div.code), {
 		enabled: div.code !== "all",
 		select: (data) => {
 			if (div.code === "all") return [];
 
-			return data.data.regcodes.map((regCode: RegCodeItem) => {
+			// 대전 API 오류 방어 코드
+			const filterd = data.data.regcodes.filter(
+				(regCode: RegCodeItem) => getDivCode(regCode.code) === getDivCode(div.code)
+			);
+
+			return filterd.map((regCode: RegCodeItem) => {
 				const all = !regCode.name.split(" ")[1];
 				return {
 					code: regCode.code,
@@ -23,10 +26,7 @@ const useRegCodes = ({ div }: { div: RegCodeItem }) => {
 		},
 	});
 
-	return {
-		divisionData,
-		districtData: districtData || [],
-	};
+	return districtData || [];
 };
 
 export default useRegCodes;

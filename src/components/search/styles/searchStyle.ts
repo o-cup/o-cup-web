@@ -49,4 +49,17 @@ export const StyledFilter = styled.div`
 	}
 `;
 
+export const ResetModalBtn = styled.div`
+	display: flex;
+	align-items: center;
+	font-size: 10px;
+	gap: 3px;
+	cursor: pointer;
+
+	i.reset {
+		width: 16px;
+		height: 16px;
+	}
+`;
+
 export default {};

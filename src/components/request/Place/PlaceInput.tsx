@@ -14,7 +14,7 @@ type KakaoResult = {
 }
 
 const KakaoAxios = axios.create({
-  baseURL: "http://dapi.kakao.com",
+  baseURL: "//dapi.kakao.com",
   headers: {
     Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_KEY}`,
   },

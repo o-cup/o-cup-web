@@ -55,6 +55,7 @@ export const StyledFcfsTitle = styled.div`
       font-size: 12px;
       line-height: 16px;
       outline: none;
+      color: ${({ theme }) => theme.colors.black};
     }
   }
 `;
@@ -77,6 +78,7 @@ export const StyledFcfsTypeSelector = styled.li`
     background: ${({ theme }) => theme.colors.white};
     border: 2px solid ${({ theme }) => theme.colors.black};
     border-radius: 10px;
+    color: ${({ theme }) => theme.colors.black};
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;

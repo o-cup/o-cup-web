@@ -47,6 +47,7 @@ export const StyledLuckyTitle = styled.div`
       outline: none;
 			display: flex;
 			align-items: center;
+      color: ${({ theme }) => theme.colors.black};
 		}
 	}
 `;

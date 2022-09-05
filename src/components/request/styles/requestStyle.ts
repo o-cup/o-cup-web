@@ -6,6 +6,45 @@ const StyledRequest = styled.div`
 	display: flex;
 `;
 
+const StyledCheckEvent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 64px;
+  padding: 32px 20px;
+  
+  > div.checkNotice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    
+    > img {
+      width: 24px;
+      height: 31px;
+    }
+    
+    > p {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 19px;
+      text-align: center;
+      color: #000000;
+    }
+  }
+  
+  > div.btnContainer {
+    width: 100%;
+    
+    &.disabled {
+      opacity: 50%;
+      pointer-events: none;
+    }
+  }
+`
+
 const StyledEntry = styled.div`
 	width: 50%;
 	display: flex;
@@ -142,5 +181,93 @@ const StyledRequestModal = styled.div`
 	}
 `;
 
-export { StyledRequest, StyledEntry, StyledPreview, Label, StyledRequestModal };
+const StyledDuplicatedModal = styled.div`
+  width: 100%;
+	border: none;
+	background-color: ${({ theme }) => theme.colors.background};
+	border-radius: 4px;
+	padding: 40px 14px;
+  text-align: center;
+
+	> p {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+	}
+
+	.modalBtnContainer {
+		display: flex;
+		gap: 12px;
+		margin-top: 40px;
+    justify-content: center;
+	}
+`;
+
+const StyledDuplicatedEvent = styled.div`
+	height: 174px;
+	border: 2px solid #000;
+	padding: 10px;
+	display: flex;
+	gap: 10px;
+	position: relative;
+	background-color: #fff;
+	box-shadow: 4px 4px 0 #000000;
+	width: 100%;
+	cursor: pointer;
+  margin-top: 40px;
+  
+	img {
+		width: 104px;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	> div {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+
+		.title {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			h2 {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 22px;
+			}
+		}
+
+		.biases {
+			display: flex;
+			gap: 5px;
+      margin-top: 6px;
+      margin-bottom: 16px;
+		}
+
+		.extraInfo {
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+
+			p {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+				color: ${({ theme }) => theme.colors.gray};
+
+				svg {
+					margin-right: 5px;
+				}
+			}
+		}
+	}
+`;
+
+export { StyledRequest, StyledCheckEvent, StyledEntry, StyledPreview, Label, StyledRequestModal, StyledDuplicatedModal, StyledDuplicatedEvent };
 export default {};

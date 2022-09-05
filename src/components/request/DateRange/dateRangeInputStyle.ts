@@ -19,6 +19,22 @@ const StyledDateRangeInput = styled.div`
       font-size: 14px;
       line-height: 20px;
     }
+    
+    > div.disabledCalendarInput {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      background: #E5E5E5;
+      border: 2px solid #000000;
+      border-radius: 4px;
+      color: ${({ theme }) => theme.colors.gray};
+      height: 48px;
+      text-align: center;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+    }
 
     > button.calendarOpenInput {
       display: flex;

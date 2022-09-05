@@ -8,7 +8,7 @@ import "./request-calendar-custom.css";
 import { StyledDateRangeInput, StyledCalendarContainer } from "./dateRangeInputStyle";
 import { convertDateToString, convertDateWithDots, convertStringToDate } from "../../../shared/utils/dateHandlers";
 
-const DateRangeInput = () => {
+const DateRangeInput = ({disabled}: {disabled?: boolean}) => {
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
   const { dateRange } = requestInputs;
 
@@ -42,6 +42,20 @@ const DateRangeInput = () => {
 		setCalendarOpen(false);
 	};
 
+	if(disabled) {
+		return (
+			<StyledDateRangeInput>
+        <div className="dateInputContainer">
+          <span>이벤트 기간 *</span>
+          <div className="disabledCalendarInput">
+            {dateRange.startAt && dateRange.endAt
+              ? `${convertDateWithDots(dateRange.startAt)} - ${convertDateWithDots(dateRange.endAt)}`
+              : ""}
+          </div>
+        </div>
+		  </StyledDateRangeInput>
+		)
+	}
 	return (
 		<StyledDateRangeInput>
 			<div className="dateInputContainer">
@@ -91,5 +105,9 @@ const DateRangeInput = () => {
 		</StyledDateRangeInput>
 	);
 };
+
+DateRangeInput.defaultProps = {
+	disabled: false
+}
 
 export default DateRangeInput;

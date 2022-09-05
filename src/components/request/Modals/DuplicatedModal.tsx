@@ -2,18 +2,18 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaCalendar, FaMapMarkerAlt, FaTwitter, FaUserCircle } from "react-icons/fa";
 import { StyledDuplicatedEvent, StyledDuplicatedModal } from "../styles/requestStyle";
-import Modal from "../../../shared/components/Modal";
-import { EventType } from "../../../types";
-import BiasChip from "../../../shared/components/BiasChip";
-import { convertDateWithDots } from "../../../shared/utils/dateHandlers";
 import { StyledBiasChip } from "../../../shared/components/BiasChip/biasChipStyle";
+import Modal from "../../../shared/components/Modal";
 import Button from "../../../shared/components/Button";
+import BiasChip from "../../../shared/components/BiasChip";
+import { EventType } from "../../../types";
+import { convertDateWithDots } from "../../../shared/utils/dateHandlers";
 
-const Event = ({ duplicatedEventData }: { duplicatedEventData: EventType }) => {
+const Event = ({ duplicatedEventData, handleClick }: { duplicatedEventData: EventType, handleClick?: () => void; }) => {
   const { images, place, biasesId, requestedBiases, organizer, snsId, district, startAt, endAt } = duplicatedEventData;
 
   return (
-    <StyledDuplicatedEvent>
+    <StyledDuplicatedEvent onClick={handleClick}>
       <img src={images[0]} alt={place} />
       <div>
         <div className="title">
@@ -53,6 +53,10 @@ const Event = ({ duplicatedEventData }: { duplicatedEventData: EventType }) => {
   );
 };
 
+Event.defaultProps = {
+  handleClick: () => console.log("click"),
+};
+
 type ModalProps = {
   duplicatedEventData: EventType;
   resetAllStates: () => void;
@@ -73,7 +77,10 @@ const DuplicatedModal = ({ duplicatedEventData, resetAllStates }: ModalProps) =>
             해당 장소, 해당 날짜로<br />
             현재 아래 이벤트가 승인 대기중이에요.
           </p>}
-        <Event duplicatedEventData={duplicatedEventData} />
+        <Event duplicatedEventData={duplicatedEventData}
+               handleClick={duplicatedEventData.isApproved
+                 ? () => navigate(`/detail/${duplicatedEventData.id}`)
+                 : () => console.log("승인 대기중")} />
 
         <div className="modalBtnContainer">
           <Button

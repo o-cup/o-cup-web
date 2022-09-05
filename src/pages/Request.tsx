@@ -24,7 +24,7 @@ const Request = () => {
 
   const [isChecked, setChecked] = useState(false); // 페이지 라우팅 역할
   const [isDuplicatedEventOpen, setDuplicatedEventOpen] = useState(false);
-  const [duplicatedEventData, setDuplicatedEventData] = useState({} as EventType);
+  const [duplicatedEventData, setDuplicatedEventData] = useState({} as EventType); // 중복 이벤트 정보
 
   const [isConfirmModalOpen, setConfirmModalOpen] = useState(false);
   const [isSubmitModalOpen, setSubmitModalOpen] = useState(false);
@@ -98,10 +98,10 @@ const Request = () => {
     };
   }, []);
 
+  // 중복 확인하기
   const checkDuplicate = () => {
     fetchDuplicatedEvent({ place: requestInputs.place.place, dateRange: requestInputs.dateRange })
       .then((res) => {
-        console.log(res);
         if (res) {
           setDuplicatedEventOpen(true);
           setDuplicatedEventData(res);
@@ -138,7 +138,8 @@ const Request = () => {
         </StyledRequest>
       </Layout>
 
-      {isDuplicatedEventOpen && <DuplicatedModal duplicatedEventData={duplicatedEventData} resetAllStates={resetAllStates}/>}
+      {isDuplicatedEventOpen &&
+        <DuplicatedModal duplicatedEventData={duplicatedEventData} resetAllStates={resetAllStates} />}
     </>);
   }
   return (

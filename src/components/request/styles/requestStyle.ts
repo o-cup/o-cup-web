@@ -226,7 +226,7 @@ const StyledDuplicatedEvent = styled.div`
 	> div {
 		display: flex;
 		flex-direction: column;
-		width: 100%;
+		width: 170px;
 
 		.title {
 			display: flex;
@@ -248,10 +248,12 @@ const StyledDuplicatedEvent = styled.div`
 		}
 
 		.extraInfo {
+      width: 100%;
 			height: 100%;
 			display: flex;
 			flex-direction: column;
 			justify-content: space-around;
+      overflow: hidden;
 
 			p {
         display: flex;
@@ -260,9 +262,13 @@ const StyledDuplicatedEvent = styled.div`
         font-size: 12px;
         line-height: 16px;
 				color: ${({ theme }) => theme.colors.gray};
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
 				svg {
 					margin-right: 5px;
+          min-width: 14px;
 				}
 			}
 		}

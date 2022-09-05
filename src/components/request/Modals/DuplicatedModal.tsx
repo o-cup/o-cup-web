@@ -14,7 +14,7 @@ const Event = ({ duplicatedEventData, handleClick }: { duplicatedEventData: Even
 
   return (
     <StyledDuplicatedEvent onClick={handleClick}>
-      <img src={images[0]} alt={place} />
+      <img src={images && images[0]} alt={place} />
       <div>
         <div className="title">
           <h2>{place}</h2>
@@ -77,10 +77,11 @@ const DuplicatedModal = ({ duplicatedEventData, resetAllStates }: ModalProps) =>
             해당 장소, 해당 날짜로<br />
             현재 아래 이벤트가 승인 대기중이에요.
           </p>}
-        <Event duplicatedEventData={duplicatedEventData}
+
+        {duplicatedEventData && <Event duplicatedEventData={duplicatedEventData}
                handleClick={duplicatedEventData.isApproved
                  ? () => navigate(`/detail/${duplicatedEventData.id}`)
-                 : () => console.log("승인 대기중")} />
+                 : () => console.log("승인 대기중")} />}
 
         <div className="modalBtnContainer">
           <Button

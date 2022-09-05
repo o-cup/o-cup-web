@@ -14,10 +14,11 @@ import SubmitModal from "../components/request/Modals/SubmitModal";
 import AlertModal from "../components/request/Modals/AlertModal";
 import PlaceInput from "../components/request/Place/PlaceInput";
 import DateRangeInput from "../components/request/DateRange/DateRangeInput";
+import DuplicatedModal from "../components/request/Modals/DuplicatedModal";
+import Toast from "../shared/components/Toast";
 import Button from "../shared/components/Button";
 import { fetchDuplicatedEvent } from "../apis";
 import { EventType } from "../types";
-import DuplicatedModal from "../components/request/Modals/DuplicatedModal";
 
 const Request = () => {
   const navigate = useNavigate();
@@ -25,6 +26,8 @@ const Request = () => {
   const [isChecked, setChecked] = useState(false); // 페이지 라우팅 역할
   const [isDuplicatedEventOpen, setDuplicatedEventOpen] = useState(false);
   const [duplicatedEventData, setDuplicatedEventData] = useState({} as EventType); // 중복 이벤트 정보
+
+  const [isToast, setToast] = useState(false);
 
   const [isConfirmModalOpen, setConfirmModalOpen] = useState(false);
   const [isSubmitModalOpen, setSubmitModalOpen] = useState(false);
@@ -109,6 +112,7 @@ const Request = () => {
           // 중복검사 통과
           window.scrollTo(0, 0);
           setChecked(true);
+          setToast(true);
         }
       });
   };
@@ -155,6 +159,10 @@ const Request = () => {
           </StyledPreview>
         </StyledRequest>
       </Layout>
+
+      {isToast &&
+        <Toast setToast={setToast}
+               text={`아직 해당 장소, 해당 날짜로 등록된 이벤트가 없어요.${"\n"}아래에서 등록하고자 하는 이벤트 정보를 입력해 주세요.`} />}
 
       {isConfirmModalOpen &&
         <ConfirmModal setConfirmModalOpen={setConfirmModalOpen} handleSubmit={handleSubmit} />}

@@ -42,8 +42,6 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 		window.scrollTo({ top: 0 });
 	};
 
-	console.log("handleBackClick", handleBackClick);
-
 	return (
 		<>
 			<StyledHeader mainPage={mainPage}>

@@ -5,6 +5,7 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+  min-width: 320px;
 	max-width: 1080px;
 	z-index: ${({ theme }) => theme.zIndex.header};
 	background: rgba(252, 251, 247, 0.9);
@@ -64,6 +65,33 @@ export const StyledDateSelector = styled.div`
     &.active {
       transform: rotate(180deg);
     }
+  }
+`
+
+export const StyledHeaderCalendarContainer = styled.div`
+  position: fixed;
+  background: rgba(252, 251, 247, 0.9);
+  z-index: ${({ theme }) => theme.zIndex.header};
+  
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 100%;
+    min-width: 320px;
+    max-width: 1080px;
+    top: ${({ theme }) => theme.heights.header};
+    
+    backdrop-filter: blur(4px);
+  }
+  
+  @media ${({ theme }) => theme.device.desktop} {
+    width: 360px;
+    top: 56px;
+    right: 20px;
+    
+    backdrop-filter: blur(20px);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    
+    padding-top: 10px;
   }
 `
 

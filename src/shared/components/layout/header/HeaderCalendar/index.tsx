@@ -7,6 +7,7 @@ import "./header-calendar-custom.css";
 import { useRecoilState } from "recoil";
 import { biasFilterAtom, dateFilterAtom } from "../../../../../state/atoms";
 import { convertDateToString, convertStringToDate } from "../../../../utils/dateHandlers";
+import { StyledHeaderCalendarContainer } from "../headerStyle";
 
 type StateProps = {
 	setCalendarOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,7 +24,7 @@ function HeaderCalendar({ setCalendarOpen }: StateProps) {
 	};
 
 	return (
-		<div className="calendar">
+		<StyledHeaderCalendarContainer>
 			<RCalendar
 				className="header-calendar"
 				locale={ko}
@@ -35,7 +36,7 @@ function HeaderCalendar({ setCalendarOpen }: StateProps) {
 				monthDisplayFormat="yyyy.MMM"
 				dateDisplayFormat="yyyy.MM.dd"
 			/>
-		</div>
+		</StyledHeaderCalendarContainer>
 	);
 }
 

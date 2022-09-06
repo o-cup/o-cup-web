@@ -13,6 +13,7 @@ type Titles = {
 
 const titles = {
 	detail: "상세보기",
+	duplicate: "이벤트 중복확인",
 	request: "이벤트 등록",
 	search: "검색하기",
 } as Titles;

@@ -35,6 +35,7 @@ const InputWrapper = styled.div`
   button {
     border-left: 2px solid ${({ theme }) => theme.colors.black};
     background: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.black};
     padding: 0 50px;
     font-weight: 700;
     font-size: 12px;

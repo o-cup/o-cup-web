@@ -1,26 +1,35 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import { fetchPeople } from "../../apis";
 import { openedBiasAtom } from "../../state/atoms";
 import Bias from "./Bias";
-import { StyledBiasList } from "./styles/mainStyle";
+import { StyledBiasList, StyledBias } from "./styles/mainStyle";
 
 function BiasList() {
-	const [openedBias] = useRecoilState(openedBiasAtom);
+  const navigate = useNavigate();
 
-	const { data: people } = useQuery(["people"], () => fetchPeople(), {
-		select: (data) => data?.filter((item) => openedBias.includes(item.id)),
-	});
+  const [openedBias] = useRecoilState(openedBiasAtom);
 
-	if (!people || !people.length) return null;
-	return (
-		<StyledBiasList>
-			{people?.map((person) => (
-				<Bias key={person.id} id={person.id} name={person.name} profilePic={person.profilePic} birthday={person.birthday} />
-			))}
-		</StyledBiasList>
-	);
+  const { data: people } = useQuery(["people"], () => fetchPeople(), {
+    select: (data) => data?.filter((item) => openedBias.includes(item.id)),
+  });
+
+  return (
+    <StyledBiasList>
+      {(people && people?.length > 0) ? people.map((person) => (
+          <Bias key={person.id} id={person.id} name={person.name} profilePic={person.profilePic}
+                birthday={person.birthday} />
+        )) :
+        <StyledBias className="active" onClick={() => navigate("/search")}>
+          <div>
+            <img id="search" src="/images/icons/search.png" alt="search" />
+          </div>
+          <p>검색하기</p>
+        </StyledBias>}
+    </StyledBiasList>
+  );
 }
 
 export default BiasList;

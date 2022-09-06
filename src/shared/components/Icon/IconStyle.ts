@@ -77,6 +77,14 @@ export const StyledIcon = styled.i`
 		width: 24px;
 	}
 
+  &.search_main {
+    display: flex;
+    background: url("/images/icons/search.png") no-repeat;
+    background-size: contain;
+    height: 36px;
+    width: 36px;
+  }
+
 	&.sort {
 		display: flex;
 		background: url("/images/icons/sort.png") no-repeat;

@@ -41,7 +41,7 @@ const Header = ({ page, share }: HeaderProps) => {
 		window.scrollTo({ top: 0 });
 	};
 
-	return (
+	return (<>
 		<StyledHeader mainPage={mainPage}>
 			<div id="header">
 				{page !== "main" ? (
@@ -62,9 +62,9 @@ const Header = ({ page, share }: HeaderProps) => {
 					)}
 				</div>
 			</div>
-			{isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}
 		</StyledHeader>
-	);
+    {isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}
+	</>);
 };
 
 Header.defaultProps = {

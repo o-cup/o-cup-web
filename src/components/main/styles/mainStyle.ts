@@ -25,7 +25,9 @@ const StyledBias = styled.li`
 	margin: 0 12px;
 	opacity: 0.5;
 	cursor: pointer;
-
+  position: relative;
+  z-index: 1;
+  
 	&.active {
 		opacity: 1;
 	}
@@ -39,12 +41,11 @@ const StyledBias = styled.li`
 	}
 
 	> div {
+    position: relative;
 		width: 72px;
 		height: 72px;
 		background: ${({ theme }) => theme.colors.primary};
 		border-radius: 50%;
-		position: relative;
-		z-index: 1;
 
 		> img {
 			width: 100%;
@@ -53,19 +54,29 @@ const StyledBias = styled.li`
 			background: ${({ theme }) => theme.colors.primary};
 			object-fit: cover;
 		}
-
-		&:after {
-			content: "";
-			width: 72px;
-			height: 72px;
-			background: ${({ theme }) => theme.colors.black};
-			border-radius: 50%;
-			position: absolute;
-			z-index: -1;
-			top: 3px;
-			left: 3px;
-		}
+    
+    > img#search {
+      width: 32px;
+      height: 32px;
+      border-radius: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-52%, -52%);
+    }
 	}
+  
+  &:after {
+    content: "";
+    width: 72px;
+    height: 72px;
+    background: ${({ theme }) => theme.colors.black};
+    border-radius: 50%;
+    position: absolute;
+    z-index: -1;
+    top: 3px;
+    left: 3px;
+  }
 
 	> p {
 		text-align: center;

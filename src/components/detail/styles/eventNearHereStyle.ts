@@ -23,6 +23,11 @@ const StyledEventNearHere = styled.div`
 		&::-webkit-scrollbar {
 			display: none;
 		}
+    
+    &::after {
+      content: "";
+      border-right: 20px solid transparent;
+    }
 	}
 `;
 
@@ -42,9 +47,9 @@ const EventNearHereList = styled.li`
 		margin-left: 20px;
 	}
 
-	&:last-child {
-		margin-right: 20px;
-	}
+  &:last-child {
+    margin-right: 0;
+  }
 
 	> img {
 		width: 100%;

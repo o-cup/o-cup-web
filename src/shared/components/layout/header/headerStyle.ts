@@ -40,31 +40,32 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 		img#logo {
 			height: 56px;
 		}
-
-		.date_selector {
-			display: flex;
-			align-items: center;
-
-			> p {
-				text-align: center;
-				font-weight: 700;
-				font-size: 20px;
-				line-height: 24px;
-				margin-right: 8px;
-				white-space: nowrap;
-			}
-
-			> button.calendarOpenButton {
-				background: none;
-				outline: none;
-
-				&.active {
-					transform: rotate(180deg);
-				}
-			}
-		}
 	}
 `;
+
+export const StyledDateSelector = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  > p {
+    text-align: center;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    margin-right: 8px;
+    white-space: nowrap;
+  }
+
+  > button.calendarOpenButton {
+    background: none;
+    outline: none;
+
+    &.active {
+      transform: rotate(180deg);
+    }
+  }
+`
 
 export const Share = styled.div`
 	position: relative;

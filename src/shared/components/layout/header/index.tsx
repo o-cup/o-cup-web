@@ -21,9 +21,10 @@ const titles = {
 type HeaderProps = {
 	page: string;
 	share?: boolean;
+	handleBackClick?: () => void;
 };
 
-const Header = ({ page, share }: HeaderProps) => {
+const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -41,34 +42,39 @@ const Header = ({ page, share }: HeaderProps) => {
 		window.scrollTo({ top: 0 });
 	};
 
-	return (<>
-		<StyledHeader mainPage={mainPage}>
-			<div id="header">
-				{page !== "main" ? (
-					<Icon name="arrow-left" handleClick={() => navigate(-1)} />
-				) : (
-					<Icon name="logo" handleClick={handleLogoClick} />
-				)}
+	console.log("handleBackClick", handleBackClick);
 
-				{page && <h1>{titles[page]}</h1>}
-				<div className="rightIcons">
-					{mainPage && <DateSelector isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen} />}
-					{(mainPage || page === "detail") && <Icon name="search_header" handleClick={() => navigate("/search")} />}
-					{share && (
-						<Share>
-							<Icon name="share" handleClick={shareTwitter} />
-							<span className="tooltip">트위터에 공유하기</span>
-						</Share>
+	return (
+		<>
+			<StyledHeader mainPage={mainPage}>
+				<div id="header">
+					{page !== "main" ? (
+						<Icon name="arrow-left" handleClick={handleBackClick || (() => navigate(-1))} />
+					) : (
+						<Icon name="logo" handleClick={handleLogoClick} />
 					)}
+
+					{page && <h1>{titles[page]}</h1>}
+					<div className="rightIcons">
+						{mainPage && <DateSelector isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen} />}
+						{(mainPage || page === "detail") && <Icon name="search_header" handleClick={() => navigate("/search")} />}
+						{share && (
+							<Share>
+								<Icon name="share" handleClick={shareTwitter} />
+								<span className="tooltip">트위터에 공유하기</span>
+							</Share>
+						)}
+					</div>
 				</div>
-			</div>
-		</StyledHeader>
-    {isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}
-	</>);
+			</StyledHeader>
+			{isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}
+		</>
+	);
 };
 
 Header.defaultProps = {
 	share: false,
+	handleBackClick: null,
 };
 
 export default Header;

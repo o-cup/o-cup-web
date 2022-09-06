@@ -27,6 +27,12 @@ const Search = () => {
 	});
 
 	useEffect(() => {
+		if (!keyword) {
+			setSearched(false);
+		}
+	}, [keyword, setSearched]);
+
+	useEffect(() => {
 		const today = new Date();
 		setSelectedMonth(today.getMonth() + 1);
 	}, []);
@@ -35,6 +41,11 @@ const Search = () => {
 		setKeyword(name);
 		setSelectedBiasId(id);
 		setSearched(true);
+	};
+
+	const handleBackClick = () => {
+		setKeyword("");
+		setSearched(false);
 	};
 
 	const conditionalRender = () => {
@@ -64,7 +75,7 @@ const Search = () => {
 	};
 
 	return (
-		<Layout page="search" share={!!viewResult}>
+		<Layout page="search" share={!!viewResult} handleBackClick={searched ? handleBackClick : undefined}>
 			<StyledSearch>
 				<div className="input">
 					<SearchInput

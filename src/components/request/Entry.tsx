@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import { useRecoilState } from "recoil";
 import { requestInputsAtom } from "../../state/atoms";
 import { StyledEntry } from "./styles/requestStyle";
+import { StyledPlaceInput } from "./Place/placeInputStyle";
 import Button from "../../shared/components/Button";
 import BasicInput from "./units/BasicInput";
 import PosterUploader from "./Poster/PosterUploader";
@@ -12,6 +13,7 @@ import HashTagsContainer from "./HashTags/HashTagsContainer";
 import DateRangeInput from "./DateRange/DateRangeInput";
 import FcfsGoodsInput from "./FcfsGoods/FcfsGoodsInput";
 import LuckyDrawInput from "./LuckyDraw/LuckyDrawInput";
+import SearchInput from "./units/SearchInput";
 
 type EntryProps = {
 	setConfirmModalOpen: Dispatch<SetStateAction<boolean>>;
@@ -46,7 +48,10 @@ const Entry = ({ setConfirmModalOpen, setBottomSheetOpen }: EntryProps) => {
 				</p>
 			</div>
 			<div className="inputsWrapper">
-				<PlaceInput />
+				<StyledPlaceInput>
+					<SearchInput value={requestInputs.place.place} id="place" placeholder="장소이름" label="장소 *" hideButton />
+					<SearchInput value={requestInputs.place.address} id="address" placeholder="주소" label="" hideLabel hideButton />
+				</StyledPlaceInput>
 				<ArtistInputContainer />
 				<BasicInput
 					label="주최자 닉네임 *"
@@ -64,7 +69,7 @@ const Entry = ({ setConfirmModalOpen, setBottomSheetOpen }: EntryProps) => {
 					handleInputChange={(e) => handleInputChange(e, "snsId")}
 					handleInputDelete={(e) => handleInputDelete(e, "snsId")}
 				/>
-				<DateRangeInput />
+				<DateRangeInput disabled />
 				<PosterUploader />
 				<HashTagsContainer />
 				<BasicInput

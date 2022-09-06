@@ -28,6 +28,7 @@ const theme: DefaultTheme = {
 		header: 10,
 		bottomSheet: 89, // memo: css 파일에 있어서 직접 입력함
 		modal: 99,
+		toast: 99,
 	},
 };
 

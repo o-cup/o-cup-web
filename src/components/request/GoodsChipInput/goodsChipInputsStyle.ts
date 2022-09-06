@@ -3,6 +3,7 @@ import styled from "styled-components";
 const StyledGoodsChipInput = styled.div`
   display: flex;
   align-items: center;
+  max-width: 270px;
   height: 30px;
   background: ${({ theme }) => theme.colors.white};
   border: 1px solid #000000;
@@ -23,6 +24,7 @@ const StyledGoodsChipInput = styled.div`
 
   input {
     min-width: 24px;
+    max-width: 178px;
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;

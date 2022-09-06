@@ -11,8 +11,10 @@ const StyledCheckEvent = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 480px;
   gap: 64px;
   padding: 32px 20px;
+  margin: 0 auto;
   
   > div.checkNotice {
     display: flex;

@@ -29,30 +29,7 @@ const StyledFooter = styled.footer`
 	flex-direction: column;
 	padding: 100px 0 50px 0;
 	text-align: center;
-
-	> ul {
-		display: none;
-		justify-content: center;
-		align-items: center;
-		margin-bottom: 20px;
-
-		> li {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: 52px;
-			height: 52px;
-			background: ${({ theme }) => theme.colors.primary};
-			border: 2px solid #000000;
-			border-radius: 35px;
-			font-size: 20px;
-			cursor: pointer;
-		}
-
-		> li:not(:last-child) {
-			margin-right: 32px;
-		}
-	}
+  gap: 12px;
 
 	> p {
 		font-weight: 500;

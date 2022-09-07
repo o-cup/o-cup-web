@@ -45,9 +45,20 @@ export const StyledFilter = styled.div`
 		display: flex;
 		flex-wrap: wrap;
 		row-gap: 20px;
-		column-gap: 15px;
 		padding: 12px 0;
-		justify-content: space-between;
+	}
+`;
+
+export const ResetModalBtn = styled.div`
+	display: flex;
+	align-items: center;
+	font-size: 10px;
+	gap: 3px;
+	cursor: pointer;
+
+	i.reset {
+		width: 16px;
+		height: 16px;
 	}
 `;
 

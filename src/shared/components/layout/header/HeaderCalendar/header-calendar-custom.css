@@ -10,13 +10,6 @@
     background-color: transparent;
 }
 
-/* todo: desktop 일 때 달력 넓이 조절 필요 */
-@media screen and (min-width: 721px) {
-    .header-calendar.rdrCalendarWrapper{
-        padding: 0 48px;
-    }
-}
-
 .header-calendar .rdrMonthAndYearWrapper {
     justify-content: center;
     align-items: center;

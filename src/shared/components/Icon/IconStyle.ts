@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const StyledIcon = styled.i`
 	cursor: pointer;
+	width: 24px;
+	height: 24px;
 
 	&.logo {
 		display: flex;
@@ -19,21 +21,21 @@ export const StyledIcon = styled.i`
 		width: 24px;
 	}
 
-  &.minus-circle {
-    display: flex;
-    background: url("/images/icons/minus-circle.png") no-repeat;
-    background-size: contain;
-    height: 24px;
-    width: 24px;
-  }
+	&.minus-circle {
+		display: flex;
+		background: url("/images/icons/minus-circle.png") no-repeat;
+		background-size: contain;
+		height: 24px;
+		width: 24px;
+	}
 
-  &.subtraction {
-    display: flex;
-    background: url("/images/icons/subtraction.png") no-repeat;
-    background-size: contain;
-    height: 24px;
-    width: 24px;
-  }
+	&.subtraction {
+		display: flex;
+		background: url("/images/icons/subtraction.png") no-repeat;
+		background-size: contain;
+		height: 24px;
+		width: 24px;
+	}
 
 	&.delete {
 		display: flex;
@@ -65,7 +67,23 @@ export const StyledIcon = styled.i`
 		background-size: contain;
 		height: 20px;
 		width: 20px;
+	}	
+  
+  &.search_header {
+		display: flex;
+		background: url("/images/icons/search.png") no-repeat;
+		background-size: contain;
+		height: 24px;
+		width: 24px;
 	}
+
+  &.search_main {
+    display: flex;
+    background: url("/images/icons/search.png") no-repeat;
+    background-size: contain;
+    height: 36px;
+    width: 36px;
+  }
 
 	&.sort {
 		display: flex;
@@ -76,11 +94,8 @@ export const StyledIcon = styled.i`
 	}
 
 	&.arrow-left {
-		display: flex;
 		background: url("/images/icons/arrow-left.png") no-repeat;
 		background-size: contain;
-		height: 24px;
-		width: 24px;
 	}
 
 	&.place {
@@ -107,29 +122,35 @@ export const StyledIcon = styled.i`
 		width: 24px;
 	}
 
-  &.check_true {
-    display: flex;
-    background: url("/images/icons/check_true.png") no-repeat;
-    background-size: contain;
-    height: 20px;
-    width: 20px;
-  }
-  
-  &.check_false {
-    display: flex;
-    background: url("/images/icons/check_false.png") no-repeat;
-    background-size: contain;
-    height: 20px;
-    width: 20px;
-  }
-  
-  &.check_blank {
-    display: flex;
-    background: url("/images/icons/check_blank.png") no-repeat;
-    background-size: contain;
-    height: 20px;
-    width: 20px;
-  }
+	&.check_true {
+		display: flex;
+		background: url("/images/icons/check_true.png") no-repeat;
+		background-size: contain;
+		height: 20px;
+		width: 20px;
+	}
+
+	&.check_false {
+		display: flex;
+		background: url("/images/icons/check_false.png") no-repeat;
+		background-size: contain;
+		height: 20px;
+		width: 20px;
+	}
+
+	&.check_blank {
+		display: flex;
+		background: url("/images/icons/check_blank.png") no-repeat;
+		background-size: contain;
+		height: 20px;
+		width: 20px;
+	}
+
+	&.reset {
+		display: flex;
+		background: url("/images/icons/reset.png") no-repeat;
+		background-size: contain;
+	}
 `;
 
 export default {};

@@ -3,7 +3,7 @@ import { isOpenToday } from "../shared/utils/dateHandlers";
 import { supabase } from "../supabaseClient";
 import { EventType, DetailType, FetchEventParams } from "../types";
 
-const fetchEvents = async ({ pageParam = 1, infinite = false, keyword, date }: FetchEventParams) => {
+const fetchEvents = async ({ pageParam = 1, infinite = false, date }: FetchEventParams) => {
 	let query = supabase.from("place_sort").select("*").eq("isApproved", true);
 
 	if (infinite) {
@@ -78,6 +78,9 @@ const fetchPeople = async () => {
 	return data;
 };
 
+/**
+ * 이벤트 추가
+ * */
 const insertEvent = async (eventData: Partial<EventType>) => {
 	const { data, error } = await supabase.from("events").insert([{ ...eventData }]);
 	if (error) {
@@ -86,6 +89,9 @@ const insertEvent = async (eventData: Partial<EventType>) => {
 	return data;
 };
 
+/**
+ * 디테일 추가
+ * */
 const insertDetail = async (detailData: Partial<DetailType>) => {
 	const { data, error } = await supabase.from("detail").insert([{ ...detailData }]);
 	if (error) {
@@ -94,6 +100,11 @@ const insertDetail = async (detailData: Partial<DetailType>) => {
 	return data;
 };
 
+/**
+ * 인물 id로 이름 받아오기
+ * @param {number} id
+ * @returns {string} name
+ * */
 const fetchBiases = async ({ id }: { id: number }) => {
 	const { data: bias } = await supabase.from("people").select("name").eq("id", id).single();
 	return bias?.name;
@@ -115,13 +126,19 @@ const uploadPoster = async (file: any) => {
 	return publicURL;
 };
 
-export {
-	fetchEvents,
-	fetchEventDetail,
-	fetchPeople,
-	insertEvent,
-	insertDetail,
-	fetchBiases,
-	uploadPoster,
+/**
+ * 장소와 이벤트 기간이 일치하는 event 반환
+ * @param {string} id
+ * @returns {EventType}
+ */
+const fetchDuplicatedEvent = async ({ place, dateRange }: { place?: string, dateRange: {startAt: string, endAt: string} }) => {
+	const { data, error } = await supabase.from("events").select("*")
+		.match({place, startAt:dateRange.startAt, endAt: dateRange.endAt});
+	if (error) {
+		throw new Error(`${error.message}: ${error.details}`);
+	}
+	return data?.[0];
 };
+
+export { fetchEvents, fetchEventDetail, fetchPeople, insertEvent, insertDetail, fetchBiases, uploadPoster, fetchDuplicatedEvent };
 export default {};

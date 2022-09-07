@@ -12,6 +12,8 @@ export const StyledEvent = styled.div`
 	min-width: 320x;
 	width: 100%;
 
+	cursor: pointer;
+
 	@media all and (max-width: 400px) {
 		gap: 15px;
 	}
@@ -27,10 +29,31 @@ export const StyledEvent = styled.div`
 		flex-direction: column;
 		gap: 10px;
 
-		h2 {
-			font-size: 18px;
-			font-weight: bold;
-			line-height: 25px;
+		width: 100%;
+
+		.title {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			h2 {
+				font-size: 18px;
+				font-weight: bold;
+				line-height: 25px;
+			}
+
+			span {
+				width: 12px;
+				height: 12px;
+				background-color: #5eff50;
+				display: inline-block;
+				border-radius: 50%;
+			}
+		}
+
+		.biases {
+			display: flex;
+			gap: 5px;
 		}
 
 		.extraInfo {

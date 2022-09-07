@@ -7,12 +7,14 @@ import Button from "../../shared/components/Button";
 import { FilterIcon, SortIcon } from "../../shared/components";
 import SearchModal from "./SearchModal";
 import Chip from "../../shared/components/Chip";
-import { dateRangeAtom } from "../../state";
+import { dateRangeAtom, districtAtom } from "../../state";
 import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { fetchSearchedEvent } from "../../apis/search";
+import { RegCodeItem } from "../../types";
 
 type ResultProps = {
 	keyword: string;
+	biasId?: number | null;
 };
 
 const sortOptions = {
@@ -23,13 +25,13 @@ const sortOptions = {
 
 type ChipType = {
 	dateChip: string;
-	distChips: string[];
+	distChips: RegCodeItem[];
 };
 
-const Result = ({ keyword }: ResultProps) => {
+const Result = ({ keyword, biasId }: ResultProps) => {
 	const [dateRange, setDateRange] = useRecoilState(dateRangeAtom);
 	const { startDate, endDate } = dateRange;
-	// const districts = useRecoilValue(districtAtom);
+	const [districts, setDistricts] = useRecoilState(districtAtom);
 	const [sortOpen, setSortOpen] = useState(false);
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
@@ -39,9 +41,8 @@ const Result = ({ keyword }: ResultProps) => {
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
-	// TODO: infinitequery로 변경하기
-	const { data: events } = useQuery(["resultEvents", keyword, dateRange], () =>
-		fetchSearchedEvent({ keyword, date: { startDate, endDate } })
+	const { data: events } = useQuery(["resultEvents", keyword, dateRange, biasId, districts], () =>
+		fetchSearchedEvent({ keyword, date: { startDate, endDate }, biasId, districts })
 	);
 
 	useEffect(() => {
@@ -50,6 +51,10 @@ const Result = ({ keyword }: ResultProps) => {
 		const dateText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 		setChips((prev) => ({ ...prev, dateChip: dateText }));
 	}, [startDate, endDate]);
+
+	useEffect(() => {
+		setChips((prev) => ({ ...prev, distChips: districts }));
+	}, [districts]);
 
 	useEffect(() => {
 		if (sortOpen) {
@@ -63,7 +68,9 @@ const Result = ({ keyword }: ResultProps) => {
 		}
 	}, [filterOpen]);
 
-	const handleDeleteChip = ({ type }: { type: "date" | "district" }) => {
+	const handleDeleteChip = ({ type, code }: { type: "date" | "district"; code?: string }) => {
+		const newDistChips = chips.distChips.filter((chip) => chip.code !== code);
+
 		switch (type) {
 			case "date":
 				setChips((prev) => ({ ...prev, dateChip: "" }));
@@ -71,6 +78,7 @@ const Result = ({ keyword }: ResultProps) => {
 				break;
 
 			case "district":
+				setDistricts(newDistChips);
 				break;
 
 			default:
@@ -103,10 +111,10 @@ const Result = ({ keyword }: ResultProps) => {
 					)}
 					{chips.distChips.map((dist) => (
 						<Chip
-							key={dist}
-							text={dist}
+							key={dist.code}
+							text={dist.name}
 							bgColor="primary"
-							handleDelete={() => handleDeleteChip({ type: "district" })}
+							handleDelete={() => handleDeleteChip({ type: "district", code: dist.code })}
 						/>
 					))}
 				</div>
@@ -132,6 +140,10 @@ const Result = ({ keyword }: ResultProps) => {
 			)}
 		</StyledResult>
 	);
+};
+
+Result.defaultProps = {
+	biasId: null,
 };
 
 export default Result;

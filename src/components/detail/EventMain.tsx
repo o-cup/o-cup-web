@@ -40,7 +40,7 @@ const EventMain = ({
 			<div className="textContainer">
 				<div>
 					<h6>{place}</h6>
-					<div>
+					<div className="chipContainer">
 						{requestedBiases
 							? requestedBiases.map((bias) =>
 									bias.bias ? <StyledBiasChip key={bias.id}>{bias.bias}</StyledBiasChip> : null

@@ -1,18 +1,27 @@
 import React from "react";
+import { useQuery } from "react-query";
+import { fetchEventsByBiasId } from "../../../apis/search";
 import { StyledBiasProfile } from "./biasProfileStyle";
 
 type BiasProfileProps = {
 	biasName: string;
 	imgUrl: string;
+	handleClick: () => void;
+	id: number;
 };
 
-const BiasProfile = ({ biasName, imgUrl }: BiasProfileProps) => (
-	<StyledBiasProfile>
-		<div>
-			<img alt={biasName} src={imgUrl} />
-			<p>{biasName}</p>
-		</div>
-	</StyledBiasProfile>
-);
+const BiasProfile = ({ biasName, imgUrl, handleClick, id }: BiasProfileProps) => {
+	const { data } = useQuery(["events", id], () => fetchEventsByBiasId(id));
+	if (!data?.length) return null;
+
+	return (
+		<StyledBiasProfile onClick={handleClick}>
+			<div>
+				<img alt={biasName} src={imgUrl} />
+				<p>{biasName}</p>
+			</div>
+		</StyledBiasProfile>
+	);
+};
 
 export default BiasProfile;

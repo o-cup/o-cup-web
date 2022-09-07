@@ -11,9 +11,9 @@ const LuckyGoodsListItem = ({ lucky }: LuckyProps) =>
     <ul className="lucky">
       {lucky.map((goods, i) =>
         <StyledHighLightItem key={`lucky${i + goods}`}>
-          <div className="labelContainer length_2">
+          {lucky.length > 1 && <div className="labelContainer length_2">
             <p className="highlight">{i + 1}등</p>
-          </div>
+          </div>}
           <div className="chipContainer">
             <GoodsChip value={goods} />
           </div>

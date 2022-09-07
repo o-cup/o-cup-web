@@ -1,23 +1,40 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { FaCaretDown } from "react-icons/fa";
+// import { FaCaretDown } from "react-icons/fa";
 import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
 import { useRegCodes } from "../../hooks";
 import { RegCodeItem } from "../../types";
 import { MAX_DISTRICT_CHIPS } from "../../shared/constants";
+import divisionData from "./divisions";
+import { Icon } from "../../shared/components";
+import { ResetModalBtn } from "./styles/searchStyle";
 
 type DistrictSelectorProps = {
 	handleSubmit: () => void;
-	selectedDist: RegCodeItem[];
-	setSelectedDist: Dispatch<SetStateAction<RegCodeItem[]>>;
+	selectedDists: RegCodeItem[];
+	setSelectedDists: Dispatch<SetStateAction<RegCodeItem[]>>;
+	setDisctrictSelectorOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const isAllDist = (code: string) => code.substring(2, 4) === "00";
 
-const DistrictSelector = ({ handleSubmit, selectedDist, setSelectedDist }: DistrictSelectorProps) => {
-	const [selectedDiv, setSelectedDiv] = useState<RegCodeItem>({ code: "1100000000", name: "서울특별시" });
+const DistrictSelector = ({
+	handleSubmit,
+	selectedDists,
+	setSelectedDists,
+	setDisctrictSelectorOpen,
+}: DistrictSelectorProps) => {
+	const [divisionList, setDivisionList] = useState<RegCodeItem[]>([]);
 	const [districtList, setDistrictList] = useState<RegCodeItem[]>([]);
 
-	const { divisionData, districtData } = useRegCodes({ div: selectedDiv });
+	const selectedDiv = divisionList.find((div) => div.selected) || divisionData[0];
+
+	const districtData = useRegCodes(selectedDiv!);
+
+	useEffect(() => {
+		if (divisionData) {
+			setDivisionList(divisionData);
+		}
+	}, []);
 
 	useEffect(() => {
 		if (districtData.length) {
@@ -28,34 +45,36 @@ const DistrictSelector = ({ handleSubmit, selectedDist, setSelectedDist }: Distr
 	useEffect(() => {
 		if (!districtList.length) return;
 
-		const selected = districtList.filter((dist) => dist.selected);
-		setSelectedDist(selected);
-	}, [districtData, districtList, setSelectedDist]);
+		const selected = districtList
+			.filter((dist) => dist.selected)
+			.map((dist) => ({ ...dist, name: `${selectedDiv.name} ${dist.name}` }));
+
+		setSelectedDists(selected);
+	}, [districtList, setSelectedDists, selectedDiv]);
 
 	const handleDivClick = (div: RegCodeItem) => {
-		if (selectedDist.length >= MAX_DISTRICT_CHIPS) return;
+		const newData = divisionList.map((item) => ({ ...item, selected: item.code === div.code }));
+		setDivisionList(newData);
 
-		setSelectedDiv(div);
-
-		const isDuplicated = selectedDist.find((dist) => dist.code === "all");
+		const isDuplicated = selectedDists.find((dist) => dist.code === "all");
 		if (div.code === "all" && !isDuplicated) {
-			setSelectedDist([{ code: "all", name: "전국" }, ...selectedDist]);
+			setSelectedDists([{ code: "all", name: "전국" }, ...selectedDists]);
 		}
 	};
 
 	const handleDistClick = (dist: RegCodeItem) => {
-		if (isAllDist(dist.code) && selectedDist.length > 0) {
+		if (isAllDist(dist.code) && selectedDists.length > 0) {
 			const newList = districtList.map((item) => ({ ...item, selected: item.code === dist.code }));
 			setDistrictList(newList);
 			return;
 		}
 
-		if (selectedDist.length >= MAX_DISTRICT_CHIPS) return;
+		if (selectedDists.length >= MAX_DISTRICT_CHIPS) return;
 
-		const isDuplicated = selectedDist.find((item) => item.code === dist.code);
+		const isDuplicated = selectedDists.find((item) => item.code === dist.code);
 		if (isDuplicated) return;
 
-		const newList = districtList.map((item: RegCodeItem) => {
+		const newData = districtList.map((item: RegCodeItem) => {
 			if (!isAllDist(dist.code) && isAllDist(item.code)) {
 				return {
 					...item,
@@ -68,69 +87,79 @@ const DistrictSelector = ({ handleSubmit, selectedDist, setSelectedDist }: Distr
 			};
 		});
 
-		setDistrictList(newList);
+		setDistrictList(newData);
 	};
 
 	const handleDeleteClick = (dist: RegCodeItem) => {
-		const newList = districtList.map((item) => ({
+		const newData = districtList.map((item) => ({
 			...item,
 			selected: item.code === dist.code ? false : item.selected,
 		}));
-		setDistrictList(newList);
+		setDistrictList(newData);
+	};
+
+	const handleResetClick = () => {
+		const newDistrictData = districtList.map((dist) => ({ ...dist, selected: isAllDist(dist.code) }));
+		setDistrictList(newDistrictData);
 	};
 
 	return (
 		<StyledDistrictSelector>
-			<div className="content">
+			<div className="title">
+				<ResetModalBtn onClick={handleResetClick}>
+					<Icon name="reset" />
+					<span>초기화</span>
+				</ResetModalBtn>
 				<h2 className="nations">
 					대한민국
-					<FaCaretDown />
+					{/* <FaCaretDown /> */}
 				</h2>
+				<Icon name="delete-circle-black" handleClick={() => setDisctrictSelectorOpen(false)} />
+			</div>
 
-				<div className="districts">
-					<ul className="main">
-						{divisionData?.map((div: RegCodeItem) => (
-							<li
-								key={div.code}
-								role="presentation"
-								onClick={() => handleDivClick(div)}
-								className={div.code === selectedDiv.code ? "selected" : ""}
-							>
-								{div.name}
-							</li>
-						))}
-					</ul>
-					<ul className="sub">
-						{districtList.map((dist: RegCodeItem) => (
-							<li
-								key={dist.code}
-								role="presentation"
-								onClick={() => handleDistClick(dist)}
-								className={dist.selected ? "selected" : ""}
-							>
-								{dist.name}
-							</li>
-						))}
-					</ul>
-				</div>
+			<div className="districts">
+				<ul className="main">
+					{divisionData?.map((div: RegCodeItem) => (
+						<li
+							key={div.code}
+							role="presentation"
+							onClick={() => handleDivClick(div)}
+							className={div.code === selectedDiv.code ? "selected" : ""}
+						>
+							{div.name}
+						</li>
+					))}
+				</ul>
+				<ul className="sub">
+					{districtList.map((dist: RegCodeItem) => (
+						<li
+							key={dist.code}
+							role="presentation"
+							onClick={() => handleDistClick(dist)}
+							className={dist.selected ? "selected" : ""}
+						>
+							{dist.name}
+						</li>
+					))}
+				</ul>
+			</div>
 
-				<div className="result">
-					<div className="chips">
-						{selectedDist.map((dist) => (
-							<span className="chip" key={dist.code}>
-								<span>{`${selectedDiv.name} ${dist.name}`}</span>
-								<span role="presentation" onClick={() => handleDeleteClick(dist)}>
-									X
-								</span>
+			<div className="result">
+				<div className="chips">
+					{selectedDists.map((dist) => (
+						<span className="chip" key={dist.code}>
+							<span>{dist.name}</span>
+							<span role="presentation" onClick={() => handleDeleteClick(dist)}>
+								X
 							</span>
-						))}
-					</div>
-					<div className="submit">
-						<p>최대 3개까지 선택 가능합니다.</p>
-						<button type="button" onClick={handleSubmit}>
-							적용
-						</button>
-					</div>
+						</span>
+					))}
+				</div>
+				<div className="submit">
+					<p>최대 3개까지 선택 가능합니다.</p>
+					<button type="button" onClick={handleSubmit}>
+						적용
+					</button>
 				</div>
 			</div>
 		</StyledDistrictSelector>

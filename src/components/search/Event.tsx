@@ -1,7 +1,7 @@
 import React from "react";
 import { FaCalendar, FaMapMarkerAlt, FaTwitter, FaUserCircle } from "react-icons/fa";
 import BiasChip from "../../shared/components/BiasChip";
-import { convertDateWithDots } from "../../shared/utils/dateHandlers";
+import { convertDateToString, convertDateWithDots, isOpenToday } from "../../shared/utils/dateHandlers";
 import { EventType } from "../../types";
 import { StyledEvent } from "./styles/eventStyle";
 
@@ -12,14 +12,23 @@ type EventProps = {
 const Event = ({ event }: EventProps) => {
 	const { images, place, biasesId, organizer, snsId, district, startAt, endAt } = event;
 
+	const today = convertDateToString(new Date());
+	const isDuringEvent = isOpenToday(today, startAt, endAt);
+
 	return (
 		<StyledEvent>
 			<img src={images[0]} alt={place} />
 			<div>
-				<h2>{place}</h2>
-				{biasesId?.map((biasId) => (
-					<BiasChip id={biasId} key={biasId} />
-				))}
+				<div className="title">
+					<h2>{place}</h2>
+					{isDuringEvent && <span />}
+				</div>
+
+				<div className="biases">
+					{biasesId?.map((biasId) => (
+						<BiasChip id={biasId} key={biasId} />
+					))}
+				</div>
 
 				<div className="extraInfo">
 					<p>

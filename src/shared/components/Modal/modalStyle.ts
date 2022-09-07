@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const StyledModalBackground = styled.div`
 	display: block;
@@ -12,7 +12,7 @@ export const StyledModalBackground = styled.div`
 	background-color: rgba(0, 0, 0, 0.4);
 `;
 
-export const StyledModal = styled.div`
+export const StyledModal = styled.div<{ maxWidth: number; minWidth: number }>`
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -21,10 +21,19 @@ export const StyledModal = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 380px;
 	background-color: ${({ theme }) => theme.colors.white};
 	border-radius: 4px;
 	border: 2px solid #000;
+
+	width: 100%;
+	max-width: ${(props) => `${props.maxWidth}px`};
+	min-width: ${(props) => `${props.minWidth}px`};
+
+	${(props) => css`
+		@media all and (max-width: calc(${props.maxWidth}px + 40px)) {
+			max-width: calc(100% - 40px);
+		}
+	`}
 `;
 
 export default {};

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const StyledGoodsChip = styled.span`
   width: fit-content;
+  max-width: 270px;
   height: 30px;
 
   background: ${({ theme }) => theme.colors.white};
@@ -14,6 +15,8 @@ const StyledGoodsChip = styled.span`
   text-align: center;
   padding: 6px 12px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 

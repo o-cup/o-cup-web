@@ -6,6 +6,8 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 	flex-direction: column;
 	width: 100%;
 	max-width: ${({ theme }) => theme.maxWidths.layout};
+	/* min-width: 320px;
+	max-width: 1080px; */
 	z-index: ${({ theme }) => theme.zIndex.header};
 	background: rgba(252, 251, 247, 0.9);
 	backdrop-filter: blur(4px);
@@ -25,42 +27,71 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 			position: absolute;
 			left: 0;
 			right: 0;
-			text-align: center;
+			margin: 0 auto;
+			width: fit-content;
 		}
 
-		> div {
+		> div.rightIcons {
 			display: flex;
 			height: 100%;
 			align-items: center;
-			gap: 10px;
+			gap: 18px;
 		}
 
 		img#logo {
 			height: 56px;
 		}
+	}
+`;
 
-		.date_selector {
-			display: flex;
-			align-items: center;
+export const StyledDateSelector = styled.div`
+	display: flex;
+	align-items: center;
+	cursor: pointer;
 
-			> p {
-				text-align: center;
-				font-weight: 700;
-				font-size: 20px;
-				line-height: 24px;
-				margin-right: 8px;
-				white-space: nowrap;
-			}
+	> p {
+		text-align: center;
+		font-weight: 700;
+		font-size: 20px;
+		line-height: 24px;
+		margin-right: 8px;
+		white-space: nowrap;
+	}
 
-			> button.calendarOpenButton {
-				background: none;
-				outline: none;
+	> button.calendarOpenButton {
+		background: none;
+		outline: none;
 
-				&.active {
-					transform: rotate(180deg);
-				}
-			}
+		&.active {
+			transform: rotate(180deg);
 		}
+	}
+`;
+
+export const StyledHeaderCalendarContainer = styled.div`
+	position: fixed;
+	background: rgba(252, 251, 247, 0.9);
+	z-index: ${({ theme }) => theme.zIndex.header};
+
+	@media ${({ theme }) => theme.device.mobile} {
+		width: 100%;
+		min-width: 320px;
+		max-width: 1080px;
+		top: ${({ theme }) => theme.heights.header};
+
+		backdrop-filter: blur(4px);
+	}
+
+	@media ${({ theme }) => theme.device.desktop} {
+		width: 360px;
+		top: 56px;
+		right: 20px;
+
+		backdrop-filter: blur(20px);
+		border-radius: 8px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+		padding-top: 10px;
 	}
 `;
 

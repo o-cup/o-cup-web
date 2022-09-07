@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useRecoilState } from "recoil";
 import { requestInputsAtom } from "../../../state/atoms";
@@ -11,6 +12,16 @@ type KakaoResult = {
   place_name: string; // "로우앤슬로우"
   road_address_name: string; // "서울 용산구 보광로 126"
 }
+
+const KakaoAxios = axios.create({
+  baseURL: "//dapi.kakao.com",
+  headers: {
+    Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_KEY}`,
+  },
+});
+
+// 법정동 코드 검색
+const bCodeSearch = (params: { query: string }) => KakaoAxios.get("/v2/local/search/address.json", { params });
 
 const PlaceInput = () => {
   const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
@@ -47,22 +58,30 @@ const PlaceInput = () => {
 
   const handleClickSelect = (placeInfo: KakaoResult) => {
     const districtArr = placeInfo.road_address_name.split(" ");
-    setRequestInputs({
-      ...requestInputs,
-      place: {
-        place: placeInfo.place_name,
-        district: `${districtArr[0]} ${districtArr[1]}`,
-        address: placeInfo.road_address_name,
-      },
-    });
-    setKeyword("");
-    setSearchOpen(false);
+    console.log(placeInfo);
+    bCodeSearch({ query: placeInfo.road_address_name })
+      .then((res) => {
+        console.log(res.data)
+        if(res.data) {
+          setRequestInputs({
+            ...requestInputs,
+            place: {
+              place: placeInfo.place_name,
+              district: `${districtArr[0]} ${districtArr[1]}`,
+              newDistrict: { code: res.data.documents[0].address.b_code, name: `${districtArr[0]} ${districtArr[1]}` },
+              address: placeInfo.road_address_name,
+            },
+          });
+          setKeyword("");
+          setSearchOpen(false);
+        }
+      });
   };
 
   return (
     <StyledPlaceInput>
       <SearchInput value={requestInputs.place.place} handleClickSearchBtn={() => setSearchOpen(!isSearchOpen)}
-                   id="place" placeholder="카페이름" label="장소 *" />
+                   id="place" placeholder="장소이름" label="장소 *" />
       {isSearchOpen && <StyledSearchListContainer>
         <div className="inputContainer">
           <input value={keyword} onChange={(e) => setKeyword(e.target.value)} />

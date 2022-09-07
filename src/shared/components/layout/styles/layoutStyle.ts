@@ -9,16 +9,7 @@ const StyledLayout = styled.div`
 	flex-direction: column;
 	align-items: center;
 	background: ${({ theme }) => theme.colors.background};
-
-	max-width: ${({ theme }) => theme.maxWidths.layout};
-
-	/* @media ${({ theme }) => theme.device.mobile} {
-		max-width: 720px;
-	}
-
-	@media ${({ theme }) => theme.device.desktop} {
-		max-width: 1080px;
-	} */
+	max-width: ${({ theme }) => theme.widths.layout};
 `;
 
 const StyledContent = styled.main`
@@ -33,7 +24,7 @@ const StyledFooter = styled.footer`
 	flex-direction: column;
 	padding: 100px 0 50px 0;
 	text-align: center;
-  gap: 12px;
+	gap: 12px;
 
 	> p {
 		font-weight: 500;

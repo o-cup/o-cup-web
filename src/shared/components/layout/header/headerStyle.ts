@@ -4,13 +4,14 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 	position: fixed;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	width: 100%;
-	max-width: ${({ theme }) => theme.maxWidths.layout};
-	/* min-width: 320px;
-	max-width: 1080px; */
 	z-index: ${({ theme }) => theme.zIndex.header};
 	background: rgba(252, 251, 247, 0.9);
 	backdrop-filter: blur(4px);
+
+	max-width: 100vw;
+	box-shadow: ${({ theme }) => theme.style.shadow.header};
 
 	> div#header {
 		display: flex;
@@ -18,8 +19,11 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 		align-items: center;
 		width: 100%;
 		height: ${({ theme }) => theme.heights.header};
-		padding: 0 24px;
+		padding: 5px 20px;
 		position: relative;
+
+		max-width: 900px;
+		width: 100%;
 
 		h1 {
 			font-size: 18px;
@@ -38,8 +42,9 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 			gap: 18px;
 		}
 
-		img#logo {
-			height: 56px;
+		i.search_header {
+			width: 20px;
+			height: 20px;
 		}
 	}
 `;
@@ -52,7 +57,7 @@ export const StyledDateSelector = styled.div`
 	> p {
 		text-align: center;
 		font-weight: 700;
-		font-size: 20px;
+		font-size: 18px;
 		line-height: 24px;
 		margin-right: 8px;
 		white-space: nowrap;

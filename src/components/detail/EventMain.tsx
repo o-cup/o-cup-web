@@ -38,7 +38,7 @@ const EventMain = ({
 	return (
 		<StyledEventMain>
 			<div className="textContainer">
-				<div>
+				<div className="title">
 					<h6>{place}</h6>
 					<div className="chipContainer">
 						{requestedBiases
@@ -48,21 +48,23 @@ const EventMain = ({
 							: biasesId?.map((biasId) => <BiasChip id={biasId} key={biasId} />)}
 					</div>
 				</div>
-				<p>
-					<img src="/images/icons/host.png" alt="host"/>
-					{organizer}
-				</p>
-				<p>
-					<FaTwitter />@{snsId}
-				</p>
-				<p>
-					<img src="/images/icons/place.png" alt="place"/>
-					{address}
-				</p>
-				<p>
-					<img src="/images/icons/calendar.png" alt="calendar"/>
-					{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
-				</p>
+				<div className="mainInfo">
+					<p>
+						<img src="/images/icons/host.png" alt="host" />
+						{organizer}
+					</p>
+					<p>
+						<FaTwitter />@{snsId}
+					</p>
+					<p>
+						<img src="/images/icons/place.png" alt="place" />
+						{address}
+					</p>
+					<p>
+						<img src="/images/icons/calendar.png" alt="calendar" />
+						{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
+					</p>
+				</div>
 			</div>
 			{images && images.length > 0 && (
 				<div className="imgContainer">
@@ -86,7 +88,8 @@ const EventMain = ({
 							adaptiveHeight={false}
 							customPaging={customPaging}
 						>
-							{images?.length && images?.map((img) => <img alt={img} src={img} key={img} onError={imageOnErrorHandler} />)}
+							{images?.length &&
+								images?.map((img) => <img alt={img} src={img} key={img} onError={imageOnErrorHandler} />)}
 						</Slider>
 					)}
 				</div>

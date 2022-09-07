@@ -24,30 +24,36 @@ const EventListItem = ({ event }: EventListItemProps) => {
 
 	return (
 		<StyledItem onClick={() => navigate(`/detail/${id}`)}>
-			<div>
-				<LazyLoadImage wrapperClassName="lazy-image"
-					alt={images[0]} src={images[0]} effect="blur"
-					onError={imageOnErrorHandler}/>
+			<div className="imgContainer">
+				<LazyLoadImage
+					wrapperClassName="lazy-image"
+					alt={images[0]}
+					src={images[0]}
+					effect="blur"
+					onError={imageOnErrorHandler}
+				/>
 			</div>
-			<div>
+			<div className="title">
 				<h6>{place}</h6>
-				<BiasChip id={biasesId[0]} key={biasesId[0]} dots={biasesId.length > 1}/>
+				<BiasChip id={biasesId[0]} key={biasesId[0]} dots={biasesId.length > 1} />
 			</div>
-			<p>
-				<img src="/images/icons/host_gray.png" alt="host"/>
-				{organizer}
-			</p>
-			<p>
-				<FaTwitter />@{snsId}
-			</p>
-			<p>
-				<img src="/images/icons/place_gray.png" alt="place"/>
-				{district}
-			</p>
-			<p>
-				<img src="/images/icons/calendar_gray.png" alt="calendar"/>
-				{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
-			</p>
+			<div className="textContainer">
+				<p>
+					<img src="/images/icons/host_gray.png" alt="host" />
+					{organizer}
+				</p>
+				<p>
+					<FaTwitter />@{snsId}
+				</p>
+				<p>
+					<img src="/images/icons/place_gray.png" alt="place" />
+					{district}
+				</p>
+				<p>
+					<img src="/images/icons/calendar_gray.png" alt="calendar" />
+					{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
+				</p>
+			</div>
 		</StyledItem>
 	);
 };

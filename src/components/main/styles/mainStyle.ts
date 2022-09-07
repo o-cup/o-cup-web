@@ -13,9 +13,11 @@ const StyledBiasList = styled.ul`
 	overflow-y: hidden;
 	-ms-overflow-style: none;
 	scrollbar-width: none;
-	height: 124px;
+	height: 100px;
 	align-items: center;
-	padding: 12px 0;
+	margin-top: 20px;
+	padding-left: 20px;
+	gap: 24px;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -23,30 +25,29 @@ const StyledBiasList = styled.ul`
 `;
 
 const StyledBias = styled.li`
-	margin: 0 12px;
 	opacity: 0.5;
 	cursor: pointer;
 	position: relative;
 	z-index: 1;
 
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+
 	&.active {
 		opacity: 1;
 	}
 
-	&:first-child {
-		margin-left: 24px;
-	}
-
-	&:last-child {
-		margin-right: 24px;
-	}
-
 	> div {
 		position: relative;
-		width: 72px;
-		height: 72px;
+		width: 65px;
+		height: 65px;
 		background: ${({ theme }) => theme.colors.primary};
 		border-radius: 50%;
+		box-shadow: 3px 3px 0 #000000;
 
 		> img {
 			width: 100%;
@@ -67,23 +68,10 @@ const StyledBias = styled.li`
 		}
 	}
 
-	&:after {
-		content: "";
-		width: 72px;
-		height: 72px;
-		background: ${({ theme }) => theme.colors.black};
-		border-radius: 50%;
-		position: absolute;
-		z-index: -1;
-		top: 3px;
-		left: 3px;
-	}
-
 	> p {
 		text-align: center;
 		font-size: 14px;
 		line-height: 16px;
-		margin-top: 8px;
 	}
 `;
 
@@ -113,40 +101,34 @@ const StyledItem = styled.li`
 	box-shadow: 4px 4px 0 #000000;
 	cursor: pointer;
 
-	/* @media ${({ theme }) => theme.device.mobile} {
-		margin-bottom: 24px;
-	}
-
-	@media ${({ theme }) => theme.device.desktop} {
-		margin-bottom: 4px;
-	} */
-
-	> div {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding-bottom: 12px;
-
+	.imgContainer {
 		> .lazy-image {
 			width: 100%;
-			height: 270px;
+			height: 350px;
 
 			img {
 				width: 100%;
-				height: 270px;
+				height: 350px;
 				object-fit: cover;
-				object-position: top;
+				object-position: 90% 10%;
+				vertical-align: bottom;
 			}
 
-			/* Error image */
 			img.error {
-				object-position: center;
+				object-position: top;
 			}
 		}
+	}
+
+	.title {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 50px;
 
 		> h6 {
 			font-size: 20px;
-			line-height: 28px;
+			line-height: 50px;
 			font-weight: 700;
 			white-space: nowrap;
 			overflow: hidden;
@@ -154,26 +136,28 @@ const StyledItem = styled.li`
 		}
 	}
 
-	> p {
-		color: ${({ theme }) => theme.colors.gray};
-		font-size: 14px;
-		line-height: 20px;
-		font-weight: 400;
+	.textContainer {
 		display: flex;
-		align-items: center;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+		flex-direction: column;
+		gap: 5px;
 
-		> img,
-		> svg {
-			margin-right: 4px;
-			width: 14px;
-			min-width: 14px;
+		> p {
+			color: ${({ theme }) => theme.colors.gray};
+			font-size: 14px;
+			line-height: 20px;
+			font-weight: 400;
+			display: flex;
+			align-items: center;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 
-		&:not(:last-child) {
-			margin-bottom: 8px;
+		img,
+		svg {
+			margin-right: 8px;
+			width: 16px;
+			min-width: 14px;
 		}
 	}
 `;

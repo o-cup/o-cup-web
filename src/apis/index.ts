@@ -131,14 +131,31 @@ const uploadPoster = async (file: any) => {
  * @param {string} id
  * @returns {EventType}
  */
-const fetchDuplicatedEvent = async ({ place, dateRange }: { place?: string, dateRange: {startAt: string, endAt: string} }) => {
-	const { data, error } = await supabase.from("events").select("*")
-		.match({place, startAt:dateRange.startAt, endAt: dateRange.endAt});
+const fetchDuplicatedEvent = async ({
+	place,
+	dateRange,
+}: {
+	place?: string;
+	dateRange: { startAt: string; endAt: string };
+}) => {
+	const { data, error } = await supabase
+		.from("events")
+		.select("*")
+		.match({ place, startAt: dateRange.startAt, endAt: dateRange.endAt });
 	if (error) {
 		throw new Error(`${error.message}: ${error.details}`);
 	}
 	return data?.[0];
 };
 
-export { fetchEvents, fetchEventDetail, fetchPeople, insertEvent, insertDetail, fetchBiases, uploadPoster, fetchDuplicatedEvent };
+export {
+	fetchEvents,
+	fetchEventDetail,
+	fetchPeople,
+	insertEvent,
+	insertDetail,
+	fetchBiases,
+	uploadPoster,
+	fetchDuplicatedEvent,
+};
 export default {};

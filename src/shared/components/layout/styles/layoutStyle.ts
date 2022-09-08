@@ -7,19 +7,15 @@ const StyledLayout = styled.div`
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	background: ${({ theme }) => theme.colors.background};
+	max-width: ${({ theme }) => theme.widths.layout};
+	box-shadow: ${({ theme }) => theme.style.shadow.default};
+`;
 
-	main {
-		padding-top: ${({ theme }) => theme.heights.header};
-	}
-
-	@media ${({ theme }) => theme.device.mobile} {
-		max-width: 720px;
-	}
-
-	@media ${({ theme }) => theme.device.desktop} {
-		max-width: 1080px;
-	}
+const StyledContent = styled.main`
+	width: 100%;
+	padding-top: ${({ theme }) => theme.heights.header};
 `;
 
 const StyledFooter = styled.footer`
@@ -29,7 +25,7 @@ const StyledFooter = styled.footer`
 	flex-direction: column;
 	padding: 100px 0 50px 0;
 	text-align: center;
-  gap: 12px;
+	gap: 12px;
 
 	> p {
 		font-weight: 500;
@@ -39,5 +35,5 @@ const StyledFooter = styled.footer`
 	}
 `;
 
-export { StyledLayout, StyledFooter };
+export { StyledLayout, StyledContent, StyledFooter };
 export default {};

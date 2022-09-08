@@ -9,8 +9,8 @@ export const StyledIcon = styled.i`
 		display: flex;
 		background: url("/images/logo_primary.png") no-repeat;
 		background-size: contain;
-		height: 56px;
-		width: 75px;
+		width: 65px;
+		height: 100%;
 	}
 
 	&.plus-circle {
@@ -67,9 +67,9 @@ export const StyledIcon = styled.i`
 		background-size: contain;
 		height: 20px;
 		width: 20px;
-	}	
-  
-  &.search_header {
+	}
+
+	&.search_header {
 		display: flex;
 		background: url("/images/icons/search.png") no-repeat;
 		background-size: contain;
@@ -77,13 +77,13 @@ export const StyledIcon = styled.i`
 		width: 24px;
 	}
 
-  &.search_main {
-    display: flex;
-    background: url("/images/icons/search.png") no-repeat;
-    background-size: contain;
-    height: 36px;
-    width: 36px;
-  }
+	&.search_main {
+		display: flex;
+		background: url("/images/icons/search.png") no-repeat;
+		background-size: contain;
+		height: 36px;
+		width: 36px;
+	}
 
 	&.sort {
 		display: flex;

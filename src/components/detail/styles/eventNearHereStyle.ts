@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 const StyledEventNearHere = styled.div`
-	padding: 64px 0 32px;
+	margin-top: 40px;
 	width: 100%;
+	padding-left: 12px;
 
 	> h4 {
-		padding: 0 20px;
 		font-weight: 700;
 		font-size: 20px;
 		line-height: 27px;
@@ -18,23 +18,23 @@ const StyledEventNearHere = styled.div`
 		overflow-y: hidden;
 		-ms-overflow-style: none;
 		scrollbar-width: none;
-		margin: 14px 0;
+		gap: 20px;
 
 		&::-webkit-scrollbar {
 			display: none;
 		}
-    
-    &::after {
-      content: "";
-      border-right: 20px solid transparent;
-    }
+
+		&::after {
+			content: "";
+			border-right: 20px solid transparent;
+		}
 	}
 `;
 
 const EventNearHereList = styled.li`
 	background: ${({ theme }) => theme.colors.white};
 	border: 2px solid #000000;
-	margin-right: 20px;
+	/* margin-right: 20px; */
 	margin-bottom: 4px;
 	position: relative;
 	box-shadow: 4px 4px 0 #000000;
@@ -42,14 +42,6 @@ const EventNearHereList = styled.li`
 	min-width: 120px;
 	width: 120px;
 	cursor: pointer;
-
-	&:first-child {
-		margin-left: 20px;
-	}
-
-  &:last-child {
-    margin-right: 0;
-  }
 
 	> img {
 		width: 100%;

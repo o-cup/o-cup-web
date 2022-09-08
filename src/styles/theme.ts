@@ -10,7 +10,7 @@ const theme: DefaultTheme = {
 		background: "#fcfbf7",
 		white: "#fff",
 		black: "#000",
-		gray: "#7a7a7a",
+		gray: "#6a6a6a",
 		red: "#CF0000",
 	},
 	device: {
@@ -18,10 +18,15 @@ const theme: DefaultTheme = {
 		desktop: "screen and (min-width: 721px)",
 	},
 	style: {
-		shadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+		shadow: {
+			default: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+		},
+	},
+	widths: {
+		layout: "480px",
 	},
 	heights: {
-		header: "76px",
+		header: "60px",
 	},
 	zIndex: {
 		imageCarousel: 9,

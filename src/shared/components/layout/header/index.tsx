@@ -43,30 +43,27 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	};
 
 	return (
-		<>
-			<StyledHeader mainPage={mainPage}>
-				<div id="header">
-					{page !== "main" ? (
-						<Icon name="arrow-left" handleClick={handleBackClick || (() => navigate(-1))} />
-					) : (
-						<Icon name="logo" handleClick={handleLogoClick} />
-					)}
+		<StyledHeader mainPage={mainPage}>
+			<div id="header">
+				{page !== "main" ? (
+					<Icon name="arrow-left" handleClick={handleBackClick || (() => navigate(-1))} />
+				) : (
+					<Icon name="logo" handleClick={handleLogoClick} />
+				)}
 
-					{page && <h1>{titles[page]}</h1>}
-					<div className="rightIcons">
-						{mainPage && <DateSelector isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen} />}
-						{(mainPage || page === "detail") && <Icon name="search_header" handleClick={() => navigate("/search")} />}
-						{share && (
-							<Share>
-								<Icon name="share" handleClick={shareTwitter} />
-								<span className="tooltip">트위터에 공유하기</span>
-							</Share>
-						)}
-					</div>
+				{page && <h1>{titles[page]}</h1>}
+				<div className="rightIcons">
+					{mainPage && <DateSelector isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen} />}
+					{(mainPage || page === "detail") && <Icon name="search_header" handleClick={() => navigate("/search")} />}
+					{share && (
+						<Share>
+							<Icon name="share" handleClick={shareTwitter} />
+							<span className="tooltip">트위터에 공유하기</span>
+						</Share>
+					)}
 				</div>
-			</StyledHeader>
-			{isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}
-		</>
+			</div>
+		</StyledHeader>
 	);
 };
 

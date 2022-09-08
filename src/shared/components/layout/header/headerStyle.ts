@@ -28,6 +28,8 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 		max-width: 900px;
 		width: 100%;
 
+		position: relative;
+
 		h1 {
 			font-size: 18px;
 			font-weight: bold;
@@ -56,6 +58,7 @@ export const StyledDateSelector = styled.div`
 	display: flex;
 	align-items: center;
 	cursor: pointer;
+	position: relative;
 
 	> p {
 		text-align: center;
@@ -77,7 +80,7 @@ export const StyledDateSelector = styled.div`
 `;
 
 export const StyledHeaderCalendarContainer = styled.div`
-	position: fixed;
+	position: absolute;
 	background: rgba(252, 251, 247, 0.9);
 	z-index: ${({ theme }) => theme.zIndex.header};
 
@@ -92,8 +95,8 @@ export const StyledHeaderCalendarContainer = styled.div`
 
 	@media ${({ theme }) => theme.device.desktop} {
 		width: 360px;
-		top: 56px;
-		right: 20px;
+		right: 0;
+		top: 50px;
 
 		backdrop-filter: blur(20px);
 		border-radius: 8px;

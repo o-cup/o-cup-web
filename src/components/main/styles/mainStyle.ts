@@ -13,7 +13,7 @@ const StyledBiasList = styled.ul`
 	overflow-y: hidden;
 	-ms-overflow-style: none;
 	scrollbar-width: none;
-	height: 120px;
+	height: 110px;
 	align-items: center;
 	margin-top: 20px;
 	padding: 0 20px;
@@ -29,13 +29,12 @@ const StyledBias = styled.li`
 	cursor: pointer;
 	position: relative;
 	z-index: 1;
-
 	height: 100%;
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-between;
+	padding: 10px 0;
 
 	&.active {
 		opacity: 1;
@@ -71,7 +70,7 @@ const StyledBias = styled.li`
 	> p {
 		text-align: center;
 		font-size: 14px;
-		line-height: 16px;
+		line-height: 14px;
 	}
 `;
 

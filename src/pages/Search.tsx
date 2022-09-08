@@ -75,7 +75,7 @@ const Search = () => {
 	};
 
 	return (
-		<Layout page="search" share={!!viewResult} handleBackClick={searched ? handleBackClick : undefined}>
+		<Layout page="search" handleBackClick={searched ? handleBackClick : undefined}>
 			<StyledSearch>
 				<div className="input">
 					<SearchInput

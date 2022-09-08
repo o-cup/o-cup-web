@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import DateSelector from "./DateSelector";
 import Icon from "../../Icon/Icons";
@@ -28,7 +28,19 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const location = useLocation();
 
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
+	const [isTooltipOpen, setIsTooltipOpen] = useState(true);
 	const mainPage = page === "main";
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setIsTooltipOpen(false);
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
 
 	const shareTwitter = () => {
 		const sendText = "오늘의 컵홀더"; // 전달할 텍스트
@@ -57,7 +69,7 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 					{share && (
 						<Share>
 							<Icon name="share" handleClick={shareTwitter} />
-							<span className="tooltip">트위터에 공유하기</span>
+							{isTooltipOpen && <span className="tooltip">트위터에 공유하기</span>}
 						</Share>
 					)}
 				</div>

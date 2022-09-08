@@ -80,20 +80,24 @@ export const StyledDateSelector = styled.div`
 `;
 
 export const StyledHeaderCalendarContainer = styled.div`
-	position: absolute;
 	background: rgba(252, 251, 247, 0.9);
 	z-index: ${({ theme }) => theme.zIndex.header};
 
 	@media ${({ theme }) => theme.device.mobile} {
+		position: fixed;
+
 		width: 100%;
 		min-width: 320px;
 		max-width: 1080px;
 		top: ${({ theme }) => theme.heights.header};
+		left: 0;
 
 		backdrop-filter: blur(4px);
 	}
 
 	@media ${({ theme }) => theme.device.desktop} {
+		position: absolute;
+
 		width: 360px;
 		right: 0;
 		top: 50px;

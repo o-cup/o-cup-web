@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import DateSelector from "./DateSelector";
-import HeaderCalendar from "./HeaderCalendar";
 import Icon from "../../Icon/Icons";
 import { Share, StyledHeader } from "./headerStyle";
 

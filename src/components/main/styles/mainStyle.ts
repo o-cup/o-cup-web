@@ -15,7 +15,7 @@ const StyledBiasList = styled.ul`
 	scrollbar-width: none;
 	height: 110px;
 	align-items: center;
-	margin-top: 20px;
+	margin-top: 10px;
 	padding: 0 20px;
 	gap: 24px;
 
@@ -80,7 +80,7 @@ const StyledList = styled.ul`
 	padding: 0 20px;
 	gap: 20px;
 
-	@media screen and (min-width: 721px) and (max-width: 1000px) {
+	/* @media screen and (min-width: 721px) and (max-width: 1000px) {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 20px;
@@ -89,7 +89,7 @@ const StyledList = styled.ul`
 		> div {
 			width: calc(33% - 12px);
 		}
-	}
+	} */
 `;
 
 const StyledItem = styled.li`

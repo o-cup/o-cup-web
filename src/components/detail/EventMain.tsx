@@ -3,7 +3,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { FaTwitter } from "react-icons/fa";
 import { EventType, DetailType } from "../../types";
 import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { StyledEventMain } from "./styles/eventMainStyle";

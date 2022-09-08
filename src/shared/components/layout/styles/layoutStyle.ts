@@ -10,6 +10,7 @@ const StyledLayout = styled.div`
 	align-items: center;
 	background: ${({ theme }) => theme.colors.background};
 	max-width: ${({ theme }) => theme.widths.layout};
+	box-shadow: ${({ theme }) => theme.style.shadow.default};
 `;
 
 const StyledContent = styled.main`

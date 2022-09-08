@@ -29,7 +29,7 @@ const EventList = () => {
 		}
 		const biasSet = new Set(biasArr);
 		setOpenedBias(Array.from(biasSet));
-	}, [events]);
+	}, [events, setOpenedBias]);
 
 	/** 이벤트 목록에 인물 필터 적용 */
 	useEffect(() => {

@@ -11,10 +11,7 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 	backdrop-filter: blur(4px);
 
 	max-width: 100vw;
-
-	@media ${({ theme }) => theme.device.desktop} {
-		box-shadow: ${({ theme }) => theme.style.shadow.header};
-	}
+	max-width: ${({ theme }) => theme.widths.layout};
 
 	> div#header {
 		display: flex;
@@ -83,19 +80,17 @@ export const StyledHeaderCalendarContainer = styled.div`
 	background: rgba(252, 251, 247, 0.9);
 	z-index: ${({ theme }) => theme.zIndex.header};
 
-	@media ${({ theme }) => theme.device.mobile} {
-		position: fixed;
+	position: fixed;
 
-		width: 100%;
-		min-width: 320px;
-		max-width: 1080px;
-		top: ${({ theme }) => theme.heights.header};
-		left: 0;
+	width: 100%;
+	min-width: 320px;
+	max-width: 1080px;
+	top: ${({ theme }) => theme.heights.header};
+	left: 0;
 
-		backdrop-filter: blur(4px);
-	}
+	backdrop-filter: blur(4px);
 
-	@media ${({ theme }) => theme.device.desktop} {
+	/* @media ${({ theme }) => theme.device.desktop} {
 		position: absolute;
 
 		width: 360px;
@@ -107,7 +102,7 @@ export const StyledHeaderCalendarContainer = styled.div`
 		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 
 		padding-top: 10px;
-	}
+	} */
 `;
 
 export const Share = styled.div`

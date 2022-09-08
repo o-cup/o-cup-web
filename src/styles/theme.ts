@@ -10,7 +10,7 @@ const theme: DefaultTheme = {
 		background: "#fcfbf7",
 		white: "#fff",
 		black: "#000",
-		gray: "#7a7a7a",
+		gray: "#6a6a6a",
 		red: "#CF0000",
 	},
 	device: {

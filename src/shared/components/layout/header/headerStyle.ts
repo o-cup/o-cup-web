@@ -11,7 +11,10 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 	backdrop-filter: blur(4px);
 
 	max-width: 100vw;
-	box-shadow: ${({ theme }) => theme.style.shadow.header};
+
+	@media ${({ theme }) => theme.device.desktop} {
+		box-shadow: ${({ theme }) => theme.style.shadow.header};
+	}
 
 	> div#header {
 		display: flex;

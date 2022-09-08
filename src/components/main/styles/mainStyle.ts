@@ -13,10 +13,10 @@ const StyledBiasList = styled.ul`
 	overflow-y: hidden;
 	-ms-overflow-style: none;
 	scrollbar-width: none;
-	height: 100px;
+	height: 120px;
 	align-items: center;
 	margin-top: 20px;
-	padding-left: 20px;
+	padding: 0 20px;
 	gap: 24px;
 
 	&::-webkit-scrollbar {
@@ -104,11 +104,11 @@ const StyledItem = styled.li`
 	.imgContainer {
 		> .lazy-image {
 			width: 100%;
-			height: 350px;
+			height: 270px;
 
 			img {
 				width: 100%;
-				height: 350px;
+				height: 270px;
 				object-fit: cover;
 				object-position: 90% 10%;
 				vertical-align: bottom;

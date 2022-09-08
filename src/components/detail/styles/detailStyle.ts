@@ -32,7 +32,7 @@ const StyledDetail = styled.div`
 	.subInfo {
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
+		gap: 40px;
 	}
 `;
 

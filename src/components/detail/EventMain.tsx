@@ -54,9 +54,6 @@ const EventMain = ({
 						{organizer}
 					</p>
 					<p>
-						<FaTwitter />@{snsId}
-					</p>
-					<p>
 						<img src="/images/icons/place.png" alt="place" />
 						{address}
 					</p>

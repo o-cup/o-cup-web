@@ -19,7 +19,7 @@ export const StyledEvent = styled.div`
 	}
 
 	img {
-		width: 110px;
+		min-width: 110px;
 		height: 100%;
 		object-fit: cover;
 	}

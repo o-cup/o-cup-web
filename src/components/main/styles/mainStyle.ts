@@ -152,11 +152,10 @@ const StyledItem = styled.li`
 			text-overflow: ellipsis;
 		}
 
-		img,
+		i,
 		svg {
 			margin-right: 8px;
 			width: 16px;
-			min-width: 14px;
 		}
 	}
 `;

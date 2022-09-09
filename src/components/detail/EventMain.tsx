@@ -4,11 +4,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { EventType, DetailType } from "../../types";
-import { convertDateWithDots } from "../../shared/utils/dateHandlers";
+import { convertDateToString, convertDateWithDots, isOpenToday } from "../../shared/utils/dateHandlers";
 import { StyledEventMain } from "./styles/eventMainStyle";
 import { StyledBiasChip } from "../../shared/components/BiasChip/biasChipStyle";
 import BiasChip from "../../shared/components/BiasChip";
 import { DEFAULT_POSTER_URL } from "../../shared/constants";
+import { Icon } from "../../shared/components";
 
 type EventMainProps = Partial<EventType> & Partial<DetailType>;
 
@@ -16,13 +17,17 @@ const EventMain = ({
 	place,
 	biasesId,
 	organizer,
-	snsId,
 	startAt,
 	endAt,
 	address,
 	images,
 	requestedBiases,
 }: EventMainProps) => {
+	const today = convertDateToString(new Date());
+
+	if (!startAt || !endAt) return null;
+	const isDuringEvent = isOpenToday(today, startAt, endAt);
+
 	const customPaging = (i: number) => (
 		<span>
 			{i + 1} / {images?.length}
@@ -49,16 +54,22 @@ const EventMain = ({
 				</div>
 				<div className="mainInfo">
 					<p>
-						<img src="/images/icons/host.png" alt="host" />
+						<Icon name="host" />
 						{organizer}
 					</p>
 					<p>
-						<img src="/images/icons/place.png" alt="place" />
+						<Icon name="place" />
 						{address}
 					</p>
 					<p>
-						<img src="/images/icons/calendar.png" alt="calendar" />
+						<Icon name="calendar" />
 						{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
+						{isDuringEvent && (
+							<span>
+								<i />
+								EVENT DAY!
+							</span>
+						)}
 					</p>
 				</div>
 			</div>

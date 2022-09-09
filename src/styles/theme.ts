@@ -12,6 +12,7 @@ const theme: DefaultTheme = {
 		black: "#000",
 		gray: "#6a6a6a",
 		red: "#CF0000",
+		eventDay: "#5eff50",
 	},
 	device: {
 		mobile: "screen and (max-width: 720px)",

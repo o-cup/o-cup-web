@@ -89,3 +89,6 @@ export type RegCodeItem = {
 	name: string;
 	selected?: boolean;
 };
+
+export type SearchSortOptions = "alphabetAsc" | "birthdayAsc" | "birthdayDsc";
+export type ResultSortOptions = "dateAsc" | "dateDsc" | "alphabetAsc";

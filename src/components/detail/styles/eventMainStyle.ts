@@ -48,16 +48,28 @@ const StyledEventMain = styled.div`
 				overflow: hidden;
 				text-overflow: ellipsis;
 
-				> img,
-				> svg {
+				i {
 					margin-right: 8px;
-					width: 16px;
-					min-width: 16px;
 				}
 
-				/* &:not(:last-child) {
-          margin-bottom: 8px;
-        } */
+				span {
+					display: flex;
+					align-items: center;
+					margin-left: 8px;
+
+					font-size: 10px;
+					color: #19ca09;
+
+					> i {
+						width: 10px;
+						height: 10px;
+						background-color: ${({ theme }) => theme.colors.eventDay};
+						display: inline-block;
+						border-radius: 50%;
+
+						margin-right: 3px;
+					}
+				}
 			}
 		}
 	}

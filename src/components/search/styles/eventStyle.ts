@@ -28,13 +28,12 @@ export const StyledEvent = styled.div`
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
-
 		width: 100%;
 
 		.title {
 			display: flex;
 			justify-content: space-between;
-			align-items: center;
+			align-items: flex-start;
 
 			h2 {
 				font-size: 18px;
@@ -42,12 +41,13 @@ export const StyledEvent = styled.div`
 				line-height: 25px;
 			}
 
-			span {
-				width: 12px;
-				height: 12px;
-				background-color: #5eff50;
+			i {
+				width: 10px;
+				height: 10px;
+				background-color: ${({ theme }) => theme.colors.eventDay};
 				display: inline-block;
 				border-radius: 50%;
+				margin-top: 3px;
 			}
 		}
 

@@ -24,7 +24,7 @@ const Event = ({ event }: EventProps) => {
 			<div>
 				<div className="title">
 					<h2>{place}</h2>
-					{isDuringEvent && <span />}
+					{isDuringEvent && <i />}
 				</div>
 
 				<div className="biases">

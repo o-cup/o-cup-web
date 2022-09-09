@@ -93,7 +93,6 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 			<div className="menu">
 				<p>{`검색 결과 총 ${events?.length || 0}개`}</p>
 				<div className="icons">
-					{/* <Icon name="place " /> */}
 					<FilterIcon
 						isOpened={filterOpen}
 						setIsOpened={setFilterOpen}

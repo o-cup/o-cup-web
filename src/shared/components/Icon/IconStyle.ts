@@ -5,6 +5,8 @@ export const StyledIcon = styled.i`
 	width: 24px;
 	height: 24px;
 
+	display: inline-block;
+
 	&.logo {
 		display: flex;
 		background: url("/images/logo_primary.png") no-repeat;
@@ -149,6 +151,27 @@ export const StyledIcon = styled.i`
 	&.reset {
 		display: flex;
 		background: url("/images/icons/reset.png") no-repeat;
+		background-size: contain;
+	}
+
+	&.host-gray {
+		background: url("/images/icons/host_gray.png") no-repeat;
+		width: 14px;
+		height: 14px;
+		background-size: contain;
+	}
+
+	&.place-gray {
+		background: url("/images/icons/place_gray.png") no-repeat;
+		width: 14px;
+		height: 14px;
+		background-size: contain;
+	}
+
+	&.calendar-gray {
+		background: url("/images/icons/calendar_gray.png") no-repeat;
+		width: 14px;
+		height: 14px;
 		background-size: contain;
 	}
 `;

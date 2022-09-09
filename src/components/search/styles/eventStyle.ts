@@ -66,8 +66,9 @@ export const StyledEvent = styled.div`
 				font-size: 13px;
 				color: ${({ theme }) => theme.colors.gray};
 
+				i,
 				svg {
-					margin-right: 5px;
+					margin-right: 8px;
 				}
 			}
 

@@ -8,6 +8,7 @@ import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { StyledItem } from "./styles/mainStyle";
 import BiasChip from "../../shared/components/BiasChip";
 import { DEFAULT_POSTER_URL } from "../../shared/constants";
+import { Icon } from "../../shared/components";
 
 type EventListItemProps = {
 	event: EventType;
@@ -39,18 +40,18 @@ const EventListItem = ({ event }: EventListItemProps) => {
 			</div>
 			<div className="textContainer">
 				<p>
-					<img src="/images/icons/host_gray.png" alt="host" />
+					<Icon name="host-gray" />
 					{organizer}
 				</p>
 				<p>
 					<FaTwitter />@{snsId}
 				</p>
 				<p>
-					<img src="/images/icons/place_gray.png" alt="place" />
+					<Icon name="place-gray" />
 					{district}
 				</p>
 				<p>
-					<img src="/images/icons/calendar_gray.png" alt="calendar" />
+					<Icon name="calendar-gray" />
 					{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
 				</p>
 			</div>

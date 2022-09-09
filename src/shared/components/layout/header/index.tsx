@@ -66,7 +66,14 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 			<StyledHeader mainPage={mainPage}>
 				<div id="header">
 					{page !== "main" ? (
-						<Icon name="arrow-left" handleClick={handleBackClick || (() => navigate(-1))} />
+						<Icon name="arrow-left"
+									handleClick={handleBackClick ? handleBackClick : () => {
+                    if (window.history.state && window.history.state.idx > 0) {
+                      navigate(-1);
+                    } else {
+                      navigate("/"); // 히스토리가 없으면 메인 페이지로
+                    }
+                  }} />
 					) : (
 						<Icon name="logo" handleClick={handleLogoClick} />
 					)}

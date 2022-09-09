@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import { StyledResult } from "./styles/resultStyle";
@@ -29,6 +30,8 @@ type ChipType = {
 };
 
 const Result = ({ keyword, biasId }: ResultProps) => {
+	const navigate = useNavigate();
+
 	const [dateRange, setDateRange] = useRecoilState(dateRangeAtom);
 	const { startDate, endDate } = dateRange;
 	const [districts, setDistricts] = useRecoilState(districtAtom);
@@ -127,7 +130,8 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 
 			<div className="request">
 				<p>찾고 있는 이벤트가 없나요?</p>
-				<Button customStyle={{ fontWeight: "bold", width: "178px", height: "50px" }}>이벤트 등록하기</Button>
+				<Button customStyle={{ fontWeight: "bold", width: "178px", height: "50px" }}
+					      handleClick={() => navigate("/request")}>이벤트 등록하기</Button>
 			</div>
 
 			{isModalOpen && (

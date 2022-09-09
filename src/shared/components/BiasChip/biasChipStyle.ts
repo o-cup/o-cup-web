@@ -10,6 +10,7 @@ const StyledBiasChip = styled.span`
 	border-radius: 24px;
 	white-space: nowrap;
 	width: fit-content;
+	height: 26px;
 `;
 
 export { StyledBiasChip };

@@ -8,11 +8,12 @@ type LayoutProps = {
 	children: JSX.Element;
 	page: string;
 	share?: boolean;
+	handleBackClick?: () => void;
 };
 
-const Layout: React.FC<LayoutProps> = ({ children, page, share }) => (
+const Layout: React.FC<LayoutProps> = ({ children, page, share, handleBackClick }) => (
 	<StyledLayout>
-		<Header page={page} share={share} />
+		<Header page={page} share={share} handleBackClick={handleBackClick} />
 		<Content>{children}</Content>
 		<Footer />
 	</StyledLayout>
@@ -20,6 +21,7 @@ const Layout: React.FC<LayoutProps> = ({ children, page, share }) => (
 
 Layout.defaultProps = {
 	share: false,
+	handleBackClick: undefined,
 };
 
 export default Layout;

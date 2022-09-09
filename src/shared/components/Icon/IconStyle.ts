@@ -4,13 +4,14 @@ export const StyledIcon = styled.i`
 	cursor: pointer;
 	width: 24px;
 	height: 24px;
+	display: inline-block;
 
 	&.logo {
 		display: flex;
 		background: url("/images/logo_primary.png") no-repeat;
 		background-size: contain;
-		height: 56px;
-		width: 75px;
+		width: 65px;
+		height: 100%;
 	}
 
 	&.plus-circle {
@@ -67,14 +68,22 @@ export const StyledIcon = styled.i`
 		background-size: contain;
 		height: 20px;
 		width: 20px;
-	}	
-  
-  &.search_header {
+	}
+
+	&.search_header {
 		display: flex;
 		background: url("/images/icons/search.png") no-repeat;
 		background-size: contain;
 		height: 24px;
 		width: 24px;
+	}
+
+	&.search_main {
+		display: flex;
+		background: url("/images/icons/search.png") no-repeat;
+		background-size: contain;
+		height: 36px;
+		width: 36px;
 	}
 
 	&.sort {
@@ -141,6 +150,51 @@ export const StyledIcon = styled.i`
 	&.reset {
 		display: flex;
 		background: url("/images/icons/reset.png") no-repeat;
+		background-size: contain;
+	}
+
+	&.host {
+		background: url("/images/icons/host.png") no-repeat;
+		width: 16px;
+		min-width: 16px;
+		height: 16px;
+		background-size: contain;
+	}
+
+	&.host-gray {
+		background: url("/images/icons/host_gray.png") no-repeat;
+		width: 14px;
+		height: 14px;
+		background-size: contain;
+	}
+
+	&.place {
+		background: url("/images/icons/place.png") no-repeat;
+		width: 16px;
+		min-width: 16px;
+		height: 16px;
+		background-size: contain;
+	}
+
+	&.place-gray {
+		background: url("/images/icons/place_gray.png") no-repeat;
+		width: 14px;
+		height: 14px;
+		background-size: contain;
+	}
+
+	&.calendar {
+		background: url("/images/icons/calendar.png") no-repeat;
+		width: 16px;
+		min-width: 16px;
+		height: 16px;
+		background-size: contain;
+	}
+
+	&.calendar-gray {
+		background: url("/images/icons/calendar_gray.png") no-repeat;
+		width: 14px;
+		height: 14px;
 		background-size: contain;
 	}
 `;

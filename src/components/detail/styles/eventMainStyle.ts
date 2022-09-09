@@ -2,20 +2,17 @@ import styled from "styled-components";
 
 const StyledEventMain = styled.div`
 	position: relative;
-	padding-top: 18px;
-	padding-bottom: 18px;
 
 	.textContainer {
 		background: ${({ theme }) => theme.colors.white};
 		border: 2px solid #000000;
 		padding: 16px 16px 68px;
-		margin-left: 14px;
 		margin-right: 40px;
-		margin-bottom: 20px;
+		margin-bottom: 15px;
 		position: relative;
 		box-shadow: 6px 6px 0 #000000;
 
-		> div {
+		.title {
 			display: flex;
 			justify-content: space-between;
 			align-items: flex-start;
@@ -26,41 +23,60 @@ const StyledEventMain = styled.div`
 				line-height: 32px;
 				font-weight: 700;
 			}
-      
-      > .chipContainer {
-        height: 32px;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        margin-left: 8px;
-      }
+
+			> .chipContainer {
+				height: fit-content;
+				display: flex;
+				align-items: center;
+				gap: 4px;
+				margin-left: 8px;
+			}
 		}
 
-		> p {
-			font-size: 14px;
-			line-height: 20px;
-			font-weight: 400;
+		.mainInfo {
 			display: flex;
-			align-items: center;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+			flex-direction: column;
+			gap: 5px;
 
-      > img,
-      > svg {
-        margin-right: 4px;
-        width: 14px;
-        min-width: 14px;
-      }
+			> p {
+				font-size: 13px;
+				line-height: 20px;
+				font-weight: 400;
+				display: flex;
+				align-items: center;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 
-			&:not(:last-child) {
-				margin-bottom: 8px;
+				i {
+					margin-right: 8px;
+				}
+
+				span {
+					display: flex;
+					align-items: center;
+					margin-left: 8px;
+
+					font-size: 10px;
+					color: #19ca09;
+
+					> i {
+						width: 10px;
+						height: 10px;
+						background-color: ${({ theme }) => theme.colors.eventDay};
+						display: inline-block;
+						border-radius: 50%;
+
+						margin-right: 3px;
+					}
+				}
 			}
 		}
 	}
 
 	.imgContainer {
-		width: calc(100% - 40px);
+		width: calc(100% - 12px);
+		margin-left: 12px;
 		min-height: 264px;
 		height: 100%;
 		position: relative;
@@ -68,7 +84,6 @@ const StyledEventMain = styled.div`
 		border: 2px solid #000000;
 		z-index: ${({ theme }) => theme.zIndex.imageCarousel};
 		margin-top: -74px;
-		margin-left: 20px;
 		margin-right: 20px;
 
 		.slick-slider,
@@ -111,10 +126,10 @@ const StyledEventMain = styled.div`
 		img {
 			width: 100%;
 			height: 100% !important;
-      min-height: 264px;
+			min-height: 264px;
 			object-fit: cover;
 			object-position: top;
-      vertical-align : bottom;
+			vertical-align: bottom;
 		}
 	}
 `;

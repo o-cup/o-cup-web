@@ -41,14 +41,14 @@ export const StyledResult = styled.div`
 
 	.events {
 		display: flex;
-		gap: 10px;
+		gap: 16px;
 		flex-wrap: wrap;
 	}
 
 	.request {
 		border: 2px solid #000;
 		box-shadow: 4px 4px 0 #000000;
-
+		margin-top: 6px;
 		height: 188px;
 
 		display: flex;

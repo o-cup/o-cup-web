@@ -1,5 +1,7 @@
 import React from "react";
 import { FaCalendar, FaMapMarkerAlt, FaTwitter, FaUserCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { Icon } from "../../shared/components";
 import BiasChip from "../../shared/components/BiasChip";
 import { convertDateToString, convertDateWithDots, isOpenToday } from "../../shared/utils/dateHandlers";
 import { EventType } from "../../types";
@@ -10,18 +12,19 @@ type EventProps = {
 };
 
 const Event = ({ event }: EventProps) => {
-	const { images, place, biasesId, organizer, snsId, district, startAt, endAt } = event;
+	const navigate = useNavigate();
+	const { images, place, biasesId, organizer, snsId, district, startAt, endAt, id } = event;
 
 	const today = convertDateToString(new Date());
 	const isDuringEvent = isOpenToday(today, startAt, endAt);
 
 	return (
-		<StyledEvent>
+		<StyledEvent onClick={() => navigate(`/detail/${id}`)}>
 			<img src={images[0]} alt={place} />
 			<div>
 				<div className="title">
 					<h2>{place}</h2>
-					{isDuringEvent && <span />}
+					{isDuringEvent && <i />}
 				</div>
 
 				<div className="biases">
@@ -32,18 +35,18 @@ const Event = ({ event }: EventProps) => {
 
 				<div className="extraInfo">
 					<p>
-						<FaUserCircle />
+						<Icon name="host-gray" />
 						{organizer}
 					</p>
 					<p>
 						<FaTwitter />@{snsId}
 					</p>
 					<p>
-						<FaMapMarkerAlt />
+						<Icon name="place-gray" />
 						{district}
 					</p>
 					<p>
-						<FaCalendar />
+						<Icon name="calendar-gray" />
 						{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
 					</p>
 				</div>

@@ -1,7 +1,7 @@
 import { ITEMS_PER_PAGE } from "../shared/constants";
 import { isOpenToday } from "../shared/utils/dateHandlers";
 import { supabase } from "../supabaseClient";
-import { EventType, DetailType, FetchEventParams } from "../types";
+import { EventType, DetailType, FetchEventParams, SearchSortOptions } from "../types";
 
 const fetchEvents = async ({ pageParam = 1, infinite = false, date }: FetchEventParams) => {
 	let query = supabase.from("place_sort").select("*").eq("isApproved", true);
@@ -70,11 +70,23 @@ const fetchEventDetail = async ({ id }: { id?: string }) => {
  * 인물 데이터 반환
  * @returns {PeopleType}
  */
-const fetchPeople = async () => {
-	const { data, error } = await supabase.from("people").select("*").order("name", { ascending: true });
-	if (error) {
-		throw new Error(`${error.message}: ${error.details}`);
+const fetchPeople = async (sortOption?: SearchSortOptions) => {
+	let query = supabase.from("people").select("*");
+
+	switch (sortOption) {
+		case "birthdayAsc":
+			break;
+
+		case "birthdayDsc":
+			break;
+
+		case "alphabetAsc":
+		default:
+			query = query.order("name", { ascending: true });
+			break;
 	}
+
+	const { data } = await query;
 	return data;
 };
 
@@ -131,14 +143,31 @@ const uploadPoster = async (file: any) => {
  * @param {string} id
  * @returns {EventType}
  */
-const fetchDuplicatedEvent = async ({ place, dateRange }: { place?: string, dateRange: {startAt: string, endAt: string} }) => {
-	const { data, error } = await supabase.from("events").select("*")
-		.match({place, startAt:dateRange.startAt, endAt: dateRange.endAt});
+const fetchDuplicatedEvent = async ({
+	place,
+	dateRange,
+}: {
+	place?: string;
+	dateRange: { startAt: string; endAt: string };
+}) => {
+	const { data, error } = await supabase
+		.from("events")
+		.select("*")
+		.match({ place, startAt: dateRange.startAt, endAt: dateRange.endAt });
 	if (error) {
 		throw new Error(`${error.message}: ${error.details}`);
 	}
 	return data?.[0];
 };
 
-export { fetchEvents, fetchEventDetail, fetchPeople, insertEvent, insertDetail, fetchBiases, uploadPoster, fetchDuplicatedEvent };
+export {
+	fetchEvents,
+	fetchEventDetail,
+	fetchPeople,
+	insertEvent,
+	insertDetail,
+	fetchBiases,
+	uploadPoster,
+	fetchDuplicatedEvent,
+};
 export default {};

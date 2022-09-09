@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import DateSelector from "./DateSelector";
-import HeaderCalendar from "./HeaderCalendar";
 import Icon from "../../Icon/Icons";
 import { Share, StyledHeader } from "./headerStyle";
 
@@ -21,14 +20,27 @@ const titles = {
 type HeaderProps = {
 	page: string;
 	share?: boolean;
+	handleBackClick?: () => void;
 };
 
-const Header = ({ page, share }: HeaderProps) => {
+const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const navigate = useNavigate();
 	const location = useLocation();
 
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
+	const [isTooltipOpen, setIsTooltipOpen] = useState(true);
 	const mainPage = page === "main";
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setIsTooltipOpen(false);
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
 
 	const shareTwitter = () => {
 		const sendText = "오늘의 컵홀더"; // 전달할 텍스트
@@ -45,7 +57,7 @@ const Header = ({ page, share }: HeaderProps) => {
 		<StyledHeader mainPage={mainPage}>
 			<div id="header">
 				{page !== "main" ? (
-					<Icon name="arrow-left" handleClick={() => navigate(-1)} />
+					<Icon name="arrow-left" handleClick={handleBackClick || (() => navigate(-1))} />
 				) : (
 					<Icon name="logo" handleClick={handleLogoClick} />
 				)}
@@ -57,18 +69,18 @@ const Header = ({ page, share }: HeaderProps) => {
 					{share && (
 						<Share>
 							<Icon name="share" handleClick={shareTwitter} />
-							<span className="tooltip">트위터에 공유하기</span>
+							{isTooltipOpen && <span className="tooltip">트위터에 공유하기</span>}
 						</Share>
 					)}
 				</div>
 			</div>
-			{isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}
 		</StyledHeader>
 	);
 };
 
 Header.defaultProps = {
 	share: false,
+	handleBackClick: null,
 };
 
 export default Header;

@@ -4,20 +4,27 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 	position: fixed;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	width: 100%;
-	max-width: 1080px;
 	z-index: ${({ theme }) => theme.zIndex.header};
 	background: rgba(252, 251, 247, 0.9);
 	backdrop-filter: blur(4px);
+
+	max-width: 100vw;
+	max-width: ${({ theme }) => theme.widths.layout};
 
 	> div#header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
-		max-width: 1080px;
 		height: ${({ theme }) => theme.heights.header};
-		padding: 0 24px;
+		padding: 5px 20px;
+		position: relative;
+
+		max-width: 900px;
+		width: 100%;
+
 		position: relative;
 
 		h1 {
@@ -37,33 +44,65 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 			gap: 18px;
 		}
 
-		img#logo {
-			height: 56px;
-		}
-
-		.date_selector {
-			display: flex;
-			align-items: center;
-
-			> p {
-				text-align: center;
-				font-weight: 700;
-				font-size: 20px;
-				line-height: 24px;
-				margin-right: 8px;
-				white-space: nowrap;
-			}
-
-			> button.calendarOpenButton {
-				background: none;
-				outline: none;
-
-				&.active {
-					transform: rotate(180deg);
-				}
-			}
+		i.search_header {
+			width: 20px;
+			height: 20px;
 		}
 	}
+`;
+
+export const StyledDateSelector = styled.div`
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	position: relative;
+
+	> p {
+		text-align: center;
+		font-weight: 700;
+		font-size: 18px;
+		line-height: 24px;
+		margin-right: 8px;
+		white-space: nowrap;
+	}
+
+	> button.calendarOpenButton {
+		background: none;
+		outline: none;
+
+		&.active {
+			transform: rotate(180deg);
+		}
+	}
+`;
+
+export const StyledHeaderCalendarContainer = styled.div`
+	background: rgba(252, 251, 247, 0.9);
+	z-index: ${({ theme }) => theme.zIndex.header};
+
+	position: fixed;
+
+	width: 100%;
+	min-width: 320px;
+	max-width: 1080px;
+	top: ${({ theme }) => theme.heights.header};
+	left: 0;
+
+	backdrop-filter: blur(4px);
+
+	/* @media ${({ theme }) => theme.device.desktop} {
+		position: absolute;
+
+		width: 360px;
+		right: 0;
+		top: 50px;
+
+		backdrop-filter: blur(20px);
+		border-radius: 8px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+		padding-top: 10px;
+	} */
 `;
 
 export const Share = styled.div`

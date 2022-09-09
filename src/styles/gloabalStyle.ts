@@ -16,6 +16,14 @@ const GlobalStyle = createGlobalStyle<ThemeType>`
     margin: 0;
     background: #fcfbf7;
 
+    // 스크롤바 제거
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    
     div#root {
       display: flex;
       flex-direction: column;

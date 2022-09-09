@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { dateFilterAtom } from "../../../../state/atoms";
 import DateSelector from "./DateSelector";
 import Icon from "../../Icon/Icons";
 import HeaderCalendar from "./HeaderCalendar";
 import { Share, StyledHeader } from "./headerStyle";
+import { convertDateToString } from "../../../utils/dateHandlers";
 
 type Titles = {
 	[key: string]: string;
@@ -28,8 +31,10 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const navigate = useNavigate();
 	const location = useLocation();
 
+	const [, setDateFilter] = useRecoilState(dateFilterAtom);
+
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
-	const [isTooltipOpen, setIsTooltipOpen] = useState(true);
+	const [, setIsTooltipOpen] = useState(true);
 	const mainPage = page === "main";
 
 	useEffect(() => {
@@ -50,6 +55,8 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	};
 
 	const handleLogoClick = () => {
+		const today = new Date();
+		setDateFilter(convertDateToString(today));
 		navigate("/");
 		window.scrollTo({ top: 0 });
 	};

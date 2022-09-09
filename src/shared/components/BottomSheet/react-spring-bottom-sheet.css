@@ -13,7 +13,7 @@
 
   /* custom */
   width: 100%;
-  max-width: 720px;
+  max-width: 480px;
   min-width: 320px;
   padding: 24px 0 16px;
   max-height: calc(100vh - 76px - env(safe-area-inset-top));

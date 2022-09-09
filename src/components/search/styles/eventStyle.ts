@@ -20,6 +20,7 @@ export const StyledEvent = styled.div`
 
 	img {
 		min-width: 110px;
+		width: 110px;
 		height: 100%;
 		object-fit: cover;
 	}
@@ -27,7 +28,7 @@ export const StyledEvent = styled.div`
 	& > div {
 		display: flex;
 		flex-direction: column;
-		gap: 10px;
+		max-width: calc(100% - 120px);
 		width: 100%;
 
 		.title {
@@ -39,6 +40,11 @@ export const StyledEvent = styled.div`
 				font-size: 18px;
 				font-weight: bold;
 				line-height: 25px;
+
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				margin-bottom: 8px;
 			}
 
 			i {
@@ -54,6 +60,7 @@ export const StyledEvent = styled.div`
 		.biases {
 			display: flex;
 			gap: 5px;
+			margin-bottom: 12px;
 		}
 
 		.extraInfo {
@@ -63,7 +70,7 @@ export const StyledEvent = styled.div`
 			justify-content: space-around;
 
 			p {
-				font-size: 13px;
+				font-size: 12px;
 				color: ${({ theme }) => theme.colors.gray};
 
 				i,

@@ -5,7 +5,7 @@ import { requestGoodsListAtom, requestInputsAtom } from "../state/atoms";
 import Layout from "../shared/components/layout";
 import Entry from "../components/request/Entry";
 import PreviewContent from "../components/request/PreviewContent";
-import { StyledPreview, StyledRequest, StyledCheckEvent } from "../components/request/styles/requestStyle";
+import { StyledPreview, StyledRequest, StyledCheckEvent, StyledRequestBottomSheet } from "../components/request/styles/requestStyle";
 import BottomSheet from "../shared/components/BottomSheet";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { sendReqData } from "../components/request/requestApi";
@@ -33,7 +33,7 @@ const Request = () => {
   const [isSubmitModalOpen, setSubmitModalOpen] = useState(false);
   const [isAlertOpen, setAlertOpen] = useState(false);
   const [isBottomSheetOpen, setBottomSheetOpen] = useState(false);
-  const isMobile = useMediaQuery("(max-width: 720px)");
+  // const isMobile = useMediaQuery("(max-width: 720px)");
 
   const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
   const [goodsList, setGoodsList] = useRecoilState(requestGoodsListAtom);
@@ -172,7 +172,7 @@ const Request = () => {
 
       {isAlertOpen && <AlertModal setAlertOpen={setAlertOpen} />}
 
-      {isMobile && (
+      {/* {isMobile && ( */}
         <BottomSheet
           open={isBottomSheetOpen}
           setOpen={setBottomSheetOpen}
@@ -184,11 +184,11 @@ const Request = () => {
             handleClick: () => setConfirmModalOpen(true),
           }}
         >
-          <div>
+          <StyledRequestBottomSheet>
             <PreviewContent />
-          </div>
+          </StyledRequestBottomSheet>
         </BottomSheet>
-      )}
+      {/* )} */}
     </>
   );
 };

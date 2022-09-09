@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledEventNearHere = styled.div`
 	margin-top: 40px;
 	width: 100%;
-	padding-left: 12px;
+	padding-left: 20px;
 
 	> h4 {
 		font-weight: 700;

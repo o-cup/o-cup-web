@@ -34,7 +34,7 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const [, setDateFilter] = useRecoilState(dateFilterAtom);
 
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
-	const [, setIsTooltipOpen] = useState(true);
+	const [isTooltipOpen, setIsTooltipOpen] = useState(true);
 	const mainPage = page === "main";
 
 	useEffect(() => {
@@ -78,7 +78,7 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 						{share && (
 							<Share>
 								<Icon name="share" handleClick={shareTwitter} />
-								<span className="tooltip">트위터에 공유하기</span>
+								{isTooltipOpen && <span className="tooltip">트위터에 공유하기</span>}
 							</Share>
 						)}
 					</div>

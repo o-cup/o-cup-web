@@ -17,6 +17,7 @@ const StyledGoodsChip = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 4px;
 `;
 
 

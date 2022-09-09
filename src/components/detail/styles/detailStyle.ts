@@ -4,15 +4,15 @@ const StyledDetail = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	padding: 20px;
 
-	padding-left: 8px;
-	padding-bottom: 0;
+  /** padding .detailInfo 안으로 이동함! */
+  > div.detailInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 
-	/* > div.detailInfo {
-		display: flex;
-		flex-direction: column;
-		width: 100%; */
+    padding: 20px 20px 0 8px;
+  }
 
 	/* div.mainInfo,
 		div.subInfo {

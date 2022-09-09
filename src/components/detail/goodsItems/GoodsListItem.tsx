@@ -13,11 +13,7 @@ const GoodsListItem = ({ title, items }: GoodsProps) => (
 	<StyledGoodsListItem>
 		<h6>{TYPE[title]}</h6>
 		<ul>
-			{items.map((item) => (
-				<li key={item}>
-					<GoodsChip key={item} value={item} />
-				</li>
-			))}
+			{items.map((item) => <GoodsChip key={item} value={item} />)}
 		</ul>
 	</StyledGoodsListItem>
 );

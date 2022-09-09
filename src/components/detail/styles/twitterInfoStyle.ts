@@ -41,7 +41,7 @@ export const StyledTwitterInfo = styled.div`
 
 	.hashTags {
 		font-weight: 400;
-		font-size: 14px;
+		font-size: 13px;
 		line-height: 18px;
 		flex-wrap: wrap;
 		display: flex;

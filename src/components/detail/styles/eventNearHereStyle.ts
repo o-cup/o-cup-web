@@ -3,13 +3,13 @@ import styled from "styled-components";
 const StyledEventNearHere = styled.div`
 	margin-top: 40px;
 	width: 100%;
-	padding-left: 12px;
 
 	> h4 {
 		font-weight: 700;
 		font-size: 20px;
 		line-height: 27px;
 		margin-bottom: 22px;
+    padding-left: 20px;
 	}
 
 	> ul {
@@ -18,12 +18,16 @@ const StyledEventNearHere = styled.div`
 		overflow-y: hidden;
 		-ms-overflow-style: none;
 		scrollbar-width: none;
-		gap: 20px;
 
 		&::-webkit-scrollbar {
 			display: none;
 		}
-
+    
+    &::before {
+      content: "";
+      border-left: 20px solid transparent;
+    }
+    
 		&::after {
 			content: "";
 			border-right: 20px solid transparent;
@@ -34,7 +38,7 @@ const StyledEventNearHere = styled.div`
 const EventNearHereList = styled.li`
 	background: ${({ theme }) => theme.colors.white};
 	border: 2px solid #000000;
-	/* margin-right: 20px; */
+	margin-right: 20px;
 	margin-bottom: 4px;
 	position: relative;
 	box-shadow: 4px 4px 0 #000000;

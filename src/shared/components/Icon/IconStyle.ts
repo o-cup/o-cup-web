@@ -10,8 +10,8 @@ export const StyledIcon = styled.i`
 		display: flex;
 		background: url("/images/logo_primary.png") no-repeat;
 		background-size: contain;
-		height: 56px;
-		width: 75px;
+		height: 42px;
+		width: 56px;
 	}
 
 	&.plus-circle {

@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledMain = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 5px;
 	width: 100%;
 `;
 
@@ -15,7 +15,6 @@ const StyledBiasList = styled.ul`
 	scrollbar-width: none;
 	height: 110px;
 	align-items: center;
-	margin-top: 10px;
 	padding: 0 20px;
 	gap: 24px;
 
@@ -138,7 +137,7 @@ const StyledItem = styled.li`
 	.textContainer {
 		display: flex;
 		flex-direction: column;
-		gap: 5px;
+		gap: 4px;
 
 		> p {
 			color: ${({ theme }) => theme.colors.gray};

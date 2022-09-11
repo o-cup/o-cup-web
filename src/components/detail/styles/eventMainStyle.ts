@@ -36,7 +36,7 @@ const StyledEventMain = styled.div`
 		.mainInfo {
 			display: flex;
 			flex-direction: column;
-			gap: 5px;
+			gap: 3px;
 
 			> p {
 				font-size: 13px;

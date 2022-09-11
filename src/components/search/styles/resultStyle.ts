@@ -5,15 +5,15 @@ export const StyledResult = styled.div`
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
 
 	.menu {
 		display: flex;
 		justify-content: space-between;
-		height: 40px;
+		height: 24px;
+		margin-bottom: 10px;
 
 		p {
-			line-height: 40px;
+			line-height: 24px;
 			font-size: 14px;
 			color: ${({ theme }) => theme.colors.gray};
 			width: 100%;
@@ -48,7 +48,7 @@ export const StyledResult = styled.div`
 	.request {
 		border: 2px solid #000;
 		box-shadow: 4px 4px 0 #000000;
-		margin-top: 6px;
+		margin-top: 16px;
 		height: 188px;
 
 		display: flex;

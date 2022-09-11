@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledMain = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 5px;
 	width: 100%;
 `;
 
@@ -137,7 +137,7 @@ const StyledItem = styled.li`
 	.textContainer {
 		display: flex;
 		flex-direction: column;
-		gap: 5px;
+		gap: 3px;
 
 		> p {
 			color: ${({ theme }) => theme.colors.gray};

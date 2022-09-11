@@ -137,7 +137,7 @@ const StyledItem = styled.li`
 	.textContainer {
 		display: flex;
 		flex-direction: column;
-		gap: 3px;
+		gap: 4px;
 
 		> p {
 			color: ${({ theme }) => theme.colors.gray};

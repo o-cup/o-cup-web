@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledSearch = styled.div`
 	width: 100%;
 	height: 100%;
-	padding: 20px;
+	padding: 0px 20px;
 
 	.input {
 		height: 68px;
@@ -15,9 +15,9 @@ export const StyledSearch = styled.div`
 
 export const StyledFilter = styled.div`
 	.months {
-		height: 104px;
+		height: 87px;
 		display: flex;
-		padding: 16px 0 16px 0;
+		padding-bottom: 15px;
 		position: relative;
 		justify-content: space-between;
 		gap: 20px;

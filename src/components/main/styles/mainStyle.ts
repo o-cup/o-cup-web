@@ -15,7 +15,6 @@ const StyledBiasList = styled.ul`
 	scrollbar-width: none;
 	height: 110px;
 	align-items: center;
-	margin-top: 10px;
 	padding: 0 20px;
 	gap: 24px;
 

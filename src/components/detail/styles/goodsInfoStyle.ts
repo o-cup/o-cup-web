@@ -45,33 +45,25 @@ const StyledGoodsListItem = styled.div`
 		margin-bottom: 16px;
 	}
 
-	ul {
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
-
-		> li {
-			height: 30px;
-			margin-bottom: 8px;
-			margin-right: 12px;
-		}
+  ul {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    height: fit-content;
+    margin-bottom: 16px;
 	}
 
 	ul.fcfs,
 	ul.lucky {
 		flex-direction: column;
 		align-items: flex-start;
-
-		> li {
-			height: fit-content !important;
-		}
 	}
 `;
 
 const StyledHighLightItem = styled.li`
 	display: flex;
 	align-items: flex-start;
-	margin-top: 12px;
 
 	> .labelContainer {
 		&.length_2 {

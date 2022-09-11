@@ -70,12 +70,14 @@ export const StyledEvent = styled.div`
 			justify-content: space-around;
 
 			p {
+        display: flex;
+        align-items: center;
 				font-size: 12px;
 				color: ${({ theme }) => theme.colors.gray};
 
 				i,
 				svg {
-					margin-right: 8px;
+					margin-right: 6px;
 				}
 			}
 

@@ -48,16 +48,16 @@ const StyledCheckEvent = styled.div`
 `
 
 const StyledEntry = styled.div`
-	width: 50%;
+	//width: 50%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 30px;
 	padding: 32px 20px;
 
-	@media ${({ theme }) => theme.device.mobile} {
+	//@media ${({ theme }) => theme.device.mobile} {
 		width: 100%;
-	}
+	//}
 
 	.notice {
 		display: flex;
@@ -100,11 +100,11 @@ const StyledEntry = styled.div`
 		gap: 20px;
 		margin-top: 30px;
 
-		@media ${({ theme }) => theme.device.desktop} {
+		/* @media ${({ theme }) => theme.device.desktop} {
 			> button:first-child {
 				display: none;
 			}
-		}
+		} */
 	}
 `;
 
@@ -122,12 +122,24 @@ const StyledPreview = styled.div`
 	flex-direction: column;
 	padding: 14px 0;
 
-	@media ${({ theme }) => theme.device.mobile} {
+	//@media ${({ theme }) => theme.device.mobile} {
 		display: none;
-	}
+	//}
 
 	.previewContent {
 		width: 100%;
+	}
+`;
+
+const StyledRequestBottomSheet = styled.div`
+	width: 100%;
+	padding: 0 20px 32px 12px;
+
+	.previewContent {
+		width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
 	}
 `;
 
@@ -277,5 +289,5 @@ const StyledDuplicatedEvent = styled.div`
 	}
 `;
 
-export { StyledRequest, StyledCheckEvent, StyledEntry, StyledPreview, Label, StyledRequestModal, StyledDuplicatedModal, StyledDuplicatedEvent };
+export { StyledRequest, StyledCheckEvent, StyledEntry, StyledPreview, StyledRequestBottomSheet, Label, StyledRequestModal, StyledDuplicatedModal, StyledDuplicatedEvent };
 export default {};

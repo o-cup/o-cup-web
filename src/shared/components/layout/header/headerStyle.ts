@@ -84,9 +84,10 @@ export const StyledHeaderCalendarContainer = styled.div`
 
 	width: 100%;
 	min-width: 320px;
-	max-width: 1080px;
+	max-width: 480px;
 	top: ${({ theme }) => theme.heights.header};
-	left: 0;
+	left: 50%;
+  transform: translateX(-50%);
 
 	backdrop-filter: blur(4px);
 

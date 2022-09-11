@@ -2,7 +2,6 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import { dateFilterAtom } from "../../../../state/atoms";
 import { addZero, convertDateToString, convertStringToDate } from "../../../utils/dateHandlers";
-import HeaderCalendar from "./HeaderCalendar";
 import { StyledDateSelector } from "./headerStyle";
 
 type StateProps = {
@@ -25,7 +24,6 @@ function DateSelector({ isCalendarOpen, setCalendarOpen }: StateProps) {
 					<path d="M7.07107 7.14236L14.1421 0.0712891H0L7.07107 7.14236Z" fill="black" />
 				</svg>
 			</button>
-			{isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}
 		</StyledDateSelector>
 	);
 }

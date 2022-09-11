@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { dateFilterAtom } from "../../../../state/atoms";
 import DateSelector from "./DateSelector";
 import Icon from "../../Icon/Icons";
+import HeaderCalendar from "./HeaderCalendar";
 import { Share, StyledHeader } from "./headerStyle";
+import { convertDateToString } from "../../../utils/dateHandlers";
 
 type Titles = {
 	[key: string]: string;
@@ -27,6 +31,8 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const navigate = useNavigate();
 	const location = useLocation();
 
+	const [, setDateFilter] = useRecoilState(dateFilterAtom);
+
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
 	const [isTooltipOpen, setIsTooltipOpen] = useState(true);
 	const mainPage = page === "main";
@@ -49,32 +55,46 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	};
 
 	const handleLogoClick = () => {
+		const today = new Date();
+		setDateFilter(convertDateToString(today));
 		navigate("/");
 		window.scrollTo({ top: 0 });
 	};
 
-	return (
-		<StyledHeader mainPage={mainPage}>
-			<div id="header">
-				{page !== "main" ? (
-					<Icon name="arrow-left" handleClick={handleBackClick || (() => navigate(-1))} />
-				) : (
-					<Icon name="logo" handleClick={handleLogoClick} />
-				)}
+  const goBack = () => {
+    if (window.history.state && window.history.state?.idx > 0) {
+      navigate(-1);
+    } else {
+      navigate("/"); // 이전 히스토리가 없으면 메인 페이지로
+    }
+  }
 
-				{page && <h1>{titles[page]}</h1>}
-				<div className="rightIcons">
-					{mainPage && <DateSelector isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen} />}
-					{(mainPage || page === "detail") && <Icon name="search_header" handleClick={() => navigate("/search")} />}
-					{share && (
-						<Share>
-							<Icon name="share" handleClick={shareTwitter} />
-							{isTooltipOpen && <span className="tooltip">트위터에 공유하기</span>}
-						</Share>
+	return (
+		<>
+			<StyledHeader mainPage={mainPage}>
+				<div id="header">
+					{page !== "main" ? (
+						<Icon name="arrow-left"
+									handleClick={handleBackClick || goBack} />
+					) : (
+						<Icon name="logo" handleClick={handleLogoClick} />
 					)}
+
+					{page && <h1>{titles[page]}</h1>}
+					<div className="rightIcons">
+						{mainPage && <DateSelector isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen} />}
+						{(mainPage || page === "detail") && <Icon name="search_header" handleClick={() => navigate("/search")} />}
+						{share && (
+							<Share>
+								<Icon name="share" handleClick={shareTwitter} />
+								{isTooltipOpen && <span className="tooltip">트위터에 공유하기</span>}
+							</Share>
+						)}
+					</div>
 				</div>
-			</div>
-		</StyledHeader>
+			</StyledHeader>
+			{isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}
+		</>
 	);
 };
 

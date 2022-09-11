@@ -11,10 +11,14 @@ import Main from "./pages/Main";
 import Detail from "./pages/Detail";
 import Request from "./pages/Request";
 import Search from "./pages/Search";
+import Wrapper from "./components/Wrapper";
+import useAnalytics from "./hooks/useAnalytics";
 
 const queryClient = new QueryClient();
 
 function App() {
+	const initialized = useAnalytics();
+
 	return (
 		<QueryClientProvider client={queryClient}>
 			<ThemeProvider theme={theme}>
@@ -26,12 +30,14 @@ function App() {
 						</Helmet>
 					</HelmetProvider>
 					<RecoilRoot>
-						<Routes>
-							<Route path="/" element={<Main />} />
-							<Route path="/detail/:id" element={<Detail />} />
-							<Route path="/request" element={<Request />} />
-							<Route path="/search" element={<Search />} />
-						</Routes>
+						<Wrapper initialized={initialized}>
+							<Routes>
+								<Route path="/" element={<Main />} />
+								<Route path="/detail/:id" element={<Detail />} />
+								<Route path="/request" element={<Request />} />
+								<Route path="/search" element={<Search />} />
+							</Routes>
+						</Wrapper>
 					</RecoilRoot>
 				</BrowserRouter>
 				<ReactQueryDevtools initialIsOpen={false} />

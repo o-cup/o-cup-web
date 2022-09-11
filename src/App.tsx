@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { RecoilRoot } from "recoil";
 import { ThemeProvider } from "styled-components";
+import ReactGA from "react-ga";
 import GlobalStyle from "./styles/gloabalStyle";
 import theme from "./styles/theme";
 import Main from "./pages/Main";
@@ -18,6 +19,12 @@ const queryClient = new QueryClient();
 
 function App() {
 	const initialized = useAnalytics();
+
+	const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID;
+
+	useEffect(() => {
+		ReactGA.initialize(TRACKING_ID!);
+	}, [TRACKING_ID]);
 
 	return (
 		<QueryClientProvider client={queryClient}>

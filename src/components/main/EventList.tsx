@@ -6,6 +6,7 @@ import { openedBiasAtom, dateFilterAtom, biasFilterAtom } from "../../state/atom
 import EventListItem from "./EventListItem";
 import { StyledList } from "./styles/mainStyle";
 import EmptyDefault from "./EmptyDefault";
+import GoogleAdvertise, { inFeedAdProps } from "../../shared/components/GoogleAdvertise";
 
 // todo: useInfiniteQuery 리팩토링 후 추가
 const EventList = () => {
@@ -49,6 +50,7 @@ const EventList = () => {
 				{biasFilteredEvents?.map((event) => (
 					<EventListItem event={event} key={event.id} />
 				))}
+				{/* <GoogleAdvertise {...inFeedAdProps} /> */}
 			</StyledList>
 			<EmptyDefault size={biasFilteredEvents.length > 0 ? "small" : "default"} />
 		</>

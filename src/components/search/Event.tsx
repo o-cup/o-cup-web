@@ -33,23 +33,26 @@ const Event = ({ event }: EventProps) => {
 					))}
 				</div>
 
-				<div className="extraInfo">
-					<p>
+				<ul className="extraInfo">
+					<li>
 						<Icon name="host-gray" />
-						{organizer}
-					</p>
-					<p>
-						<FaTwitter />@{snsId}
-					</p>
-					<p>
+						<p>{organizer}</p>
+					</li>
+					<li>
+						<FaTwitter />
+						<p>@{snsId}</p>
+					</li>
+					<li>
 						<Icon name="place-gray" />
-						{district}
-					</p>
-					<p>
+						<p>{district}</p>
+					</li>
+					<li>
 						<Icon name="calendar-gray" />
-						{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
-					</p>
-				</div>
+						<p>
+							{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
+						</p>
+					</li>
+				</ul>
 			</div>
 		</StyledEvent>
 	);

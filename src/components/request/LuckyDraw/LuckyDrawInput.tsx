@@ -10,13 +10,13 @@ const LuckyDrawInput = () => {
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
 	const { goods } = requestInputs;
 
-	const [hasLucky, setHasLucky] = useState(false);
+	const [hasLucky, setHasLucky] = useState(true);
 	const [isFurtherNotice, setIsFurtherNotice] = useState(false);
 
   /** 데이터 초기화 시 체크박스 초기화 */
 	useEffect(() => {
 		if(!goods.lucky) {
-      setHasLucky(false);
+      setHasLucky(true);
       setIsFurtherNotice(false);
     }
 	}, [requestInputs])

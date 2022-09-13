@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledEvent = styled.div`
-	height: 188px;
+	height: 184px;
 	border: 2px solid #000;
 	padding: 10px;
 	display: flex;
@@ -11,7 +11,6 @@ export const StyledEvent = styled.div`
 	box-shadow: 4px 4px 0 #000000;
 	min-width: 320x;
 	width: 100%;
-
 	cursor: pointer;
 
 	@media all and (max-width: 400px) {
@@ -28,8 +27,9 @@ export const StyledEvent = styled.div`
 	& > div {
 		display: flex;
 		flex-direction: column;
-		max-width: calc(100% - 120px);
+		max-width: calc(100% - 125px);
 		width: 100%;
+		justify-content: space-between;
 
 		.title {
 			display: flex;
@@ -63,26 +63,30 @@ export const StyledEvent = styled.div`
 			margin-bottom: 12px;
 		}
 
-		.extraInfo {
-			height: 100%;
+		ul.extraInfo {
+			height: 80px;
 			display: flex;
 			flex-direction: column;
 			justify-content: space-around;
 
-			p {
-        display: flex;
-        align-items: center;
+			li {
+				display: flex;
+				align-items: center;
 				font-size: 12px;
-				color: ${({ theme }) => theme.colors.gray};
+				height: 20px;
+
+				p {
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					color: ${({ theme }) => theme.colors.gray};
+				}
 
 				i,
 				svg {
+					min-width: 14px;
 					margin-right: 6px;
 				}
-			}
-
-			p:last-child {
-				font-size: 13px;
 			}
 		}
 	}

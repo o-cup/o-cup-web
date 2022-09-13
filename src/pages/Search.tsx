@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import { useSearchParams } from "react-router-dom";
 import { fetchPeople } from "../apis";
 import { MonthSelector, Result, SearchInput } from "../components/search";
 import { StyledFilter, StyledSearch } from "../components/search/styles/searchStyle";
@@ -16,6 +17,7 @@ const sortOptions = {
 };
 
 const Search = () => {
+	const [searchParams, setSearchParams] = useSearchParams();
 	const [keyword, setKeyword] = useState("");
 	const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 	const [searched, setSearched] = useState(false);
@@ -47,6 +49,14 @@ const Search = () => {
 	});
 
 	useEffect(() => {
+		if (!viewResult) return;
+
+		if (keyword) {
+			setSearchParams({ keyword });
+		}
+	}, [viewResult, setSearchParams, keyword]);
+
+	useEffect(() => {
 		if (!keyword) {
 			setSearched(false);
 		}
@@ -70,7 +80,7 @@ const Search = () => {
 
 	const conditionalRender = () => {
 		if (viewResult) {
-			return <Result keyword={keyword} biasId={selectedBiasId} />;
+			return <Result keyword={keyword} biasId={selectedBiasId} searchParams={searchParams} />;
 		}
 		return (
 			<StyledFilter>

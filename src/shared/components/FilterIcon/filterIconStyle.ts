@@ -9,7 +9,7 @@ export const StyledFilterIcon = styled.div`
 		height: 104px;
 		box-shadow: ${({ theme }) => theme.style.shadow};
 		background-color: ${({ theme }) => theme.colors.background};
-		bottom: -108px;
+		bottom: -114px;
 		right: 0;
 		z-index: 1;
 
@@ -28,6 +28,7 @@ export const StyledFilterIcon = styled.div`
 			text-align: center;
 			border-radius: 16px;
 			font-size: 13px;
+			cursor: pointer;
 		}
 	}
 `;

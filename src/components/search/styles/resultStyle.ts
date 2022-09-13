@@ -31,7 +31,7 @@ export const StyledResult = styled.div`
 	.chips {
 		display: flex;
 		gap: 10px;
-		padding: 5px 0;
+		margin-bottom: 8px;
 		overflow-x: scroll;
 
 		::-webkit-scrollbar {

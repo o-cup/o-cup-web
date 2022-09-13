@@ -16,6 +16,7 @@ import { RegCodeItem } from "../../types";
 type ResultProps = {
 	keyword: string;
 	biasId?: number | null;
+	searchParams: URLSearchParams;
 };
 
 const sortOptions = {
@@ -29,9 +30,10 @@ type ChipType = {
 	distChips: RegCodeItem[];
 };
 
-const Result = ({ keyword, biasId }: ResultProps) => {
-	const navigate = useNavigate();
+const initialChips = { dateChip: "", distChips: [] };
 
+const Result = ({ keyword, biasId, searchParams }: ResultProps) => {
+	const navigate = useNavigate();
 	const [dateRange, setDateRange] = useRecoilState(dateRangeAtom);
 	const { startDate, endDate } = dateRange;
 	const [districts, setDistricts] = useRecoilState(districtAtom);
@@ -39,7 +41,7 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
 	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
-	const [chips, setChips] = useState<ChipType>({ dateChip: "", distChips: [] });
+	const [chips, setChips] = useState<ChipType>(initialChips);
 
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
@@ -109,7 +111,12 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 			{chip && (
 				<div className="chips">
 					{chips.dateChip && (
-						<Chip text={dateChipText} bgColor="primary" handleDelete={() => handleDeleteChip({ type: "date" })} />
+						<Chip
+							text={dateChipText}
+							bgColor="primary"
+							customStyle={{ fontSize: "12px" }}
+							handleDelete={() => handleDeleteChip({ type: "date" })}
+						/>
 					)}
 					{chips.distChips.map((dist) => (
 						<Chip
@@ -130,8 +137,12 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 
 			<div className="request">
 				<p>찾고 있는 이벤트가 없나요?</p>
-				<Button customStyle={{ fontWeight: "bold", width: "178px", height: "50px" }}
-					      handleClick={() => navigate("/request")}>이벤트 등록하기</Button>
+				<Button
+					customStyle={{ fontWeight: "bold", width: "178px", height: "50px" }}
+					handleClick={() => navigate("/request")}
+				>
+					이벤트 등록하기
+				</Button>
 			</div>
 
 			{isModalOpen && (

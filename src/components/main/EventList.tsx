@@ -50,9 +50,7 @@ const EventList = () => {
 				{biasFilteredEvents?.map((event) => (
 					<EventListItem event={event} key={event.id} />
 				))}
-				<GoogleAdvertise
-					{...inFeedAdProps}
-					/>
+				{/* <GoogleAdvertise {...inFeedAdProps} /> */}
 			</StyledList>
 			<EmptyDefault size={biasFilteredEvents.length > 0 ? "small" : "default"} />
 		</>

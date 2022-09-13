@@ -42,11 +42,16 @@ const GoogleAdvertise = ({
     <ins
       className={className}
       style={{
-        overflowX: "auto",
-        overflowY: "hidden",
         display: "block",
-        boxShadow: "4px 4px 0 #000000"
+        overflowX: "hidden",
+        overflowY: "hidden",
+        boxShadow: "4px 4px 0 #000000",
+        border: "2px solid #000000",
+        width: "100%",
+        minHeight: "50px",
+        background: "#FFFFFF"
       }}
+      data-adtest="on"
       data-ad-client={client}
       data-ad-slot={slot}
       data-ad-format={format}

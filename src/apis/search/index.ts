@@ -27,7 +27,8 @@ const fetchSearchedEvent = async ({ keyword, date, biasId, districts }: FetchSea
 	let data;
 	data = events;
 
-	if (biasId && keyword) return data;
+	if (biasId && keyword && !date?.startDate && !districts) return data;
+
 	if (!keyword) return data;
 
 	const { data: biasData } = await supabase
@@ -72,14 +73,26 @@ const fetchSearchedEvent = async ({ keyword, date, biasId, districts }: FetchSea
 		});
 	}
 
-	if (districts?.length) {
-		const codes = districts.map((dist) => dist.code.substring(0, 4));
+	if (!districts?.length) return data;
+
+	const isAllDist = districts?.length === 1 && districts[0].code.slice(-8) === "000";
+	if (isAllDist) {
+		const searchedDist = districts?.[0].code;
 
 		data = data?.filter((event) => {
-			const distCode = event.newDistrict.code.substring(0, 4);
-			return codes.includes(distCode);
+			const distCode = event.newDistrict.code.substring(0, 2);
+			return searchedDist.includes(distCode);
 		});
+
+		return data;
 	}
+
+	const codes = districts.map((dist) => dist.code.substring(0, 4));
+
+	data = data?.filter((event) => {
+		const distCode = event.newDistrict.code.substring(0, 4);
+		return codes.includes(distCode);
+	});
 
 	return data;
 };

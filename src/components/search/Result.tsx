@@ -30,9 +30,10 @@ type ChipType = {
 	distChips: RegCodeItem[];
 };
 
+const initialChips = { dateChip: "", distChips: [] };
+
 const Result = ({ keyword, biasId, searchParams }: ResultProps) => {
 	const navigate = useNavigate();
-
 	const [dateRange, setDateRange] = useRecoilState(dateRangeAtom);
 	const { startDate, endDate } = dateRange;
 	const [districts, setDistricts] = useRecoilState(districtAtom);
@@ -40,7 +41,7 @@ const Result = ({ keyword, biasId, searchParams }: ResultProps) => {
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
 	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
-	const [chips, setChips] = useState<ChipType>({ dateChip: "", distChips: [] });
+	const [chips, setChips] = useState<ChipType>(initialChips);
 
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
@@ -48,8 +49,6 @@ const Result = ({ keyword, biasId, searchParams }: ResultProps) => {
 	const { data: events } = useQuery(["resultEvents", keyword, dateRange, biasId, districts], () =>
 		fetchSearchedEvent({ keyword, date: { startDate, endDate }, biasId, districts })
 	);
-
-	console.log("searchParams", searchParams);
 
 	useEffect(() => {
 		if (!startDate) return;
@@ -112,7 +111,12 @@ const Result = ({ keyword, biasId, searchParams }: ResultProps) => {
 			{chip && (
 				<div className="chips">
 					{chips.dateChip && (
-						<Chip text={dateChipText} bgColor="primary" handleDelete={() => handleDeleteChip({ type: "date" })} />
+						<Chip
+							text={dateChipText}
+							bgColor="primary"
+							customStyle={{ fontSize: "12px" }}
+							handleDelete={() => handleDeleteChip({ type: "date" })}
+						/>
 					)}
 					{chips.distChips.map((dist) => (
 						<Chip

@@ -16,6 +16,7 @@ module.exports = {
 		"no-console": ["warn", { allow: ["warn", "error"] }],
 		quotes: ["error", "double"],
 		"react/function-component-definition": "off",
+		"react/jsx-props-no-spreading": "off",
 
 		"import/extensions": [
 			"error",

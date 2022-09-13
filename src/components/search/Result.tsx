@@ -16,6 +16,7 @@ import { RegCodeItem } from "../../types";
 type ResultProps = {
 	keyword: string;
 	biasId?: number | null;
+	searchParams: URLSearchParams;
 };
 
 const sortOptions = {
@@ -29,7 +30,7 @@ type ChipType = {
 	distChips: RegCodeItem[];
 };
 
-const Result = ({ keyword, biasId }: ResultProps) => {
+const Result = ({ keyword, biasId, searchParams }: ResultProps) => {
 	const navigate = useNavigate();
 
 	const [dateRange, setDateRange] = useRecoilState(dateRangeAtom);
@@ -47,6 +48,8 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 	const { data: events } = useQuery(["resultEvents", keyword, dateRange, biasId, districts], () =>
 		fetchSearchedEvent({ keyword, date: { startDate, endDate }, biasId, districts })
 	);
+
+	console.log("searchParams", searchParams);
 
 	useEffect(() => {
 		if (!startDate) return;
@@ -130,8 +133,12 @@ const Result = ({ keyword, biasId }: ResultProps) => {
 
 			<div className="request">
 				<p>찾고 있는 이벤트가 없나요?</p>
-				<Button customStyle={{ fontWeight: "bold", width: "178px", height: "50px" }}
-					      handleClick={() => navigate("/request")}>이벤트 등록하기</Button>
+				<Button
+					customStyle={{ fontWeight: "bold", width: "178px", height: "50px" }}
+					handleClick={() => navigate("/request")}
+				>
+					이벤트 등록하기
+				</Button>
 			</div>
 
 			{isModalOpen && (

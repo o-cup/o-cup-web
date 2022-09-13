@@ -6,10 +6,11 @@ export const StyledSearch = styled.div`
 	padding: 0px 20px;
 
 	.input {
-		height: 68px;
+		height: 58px;
 		display: flex;
 		align-items: center;
 		width: 100%;
+		margin-bottom: 5px;
 	}
 `;
 

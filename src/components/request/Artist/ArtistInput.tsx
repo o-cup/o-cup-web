@@ -29,7 +29,7 @@ const ArtistInput = ({ value, handleChangeArtist, handleDeleteArtist }: InputPro
   });
 
   const { data: people } = useQuery(["people"], () => fetchPeople(), {
-    select: (data) => data?.filter((item) => item.name.includes(keyword)),
+    select: (data) => data?.filter((item) => `${item.name} ${item.enName || ""} ${item.koName || ""} ${item.realName || ""}  ${item.team?.join() || ""}`.includes(keyword)),
   });
 
   const handleClickSelect = (biasInfo: PeopleType) => {

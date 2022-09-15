@@ -4,8 +4,8 @@ import { format } from "date-fns";
 import Modal from "../../shared/components/Modal";
 import Calendar from "../../shared/components/Calendar";
 import DistrictSelector from "./DistrictSelector";
-import { DateRangeType, RegCodeItem } from "../../types";
-import { SearchModalProps } from "./types";
+import { DateRangeType } from "../../types";
+import { RegCodeItem, SearchModalProps } from "./types";
 import { dateRangeAtom, districtAtom } from "../../state";
 
 const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: SearchModalProps) => {

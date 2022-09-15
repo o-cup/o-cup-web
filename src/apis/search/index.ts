@@ -1,5 +1,5 @@
 import axios from "axios";
-import { RegCodeItem } from "../../types";
+import { RegCodeItem } from "../../components/search/types";
 import { isDateRangeOverlaps } from "../../shared/utils/dateHandlers";
 import { supabase } from "../../supabaseClient";
 
@@ -75,7 +75,7 @@ const fetchSearchedEvent = async ({ keyword, date, biasId, districts }: FetchSea
 
 	if (!districts?.length) return data;
 
-	const isAllDist = districts?.length === 1 && districts[0].code.slice(-8) === "000";
+	const isAllDist = districts?.length === 1 && districts[0].code.slice(-8) === "00000000";
 	if (isAllDist) {
 		const searchedDist = districts?.[0].code;
 

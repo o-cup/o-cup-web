@@ -1,3 +1,3 @@
-import { dateRangeAtom, districtAtom } from "./atoms";
+import { dateRangeAtom, districtAtom, searchFilterChipsAtom } from "./atoms";
 
-export { dateRangeAtom, districtAtom };
+export { dateRangeAtom, districtAtom, searchFilterChipsAtom };

@@ -2,11 +2,11 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 // import { FaCaretDown } from "react-icons/fa";
 import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
 import { useRegCodes } from "../../hooks";
-import { RegCodeItem } from "../../types";
 import { MAX_DISTRICT_CHIPS } from "../../shared/constants";
 import divisionData from "./divisions";
 import { Icon } from "../../shared/components";
 import { ResetModalBtn } from "./styles/searchStyle";
+import { RegCodeItem } from "./types";
 
 type DistrictSelectorProps = {
 	handleSubmit: () => void;

@@ -65,6 +65,9 @@ export type PeopleType = {
 	team?: string[];
 	birthday: string;
 	profilePic: string;
+	koName?: string;
+	enName?: string;
+	realName?: string;
 };
 
 export type FetchEventParams = {
@@ -82,12 +85,6 @@ export type DateRangeType = {
 	startDate: Date;
 	endDate: Date;
 	key: string;
-};
-
-export type RegCodeItem = {
-	code: string;
-	name: string;
-	selected?: boolean;
 };
 
 export type SearchSortOptions = "alphabetAsc" | "birthdayAsc" | "birthdayDsc";

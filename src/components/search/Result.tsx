@@ -8,10 +8,9 @@ import Button from "../../shared/components/Button";
 import { FilterIcon, SortIcon } from "../../shared/components";
 import SearchModal from "./SearchModal";
 import Chip from "../../shared/components/Chip";
-import { dateRangeAtom, districtAtom } from "../../state";
+import { dateRangeAtom, districtAtom, searchFilterChipsAtom } from "../../state";
 import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { fetchSearchedEvent } from "../../apis/search";
-import { RegCodeItem } from "../../types";
 
 type ResultProps = {
 	keyword: string;
@@ -25,13 +24,6 @@ const sortOptions = {
 	alphabetAsc: "카페: 가나다순",
 };
 
-type ChipType = {
-	dateChip: string;
-	distChips: RegCodeItem[];
-};
-
-const initialChips = { dateChip: "", distChips: [] };
-
 const Result = ({ keyword, biasId, searchParams }: ResultProps) => {
 	const navigate = useNavigate();
 	const [dateRange, setDateRange] = useRecoilState(dateRangeAtom);
@@ -41,7 +33,7 @@ const Result = ({ keyword, biasId, searchParams }: ResultProps) => {
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
 	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
-	const [chips, setChips] = useState<ChipType>(initialChips);
+	const [chips, setChips] = useRecoilState(searchFilterChipsAtom);
 
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;

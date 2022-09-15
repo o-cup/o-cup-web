@@ -1,5 +1,5 @@
 import axios from "axios";
-import { RegCodeItem } from "../../types";
+import { RegCodeItem } from "../../components/search/types";
 import { isDateRangeOverlaps } from "../../shared/utils/dateHandlers";
 import { supabase } from "../../supabaseClient";
 

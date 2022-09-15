@@ -1,8 +1,8 @@
 import { atom } from "recoil";
 import { RequestGoodsListType, RequestType } from "../components/request/requestType";
+import { ChipType, RegCodeItem } from "../components/search/types";
 import { convertDateToString } from "../shared/utils/dateHandlers";
 import { sessionAtom } from "./recoilUtils";
-import { RegCodeItem } from "../types";
 
 const today = new Date();
 
@@ -66,6 +66,14 @@ export const requestGoodsListAtom = atom<RequestGoodsListType[]>({
 		},
 	],
 	effects: [sessionAtom],
+});
+
+export const searchFilterChipsAtom = atom<ChipType>({
+	key: "searchFilterChipsAtom",
+	default: {
+		dateChip: "",
+		distChips: [],
+	},
 });
 
 export default {};

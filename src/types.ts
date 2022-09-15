@@ -84,11 +84,5 @@ export type DateRangeType = {
 	key: string;
 };
 
-export type RegCodeItem = {
-	code: string;
-	name: string;
-	selected?: boolean;
-};
-
 export type SearchSortOptions = "alphabetAsc" | "birthdayAsc" | "birthdayDsc";
 export type ResultSortOptions = "dateAsc" | "dateDsc" | "alphabetAsc";

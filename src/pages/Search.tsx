@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import { fetchPeople } from "../apis";
 import { MonthSelector, Result, SearchInput } from "../components/search";
 import { StyledFilter, StyledSearch } from "../components/search/styles/searchStyle";
@@ -8,6 +9,7 @@ import BiasProfile from "../shared/components/BiasProfile";
 import Layout from "../shared/components/layout";
 import SortIcon from "../shared/components/SortIcon";
 import { getBirthMonth } from "../shared/utils/dateHandlers";
+import { searchFilterChipsAtom } from "../state";
 import { SearchSortOptions } from "../types";
 
 const sortOptions = {
@@ -25,6 +27,8 @@ const Search = () => {
 	const [selectedBiasId, setSelectedBiasId] = useState<number | null>(null);
 	const [selectedOption, setSelectedOption] = useState<SearchSortOptions>("alphabetAsc");
 	const viewResult = keyword && searched;
+
+	const setSearchFilterChips = useSetRecoilState(searchFilterChipsAtom);
 
 	const { data: people } = useQuery(["people", selectedOption], () => fetchPeople(selectedOption), {
 		select: (data) => {
@@ -57,10 +61,12 @@ const Search = () => {
 	}, [viewResult, setSearchParams, keyword]);
 
 	useEffect(() => {
+		setSearchFilterChips({ dateChip: "", distChips: [] });
+
 		if (!keyword) {
 			setSearched(false);
 		}
-	}, [keyword, setSearched]);
+	}, [keyword, setSearched, setSearchFilterChips]);
 
 	useEffect(() => {
 		const today = new Date();

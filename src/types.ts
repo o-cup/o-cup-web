@@ -65,6 +65,9 @@ export type PeopleType = {
 	team?: string[];
 	birthday: string;
 	profilePic: string;
+	koName?: string;
+	enName?: string;
+	realName?: string;
 };
 
 export type FetchEventParams = {

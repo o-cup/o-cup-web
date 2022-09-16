@@ -8,12 +8,12 @@ import Button from "../../shared/components/Button";
 import { FilterIcon, SortIcon } from "../../shared/components";
 import SearchModal from "./SearchModal";
 import Chip from "../../shared/components/Chip";
-import { dateRangeAtom, districtAtom, searchFilterChipsAtom } from "../../state";
+import { searchFiltersAtom } from "../../state";
 import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { fetchSearchedEvent } from "../../apis/search";
+import { RegCodeItem } from "./types";
 
 type ResultProps = {
-	keyword: string;
 	biasId?: number | null;
 	searchParams: URLSearchParams;
 };
@@ -24,21 +24,24 @@ const sortOptions = {
 	alphabetAsc: "카페: 가나다순",
 };
 
-const Result = ({ keyword, biasId, searchParams }: ResultProps) => {
+const Result = ({ biasId, searchParams }: ResultProps) => {
 	const navigate = useNavigate();
-	const [dateRange, setDateRange] = useRecoilState(dateRangeAtom);
-	const { startDate, endDate } = dateRange;
-	const [districts, setDistricts] = useRecoilState(districtAtom);
+	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
+	const {
+		keyword,
+		date: { startDate, endDate },
+		districts,
+	} = searchFilters;
 	const [sortOpen, setSortOpen] = useState(false);
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
 	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
-	const [chips, setChips] = useRecoilState(searchFilterChipsAtom);
+	const [chips, setChips] = useState<{ dateChip: string; distChips: RegCodeItem[] }>({ dateChip: "", distChips: [] });
 
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
-	const { data: events } = useQuery(["resultEvents", keyword, dateRange, biasId, districts], () =>
+	const { data: events } = useQuery(["resultEvents", keyword, startDate, endDate, biasId, districts], () =>
 		fetchSearchedEvent({ keyword, date: { startDate, endDate }, biasId, districts })
 	);
 
@@ -71,11 +74,12 @@ const Result = ({ keyword, biasId, searchParams }: ResultProps) => {
 		switch (type) {
 			case "date":
 				setChips((prev) => ({ ...prev, dateChip: "" }));
-				setDateRange((prev) => ({ ...prev, startDate: "", endDate: "" }));
+
+				setSearchFilters((prev) => ({ ...prev, date: { startDate: "", endDate: "" } }));
 				break;
 
 			case "district":
-				setDistricts(newDistChips);
+				setSearchFilters((prev) => ({ ...prev, districts: newDistChips }));
 				break;
 
 			default:

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { dateFilterAtom } from "../../../../state/atoms";
 import DateSelector from "./DateSelector";
 import Icon from "../../Icon/Icons";
@@ -30,9 +30,7 @@ type HeaderProps = {
 const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const navigate = useNavigate();
 	const location = useLocation();
-
-	const [, setDateFilter] = useRecoilState(dateFilterAtom);
-
+	const setDateFilter = useSetRecoilState(dateFilterAtom);
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
 	const [isTooltipOpen, setIsTooltipOpen] = useState(true);
 	const mainPage = page === "main";
@@ -61,21 +59,20 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 		window.scrollTo({ top: 0 });
 	};
 
-  const goBack = () => {
-    if (window.history.state && window.history.state?.idx > 0) {
-      navigate(-1);
-    } else {
-      navigate("/"); // 이전 히스토리가 없으면 메인 페이지로
-    }
-  }
+	const goBack = () => {
+		if (window.history.state && window.history.state?.idx > 0) {
+			navigate(-1);
+		} else {
+			navigate("/"); // 이전 히스토리가 없으면 메인 페이지로
+		}
+	};
 
 	return (
 		<>
 			<StyledHeader mainPage={mainPage}>
 				<div id="header">
 					{page !== "main" ? (
-						<Icon name="arrow-left"
-									handleClick={handleBackClick || goBack} />
+						<Icon name="arrow-left" handleClick={handleBackClick || goBack} />
 					) : (
 						<Icon name="logo" handleClick={handleLogoClick} />
 					)}

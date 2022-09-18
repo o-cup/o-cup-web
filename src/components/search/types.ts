@@ -12,9 +12,4 @@ export type RegCodeItem = {
 	selected?: boolean;
 };
 
-export type ChipType = {
-	dateChip: string;
-	distChips: RegCodeItem[];
-};
-
 export default {};

@@ -6,11 +6,10 @@ import Calendar from "../../shared/components/Calendar";
 import DistrictSelector from "./DistrictSelector";
 import { DateRangeType } from "../../types";
 import { RegCodeItem, SearchModalProps } from "./types";
-import { dateRangeAtom, districtAtom } from "../../state";
+import { searchFiltersAtom } from "../../state";
 
 const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: SearchModalProps) => {
-	const setDateRange = useSetRecoilState(dateRangeAtom);
-	const setDistricts = useSetRecoilState(districtAtom);
+	const setSearchFilters = useSetRecoilState(searchFiltersAtom);
 	const [selectedRange, setSelectedRange] = useState<DateRangeType>({
 		startDate: new Date(),
 		endDate: new Date(),
@@ -27,16 +26,16 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 
 		switch (modal) {
 			case "dateRange":
-				setDateRange((prev) => ({
+				setSearchFilters((prev) => ({
 					...prev,
-					startDate: format(startDate, "yyyyMMdd"),
-					endDate: format(endDate, "yyyyMMdd"),
+					date: { startDate: format(startDate, "yyyyMMdd"), endDate: format(endDate, "yyyyMMdd") },
 				}));
+
 				setCalendarOpen(false);
 				break;
 
 			case "district":
-				setDistricts(selectedDists);
+				setSearchFilters((prev) => ({ ...prev, districts: selectedDists }));
 				setDisctrictSelectorOpen(false);
 				break;
 

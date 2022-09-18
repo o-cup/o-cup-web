@@ -52,8 +52,16 @@ const Search = () => {
 	});
 
 	useEffect(() => {
+		setSearchFilters((prev) => ({ ...prev, date: { startDate: "", endDate: "" }, districts: [] }));
+	}, [keyword, setSearchFilters]);
+
+	useEffect(() => {
 		setViewResult(!!(keyword && searched));
-	}, [keyword, searched]);
+
+		if (!keyword) {
+			setSearched(false);
+		}
+	}, [keyword, searched, setSearched]);
 
 	useEffect(() => {
 		if (!viewResult) return;
@@ -61,12 +69,6 @@ const Search = () => {
 			setSearchParams({ keyword });
 		}
 	}, [viewResult, setSearchParams, keyword, setSearchFilters]);
-
-	useEffect(() => {
-		if (!keyword) {
-			setSearched(false);
-		}
-	}, [keyword, setSearched]);
 
 	useEffect(() => {
 		const today = new Date();

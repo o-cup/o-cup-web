@@ -24,6 +24,8 @@ const sortOptions = {
 	alphabetAsc: "카페: 가나다순",
 };
 
+const initialChipsData = { dateChip: "", distChips: [] };
+
 const Result = ({ biasId, searchParams }: ResultProps) => {
 	const navigate = useNavigate();
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
@@ -36,7 +38,7 @@ const Result = ({ biasId, searchParams }: ResultProps) => {
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
 	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
-	const [chips, setChips] = useState<{ dateChip: string; distChips: RegCodeItem[] }>({ dateChip: "", distChips: [] });
+	const [chips, setChips] = useState<{ dateChip: string; distChips: RegCodeItem[] }>(initialChipsData);
 
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;

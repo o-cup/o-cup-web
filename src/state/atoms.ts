@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 import { RequestGoodsListType, RequestType } from "../components/request/requestType";
-import { ChipType, RegCodeItem } from "../components/search/types";
+import { RegCodeItem } from "../components/search/types";
 import { convertDateToString } from "../shared/utils/dateHandlers";
 import { sessionAtom } from "./recoilUtils";
 
@@ -19,24 +19,6 @@ export const biasFilterAtom = atom({
 export const openedBiasAtom = atom({
 	key: "openedBiasAtom",
 	default: [] as number[],
-});
-
-export const keywordAtom = atom({
-	key: "keywordAtom",
-	default: "",
-});
-
-export const dateRangeAtom = atom<{ startDate: string; endDate: string }>({
-	key: "dateRangeAtom",
-	default: {
-		startDate: "",
-		endDate: "",
-	},
-});
-
-export const districtAtom = atom<RegCodeItem[]>({
-	key: "districtAtom",
-	default: [],
 });
 
 export const requestInputsAtom = atom<RequestType>({
@@ -68,12 +50,32 @@ export const requestGoodsListAtom = atom<RequestGoodsListType[]>({
 	effects: [sessionAtom],
 });
 
-export const searchFilterChipsAtom = atom<ChipType>({
-	key: "searchFilterChipsAtom",
+export type SearchFiltersAtomType = {
+	keyword: string;
+	date: {
+		startDate: string;
+		endDate: string;
+	};
+	districts: RegCodeItem[];
+};
+
+export const searchFiltersAtom = atom<SearchFiltersAtomType>({
+	key: "searchFilters",
 	default: {
-		dateChip: "",
-		distChips: [],
+		keyword: "",
+		date: {
+			startDate: "",
+			endDate: "",
+		},
+		districts: [],
 	},
+	effects: [sessionAtom],
+});
+
+export const searchedAtom = atom<boolean>({
+	key: "searchedAtom",
+	default: false,
+	effects: [sessionAtom],
 });
 
 export default {};

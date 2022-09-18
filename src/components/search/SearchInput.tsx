@@ -1,18 +1,21 @@
 import React, { Dispatch, SetStateAction } from "react";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import Icon from "../../shared/components/Icon/Icons";
+import { searchedAtom, searchFiltersAtom } from "../../state";
 import { StyledSearchInput } from "./styles/searchInputStyle";
 
 type SearchInputProps = {
-	keyword: string;
-	setKeyword: Dispatch<SetStateAction<string>>;
-	setSearched: Dispatch<SetStateAction<boolean>>;
 	setSelectedBiasId: Dispatch<SetStateAction<null | number>>;
 };
 
-const SearchInput = ({ keyword, setKeyword, setSearched, setSelectedBiasId }: SearchInputProps) => {
+const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
+	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
+	const { keyword } = searchFilters;
+	const setSearched = useSetRecoilState(searchedAtom);
+
 	const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
 		const { value } = e.currentTarget;
-		setKeyword(value);
+		setSearchFilters((prev) => ({ ...prev, keyword: value }));
 		setSearched(false);
 	};
 
@@ -24,7 +27,7 @@ const SearchInput = ({ keyword, setKeyword, setSearched, setSelectedBiasId }: Se
 	};
 
 	const handleDeleteClick = () => {
-		setKeyword("");
+		setSearchFilters((prev) => ({ ...prev, keyword: "" }));
 		setSelectedBiasId(null);
 	};
 

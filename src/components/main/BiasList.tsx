@@ -6,13 +6,14 @@ import { fetchPeople } from "../../apis";
 import { dateFilterAtom, openedBiasAtom } from "../../state/atoms";
 import Bias from "./Bias";
 import { StyledBiasList, StyledBias } from "./styles/mainStyle";
+import Loading from "../../shared/components/Loading";
 
 function BiasList() {
 	const navigate = useNavigate();
 	const [openedBias] = useRecoilState(openedBiasAtom);
 	const selectedDate = useRecoilValue(dateFilterAtom);
 
-	const { data: people } = useQuery(["people", selectedDate], () => fetchPeople(), {
+	const { data: people, isLoading } = useQuery(["people", selectedDate], () => fetchPeople(), {
 		select: (data) => {
 			const biasesData = data?.filter((item) => openedBias.includes(item.id)) || [];
 
@@ -27,6 +28,9 @@ function BiasList() {
 		},
 	});
 
+	if (isLoading) {
+		return <Loading />;
+	}
 	return (
 		<StyledBiasList>
 			{people && people?.length ? (

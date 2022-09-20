@@ -31,10 +31,12 @@ const theme: DefaultTheme = {
 	},
 	zIndex: {
 		imageCarousel: 9,
+		loadingBackground: 9,
 		header: 10,
 		bottomSheet: 89, // memo: css 파일에 있어서 직접 입력함
 		modal: 99,
 		toast: 99,
+		loadingSpinner: 999,
 	},
 };
 

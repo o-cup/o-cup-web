@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import { StyledResult } from "./styles/resultStyle";
@@ -15,7 +15,6 @@ import { RegCodeItem } from "./types";
 
 type ResultProps = {
 	biasId?: number | null;
-	searchParams: URLSearchParams;
 };
 
 const sortOptions = {
@@ -26,7 +25,7 @@ const sortOptions = {
 
 const initialChipsData = { dateChip: "", distChips: [] };
 
-const Result = ({ biasId, searchParams }: ResultProps) => {
+const Result = ({ biasId }: ResultProps) => {
 	const navigate = useNavigate();
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 	const {

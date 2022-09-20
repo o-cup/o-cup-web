@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { fetchPeople } from "../apis";
 import { MonthSelector, Result, SearchInput } from "../components/search";
@@ -19,6 +19,7 @@ const sortOptions = {
 };
 
 const Search = () => {
+	const navigate = useNavigate();
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 	const { keyword } = searchFilters;
@@ -52,6 +53,22 @@ const Search = () => {
 	});
 
 	useEffect(() => {
+		const paramValue = searchParams.get("keyword");
+		if (paramValue && !viewResult) {
+			setSearchFilters((prev) => ({ ...prev, keyword: paramValue }));
+			setSearched(true);
+			return;
+		}
+
+		if (viewResult) {
+			setSearchParams({ keyword });
+		} else {
+			searchParams.delete("keyword");
+			setSearchParams(searchParams);
+		}
+	}, [viewResult, setSearchParams, searchParams, setSearchFilters, setSearched, keyword, searched]);
+
+	useEffect(() => {
 		setSearchFilters((prev) => ({ ...prev, date: { startDate: "", endDate: "" }, districts: [] }));
 	}, [keyword, setSearchFilters]);
 
@@ -62,13 +79,6 @@ const Search = () => {
 			setSearched(false);
 		}
 	}, [keyword, searched, setSearched]);
-
-	useEffect(() => {
-		if (!viewResult) return;
-		if (keyword) {
-			setSearchParams({ keyword });
-		}
-	}, [viewResult, setSearchParams, keyword, setSearchFilters]);
 
 	useEffect(() => {
 		const today = new Date();
@@ -82,13 +92,17 @@ const Search = () => {
 	};
 
 	const handleBackClick = () => {
-		setSearchFilters((prev) => ({ ...prev, keyword: "" }));
-		setSearched(false);
+		if (searched) {
+			setSearchFilters((prev) => ({ ...prev, keyword: "" }));
+			setSearched(false);
+			return;
+		}
+		navigate("/");
 	};
 
 	const conditionalRender = () => {
 		if (viewResult) {
-			return <Result biasId={selectedBiasId} searchParams={searchParams} />;
+			return <Result biasId={selectedBiasId} />;
 		}
 		return (
 			<StyledFilter>
@@ -118,7 +132,7 @@ const Search = () => {
 	};
 
 	return (
-		<Layout page="search" handleBackClick={searched ? handleBackClick : undefined}>
+		<Layout page="search" handleBackClick={handleBackClick}>
 			<StyledSearch>
 				<div className="input">
 					<SearchInput setSelectedBiasId={setSelectedBiasId} />

@@ -54,8 +54,9 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 		const sendUrl = `${window.origin}${location.pathname}`; // 전달할 URL
 
 		if (keyword) {
+			const encodedKeyword = encodeURIComponent(keyword);
 			window.open(
-				`https://twitter.com/intent/tweet?text=${sendText}&url=${sendUrl}?keyword=${keyword}`,
+				`https://twitter.com/intent/tweet?text=${sendText}&url=${sendUrl}?keyword=${encodedKeyword}`,
 				"popup",
 				"width=600, height=360"
 			);

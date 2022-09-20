@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import { dateFilterAtom } from "../../../../state/atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { dateFilterAtom, searchFiltersAtom } from "../../../../state/atoms";
 import DateSelector from "./DateSelector";
 import Icon from "../../Icon/Icons";
 import HeaderCalendar from "./HeaderCalendar";
@@ -33,6 +33,9 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const setDateFilter = useSetRecoilState(dateFilterAtom);
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
 	const [isTooltipOpen, setIsTooltipOpen] = useState(true);
+	const searchFilters = useRecoilValue(searchFiltersAtom);
+	const { keyword } = searchFilters;
+
 	const mainPage = page === "main";
 
 	useEffect(() => {
@@ -49,6 +52,16 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const shareTwitter = () => {
 		const sendText = "오늘의 컵홀더"; // 전달할 텍스트
 		const sendUrl = `${window.origin}${location.pathname}`; // 전달할 URL
+
+		if (keyword) {
+			window.open(
+				`https://twitter.com/intent/tweet?text=${sendText}&url=${sendUrl}?keyword=${keyword}`,
+				"popup",
+				"width=600, height=360"
+			);
+			return;
+		}
+
 		window.open(`https://twitter.com/intent/tweet?text=${sendText}&url=${sendUrl}`, "popup", "width=600, height=360");
 	};
 

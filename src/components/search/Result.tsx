@@ -42,8 +42,10 @@ const Result = ({ biasId }: ResultProps) => {
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
-	const { data: events } = useQuery(["resultEvents", keyword, startDate, endDate, biasId, districts], () =>
-		fetchSearchedEvent({ keyword, date: { startDate, endDate }, biasId, districts })
+	const { data: events } = useQuery(
+		["resultEvents", keyword, startDate, endDate, biasId, districts],
+		() => fetchSearchedEvent({ keyword, date: { startDate, endDate }, biasId, districts }),
+		{ enabled: !!keyword }
 	);
 
 	useEffect(() => {

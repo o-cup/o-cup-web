@@ -51,17 +51,7 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 
 	const shareTwitter = () => {
 		const sendText = "오늘의 컵홀더"; // 전달할 텍스트
-		const sendUrl = `${window.origin}${location.pathname}`; // 전달할 URL
-
-		if (keyword) {
-			const encodedKeyword = encodeURIComponent(keyword);
-			window.open(
-				`https://twitter.com/intent/tweet?text=${sendText}&url=${sendUrl}?keyword=${encodedKeyword}`,
-				"popup",
-				"width=600, height=360"
-			);
-			return;
-		}
+		const sendUrl = `${window.origin}${location.pathname}`;
 
 		window.open(`https://twitter.com/intent/tweet?text=${sendText}&url=${sendUrl}`, "popup", "width=600, height=360");
 	};

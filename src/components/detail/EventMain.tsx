@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { EventType, DetailType } from "../../types";
 import { convertDateToString, convertDateWithDots, isOpenToday } from "../../shared/utils/dateHandlers";
 import { StyledDetailImgContainer, StyledDetailTextContainer, StyledEventMain } from "./styles/eventMainStyle";
@@ -6,6 +6,7 @@ import { StyledBiasChip } from "../../shared/components/BiasChip/biasChipStyle";
 import BiasChip from "../../shared/components/BiasChip";
 import { DEFAULT_POSTER_URL } from "../../shared/constants";
 import { Icon } from "../../shared/components";
+import PosterView from "./PosterView";
 
 type EventMainProps = Partial<EventType> & Partial<DetailType>;
 
@@ -19,6 +20,8 @@ const EventMain = ({
 	images,
 	requestedBiases,
 }: EventMainProps) => {
+	const [isPosterViewOpen, setPosterViewOpen] = useState(false);
+
 	const today = convertDateToString(new Date());
 
 	if (!startAt || !endAt) return null;
@@ -64,13 +67,15 @@ const EventMain = ({
 				</div>
 			</StyledDetailTextContainer>
 			{images && images.length > 0 && (
-				<StyledDetailImgContainer>
+				<StyledDetailImgContainer onClick={() => setPosterViewOpen(true)}>
 					<img alt={images[0]} src={images[0]} onError={imageOnErrorHandler} />
 					<div className="imgPage">
 						<span>1 / {images.length}</span>
 					</div>
 				</StyledDetailImgContainer>
 			)}
+
+			{isPosterViewOpen && images && <PosterView images={images} setPosterViewOpen={setPosterViewOpen} />}
 		</StyledEventMain>
 	);
 };

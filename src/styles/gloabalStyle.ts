@@ -5,6 +5,10 @@ import { ThemeType } from "./theme";
 const GlobalStyle = createGlobalStyle<ThemeType>`
   ${reset};
 
+  html {
+    scroll-behavior: auto;
+  }
+  
   *, *::before, *::after {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;

@@ -7,6 +7,7 @@ import EventListItem from "./EventListItem";
 import { StyledList } from "./styles/mainStyle";
 import EmptyDefault from "./EmptyDefault";
 import GoogleAdvertise, { inFeedAdProps } from "../../shared/components/GoogleAdvertise";
+import Loading from "../../shared/components/Loading";
 
 // todo: useInfiniteQuery 리팩토링 후 추가
 const EventList = () => {
@@ -14,7 +15,7 @@ const EventList = () => {
 	const biasFilter = useRecoilValue(biasFilterAtom);
 	const setOpenedBias = useSetRecoilState(openedBiasAtom);
 
-	const { data: events } = useQuery(["events", dateFilter], () =>
+	const { data: events, isLoading } = useQuery(["events", dateFilter], () =>
 		fetchEvents({
 			date: dateFilter,
 		})
@@ -44,6 +45,9 @@ const EventList = () => {
 		}
 	}, [biasFilter, events]);
 
+	if (isLoading) {
+		return <Loading />;
+	}
 	return (
 		<>
 			<StyledList>

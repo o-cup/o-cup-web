@@ -39,7 +39,7 @@ export const LoadingSpinnerWrapper = styled.div`
 		border-radius: 50%;
 		animation: ${spinnerKeyframe} 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 		border: 2px solid;
-		border-color: ${({ theme }) => theme.colors.primary} transparent transparent transparent;
+		border-color: ${({ theme }) => theme.colors.gray} transparent transparent transparent;
 	}
 
 	div:nth-child(1) {

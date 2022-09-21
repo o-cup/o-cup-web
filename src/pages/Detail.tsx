@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { fetchEventDetail } from "../apis";
@@ -6,13 +6,12 @@ import { EventType, DetailType } from "../types";
 import { StyledDetail } from "../components/detail/styles/detailStyle";
 import { EventMain, EventNearHere, GoodsInfo, TwitterInfo, Location } from "../components/detail";
 import Layout from "../shared/components/layout";
+import Loading from "../shared/components/Loading";
 
 const Detail = () => {
-	window.scrollTo(0, 0);
-
 	const { id } = useParams();
 
-	const { data: combinedDetail }: (EventType & DetailType) | any = useQuery(
+	const { data: combinedDetail, isLoading }: (EventType & DetailType) | any = useQuery(
 		["detail", id],
 		() => fetchEventDetail({ id }),
 		{
@@ -20,7 +19,17 @@ const Detail = () => {
 		}
 	);
 
-	if (!combinedDetail) return null;
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+
+	if (isLoading || !combinedDetail)
+		return (
+			<Layout page="detail">
+				<Loading />
+			</Layout>
+		);
+
 	const { place, biasesId, organizer, snsId, startAt, endAt, images, district, address, goods, hashTags, tweetUrl } =
 		combinedDetail;
 

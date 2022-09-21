@@ -50,6 +50,7 @@ const Search = () => {
 			}
 			return biases;
 		},
+		enabled: !searched && !keyword,
 	});
 
 	useEffect(() => {
@@ -67,10 +68,6 @@ const Search = () => {
 			setSearchParams(searchParams);
 		}
 	}, [viewResult, setSearchParams, searchParams, setSearchFilters, setSearched, keyword, searched]);
-
-	useEffect(() => {
-		setSearchFilters((prev) => ({ ...prev, date: { startDate: "", endDate: "" }, districts: [] }));
-	}, [keyword, setSearchFilters]);
 
 	useEffect(() => {
 		setViewResult(!!(keyword && searched));
@@ -132,7 +129,7 @@ const Search = () => {
 	};
 
 	return (
-		<Layout page="search" handleBackClick={handleBackClick} share>
+		<Layout page="search" handleBackClick={handleBackClick}>
 			<StyledSearch>
 				<div className="input">
 					<SearchInput setSelectedBiasId={setSelectedBiasId} />

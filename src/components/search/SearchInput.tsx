@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import Icon from "../../shared/components/Icon/Icons";
 import { searchedAtom, searchFiltersAtom } from "../../state";
@@ -12,17 +12,25 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 	const { keyword } = searchFilters;
 	const setSearched = useSetRecoilState(searchedAtom);
+	const [inputValue, setInputValue] = useState("");
+
+	useEffect(() => {
+		setInputValue(keyword);
+	}, [keyword]);
 
 	const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
 		const { value } = e.currentTarget;
-		setSearchFilters((prev) => ({ ...prev, keyword: value }));
-		setSearched(false);
+		if (!value) {
+			setInputValue("");
+		}
+		setInputValue(value.trim());
 	};
 
 	const handleEnter = (e: React.KeyboardEvent<HTMLElement>) => {
 		if (e.key !== "Enter") return;
-
 		e.preventDefault();
+
+		setSearchFilters((prev) => ({ ...prev, keyword: inputValue }));
 		setSearched(true);
 	};
 
@@ -34,7 +42,7 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 	return (
 		<StyledSearchInput>
 			<input
-				value={keyword}
+				value={inputValue}
 				placeholder="카페 이름, 아티스트 이름, ..."
 				onChange={handleInputChange}
 				onKeyDown={handleEnter}

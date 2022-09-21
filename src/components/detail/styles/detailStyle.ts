@@ -5,14 +5,14 @@ const StyledDetail = styled.div`
 	flex-direction: column;
 	width: 100%;
 
-  /** padding .detailInfo 안으로 이동함! */
-  > div.detailInfo {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+	/** padding .detailInfo 안으로 이동함! */
+	> div.detailInfo {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
 
-    padding: 20px 20px 0 8px;
-  }
+		padding: 20px 20px 0 20px;
+	}
 
 	/* div.mainInfo,
 		div.subInfo {

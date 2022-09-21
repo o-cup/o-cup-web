@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import Icon from "../../shared/components/Icon/Icons";
 import { searchedAtom, searchFiltersAtom } from "../../state";
@@ -14,12 +14,16 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 	const setSearched = useSetRecoilState(searchedAtom);
 	const [inputValue, setInputValue] = useState("");
 
+	useEffect(() => {
+		setInputValue(keyword);
+	}, [keyword]);
+
 	const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
 		const { value } = e.currentTarget;
 		if (!value) {
-			setSearchFilters((prev) => ({ ...prev, keyword: "" }));
+			setInputValue("");
 		}
-		setInputValue(value);
+		setInputValue(value.trim());
 	};
 
 	const handleEnter = (e: React.KeyboardEvent<HTMLElement>) => {

@@ -7,45 +7,45 @@ const StyledRequest = styled.div`
 `;
 
 const StyledCheckEvent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 480px;
-  gap: 64px;
-  padding: 32px 20px;
-  margin: 0 auto;
-  
-  > div.checkNotice {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    padding: 12px;
-    
-    > img {
-      width: 24px;
-      height: 31px;
-    }
-    
-    > p {
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 19px;
-      text-align: center;
-      color: #000000;
-    }
-  }
-  
-  > div.btnContainer {
-    width: 100%;
-    
-    &.disabled {
-      opacity: 50%;
-      pointer-events: none;
-    }
-  }
-`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	max-width: 480px;
+	gap: 64px;
+	padding: 32px 20px;
+	margin: 0 auto;
+
+	> div.checkNotice {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 12px;
+		padding: 12px;
+
+		> img {
+			width: 24px;
+			height: 31px;
+		}
+
+		> p {
+			font-weight: 500;
+			font-size: 14px;
+			line-height: 19px;
+			text-align: center;
+			color: #000000;
+		}
+	}
+
+	> div.btnContainer {
+		width: 100%;
+
+		&.disabled {
+			opacity: 50%;
+			pointer-events: none;
+		}
+	}
+`;
 
 const StyledEntry = styled.div`
 	//width: 50%;
@@ -56,7 +56,7 @@ const StyledEntry = styled.div`
 	padding: 32px 20px;
 
 	//@media ${({ theme }) => theme.device.mobile} {
-		width: 100%;
+	width: 100%;
 	//}
 
 	.notice {
@@ -123,7 +123,7 @@ const StyledPreview = styled.div`
 	padding: 14px 0;
 
 	//@media ${({ theme }) => theme.device.mobile} {
-		display: none;
+	display: none;
 	//}
 
 	.previewContent {
@@ -133,13 +133,13 @@ const StyledPreview = styled.div`
 
 const StyledRequestBottomSheet = styled.div`
 	width: 100%;
-	padding: 0 20px 32px 12px;
+	padding: 0 20px 32px;
 
 	.previewContent {
 		width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
 	}
 `;
 
@@ -186,7 +186,7 @@ const StyledRequestModal = styled.div`
 			line-height: 16px;
 			text-align: center;
 			padding: 6px 12px;
-      width: 116px;
+			width: 116px;
 
 			&.alertBtn {
 				width: 72px;
@@ -196,25 +196,25 @@ const StyledRequestModal = styled.div`
 `;
 
 const StyledDuplicatedModal = styled.div`
-  width: 100%;
+	width: 100%;
 	border: none;
 	background-color: ${({ theme }) => theme.colors.background};
 	border-radius: 4px;
 	padding: 40px 14px;
-  text-align: center;
+	text-align: center;
 
 	> p {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 19px;
-    text-align: center;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 19px;
+		text-align: center;
 	}
 
 	.modalBtnContainer {
 		display: flex;
 		gap: 12px;
 		margin-top: 40px;
-    justify-content: center;
+		justify-content: center;
 	}
 `;
 
@@ -229,8 +229,8 @@ const StyledDuplicatedEvent = styled.div`
 	box-shadow: 4px 4px 0 #000000;
 	width: 100%;
 	cursor: pointer;
-  margin-top: 40px;
-  
+	margin-top: 40px;
+
 	img {
 		width: 104px;
 		height: 100%;
@@ -248,46 +248,56 @@ const StyledDuplicatedEvent = styled.div`
 			align-items: center;
 
 			h2 {
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 22px;
+				font-weight: 700;
+				font-size: 16px;
+				line-height: 22px;
 			}
 		}
 
 		.biases {
 			display: flex;
 			gap: 5px;
-      margin-top: 6px;
-      margin-bottom: 16px;
+			margin-top: 6px;
+			margin-bottom: 16px;
 		}
 
 		.extraInfo {
-      width: 100%;
+			width: 100%;
 			height: 100%;
 			display: flex;
 			flex-direction: column;
 			justify-content: space-around;
-      overflow: hidden;
+			overflow: hidden;
 
 			p {
-        display: flex;
-        align-items: center;
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 16px;
+				display: flex;
+				align-items: center;
+				font-weight: 500;
+				font-size: 12px;
+				line-height: 16px;
 				color: ${({ theme }) => theme.colors.gray};
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 
 				svg {
 					margin-right: 5px;
-          min-width: 14px;
+					min-width: 14px;
 				}
 			}
 		}
 	}
 `;
 
-export { StyledRequest, StyledCheckEvent, StyledEntry, StyledPreview, StyledRequestBottomSheet, Label, StyledRequestModal, StyledDuplicatedModal, StyledDuplicatedEvent };
+export {
+	StyledRequest,
+	StyledCheckEvent,
+	StyledEntry,
+	StyledPreview,
+	StyledRequestBottomSheet,
+	Label,
+	StyledRequestModal,
+	StyledDuplicatedModal,
+	StyledDuplicatedEvent,
+};
 export default {};

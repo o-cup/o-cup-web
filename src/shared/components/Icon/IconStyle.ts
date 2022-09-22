@@ -197,6 +197,13 @@ export const StyledIcon = styled.i`
 		height: 14px;
 		background-size: contain;
 	}
+
+	&.poster-close {
+		background: url("/images/icons/delete-circle_white.png") no-repeat;
+		background-size: contain;
+		height: 32px;
+		width: 32px;
+	}
 `;
 
 export default {};

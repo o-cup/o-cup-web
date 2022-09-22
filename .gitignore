@@ -22,3 +22,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#IntelliJ project files
+.idea
+.idea/*.xml*
+.idea/*.iml*

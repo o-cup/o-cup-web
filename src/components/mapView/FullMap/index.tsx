@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { EventType } from "../../../types";
 import { StyledFullMap } from "../styles/mapStyle";
 
 type MapProps = {
 	events: EventType[];
+	setLoading: Dispatch<SetStateAction<boolean>>;
 };
 
 type MarkerContentType = {
@@ -11,7 +12,7 @@ type MarkerContentType = {
 	latlng: any;
 };
 
-function FullMap({ events }: MapProps) {
+function FullMap({ events, setLoading }: MapProps) {
 	const { kakao } = window as any;
 
 	const fullContainer = useRef<HTMLDivElement>(null);
@@ -59,6 +60,8 @@ function FullMap({ events }: MapProps) {
 						// LatLngBounds 객체에 좌표를 추가합니다
 						bounds.extend(pin.latlng);
 						map.setBounds(bounds);
+
+						setLoading(false);
 					}
 				});
 			});

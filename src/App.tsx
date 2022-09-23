@@ -12,6 +12,7 @@ import Main from "./pages/Main";
 import Detail from "./pages/Detail";
 import Request from "./pages/Request";
 import Search from "./pages/Search";
+import MapResult from "./pages/MapResult";
 import Wrapper from "./components/Wrapper";
 import useAnalytics from "./hooks/useAnalytics";
 
@@ -43,6 +44,7 @@ function App() {
 								<Route path="/detail/:id" element={<Detail />} />
 								<Route path="/request" element={<Request />} />
 								<Route path="/search" element={<Search />} />
+								<Route path="/map" element={<MapResult />} />
 							</Routes>
 						</Wrapper>
 					</RecoilRoot>

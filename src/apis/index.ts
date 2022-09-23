@@ -169,5 +169,6 @@ export {
 	fetchBiases,
 	uploadPoster,
 	fetchDuplicatedEvent,
+	fetchDetail,
 };
 export default {};

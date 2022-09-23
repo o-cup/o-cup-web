@@ -8,7 +8,7 @@ export type RequestBias = {
 };
 
 export type EventType = {
-	id: number;
+	id: string;
 	createdAt: string;
 	place: string;
 	bias: string[];
@@ -16,6 +16,7 @@ export type EventType = {
 	organizer: string;
 	snsId: string;
 	district: string;
+	newDistrict: { code: string; name: string };
 	startAt: string;
 	endAt: string;
 	images: string[];

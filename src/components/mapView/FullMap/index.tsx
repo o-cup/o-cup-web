@@ -47,7 +47,6 @@ function FullMap({ events, setLoading }: MapProps) {
 						pin.latlng = latLng;
 
 						markerContents.push(pin);
-						console.log(pin);
 
 						// 결과값으로 받은 위치를 마커로 표시합니다
 						const marker = new kakao.maps.Marker({

@@ -114,17 +114,9 @@ export const StyledMapResult = styled.div`
 	}
 
 	> .eventsContainer {
-		display: flex;
-		overflow-x: auto;
-		gap: 12px;
-
-		&::after {
-			content: "";
-			border-right: 8px solid transparent;
-		}
-
-		> div:first-child {
-			margin-left: 20px;
+		.swiper-slide {
+			width: 100%;
+			padding: 0 20px 4px 16px; // 그림자
 		}
 	}
 `;

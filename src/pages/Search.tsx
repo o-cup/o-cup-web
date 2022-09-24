@@ -129,7 +129,7 @@ const Search = () => {
 	};
 
 	return (
-		<Layout page="search" handleBackClick={handleBackClick}>
+		<Layout page="search" handleBackClick={handleBackClick} share>
 			<StyledSearch>
 				<div className="input">
 					<SearchInput setSelectedBiasId={setSelectedBiasId} />

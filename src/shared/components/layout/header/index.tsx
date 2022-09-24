@@ -49,11 +49,27 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 		};
 	}, []);
 
+	const copyUrl = () => {
+		console.log("copyUrl");
+	};
+
 	const shareTwitter = () => {
-		const sendText = "오늘의 컵홀더"; // 전달할 텍스트
+		const sendText = "오늘의 컵홀더";
 		const sendUrl = `${window.origin}${location.pathname}`;
 
 		window.open(`https://twitter.com/intent/tweet?text=${sendText}&url=${sendUrl}`, "popup", "width=600, height=360");
+	};
+
+	const handleShareClick = () => {
+		const isResultShare = !!keyword;
+
+		if (isResultShare) {
+			// todo: 링크 복사 + 토스트 발생
+			copyUrl();
+			return;
+		}
+
+		shareTwitter();
 	};
 
 	const handleLogoClick = () => {
@@ -67,7 +83,7 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 		if (window.history.state && window.history.state?.idx > 0) {
 			navigate(-1);
 		} else {
-			navigate("/"); // 이전 히스토리가 없으면 메인 페이지로
+			navigate("/");
 		}
 	};
 
@@ -87,7 +103,7 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 						{(mainPage || page === "detail") && <Icon name="search_header" handleClick={() => navigate("/search")} />}
 						{share && (
 							<Share>
-								<Icon name="share" handleClick={shareTwitter} />
+								<Icon name="share" handleClick={handleShareClick} />
 								{isTooltipOpen && <span className="tooltip">트위터에 공유하기</span>}
 							</Share>
 						)}

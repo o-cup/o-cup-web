@@ -3,9 +3,12 @@ import { FaTwitter } from "react-icons/fa";
 import { DetailType, EventType } from "../../types";
 import { StyledTwitterInfo } from "./styles/twitterInfoStyle";
 
-type TwitterInfoProps = Partial<EventType> & Partial<DetailType>;
+type TwitterInfoProps = {
+	data: Partial<EventType> & Partial<DetailType>;
+};
 
-function TwitterInfo({ organizer, snsId, hashTags }: TwitterInfoProps) {
+function TwitterInfo({ data }: TwitterInfoProps) {
+	const { organizer, snsId, hashTags } = data;
 	return (
 		<StyledTwitterInfo>
 			<div className="account">

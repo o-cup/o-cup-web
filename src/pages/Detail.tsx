@@ -30,33 +30,22 @@ const Detail = () => {
 			</Layout>
 		);
 
-	const { place, biasesId, organizer, snsId, startAt, endAt, images, district, address, goods, hashTags, tweetUrl } =
-		combinedDetail;
+	const { biasesId, newDistrict, address, goods, tweetUrl } = combinedDetail;
 
-	// TODO: props하나로 묶어서 전달할 수 있도록 리팩토링
 	return (
 		<Layout page="detail" share>
 			<StyledDetail>
 				<div className="detailInfo">
 					<div className="mainInfo">
-						<EventMain
-							place={place}
-							biasesId={biasesId}
-							organizer={organizer}
-							snsId={snsId}
-							startAt={startAt}
-							endAt={endAt}
-							address={address}
-							images={images}
-						/>
+						<EventMain data={combinedDetail} />
 					</div>
 					<div className="subInfo">
-						<TwitterInfo organizer={organizer} snsId={snsId} hashTags={hashTags} />
+						<TwitterInfo data={combinedDetail} />
 						<GoodsInfo goods={goods} tweetUrl={tweetUrl} />
 						<Location address={address} />
 					</div>
 				</div>
-				<EventNearHere biasesId={biasesId} district={district} />
+				<EventNearHere biasesId={biasesId} newDistrict={newDistrict} />
 			</StyledDetail>
 		</Layout>
 	);

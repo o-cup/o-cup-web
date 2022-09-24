@@ -16,6 +16,7 @@ export type EventType = {
 	organizer: string;
 	snsId: string;
 	district: string;
+	newDistrict: { code: string; name: string };
 	startAt: string;
 	endAt: string;
 	images: string[];

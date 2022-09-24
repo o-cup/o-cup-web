@@ -4,7 +4,6 @@ const StyledGoodsInfo = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
-	padding-left: 12px;
 
 	> h4 {
 		font-weight: 700;
@@ -45,13 +44,13 @@ const StyledGoodsListItem = styled.div`
 		margin-bottom: 16px;
 	}
 
-  ul {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    height: fit-content;
-    margin-bottom: 16px;
+	ul {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 8px;
+		height: fit-content;
+		margin-bottom: 16px;
 	}
 
 	ul.fcfs,

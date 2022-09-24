@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const StyledTwitterInfo = styled.div`
 	position: relative;
 	padding: 20px 0 0 0;
-	padding-left: 12px;
 
 	display: flex;
 	flex-direction: column;

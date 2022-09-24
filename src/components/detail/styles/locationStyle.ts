@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 const StyledLocation = styled.div`
-	padding-left: 12px;
-
 	> h4 {
 		font-weight: 700;
 		font-size: 20px;
@@ -11,10 +9,17 @@ const StyledLocation = styled.div`
 	}
 
 	> p {
+		display: flex;
+		align-items: center;
+		gap: 4px;
 		font-weight: 400;
 		font-size: 14px;
 		line-height: 19px;
 		margin-top: 16px;
+
+		svg {
+			cursor: pointer;
+		}
 	}
 `;
 

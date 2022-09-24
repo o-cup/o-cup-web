@@ -7,6 +7,8 @@ import Icon from "../../Icon/Icons";
 import HeaderCalendar from "./HeaderCalendar";
 import { Share, StyledHeader } from "./headerStyle";
 import { convertDateToString } from "../../../utils/dateHandlers";
+import { copyToClipboard } from "../../../utils/copyHandlers";
+import Toast from "../../Toast";
 
 type Titles = {
 	[key: string]: string;
@@ -31,12 +33,14 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const setDateFilter = useSetRecoilState(dateFilterAtom);
-	const [isCalendarOpen, setCalendarOpen] = useState(false);
-	const [isTooltipOpen, setIsTooltipOpen] = useState(true);
 	const searchFilters = useRecoilValue(searchFiltersAtom);
 	const { keyword } = searchFilters;
+	const [isCalendarOpen, setCalendarOpen] = useState(false);
+	const [isTooltipOpen, setIsTooltipOpen] = useState(true);
+	const [isToastOpen, setIsToastOpen] = useState(false);
 
 	const mainPage = page === "main";
+	const baseUrl = `${window.origin}${location.pathname}`;
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -49,27 +53,22 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 		};
 	}, []);
 
-	const copyUrl = () => {
-		console.log("copyUrl");
-	};
-
 	const shareTwitter = () => {
 		const sendText = "오늘의 컵홀더";
-		const sendUrl = `${window.origin}${location.pathname}`;
-
-		window.open(`https://twitter.com/intent/tweet?text=${sendText}&url=${sendUrl}`, "popup", "width=600, height=360");
+		window.open(`https://twitter.com/intent/tweet?text=${sendText}&url=${baseUrl}`, "popup", "width=600, height=360");
 	};
 
 	const handleShareClick = () => {
 		const isResultShare = !!keyword;
 
 		if (isResultShare) {
-			// todo: 링크 복사 + 토스트 발생
-			copyUrl();
-			return;
+			const encodedKeyword = encodeURIComponent(keyword);
+			const url = `${baseUrl}?keyword=${encodedKeyword}`;
+			copyToClipboard(url);
+			setIsToastOpen(true);
+		} else {
+			shareTwitter();
 		}
-
-		shareTwitter();
 	};
 
 	const handleLogoClick = () => {
@@ -109,6 +108,7 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 						)}
 					</div>
 				</div>
+				{isToastOpen && <Toast setToast={setIsToastOpen} text="링크가 복사되었습니다" />}
 			</StyledHeader>
 			{isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}
 		</>

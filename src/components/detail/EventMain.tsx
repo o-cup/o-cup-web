@@ -8,18 +8,13 @@ import { DEFAULT_POSTER_URL } from "../../shared/constants";
 import { Icon } from "../../shared/components";
 import PosterView from "./PosterView";
 
-type EventMainProps = Partial<EventType> & Partial<DetailType>;
+type EventMainProps = {
+	data: Partial<EventType> & Partial<DetailType>;
+};
 
-const EventMain = ({
-	place,
-	biasesId,
-	organizer,
-	startAt,
-	endAt,
-	address,
-	images,
-	requestedBiases,
-}: EventMainProps) => {
+const EventMain = ({ data }: EventMainProps) => {
+	const { place, biasesId, organizer, startAt, endAt, images, address, requestedBiases } = data;
+
 	const [isPosterViewOpen, setPosterViewOpen] = useState(false);
 
 	const today = convertDateToString(new Date());

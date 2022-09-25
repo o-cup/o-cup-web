@@ -6,7 +6,7 @@ import { EventType } from "../../types";
 import { EventNearHereList, StyledEventNearHere } from "./styles/eventNearHereStyle";
 import { DEFAULT_POSTER_URL } from "../../shared/constants";
 
-function EventNearHere({ biasesId, district }: Partial<EventType>) {
+function EventNearHere({ biasesId, newDistrict }: Partial<EventType>) {
 	const { id } = useParams();
 	const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ function EventNearHere({ biasesId, district }: Partial<EventType>) {
 		select: (data) =>
 			data?.filter((item) => {
 				if (biasesId && biasesId[0]) {
-					return item.id !== id && item.district === district && item.biasesId[0] === biasesId[0];
+					return item.id !== id && item.newDistrict.name === newDistrict?.name && item.biasesId[0] === biasesId[0];
 				}
 				return null;
 			}),
@@ -32,7 +32,7 @@ function EventNearHere({ biasesId, district }: Partial<EventType>) {
 
 	return (
 		<StyledEventNearHere>
-			<h4>가까운 연관 이벤트</h4>
+			<h4>{newDistrict?.name || "가까운"} 연관 이벤트</h4>
 			<ul>
 				{nearEvent &&
 					nearEvent.map((event) => {

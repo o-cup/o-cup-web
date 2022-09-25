@@ -7,6 +7,7 @@ import { MonthSelector, Result, SearchInput } from "../components/search";
 import { StyledFilter, StyledSearch } from "../components/search/styles/searchStyle";
 import BiasProfile from "../shared/components/BiasProfile";
 import Layout from "../shared/components/layout";
+import Loading from "../shared/components/Loading";
 import SortIcon from "../shared/components/SortIcon";
 import { getBirthMonth } from "../shared/utils/dateHandlers";
 import { searchedAtom, searchFiltersAtom } from "../state";
@@ -30,7 +31,7 @@ const Search = () => {
 	const [selectedOption, setSelectedOption] = useState<SearchSortOptions>("alphabetAsc");
 	const [viewResult, setViewResult] = useState(false);
 
-	const { data: people } = useQuery(["people", selectedOption], () => fetchPeople(selectedOption), {
+	const { data: people, isLoading } = useQuery(["people", selectedOption], () => fetchPeople(selectedOption), {
 		select: (data) => {
 			let biases = data?.filter((item) => getBirthMonth(item.birthday) === selectedMonth);
 
@@ -97,6 +98,10 @@ const Search = () => {
 		navigate("/");
 	};
 
+	if (isLoading) {
+		return <Loading />;
+	}
+
 	const conditionalRender = () => {
 		if (viewResult) {
 			return <Result biasId={selectedBiasId} />;
@@ -129,7 +134,7 @@ const Search = () => {
 	};
 
 	return (
-		<Layout page="search" handleBackClick={handleBackClick}>
+		<Layout page="search" handleBackClick={handleBackClick} share>
 			<StyledSearch>
 				<div className="input">
 					<SearchInput setSelectedBiasId={setSelectedBiasId} />

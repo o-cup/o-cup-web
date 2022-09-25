@@ -8,9 +8,9 @@ import "./request-calendar-custom.css";
 import { StyledDateRangeInput, StyledCalendarContainer } from "./dateRangeInputStyle";
 import { convertDateToString, convertDateWithDots, convertStringToDate } from "../../../shared/utils/dateHandlers";
 
-const DateRangeInput = ({disabled}: {disabled?: boolean}) => {
+const DateRangeInput = ({ disabled }: { disabled?: boolean }) => {
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
-  const { dateRange } = requestInputs;
+	const { dateRange } = requestInputs;
 
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
 	const [selectedRange, setSelectedRange] = useState({
@@ -32,29 +32,29 @@ const DateRangeInput = ({disabled}: {disabled?: boolean}) => {
 	};
 
 	const handleClickSubmit = () => {
-    setRequestInputs({
-      ...requestInputs,
-      dateRange: {
-        startAt: convertDateToString(selectedRange.startDate),
-        endAt: convertDateToString(selectedRange.endDate),
-      },
-    });
+		setRequestInputs({
+			...requestInputs,
+			dateRange: {
+				startAt: convertDateToString(selectedRange.startDate),
+				endAt: convertDateToString(selectedRange.endDate),
+			},
+		});
 		setCalendarOpen(false);
 	};
 
-	if(disabled) {
+	if (disabled) {
 		return (
 			<StyledDateRangeInput>
-        <div className="dateInputContainer">
-          <span>이벤트 기간 *</span>
-          <div className="disabledCalendarInput">
-            {dateRange.startAt && dateRange.endAt
-              ? `${convertDateWithDots(dateRange.startAt)} - ${convertDateWithDots(dateRange.endAt)}`
-              : ""}
-          </div>
-        </div>
-		  </StyledDateRangeInput>
-		)
+				<div className="dateInputContainer">
+					<span>이벤트 기간 *</span>
+					<div className="disabledCalendarInput">
+						{dateRange.startAt && dateRange.endAt
+							? `${convertDateWithDots(dateRange.startAt)} - ${convertDateWithDots(dateRange.endAt)}`
+							: ""}
+					</div>
+				</div>
+			</StyledDateRangeInput>
+		);
 	}
 	return (
 		<StyledDateRangeInput>
@@ -107,7 +107,7 @@ const DateRangeInput = ({disabled}: {disabled?: boolean}) => {
 };
 
 DateRangeInput.defaultProps = {
-	disabled: false
-}
+	disabled: false,
+};
 
 export default DateRangeInput;

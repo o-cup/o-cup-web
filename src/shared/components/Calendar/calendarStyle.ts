@@ -12,7 +12,16 @@ export const StyledCalendar = styled.div`
 		height: 50px;
 	}
 
-	i.delete-circle-black {
+	& > div:first-child {
+		width: fit-content;
+		position: absolute;
+
+		top: 17px;
+		left: 15px;
+		z-index: 1;
+	}
+
+	& > i.delete-circle-black {
 		position: absolute;
 		top: 14px;
 		right: 15px;

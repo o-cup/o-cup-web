@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { ko } from "date-fns/locale";
 import { DateRange } from "react-date-range-ts";
 import { convertDateToString, convertDateWithDots } from "../../utils/dateHandlers";
@@ -9,11 +9,12 @@ type CalendarProps = {
 	selectedRange: any;
 	handleSelectRange: any;
 	handleClickSubmit: any;
+	setCalendarOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const Calendar = ({ selectedRange, handleSelectRange, handleClickSubmit }: CalendarProps) => (
+const Calendar = ({ selectedRange, handleSelectRange, handleClickSubmit, setCalendarOpen }: CalendarProps) => (
 	<StyledCalendar>
-		<Icon name="delete-circle-black" />
+		<Icon name="delete-circle-black" handleClick={() => setCalendarOpen(false)} />
 
 		<DateRange
 			className="request-calendar"

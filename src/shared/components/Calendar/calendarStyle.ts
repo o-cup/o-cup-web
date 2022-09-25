@@ -15,7 +15,7 @@ export const StyledCalendar = styled.div`
 	i.delete-circle-black {
 		position: absolute;
 		top: 14px;
-		right: 10px;
+		right: 15px;
 		z-index: 1;
 	}
 

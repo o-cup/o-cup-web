@@ -7,6 +7,27 @@ export const StyledCalendar = styled.div`
 	width: 100%;
 	gap: 6px;
 
+	.rdrMonthAndYearWrapper {
+		position: relative;
+		height: 50px;
+	}
+
+	& > div:first-child {
+		width: fit-content;
+		position: absolute;
+
+		top: 17px;
+		left: 15px;
+		z-index: 1;
+	}
+
+	& > i.delete-circle-black {
+		position: absolute;
+		top: 14px;
+		right: 15px;
+		z-index: 1;
+	}
+
 	.dateCheckContainer {
 		display: flex;
 		justify-content: space-between;

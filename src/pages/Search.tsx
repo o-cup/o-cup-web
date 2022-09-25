@@ -12,6 +12,7 @@ import SortIcon from "../shared/components/SortIcon";
 import { getBirthMonth } from "../shared/utils/dateHandlers";
 import { searchedAtom, searchFiltersAtom } from "../state";
 import { SearchSortOptions } from "../types";
+import { setMetaTags } from "../shared/utils/metaTagHandlers";
 
 const sortOptions = {
 	alphabetAsc: "가나다순",
@@ -53,6 +54,23 @@ const Search = () => {
 		},
 		enabled: !searched && !keyword,
 	});
+
+	useEffect(() => {
+		if (keyword) {
+			setMetaTags({
+				title: "오늘의 컵홀더 | 검색하기",
+				description: `${keyword}의 생일 이벤트를 확인해보세요!`,
+			});
+		} else {
+			setMetaTags({
+				title: "오늘의 컵홀더 | 검색하기",
+				description: "응원하는 아티스트의 생일 이벤트를 검색해보세요!",
+			});
+		}
+		return () => {
+			setMetaTags({});
+		};
+	}, [keyword]);
 
 	useEffect(() => {
 		const paramValue = searchParams.get("keyword");

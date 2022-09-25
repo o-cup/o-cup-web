@@ -87,7 +87,7 @@ export const StyledHeaderCalendarContainer = styled.div`
 	max-width: 480px;
 	top: ${({ theme }) => theme.heights.header};
 	left: 50%;
-  transform: translateX(-50%);
+	transform: translateX(-50%);
 
 	backdrop-filter: blur(4px);
 

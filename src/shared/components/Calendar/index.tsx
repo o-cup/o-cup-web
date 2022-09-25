@@ -3,6 +3,7 @@ import { ko } from "date-fns/locale";
 import { DateRange } from "react-date-range-ts";
 import { convertDateToString, convertDateWithDots } from "../../utils/dateHandlers";
 import { StyledCalendar } from "./calendarStyle";
+import Icon from "../Icon/Icons";
 
 type CalendarProps = {
 	selectedRange: any;
@@ -12,6 +13,8 @@ type CalendarProps = {
 
 const Calendar = ({ selectedRange, handleSelectRange, handleClickSubmit }: CalendarProps) => (
 	<StyledCalendar>
+		<Icon name="delete-circle-black" />
+
 		<DateRange
 			className="request-calendar"
 			editableDateInputs

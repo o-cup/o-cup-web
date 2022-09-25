@@ -60,7 +60,8 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	}, []);
 
 	const shareTwitter = () => {
-		const sendText = "오늘의 컵홀더";
+		const sendText =
+			document?.querySelector("meta[name='twitter:description']")?.getAttribute("content") || "오늘의 컵홀더";
 		window.open(`https://twitter.com/intent/tweet?text=${sendText}&url=${baseUrl}`, "popup", "width=600, height=360");
 	};
 

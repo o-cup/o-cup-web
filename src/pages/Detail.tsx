@@ -28,7 +28,7 @@ const Detail = () => {
 		if (combinedDetail?.place && name) {
 			setMetaTags({
 				title: "오늘의 컵홀더 | 상세보기",
-				description: `${combinedDetail.place}에서 진행하는 ${name}의 이벤트를 오늘의 컵홀더에서 확인해보세요!`,
+				description: `${combinedDetail.place}에서 열리는 ${name}의 이벤트를 오늘의 컵홀더에서 확인해보세요!`,
 			});
 		}
 		return () => {

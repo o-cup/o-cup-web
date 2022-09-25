@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { dateFilterAtom, searchFiltersAtom } from "../../../../state/atoms";
+import { dateFilterAtom, searchedAtom, searchFiltersAtom } from "../../../../state/atoms";
 import DateSelector from "./DateSelector";
 import Icon from "../../Icon/Icons";
 import HeaderCalendar from "./HeaderCalendar";
@@ -35,12 +35,18 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const setDateFilter = useSetRecoilState(dateFilterAtom);
 	const searchFilters = useRecoilValue(searchFiltersAtom);
 	const { keyword } = searchFilters;
+	const searched = useRecoilValue(searchedAtom);
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
 	const [isTooltipOpen, setIsTooltipOpen] = useState(true);
 	const [isToastOpen, setIsToastOpen] = useState(false);
 
 	const mainPage = page === "main";
 	const baseUrl = `${window.origin}${location.pathname}`;
+
+	useEffect(() => {
+		const hideTooltip = page === "search" && searched;
+		setIsTooltipOpen(!hideTooltip);
+	}, [page, searched, setIsTooltipOpen]);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -86,6 +92,15 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 		}
 	};
 
+	// const renderTooltip = () => {
+	// 	if (!isTooltipOpen) return null;
+
+	// 	const searchResult = page === "search" && searched;
+	// 	if (searchResult) return null;
+
+	// 	return <span className="tooltip">트위터에 공유하기</span>;
+	// };
+
 	return (
 		<>
 			<StyledHeader mainPage={mainPage}>
@@ -104,6 +119,7 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 							<Share>
 								<Icon name="share" handleClick={handleShareClick} />
 								{isTooltipOpen && <span className="tooltip">트위터에 공유하기</span>}
+								{/* {renderTooltip()} */}
 							</Share>
 						)}
 					</div>

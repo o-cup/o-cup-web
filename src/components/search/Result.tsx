@@ -12,6 +12,7 @@ import { searchFiltersAtom } from "../../state";
 import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { fetchSearchedEvent } from "../../apis/search";
 import { RegCodeItem } from "./types";
+import Loading from "../../shared/components/Loading";
 
 type ResultProps = {
 	biasId?: number | null;
@@ -42,7 +43,7 @@ const Result = ({ biasId }: ResultProps) => {
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
-	const { data: events } = useQuery(
+	const { data: events, isLoading } = useQuery(
 		["resultEvents", keyword, startDate, endDate, biasId, districts],
 		() => fetchSearchedEvent({ keyword, date: { startDate, endDate }, biasId, districts }),
 		{ enabled: !!keyword }
@@ -91,6 +92,10 @@ const Result = ({ biasId }: ResultProps) => {
 	};
 
 	const chip = chips.dateChip || chips.distChips.length > 0;
+
+	if (isLoading) {
+		return <Loading />;
+	}
 
 	return (
 		<StyledResult>

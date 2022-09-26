@@ -1,7 +1,7 @@
 export const setMetaTags = ({
 	title = "오늘의 컵홀더",
 	description = "응원하는 아티스트의 생일 이벤트를 한눈에 확인해보세요!",
-	imageUrl = "https://www.o-cup.kr/images/ocup_profile.png",
+	imageUrl = "https://www.o-cup.kr/images/ocup_profile.jpg",
 }: {
 	title?: string;
 	description?: string;

@@ -15,10 +15,10 @@ export const setMetaTags = ({
 	document?.querySelector("meta[name='twitter:description']")?.setAttribute("content", description);
 
 	// set images
-	document?.querySelector("meta[property='og:image']")?.setAttribute("content", "%PUBLIC_URL%/images/logo_primary.png");
-	document
-		?.querySelector("meta[name='twitter:image']")
-		?.setAttribute("content", "%PUBLIC_URL%/images/logo_primary.png");
+	// document?.querySelector("meta[property='og:image']")?.setAttribute("content", "%PUBLIC_URL%/images/logo_primary.png");
+	// document
+	// 	?.querySelector("meta[name='twitter:image']")
+	// 	?.setAttribute("content", "https://www.o-cup.kr/images/logo_primary.png");
 
 	// set url
 	document?.querySelector("meta[property='og:url']")?.setAttribute("content", window.location.href);

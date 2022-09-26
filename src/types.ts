@@ -88,5 +88,5 @@ export type DateRangeType = {
 	key: string;
 };
 
-export type SearchSortOptions = "alphabetAsc" | "birthdayAsc" | "birthdayDsc";
-export type ResultSortOptions = "dateAsc" | "dateDsc" | "alphabetAsc";
+export type SearchSortOptionKeys = "alphabetAsc" | "birthdayAsc" | "birthdayDsc";
+export type ResultSortOptionKeys = "dateAsc" | "dateDsc" | "alphabetAsc";

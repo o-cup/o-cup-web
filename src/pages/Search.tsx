@@ -11,14 +11,8 @@ import Loading from "../shared/components/Loading";
 import SortIcon from "../shared/components/SortIcon";
 import { getBirthMonth } from "../shared/utils/dateHandlers";
 import { searchedAtom, searchFiltersAtom } from "../state";
-import { SearchSortOptions } from "../types";
 import { setMetaTags } from "../shared/utils/metaTagHandlers";
-
-const sortOptions = {
-	alphabetAsc: "가나다순",
-	birthdayAsc: "생일: 1일부터",
-	birthdayDsc: "생일: 말일부터",
-};
+import { SearchSortOptionKeys } from "../types";
 
 const Search = () => {
 	const navigate = useNavigate();
@@ -29,7 +23,7 @@ const Search = () => {
 	const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 	const [searchSortOpen, setSearchSortOpen] = useState(false);
 	const [selectedBiasId, setSelectedBiasId] = useState<number | null>(null);
-	const [selectedOption, setSelectedOption] = useState<SearchSortOptions>("alphabetAsc");
+	const [selectedOption, setSelectedOption] = useState<SearchSortOptionKeys>("alphabetAsc");
 	const [viewResult, setViewResult] = useState(false);
 
 	const { data: people, isLoading } = useQuery(["people", selectedOption], () => fetchPeople(selectedOption), {
@@ -129,10 +123,10 @@ const Search = () => {
 				<div className="months">
 					<MonthSelector selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
 					<SortIcon
-						options={sortOptions}
+						type="search"
 						isOpened={searchSortOpen}
 						setIsOpened={setSearchSortOpen}
-						setSelectedOption={setSelectedOption}
+						setSelectedSearchOption={setSelectedOption}
 					/>
 				</div>
 

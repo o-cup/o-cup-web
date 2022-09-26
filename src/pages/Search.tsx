@@ -50,7 +50,8 @@ const Search = () => {
 	});
 
 	useEffect(() => {
-		if (keyword) {
+		const paramValue = searchParams.get("keyword");
+		if (keyword && paramValue) {
 			setMetaTags({
 				title: "오늘의 컵홀더 | 검색하기",
 				description: `${keyword}의 생일 이벤트를 확인해보세요!`,
@@ -64,7 +65,7 @@ const Search = () => {
 		return () => {
 			setMetaTags({});
 		};
-	}, [keyword]);
+	}, [searchParams, keyword]);
 
 	useEffect(() => {
 		const paramValue = searchParams.get("keyword");

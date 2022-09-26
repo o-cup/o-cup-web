@@ -53,8 +53,10 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 					<Modal maxWidth={380} minWidth={330}>
 						<Calendar
 							selectedRange={selectedRange}
+							setSelectedRange={setSelectedRange}
 							handleSelectRange={handleSelectRange}
 							handleClickSubmit={() => handleSubmit({ modal: "dateRange" })}
+							setCalendarOpen={setCalendarOpen}
 						/>
 					</Modal>
 				);

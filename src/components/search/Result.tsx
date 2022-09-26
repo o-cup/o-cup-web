@@ -32,7 +32,7 @@ const Result = ({ biasId }: ResultProps) => {
 	const [sortOpen, setSortOpen] = useState(false);
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
-	const [selectedSortOption, setSelectedSortOption] = useState<ResultSortOptionKeys>("dateAsc");
+	const [selectedSortOption, setSelectedSortOption] = useState<ResultSortOptionKeys>("alphabetAsc");
 	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
 	const [chips, setChips] = useState<{ dateChip: string; distChips: RegCodeItem[] }>(initialChipsData);
 

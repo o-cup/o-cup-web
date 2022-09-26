@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import { StyledResult } from "./styles/resultStyle";
@@ -13,15 +13,10 @@ import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { fetchSearchedEvent } from "../../apis/search";
 import { RegCodeItem } from "./types";
 import Loading from "../../shared/components/Loading";
+import { ResultSortOptionKeys } from "../../types";
 
 type ResultProps = {
 	biasId?: number | null;
-};
-
-const sortOptions = {
-	dateAsc: "날짜: 빠른 순",
-	dateDsc: "날짜: 느린 순",
-	alphabetAsc: "카페: 가나다순",
 };
 
 const initialChipsData = { dateChip: "", distChips: [] };
@@ -37,6 +32,7 @@ const Result = ({ biasId }: ResultProps) => {
 	const [sortOpen, setSortOpen] = useState(false);
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
+	const [selectedSortOption, setSelectedSortOption] = useState<ResultSortOptionKeys>("dateAsc");
 	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
 	const [chips, setChips] = useState<{ dateChip: string; distChips: RegCodeItem[] }>(initialChipsData);
 
@@ -44,9 +40,24 @@ const Result = ({ biasId }: ResultProps) => {
 	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
 	const { data: events, isLoading } = useQuery(
-		["resultEvents", keyword, startDate, endDate, biasId, districts],
+		["resultEvents", keyword, startDate, endDate, biasId, districts, selectedSortOption],
 		() => fetchSearchedEvent({ keyword, date: { startDate, endDate }, biasId, districts }),
-		{ enabled: !!keyword }
+		{
+			select: (data) => {
+				switch (selectedSortOption) {
+					case "dateAsc":
+						return data?.sort((a, b) => a.startAt - b.startAt);
+
+					case "dateDsc":
+						return data?.sort((a, b) => b.startAt - a.startAt);
+
+					case "alphabetAsc":
+					default:
+						return data;
+				}
+			},
+			enabled: !!keyword,
+		}
 	);
 
 	useEffect(() => {
@@ -108,7 +119,12 @@ const Result = ({ biasId }: ResultProps) => {
 						setCalendarOpen={setCalendarOpen}
 						setDistrictSelectorOpen={setDistrictSelectorOpen}
 					/>
-					<SortIcon options={sortOptions} isOpened={sortOpen} setIsOpened={setSortOpen} />
+					<SortIcon
+						type="result"
+						isOpened={sortOpen}
+						setIsOpened={setSortOpen}
+						setSelectedResultOption={setSelectedSortOption}
+					/>
 				</div>
 			</div>
 

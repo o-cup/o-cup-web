@@ -1,7 +1,7 @@
 import { ITEMS_PER_PAGE } from "../shared/constants";
 import { isOpenToday } from "../shared/utils/dateHandlers";
 import { supabase } from "../supabaseClient";
-import { EventType, DetailType, FetchEventParams, SearchSortOptions } from "../types";
+import { EventType, DetailType, FetchEventParams, SearchSortOptionKeys } from "../types";
 
 const fetchEvents = async ({ pageParam = 1, infinite = false, date }: FetchEventParams) => {
 	let query = supabase.from("place_sort").select("*").eq("isApproved", true);
@@ -70,7 +70,7 @@ const fetchEventDetail = async ({ id }: { id?: string }) => {
  * 인물 데이터 반환
  * @returns {PeopleType}
  */
-const fetchPeople = async (sortOption?: SearchSortOptions) => {
+const fetchPeople = async (sortOption?: SearchSortOptionKeys) => {
 	let query = supabase.from("people").select("*");
 
 	switch (sortOption) {

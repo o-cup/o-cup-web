@@ -9,8 +9,8 @@ export const setMetaTags = ({
 }) => {
 	// set title
 	document.title = title;
-	document?.querySelector("meta[property='og:title']")?.setAttribute("content", `${title}`);
-	document?.querySelector("meta[name='twitter:title']")?.setAttribute("content", `${title}`);
+	document?.querySelector("meta[property='og:title']")?.setAttribute("content", title);
+	document?.querySelector("meta[name='twitter:title']")?.setAttribute("content", title);
 
 	// set description
 	document?.querySelector("meta[property='og:description']")?.setAttribute("content", description);
@@ -22,6 +22,7 @@ export const setMetaTags = ({
 
 	// set url
 	document?.querySelector("meta[property='og:url']")?.setAttribute("content", window.location.href);
+	document?.querySelector("meta[name='twitter:site']")?.setAttribute("content", window.location.href);
 };
 
 export default {};

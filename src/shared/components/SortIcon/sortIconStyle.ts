@@ -21,6 +21,7 @@ const StyledSortIcon = styled.div`
 			display: flex;
 			justify-content: flex-end;
 			align-items: center;
+			cursor: pointer;
 		}
 	}
 `;

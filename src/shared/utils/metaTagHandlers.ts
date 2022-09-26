@@ -1,9 +1,11 @@
 export const setMetaTags = ({
 	title = "오늘의 컵홀더",
 	description = "응원하는 아티스트의 생일 이벤트를 한눈에 확인해보세요!",
+	imageUrl = "https://www.o-cup.kr/images/ocup_profile.png",
 }: {
 	title?: string;
 	description?: string;
+	imageUrl?: string;
 }) => {
 	// set title
 	document.title = title;
@@ -15,10 +17,8 @@ export const setMetaTags = ({
 	document?.querySelector("meta[name='twitter:description']")?.setAttribute("content", description);
 
 	// set images
-	// document?.querySelector("meta[property='og:image']")?.setAttribute("content", "%PUBLIC_URL%/images/logo_primary.png");
-	// document
-	// 	?.querySelector("meta[name='twitter:image']")
-	// 	?.setAttribute("content", "https://www.o-cup.kr/images/logo_primary.png");
+	document?.querySelector("meta[property='og:image']")?.setAttribute("content", imageUrl);
+	document?.querySelector("meta[name='twitter:image']")?.setAttribute("content", imageUrl);
 
 	// set url
 	document?.querySelector("meta[property='og:url']")?.setAttribute("content", window.location.href);

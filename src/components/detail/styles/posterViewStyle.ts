@@ -11,37 +11,34 @@ export const StyledPosterView = styled.div`
 	max-width: ${({ theme }) => theme.widths.layout};
 	height: 100vh;
 	background-color: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(2px);
 	overflow: hidden;
 
-	i {
-		cursor: pointer;
+	div.topIcons {
 		position: fixed;
 		top: 12px;
 		right: 12px;
 		z-index: 99;
-	}
+		display: flex;
+		align-items: center;
+		gap: 16px;
 
-	> .imgPage {
-		width: 72px;
-		height: auto;
-		text-align: center;
-		position: absolute;
-		bottom: 0;
-		right: 0;
-		margin: 16px;
-		padding: 8px 20px;
-		display: inline-block;
-		white-space: nowrap;
-		background: rgba(0, 0, 0, 0.6);
-		backdrop-filter: blur(4px);
-		border-radius: 45px;
-		z-index: 99;
+		> i {
+			cursor: pointer;
+		}
 
-		> span {
-			font-weight: 500;
-			font-size: 14px;
-			line-height: 17px !important;
-			color: ${({ theme }) => theme.colors.white};
+		> .imgPage {
+			width: 72px;
+			text-align: right;
+			display: inline-block;
+			white-space: nowrap;
+
+			> span {
+				font-weight: 500;
+				font-size: 14px;
+				line-height: 17px;
+				color: ${({ theme }) => theme.colors.white};
+			}
 		}
 	}
 

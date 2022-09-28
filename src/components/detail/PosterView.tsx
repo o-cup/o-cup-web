@@ -18,12 +18,15 @@ function PosterView({ images, setPosterViewOpen }: PosterProps) {
 
 	return (
 		<StyledPosterView>
-			<Icons name="poster-close" handleClick={() => setPosterViewOpen(false)} />
-			<div className="imgPage">
-				<span>
-					{pageNum} / {images.length}
-				</span>
+			<div className="topIcons">
+				<div className="imgPage">
+					<span>
+						{pageNum} / {images.length}
+					</span>
+				</div>
+				<Icons name="poster-close" handleClick={() => setPosterViewOpen(false)} />
 			</div>
+
 			<Swiper slidesPerView={1} navigation onSlideChange={(e) => setPageNum(e.activeIndex + 1)}>
 				{images.map((img, i) => (
 					<SwiperSlide key={img}>

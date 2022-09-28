@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { StyledPosterView } from "./styles/posterViewStyle";
@@ -14,17 +14,18 @@ type PosterProps = {
 
 function PosterView({ images, setPosterViewOpen }: PosterProps) {
 	SwiperCore.use([Navigation]);
+	const [pageNum, setPageNum] = useState(1);
 
 	return (
 		<StyledPosterView>
 			<Icons name="poster-close" handleClick={() => setPosterViewOpen(false)} />
-			<Swiper
-				slidesPerView={1}
-				navigation
-				onSlideChange={() => console.log("slide change")}
-				onSwiper={(swiper) => console.log(swiper)}
-			>
-				{images.map((img) => (
+			<div className="imgPage">
+				<span>
+					{pageNum} / {images.length}
+				</span>
+			</div>
+			<Swiper slidesPerView={1} navigation onSlideChange={(e) => setPageNum(e.activeIndex + 1)}>
+				{images.map((img, i) => (
 					<SwiperSlide key={img}>
 						<img src={img} alt={img} />
 					</SwiperSlide>

@@ -64,8 +64,9 @@ const EventMain = ({ data }: EventMainProps) => {
 			{images && images.length > 0 && (
 				<StyledDetailImgContainer onClick={() => setPosterViewOpen(true)}>
 					<img alt={images[0]} src={images[0]} onError={imageOnErrorHandler} />
-					<div className="imgPage">
-						<span>1 / {images.length}</span>
+
+					<div className="imgZoom">
+						<img alt="zoom" src="/images/icons/zoom_white.png" />
 					</div>
 				</StyledDetailImgContainer>
 			)}

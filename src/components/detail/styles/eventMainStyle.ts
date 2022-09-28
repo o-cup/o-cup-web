@@ -88,35 +88,34 @@ const StyledDetailImgContainer = styled.div`
 	margin-right: 20px;
 	cursor: pointer;
 
-	.imgPage {
-		width: fit-content;
-		height: auto;
-		position: absolute;
-		bottom: 0;
-		right: 0;
-		margin: 16px;
-		padding: 8px 20px;
-		display: inline-block;
-		white-space: nowrap;
-		background: rgba(0, 0, 0, 0.6);
-		backdrop-filter: blur(4px);
-		border-radius: 45px;
-
-		> span {
-			font-weight: 500;
-			font-size: 14px;
-			line-height: 17px !important;
-			color: ${({ theme }) => theme.colors.white};
-		}
-	}
-
 	img {
 		width: 100%;
-		height: 100% !important;
+		height: 100%;
 		min-height: 200px;
 		object-fit: cover;
 		object-position: top;
 		vertical-align: bottom;
+	}
+
+	.imgZoom {
+		width: 40px;
+		height: 40px;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		margin: 16px;
+		padding: 10px;
+		display: inline-block;
+		background: rgba(0, 0, 0, 0.6);
+		backdrop-filter: blur(4px);
+		border-radius: 45px;
+
+		> img {
+			width: 20px;
+			height: 20px;
+			min-height: 20px;
+			object-fit: contain;
+		}
 	}
 `;
 export { StyledEventMain, StyledDetailTextContainer, StyledDetailImgContainer };

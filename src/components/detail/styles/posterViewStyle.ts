@@ -10,6 +10,7 @@ export const StyledPosterView = styled.div`
 	width: 100%;
 	max-width: ${({ theme }) => theme.widths.layout};
 	height: 100vh;
+	height: calc(var(--vh, 1vh) * 100);
 	background-color: rgba(0, 0, 0, 0.6);
 	backdrop-filter: blur(2px);
 	overflow: hidden;
@@ -48,6 +49,7 @@ export const StyledPosterView = styled.div`
 		align-items: center;
 		width: 100%;
 		height: 100vh;
+		height: calc(var(--vh, 1vh) * 100);
 
 		> img {
 			width: 100%;

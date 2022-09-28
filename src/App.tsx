@@ -26,6 +26,11 @@ function App() {
 		ReactGA.initialize(TRACKING_ID!);
 	}, [TRACKING_ID]);
 
+	useEffect(() => {
+		const vh = window.innerHeight * 0.01;
+		document.documentElement.style.setProperty("--vh", `${vh}px`);
+	}, []);
+
 	return (
 		<QueryClientProvider client={queryClient}>
 			<ThemeProvider theme={theme}>

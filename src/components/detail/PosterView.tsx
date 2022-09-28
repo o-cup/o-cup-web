@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { StyledPosterView } from "./styles/posterViewStyle";
@@ -15,6 +15,13 @@ type PosterProps = {
 function PosterView({ images, setPosterViewOpen }: PosterProps) {
 	SwiperCore.use([Navigation]);
 	const [pageNum, setPageNum] = useState(1);
+
+	useEffect(() => {
+		document.body.style.overflow = "hidden";
+		return () => {
+			document.body.style.overflow = "auto";
+		};
+	}, []);
 
 	return (
 		<StyledPosterView>

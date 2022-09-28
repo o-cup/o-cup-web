@@ -31,6 +31,10 @@ function App() {
 		document.documentElement.style.setProperty("--vh", `${vh}px`);
 	}
 
+	useEffect(() => {
+		setScreenSize();
+	}, []);
+
 	window.addEventListener("resize", () => setScreenSize());
 
 	return (

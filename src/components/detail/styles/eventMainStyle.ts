@@ -35,26 +35,30 @@ const StyledDetailTextContainer = styled.div`
 		}
 	}
 
-	.mainInfo {
+	ul {
 		display: flex;
 		flex-direction: column;
 		gap: 3px;
 
-		> p {
+		> li {
+			width: 100%;
 			font-size: 13px;
 			line-height: 20px;
 			font-weight: 400;
 			display: flex;
 			align-items: center;
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
 
 			i {
 				margin-right: 8px;
 			}
 
-			span {
+			> p {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			span.eventDay {
 				display: flex;
 				align-items: center;
 				margin-left: 8px;

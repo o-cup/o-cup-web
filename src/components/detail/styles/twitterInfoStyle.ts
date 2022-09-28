@@ -15,7 +15,6 @@ export const StyledTwitterInfo = styled.div`
 		padding: 16px;
 		position: relative;
 		box-shadow: 4px 4px 0 #000000;
-		height: 80px;
 
 		> h6 {
 			font-size: 14px;

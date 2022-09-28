@@ -4,7 +4,11 @@ import { ThemeType } from "./theme";
 
 const GlobalStyle = createGlobalStyle<ThemeType>`
   ${reset};
-
+  
+  :root {
+    --vh: 100%;
+  }
+  
   html {
     scroll-behavior: auto;
   }

@@ -40,32 +40,37 @@ const EventMain = ({ data }: EventMainProps) => {
 							: biasesId?.map((biasId) => <BiasChip id={biasId} key={biasId} />)}
 					</div>
 				</div>
-				<div className="mainInfo">
-					<p>
+				<ul>
+					<li>
 						<Icon name="host" />
-						{organizer}
-					</p>
-					<p>
+						<p>{organizer}</p>
+					</li>
+					<li>
 						<Icon name="place" />
-						{address}
-					</p>
-					<p>
+						<p>{address}</p>
+					</li>
+					<li>
 						<Icon name="calendar" />
-						{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
+						{startAt && (
+							<p>
+								{convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
+							</p>
+						)}
 						{isDuringEvent && (
-							<span>
+							<span className="eventDay">
 								<i />
 								EVENT DAY!
 							</span>
 						)}
-					</p>
-				</div>
+					</li>
+				</ul>
 			</StyledDetailTextContainer>
 			{images && images.length > 0 && (
 				<StyledDetailImgContainer onClick={() => setPosterViewOpen(true)}>
 					<img alt={images[0]} src={images[0]} onError={imageOnErrorHandler} />
-					<div className="imgPage">
-						<span>1 / {images.length}</span>
+
+					<div className="imgZoom">
+						<img alt="zoom" src="/images/icons/zoom_white.png" />
 					</div>
 				</StyledDetailImgContainer>
 			)}

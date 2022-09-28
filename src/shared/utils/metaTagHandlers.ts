@@ -13,6 +13,7 @@ export const setMetaTags = ({
 	document?.querySelector("meta[name='twitter:title']")?.setAttribute("content", title);
 
 	// set description
+	document?.querySelector("meta[name='description']")?.setAttribute("content", description);
 	document?.querySelector("meta[property='og:description']")?.setAttribute("content", description);
 	document?.querySelector("meta[name='twitter:description']")?.setAttribute("content", description);
 

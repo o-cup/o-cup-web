@@ -9,7 +9,7 @@ export const StyledSearchInput = styled.div`
 	> input {
 		width: 100%;
 		height: 40px;
-		font-size: 14px;
+		font-size: 16px;
 		line-height: 40px;
 		border: none;
 		outline: none;

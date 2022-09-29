@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { ResultSortOptionKeys, SearchSortOptionKeys } from "../../../types";
 import Icon from "../Icon/Icons";
-import StyledSortIcon from "./sortIconStyle";
+import { StyledSortIcon, SortOption } from "./sortIconStyle";
 
 type SortProps = {
 	type: "result" | "search";
@@ -9,6 +9,7 @@ type SortProps = {
 	setIsOpened: Dispatch<SetStateAction<boolean>>;
 	setSelectedSearchOption?: Dispatch<SetStateAction<SearchSortOptionKeys>>;
 	setSelectedResultOption?: Dispatch<SetStateAction<ResultSortOptionKeys>>;
+	selectedOption: SearchSortOptionKeys | ResultSortOptionKeys;
 };
 
 const options = {
@@ -24,43 +25,54 @@ const options = {
 	},
 };
 
-const SortIcon = ({ type, isOpened, setIsOpened, setSelectedSearchOption, setSelectedResultOption }: SortProps) => {
+const SortIcon = ({
+	type,
+	isOpened,
+	setIsOpened,
+	setSelectedSearchOption,
+	setSelectedResultOption,
+	selectedOption,
+}: SortProps) => {
 	const renderSortOptions = () => {
 		if (!isOpened) return null;
+
+		// console.log("selectedOption", selectedOption);
 
 		const resultOptionsKeys = Object.keys(options.result) as Array<ResultSortOptionKeys>;
 		const searchOptionKeys = Object.keys(options.search) as Array<SearchSortOptionKeys>;
 
 		switch (type) {
-			case "result":
-				return (
-					<ul>
-						{resultOptionsKeys.map((option) => (
-							<li
-								key={option}
-								role="presentation"
-								onClick={() => setSelectedResultOption && setSelectedResultOption(option)}
-							>
-								{options.result[option]}
-							</li>
-						))}
-					</ul>
-				);
-				break;
 			case "search":
 				return (
 					<ul>
 						{searchOptionKeys.map((option) => (
-							<li
+							<SortOption
 								key={option}
 								role="presentation"
 								onClick={() => setSelectedSearchOption && setSelectedSearchOption(option)}
+								isActive={option === selectedOption}
 							>
 								{options.search[option]}
-							</li>
+							</SortOption>
 						))}
 					</ul>
 				);
+			case "result":
+				return (
+					<ul>
+						{resultOptionsKeys.map((option) => (
+							<SortOption
+								key={option}
+								role="presentation"
+								onClick={() => setSelectedResultOption && setSelectedResultOption(option)}
+								isActive={option === selectedOption}
+							>
+								{options.result[option]}
+							</SortOption>
+						))}
+					</ul>
+				);
+				break;
 			default:
 				return null;
 				break;

@@ -10,20 +10,22 @@ const StyledSortIcon = styled.div`
 		bottom: -130px;
 		right: 0;
 		z-index: 1;
-		box-shadow: ${({ theme }) => theme.style.shadow};
+		box-shadow: ${({ theme }) => theme.style.shadow.default};
 		background-color: ${({ theme }) => theme.colors.background};
-
-		li {
-			height: 42px;
-			font-size: 14px;
-			padding: 10px;
-
-			display: flex;
-			justify-content: flex-end;
-			align-items: center;
-			cursor: pointer;
-		}
 	}
 `;
 
-export default StyledSortIcon;
+const SortOption = styled.li<{ isActive: boolean }>`
+	height: 42px;
+	font-size: 14px;
+	padding: 10px;
+
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	cursor: pointer;
+
+	background-color: ${(props) => (props.isActive ? props.theme.colors.softPrimary : "")};
+`;
+
+export { StyledSortIcon, SortOption };

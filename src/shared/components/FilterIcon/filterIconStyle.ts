@@ -7,7 +7,7 @@ export const StyledFilterIcon = styled.div`
 		position: absolute;
 		width: 120px;
 		height: 104px;
-		box-shadow: ${({ theme }) => theme.style.shadow};
+		box-shadow: ${({ theme }) => theme.style.shadow.default};
 		background-color: ${({ theme }) => theme.colors.background};
 		bottom: -114px;
 		right: 0;

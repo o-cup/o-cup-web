@@ -124,6 +124,7 @@ const Result = ({ biasId }: ResultProps) => {
 						isOpened={sortOpen}
 						setIsOpened={setSortOpen}
 						setSelectedResultOption={setSelectedSortOption}
+						selectedOption={selectedSortOption}
 					/>
 				</div>
 			</div>

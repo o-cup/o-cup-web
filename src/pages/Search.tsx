@@ -128,6 +128,7 @@ const Search = () => {
 						isOpened={searchSortOpen}
 						setIsOpened={setSearchSortOpen}
 						setSelectedSearchOption={setSelectedOption}
+						selectedOption={selectedOption}
 					/>
 				</div>
 

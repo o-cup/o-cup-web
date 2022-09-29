@@ -31,6 +31,10 @@ export const StyledMonthSelector = styled.div`
 			line-height: 19px;
 			width: fit-content;
 		}
+
+		> svg {
+			cursor: pointer;
+		}
 	}
 
 	.selectBox {

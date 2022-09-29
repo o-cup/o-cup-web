@@ -64,11 +64,11 @@ export const Month = styled.span<{ isActive: boolean }>`
 	font-weight: bold;
 	text-align: center;
 	border-radius: 4px;
-
 	background-color: ${({ isActive, theme }) => (isActive ? theme.colors.primary : theme.colors.black)};
 	color: ${({ isActive, theme }) => (isActive ? theme.colors.black : theme.colors.white)};
 	border: ${({ isActive }) => (isActive ? "2px solid #000" : "")};
 	line-height: ${({ isActive }) => (isActive ? "28px" : "30px")};
+	cursor: pointer;
 `;
 
 export default {};

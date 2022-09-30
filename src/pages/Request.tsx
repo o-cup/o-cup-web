@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { requestGoodsListAtom, requestInputsAtom } from "../state/atoms";
+import { requestGoodsListAtom, requestInputsAtom, tempPostersAtom } from "../state/atoms";
 import Layout from "../shared/components/layout";
 import Entry from "../components/request/Entry";
 import PreviewContent from "../components/request/PreviewContent";
@@ -29,6 +29,8 @@ import { setMetaTags } from "../shared/utils/metaTagHandlers";
 const Request = () => {
 	const navigate = useNavigate();
 
+	const [isLoading, setLoading] = useState(false);
+
 	const [isChecked, setChecked] = useState(false); // 페이지 라우팅 역할
 	const [isDuplicatedEventOpen, setDuplicatedEventOpen] = useState(false);
 	const [duplicatedEventData, setDuplicatedEventData] = useState({} as EventType); // 중복 이벤트 정보
@@ -43,6 +45,7 @@ const Request = () => {
 
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
 	const [goodsList, setGoodsList] = useRecoilState(requestGoodsListAtom);
+	const [tempPosters, setTempPosters] = useRecoilState(tempPostersAtom);
 
 	useEffect(() => {
 		setMetaTags({
@@ -54,13 +57,18 @@ const Request = () => {
 		};
 	}, []);
 
-	const handleSubmit = () =>
+	const handleSubmit = () => {
+		setLoading(true);
 		sendReqData({
 			requestInputs,
 			goodsList,
+			tempPosters,
 			setSubmitModalOpen,
+			setConfirmModalOpen,
 			setAlertOpen,
+			setLoading,
 		});
+	};
 
 	const resetAllStates = () => {
 		setRequestInputs({
@@ -82,6 +90,7 @@ const Request = () => {
 				items: [{ id: 1, text: "" }],
 			},
 		]);
+		setTempPosters([{ id: 1, file: null, result: "" }]);
 		setChecked(false);
 		setDuplicatedEventOpen(false);
 		setDuplicatedEventData({} as EventType);
@@ -168,7 +177,7 @@ const Request = () => {
 	}
 	return (
 		<>
-			<Layout page="request">
+			<Layout page="request" handleBackClick={() => setChecked(false)}>
 				<StyledRequest>
 					<Entry setConfirmModalOpen={setConfirmModalOpen} setBottomSheetOpen={setBottomSheetOpen} />
 					<StyledPreview>
@@ -184,7 +193,9 @@ const Request = () => {
 				/>
 			)}
 
-			{isConfirmModalOpen && <ConfirmModal setConfirmModalOpen={setConfirmModalOpen} handleSubmit={handleSubmit} />}
+			{isConfirmModalOpen && (
+				<ConfirmModal isLoading={isLoading} setConfirmModalOpen={setConfirmModalOpen} handleSubmit={handleSubmit} />
+			)}
 
 			{isSubmitModalOpen && (
 				<SubmitModal handleClickContinue={handleClickContinue} handleClickFinish={handleClickFinish} />

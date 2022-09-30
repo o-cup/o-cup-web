@@ -1,6 +1,6 @@
 import React from "react";
-import { useRecoilValue } from "recoil";
-import { requestGoodsListAtom, requestInputsAtom } from "../../state/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { requestGoodsListAtom, requestInputsAtom, tempPostersAtom } from "../../state/atoms";
 import { getGoodsObj } from "./requestApi";
 import { EventMain, GoodsInfo, Location, TwitterInfo } from "../detail";
 import { DEFAULT_POSTER_URL } from "../../shared/constants";
@@ -8,8 +8,9 @@ import { DEFAULT_POSTER_URL } from "../../shared/constants";
 const PreviewContent = () => {
 	const requestInputs = useRecoilValue(requestInputsAtom);
 	const goodsList = useRecoilValue(requestGoodsListAtom);
+	const tempPosters = useRecoilValue(tempPostersAtom);
 
-	const { place, artist, organizer, snsId, link, posterUrls, hashTags, dateRange } = requestInputs;
+	const { place, artist, organizer, snsId, link, hashTags, dateRange } = requestInputs;
 
 	return (
 		<div className="previewContent">
@@ -23,10 +24,11 @@ const PreviewContent = () => {
 					startAt: dateRange.startAt || "20220000",
 					endAt: dateRange.endAt || "20220000",
 					address: place.address || "이벤트 주소",
-					images: posterUrls[0].publicUrl
-						? posterUrls.filter((poster) => poster.publicUrl !== "").map((poster) => poster.publicUrl)
+					images: tempPosters[0].result
+						? tempPosters.filter((poster) => poster.result !== "").map((poster) => poster.result)
 						: [DEFAULT_POSTER_URL],
 				}}
+				posterPopupDisabled
 			/>
 			<TwitterInfo
 				data={{

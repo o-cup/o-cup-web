@@ -61,7 +61,7 @@ export const StyledMonthSelector = styled.div`
 	}
 `;
 
-export const Month = styled.span<{ isActive: boolean }>`
+export const Month = styled.li<{ isActive: boolean }>`
 	width: 46px;
 	height: 30px;
 	font-size: 12px;

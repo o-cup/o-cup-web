@@ -175,6 +175,7 @@ const StyledRequestModal = styled.div`
 		display: flex;
 		gap: 12px;
 		margin-top: 20px;
+		height: 30px;
 
 		> button {
 			background: ${({ theme }) => theme.colors.white};

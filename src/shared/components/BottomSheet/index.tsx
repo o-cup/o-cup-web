@@ -20,7 +20,7 @@ type BottomSheetProps = {
 	children: JSX.Element;
 };
 
-export default function BottomSheet({ open, setOpen, header, close, slider, buttons, children }: BottomSheetProps) {
+function BottomSheet({ open, setOpen, header, close, slider, buttons, children }: BottomSheetProps) {
 	function onDismiss() {
 		setOpen(false);
 		return false;
@@ -74,3 +74,5 @@ BottomSheet.defaultProps = {
 		handleClick: () => console.log("click!"),
 	},
 };
+
+export default React.memo(BottomSheet);

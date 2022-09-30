@@ -10,9 +10,10 @@ import PosterView from "./PosterView";
 
 type EventMainProps = {
 	data: Partial<EventType> & Partial<DetailType>;
+	posterPopupDisabled?: boolean;
 };
 
-const EventMain = ({ data }: EventMainProps) => {
+const EventMain = ({ data, posterPopupDisabled }: EventMainProps) => {
 	const { place, biasesId, organizer, startAt, endAt, images, address, requestedBiases } = data;
 
 	const [isPosterViewOpen, setPosterViewOpen] = useState(false);
@@ -75,9 +76,15 @@ const EventMain = ({ data }: EventMainProps) => {
 				</StyledDetailImgContainer>
 			)}
 
-			{isPosterViewOpen && images && <PosterView images={images} setPosterViewOpen={setPosterViewOpen} />}
+			{!posterPopupDisabled && isPosterViewOpen && images && (
+				<PosterView images={images} setPosterViewOpen={setPosterViewOpen} />
+			)}
 		</StyledEventMain>
 	);
+};
+
+EventMain.defaultProps = {
+	posterPopupDisabled: false,
 };
 
 export default EventMain;

@@ -9,6 +9,7 @@ type ReqType = {
 	tempPosters: { id: number; file: any; result: string }[];
 	setSubmitModalOpen: Dispatch<React.SetStateAction<boolean>>;
 	setAlertOpen: Dispatch<React.SetStateAction<boolean>>;
+	setLoading: Dispatch<React.SetStateAction<boolean>>;
 };
 
 /** all, random, dDay, firstCome, lucky, extra 형식에 맞추기 */
@@ -87,6 +88,22 @@ const hasGoods = (requestInputs: RequestType, goodsList: RequestGoodsListType[])
 	return result;
 };
 
+/** 포스터 이미지 업로드 후 return [urls] */
+const getPublicUrls = async (tempPosters: { id: number; file: any; result: string }[]) => {
+	const tempImages = tempPosters.filter((poster) => poster.result !== "");
+
+	const posterUrls = [] as string[];
+	await Promise.all(
+		tempImages.map(async (obj) => {
+			const data = await uploadPoster(obj.file);
+			if (data) {
+				posterUrls.push(data);
+			}
+		})
+	);
+	return posterUrls;
+};
+
 /** 신청 데이터 등록 */
 export const sendReqData = async ({
 	requestInputs,
@@ -94,25 +111,17 @@ export const sendReqData = async ({
 	tempPosters,
 	setSubmitModalOpen,
 	setAlertOpen,
+	setLoading,
 }: ReqType) => {
 	const { place, artist, organizer, snsId, link, hashTags, dateRange } = requestInputs;
 
-	const tempImages = tempPosters.filter((poster) => poster.result !== "");
 	const requestedBiases = artist.map((a) => ({
 		peopleId: a.peopleId,
 		bias: a.bias,
 		team: a.team,
 	}));
 
-	const posters = [] as string[];
-
-	for (let i = 0; i < tempImages.length; i += 1) {
-		uploadPoster(tempImages[i].file).then((data) => {
-			if (data) {
-				posters.push(data);
-			}
-		});
-	}
+	const images = await getPublicUrls(tempPosters);
 
 	// 필수값 비워져 있을 때 경고 팝업
 	if (
@@ -120,7 +129,7 @@ export const sendReqData = async ({
 		!requestedBiases[0].bias ||
 		!organizer ||
 		!dateRange.startAt ||
-		tempImages.length === 0 ||
+		images.length === 0 ||
 		!link ||
 		!hasGoods(requestInputs, goodsList)
 	) {
@@ -136,7 +145,7 @@ export const sendReqData = async ({
 		newDistrict: place.newDistrict,
 		startAt: dateRange.startAt,
 		endAt: dateRange.endAt,
-		images: posters,
+		images,
 		requestedBiases,
 		isRequested: true,
 		isApproved: false,
@@ -158,6 +167,7 @@ export const sendReqData = async ({
 		});
 	}
 
+	setLoading(false);
 	setSubmitModalOpen(true);
 };
 

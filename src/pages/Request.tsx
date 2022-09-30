@@ -25,9 +25,12 @@ import Button from "../shared/components/Button";
 import { fetchDuplicatedEvent } from "../apis";
 import { EventType } from "../types";
 import { setMetaTags } from "../shared/utils/metaTagHandlers";
+import Loading from "../shared/components/Loading";
 
 const Request = () => {
 	const navigate = useNavigate();
+
+	const [isLoading, setLoading] = useState(false);
 
 	const [isChecked, setChecked] = useState(false); // 페이지 라우팅 역할
 	const [isDuplicatedEventOpen, setDuplicatedEventOpen] = useState(false);
@@ -55,14 +58,18 @@ const Request = () => {
 		};
 	}, []);
 
-	const handleSubmit = () =>
+	const handleSubmit = () => {
+		setLoading(true);
+		setBottomSheetOpen(false);
 		sendReqData({
 			requestInputs,
 			goodsList,
 			tempPosters,
 			setSubmitModalOpen,
 			setAlertOpen,
+			setLoading,
 		});
+	};
 
 	const resetAllStates = () => {
 		setRequestInputs({
@@ -128,6 +135,14 @@ const Request = () => {
 			}
 		});
 	};
+
+	if (isLoading) {
+		return (
+			<Layout page="request">
+				<Loading />
+			</Layout>
+		);
+	}
 
 	if (!isChecked) {
 		return (

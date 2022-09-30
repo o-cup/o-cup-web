@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { requestGoodsListAtom, requestInputsAtom } from "../state/atoms";
+import { requestGoodsListAtom, requestInputsAtom, tempPostersAtom } from "../state/atoms";
 import Layout from "../shared/components/layout";
 import Entry from "../components/request/Entry";
 import PreviewContent from "../components/request/PreviewContent";
@@ -43,6 +43,7 @@ const Request = () => {
 
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
 	const [goodsList, setGoodsList] = useRecoilState(requestGoodsListAtom);
+	const [tempPosters, setTempPosters] = useRecoilState(tempPostersAtom);
 
 	useEffect(() => {
 		setMetaTags({
@@ -58,6 +59,7 @@ const Request = () => {
 		sendReqData({
 			requestInputs,
 			goodsList,
+			tempPosters,
 			setSubmitModalOpen,
 			setAlertOpen,
 		});
@@ -82,6 +84,7 @@ const Request = () => {
 				items: [{ id: 1, text: "" }],
 			},
 		]);
+		setTempPosters([{ id: 1, file: null, result: "" }]);
 		setChecked(false);
 		setDuplicatedEventOpen(false);
 		setDuplicatedEventData({} as EventType);
@@ -168,7 +171,7 @@ const Request = () => {
 	}
 	return (
 		<>
-			<Layout page="request">
+			<Layout page="request" handleBackClick={() => setChecked(false)}>
 				<StyledRequest>
 					<Entry setConfirmModalOpen={setConfirmModalOpen} setBottomSheetOpen={setBottomSheetOpen} />
 					<StyledPreview>

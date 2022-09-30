@@ -1,8 +1,10 @@
 import React, { memo } from "react";
-import { FaCalendar, FaMapMarkerAlt, FaTwitter, FaUserCircle } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "../../shared/components";
 import BiasChip from "../../shared/components/BiasChip";
+import { DEFAULT_POSTER_URL } from "../../shared/constants";
 import { convertDateToString, convertDateWithDots, isOpenToday } from "../../shared/utils/dateHandlers";
 import { EventType } from "../../types";
 import { StyledEvent } from "./styles/eventStyle";
@@ -18,9 +20,20 @@ const Event = ({ event }: EventProps) => {
 	const today = convertDateToString(new Date());
 	const isDuringEvent = isOpenToday(today, startAt, endAt);
 
+	const handleImgLoadError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+		e.currentTarget.src = DEFAULT_POSTER_URL;
+		e.currentTarget.className = "error";
+	};
+
 	return (
 		<StyledEvent onClick={() => navigate(`/detail/${id}`)}>
-			<img src={images[0]} alt={place} />
+			<LazyLoadImage
+				wrapperClassName="lazy-image"
+				alt={place}
+				src={images[0]}
+				effect="blur"
+				onError={handleImgLoadError}
+			/>
 			<div>
 				<div className="title">
 					<h2>{place}</h2>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { FaCalendar, FaMapMarkerAlt, FaTwitter, FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "../../shared/components";
@@ -58,4 +58,4 @@ const Event = ({ event }: EventProps) => {
 	);
 };
 
-export default Event;
+export default memo(Event);

@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState, Dispatch } from "react";
+import React, { SetStateAction, useState, Dispatch, memo } from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { Month, StyledMonthSelector } from "./styles/monthSelectorStyle";
 
@@ -42,4 +42,4 @@ const MonthSelector = ({ selectedMonth, setSelectedMonth }: MonthSelectorProps) 
 	);
 };
 
-export default MonthSelector;
+export default memo(MonthSelector);

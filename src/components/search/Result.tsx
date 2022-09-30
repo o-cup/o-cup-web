@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
@@ -181,4 +181,4 @@ Result.defaultProps = {
 	biasId: null,
 };
 
-export default Result;
+export default memo(Result);

@@ -93,14 +93,15 @@ const getPublicUrls = async (tempPosters: { id: number; file: any; result: strin
 	const tempImages = tempPosters.filter((poster) => poster.result !== "");
 
 	const posterUrls = [] as string[];
-	await Promise.all(
-		tempImages.map(async (obj) => {
-			const data = await uploadPoster(obj.file);
-			if (data) {
-				posterUrls.push(data);
-			}
-		})
-	);
+	// 포스터 차례대로 업로드 되어야하기 때문에 eslint-disable 처리함
+	/* eslint-disable no-await-in-loop */
+	for (let i = 0; i < tempImages.length; i += 1) {
+		const data = await uploadPoster(tempPosters[i].file);
+		if (data) {
+			posterUrls.push(data);
+		}
+	}
+	/* eslint-disable no-await-in-loop */
 	return posterUrls;
 };
 

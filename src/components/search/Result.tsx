@@ -44,16 +44,22 @@ const Result = ({ biasId }: ResultProps) => {
 		() => fetchSearchedEvent({ keyword, date: { startDate, endDate }, biasId, districts }),
 		{
 			select: (data) => {
+				const eventsData = data?.map((e) => {
+					const event = { ...e, image: e.images[0] };
+					delete event.images;
+					return event;
+				});
+
 				switch (selectedSortOption) {
 					case "dateAsc":
-						return data?.sort((a, b) => a.startAt - b.startAt);
+						return eventsData?.sort((a, b) => a.startAt - b.startAt);
 
 					case "dateDsc":
-						return data?.sort((a, b) => b.startAt - a.startAt);
+						return eventsData?.sort((a, b) => b.startAt - a.startAt);
 
 					case "alphabetAsc":
 					default:
-						return data;
+						return eventsData;
 				}
 			},
 			enabled: !!keyword,

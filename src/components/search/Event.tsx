@@ -10,15 +10,15 @@ import { EventType } from "../../types";
 import { StyledEvent } from "./styles/eventStyle";
 
 type EventProps = {
-	event: EventType;
+	event: Partial<EventType> & { image: string };
 };
 
 const Event = ({ event }: EventProps) => {
 	const navigate = useNavigate();
-	const { images, place, biasesId, organizer, snsId, district, startAt, endAt, id } = event;
+	const { image, place, biasesId, organizer, snsId, district, startAt, endAt, id } = event;
 
 	const today = convertDateToString(new Date());
-	const isDuringEvent = isOpenToday(today, startAt, endAt);
+	const isDuringEvent = isOpenToday(today, startAt!, endAt!);
 
 	const handleImgLoadError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
 		e.currentTarget.src = DEFAULT_POSTER_URL;
@@ -27,13 +27,7 @@ const Event = ({ event }: EventProps) => {
 
 	return (
 		<StyledEvent onClick={() => navigate(`/detail/${id}`)}>
-			<LazyLoadImage
-				wrapperClassName="lazy-image"
-				alt={place}
-				src={images[0]}
-				effect="blur"
-				onError={handleImgLoadError}
-			/>
+			<LazyLoadImage wrapperClassName="lazy-image" alt={place} src={image} effect="blur" onError={handleImgLoadError} />
 			<div>
 				<div className="title">
 					<h2>{place}</h2>

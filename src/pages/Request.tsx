@@ -25,7 +25,6 @@ import Button from "../shared/components/Button";
 import { fetchDuplicatedEvent } from "../apis";
 import { EventType } from "../types";
 import { setMetaTags } from "../shared/utils/metaTagHandlers";
-import Loading from "../shared/components/Loading";
 
 const Request = () => {
 	const navigate = useNavigate();
@@ -60,12 +59,12 @@ const Request = () => {
 
 	const handleSubmit = () => {
 		setLoading(true);
-		setBottomSheetOpen(false);
 		sendReqData({
 			requestInputs,
 			goodsList,
 			tempPosters,
 			setSubmitModalOpen,
+			setConfirmModalOpen,
 			setAlertOpen,
 			setLoading,
 		});
@@ -136,14 +135,6 @@ const Request = () => {
 		});
 	};
 
-	if (isLoading) {
-		return (
-			<Layout page="request">
-				<Loading />
-			</Layout>
-		);
-	}
-
 	if (!isChecked) {
 		return (
 			<>
@@ -202,7 +193,9 @@ const Request = () => {
 				/>
 			)}
 
-			{isConfirmModalOpen && <ConfirmModal setConfirmModalOpen={setConfirmModalOpen} handleSubmit={handleSubmit} />}
+			{isConfirmModalOpen && (
+				<ConfirmModal isLoading={isLoading} setConfirmModalOpen={setConfirmModalOpen} handleSubmit={handleSubmit} />
+			)}
 
 			{isSubmitModalOpen && (
 				<SubmitModal handleClickContinue={handleClickContinue} handleClickFinish={handleClickFinish} />

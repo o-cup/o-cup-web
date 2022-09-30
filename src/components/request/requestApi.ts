@@ -8,6 +8,7 @@ type ReqType = {
 	goodsList: RequestGoodsListType[];
 	tempPosters: { id: number; file: any; result: string }[];
 	setSubmitModalOpen: Dispatch<React.SetStateAction<boolean>>;
+	setConfirmModalOpen: Dispatch<React.SetStateAction<boolean>>;
 	setAlertOpen: Dispatch<React.SetStateAction<boolean>>;
 	setLoading: Dispatch<React.SetStateAction<boolean>>;
 };
@@ -111,6 +112,7 @@ export const sendReqData = async ({
 	goodsList,
 	tempPosters,
 	setSubmitModalOpen,
+	setConfirmModalOpen,
 	setAlertOpen,
 	setLoading,
 }: ReqType) => {
@@ -169,6 +171,7 @@ export const sendReqData = async ({
 	}
 
 	setLoading(false);
+	setConfirmModalOpen(false);
 	setSubmitModalOpen(true);
 };
 

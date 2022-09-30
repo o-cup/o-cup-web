@@ -150,11 +150,11 @@ const Result = ({ biasId }: ResultProps) => {
 				</div>
 			)}
 
-			<div className="events">
+			<ul className="events">
 				{events?.map((event) => (
 					<Event key={event.id} event={event} />
 				))}
-			</div>
+			</ul>
 
 			<div className="request">
 				<p>찾고 있는 이벤트가 없나요?</p>

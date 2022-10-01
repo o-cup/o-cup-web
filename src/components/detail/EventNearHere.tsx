@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchEvents } from "../../apis";
 import { EventType } from "../../types";
 import { EventNearHereList, StyledEventNearHere } from "./styles/eventNearHereStyle";
-import { DEFAULT_POSTER_URL } from "../../shared/constants";
+import { imageOnErrorHandler } from "../../shared/utils/imageHandlers";
 
 function EventNearHere({ biasesId, newDistrict }: Partial<EventType>) {
 	const { id } = useParams();
@@ -21,18 +21,13 @@ function EventNearHere({ biasesId, newDistrict }: Partial<EventType>) {
 			}),
 	});
 
-	const imageOnErrorHandler = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-		e.currentTarget.src = DEFAULT_POSTER_URL;
-		e.currentTarget.className = "error";
-	};
-
 	if (!nearEvent || nearEvent.length === 0) {
 		return null;
 	}
 
 	return (
 		<StyledEventNearHere>
-			<h4>{newDistrict?.name || "가까운"} 연관 이벤트</h4>
+			<p className="title">{newDistrict?.name || "가까운"} 연관 이벤트</p>
 			<ul>
 				{nearEvent &&
 					nearEvent.map((event) => {
@@ -42,8 +37,8 @@ function EventNearHere({ biasesId, newDistrict }: Partial<EventType>) {
 							<EventNearHereList key={eventId} onClick={() => navigate(`/detail/${eventId}`)}>
 								{previewUrl && <img alt={previewUrl} src={previewUrl} onError={imageOnErrorHandler} />}
 								<div>
-									<h6>{place}</h6>
-									<p>{organizer}</p>
+									<p className="near_place">{place}</p>
+									<p className="near_organizer">{organizer}</p>
 								</div>
 							</EventNearHereList>
 						);

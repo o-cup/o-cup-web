@@ -50,7 +50,14 @@ const Entry = ({ setConfirmModalOpen, setBottomSheetOpen }: EntryProps) => {
 			<div className="inputsWrapper">
 				<StyledPlaceInput>
 					<SearchInput value={requestInputs.place.place} id="place" placeholder="장소이름" label="장소 *" hideButton />
-					<SearchInput value={requestInputs.place.address} id="address" placeholder="주소" label="" hideLabel hideButton />
+					<SearchInput
+						value={requestInputs.place.address}
+						id="address"
+						placeholder="주소"
+						label=""
+						hideLabel
+						hideButton
+					/>
 				</StyledPlaceInput>
 				<ArtistInputContainer />
 				<BasicInput
@@ -96,4 +103,4 @@ const Entry = ({ setConfirmModalOpen, setBottomSheetOpen }: EntryProps) => {
 	);
 };
 
-export default Entry;
+export default React.memo(Entry);

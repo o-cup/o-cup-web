@@ -16,13 +16,13 @@ export const StyledTwitterInfo = styled.div`
 		position: relative;
 		box-shadow: 4px 4px 0 #000000;
 
-		> h6 {
+		> p.organizer {
 			font-size: 14px;
 			line-height: 19px;
 			font-weight: 700;
 		}
 
-		> p {
+		> p.snsId {
 			font-weight: 500;
 			font-size: 12px;
 			line-height: 15px;

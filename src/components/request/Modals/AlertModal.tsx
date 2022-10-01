@@ -19,4 +19,4 @@ const AlertModal = ({ setAlertOpen }: ModalProps) => (
 	</Modal>
 );
 
-export default AlertModal;
+export default React.memo(AlertModal);

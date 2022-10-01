@@ -16,20 +16,9 @@ export type FetchSearchedEventParams = {
 	districts?: RegCodeItem[];
 };
 
-const fetchSearchedEvent = async ({ keyword, date, biasId, districts }: FetchSearchedEventParams) => {
-	let query = supabase.from("place_sort").select("*").eq("isApproved", true);
-
-	if (biasId) {
-		query = query.contains("biasesId", [biasId]);
-	}
-
-	const { data: events } = await query;
+const fetchSearchedEvent = async ({ keyword, date, districts }: FetchSearchedEventParams) => {
 	let data;
-	data = events;
-
-	if (biasId && keyword && !date?.startDate && !districts) return data;
-
-	if (!keyword) return data;
+	const { data: events } = await supabase.from("place_sort").select("*").eq("isApproved", true);
 
 	const { data: biasData } = await supabase
 		.from("people")
@@ -37,7 +26,6 @@ const fetchSearchedEvent = async ({ keyword, date, biasId, districts }: FetchSea
 		.or(`name.eq.${keyword},enName.eq.${keyword},koName.eq.${keyword},realName.eq.${keyword}`);
 
 	const isNameKeyword = !!biasData?.length;
-
 	if (isNameKeyword) {
 		const biasesId = biasData?.map((bias) => bias.id);
 		// TODO: 추후 동명이인 처리를 고려하여 fetchEventsByBiasId를 사용하지 않음

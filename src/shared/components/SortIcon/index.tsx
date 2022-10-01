@@ -36,8 +36,6 @@ const SortIcon = ({
 	const renderSortOptions = () => {
 		if (!isOpened) return null;
 
-		// console.log("selectedOption", selectedOption);
-
 		const resultOptionsKeys = Object.keys(options.result) as Array<ResultSortOptionKeys>;
 		const searchOptionKeys = Object.keys(options.search) as Array<SearchSortOptionKeys>;
 

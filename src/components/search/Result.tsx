@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
@@ -44,16 +44,22 @@ const Result = ({ biasId }: ResultProps) => {
 		() => fetchSearchedEvent({ keyword, date: { startDate, endDate }, biasId, districts }),
 		{
 			select: (data) => {
+				const eventsData = data?.map((e) => {
+					const event = { ...e, image: e.images[0] };
+					delete event.images;
+					return event;
+				});
+
 				switch (selectedSortOption) {
 					case "dateAsc":
-						return data?.sort((a, b) => a.startAt - b.startAt);
+						return eventsData?.sort((a, b) => a.startAt - b.startAt);
 
 					case "dateDsc":
-						return data?.sort((a, b) => b.startAt - a.startAt);
+						return eventsData?.sort((a, b) => b.startAt - a.startAt);
 
 					case "alphabetAsc":
 					default:
-						return data;
+						return eventsData;
 				}
 			},
 			enabled: !!keyword,
@@ -150,11 +156,11 @@ const Result = ({ biasId }: ResultProps) => {
 				</div>
 			)}
 
-			<div className="events">
+			<ul className="events">
 				{events?.map((event) => (
 					<Event key={event.id} event={event} />
 				))}
-			</div>
+			</ul>
 
 			<div className="request">
 				<p>찾고 있는 이벤트가 없나요?</p>
@@ -181,4 +187,4 @@ Result.defaultProps = {
 	biasId: null,
 };
 
-export default Result;
+export default memo(Result);

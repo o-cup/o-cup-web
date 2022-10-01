@@ -1,4 +1,5 @@
 import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useQuery } from "react-query";
 import { fetchEventsByBiasId } from "../../../apis/search";
 import { StyledBiasProfile } from "./biasProfileStyle";
@@ -17,7 +18,7 @@ const BiasProfile = ({ biasName, imgUrl, handleClick, id }: BiasProfileProps) =>
 	return (
 		<StyledBiasProfile onClick={handleClick}>
 			<div>
-				<img alt={biasName} src={imgUrl} />
+				<LazyLoadImage wrapperClassName="lazy-image" alt={biasName} src={imgUrl} effect="blur" />
 				<p>{biasName}</p>
 			</div>
 		</StyledBiasProfile>

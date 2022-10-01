@@ -23,7 +23,7 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 		if (!value) {
 			setInputValue("");
 		}
-		setInputValue(value.trim());
+		setInputValue(value);
 	};
 
 	const handleEnter = (e: React.KeyboardEvent<HTMLElement>) => {

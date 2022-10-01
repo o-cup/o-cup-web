@@ -20,7 +20,7 @@ const StyledDetailTextContainer = styled.div`
 		align-items: flex-start;
 		padding-bottom: 12px;
 
-		> h6 {
+		> p {
 			font-size: 24px;
 			line-height: 32px;
 			font-weight: 700;

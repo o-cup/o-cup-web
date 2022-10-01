@@ -30,7 +30,7 @@ const EventListItem = ({ event }: EventListItemProps) => {
 				/>
 			</div>
 			<div className="title">
-				<h6>{place}</h6>
+				<p>{place}</p>
 				<BiasChip id={biasesId[0]} key={biasesId[0]} dots={biasesId.length > 1} />
 			</div>
 			<div className="textContainer">

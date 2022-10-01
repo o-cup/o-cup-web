@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 const StyledLocation = styled.div`
-	> h4 {
+	> p.title {
 		font-weight: 700;
 		font-size: 20px;
 		line-height: 27px;
 		margin-bottom: 22px;
 	}
 
-	> p {
+	> p.address {
 		display: flex;
 		align-items: center;
 		gap: 4px;

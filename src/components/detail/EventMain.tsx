@@ -27,7 +27,7 @@ const EventMain = ({ data, posterPopupDisabled }: EventMainProps) => {
 		<StyledEventMain>
 			<StyledDetailTextContainer>
 				<div className="title">
-					<h6>{place}</h6>
+					<p>{place}</p>
 					<div className="chipContainer">
 						{requestedBiases
 							? requestedBiases.map((bias) =>

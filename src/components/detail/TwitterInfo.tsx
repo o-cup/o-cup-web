@@ -12,8 +12,8 @@ function TwitterInfo({ data }: TwitterInfoProps) {
 	return (
 		<StyledTwitterInfo>
 			<div className="account">
-				<h6>{organizer}</h6>
-				<p>
+				<p className="organizer">{organizer}</p>
+				<p className="snsId">
 					<FaTwitter />@{snsId}
 				</p>
 			</div>

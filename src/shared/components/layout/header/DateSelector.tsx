@@ -19,7 +19,12 @@ function DateSelector({ isCalendarOpen, setCalendarOpen }: StateProps) {
 	return (
 		<StyledDateSelector onClick={() => setCalendarOpen(!isCalendarOpen)}>
 			<p>{isToday ? "오늘" : `${addZero(monthIndex + 1)}.${addZero(date)}`}</p>
-			<button type="button" className={`calendarOpenButton ${isCalendarOpen ? "active" : ""}`}>
+			<button
+				type="button"
+				id="calendarOpenButton"
+				aria-label="calendarOpenButton"
+				className={`calendarOpenButton ${isCalendarOpen ? "active" : ""}`}
+			>
 				<svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M7.07107 7.14236L14.1421 0.0712891H0L7.07107 7.14236Z" fill="black" />
 				</svg>

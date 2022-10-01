@@ -11,9 +11,13 @@ const TYPE = { all: "전체특전", random: "랜덤특전", dDay: "기념일특�
 
 const GoodsListItem = ({ title, items }: GoodsProps) => (
 	<StyledGoodsListItem>
-		<h6>{TYPE[title]}</h6>
-		<ul>
-			{items.map((item) => <GoodsChip key={item} value={item} />)}
+		<p className="goods_title">{TYPE[title]}</p>
+		<ul className="default">
+			{items.map((item) => (
+				<li key={item}>
+					<GoodsChip value={item} />
+				</li>
+			))}
 		</ul>
 	</StyledGoodsListItem>
 );

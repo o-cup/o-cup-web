@@ -4,12 +4,12 @@ const StyledEventNearHere = styled.div`
 	margin-top: 40px;
 	width: 100%;
 
-	> h4 {
+	> p.title {
 		font-weight: 700;
 		font-size: 20px;
 		line-height: 27px;
 		margin-bottom: 22px;
-    padding-left: 20px;
+		padding-left: 20px;
 	}
 
 	> ul {
@@ -22,12 +22,12 @@ const StyledEventNearHere = styled.div`
 		&::-webkit-scrollbar {
 			display: none;
 		}
-    
-    &::before {
-      content: "";
-      border-left: 20px solid transparent;
-    }
-    
+
+		&::before {
+			content: "";
+			border-left: 20px solid transparent;
+		}
+
 		&::after {
 			content: "";
 			border-right: 20px solid transparent;
@@ -57,7 +57,7 @@ const EventNearHereList = styled.li`
 	> div {
 		padding: 10px;
 
-		> h6 {
+		> p.near_place {
 			font-weight: 500;
 			font-size: 12px;
 			line-height: 16px;
@@ -66,7 +66,7 @@ const EventNearHereList = styled.li`
 			text-overflow: ellipsis;
 		}
 
-		> p {
+		> p.near_organizer {
 			font-weight: 400;
 			font-size: 10px;
 			line-height: 14px;

@@ -124,7 +124,7 @@ const StyledItem = styled.li`
 		align-items: center;
 		height: 50px;
 
-		> h6 {
+		> p {
 			font-size: 20px;
 			line-height: 50px;
 			font-weight: 700;

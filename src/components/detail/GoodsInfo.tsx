@@ -9,7 +9,7 @@ import { StyledGoodsInfo } from "./styles/goodsInfoStyle";
 function GoodsInfo({ goods, tweetUrl }: Partial<DetailType>) {
 	return (
 		<StyledGoodsInfo>
-			<h4>특전</h4>
+			<p className="title">특전</p>
 			{goods?.firstCome && goods.firstCome.type && <FcfsGoodsListItem fcfs={goods.firstCome} />}
 			{goods?.all && goods.all.length > 0 && <GoodsListItem title="all" items={goods.all} />}
 			{goods?.random && goods.random.length > 0 && <GoodsListItem title="random" items={goods.random} />}

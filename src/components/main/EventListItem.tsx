@@ -7,8 +7,8 @@ import { EventType } from "../../types";
 import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { StyledItem } from "./styles/mainStyle";
 import BiasChip from "../../shared/components/BiasChip";
-import { DEFAULT_POSTER_URL } from "../../shared/constants";
 import { Icon } from "../../shared/components";
+import { imageOnErrorHandler } from "../../shared/utils/imageHandlers";
 
 type EventListItemProps = {
 	event: EventType;
@@ -17,11 +17,6 @@ type EventListItemProps = {
 const EventListItem = ({ event }: EventListItemProps) => {
 	const navigate = useNavigate();
 	const { id, place, images, biasesId, organizer, snsId, district, startAt, endAt } = event;
-
-	const imageOnErrorHandler = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-		e.currentTarget.src = DEFAULT_POSTER_URL;
-		e.currentTarget.className = "error";
-	};
 
 	return (
 		<StyledItem onClick={() => navigate(`/detail/${id}`)}>
@@ -35,7 +30,7 @@ const EventListItem = ({ event }: EventListItemProps) => {
 				/>
 			</div>
 			<div className="title">
-				<h6>{place}</h6>
+				<p>{place}</p>
 				<BiasChip id={biasesId[0]} key={biasesId[0]} dots={biasesId.length > 1} />
 			</div>
 			<div className="textContainer">

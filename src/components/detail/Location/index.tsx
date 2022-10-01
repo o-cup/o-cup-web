@@ -19,9 +19,9 @@ function Location({ address }: Partial<DetailType>) {
 	return (
 		<>
 			<StyledLocation>
-				<h4>위치</h4>
+				<p className="title">위치</p>
 				<Map address={address} />
-				<p>
+				<p className="address">
 					{address || "카페 주소"}
 					<FaRegCopy onClick={handleClickCopy} />
 				</p>

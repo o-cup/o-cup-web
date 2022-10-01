@@ -36,4 +36,4 @@ const ConfirmModal = ({ isLoading, setConfirmModalOpen, handleSubmit }: ModalPro
 	</Modal>
 );
 
-export default ConfirmModal;
+export default React.memo(ConfirmModal);

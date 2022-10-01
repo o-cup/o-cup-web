@@ -43,4 +43,4 @@ const PreviewContent = () => {
 	);
 };
 
-export default PreviewContent;
+export default React.memo(PreviewContent);

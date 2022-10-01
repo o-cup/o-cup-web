@@ -6,17 +6,59 @@ export const StyledSearchInput = styled.div`
 	position: relative;
 	width: 100%;
 
-	> input {
-		width: 100%;
-		height: 40px;
+	border: 1px solid red;
+	height: 38px;
+	border: 2px solid #000;
+	border-radius: 32px;
+	background-color: #fff;
+
+	.select {
+		border-right: 2px solid #000;
+		height: 100%;
+		min-width: 104px;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		position: relative;
+
+		p {
+			text-align: center;
+			font-size: 16px;
+			position: absolute;
+			left: 18px;
+			top: 50%;
+			transform: translateY(-50%);
+			user-select: none;
+		}
+
+		svg {
+			position: absolute;
+			right: 8px;
+			cursor: pointer;
+		}
+	}
+
+	ul {
+		position: absolute;
+		background-color: #fff;
+
+		width: 106px;
+
+		top: 38px;
+		left: -2px;
+
+		z-index: 1;
+	}
+
+	input {
 		font-size: 16px;
-		line-height: 40px;
-		border: none;
-		outline: none;
 		background: ${({ theme }) => theme.colors.white};
-		border: 2px solid #000;
+		padding: 0 45px 0 10px;
+		width: 100%;
 		border-radius: 32px;
-		padding: 0 20px;
+		line-height: 34px;
 	}
 
 	i.search {
@@ -50,6 +92,16 @@ export const StyledSearchInput = styled.div`
 			margin: 2px 0 -2px;
 		}
 	}
+`;
+
+export const StyledOption = styled.li<{ selected: boolean }>`
+	height: 44px;
+	line-height: 44px;
+	font-size: 16px;
+	padding: 0 20px;
+	cursor: pointer;
+
+	background-color: ${(props) => (props.selected ? props.theme.colors.softPrimary : "")};
 `;
 
 export default {};

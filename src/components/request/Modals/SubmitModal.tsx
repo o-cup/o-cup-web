@@ -24,4 +24,4 @@ const SubmitModal = ({ handleClickContinue, handleClickFinish }: ModalProps) => 
 	</Modal>
 );
 
-export default SubmitModal;
+export default React.memo(SubmitModal);

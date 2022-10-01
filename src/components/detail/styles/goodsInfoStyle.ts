@@ -5,7 +5,7 @@ const StyledGoodsInfo = styled.div`
 	flex-direction: column;
 	gap: 10px;
 
-	> h4 {
+	> p.title {
 		font-weight: 700;
 		font-size: 20px;
 		line-height: 50px;
@@ -40,7 +40,7 @@ const StyledGoodsListItem = styled.div`
 	flex-direction: column;
 	justify-content: center;
 
-	h6 {
+	p.goods_title {
 		margin-bottom: 16px;
 	}
 
@@ -57,6 +57,16 @@ const StyledGoodsListItem = styled.div`
 	ul.lucky {
 		flex-direction: column;
 		align-items: flex-start;
+	}
+
+	ul.default,
+	ul.extra {
+		> li {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			height: fit-content;
+		}
 	}
 `;
 

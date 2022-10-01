@@ -66,13 +66,11 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 		setToggle(false);
 	};
 
-	const handleToggleClick = () => setToggle(!toggle);
-
 	return (
 		<StyledSearchInput>
-			<div className="select">
+			<div className="select" onClick={() => setToggle(!toggle)} role="presentation">
 				<p>{selectedOptionValue}</p>
-				{toggle ? <FaCaretUp onClick={handleToggleClick} /> : <FaCaretDown onClick={handleToggleClick} />}
+				{toggle ? <FaCaretUp /> : <FaCaretDown />}
 			</div>
 			{toggle && (
 				<ul>

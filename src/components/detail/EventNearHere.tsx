@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchEvents } from "../../apis";
 import { EventType } from "../../types";
 import { EventNearHereList, StyledEventNearHere } from "./styles/eventNearHereStyle";
-import { DEFAULT_POSTER_URL } from "../../shared/constants";
+import { imageOnErrorHandler } from "../../shared/utils/imageHandlers";
 
 function EventNearHere({ biasesId, newDistrict }: Partial<EventType>) {
 	const { id } = useParams();
@@ -20,11 +20,6 @@ function EventNearHere({ biasesId, newDistrict }: Partial<EventType>) {
 				return null;
 			}),
 	});
-
-	const imageOnErrorHandler = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-		e.currentTarget.src = DEFAULT_POSTER_URL;
-		e.currentTarget.className = "error";
-	};
 
 	if (!nearEvent || nearEvent.length === 0) {
 		return null;

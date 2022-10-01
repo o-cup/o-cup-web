@@ -6,6 +6,7 @@ import { requestInputsAtom } from "../../../state/atoms";
 import { StyledPlaceInput } from "./placeInputStyle";
 import { StyledSearchListContainer, StyledSearchList } from "../units/searchListStyle";
 import SearchInput from "../units/SearchInput";
+import { setKakaoMapKey } from "../../../shared/utils/kakaoMapHandlers";
 
 type KakaoResult = {
 	id: string; // "1376253571"
@@ -31,6 +32,8 @@ const PlaceInput = () => {
 	const [placeList, setPlaceList] = useState([] as KakaoResult[]);
 
 	const { kakao } = window as any;
+
+	useEffect(setKakaoMapKey, []);
 
 	const onLoadKakaoMap = (k: string) => {
 		kakao.maps.load(() => {
@@ -116,4 +119,4 @@ const PlaceInput = () => {
 	);
 };
 
-export default PlaceInput;
+export default React.memo(PlaceInput);

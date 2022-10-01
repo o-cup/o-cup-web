@@ -4,9 +4,9 @@ import { convertDateToString, convertDateWithDots, isOpenToday } from "../../sha
 import { StyledDetailImgContainer, StyledDetailTextContainer, StyledEventMain } from "./styles/eventMainStyle";
 import { StyledBiasChip } from "../../shared/components/BiasChip/biasChipStyle";
 import BiasChip from "../../shared/components/BiasChip";
-import { DEFAULT_POSTER_URL } from "../../shared/constants";
 import { Icon } from "../../shared/components";
 import PosterView from "./PosterView";
+import { imageOnErrorHandler } from "../../shared/utils/imageHandlers";
 
 type EventMainProps = {
 	data: Partial<EventType> & Partial<DetailType>;
@@ -22,11 +22,6 @@ const EventMain = ({ data, posterPopupDisabled }: EventMainProps) => {
 
 	if (!startAt || !endAt) return null;
 	const isDuringEvent = isOpenToday(today, startAt, endAt);
-
-	const imageOnErrorHandler = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-		e.currentTarget.src = DEFAULT_POSTER_URL;
-		e.currentTarget.className = "error";
-	};
 
 	return (
 		<StyledEventMain>

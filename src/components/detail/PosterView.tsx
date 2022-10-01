@@ -45,4 +45,4 @@ function PosterView({ images, setPosterViewOpen }: PosterProps) {
 	);
 }
 
-export default PosterView;
+export default React.memo(PosterView);

@@ -1,4 +1,4 @@
-import { searchFiltersAtom, searchedAtom } from "./atoms";
+import { searchFiltersAtom, searchedAtom, searchInputOptionsAtom } from "./atoms";
 
-export { searchFiltersAtom, searchedAtom };
+export { searchFiltersAtom, searchedAtom, searchInputOptionsAtom };
 export default {};

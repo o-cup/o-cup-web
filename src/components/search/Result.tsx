@@ -1,14 +1,14 @@
 import React, { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { StyledResult } from "./styles/resultStyle";
 import Event from "./Event";
 import Button from "../../shared/components/Button";
 import { FilterIcon, SortIcon } from "../../shared/components";
 import SearchModal from "./SearchModal";
 import Chip from "../../shared/components/Chip";
-import { searchFiltersAtom } from "../../state";
+import { searchFiltersAtom, searchInputOptionsAtom } from "../../state";
 import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { fetchSearchedEvent } from "../../apis/search";
 import { RegCodeItem } from "./types";
@@ -35,13 +35,22 @@ const Result = ({ biasId }: ResultProps) => {
 	const [selectedSortOption, setSelectedSortOption] = useState<ResultSortOptionKeys>("alphabetAsc");
 	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
 	const [chips, setChips] = useState<{ dateChip: string; distChips: RegCodeItem[] }>(initialChipsData);
+	const searchInputOptions = useRecoilValue(searchInputOptionsAtom);
+	const searchInputOptionKey = searchInputOptions.find((o) => o.selected)?.key;
 
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
 	const { data: events, isLoading } = useQuery(
 		["resultEvents", keyword, startDate, endDate, biasId, districts, selectedSortOption],
-		() => fetchSearchedEvent({ keyword, date: { startDate, endDate }, biasId, districts }),
+		() =>
+			fetchSearchedEvent({
+				keyword: keyword.trim(),
+				date: { startDate, endDate },
+				biasId,
+				districts,
+				searchInputOptionKey,
+			}),
 		{
 			select: (data) => {
 				const eventsData = data?.map((e) => {
@@ -49,14 +58,11 @@ const Result = ({ biasId }: ResultProps) => {
 					delete event.images;
 					return event;
 				});
-
 				switch (selectedSortOption) {
 					case "dateAsc":
 						return eventsData?.sort((a, b) => a.startAt - b.startAt);
-
 					case "dateDsc":
 						return eventsData?.sort((a, b) => b.startAt - a.startAt);
-
 					case "alphabetAsc":
 					default:
 						return eventsData;

@@ -2,24 +2,13 @@ import React, { Dispatch, memo, SetStateAction, useEffect, useState } from "reac
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import Icon from "../../shared/components/Icon/Icons";
-import { searchedAtom, searchFiltersAtom } from "../../state";
+import { searchedAtom, searchFiltersAtom, searchInputOptionsAtom } from "../../state";
 import { StyledOption, StyledSearchInput } from "./styles/searchInputStyle";
+import { SearchInputOptionType } from "../../types";
 
 type SearchInputProps = {
 	setSelectedBiasId: Dispatch<SetStateAction<null | number>>;
 };
-
-type SelectOptionsType = {
-	key: string;
-	value: string;
-	selected: boolean;
-};
-
-const initialSelectOptions = [
-	{ key: "bias", value: "아티스트", selected: true },
-	{ key: "place", value: "장소이름", selected: false },
-	{ key: "organizer", value: "주최자", selected: false },
-];
 
 const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
@@ -27,7 +16,7 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 	const setSearched = useSetRecoilState(searchedAtom);
 	const [inputValue, setInputValue] = useState("");
 	const [toggle, setToggle] = useState(false);
-	const [selectOptions, setSelectOptions] = useState<SelectOptionsType[]>(initialSelectOptions);
+	const [selectOptions, setSelectOptions] = useRecoilState<SearchInputOptionType[]>(searchInputOptionsAtom);
 	const selectedOptionValue = selectOptions.find((o) => o.selected)?.value;
 
 	useEffect(() => {

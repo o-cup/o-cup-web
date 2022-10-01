@@ -1,4 +1,5 @@
 import axios from "axios";
+import { SearchInputOptionKey } from "../../types";
 import { RegCodeItem } from "../../components/search/types";
 import { isDateRangeOverlaps } from "../../shared/utils/dateHandlers";
 import { supabase } from "../../supabaseClient";
@@ -14,42 +15,46 @@ export type FetchSearchedEventParams = {
 	date?: { startDate: string; endDate: string };
 	biasId?: number | null;
 	districts?: RegCodeItem[];
+	searchInputOptionKey?: SearchInputOptionKey;
 };
 
-const fetchSearchedEvent = async ({ keyword, date, districts }: FetchSearchedEventParams) => {
+const fetchSearchedEvent = async ({ keyword, date, districts, searchInputOptionKey }: FetchSearchedEventParams) => {
+	const { data: allEvents } = await supabase.from("place_sort").select("*").eq("isApproved", true);
 	let data;
-	const { data: events } = await supabase.from("place_sort").select("*").eq("isApproved", true);
 
-	const { data: biasData } = await supabase
-		.from("people")
-		.select("*")
-		.or(`name.eq.${keyword},enName.eq.${keyword},koName.eq.${keyword},realName.eq.${keyword}`);
+	if (!keyword) return data;
 
-	const isNameKeyword = !!biasData?.length;
-	if (isNameKeyword) {
-		const biasesId = biasData?.map((bias) => bias.id);
-		// TODO: 추후 동명이인 처리를 고려하여 fetchEventsByBiasId를 사용하지 않음
+	if (searchInputOptionKey === "bias") {
+		const { data: biasData } = await supabase.from("people").select("*");
 
-		const { data: biasEvents } = await supabase
-			.from("place_sort")
-			.select("*")
-			.eq("isApproved", true)
-			.contains("biasesId", [biasesId]);
+		const searchedBiasId = biasData?.filter((row) => {
+			const { name, enName, koName, realName } = row;
 
-		data = biasEvents;
-	} else {
-		data = events?.filter((event) => {
-			const { bias, place, organizer, district } = event;
 			if (
-				(bias && bias.includes(keyword)) ||
-				(place && place.includes(keyword)) ||
-				(organizer && organizer.includes(keyword)) ||
-				(district && district.includes(keyword))
+				name.includes(keyword) ||
+				(enName && enName.includes(keyword)) ||
+				(enName && enName.includes(keyword.toUpperCase())) ||
+				(enName && enName.includes(keyword.toLowerCase())) ||
+				(koName && koName.includes(keyword)) ||
+				(realName && realName.includes(keyword))
 			) {
 				return true;
 			}
 			return false;
 		});
+
+		const biasId = searchedBiasId?.map((bias) => bias.id);
+		if (biasId?.length) {
+			data = allEvents?.filter((event) => event.biasesId.includes(biasId[0]));
+		}
+	}
+
+	if (searchInputOptionKey === "place") {
+		data = allEvents?.filter((event) => event.place.includes(keyword));
+	}
+
+	if (searchInputOptionKey === "organizer") {
+		data = allEvents?.filter((event) => event.organizer.includes(keyword) || event.snsId.includes(keyword));
 	}
 
 	if (date?.startDate) {

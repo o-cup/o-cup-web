@@ -42,7 +42,7 @@ const Result = ({ biasId }: ResultProps) => {
 	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
 	const { data: events, isLoading } = useQuery(
-		["resultEvents", keyword, startDate, endDate, biasId, districts, selectedSortOption],
+		["resultEvents", keyword, startDate, endDate, biasId, districts, selectedSortOption, searchInputOptionKey],
 		() =>
 			fetchSearchedEvent({
 				keyword: keyword.trim(),

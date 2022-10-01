@@ -20,14 +20,9 @@ const Event = ({ event }: EventProps) => {
 	const today = convertDateToString(new Date());
 	const isDuringEvent = isOpenToday(today, startAt!, endAt!);
 
-	const handleImgLoadError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-		e.currentTarget.src = DEFAULT_POSTER_URL;
-		e.currentTarget.className = "error";
-	};
-
 	return (
 		<StyledEvent onClick={() => navigate(`/detail/${id}`)}>
-			<LazyLoadImage wrapperClassName="lazy-image" alt={place} src={image} effect="blur" onError={handleImgLoadError} />
+			<img alt={place} src={image} />
 			<div>
 				<div className="title">
 					<h2>{place}</h2>

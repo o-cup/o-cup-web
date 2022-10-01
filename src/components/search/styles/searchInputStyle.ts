@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledSearchInput = styled.div`
+export const StyledSearchInput = styled.div<{ searched: boolean }>`
 	display: flex;
 	align-items: center;
 	position: relative;
@@ -55,7 +55,8 @@ export const StyledSearchInput = styled.div`
 	input {
 		font-size: 16px;
 		background: ${({ theme }) => theme.colors.white};
-		padding: 0 45px 0 10px;
+		/* padding: 0 45px 0 10px; */
+		padding: ${(props) => (props.searched ? "0 65px 0 10px" : "0 42px 0 10px")};
 		width: 100%;
 		border-radius: 32px;
 		line-height: 34px;

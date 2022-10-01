@@ -8,9 +8,10 @@ import { SearchInputOptionType } from "../../types";
 
 type SearchInputProps = {
 	setSelectedBiasId: Dispatch<SetStateAction<null | number>>;
+	searched: boolean;
 };
 
-const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
+const SearchInput = ({ setSelectedBiasId, searched }: SearchInputProps) => {
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 	const { keyword } = searchFilters;
 	const setSearched = useSetRecoilState(searchedAtom);
@@ -56,7 +57,7 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 	};
 
 	return (
-		<StyledSearchInput>
+		<StyledSearchInput searched={searched}>
 			<div className="select" onClick={() => setToggle(!toggle)} role="presentation">
 				<p>{selectedOptionValue}</p>
 				{toggle ? <FaCaretUp /> : <FaCaretDown />}

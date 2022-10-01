@@ -151,7 +151,7 @@ const Search = () => {
 		<Layout page="search" handleBackClick={handleBackClick} share>
 			<StyledSearch>
 				<div className="input">
-					<SearchInput setSelectedBiasId={setSelectedBiasId} />
+					<SearchInput setSelectedBiasId={setSelectedBiasId} searched={searched} />
 				</div>
 
 				{conditionalRender()}

@@ -8,4 +8,11 @@ export const setKakaoMapKey = () => {
 	}
 };
 
+export const removeKakaoMapKey = () => {
+	const kakaoScript = document.querySelector("#kakaoMap");
+	if (kakaoScript) {
+		kakaoScript.remove();
+	}
+};
+
 export default {};

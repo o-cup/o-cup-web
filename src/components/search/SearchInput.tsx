@@ -42,12 +42,16 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 		setInputValue(value);
 	};
 
+	const showResult = () => {
+		setSearchFilters((prev) => ({ ...prev, keyword: inputValue }));
+		setSearched(true);
+	};
+
 	const handleEnter = (e: React.KeyboardEvent<HTMLElement>) => {
 		if (e.key !== "Enter") return;
 		e.preventDefault();
 
-		setSearchFilters((prev) => ({ ...prev, keyword: inputValue }));
-		setSearched(true);
+		showResult();
 	};
 
 	const handleDeleteClick = () => {
@@ -85,7 +89,7 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 				onChange={handleInputChange}
 				onKeyDown={handleEnter}
 			/>
-			<Icon name="search" handleClick={() => setSearched(true)} />
+			<Icon name="search" handleClick={() => showResult()} />
 			{keyword && <Icon name="delete" handleClick={handleDeleteClick} />}
 		</StyledSearchInput>
 	);

@@ -1,5 +1,6 @@
-import React from "react";
-import { FaCalendar, FaMapMarkerAlt, FaTwitter, FaUserCircle } from "react-icons/fa";
+import React, { memo } from "react";
+import { FaTwitter } from "react-icons/fa";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "../../shared/components";
 import BiasChip from "../../shared/components/BiasChip";
@@ -8,19 +9,19 @@ import { EventType } from "../../types";
 import { StyledEvent } from "./styles/eventStyle";
 
 type EventProps = {
-	event: EventType;
+	event: Partial<EventType> & { image: string };
 };
 
 const Event = ({ event }: EventProps) => {
 	const navigate = useNavigate();
-	const { images, place, biasesId, organizer, snsId, district, startAt, endAt, id } = event;
+	const { image, place, biasesId, organizer, snsId, district, startAt, endAt, id } = event;
 
 	const today = convertDateToString(new Date());
-	const isDuringEvent = isOpenToday(today, startAt, endAt);
+	const isDuringEvent = isOpenToday(today, startAt!, endAt!);
 
 	return (
 		<StyledEvent onClick={() => navigate(`/detail/${id}`)}>
-			<img src={images[0]} alt={place} />
+			<img alt={place} src={image} />
 			<div>
 				<div className="title">
 					<h2>{place}</h2>
@@ -58,4 +59,4 @@ const Event = ({ event }: EventProps) => {
 	);
 };
 
-export default Event;
+export default memo(Event);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { format } from "date-fns";
 import Modal from "../../shared/components/Modal";
@@ -84,4 +84,4 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 	return <>{conditionalRender()}</>;
 };
 
-export default SearchModal;
+export default memo(SearchModal);

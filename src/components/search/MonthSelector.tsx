@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState, Dispatch } from "react";
+import React, { SetStateAction, useState, Dispatch, memo } from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { Month, StyledMonthSelector } from "./styles/monthSelectorStyle";
 
@@ -12,23 +12,23 @@ const MonthSelector = ({ selectedMonth, setSelectedMonth }: MonthSelectorProps) 
 
 	const months = Array.from({ length: 12 }, (_, i) => i + 1);
 
-	const handleToggleClick = () => setToggle(!toggle);
-
 	const handleMonthClick = (month: number) => {
 		setSelectedMonth(month);
 		setToggle(!toggle);
 	};
+
+	const handleToggleClick = () => setToggle(!toggle);
 
 	return (
 		<StyledMonthSelector>
 			<h2>{`${selectedMonth}월 생일 아티스트를 찾아보세요.`}</h2>
 			<div className="toggle">
 				<p>다른 생일 달 아티스트 찾아보기</p>
-				{toggle ? <FaCaretUp onClick={handleToggleClick} /> : <FaCaretDown onClick={handleToggleClick} />}
+				{toggle ? <FaCaretUp onClick={() => setToggle(!toggle)} /> : <FaCaretDown onClick={handleToggleClick} />}
 			</div>
 
 			{toggle && (
-				<div className="selectBox">
+				<ul className="selectBox">
 					{months.map((month) => (
 						<Month
 							key={month}
@@ -36,10 +36,10 @@ const MonthSelector = ({ selectedMonth, setSelectedMonth }: MonthSelectorProps) 
 							onClick={() => handleMonthClick(month)}
 						>{`${month}월`}</Month>
 					))}
-				</div>
+				</ul>
 			)}
 		</StyledMonthSelector>
 	);
 };
 
-export default MonthSelector;
+export default memo(MonthSelector);

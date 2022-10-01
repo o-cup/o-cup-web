@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, memo, SetStateAction, useEffect, useState } from "react";
 // import { FaCaretDown } from "react-icons/fa";
 import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
 import { useRegCodes } from "../../hooks";
@@ -166,4 +166,4 @@ const DistrictSelector = ({
 	);
 };
 
-export default DistrictSelector;
+export default memo(DistrictSelector);

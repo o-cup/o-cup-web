@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledEvent = styled.div`
+export const StyledEvent = styled.li`
 	height: 184px;
 	border: 2px solid #000;
 	padding: 10px;
@@ -84,7 +84,7 @@ export const StyledEvent = styled.div`
 
 				i,
 				svg {
-          color: ${({ theme }) => theme.colors.gray};
+					color: ${({ theme }) => theme.colors.gray};
 					min-width: 14px;
 					margin-right: 6px;
 				}

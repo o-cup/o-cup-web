@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, memo, SetStateAction, useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import Icon from "../../shared/components/Icon/Icons";
 import { searchedAtom, searchFiltersAtom } from "../../state";
@@ -53,4 +53,4 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 	);
 };
 
-export default SearchInput;
+export default memo(SearchInput);

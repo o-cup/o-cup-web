@@ -4,7 +4,6 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "../../shared/components";
 import BiasChip from "../../shared/components/BiasChip";
-import { DEFAULT_POSTER_URL } from "../../shared/constants";
 import { convertDateToString, convertDateWithDots, isOpenToday } from "../../shared/utils/dateHandlers";
 import { EventType } from "../../types";
 import { StyledEvent } from "./styles/eventStyle";

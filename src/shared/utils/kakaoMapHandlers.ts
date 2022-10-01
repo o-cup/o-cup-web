@@ -1,17 +1,30 @@
 export const setKakaoMapKey = () => {
 	if (!document.querySelector("#kakaoMap")) {
-		const kakaoScript = document.createElement("script");
-		kakaoScript.id = "kakaoMap";
-		kakaoScript.src =
+		const kakaoMap = document.createElement("script");
+		kakaoMap.id = "kakaoMap";
+		kakaoMap.src =
 			"//dapi.kakao.com/v2/maps/sdk.js?appkey=aa90b5cd8734fb0ed66e4f3aab95a147&autoload=false&libraries=services";
-		document.head.appendChild(kakaoScript);
+		document.head.appendChild(kakaoMap);
+	}
+
+	if (!document.querySelector("#kakaoJS")) {
+		const kakaoJS = document.createElement("script");
+		kakaoJS.id = "kakaoJS";
+		kakaoJS.type = "text/javascript";
+		kakaoJS.src = "https://developers.kakao.com/sdk/js/kakao.js";
+		document.head.appendChild(kakaoJS);
 	}
 };
 
 export const removeKakaoMapKey = () => {
-	const kakaoScript = document.querySelector("#kakaoMap");
-	if (kakaoScript) {
-		kakaoScript.remove();
+	const kakaoMap = document.querySelector("#kakaoMap");
+	if (kakaoMap) {
+		kakaoMap.remove();
+	}
+
+	const kakaoJS = document.querySelector("#kakaoJS");
+	if (kakaoJS) {
+		kakaoJS.remove();
 	}
 };
 

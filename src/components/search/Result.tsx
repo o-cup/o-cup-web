@@ -14,6 +14,7 @@ import { fetchSearchedEvent } from "../../apis/search";
 import { RegCodeItem } from "./types";
 import Loading from "../../shared/components/Loading";
 import { ResultSortOptionKeys } from "../../types";
+import { removeSpace } from "./utils";
 
 type ResultProps = {
 	biasId?: number | null;
@@ -45,7 +46,7 @@ const Result = ({ biasId }: ResultProps) => {
 		["resultEvents", keyword, startDate, endDate, biasId, districts, selectedSortOption, searchInputOptionKey],
 		() =>
 			fetchSearchedEvent({
-				keyword: keyword.trim(),
+				keyword: removeSpace(keyword.trim()),
 				date: { startDate, endDate },
 				biasId,
 				districts,

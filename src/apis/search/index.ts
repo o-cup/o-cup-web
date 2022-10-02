@@ -3,6 +3,7 @@ import { SearchInputOptionKey } from "../../types";
 import { RegCodeItem } from "../../components/search/types";
 import { isDateRangeOverlaps } from "../../shared/utils/dateHandlers";
 import { supabase } from "../../supabaseClient";
+import { removeSpace } from "../../components/search/utils";
 
 const fetchRegcodes = async (code?: string) => {
 	const param = !code ? "*00000000" : `${code.split("0")[0]}*000000`;
@@ -32,9 +33,7 @@ const fetchSearchedEvent = async ({ keyword, date, districts, searchInputOptionK
 
 			if (
 				name.includes(keyword) ||
-				(enName && enName.includes(keyword)) ||
-				(enName && enName.includes(keyword.toUpperCase())) ||
-				(enName && enName.includes(keyword.toLowerCase())) ||
+				(enName && removeSpace(enName).toUpperCase().includes(keyword.toUpperCase())) ||
 				(koName && koName.includes(keyword)) ||
 				(realName && realName.includes(keyword))
 			) {
@@ -50,11 +49,26 @@ const fetchSearchedEvent = async ({ keyword, date, districts, searchInputOptionK
 	}
 
 	if (searchInputOptionKey === "place") {
-		data = allEvents?.filter((event) => event.place.includes(keyword));
+		data = allEvents?.filter((event) => {
+			const { place } = event;
+			if (place && removeSpace(place).toUpperCase().includes(keyword.toUpperCase())) {
+				return true;
+			}
+			return false;
+		});
 	}
 
 	if (searchInputOptionKey === "organizer") {
-		data = allEvents?.filter((event) => event.organizer.includes(keyword) || event.snsId.includes(keyword));
+		data = allEvents?.filter((event) => {
+			const { organizer, snsId } = event;
+			if (
+				(organizer && removeSpace(organizer).toUpperCase().includes(keyword.toUpperCase())) ||
+				(snsId && removeSpace(snsId).toUpperCase().includes(keyword.toUpperCase()))
+			) {
+				return true;
+			}
+			return false;
+		});
 	}
 
 	if (date?.startDate) {

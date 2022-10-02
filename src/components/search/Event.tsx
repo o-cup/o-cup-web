@@ -1,10 +1,10 @@
 import React, { memo } from "react";
 import { FaTwitter } from "react-icons/fa";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "../../shared/components";
 import BiasChip from "../../shared/components/BiasChip";
 import { convertDateToString, convertDateWithDots, isOpenToday } from "../../shared/utils/dateHandlers";
+import { imageOnErrorHandler } from "../../shared/utils/imageHandlers";
 import { EventType } from "../../types";
 import { StyledEvent } from "./styles/eventStyle";
 
@@ -21,7 +21,7 @@ const Event = ({ event }: EventProps) => {
 
 	return (
 		<StyledEvent onClick={() => navigate(`/detail/${id}`)}>
-			<img alt={place} src={image} />
+			<img alt={place} src={image} onError={imageOnErrorHandler} />
 			<div>
 				<div className="title">
 					<h2>{place}</h2>

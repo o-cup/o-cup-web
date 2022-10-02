@@ -2,6 +2,7 @@ import { atom } from "recoil";
 import { RequestGoodsListType, RequestType } from "../components/request/requestType";
 import { RegCodeItem } from "../components/search/types";
 import { convertDateToString } from "../shared/utils/dateHandlers";
+import { SearchInputOptionType } from "../types";
 import { sessionAtom } from "./recoilUtils";
 
 const today = new Date();
@@ -81,6 +82,15 @@ export const searchedAtom = atom<boolean>({
 	key: "searchedAtom",
 	default: false,
 	effects: [sessionAtom],
+});
+
+export const searchInputOptionsAtom = atom<SearchInputOptionType[]>({
+	key: "searchInputOptionsAtom",
+	default: [
+		{ key: "bias", value: "아티스트", selected: true },
+		{ key: "place", value: "장소이름", selected: false },
+		{ key: "organizer", value: "주최자", selected: false },
+	],
 });
 
 export default {};

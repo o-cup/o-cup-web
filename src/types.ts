@@ -90,3 +90,11 @@ export type DateRangeType = {
 
 export type SearchSortOptionKeys = "alphabetAsc" | "birthdayAsc" | "birthdayDsc";
 export type ResultSortOptionKeys = "dateAsc" | "dateDsc" | "alphabetAsc";
+
+export type SearchInputOptionKey = "bias" | "place" | "organizer";
+
+export type SearchInputOptionType = {
+	key: SearchInputOptionKey;
+	value: string;
+	selected: boolean;
+};

@@ -171,6 +171,7 @@ const Result = ({ biasId }: ResultProps) => {
 
 			<div className="request">
 				<p>찾고 있는 이벤트가 없나요?</p>
+				<img src="/images/pin_cone.png" alt="request" />
 				<Button
 					customStyle={{ fontWeight: "bold", width: "178px", height: "50px" }}
 					handleClick={() => navigate("/request")}

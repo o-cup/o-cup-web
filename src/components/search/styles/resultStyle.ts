@@ -46,18 +46,21 @@ export const StyledResult = styled.div`
 	}
 
 	.request {
-		border: 2px solid #000;
-		box-shadow: 4px 4px 0 #000000;
-		margin-top: 16px;
-		height: 188px;
+		margin-top: 20px;
+		height: 240px;
 
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: space-evenly;
+
+		img {
+			width: 56px;
+		}
 
 		p {
 			text-align: center;
-			line-height: 100px;
+			line-height: 30px;
 		}
 	}
 `;

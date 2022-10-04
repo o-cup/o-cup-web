@@ -24,7 +24,7 @@ const StyledFooter = styled.footer`
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	padding: 100px 0 50px 0;
+	padding: 50px 0 50px 0;
 	text-align: center;
 	gap: 12px;
 

@@ -32,7 +32,7 @@ const fetchSearchedEvent = async ({ keyword, date, districts, searchInputOptionK
 			const { name, enName, koName, realName } = row;
 
 			if (
-				name.includes(keyword) ||
+				removeSpace(name).toUpperCase().includes(keyword.toUpperCase()) ||
 				(enName && removeSpace(enName).toUpperCase().includes(keyword.toUpperCase())) ||
 				(koName && koName.includes(keyword)) ||
 				(realName && realName.includes(keyword))

@@ -89,7 +89,7 @@ export const searchInputOptionsAtom = atom<SearchInputOptionType[]>({
 	default: [
 		{ key: "bias", value: "아티스트", selected: true },
 		{ key: "place", value: "장소이름", selected: false },
-		{ key: "organizer", value: "주최자", selected: false },
+		{ key: "organizer", value: "주최자ID", selected: false },
 	],
 });
 

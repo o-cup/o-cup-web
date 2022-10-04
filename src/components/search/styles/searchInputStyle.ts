@@ -15,7 +15,7 @@ export const StyledSearchInput = styled.div<{ searched: boolean }>`
 	.select {
 		border-right: 2px solid #000;
 		height: 100%;
-		min-width: 98px;
+		min-width: 102px;
 
 		display: flex;
 		justify-content: center;
@@ -27,7 +27,7 @@ export const StyledSearchInput = styled.div<{ searched: boolean }>`
 			text-align: center;
 			font-size: 16px;
 			position: absolute;
-			left: 14px;
+			left: 15px;
 			top: 17.5px;
 			transform: translateY(-50%);
 			user-select: none;

@@ -1,10 +1,10 @@
 import React from "react";
 import { FaTwitter } from "react-icons/fa";
-import { DetailType, EventType } from "../../types";
+import { EventType } from "../../types";
 import { StyledTwitterInfo } from "./styles/twitterInfoStyle";
 
 type TwitterInfoProps = {
-	data: Partial<EventType> & Partial<DetailType>;
+	data: Partial<EventType>;
 };
 
 function TwitterInfo({ data }: TwitterInfoProps) {

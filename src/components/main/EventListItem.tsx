@@ -39,7 +39,8 @@ const EventListItem = ({ event }: EventListItemProps) => {
 					{organizer}
 				</p>
 				<p>
-					<FaTwitter />@{snsId}
+					<FaTwitter />
+					{snsId ? `@${snsId}` : "-"}
 				</p>
 				<p>
 					<Icon name="place-gray" />

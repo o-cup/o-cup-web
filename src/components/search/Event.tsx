@@ -14,7 +14,7 @@ type EventProps = {
 
 const Event = ({ event }: EventProps) => {
 	const navigate = useNavigate();
-	const { image, place, biasesId, organizer, snsId, district, startAt, endAt, id } = event;
+	const { image, place, biasesId, organizer, snsId, newDistrict, startAt, endAt, id } = event;
 
 	const today = convertDateToString(new Date());
 	const isDuringEvent = isOpenToday(today, startAt!, endAt!);
@@ -45,7 +45,7 @@ const Event = ({ event }: EventProps) => {
 					</li>
 					<li>
 						<Icon name="place-gray" />
-						<p>{district}</p>
+						<p>{newDistrict?.name}</p>
 					</li>
 					<li>
 						<Icon name="calendar-gray" />

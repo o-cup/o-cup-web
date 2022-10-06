@@ -10,7 +10,8 @@ import { EventType } from "../../../types";
 import { convertDateWithDots } from "../../../shared/utils/dateHandlers";
 
 const Event = ({ duplicatedEventData, handleClick }: { duplicatedEventData: EventType; handleClick?: () => void }) => {
-	const { images, place, biasesId, requestedBiases, organizer, snsId, district, startAt, endAt } = duplicatedEventData;
+	const { images, place, biasesId, requestedBiases, organizer, snsId, newDistrict, startAt, endAt } =
+		duplicatedEventData;
 
 	return (
 		<StyledDuplicatedEvent onClick={handleClick}>
@@ -36,7 +37,7 @@ const Event = ({ duplicatedEventData, handleClick }: { duplicatedEventData: Even
 					</p>
 					<p>
 						<FaMapMarkerAlt />
-						{district}
+						{newDistrict.name}
 					</p>
 					<p>
 						<FaCalendar />

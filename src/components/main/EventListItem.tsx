@@ -16,7 +16,7 @@ type EventListItemProps = {
 
 const EventListItem = ({ event }: EventListItemProps) => {
 	const navigate = useNavigate();
-	const { id, place, images, biasesId, organizer, snsId, district, startAt, endAt } = event;
+	const { id, place, images, biasesId, organizer, snsId, districts, startAt, endAt } = event;
 
 	return (
 		<StyledItem onClick={() => navigate(`/detail/${id}`)}>
@@ -33,24 +33,26 @@ const EventListItem = ({ event }: EventListItemProps) => {
 				<p>{place}</p>
 				<BiasChip id={biasesId[0]} key={biasesId[0]} dots={biasesId.length > 1} />
 			</div>
-			<div className="textContainer">
-				<p>
+			<ul className="textContainer">
+				<li>
 					<Icon name="host-gray" />
-					{organizer}
-				</p>
-				<p>
+					<p>{organizer}</p>
+				</li>
+				<li>
 					<FaTwitter />
-					{snsId ? `@${snsId}` : "-"}
-				</p>
-				<p>
+					<p>{snsId ? `@${snsId}` : "-"}</p>
+				</li>
+				<li>
 					<Icon name="place-gray" />
-					{district}
-				</p>
-				<p>
+					<p>{districts.name}</p>
+				</li>
+				<li>
 					<Icon name="calendar-gray" />
-					{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
-				</p>
-			</div>
+					<p>
+						{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
+					</p>
+				</li>
+			</ul>
 		</StyledItem>
 	);
 };

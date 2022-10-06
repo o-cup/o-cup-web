@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { EventType, DetailType } from "../../types";
+import { EventType } from "../../types";
 import { convertDateToString, convertDateWithDots, isOpenToday } from "../../shared/utils/dateHandlers";
 import { StyledDetailImgContainer, StyledDetailTextContainer, StyledEventMain } from "./styles/eventMainStyle";
 import { StyledBiasChip } from "../../shared/components/BiasChip/biasChipStyle";
@@ -9,7 +9,7 @@ import PosterView from "./PosterView";
 import { imageOnErrorHandler } from "../../shared/utils/imageHandlers";
 
 type EventMainProps = {
-	data: Partial<EventType> & Partial<DetailType>;
+	data: Partial<EventType>;
 	posterPopupDisabled?: boolean;
 };
 

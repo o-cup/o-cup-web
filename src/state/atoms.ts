@@ -30,7 +30,7 @@ export const tempPostersAtom = atom<{ id: number; file: any; result: string }[]>
 export const requestInputsAtom = atom<RequestType>({
 	key: "requestInputsAtom",
 	default: {
-		place: { place: "", district: "", address: "", newDistrict: { code: "", name: "" } },
+		place: { place: "", address: "", districts: { code: "", name: "" } },
 		artist: [{ id: 1, peopleId: 0, bias: "", team: "" }],
 		organizer: "",
 		snsId: "",

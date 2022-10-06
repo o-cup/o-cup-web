@@ -81,8 +81,7 @@ const PlaceInput = () => {
 					...requestInputs,
 					place: {
 						place: placeInfo.place_name,
-						district: `${districtArr[0]} ${districtArr[1]}`,
-						newDistrict: { code: res.data.documents[0].address.b_code, name: `${districtArr[0]} ${districtArr[1]}` },
+						districts: { code: res.data.documents[0].address.b_code, name: `${districtArr[0]} ${districtArr[1]}` },
 						address: placeInfo.road_address_name,
 					},
 				});

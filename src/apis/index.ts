@@ -1,10 +1,10 @@
 import { ITEMS_PER_PAGE } from "../shared/constants";
 import { isOpenToday } from "../shared/utils/dateHandlers";
 import { supabase } from "../supabaseClient";
-import { EventType, DetailType, FetchEventParams, SearchSortOptionKeys } from "../types";
+import { EventType, FetchEventParams, SearchSortOptionKeys } from "../types";
 
 const fetchEvents = async ({ pageParam = 1, infinite = false, date }: FetchEventParams) => {
-	let query = supabase.from("place_sort").select("*").eq("isApproved", true);
+	let query = supabase.from("temp_place_sort").select("*").eq("isApproved", true);
 
 	if (infinite) {
 		const endAt = pageParam * ITEMS_PER_PAGE;
@@ -33,37 +33,12 @@ const fetchEvents = async ({ pageParam = 1, infinite = false, date }: FetchEvent
  * @param {string} id
  * @returns {EventType}
  */
-const fetchEvent = async ({ id }: { id?: string }) => {
-	const { data, error } = await supabase.from("events").select("*").eq("id", id);
+const fetchEventById = async ({ id }: { id?: string }) => {
+	const { data, error } = await supabase.from("temp_events").select("*").eq("id", id);
 	if (error) {
 		throw new Error(`${error.message}: ${error.details}`);
 	}
 	return data?.[0];
-};
-
-/**
- * 아이디가 일치하는 detail 데이터 반환
- * @param {string} id
- * @returns {DetailType}
- */
-const fetchDetail = async ({ id }: { id?: string }) => {
-	const { data, error } = await supabase.from("detail").select("*").eq("id", id);
-	if (error) {
-		throw new Error(`${error.message}: ${error.details}`);
-	}
-	return data?.[0];
-};
-
-/**
- * 아이디가 일치하는 { ...event, ...detail } 데이터 통합하여 반환
- * @param {string} id
- * @returns {EventType & DetailType}
- */
-const fetchEventDetail = async ({ id }: { id?: string }) => {
-	const event = await fetchEvent({ id });
-	const detail = await fetchDetail({ id });
-
-	return { ...event, ...detail };
 };
 
 /**
@@ -91,21 +66,10 @@ const fetchPeople = async (sortOption?: SearchSortOptionKeys) => {
 };
 
 /**
- * 이벤트 추가
+ * 이벤트 등록 신청
  * */
 const insertEvent = async (eventData: Partial<EventType>) => {
-	const { data, error } = await supabase.from("events").insert([{ ...eventData }]);
-	if (error) {
-		throw new Error(`${error.message}: ${error.details}`);
-	}
-	return data;
-};
-
-/**
- * 디테일 추가
- * */
-const insertDetail = async (detailData: Partial<DetailType>) => {
-	const { data, error } = await supabase.from("detail").insert([{ ...detailData }]);
+	const { data, error } = await supabase.from("temp_events").insert([{ ...eventData }]);
 	if (error) {
 		throw new Error(`${error.message}: ${error.details}`);
 	}
@@ -151,7 +115,7 @@ const fetchDuplicatedEvent = async ({
 	dateRange: { startAt: string; endAt: string };
 }) => {
 	const { data, error } = await supabase
-		.from("events")
+		.from("temp_events")
 		.select("*")
 		.match({ place, startAt: dateRange.startAt, endAt: dateRange.endAt });
 	if (error) {
@@ -160,14 +124,5 @@ const fetchDuplicatedEvent = async ({
 	return data?.[0];
 };
 
-export {
-	fetchEvents,
-	fetchEventDetail,
-	fetchPeople,
-	insertEvent,
-	insertDetail,
-	fetchBiases,
-	uploadPoster,
-	fetchDuplicatedEvent,
-};
+export { fetchEvents, fetchEventById, fetchPeople, insertEvent, fetchBiases, uploadPoster, fetchDuplicatedEvent };
 export default {};

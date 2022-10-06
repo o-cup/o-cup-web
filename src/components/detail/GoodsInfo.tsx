@@ -1,12 +1,12 @@
 import React from "react";
-import { DetailType } from "../../types";
+import { EventType } from "../../types";
 import FcfsGoodsListItem from "./goodsItems/FcfsGoodsListItem";
 import GoodsListItem from "./goodsItems/GoodsListItem";
 import ExtraGoodsListItem from "./goodsItems/ExtraGoodsListItem";
 import LuckyGoodsListItem from "./goodsItems/LuckyGoodsListItem";
 import { StyledGoodsInfo } from "./styles/goodsInfoStyle";
 
-function GoodsInfo({ goods, tweetUrl }: Partial<DetailType>) {
+function GoodsInfo({ goods, tweetUrl }: Partial<EventType>) {
 	return (
 		<StyledGoodsInfo>
 			<p className="title">특전</p>

@@ -85,6 +85,12 @@ const StyledHighLightItem = styled.li`
 			min-width: 48px;
 		}
 
+		// 기념일 제외
+		&.length_6 {
+			width: 72px;
+			min-width: 72px;
+		}
+
 		.highlight {
 			width: fit-content;
 			font-weight: 600;

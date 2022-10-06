@@ -7,14 +7,14 @@ type FcfsProps = {
 	fcfs: FirstComeType;
 };
 
-const TYPE_C = { others: "매일", dDay: "기념일" };
+const TYPE_C = { others: "기념일 제외", dDay: "기념일" };
 
 const FcfsGoodsListItem = ({ fcfs }: FcfsProps) => {
 	const { data } = fcfs;
 
 	return (
 		<StyledGoodsListItem>
-			<p className="goods_title">선착특전</p>
+			<p className="goods_title">선착 특전</p>
 			<ul className="fcfs">
 				{data
 					.filter((d) => d.items.length > 0)

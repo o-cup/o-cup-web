@@ -132,6 +132,14 @@ const StyledItem = styled.li`
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
+			> span {
+				font-size: 20px;
+				line-height: 50px;
+				font-weight: 700;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
 		}
 	}
 
@@ -140,16 +148,20 @@ const StyledItem = styled.li`
 		flex-direction: column;
 		gap: 4px;
 
-		> p {
+		> li {
+			width: 100%;
 			color: ${({ theme }) => theme.colors.gray};
 			font-size: 14px;
 			line-height: 20px;
 			font-weight: 400;
 			display: flex;
 			align-items: center;
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
+
+			> p {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
 		}
 
 		i,

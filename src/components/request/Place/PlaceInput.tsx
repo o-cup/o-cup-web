@@ -59,7 +59,11 @@ const PlaceInput = () => {
 	};
 
 	useEffect(() => {
-		if (window.location.origin === "https://www.o-cup.kr" || window.location.origin === "http://localhost:3000") {
+		if (
+			window.location.origin === "https://www.o-cup.kr" ||
+			window.location.origin === "https://www.o-cup.com" ||
+			window.location.origin === "http://localhost:3000"
+		) {
 			if (keyword) {
 				onLoadKakaoMap(keyword);
 			}

@@ -59,8 +59,12 @@ const PlaceInput = () => {
 	};
 
 	useEffect(() => {
-		if (keyword) {
-			onLoadKakaoMap(keyword);
+		if (window.location.origin === "https://www.o-cup.kr" || window.location.origin === "http://localhost:3000") {
+			if (keyword) {
+				onLoadKakaoMap(keyword);
+			}
+		} else {
+			alert("해당 url에서는 장소등록이 불가능합니다.");
 		}
 	}, [keyword]);
 

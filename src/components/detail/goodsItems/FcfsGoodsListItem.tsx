@@ -7,7 +7,7 @@ type FcfsProps = {
 	fcfs: FirstComeType;
 };
 
-const TYPE_C = { others: "기념일 제외", dDay: "기념일" };
+const TYPE_C = { dDay: "기념일", others: "기념일 제외" };
 
 const FcfsGoodsListItem = ({ fcfs }: FcfsProps) => {
 	const { data } = fcfs;
@@ -19,9 +19,9 @@ const FcfsGoodsListItem = ({ fcfs }: FcfsProps) => {
 				{data
 					.filter((d) => d.items.length > 0)
 					.map((d) => {
-						if (d.key === "others" || d.key === "dDay") {
+						if (d.key === "dDay" || d.key === "others") {
 							return (
-								<StyledHighLightItem key={d.key}>
+								<StyledHighLightItem key={d.key} className={d.key}>
 									<div className={`labelContainer length_${TYPE_C[d.key].length}`}>
 										<p className="highlight">{TYPE_C[d.key]}</p>
 									</div>

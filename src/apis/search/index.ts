@@ -20,7 +20,7 @@ export type FetchSearchedEventParams = {
 };
 
 const fetchSearchedEvent = async ({ keyword, date, districts, searchInputOptionKey }: FetchSearchedEventParams) => {
-	const { data: allEvents } = await supabase.from("temp_place_sort").select("*").eq("isApproved", true);
+	const { data: allEvents } = await supabase.from("place_sort").select("*").eq("isApproved", true);
 	let data;
 
 	if (!keyword) return data;
@@ -105,7 +105,7 @@ const fetchSearchedEvent = async ({ keyword, date, districts, searchInputOptionK
 };
 
 const fetchEventsByBiasId = async (id: number) => {
-	const query = supabase.from("temp_place_sort").select("*").eq("isApproved", true).contains("biasesId", [id]);
+	const query = supabase.from("place_sort").select("*").eq("isApproved", true).contains("biasesId", [id]);
 	const { data } = await query;
 	return data;
 };

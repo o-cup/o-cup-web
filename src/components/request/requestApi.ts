@@ -1,5 +1,5 @@
 import React, { Dispatch } from "react";
-import { insertDetail, insertEvent, uploadPoster } from "../../apis";
+import { insertEvent, uploadPoster } from "../../apis";
 import { RequestGoodsListType, RequestType } from "./requestType";
 import { GoodsListType } from "../../types";
 
@@ -142,32 +142,24 @@ export const sendReqData = async ({
 
 	const eventParams = {
 		place: place.place,
+		category: "A", // TODO: 카테고리 수정 필요
 		organizer,
 		snsId,
-		newDistrict: place.newDistrict,
+		districts: place.districts,
+		address: place.address,
+		hashTags: hashTags.map((h) => h.text),
+		goods: getGoodsObj(requestInputs, goodsList),
+		tweetUrl: link,
 		startAt: dateRange.startAt,
 		endAt: dateRange.endAt,
 		images,
 		requestedBiases,
 		isRequested: true,
 		isApproved: false,
-	};
-
-	const detailParams = {
-		// id: 0,
-		address: place.address,
-		hashTags: hashTags.map((h) => h.text),
-		goods: getGoodsObj(requestInputs, goodsList),
-		tweetUrl: link,
+		views: 0,
 	};
 
 	const eventData = await insertEvent(eventParams);
-	if (eventData) {
-		await insertDetail({
-			id: eventData[0].id,
-			...detailParams,
-		});
-	}
 
 	setLoading(false);
 	setConfirmModalOpen(false);

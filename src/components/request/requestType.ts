@@ -19,7 +19,7 @@ export type RequestArtistType = {
 export type RequestPlaceType = {
 	place: string;
 	address: string;
-	newDistrict: { code: string; name: string };
+	districts: { code: string; name: string };
 };
 
 export type RequestPosterType = {

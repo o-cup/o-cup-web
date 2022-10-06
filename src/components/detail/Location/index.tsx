@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { FaRegCopy } from "react-icons/fa";
-import { DetailType } from "../../../types";
+import { EventType } from "../../../types";
 import { StyledLocation } from "../styles/locationStyle";
 import Map from "./Map";
 import { copyToClipboard } from "../../../shared/utils/copyHandlers";
 import Toast from "../../../shared/components/Toast";
 
-function Location({ address }: Partial<DetailType>) {
+function Location({ address }: Partial<EventType>) {
 	const [isToast, setToast] = useState(false);
 
 	const handleClickCopy = () => {

@@ -7,23 +7,6 @@ export type RequestBias = {
 	team: string;
 };
 
-export type EventType = {
-	id: number;
-	createdAt: string;
-	place: string;
-	bias: string[];
-	biasesId: number[];
-	organizer: string;
-	snsId: string;
-	newDistrict: { code: string; name: string };
-	startAt: string;
-	endAt: string;
-	images: string[];
-	requestedBiases?: RequestBias[];
-	isRequested: boolean;
-	isApproved: boolean;
-};
-
 export type FirstComeDataType = {
 	key?: string;
 	day?: number;
@@ -50,12 +33,26 @@ export type GoodsListType = {
 	extra?: ExtraGoodsType[];
 };
 
-export type DetailType = {
-	id: string;
+export type EventType = {
+	id: number;
+	createdAt: string;
+	place: string;
+	biasesId: number[];
+	organizer: string;
+	snsId: string;
+	districts: { code: string; name: string };
+	startAt: string;
+	endAt: string;
+	images: string[];
 	address: string;
 	goods: GoodsListType;
 	hashTags: string[];
 	tweetUrl: string;
+	category: string;
+	views: number;
+	requestedBiases?: RequestBias[];
+	isRequested: boolean;
+	isApproved: boolean;
 };
 
 export type PeopleType = {

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import { DetailType } from "../../../types";
+import { EventType } from "../../../types";
 import { StyledMap } from "../styles/locationStyle";
 import { removeKakaoMapKey, setKakaoMapKey } from "../../../shared/utils/kakaoMapHandlers";
 
-function Map({ address }: Partial<DetailType>) {
+function Map({ address }: Partial<EventType>) {
 	const { kakao } = window as any;
 
 	const container = useRef<HTMLDivElement>(null);

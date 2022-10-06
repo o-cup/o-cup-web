@@ -16,7 +16,7 @@ type EventListItemProps = {
 
 const EventListItem = ({ event }: EventListItemProps) => {
 	const navigate = useNavigate();
-	const { id, place, images, biasesId, organizer, snsId, newDistrict, startAt, endAt } = event;
+	const { id, place, images, biasesId, organizer, snsId, districts, startAt, endAt } = event;
 
 	return (
 		<StyledItem onClick={() => navigate(`/detail/${id}`)}>
@@ -44,7 +44,7 @@ const EventListItem = ({ event }: EventListItemProps) => {
 				</p>
 				<p>
 					<Icon name="place-gray" />
-					{newDistrict.name}
+					{districts.name}
 				</p>
 				<p>
 					<Icon name="calendar-gray" />

@@ -72,7 +72,7 @@ const Request = () => {
 
 	const resetAllStates = () => {
 		setRequestInputs({
-			place: { place: "", address: "", newDistrict: { code: "", name: "" } },
+			place: { place: "", address: "", districts: { code: "", name: "" } },
 			artist: [{ id: 1, peopleId: 0, bias: "", team: "" }],
 			organizer: "",
 			snsId: "",

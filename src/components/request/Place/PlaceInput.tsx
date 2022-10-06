@@ -96,7 +96,7 @@ const PlaceInput = () => {
 			{isSearchOpen && (
 				<StyledSearchListContainer>
 					<div className="inputContainer">
-						<input value={keyword} onChange={(e) => setKeyword(e.target.value)} />
+						<input value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="예) 카페 오컵" />
 						<div className="buttonContainer">
 							<FaTimes onClick={() => setKeyword("")} />
 							<FaSearch />

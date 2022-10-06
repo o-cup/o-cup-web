@@ -14,7 +14,8 @@ function TwitterInfo({ data }: TwitterInfoProps) {
 			<div className="account">
 				<p className="organizer">{organizer}</p>
 				<p className="snsId">
-					<FaTwitter />@{snsId}
+					<FaTwitter />
+					{snsId ? `@${snsId}` : "-"}
 				</p>
 			</div>
 			<div className="hashTags">{hashTags?.map((tag) => (tag === "" ? null : <p key={tag}>#{tag}</p>))}</div>

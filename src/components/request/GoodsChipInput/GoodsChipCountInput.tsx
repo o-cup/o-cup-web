@@ -29,7 +29,11 @@ const GoodsChipCountInput = ({
 	useEffect(() => {
 		if (textRef.current) {
 			if (value === "") {
-				setTextWidth(94); // placeholder width
+				if (index === 1) {
+					setTextWidth(94); // placeholder width
+				} else {
+					setTextWidth(46); // placeholder width
+				}
 			} else {
 				setTextWidth(textRef.current.offsetWidth + 2);
 			}
@@ -55,7 +59,7 @@ const GoodsChipCountInput = ({
 				style={{ width: textWidth }}
 				value={value}
 				onChange={(e) => handleChange(e.target.value, index, "text", dayKey)}
-				placeholder="특전 내용 (예: 액자)"
+				placeholder={index === 1 ? "특전 내용 (예: 액자)" : "특전 내용"}
 			/>
 			<div style={{ marginLeft: "4px" }}>
 				(<span className="hide" ref={countRef}>{`${count}`}</span>

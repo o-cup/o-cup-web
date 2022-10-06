@@ -47,6 +47,10 @@ const GlobalStyle = createGlobalStyle<ThemeType>`
   input, textarea, select {
     outline: 0;
   }
+
+  input[disabled] {
+    color: #000000;
+  }
   
   select {
     -webkit-appearance: none;

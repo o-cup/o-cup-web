@@ -4,7 +4,7 @@ import { supabase } from "../supabaseClient";
 import { EventType, FetchEventParams, SearchSortOptionKeys } from "../types";
 
 const fetchEvents = async ({ pageParam = 1, infinite = false, date }: FetchEventParams) => {
-	let query = supabase.from("temp_place_sort").select("*").eq("isApproved", true);
+	let query = supabase.from("place_sort").select("*").eq("isApproved", true);
 
 	if (infinite) {
 		const endAt = pageParam * ITEMS_PER_PAGE;
@@ -34,7 +34,7 @@ const fetchEvents = async ({ pageParam = 1, infinite = false, date }: FetchEvent
  * @returns {EventType}
  */
 const fetchEventById = async ({ id }: { id?: string }) => {
-	const { data, error } = await supabase.from("temp_events").select("*").eq("id", id);
+	const { data, error } = await supabase.from("events").select("*").eq("id", id);
 	if (error) {
 		throw new Error(`${error.message}: ${error.details}`);
 	}
@@ -69,7 +69,7 @@ const fetchPeople = async (sortOption?: SearchSortOptionKeys) => {
  * 이벤트 등록 신청
  * */
 const insertEvent = async (eventData: Partial<EventType>) => {
-	const { data, error } = await supabase.from("temp_events").insert([{ ...eventData }]);
+	const { data, error } = await supabase.from("events").insert([{ ...eventData }]);
 	if (error) {
 		throw new Error(`${error.message}: ${error.details}`);
 	}
@@ -115,7 +115,7 @@ const fetchDuplicatedEvent = async ({
 	dateRange: { startAt: string; endAt: string };
 }) => {
 	const { data, error } = await supabase
-		.from("temp_events")
+		.from("events")
 		.select("*")
 		.match({ place, startAt: dateRange.startAt, endAt: dateRange.endAt });
 	if (error) {

@@ -59,8 +59,16 @@ const PlaceInput = () => {
 	};
 
 	useEffect(() => {
-		if (keyword) {
-			onLoadKakaoMap(keyword);
+		if (
+			window.location.origin === "https://www.o-cup.kr" ||
+			window.location.origin === "https://www.o-cup.com" ||
+			window.location.origin === "http://localhost:3000"
+		) {
+			if (keyword) {
+				onLoadKakaoMap(keyword);
+			}
+		} else {
+			alert("해당 url에서는 장소등록이 불가능합니다.");
 		}
 	}, [keyword]);
 
@@ -96,7 +104,7 @@ const PlaceInput = () => {
 			{isSearchOpen && (
 				<StyledSearchListContainer>
 					<div className="inputContainer">
-						<input value={keyword} onChange={(e) => setKeyword(e.target.value)} />
+						<input value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="예) 카페 오컵" />
 						<div className="buttonContainer">
 							<FaTimes onClick={() => setKeyword("")} />
 							<FaSearch />

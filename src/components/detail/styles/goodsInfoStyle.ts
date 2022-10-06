@@ -74,6 +74,11 @@ const StyledHighLightItem = styled.li`
 	display: flex;
 	align-items: flex-start;
 
+	// 기념일 순서 앞으로
+	&.dDay {
+		order: -1;
+	}
+
 	> .labelContainer {
 		&.length_2 {
 			width: 36px;
@@ -83,6 +88,12 @@ const StyledHighLightItem = styled.li`
 		&.length_3 {
 			width: 48px;
 			min-width: 48px;
+		}
+
+		// 기념일 제외
+		&.length_6 {
+			width: 70px;
+			min-width: 70px;
 		}
 
 		.highlight {

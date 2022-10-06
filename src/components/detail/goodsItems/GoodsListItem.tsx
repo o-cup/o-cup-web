@@ -7,7 +7,7 @@ type GoodsProps = {
 	items: string[];
 };
 
-const TYPE = { all: "전체특전", random: "랜덤특전", dDay: "기념일특전" };
+const TYPE = { all: "전체 특전", random: "랜덤 특전", dDay: "기념일 특전" };
 
 const GoodsListItem = ({ title, items }: GoodsProps) => (
 	<StyledGoodsListItem>

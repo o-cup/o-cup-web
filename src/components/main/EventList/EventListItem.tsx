@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { FaTwitter } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import { EventType } from "../../types";
-import { convertDateWithDots } from "../../shared/utils/dateHandlers";
-import { StyledItem } from "./styles/mainStyle";
-import BiasChip from "../../shared/components/BiasChip";
-import { Icon } from "../../shared/components";
-import { imageOnErrorHandler } from "../../shared/utils/imageHandlers";
+import { EventType } from "../../../types";
+import { convertDateWithDots } from "../../../shared/utils/dateHandlers";
+import { StyledMainListItem } from "./mainEventListStyles";
+import BiasChip from "../../../shared/components/BiasChip";
+import { Icon } from "../../../shared/components";
+import { imageOnErrorHandler } from "../../../shared/utils/imageHandlers";
 
 type EventListItemProps = {
 	event: EventType;
@@ -19,7 +19,7 @@ const EventListItem = ({ event }: EventListItemProps) => {
 	const { id, place, images, biasesId, organizer, snsId, districts, startAt, endAt } = event;
 
 	return (
-		<StyledItem onClick={() => navigate(`/detail/${id}`)}>
+		<StyledMainListItem onClick={() => navigate(`/detail/${id}`)}>
 			<div className="imgContainer">
 				<LazyLoadImage
 					wrapperClassName="lazy-image"
@@ -53,7 +53,7 @@ const EventListItem = ({ event }: EventListItemProps) => {
 					</p>
 				</li>
 			</ul>
-		</StyledItem>
+		</StyledMainListItem>
 	);
 };
 

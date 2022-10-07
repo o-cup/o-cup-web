@@ -12,11 +12,6 @@ export const dateFilterAtom = atom({
 	default: convertDateToString(today),
 });
 
-export const biasFilterAtom = atom({
-	key: "biasFilterAtom",
-	default: [] as number[],
-});
-
 export const openedBiasAtom = atom({
 	key: "openedBiasAtom",
 	default: [] as number[],

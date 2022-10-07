@@ -5,7 +5,7 @@ import "react-date-range-ts/dist/styles.css";
 import "./header-calendar-custom.css";
 
 import { useRecoilState } from "recoil";
-import { biasFilterAtom, dateFilterAtom } from "../../../../../state/atoms";
+import { dateFilterAtom } from "../../../../../state/atoms";
 import { convertDateToString, convertStringToDate } from "../../../../utils/dateHandlers";
 import { StyledHeaderCalendarContainer } from "../headerStyle";
 
@@ -15,11 +15,9 @@ type StateProps = {
 
 function HeaderCalendar({ setCalendarOpen }: StateProps) {
 	const [dateFilter, setDateFilter] = useRecoilState(dateFilterAtom);
-	const [, setBiasFilter] = useRecoilState(biasFilterAtom);
 
 	const handleChangeDate = (date: Date) => {
 		setDateFilter(convertDateToString(date));
-		setBiasFilter([] as number[]); // 선택 된 아티스트 필터 초기화
 		setCalendarOpen(false);
 	};
 

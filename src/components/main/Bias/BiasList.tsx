@@ -1,30 +1,26 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { fetchPeople } from "../../apis";
-import { dateFilterAtom, openedBiasAtom } from "../../state/atoms";
+import { useRecoilValue } from "recoil";
+import { fetchPeople } from "../../../apis";
+import { dateFilterAtom, openedBiasAtom } from "../../../state/atoms";
 import Bias from "./Bias";
-import { StyledBiasList, StyledBias } from "./styles/mainStyle";
-import Loading from "../../shared/components/Loading";
+import { StyledBiasList, StyledBias } from "./biasStyles";
+import Loading from "../../../shared/components/Loading";
 
 function BiasList() {
 	const navigate = useNavigate();
-	const [openedBias] = useRecoilState(openedBiasAtom);
-	const selectedDate = useRecoilValue(dateFilterAtom);
+	const openedBias = useRecoilValue(openedBiasAtom);
+	const dateFilter = useRecoilValue(dateFilterAtom);
 
-	const { data: people, isLoading } = useQuery(["people", selectedDate], () => fetchPeople(), {
+	const { data: people, isLoading } = useQuery(["people", dateFilter], () => fetchPeople(), {
 		select: (data) => {
 			const biasesData = data?.filter((item) => openedBias.includes(item.id)) || [];
 
-			const biasList = [];
-			const birthdayPeople = biasesData?.filter((bias) => bias.birthday.slice(-4) === selectedDate.slice(-4));
-			biasList.push(...birthdayPeople);
-
+			const birthdayPeople = biasesData?.filter((bias) => bias.birthday.slice(-4) === dateFilter.slice(-4));
 			const biases = biasesData.filter((bias) => !birthdayPeople.includes(bias));
-			biasList.push(...biases);
 
-			return biasList;
+			return [...birthdayPeople, ...biases];
 		},
 	});
 

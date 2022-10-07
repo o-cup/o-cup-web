@@ -88,4 +88,17 @@ export const isDateRangeOverlaps = (start: string, end: string, eventStart: stri
 	return false;
 };
 
+/**
+ * 해당 날짜가 오늘 이전인지 체크
+ * @param {string} day 열렸는지 체크할 날짜
+ * @returns {boolean}
+ */
+export const isBeforeToday = (day: string) => {
+	const today = new Date();
+	if (day === convertDateToString(today) || convertStringToDate(day) < today) {
+		return true;
+	}
+	return false;
+};
+
 export default {};

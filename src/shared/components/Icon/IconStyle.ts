@@ -76,6 +76,8 @@ export const StyledIcon = styled.i`
 		background-size: contain;
 		height: 24px;
 		width: 24px;
+		min-width: 24px;
+		min-height: 24px;
 	}
 
 	&.search_main {
@@ -191,6 +193,14 @@ export const StyledIcon = styled.i`
 		background-size: contain;
 	}
 
+	&.calendar_header {
+		background: url("/images/icons/calendar.png") no-repeat;
+		width: 24px;
+		min-width: 24px;
+		height: 24px;
+		background-size: contain;
+	}
+
 	&.calendar-gray {
 		background: url("/images/icons/calendar_gray.png") no-repeat;
 		width: 14px;
@@ -203,6 +213,20 @@ export const StyledIcon = styled.i`
 		background-size: contain;
 		height: 32px;
 		width: 32px;
+	}
+
+	&.left-arrow-circle {
+		background: url("/images/icons/left-arrow-circle.png") no-repeat;
+		background-size: contain;
+		height: 20px;
+		width: 20px;
+	}
+
+	&.right-arrow-circle {
+		background: url("/images/icons/right-arrow-circle.png") no-repeat;
+		background-size: contain;
+		height: 20px;
+		width: 20px;
 	}
 `;
 

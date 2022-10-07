@@ -1,4 +1,4 @@
-import BiasList from "./BiasList";
-import EventList from "./EventList";
+import BiasList from "./Bias/BiasList";
+import EventSection from "./EventList/EventSection";
 
-export { BiasList, EventList };
+export { BiasList, EventSection };

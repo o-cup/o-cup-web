@@ -204,6 +204,20 @@ export const StyledIcon = styled.i`
 		height: 32px;
 		width: 32px;
 	}
+
+	&.left-arrow-circle {
+		background: url("/images/icons/left-arrow-circle.png") no-repeat;
+		background-size: contain;
+		height: 20px;
+		width: 20px;
+	}
+
+	&.right-arrow-circle {
+		background: url("/images/icons/right-arrow-circle.png") no-repeat;
+		background-size: contain;
+		height: 20px;
+		width: 20px;
+	}
 `;
 
 export default {};

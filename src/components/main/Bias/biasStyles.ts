@@ -8,16 +8,15 @@ export const StyledBiasList = styled.ul`
 	scrollbar-width: none;
 	height: 112px;
 	align-items: center;
-	gap: 20px;
 	margin-bottom: 14px;
 
 	&::-webkit-scrollbar {
 		display: none;
 	}
 
-	&::after {
+	&::before {
 		content: "";
-		border-right: 20px solid transparent;
+		border-left: 20px solid transparent;
 	}
 `;
 
@@ -28,9 +27,10 @@ export const StyledBias = styled.li`
 	height: 100%;
 	display: flex;
 	padding: 12px 0 10px;
+	margin-right: 20px;
 
-	&:first-child {
-		margin-left: 20px;
+	&:last-child {
+		padding: 12px 20px 10px 0;
 	}
 
 	> a {

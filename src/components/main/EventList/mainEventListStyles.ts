@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledMainEvents = styled.section`
 	display: flex;
 	flex-direction: column;
-	gap: 40px;
+	gap: 36px;
 
 	> div {
 		display: flex;

@@ -3,8 +3,20 @@ import styled from "styled-components";
 const StyledMain = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 36px;
 	width: 100%;
+
+	div.dateTitle {
+		display: flex;
+		align-items: center;
+		padding: 12px 20px;
+		gap: 9px;
+
+		> p {
+			font-weight: 600;
+			font-size: 18px;
+			line-height: 25px;
+		}
+	}
 `;
 
 const StyledEmptyMain = styled.div`

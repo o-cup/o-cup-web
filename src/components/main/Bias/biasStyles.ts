@@ -1,23 +1,5 @@
 import styled from "styled-components";
 
-export const StyledBiasListContainer = styled.section`
-	display: flex;
-	flex-direction: column;
-
-	div.dateTitle {
-		display: flex;
-		align-items: center;
-		padding: 12px 20px;
-		gap: 9px;
-
-		> p {
-			font-weight: 600;
-			font-size: 18px;
-			line-height: 25px;
-		}
-	}
-`;
-
 export const StyledBiasList = styled.ul`
 	display: flex;
 	overflow-x: auto;
@@ -27,6 +9,7 @@ export const StyledBiasList = styled.ul`
 	height: 112px;
 	align-items: center;
 	gap: 20px;
+	margin-bottom: 14px;
 
 	&::-webkit-scrollbar {
 		display: none;

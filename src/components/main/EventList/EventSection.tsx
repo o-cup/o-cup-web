@@ -46,9 +46,7 @@ const EventSection = () => {
 	const date = convertStringToDate(dateFilter).getDate();
 
 	const getEventTitle = (bias: PeopleType) =>
-		`${isToday ? "오늘" : `${monthIndex + 1}월 ${date}일에`} ${isBeforeToday(dateFilter) ? "열린" : "열리는"} ${
-			bias.name
-		} 이벤트`;
+		`${isToday ? "오늘" : `${date}일에`} ${isBeforeToday(dateFilter) ? "열린" : "열리는"} ${bias.name} 이벤트`;
 
 	if (isLoading) {
 		return <Loading />;

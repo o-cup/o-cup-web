@@ -27,47 +27,52 @@ export const StyledBias = styled.li`
 	z-index: 1;
 	height: 100%;
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: space-between;
 	padding: 12px 0 10px;
 
 	&:first-child {
 		margin-left: 20px;
 	}
 
-	> div {
-		position: relative;
-		width: 65px;
-		height: 65px;
-		background: ${({ theme }) => theme.colors.primary};
-		border-radius: 50%;
-		box-shadow: 3px 3px 0 #000000;
+	> a {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
 
-		> img {
-			width: 100%;
-			height: 100%;
-			border-radius: 50%;
+		> div {
+			position: relative;
+			width: 65px;
+			height: 65px;
 			background: ${({ theme }) => theme.colors.primary};
-			object-fit: cover;
+			border-radius: 50%;
+			box-shadow: 3px 3px 0 #000000;
+
+			> img {
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+				background: ${({ theme }) => theme.colors.primary};
+				object-fit: cover;
+			}
+
+			> img#search {
+				width: 32px;
+				height: 32px;
+				border-radius: 0;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-52%, -52%);
+			}
 		}
 
-		> img#search {
-			width: 32px;
-			height: 32px;
-			border-radius: 0;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-52%, -52%);
+		> p {
+			text-align: center;
+			font-size: 14px;
+			line-height: 14px;
+			white-space: nowrap;
 		}
-	}
-
-	> p {
-		text-align: center;
-		font-size: 14px;
-		line-height: 14px;
-		white-space: nowrap;
 	}
 `;
 

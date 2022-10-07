@@ -6,15 +6,12 @@ import { StyledMainLists } from "./mainEventListStyles";
 type BiasEventListProps = {
 	events: EventType[];
 };
-const BiasEventList = ({ events }: BiasEventListProps) => {
-	const a = 6;
+const BiasEventList = ({ events }: BiasEventListProps) => (
+	<StyledMainLists>
+		{events?.map((event) => (
+			<EventListItem event={event} key={event.id} />
+		))}
+	</StyledMainLists>
+);
 
-	return (
-		<StyledMainLists>
-			{events?.map((event) => (
-				<EventListItem event={event} key={event.id} />
-			))}
-		</StyledMainLists>
-	);
-};
 export default BiasEventList;

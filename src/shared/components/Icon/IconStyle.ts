@@ -76,6 +76,8 @@ export const StyledIcon = styled.i`
 		background-size: contain;
 		height: 24px;
 		width: 24px;
+		min-width: 24px;
+		min-height: 24px;
 	}
 
 	&.search_main {
@@ -188,6 +190,14 @@ export const StyledIcon = styled.i`
 		width: 16px;
 		min-width: 16px;
 		height: 16px;
+		background-size: contain;
+	}
+
+	&.calendar_header {
+		background: url("/images/icons/calendar.png") no-repeat;
+		width: 24px;
+		min-width: 24px;
+		height: 24px;
 		background-size: contain;
 	}
 

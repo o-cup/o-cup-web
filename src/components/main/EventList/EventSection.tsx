@@ -7,8 +7,9 @@ import { StyledMainEvents } from "./mainEventListStyles";
 import EmptyDefault from "../EmptyDefault";
 import Loading from "../../../shared/components/Loading";
 import BiasEventList from "./BiasEventList";
+import { convertDateToString, convertStringToDate, isBeforeToday } from "../../../shared/utils/dateHandlers";
+import { PeopleType } from "../../../types";
 
-// todo: useInfiniteQuery 리팩토링 후 추가
 const EventSection = () => {
 	const dateFilter = useRecoilValue(dateFilterAtom);
 	const [openedBias, setOpenedBias] = useRecoilState(openedBiasAtom);
@@ -19,7 +20,16 @@ const EventSection = () => {
 		})
 	);
 
-	const { data: people } = useQuery(["bias"], () => fetchPeople());
+	const { data: openedPeople } = useQuery(["bias", openedBias], () => fetchPeople(), {
+		select: (data) => {
+			const birthdayPeople =
+				data?.filter((bias) => openedBias.includes(bias.id) && bias.birthday.slice(-4) === dateFilter.slice(-4)) || [];
+			const noneBirthdayPeople =
+				data?.filter((bias) => openedBias.includes(bias.id) && bias.birthday.slice(-4) !== dateFilter.slice(-4)) || [];
+
+			return [...birthdayPeople, ...noneBirthdayPeople];
+		},
+	});
 
 	/** 이벤트 목록에서 인물 id 추출 */
 	useEffect(() => {
@@ -31,7 +41,14 @@ const EventSection = () => {
 		setOpenedBias(Array.from(biasSet));
 	}, [events, setOpenedBias]);
 
-	const getBiasName = (biasId: number) => people?.filter((p) => p.id === biasId)[0].name;
+	const isToday = dateFilter === convertDateToString(new Date());
+	const monthIndex = convertStringToDate(dateFilter).getMonth();
+	const date = convertStringToDate(dateFilter).getDate();
+
+	const getEventTitle = (bias: PeopleType) =>
+		`${isToday ? "오늘" : `${monthIndex + 1}월 ${date}일에`} ${isBeforeToday(dateFilter) ? "열린" : "열리는"} ${
+			bias.name
+		} 이벤트`;
 
 	if (isLoading) {
 		return <Loading />;
@@ -39,10 +56,10 @@ const EventSection = () => {
 	return (
 		<>
 			<StyledMainEvents>
-				{openedBias.map((bias) => (
-					<div key={bias}>
-						<p>오늘 열린 {getBiasName(bias)} 이벤트</p>
-						<BiasEventList events={events ? events.filter((event) => event.biasesId.includes(bias)) : []} />
+				{openedPeople?.map((bias) => (
+					<div key={bias.id}>
+						<p>{getEventTitle(bias)}</p>
+						<BiasEventList events={events ? events.filter((event) => event.biasesId.includes(bias.id)) : []} />
 					</div>
 				))}
 			</StyledMainEvents>

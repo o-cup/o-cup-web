@@ -55,7 +55,7 @@ const EventSection = () => {
 		<>
 			<StyledMainEvents>
 				{openedPeople?.map((bias) => (
-					<div key={bias.id}>
+					<div key={bias.id} id={`bias_${bias.id}`}>
 						<p>{getEventTitle(bias)}</p>
 						<BiasEventList events={events ? events.filter((event) => event.biasesId.includes(bias.id)) : []} />
 					</div>

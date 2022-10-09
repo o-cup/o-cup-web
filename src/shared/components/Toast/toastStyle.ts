@@ -31,7 +31,7 @@ export const StyledToast = styled.div`
 		0% {
 			opacity: 0;
 		}
-		10%,
+		20%,
 		90% {
 			opacity: 1;
 		}

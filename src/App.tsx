@@ -35,9 +35,10 @@ function App() {
 
 	useEffect(() => {
 		setScreenSize();
-	}, []);
 
-	window.addEventListener("resize", () => setScreenSize());
+		window.addEventListener("resize", setScreenSize);
+		return () => window.removeEventListener("resize", setScreenSize);
+	}, []);
 
 	return (
 		<QueryClientProvider client={queryClient}>
@@ -52,7 +53,7 @@ function App() {
 					<RecoilRoot>
 						<Wrapper initialized={initialized}>
 							<Routes>
-								<Route path="/" element={<Main />} />
+								<Route path="/main" element={<Main />} />
 								<Route path="/detail/:id" element={<Detail />} />
 								<Route path="/request" element={<Request />} />
 								<Route path="/search" element={<Search />} />

@@ -1,7 +1,7 @@
 import React from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useQuery } from "react-query";
-import { fetchEventsByBiasId } from "../../../apis/search";
+import { fetchEventsByBiasId } from "../../apis/search";
 import { StyledBiasProfile } from "./biasProfileStyle";
 
 type BiasProfileProps = {

@@ -1,12 +1,12 @@
-import React, { Dispatch, memo, SetStateAction, useEffect, useState } from "react";
-// import { FaCaretDown } from "react-icons/fa";
-import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
-import { useRegCodes } from "../../hooks";
-import { MAX_DISTRICT_CHIPS } from "../../shared/constants";
-import divisionData from "./divisions";
+import React, { memo, useEffect, useState } from "react";
 import { Icon } from "../../shared/components";
+import { MAX_DISTRICT_CHIPS } from "../../shared/constants";
+import { useRegCodes } from "../../shared/hooks";
+import divisionData from "./divisions";
+import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
 import { ResetModalBtn } from "./styles/searchStyle";
-import { RegCodeItem } from "./types";
+import type { RegCodeItem } from "./types";
+import type { Dispatch, SetStateAction } from "react";
 
 type DistrictSelectorProps = {
 	handleSubmit: () => void;

@@ -39,7 +39,8 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const [isToastOpen, setIsToastOpen] = useState(false);
 
 	const mainPage = page === "main";
-	const urlRef = useRef(null);
+
+	const urlRef = useRef<null | string>("https://www.o-cup.kr");
 
 	useEffect(() => {
 		if (typeof window !== "undefined") {
@@ -98,14 +99,14 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 		}
 	};
 
-	// const renderTooltip = () => {
-	// 	if (!isTooltipOpen) return null;
+	const renderTooltip = () => {
+		if (!isTooltipOpen) return null;
 
-	// 	const searchResult = page === "search" && searched;
-	// 	if (searchResult) return null;
+		const searchResult = page === "search" && searched;
+		if (searchResult) return null;
 
-	// 	return <span className="tooltip">트위터에 공유하기</span>;
-	// };
+		return <span className="tooltip">트위터에 공유하기</span>;
+	};
 
 	return (
 		<>

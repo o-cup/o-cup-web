@@ -116,7 +116,7 @@ export const sendReqData = async ({
 	setAlertOpen,
 	setLoading,
 }: ReqType) => {
-	const { place, artist, organizer, snsId, link, hashTags, dateRange } = requestInputs;
+	const { place, artist, organizer, snsId, link, hashTags, dateRange, category } = requestInputs;
 
 	const requestedBiases = artist.map((a) => ({
 		peopleId: a.peopleId,
@@ -129,20 +129,22 @@ export const sendReqData = async ({
 	// 필수값 비워져 있을 때 경고 팝업
 	if (
 		!place.place ||
+		!category ||
 		!requestedBiases[0].bias ||
 		!organizer ||
 		!dateRange.startAt ||
 		images.length === 0 ||
-		!link ||
-		!hasGoods(requestInputs, goodsList)
+		!link
+		// || !hasGoods(requestInputs, goodsList)
 	) {
+		setConfirmModalOpen(false);
 		setAlertOpen(true);
 		return;
 	}
 
 	const eventParams = {
 		place: place.place,
-		category: "A", // TODO: 카테고리 수정 필요
+		category,
 		organizer,
 		snsId,
 		districts: place.districts,

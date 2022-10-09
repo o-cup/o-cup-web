@@ -41,10 +41,12 @@ function BiasList() {
 				))
 			) : (
 				<StyledBias className="active" onClick={() => navigate("/search")}>
-					<div>
-						<img id="search" src="/images/icons/search.png" alt="search" />
+					<div id="search">
+						<div>
+							<img id="search" src="/images/icons/search.png" alt="search" />
+						</div>
+						<p>검색하기</p>
 					</div>
-					<p>검색하기</p>
 				</StyledBias>
 			)}
 		</StyledBiasList>

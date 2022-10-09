@@ -26,6 +26,7 @@ export const requestInputsAtom = atom<RequestType>({
 	key: "requestInputsAtom",
 	default: {
 		place: { place: "", address: "", districts: { code: "", name: "" } },
+		category: "",
 		artist: [{ id: 1, peopleId: 0, bias: "", team: "" }],
 		organizer: "",
 		snsId: "",

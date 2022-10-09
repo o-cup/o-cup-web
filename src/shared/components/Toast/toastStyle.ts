@@ -28,7 +28,10 @@ export const StyledToast = styled.div`
 	}
 
 	@keyframes snack_animation {
-		0%,
+		0% {
+			opacity: 0;
+		}
+		20%,
 		90% {
 			opacity: 1;
 		}

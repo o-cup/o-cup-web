@@ -2,14 +2,14 @@ import React, { memo, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { fetchSearchedEvent } from "../../../shared/apis/search";
-import { Button, Chip, FilterIcon, Loading, SortIcon } from "../../../shared/components";
-import { searchFiltersAtom, searchInputOptionsAtom } from "../../../shared/state";
-import { convertDateWithDots, removeSpace } from "../../../shared/utils";
+import { fetchSearchedEvents } from "../../shared/apis/search";
+import { Button, Chip, FilterIcon, Loading, SortIcon } from "../../shared/components";
+import { searchFiltersAtom, searchInputOptionsAtom } from "../../shared/state";
+import { convertDateWithDots, removeSpace } from "../../shared/utils";
 import Event from "./Event";
 import SearchModal from "./SearchModal";
 import { StyledResult } from "./styles/resultStyle";
-import type { ResultSortOptionKeys } from "../../../shared/types";
+import type { ResultSortOptionKeys } from "../../shared/types";
 import type { RegCodeItem } from "./types";
 
 type ResultProps = {
@@ -41,7 +41,7 @@ const Result = ({ biasId }: ResultProps) => {
 	const { data: events, isLoading } = useQuery(
 		["resultEvents", keyword, startDate, endDate, biasId, districts, selectedSortOption, searchInputOptionKey],
 		() =>
-			fetchSearchedEvent({
+			fetchSearchedEvents({
 				keyword: removeSpace(keyword.trim()),
 				date: { startDate, endDate },
 				biasId,

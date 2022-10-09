@@ -18,7 +18,7 @@ export type FetchSearchedEventParams = {
 	searchInputOptionKey?: SearchInputOptionKey;
 };
 
-const fetchSearchedEvent = async ({ keyword, date, districts, searchInputOptionKey }: FetchSearchedEventParams) => {
+const fetchSearchedEvents = async ({ keyword, date, districts, searchInputOptionKey }: FetchSearchedEventParams) => {
 	const { data: allEvents } = await supabase.from("place_sort").select("*").eq("isApproved", true);
 	let data;
 
@@ -109,4 +109,4 @@ const fetchEventsByBiasId = async (id: number) => {
 	return data;
 };
 
-export { fetchRegcodes, fetchSearchedEvent, fetchEventsByBiasId };
+export { fetchRegcodes, fetchSearchedEvents, fetchEventsByBiasId };

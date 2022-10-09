@@ -1,30 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { requestGoodsListAtom, requestInputsAtom, tempPostersAtom } from "../state/atoms";
-import Layout from "../shared/components/layout";
-import Entry from "../components/request/Entry";
-import PreviewContent from "../components/request/PreviewContent";
-import {
-	StyledPreview,
-	StyledRequest,
-	StyledCheckEvent,
-	StyledRequestBottomSheet,
-} from "../components/request/styles/requestStyle";
-import BottomSheet from "../shared/components/BottomSheet";
-import useMediaQuery from "../hooks/useMediaQuery";
-import { sendReqData } from "../components/request/requestApi";
-import ConfirmModal from "../components/request/Modals/ConfirmModal";
-import SubmitModal from "../components/request/Modals/SubmitModal";
-import AlertModal from "../components/request/Modals/AlertModal";
-import PlaceInput from "../components/request/Place/PlaceInput";
-import DateRangeInput from "../components/request/DateRange/DateRangeInput";
-import DuplicatedModal from "../components/request/Modals/DuplicatedModal";
-import Toast from "../shared/components/Toast";
-import Button from "../shared/components/Button";
-import { fetchDuplicatedEvent } from "../apis";
-import { EventType } from "../../shared/types";
-import { setMetaTags } from "../shared/utils/metaTagHandlers";
+import { fetchDuplicatedEvent } from "../../shared/apis/common";
+import { requestGoodsListAtom, requestInputsAtom, tempPostersAtom } from "../../shared/state";
+import { setMetaTags } from "../../shared/utils";
+import type { EventType } from "../../shared/types";
+// import { requestGoodsListAtom, requestInputsAtom, tempPostersAtom } from "../state/atoms";
+// import Layout from "../shared/components/layout";
+// import Entry from "../components/request/Entry";
+// import PreviewContent from "../components/request/PreviewContent";
+// import {
+// 	StyledPreview,
+// 	StyledRequest,
+// 	StyledCheckEvent,
+// 	StyledRequestBottomSheet,
+// } from "../components/request/styles/requestStyle";
+// import BottomSheet from "../shared/components/BottomSheet";
+// import useMediaQuery from "../hooks/useMediaQuery";
+// import { sendReqData } from "../components/request/requestApi";
+// import ConfirmModal from "../components/request/Modals/ConfirmModal";
+// import SubmitModal from "../components/request/Modals/SubmitModal";
+// import AlertModal from "../components/request/Modals/AlertModal";
+// import PlaceInput from "../components/request/Place/PlaceInput";
+// import DateRangeInput from "../components/request/DateRange/DateRangeInput";
+// import DuplicatedModal from "../components/request/Modals/DuplicatedModal";
+// import Toast from "../shared/components/Toast";
+// import Button from "../shared/components/Button";
+// import { fetchDuplicatedEvent } from "../apis";
+// import { EventType } from "../../shared/types";
+// import { setMetaTags } from "../shared/utils/metaTagHandlers";
 
 const Request = () => {
 	const navigate = useNavigate();

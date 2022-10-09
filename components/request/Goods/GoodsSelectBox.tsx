@@ -1,6 +1,6 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-// import { requestGoodsListAtom } from "../../../state/atoms";
+import { requestGoodsListAtom } from "../../../../shared/state/atoms";
 import { StyledSearchList, StyledSearchListContainer } from "../units/searchListStyle";
 import { StyledSelectWrapper } from "./goodsInputStyle";
 import type { ItemsType } from "../../../../shared/types/request";

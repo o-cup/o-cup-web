@@ -1,5 +1,11 @@
 import { copyToClipboard } from "./copyHandlers";
-import { convertDateToString, convertDateWithDots, convertStringToDate, isOpenToday } from "./dateHandlers";
+import {
+	convertDateToString,
+	convertDateWithDots,
+	convertStringToDate,
+	isOpenToday,
+	getBirthMonth,
+} from "./dateHandlers";
 import { imageOnErrorHandler } from "./imageHandlers";
 import { setMetaTags } from "./metaTagHandlers";
 
@@ -11,6 +17,7 @@ export {
 	convertDateWithDots,
 	convertStringToDate,
 	isOpenToday,
+	getBirthMonth,
 	imageOnErrorHandler,
 	setMetaTags,
 };

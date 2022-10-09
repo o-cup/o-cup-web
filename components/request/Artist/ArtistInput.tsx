@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useQuery } from "react-query";
-import { fetchPeople } from "../../../apis";
-import Icons from "../../../shared/components/Icon/Icons";
+import { fetchPeople } from "../../../../shared/apis/common";
+import { Icon } from "../../../../shared/components";
 import SearchInput from "../units/SearchInput";
 import { DeleteBtn } from "../units/basicInputStyle";
 import { StyledSearchListContainer, StyledSearchList } from "../units/searchListStyle";
@@ -77,7 +77,7 @@ const ArtistInput = ({ value, handleChangeArtist, handleDeleteArtist }: InputPro
 					hideLabel={value.id > 1}
 					shortBtn={value.id > 1}
 				/>
-				{value.id !== 1 && <Icons name="subtraction" handleClick={() => handleDeleteArtist(value.id)} />}
+				{value.id !== 1 && <Icon name="subtraction" handleClick={() => handleDeleteArtist(value.id)} />}
 			</div>
 
 			{isSearchOpen && (

@@ -2,17 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { fetchPeople } from "../apis";
-import { MonthSelector, Result, SearchInput } from "../components/search";
-import { StyledFilter, StyledSearch } from "../components/search/styles/searchStyle";
-import BiasProfile from "../shared/components/BiasProfile";
-import Layout from "../shared/components/layout";
-import Loading from "../shared/components/Loading";
-import SortIcon from "../shared/components/SortIcon";
-import { getBirthMonth } from "../shared/utils/dateHandlers";
-import { searchedAtom, searchFiltersAtom } from "../state";
-import { setMetaTags } from "../shared/utils/metaTagHandlers";
-import { SearchSortOptionKeys } from "../../shared/types";
+import { fetchPeople } from "../../shared/apis/common";
+import { BiasProfile, Layout, Loading, SortIcon } from "../../shared/components";
+import { searchedAtom, searchFiltersAtom } from "../../shared/state";
+import { getBirthMonth, setMetaTags } from "../../shared/utils";
+import MonthSelector from "./MonthSelector";
+import Result from "./Result";
+import SearchInput from "./SearchInput";
+import { StyledFilter, StyledSearch } from "./styles/searchStyle";
+import type { SearchSortOptionKeys } from "../../shared/types";
 
 const Search = () => {
 	const navigate = useNavigate();

@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import React, { memo } from "react";
 import { FaTwitter } from "react-icons/fa";
-import { BiasChip, Icon } from "../../../shared/components";
-import { convertDateToString, convertDateWithDots, imageOnErrorHandler, isOpenToday } from "../../../shared/utils";
+import { BiasChip, Icon } from "../../shared/components";
+import { convertDateToString, convertDateWithDots, imageOnErrorHandler, isOpenToday } from "../../shared/utils";
 import { StyledEvent } from "./styles/eventStyle";
-import type { EventType } from "../../../shared/types";
+import type { EventType } from "../../shared/types";
 
 type EventProps = {
 	event: Partial<EventType> & { image: string };

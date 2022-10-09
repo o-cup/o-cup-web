@@ -1,4 +1,4 @@
-import { insertEvent, uploadPoster } from "../../apis";
+import { uploadPoster, insertEvent } from "../../../shared/apis/common";
 import type { GoodsListType } from "../../../shared/types";
 import type { RequestGoodsListType, RequestType } from "../../../shared/types/request";
 import type React from "react";

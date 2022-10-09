@@ -12,7 +12,6 @@ import {
 	StyledRequestBottomSheet,
 } from "../components/request/styles/requestStyle";
 import BottomSheet from "../shared/components/BottomSheet";
-import useMediaQuery from "../hooks/useMediaQuery";
 import { sendReqData } from "../components/request/requestApi";
 import ConfirmModal from "../components/request/Modals/ConfirmModal";
 import SubmitModal from "../components/request/Modals/SubmitModal";
@@ -25,6 +24,8 @@ import Button from "../shared/components/Button";
 import { fetchDuplicatedEvent } from "../apis";
 import { EventType } from "../types";
 import { setMetaTags } from "../shared/utils/metaTagHandlers";
+import CategoryChip from "../shared/components/CategoryChip";
+import CategoryInput from "../components/request/CategoryInput";
 
 const Request = () => {
 	const navigate = useNavigate();
@@ -41,7 +42,6 @@ const Request = () => {
 	const [isSubmitModalOpen, setSubmitModalOpen] = useState(false);
 	const [isAlertOpen, setAlertOpen] = useState(false);
 	const [isBottomSheetOpen, setBottomSheetOpen] = useState(false);
-	// const isMobile = useMediaQuery("(max-width: 720px)");
 
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
 	const [goodsList, setGoodsList] = useRecoilState(requestGoodsListAtom);
@@ -73,6 +73,7 @@ const Request = () => {
 	const resetAllStates = () => {
 		setRequestInputs({
 			place: { place: "", address: "", districts: { code: "", name: "" } },
+			category: "",
 			artist: [{ id: 1, peopleId: 0, bias: "", team: "" }],
 			organizer: "",
 			snsId: "",
@@ -149,11 +150,15 @@ const Request = () => {
 									이벤트 등록 전, 중복 확인 먼저 해주세요.
 								</p>
 							</div>
+							<CategoryInput />
 							<PlaceInput />
 							<DateRangeInput />
 							<div
 								className={`btnContainer ${
-									requestInputs.place.place && requestInputs.dateRange.startAt && requestInputs.dateRange.endAt
+									requestInputs.place.place &&
+									requestInputs.dateRange.startAt &&
+									requestInputs.dateRange.endAt &&
+									requestInputs.category
 										? ""
 										: "disabled"
 								}`}

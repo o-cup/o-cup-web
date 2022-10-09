@@ -33,7 +33,8 @@ export const StyledBias = styled.li`
 		padding: 12px 20px 10px 0;
 	}
 
-	> a {
+	> a,
+	> div#search {
 		height: 100%;
 		display: flex;
 		flex-direction: column;

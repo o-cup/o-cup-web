@@ -37,6 +37,26 @@ const StyledCheckEvent = styled.div`
 		}
 	}
 
+	> div.categoryContainer {
+		width: 100%;
+
+		> p {
+			font-weight: 400;
+			font-size: 14px;
+			line-height: 19px;
+			margin-bottom: 9px;
+		}
+
+		> ul {
+			display: flex;
+			gap: 12px;
+
+			> li {
+				height: 30px;
+			}
+		}
+	}
+
 	> div.btnContainer {
 		width: 100%;
 
@@ -58,34 +78,6 @@ const StyledEntry = styled.div`
 	//@media ${({ theme }) => theme.device.mobile} {
 	width: 100%;
 	//}
-
-	.notice {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-		font-size: 12px;
-		width: 100%;
-		font-weight: 400;
-
-		p:first-child {
-			width: 140px;
-			height: 28px;
-			background-color: ${({ theme }) => theme.colors.black};
-			color: ${({ theme }) => theme.colors.white};
-			font-weight: 700;
-			border-radius: 30px;
-			text-align: center;
-			line-height: 28px;
-		}
-
-		p:not(:first-child) {
-			line-height: 16px;
-		}
-
-		b {
-			font-weight: 700;
-		}
-	}
 
 	.inputsWrapper {
 		display: flex;

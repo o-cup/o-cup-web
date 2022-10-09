@@ -1,6 +1,6 @@
 import axios from "axios";
-import { removeSpace } from "../../src/components/search/utils";
 import { supabase } from "../../supabaseClient";
+import { removeSpace } from "../utils";
 import { isDateRangeOverlaps } from "../utils/dateHandlers";
 import type { RegCodeItem, SearchInputOptionKey } from "../types";
 

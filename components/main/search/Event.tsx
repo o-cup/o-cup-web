@@ -1,10 +1,8 @@
+import { useRouter } from "next/router";
 import React, { memo } from "react";
 import { FaTwitter } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { Icon } from "../../shared/components";
-import BiasChip from "../../shared/components/BiasChip";
-import { convertDateToString, convertDateWithDots, isOpenToday } from "../../shared/utils/dateHandlers";
-import { imageOnErrorHandler } from "../../shared/utils/imageHandlers";
+import { BiasChip, Icon } from "../../../shared/components";
+import { convertDateToString, convertDateWithDots, imageOnErrorHandler, isOpenToday } from "../../../shared/utils";
 import { StyledEvent } from "./styles/eventStyle";
 import type { EventType } from "../../../shared/types";
 
@@ -13,14 +11,14 @@ type EventProps = {
 };
 
 const Event = ({ event }: EventProps) => {
-	const navigate = useNavigate();
+	const router = useRouter();
 	const { image, place, biasesId, organizer, snsId, districts, startAt, endAt, id } = event;
 
 	const today = convertDateToString(new Date());
 	const isDuringEvent = isOpenToday(today, startAt!, endAt!);
 
 	return (
-		<StyledEvent onClick={() => navigate(`/detail/${id}`)}>
+		<StyledEvent onClick={() => router.push(`/detail/${id}`)}>
 			<img alt={place} src={image} onError={imageOnErrorHandler} />
 			<div>
 				<div className="title">

@@ -1,7 +1,7 @@
 import React from "react";
-import { ColorsType, CustomStyleType } from "../../../types";
-import Icon from "../Icon/Icons";
+import Icon from "../icon";
 import { StyledChip } from "./chipStyle";
+import type { CustomStyleType, ColorsType } from "../../types";
 
 type ChipProps = {
 	text: string;

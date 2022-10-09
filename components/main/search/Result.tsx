@@ -1,20 +1,16 @@
 import React, { memo, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { StyledResult } from "./styles/resultStyle";
-import Event from "./Event";
-import Button from "../../shared/components/Button";
-import { FilterIcon, SortIcon } from "../../shared/components";
-import SearchModal from "./SearchModal";
-import Chip from "../../shared/components/Chip";
-import { searchFiltersAtom, searchInputOptionsAtom } from "../../state";
-import { convertDateWithDots } from "../../shared/utils/dateHandlers";
 import { fetchSearchedEvent } from "../../../shared/apis/search";
-import { RegCodeItem } from "./types";
-import Loading from "../../shared/components/Loading";
-import { ResultSortOptionKeys } from "../../../shared/types";
-import { removeSpace } from "./utils";
+import { Button, Chip, FilterIcon, Loading, SortIcon } from "../../../shared/components";
+import { searchFiltersAtom, searchInputOptionsAtom } from "../../../shared/state";
+import { convertDateWithDots, removeSpace } from "../../../shared/utils";
+import Event from "./Event";
+import SearchModal from "./SearchModal";
+import { StyledResult } from "./styles/resultStyle";
+import type { ResultSortOptionKeys } from "../../../shared/types";
+import type { RegCodeItem } from "./types";
 
 type ResultProps = {
 	biasId?: number | null;

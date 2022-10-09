@@ -1,7 +1,7 @@
 import React from "react";
 import { FaTwitter } from "react-icons/fa";
-import { EventType } from "../../types";
 import { StyledTwitterInfo } from "./styles/twitterInfoStyle";
+import type { EventType } from "../../../shared/types";
 
 type TwitterInfoProps = {
 	data: Partial<EventType>;

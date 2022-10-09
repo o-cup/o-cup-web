@@ -5,8 +5,8 @@ import { Icon } from "../../shared/components";
 import BiasChip from "../../shared/components/BiasChip";
 import { convertDateToString, convertDateWithDots, isOpenToday } from "../../shared/utils/dateHandlers";
 import { imageOnErrorHandler } from "../../shared/utils/imageHandlers";
-import { EventType } from "../../types";
 import { StyledEvent } from "./styles/eventStyle";
+import type { EventType } from "../../../shared/types";
 
 type EventProps = {
 	event: Partial<EventType> & { image: string };

@@ -1,5 +1,5 @@
 import React from "react";
-import { EventType } from "../../types";
+import { EventType } from "../../../shared/types";
 import FcfsGoodsListItem from "./goodsItems/FcfsGoodsListItem";
 import GoodsListItem from "./goodsItems/GoodsListItem";
 import ExtraGoodsListItem from "./goodsItems/ExtraGoodsListItem";

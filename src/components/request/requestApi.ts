@@ -1,7 +1,8 @@
-import React, { Dispatch } from "react";
 import { insertEvent, uploadPoster } from "../../apis";
-import { RequestGoodsListType, RequestType } from "./requestType";
-import { GoodsListType } from "../../types";
+import type { GoodsListType } from "../../../shared/types";
+import type { RequestGoodsListType, RequestType } from "../../../shared/types/request";
+import type React from "react";
+import type { Dispatch } from "react";
 
 type ReqType = {
 	requestInputs: RequestType;

@@ -23,7 +23,7 @@ import DuplicatedModal from "../components/request/Modals/DuplicatedModal";
 import Toast from "../shared/components/Toast";
 import Button from "../shared/components/Button";
 import { fetchDuplicatedEvent } from "../apis";
-import { EventType } from "../types";
+import { EventType } from "../../shared/types";
 import { setMetaTags } from "../shared/utils/metaTagHandlers";
 
 const Request = () => {

@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
-import { fetchRegcodes } from "../apis/search";
-import { RegCodeItem } from "../components/search/types";
+import { fetchRegcodes } from "../../shared/apis/search";
+import type { RegCodeItem } from "../components/search/types";
 
 const getDivCode = (code: string) => code.substring(0, 2);
 

@@ -4,7 +4,7 @@ import { StyledFcfsGoodsInput, StyledFcfsTitle, StyledFcfsTypeSelector } from ".
 import { requestInputsAtom } from "../../../state/atoms";
 import Icons from "../../../shared/components/Icon/Icons";
 import { getDatesInRange } from "../../../shared/utils/dateHandlers";
-import { RequestFcfsType } from "../requestType";
+import { RequestFcfsType } from "../../../../shared/types/request";
 import FcfsContent from "./chipContents/FcfsContent";
 
 const TYPE = [

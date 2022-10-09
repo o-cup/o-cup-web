@@ -1,7 +1,7 @@
 import React from "react";
-import { FirstComeType } from "../../../types";
-import { StyledGoodsListItem, StyledHighLightItem } from "../styles/goodsInfoStyle";
 import GoodsChip from "../../../shared/components/GoodsChip";
+import { StyledGoodsListItem, StyledHighLightItem } from "../styles/goodsInfoStyle";
+import type { FirstComeType } from "../../../../shared/types";
 
 type FcfsProps = {
 	fcfs: FirstComeType;

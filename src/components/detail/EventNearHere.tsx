@@ -2,9 +2,9 @@ import React from "react";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchEvents } from "../../apis";
-import { EventType } from "../../types";
-import { EventNearHereList, StyledEventNearHere } from "./styles/eventNearHereStyle";
 import { imageOnErrorHandler } from "../../shared/utils/imageHandlers";
+import { EventNearHereList, StyledEventNearHere } from "./styles/eventNearHereStyle";
+import type { EventType } from "../../../shared/types";
 
 function EventNearHere({ biasesId, districts }: Partial<EventType>) {
 	const { id } = useParams();

@@ -12,7 +12,7 @@ import SortIcon from "../shared/components/SortIcon";
 import { getBirthMonth } from "../shared/utils/dateHandlers";
 import { searchedAtom, searchFiltersAtom } from "../state";
 import { setMetaTags } from "../shared/utils/metaTagHandlers";
-import { SearchSortOptionKeys } from "../types";
+import { SearchSortOptionKeys } from "../../shared/types";
 
 const Search = () => {
 	const navigate = useNavigate();

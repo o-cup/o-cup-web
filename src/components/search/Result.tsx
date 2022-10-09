@@ -10,10 +10,10 @@ import SearchModal from "./SearchModal";
 import Chip from "../../shared/components/Chip";
 import { searchFiltersAtom, searchInputOptionsAtom } from "../../state";
 import { convertDateWithDots } from "../../shared/utils/dateHandlers";
-import { fetchSearchedEvent } from "../../apis/search";
+import { fetchSearchedEvent } from "../../../shared/apis/search";
 import { RegCodeItem } from "./types";
 import Loading from "../../shared/components/Loading";
-import { ResultSortOptionKeys } from "../../types";
+import { ResultSortOptionKeys } from "../../../shared/types";
 import { removeSpace } from "./utils";
 
 type ResultProps = {

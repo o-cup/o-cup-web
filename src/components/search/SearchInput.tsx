@@ -1,10 +1,11 @@
-import React, { Dispatch, memo, SetStateAction, useEffect, useState } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import React, { memo, useEffect, useState } from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import Icon from "../../shared/components/Icon/Icons";
 import { searchedAtom, searchFiltersAtom, searchInputOptionsAtom } from "../../state";
 import { StyledOption, StyledSearchInput } from "./styles/searchInputStyle";
-import { SearchInputOptionType } from "../../types";
+import type { SearchInputOptionType } from "../../../shared/types";
+import type { Dispatch, SetStateAction } from "react";
 
 type SearchInputProps = {
 	setSelectedBiasId: Dispatch<SetStateAction<null | number>>;

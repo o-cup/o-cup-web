@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import { EventType } from "../../../types";
-import { StyledMap } from "../styles/locationStyle";
 import { removeKakaoMapKey, setKakaoMapKey } from "../../../shared/utils/kakaoMapHandlers";
+import { StyledMap } from "../styles/locationStyle";
+import type { EventType } from "../../../../shared/types";
 
 function Map({ address }: Partial<EventType>) {
 	const { kakao } = window as any;

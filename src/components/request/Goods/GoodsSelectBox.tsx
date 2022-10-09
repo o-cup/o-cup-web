@@ -1,9 +1,10 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import { useRecoilValue } from "recoil";
-import { requestGoodsListAtom } from "../../../state/atoms";
-import { StyledSelectWrapper } from "./goodsInputStyle";
+// import { requestGoodsListAtom } from "../../../state/atoms";
 import { StyledSearchList, StyledSearchListContainer } from "../units/searchListStyle";
-import { ItemsType } from "../requestType";
+import { StyledSelectWrapper } from "./goodsInputStyle";
+import type { ItemsType } from "../../../../shared/types/request";
+import type { Dispatch, SetStateAction } from "react";
 
 type GoodsListValues = {
 	id: number;

@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import Modal from "../../shared/components/Modal";
 import Calendar from "../../shared/components/Calendar";
 import DistrictSelector from "./DistrictSelector";
-import { DateRangeType } from "../../types";
+import { DateRangeType } from "../../../shared/types";
 import { RegCodeItem, SearchModalProps } from "./types";
 import { searchFiltersAtom } from "../../state";
 

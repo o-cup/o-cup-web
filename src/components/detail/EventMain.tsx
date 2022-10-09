@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { EventType } from "../../types";
+import { EventType } from "../../../shared/types";
 import { convertDateToString, convertDateWithDots, isOpenToday } from "../../shared/utils/dateHandlers";
 import { StyledDetailImgContainer, StyledDetailTextContainer, StyledEventMain } from "./styles/eventMainStyle";
 import { StyledBiasChip } from "../../shared/components/BiasChip/biasChipStyle";

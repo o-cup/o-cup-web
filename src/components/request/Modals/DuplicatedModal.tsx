@@ -1,13 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { FaCalendar, FaMapMarkerAlt, FaTwitter, FaUserCircle } from "react-icons/fa";
-import { StyledDuplicatedEvent, StyledDuplicatedModal } from "../styles/requestStyle";
-import { StyledBiasChip } from "../../../shared/components/BiasChip/biasChipStyle";
-import Modal from "../../../shared/components/Modal";
-import Button from "../../../shared/components/Button";
+import { useNavigate } from "react-router-dom";
 import BiasChip from "../../../shared/components/BiasChip";
-import { EventType } from "../../../types";
+import { StyledBiasChip } from "../../../shared/components/BiasChip/biasChipStyle";
+import Button from "../../../shared/components/Button";
+import Modal from "../../../shared/components/Modal";
 import { convertDateWithDots } from "../../../shared/utils/dateHandlers";
+import { StyledDuplicatedEvent, StyledDuplicatedModal } from "../styles/requestStyle";
+import type { EventType } from "../../../../shared/types";
 
 const Event = ({ duplicatedEventData, handleClick }: { duplicatedEventData: EventType; handleClick?: () => void }) => {
 	const { images, place, biasesId, requestedBiases, organizer, snsId, districts, startAt, endAt } = duplicatedEventData;

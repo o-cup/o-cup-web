@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { dateFilterAtom } from "../state/atoms";
+import { StyledMain } from "../../components/main/styles/mainStyle";
 import { BiasList, EventSection } from "../components/main";
-import { StyledMain } from "../components/main/styles/mainStyle";
-import Layout from "../shared/components/layout";
-import { setMetaTags } from "../shared/utils/metaTagHandlers";
 import Icons from "../shared/components/Icon/Icons";
+import Layout from "../shared/components/layout";
 import { convertDateToString, convertStringToDate } from "../shared/utils/dateHandlers";
+import { setMetaTags } from "../shared/utils/metaTagHandlers";
+import { dateFilterAtom } from "../state/atoms";
 
 function Main() {
 	const [dateFilter, setDateFilter] = useRecoilState(dateFilterAtom);

@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useQuery } from "react-query";
 import { fetchPeople } from "../../../apis";
-import { StyledArtistInput } from "./artistInputStyle";
-import { StyledSearchListContainer, StyledSearchList } from "../units/searchListStyle";
-import { DeleteBtn } from "../units/basicInputStyle";
-import SearchInput from "../units/SearchInput";
-import { PeopleType } from "../../../types";
-import { RequestArtistType } from "../requestType";
 import Icons from "../../../shared/components/Icon/Icons";
+import SearchInput from "../units/SearchInput";
+import { DeleteBtn } from "../units/basicInputStyle";
+import { StyledSearchListContainer, StyledSearchList } from "../units/searchListStyle";
+import { StyledArtistInput } from "./artistInputStyle";
+import type { PeopleType } from "../../../../shared/types";
+import type { RequestArtistType } from "../../../../shared/types/request";
 
 type InputProps = {
 	value: RequestArtistType;

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { fetchEventById, fetchPeople } from "../apis";
-import { EventType } from "../types";
+import { EventType } from "../../shared/types";
 import { StyledDetail } from "../components/detail/styles/detailStyle";
 import { EventMain, EventNearHere, GoodsInfo, TwitterInfo, Location } from "../components/detail";
 import Layout from "../shared/components/layout";

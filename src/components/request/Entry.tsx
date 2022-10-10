@@ -6,7 +6,6 @@ import { StyledPlaceInput } from "./Place/placeInputStyle";
 import Button from "../../shared/components/Button";
 import BasicInput from "./units/BasicInput";
 import PosterUploader from "./Poster/PosterUploader";
-import PlaceInput from "./Place/PlaceInput";
 import ArtistInputContainer from "./Artist/ArtistInputContainer";
 import GoodsInputContainer from "./Goods/GoodsInputContainer";
 import HashTagsContainer from "./HashTags/HashTagsContainer";

@@ -1,6 +1,10 @@
-# Disallow everything.
+# Allow everything.
 User-agent: *
-Disallow: /
+Allow:/
+
+# 네이버 검색로봇
+User-agent: Yeti
+Allow:/
 
 # Certain social media sites are whitelisted to allow crawlers to access page markup when links to /images are shared.
 User-agent: Twitterbot

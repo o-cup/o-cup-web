@@ -51,19 +51,33 @@ const EventNearHereList = styled.li`
 		width: 100%;
 		height: 120px;
 		object-fit: cover;
-		object-position: top;
+		object-position: 90% 10%;
 	}
 
 	> div {
 		padding: 10px;
 
-		> p.near_place {
-			font-weight: 500;
-			font-size: 12px;
-			line-height: 16px;
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
+		> div.near_title {
+			display: flex;
+			align-items: center;
+			margin-bottom: 4px;
+
+			> img {
+				width: 16px;
+				min-width: 16px;
+				height: 16px;
+				object-fit: contain;
+				margin-right: 4px;
+			}
+
+			> p.near_place {
+				font-weight: 500;
+				font-size: 12px;
+				line-height: 16px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
 		}
 
 		> p.near_organizer {

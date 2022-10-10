@@ -5,11 +5,12 @@ import {
 	StyledDetailMainInfo,
 	StyledDetailImgContainer,
 	StyledDetailTextContainer,
+	StyledDetailCategory,
 } from "./styles/detailMainInfoStyle";
+import PosterView from "./PosterView";
 import { StyledBiasChip } from "../../shared/components/BiasChip/biasChipStyle";
 import BiasChip from "../../shared/components/BiasChip";
 import { Icon } from "../../shared/components";
-import PosterView from "./PosterView";
 import { imageOnErrorHandler } from "../../shared/utils/imageHandlers";
 
 type DetailMainInfoProps = {
@@ -18,7 +19,7 @@ type DetailMainInfoProps = {
 };
 
 const DetailMainInfo = ({ data, posterPopupDisabled }: DetailMainInfoProps) => {
-	const { place, biasesId, organizer, startAt, endAt, images, address, requestedBiases } = data;
+	const { place, category, biasesId, organizer, startAt, endAt, images, address, requestedBiases } = data;
 
 	const [isPosterViewOpen, setPosterViewOpen] = useState(false);
 
@@ -30,6 +31,7 @@ const DetailMainInfo = ({ data, posterPopupDisabled }: DetailMainInfoProps) => {
 	return (
 		<StyledDetailMainInfo>
 			<StyledDetailTextContainer>
+				<StyledDetailCategory type={category || ""} />
 				<div className="title">
 					<p>{place}</p>
 					<div className="chipContainer">

@@ -52,7 +52,7 @@ export const StyledMainLists = styled.ul`
 export const StyledCategoryBorder = styled.span<{ type: string }>`
 	background: ${(props) => props.theme.category[props.type].primary};
 	width: 100%;
-	height: 8px;
+	height: 6px;
 	position: absolute;
 	top: 0;
 	left: 0;

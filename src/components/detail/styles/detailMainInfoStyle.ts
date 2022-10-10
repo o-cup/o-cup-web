@@ -4,6 +4,15 @@ const StyledDetailMainInfo = styled.div`
 	position: relative;
 `;
 
+const StyledDetailCategory = styled.span<{ type: string }>`
+	background: ${(props) => props.theme.category[props.type].primary};
+	width: 6px;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+`;
+
 const StyledDetailTextContainer = styled.div`
 	background: ${({ theme }) => theme.colors.white};
 	border: 2px solid #000000;
@@ -122,5 +131,5 @@ const StyledDetailImgContainer = styled.div`
 		}
 	}
 `;
-export { StyledDetailMainInfo, StyledDetailTextContainer, StyledDetailImgContainer };
+export { StyledDetailMainInfo, StyledDetailCategory, StyledDetailTextContainer, StyledDetailImgContainer };
 export default {};

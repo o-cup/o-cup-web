@@ -24,7 +24,6 @@ import Button from "../shared/components/Button";
 import { fetchDuplicatedEvent } from "../apis";
 import { EventType } from "../types";
 import { setMetaTags } from "../shared/utils/metaTagHandlers";
-import CategoryChip from "../shared/components/CategoryChip";
 import CategoryInput from "../components/request/CategoryInput";
 
 const Request = () => {

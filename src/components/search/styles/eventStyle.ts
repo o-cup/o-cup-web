@@ -9,7 +9,7 @@ export const StyledEvent = styled.li`
 	position: relative;
 	background-color: #fff;
 	box-shadow: 4px 4px 0 #000000;
-	min-width: 320x;
+	min-width: 320px;
 	width: 100%;
 	cursor: pointer;
 
@@ -29,12 +29,12 @@ export const StyledEvent = styled.li`
 		flex-direction: column;
 		max-width: calc(100% - 125px);
 		width: 100%;
-		justify-content: space-between;
 
 		.title {
 			display: flex;
 			justify-content: space-between;
 			align-items: flex-start;
+			margin-bottom: 8px;
 
 			h2 {
 				font-size: 18px;
@@ -44,30 +44,29 @@ export const StyledEvent = styled.li`
 				white-space: nowrap;
 				text-overflow: ellipsis;
 				overflow: hidden;
-				margin-bottom: 8px;
 			}
 
-			i {
-				width: 10px;
-				height: 10px;
-				background-color: ${({ theme }) => theme.colors.eventDay};
-				display: inline-block;
-				border-radius: 50%;
-				margin-top: 3px;
+			img.category_icon {
+				width: 24px;
+				min-width: 24px;
+				height: 24px;
+				object-fit: contain;
+				margin-left: 2px;
 			}
 		}
 
 		.biases {
 			display: flex;
 			gap: 5px;
-			margin-bottom: 12px;
+			margin-bottom: 14px;
 		}
 
 		ul.extraInfo {
 			height: 80px;
 			display: flex;
 			flex-direction: column;
-			justify-content: space-around;
+			flex: 1 1 0;
+			justify-content: space-between;
 
 			li {
 				display: flex;
@@ -75,18 +74,31 @@ export const StyledEvent = styled.li`
 				font-size: 12px;
 				height: 20px;
 
-				p {
-					white-space: nowrap;
-					overflow: hidden;
-					text-overflow: ellipsis;
-					color: ${({ theme }) => theme.colors.gray};
-				}
-
 				i,
 				svg {
 					color: ${({ theme }) => theme.colors.gray};
 					min-width: 14px;
 					margin-right: 6px;
+				}
+
+				p {
+					display: flex;
+					align-items: center;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					color: ${({ theme }) => theme.colors.gray};
+
+					> i.event_day {
+						width: 6px;
+						min-width: 6px;
+						height: 6px;
+						margin-left: 4px;
+						margin-right: 0;
+						background-color: ${({ theme }) => theme.colors.eventDay};
+						display: inline-block;
+						border-radius: 50%;
+					}
 				}
 			}
 		}

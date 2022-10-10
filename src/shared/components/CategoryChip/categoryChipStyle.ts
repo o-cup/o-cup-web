@@ -4,6 +4,7 @@ export const StyledCategoryChip = styled.div<{
 	type: "A" | "B" | "C" | "D" | "E";
 	selected?: boolean;
 	opacity?: number;
+	disabled?: boolean;
 }>`
 	display: inline-block;
 	width: fit-content;
@@ -11,6 +12,7 @@ export const StyledCategoryChip = styled.div<{
 	position: relative;
 	cursor: pointer;
 	opacity: ${(props) => props.opacity};
+	pointer-events: ${(props) => (props.disabled ? "none" : "auto")};
 
 	p {
 		background: ${({ theme }) => theme.colors.white};
@@ -23,6 +25,7 @@ export const StyledCategoryChip = styled.div<{
 		margin-bottom: 4px;
 		position: relative;
 		z-index: 2;
+		white-space: nowrap;
 	}
 
 	span.shadow {

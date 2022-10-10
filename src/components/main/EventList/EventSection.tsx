@@ -7,8 +7,6 @@ import { StyledMainEvents } from "./mainEventListStyles";
 import EmptyDefault from "../EmptyDefault";
 import Loading from "../../../shared/components/Loading";
 import BiasEventList from "./BiasEventList";
-import { convertDateToString, convertStringToDate, isBeforeToday } from "../../../shared/utils/dateHandlers";
-import { PeopleType } from "../../../types";
 
 const EventSection = () => {
 	const dateFilter = useRecoilValue(dateFilterAtom);
@@ -41,13 +39,6 @@ const EventSection = () => {
 		setOpenedBias(Array.from(biasSet));
 	}, [events, setOpenedBias]);
 
-	const isToday = dateFilter === convertDateToString(new Date());
-	const monthIndex = convertStringToDate(dateFilter).getMonth();
-	const date = convertStringToDate(dateFilter).getDate();
-
-	const getEventTitle = (bias: PeopleType) =>
-		`${isToday ? "오늘" : `${date}일에`} ${isBeforeToday(dateFilter) ? "열린" : "열리는"} ${bias.name} 이벤트`;
-
 	if (isLoading) {
 		return <Loading />;
 	}
@@ -55,10 +46,12 @@ const EventSection = () => {
 		<>
 			<StyledMainEvents>
 				{openedPeople?.map((bias) => (
-					<div key={bias.id} id={`bias_${bias.id}`}>
-						<p>{getEventTitle(bias)}</p>
-						<BiasEventList events={events ? events.filter((event) => event.biasesId.includes(bias.id)) : []} />
-					</div>
+					<BiasEventList
+						key={bias.id}
+						id={`bias_${bias.id}`}
+						bias={bias}
+						events={events ? events.filter((event) => event.biasesId.includes(bias.id)) : []}
+					/>
 				))}
 			</StyledMainEvents>
 			<EmptyDefault size={events && events.length > 0 ? "small" : "default"} />

@@ -7,6 +7,26 @@ import LuckyGoodsListItem from "./goodsItems/LuckyGoodsListItem";
 import { StyledGoodsInfo } from "./styles/goodsInfoStyle";
 
 function GoodsInfo({ goods, tweetUrl }: Partial<EventType>) {
+	const hasGoods = () => {
+		let result = false;
+		if (goods) {
+			if (
+				(goods.all && goods.all?.length > 0) ||
+				(goods.random && goods.random?.length > 0) ||
+				(goods.dDay && goods.dDay?.length > 0) ||
+				(goods.extra && goods.extra?.length > 0) ||
+				(goods.lucky && goods.lucky?.length > 0) ||
+				(goods.firstCome?.type && goods.firstCome?.data.length > 0)
+			) {
+				result = true;
+			}
+		}
+		return result;
+	};
+
+	if (!hasGoods()) {
+		return null;
+	}
 	return (
 		<StyledGoodsInfo>
 			<p className="title">특전</p>

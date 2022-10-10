@@ -8,7 +8,7 @@ export const StyledMainEvents = styled.section`
 	> div {
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
+		gap: 10px;
 
 		> p {
 			font-weight: 700;

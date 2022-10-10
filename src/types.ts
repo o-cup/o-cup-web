@@ -48,7 +48,7 @@ export type EventType = {
 	goods: GoodsListType;
 	hashTags: string[];
 	tweetUrl: string;
-	category: string;
+	category: "A" | "B" | "C" | "D" | "E";
 	views: number;
 	requestedBiases?: RequestBias[];
 	isRequested: boolean;

@@ -5,8 +5,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { EventType } from "../../../types";
 import { convertDateWithDots } from "../../../shared/utils/dateHandlers";
-import { StyledMainListItem } from "./mainEventListStyles";
-import BiasChip from "../../../shared/components/BiasChip";
+import { StyledCategoryBorder, StyledMainListItem } from "./mainEventListStyles";
 import { Icon } from "../../../shared/components";
 import { imageOnErrorHandler } from "../../../shared/utils/imageHandlers";
 
@@ -16,10 +15,11 @@ type EventListItemProps = {
 
 const EventListItem = ({ event }: EventListItemProps) => {
 	const navigate = useNavigate();
-	const { id, place, images, biasesId, organizer, snsId, districts, startAt, endAt } = event;
+	const { id, place, images, category, organizer, snsId, districts, startAt, endAt } = event;
 
 	return (
 		<StyledMainListItem onClick={() => navigate(`/detail/${id}`)}>
+			<StyledCategoryBorder type={category} />
 			<div className="imgContainer">
 				<LazyLoadImage
 					wrapperClassName="lazy-image"
@@ -31,7 +31,7 @@ const EventListItem = ({ event }: EventListItemProps) => {
 			</div>
 			<div className="title">
 				<p>{place}</p>
-				<BiasChip id={biasesId[0]} key={biasesId[0]} dots={biasesId.length > 1} />
+				{/* <BiasChip id={biasesId[0]} key={biasesId[0]} dots={biasesId.length > 1} /> */}
 			</div>
 			<ul className="textContainer">
 				<li>

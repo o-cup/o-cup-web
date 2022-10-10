@@ -2,7 +2,7 @@ import React from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { requestGoodsListAtom, requestInputsAtom, tempPostersAtom } from "../../state/atoms";
 import { getGoodsObj } from "./requestApi";
-import { EventMain, GoodsInfo, Location, TwitterInfo } from "../detail";
+import { DetailMainInfo, GoodsInfo, Location, TwitterInfo } from "../detail";
 import { DEFAULT_POSTER_URL } from "../../shared/constants";
 
 const PreviewContent = () => {
@@ -14,7 +14,7 @@ const PreviewContent = () => {
 
 	return (
 		<div className="previewContent">
-			<EventMain
+			<DetailMainInfo
 				data={{
 					place: place.place || "카페이름",
 					biasesId: [],

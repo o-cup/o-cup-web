@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledEventMain = styled.div`
+const StyledDetailMainInfo = styled.div`
 	position: relative;
 `;
 
@@ -122,5 +122,5 @@ const StyledDetailImgContainer = styled.div`
 		}
 	}
 `;
-export { StyledEventMain, StyledDetailTextContainer, StyledDetailImgContainer };
+export { StyledDetailMainInfo, StyledDetailTextContainer, StyledDetailImgContainer };
 export default {};

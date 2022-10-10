@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { fetchEventById, fetchPeople } from "../apis";
 import { EventType } from "../types";
 import { StyledDetail } from "../components/detail/styles/detailStyle";
-import { EventMain, EventNearHere, GoodsInfo, TwitterInfo, Location } from "../components/detail";
+import { DetailMainInfo, EventNearHere, GoodsInfo, TwitterInfo, Location } from "../components/detail";
 import Layout from "../shared/components/layout";
 import Loading from "../shared/components/Loading";
 import { setMetaTags } from "../shared/utils/metaTagHandlers";
@@ -52,7 +52,7 @@ const Detail = () => {
 			<StyledDetail>
 				<div className="detailInfo">
 					<div className="mainInfo">
-						<EventMain data={data} />
+						<DetailMainInfo data={data} />
 					</div>
 					<div className="subInfo">
 						<TwitterInfo data={data} />

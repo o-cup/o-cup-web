@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import { EventType } from "../../types";
 import { convertDateToString, convertDateWithDots, isOpenToday } from "../../shared/utils/dateHandlers";
-import { StyledDetailImgContainer, StyledDetailTextContainer, StyledEventMain } from "./styles/eventMainStyle";
+import {
+	StyledDetailMainInfo,
+	StyledDetailImgContainer,
+	StyledDetailTextContainer,
+} from "./styles/detailMainInfoStyle";
 import { StyledBiasChip } from "../../shared/components/BiasChip/biasChipStyle";
 import BiasChip from "../../shared/components/BiasChip";
 import { Icon } from "../../shared/components";
 import PosterView from "./PosterView";
 import { imageOnErrorHandler } from "../../shared/utils/imageHandlers";
 
-type EventMainProps = {
+type DetailMainInfoProps = {
 	data: Partial<EventType>;
 	posterPopupDisabled?: boolean;
 };
 
-const EventMain = ({ data, posterPopupDisabled }: EventMainProps) => {
+const DetailMainInfo = ({ data, posterPopupDisabled }: DetailMainInfoProps) => {
 	const { place, biasesId, organizer, startAt, endAt, images, address, requestedBiases } = data;
 
 	const [isPosterViewOpen, setPosterViewOpen] = useState(false);
@@ -24,7 +28,7 @@ const EventMain = ({ data, posterPopupDisabled }: EventMainProps) => {
 	const isDuringEvent = isOpenToday(today, startAt, endAt);
 
 	return (
-		<StyledEventMain>
+		<StyledDetailMainInfo>
 			<StyledDetailTextContainer>
 				<div className="title">
 					<p>{place}</p>
@@ -74,12 +78,12 @@ const EventMain = ({ data, posterPopupDisabled }: EventMainProps) => {
 			{!posterPopupDisabled && isPosterViewOpen && images && (
 				<PosterView images={images} setPosterViewOpen={setPosterViewOpen} />
 			)}
-		</StyledEventMain>
+		</StyledDetailMainInfo>
 	);
 };
 
-EventMain.defaultProps = {
+DetailMainInfo.defaultProps = {
 	posterPopupDisabled: false,
 };
 
-export default EventMain;
+export default DetailMainInfo;

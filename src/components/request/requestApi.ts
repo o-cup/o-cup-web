@@ -119,6 +119,7 @@ export const sendReqData = async ({
 		!link
 		// || !hasGoods(requestInputs, goodsList)
 	) {
+		setLoading(false);
 		setConfirmModalOpen(false);
 		setAlertOpen(true);
 		return;

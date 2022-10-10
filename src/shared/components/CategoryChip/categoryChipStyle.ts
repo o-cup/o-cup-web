@@ -25,6 +25,7 @@ export const StyledCategoryChip = styled.div<{
 		margin-bottom: 4px;
 		position: relative;
 		z-index: 2;
+		white-space: nowrap;
 	}
 
 	span.shadow {

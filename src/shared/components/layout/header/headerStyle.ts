@@ -9,7 +9,7 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 	z-index: ${({ theme }) => theme.zIndex.header};
 	background: rgba(252, 251, 247, 0.9);
 	backdrop-filter: blur(4px);
-
+	min-width: 320px;
 	max-width: 100vw;
 	max-width: ${({ theme }) => theme.widths.layout};
 

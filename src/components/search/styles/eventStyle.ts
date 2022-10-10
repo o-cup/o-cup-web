@@ -90,9 +90,9 @@ export const StyledEvent = styled.li`
 					color: ${({ theme }) => theme.colors.gray};
 
 					> i.event_day {
-						width: 10px;
-						min-width: 10px;
-						height: 10px;
+						width: 6px;
+						min-width: 6px;
+						height: 6px;
 						margin-left: 4px;
 						margin-right: 0;
 						background-color: ${({ theme }) => theme.colors.eventDay};

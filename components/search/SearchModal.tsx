@@ -1,14 +1,17 @@
+import { format } from "date-fns";
 import React, { memo, useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { format } from "date-fns";
-import Modal from "../../shared/components/Modal";
-import Calendar from "../../shared/components/Calendar";
+import { Calendar, Modal } from "../../shared/components";
+import { searchFiltersAtom } from "../../shared/state";
 import DistrictSelector from "./DistrictSelector";
-import { DateRangeType } from "../../../shared/types";
-import { RegCodeItem, SearchModalProps } from "./types";
-import { searchFiltersAtom } from "../../state";
+import type { DateRangeType } from "../../shared/types";
+import type { RegCodeItem, SearchModalProps } from "./types";
 
-const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: SearchModalProps) => {
+const SearchModal = ({
+	type,
+	setCalendarOpen,
+	setDisctrictSelectorOpen,
+}: SearchModalProps) => {
 	const setSearchFilters = useSetRecoilState(searchFiltersAtom);
 	const [selectedRange, setSelectedRange] = useState<DateRangeType>({
 		startDate: new Date(),
@@ -28,7 +31,10 @@ const SearchModal = ({ type, setCalendarOpen, setDisctrictSelectorOpen }: Search
 			case "dateRange":
 				setSearchFilters((prev) => ({
 					...prev,
-					date: { startDate: format(startDate, "yyyyMMdd"), endDate: format(endDate, "yyyyMMdd") },
+					date: {
+						startDate: format(startDate, "yyyyMMdd"),
+						endDate: format(endDate, "yyyyMMdd"),
+					},
 				}));
 
 				setCalendarOpen(false);

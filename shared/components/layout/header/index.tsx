@@ -1,7 +1,11 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { dateFilterAtom, searchedAtom, searchFiltersAtom } from "../../../state";
+import {
+	dateFilterAtom,
+	searchedAtom,
+	searchFiltersAtom,
+} from "../../../state";
 import { convertDateToString, copyToClipboard } from "../../../utils";
 import Icon from "../../icon";
 import Toast from "../../toast";
@@ -66,8 +70,14 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 
 	const shareTwitter = () => {
 		const sendText =
-			document?.querySelector("meta[name='twitter:description']")?.getAttribute("content") || "오늘의 컵홀더";
-		window.open(`https://twitter.com/intent/tweet?text=${sendText}&url=${urlRef}`, "popup", "width=600, height=360");
+			document
+				?.querySelector("meta[name='twitter:description']")
+				?.getAttribute("content") || "오늘의 컵홀더";
+		window.open(
+			`https://twitter.com/intent/tweet?text=${sendText}&url=${urlRef}`,
+			"popup",
+			"width=600, height=360"
+		);
 	};
 
 	const handleShareClick = () => {
@@ -120,20 +130,32 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 
 					{page && <h1>{titles[page]}</h1>}
 					<div className="rightIcons">
-						{mainPage && <DateSelector isCalendarOpen={isCalendarOpen} setCalendarOpen={setCalendarOpen} />}
+						{mainPage && (
+							<DateSelector
+								isCalendarOpen={isCalendarOpen}
+								setCalendarOpen={setCalendarOpen}
+							/>
+						)}
 						{(mainPage || page === "detail") && (
-							<Icon name="search_header" handleClick={() => router.push("/search")} />
+							<Icon
+								name="search_header"
+								handleClick={() => router.push("/search")}
+							/>
 						)}
 						{share && (
 							<Share>
 								<Icon name="share" handleClick={handleShareClick} />
-								{isTooltipOpen && <span className="tooltip">트위터에 공유하기</span>}
+								{isTooltipOpen && (
+									<span className="tooltip">트위터에 공유하기</span>
+								)}
 								{/* {renderTooltip()} */}
 							</Share>
 						)}
 					</div>
 				</div>
-				{isToastOpen && <Toast setToast={setIsToastOpen} text="링크가 복사되었습니다" />}
+				{isToastOpen && (
+					<Toast setToast={setIsToastOpen} text="링크가 복사되었습니다" />
+				)}
 			</StyledHeader>
 			{/* {isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />} */}
 		</>

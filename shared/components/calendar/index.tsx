@@ -1,11 +1,12 @@
-import React, { Dispatch, SetStateAction } from "react";
 import { ko } from "date-fns/locale";
-import { DateRange } from "react-date-range-ts";
-import { convertDateToString, convertDateWithDots } from "../../utils/dateHandlers";
-import { StyledCalendar } from "./calendarStyle";
-import Icon from "../Icon/Icons";
+import React from "react";
+// import { DateRange } from "react-date-range-ts";
 import { ResetModalBtn } from "../../../components/search/styles/searchStyle";
-import { DateRangeType } from "../../../types";
+import { convertDateToString, convertDateWithDots } from "../../utils";
+import Icon from "../icon";
+import { StyledCalendar } from "./calendarStyle";
+import type { DateRangeType } from "../../types";
+import type { Dispatch, SetStateAction } from "react";
 
 type CalendarProps = {
 	selectedRange: any;
@@ -23,7 +24,11 @@ const Calendar = ({
 	setSelectedRange,
 }: CalendarProps) => {
 	const handleClickReset = () => {
-		setSelectedRange({ startDate: new Date(), endDate: new Date(), key: "selection" });
+		setSelectedRange({
+			startDate: new Date(),
+			endDate: new Date(),
+			key: "selection",
+		});
 	};
 
 	return (
@@ -32,9 +37,12 @@ const Calendar = ({
 				<Icon name="reset" />
 				<span>초기화</span>
 			</ResetModalBtn>
-			<Icon name="delete-circle-black" handleClick={() => setCalendarOpen(false)} />
+			<Icon
+				name="delete-circle-black"
+				handleClick={() => setCalendarOpen(false)}
+			/>
 
-			<DateRange
+			{/* <DateRange
 				className="request-calendar"
 				editableDateInputs
 				moveRangeOnFirstSelection={false}
@@ -46,11 +54,16 @@ const Calendar = ({
 				minDate={new Date(2022, 7, 1)}
 				monthDisplayFormat="yyyy.MMM"
 				dateDisplayFormat="yyyy.MM.dd"
-			/>
+			/> */}
 			<div className="dateCheckContainer">
 				<div className="dateRange">
-					<p>{convertDateWithDots(convertDateToString(selectedRange.startDate))}</p>~
-					<p>{convertDateWithDots(convertDateToString(selectedRange.endDate))}</p>
+					<p>
+						{convertDateWithDots(convertDateToString(selectedRange.startDate))}
+					</p>
+					~
+					<p>
+						{convertDateWithDots(convertDateToString(selectedRange.endDate))}
+					</p>
 				</div>
 				<button type="button" onClick={handleClickSubmit}>
 					적용

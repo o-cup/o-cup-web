@@ -2,7 +2,11 @@ import React, { memo, useEffect, useState } from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { Icon } from "../../shared/components";
-import { searchedAtom, searchFiltersAtom, searchInputOptionsAtom } from "../../shared/state";
+import {
+	searchedAtom,
+	searchFiltersAtom,
+	searchInputOptionsAtom,
+} from "../../shared/state";
 import { StyledOption, StyledSearchInput } from "./styles/searchInputStyle";
 import type { SearchInputOptionType } from "../../shared/types";
 import type { Dispatch, SetStateAction } from "react";
@@ -18,7 +22,9 @@ const SearchInput = ({ setSelectedBiasId, searched }: SearchInputProps) => {
 	const setSearched = useSetRecoilState(searchedAtom);
 	const [inputValue, setInputValue] = useState("");
 	const [toggle, setToggle] = useState(false);
-	const [selectOptions, setSelectOptions] = useRecoilState<SearchInputOptionType[]>(searchInputOptionsAtom);
+	const [selectOptions, setSelectOptions] = useRecoilState<
+		SearchInputOptionType[]
+	>(searchInputOptionsAtom);
 	const selectedOptionValue = selectOptions.find((o) => o.selected)?.value;
 
 	useEffect(() => {
@@ -51,7 +57,10 @@ const SearchInput = ({ setSelectedBiasId, searched }: SearchInputProps) => {
 	};
 
 	const handleOptionClick = (key: string) => {
-		const newData = selectOptions.map((o) => ({ ...o, selected: key === o.key }));
+		const newData = selectOptions.map((o) => ({
+			...o,
+			selected: key === o.key,
+		}));
 		setSelectOptions(newData);
 
 		setToggle(false);
@@ -59,14 +68,22 @@ const SearchInput = ({ setSelectedBiasId, searched }: SearchInputProps) => {
 
 	return (
 		<StyledSearchInput searched={searched}>
-			<div className="select" onClick={() => setToggle(!toggle)} role="presentation">
+			<div
+				className="select"
+				onClick={() => setToggle(!toggle)}
+				role="presentation"
+			>
 				<p>{selectedOptionValue}</p>
 				{toggle ? <FaCaretUp /> : <FaCaretDown />}
 			</div>
 			{toggle && (
 				<ul>
 					{selectOptions.map((o) => (
-						<StyledOption key={o.key} selected={o.selected} onClick={() => handleOptionClick(o.key)}>
+						<StyledOption
+							key={o.key}
+							selected={o.selected}
+							onClick={() => handleOptionClick(o.key)}
+						>
 							{o.value}
 						</StyledOption>
 					))}

@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { FaTwitter } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+// import "react-lazy-load-image-component/src/effects/blur.css";
 import BiasChip from "../../shared/components/biasChip";
 import Icon from "../../shared/components/icon";
 import { convertDateWithDots, imageOnErrorHandler } from "../../shared/utils";
@@ -16,22 +16,30 @@ type EventListItemProps = {
 const EventListItem = ({ event }: EventListItemProps) => {
 	const router = useRouter();
 
-	const { id, place, images, biasesId, organizer, snsId, districts, startAt, endAt } = event;
+	const {
+		id,
+		place,
+		images,
+		biasesId,
+		organizer,
+		snsId,
+		districts,
+		startAt,
+		endAt,
+	} = event;
 
 	return (
 		<StyledMainListItem onClick={() => router.push(`/detail/${id}`)}>
 			<div className="imgContainer">
-				<LazyLoadImage
-					wrapperClassName="lazy-image"
-					alt={images[0]}
-					src={images[0]}
-					effect="blur"
-					onError={imageOnErrorHandler}
-				/>
+				<img alt={images[0]} src={images[0]} onError={imageOnErrorHandler} />
 			</div>
 			<div className="title">
 				<p>{place}</p>
-				<BiasChip id={biasesId[0]} key={biasesId[0]} dots={biasesId.length > 1} />
+				<BiasChip
+					id={biasesId[0]}
+					key={biasesId[0]}
+					dots={biasesId.length > 1}
+				/>
 			</div>
 			<ul className="textContainer">
 				<li>
@@ -49,7 +57,8 @@ const EventListItem = ({ event }: EventListItemProps) => {
 				<li>
 					<Icon name="calendar-gray" />
 					<p>
-						{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
+						{startAt && convertDateWithDots(startAt)} -{" "}
+						{endAt && convertDateWithDots(endAt)}
 					</p>
 				</li>
 			</ul>

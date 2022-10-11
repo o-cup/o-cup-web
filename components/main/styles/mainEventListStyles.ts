@@ -54,21 +54,16 @@ export const StyledMainListItem = styled.li`
 	}
 
 	.imgContainer {
-		> .lazy-image {
+		img {
 			width: 176px;
 			height: 235px;
+			object-fit: cover;
+			object-position: 90% 10%;
+			vertical-align: center;
+		}
 
-			img {
-				width: 176px;
-				height: 235px;
-				object-fit: cover;
-				object-position: 90% 10%;
-				vertical-align: center;
-			}
-
-			img.error {
-				object-position: top;
-			}
+		img.error {
+			object-position: top;
 		}
 	}
 

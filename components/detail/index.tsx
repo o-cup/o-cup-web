@@ -1,6 +1,6 @@
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useQuery } from "react-query";
-// import { useParams } from "react-router-dom";
 import { fetchEventById, fetchPeople } from "../../shared/apis/common";
 import { Layout, Loading } from "../../shared/components";
 import { setMetaTags } from "../../shared/utils";
@@ -13,18 +13,22 @@ import { StyledDetail } from "./styles";
 import type { EventType } from "../../shared/types";
 
 const Detail = () => {
-	console.log("----detail");
+	const router = useRouter();
+	const { query } = router;
+	const eid = query.eid as string;
 
-	// const { id } = useParams();
-
-	const id = "cfffc618-62bd-4ca3-b527-51b5282a0638";
-	const { data, isLoading }: EventType | any = useQuery(["detail", id], () => fetchEventById({ id }), {
-		enabled: !!id,
-	});
+	const { data, isLoading }: EventType | any = useQuery(
+		["detail", eid],
+		() => fetchEventById({ id: eid }),
+		{
+			enabled: !!eid,
+		}
+	);
 
 	const { data: people } = useQuery(["bias"], () => fetchPeople());
 
-	const getBiasName = (biasId: number) => people?.filter((p) => p.id === biasId)[0].name;
+	const getBiasName = (biasId: number) =>
+		people?.filter((p) => p.id === biasId)[0].name;
 
 	useEffect(() => {
 		if (data?.place) {

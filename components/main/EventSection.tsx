@@ -4,7 +4,11 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { fetchEvents, fetchPeople } from "../../shared/apis/common";
 import { Loading } from "../../shared/components";
 import { dateFilterAtom, openedBiasAtom } from "../../shared/state";
-import { convertDateToString, convertStringToDate, isBeforeToday } from "../../shared/utils/dateHandlers";
+import {
+	convertDateToString,
+	convertStringToDate,
+	isBeforeToday,
+} from "../../shared/utils/dateHandlers";
 import BiasEventList from "./BiasEventList";
 import EmptyDefault from "./EmptyDefault";
 import { StyledMainEvents } from "./styles/mainEventListStyles";
@@ -14,22 +18,39 @@ const EventSection = () => {
 	const dateFilter = useRecoilValue(dateFilterAtom);
 	const [openedBias, setOpenedBias] = useRecoilState(openedBiasAtom);
 
-	const { data: events, isLoading } = useQuery(["events", dateFilter], () =>
-		fetchEvents({
-			date: dateFilter,
-		})
+	const { data: events, isLoading } = useQuery(
+		["events", dateFilter],
+		() =>
+			fetchEvents({
+				date: dateFilter,
+			}),
+		{
+			select: (data) => data?.map((e) => ({ ...e, image: e.images[0] })),
+		}
 	);
 
-	const { data: openedPeople } = useQuery(["bias", openedBias], () => fetchPeople(), {
-		select: (data) => {
-			const birthdayPeople =
-				data?.filter((bias) => openedBias.includes(bias.id) && bias.birthday.slice(-4) === dateFilter.slice(-4)) || [];
-			const noneBirthdayPeople =
-				data?.filter((bias) => openedBias.includes(bias.id) && bias.birthday.slice(-4) !== dateFilter.slice(-4)) || [];
+	const { data: openedPeople } = useQuery(
+		["bias", openedBias],
+		() => fetchPeople(),
+		{
+			select: (data) => {
+				const birthdayPeople =
+					data?.filter(
+						(bias) =>
+							openedBias.includes(bias.id) &&
+							bias.birthday.slice(-4) === dateFilter.slice(-4)
+					) || [];
+				const noneBirthdayPeople =
+					data?.filter(
+						(bias) =>
+							openedBias.includes(bias.id) &&
+							bias.birthday.slice(-4) !== dateFilter.slice(-4)
+					) || [];
 
-			return [...birthdayPeople, ...noneBirthdayPeople];
-		},
-	});
+				return [...birthdayPeople, ...noneBirthdayPeople];
+			},
+		}
+	);
 
 	/** 이벤트 목록에서 인물 id 추출 */
 	useEffect(() => {
@@ -46,7 +67,9 @@ const EventSection = () => {
 	const date = convertStringToDate(dateFilter).getDate();
 
 	const getEventTitle = (bias: PeopleType) =>
-		`${isToday ? "오늘" : `${date}일에`} ${isBeforeToday(dateFilter) ? "열린" : "열리는"} ${bias.name} 이벤트`;
+		`${isToday ? "오늘" : `${date}일에`} ${
+			isBeforeToday(dateFilter) ? "열린" : "열리는"
+		} ${bias.name} 이벤트`;
 
 	if (isLoading) {
 		return <Loading />;
@@ -57,7 +80,13 @@ const EventSection = () => {
 				{openedPeople?.map((bias) => (
 					<div key={bias.id} id={`bias_${bias.id}`}>
 						<p>{getEventTitle(bias)}</p>
-						<BiasEventList events={events ? events.filter((event) => event.biasesId.includes(bias.id)) : []} />
+						<BiasEventList
+							events={
+								events
+									? events.filter((event) => event.biasesId.includes(bias.id))
+									: []
+							}
+						/>
 					</div>
 				))}
 			</StyledMainEvents>

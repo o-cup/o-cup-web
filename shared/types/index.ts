@@ -44,7 +44,8 @@ export type EventType = {
 	districts: { code: string; name: string };
 	startAt: string;
 	endAt: string;
-	images: string[];
+	images?: string[];
+	image?: string;
 	address: string;
 	goods: GoodsListType;
 	hashTags: string[];
@@ -85,7 +86,10 @@ export type DateRangeType = {
 	key: string;
 };
 
-export type SearchSortOptionKeys = "alphabetAsc" | "birthdayAsc" | "birthdayDsc";
+export type SearchSortOptionKeys =
+	| "alphabetAsc"
+	| "birthdayAsc"
+	| "birthdayDsc";
 export type ResultSortOptionKeys = "dateAsc" | "dateDsc" | "alphabetAsc";
 
 export type SearchInputOptionKey = "bias" | "place" | "organizer";

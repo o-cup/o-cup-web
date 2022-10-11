@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import { BiasChip, Icon } from "../../shared/components";
 import { StyledBiasChip } from "../../shared/components/biasChip/biasChipStyle";
-import { convertDateToString, convertDateWithDots, isOpenToday } from "../../shared/utils/dateHandlers";
+import {
+	convertDateToString,
+	convertDateWithDots,
+	isOpenToday,
+} from "../../shared/utils/dateHandlers";
 import { imageOnErrorHandler } from "../../shared/utils/imageHandlers";
 import PosterView from "./PosterView";
-import { StyledDetailImgContainer, StyledDetailTextContainer, StyledEventMain } from "./styles/eventMainStyle";
+import {
+	StyledDetailImgContainer,
+	StyledDetailTextContainer,
+	StyledEventMain,
+} from "./styles/eventMainStyle";
 import type { EventType } from "../../shared/types";
 
 type EventMainProps = {
@@ -13,7 +21,16 @@ type EventMainProps = {
 };
 
 const EventMain = ({ data, posterPopupDisabled }: EventMainProps) => {
-	const { place, biasesId, organizer, startAt, endAt, images, address, requestedBiases } = data;
+	const {
+		place,
+		biasesId,
+		organizer,
+		startAt,
+		endAt,
+		images,
+		address,
+		requestedBiases,
+	} = data;
 
 	const [isPosterViewOpen, setPosterViewOpen] = useState(false);
 
@@ -30,9 +47,13 @@ const EventMain = ({ data, posterPopupDisabled }: EventMainProps) => {
 					<div className="chipContainer">
 						{requestedBiases
 							? requestedBiases.map((bias) =>
-									bias.bias ? <StyledBiasChip key={bias.id}>{bias.bias}</StyledBiasChip> : null
+									bias.bias ? (
+										<StyledBiasChip key={bias.id}>{bias.bias}</StyledBiasChip>
+									) : null
 							  )
-							: biasesId?.map((biasId) => <BiasChip id={biasId} key={biasId} />)}
+							: biasesId?.map((biasId) => (
+									<BiasChip id={biasId} key={biasId} />
+							  ))}
 					</div>
 				</div>
 				<ul>
@@ -48,7 +69,8 @@ const EventMain = ({ data, posterPopupDisabled }: EventMainProps) => {
 						<Icon name="calendar" />
 						{startAt && (
 							<p>
-								{convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
+								{convertDateWithDots(startAt)} -{" "}
+								{endAt && convertDateWithDots(endAt)}
 							</p>
 						)}
 						{isDuringEvent && (

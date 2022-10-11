@@ -19,7 +19,7 @@ const EventListItem = ({ event }: EventListItemProps) => {
 	const {
 		id,
 		place,
-		images,
+		image,
 		biasesId,
 		organizer,
 		snsId,
@@ -31,7 +31,7 @@ const EventListItem = ({ event }: EventListItemProps) => {
 	return (
 		<StyledMainListItem onClick={() => router.push(`/detail/${id}`)}>
 			<div className="imgContainer">
-				<img alt={images[0]} src={images[0]} onError={imageOnErrorHandler} />
+				<img alt={image} src={image} onError={imageOnErrorHandler} />
 			</div>
 			<div className="title">
 				<p>{place}</p>

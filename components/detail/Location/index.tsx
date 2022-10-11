@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { FaRegCopy } from "react-icons/fa";
-import Toast from "../../../shared/components/Toast";
+import { Toast } from "../../../shared/components";
 import { copyToClipboard } from "../../../shared/utils/copyHandlers";
 import { StyledLocation } from "../styles/locationStyle";
 import Map from "./Map";
-import type { EventType } from "../../../../shared/types";
+import type { EventType } from "../../../shared/types";
 
 function Location({ address }: Partial<EventType>) {
 	const [isToast, setToast] = useState(false);

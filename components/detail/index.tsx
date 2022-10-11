@@ -1,17 +1,23 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
-import { fetchEventById, fetchPeople } from "../apis";
-import { EventType } from "../../shared/types";
-import { StyledDetail } from "../components/detail/styles/detailStyle";
-import { EventMain, EventNearHere, GoodsInfo, TwitterInfo, Location } from "../components/detail";
-import Layout from "../shared/components/layout";
-import Loading from "../shared/components/Loading";
-import { setMetaTags } from "../shared/utils/metaTagHandlers";
+// import { useParams } from "react-router-dom";
+import { fetchEventById, fetchPeople } from "../../shared/apis/common";
+import { Layout, Loading } from "../../shared/components";
+import { setMetaTags } from "../../shared/utils";
+import EventMain from "./EventMain";
+import EventNearHere from "./EventNearHere";
+import GoodsInfo from "./GoodsInfo";
+import Location from "./Location";
+import TwitterInfo from "./TwitterInfo";
+import { StyledDetail } from "./styles";
+import type { EventType } from "../../shared/types";
 
 const Detail = () => {
-	const { id } = useParams();
+	console.log("----detail");
 
+	// const { id } = useParams();
+
+	const id = "cfffc618-62bd-4ca3-b527-51b5282a0638";
 	const { data, isLoading }: EventType | any = useQuery(["detail", id], () => fetchEventById({ id }), {
 		enabled: !!id,
 	});

@@ -21,18 +21,15 @@
     "jsx": "preserve",
     "incremental": true
   },
+  "baseUrl": ".",
   "include": [
-    "src",
-    "components/main/EventSection.tsx",
-    "components/main/BiasList.tsx",
-    "components/main/mainStyle.ts",
-    "shared/index.ts",
-    "components/main/styles/mainEventListStyles.ts",
-    "components/main/Bias.tsx",
-    "components/main/biasStyles.ts",
-    "shared/apis/search.ts",
-    "components/main/BiasEventList.tsx",
-    "shared/requestType.ts"
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.json",
+    "types/*.d.ts"
   ],
   "exclude": [
     "node_modules"

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Icon } from "../../shared/components";
 import { StyledPosterView } from "./styles/posterViewStyle";
-import Icons from "../../shared/components/Icon/Icons";
 
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
@@ -31,7 +31,7 @@ function PosterView({ images, setPosterViewOpen }: PosterProps) {
 						{pageNum} / {images.length}
 					</span>
 				</div>
-				<Icons name="poster-close" handleClick={() => setPosterViewOpen(false)} />
+				<Icon name="poster-close" handleClick={() => setPosterViewOpen(false)} />
 			</div>
 
 			<Swiper slidesPerView={1} navigation onSlideChange={(e) => setPageNum(e.activeIndex + 1)}>

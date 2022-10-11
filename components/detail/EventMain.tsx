@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { EventType } from "../../../shared/types";
+import { BiasChip, Icon } from "../../shared/components";
+import { StyledBiasChip } from "../../shared/components/biasChip/biasChipStyle";
 import { convertDateToString, convertDateWithDots, isOpenToday } from "../../shared/utils/dateHandlers";
-import { StyledDetailImgContainer, StyledDetailTextContainer, StyledEventMain } from "./styles/eventMainStyle";
-import { StyledBiasChip } from "../../shared/components/BiasChip/biasChipStyle";
-import BiasChip from "../../shared/components/BiasChip";
-import { Icon } from "../../shared/components";
-import PosterView from "./PosterView";
 import { imageOnErrorHandler } from "../../shared/utils/imageHandlers";
+import PosterView from "./PosterView";
+import { StyledDetailImgContainer, StyledDetailTextContainer, StyledEventMain } from "./styles/eventMainStyle";
+import type { EventType } from "../../shared/types";
 
 type EventMainProps = {
 	data: Partial<EventType>;

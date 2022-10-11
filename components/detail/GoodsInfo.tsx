@@ -1,10 +1,10 @@
 import React from "react";
-import { EventType } from "../../../shared/types";
+import ExtraGoodsListItem from "./goodsItems/ExtraGoodsListItem";
 import FcfsGoodsListItem from "./goodsItems/FcfsGoodsListItem";
 import GoodsListItem from "./goodsItems/GoodsListItem";
-import ExtraGoodsListItem from "./goodsItems/ExtraGoodsListItem";
 import LuckyGoodsListItem from "./goodsItems/LuckyGoodsListItem";
 import { StyledGoodsInfo } from "./styles/goodsInfoStyle";
+import type { EventType } from "../../shared/types";
 
 function GoodsInfo({ goods, tweetUrl }: Partial<EventType>) {
 	return (

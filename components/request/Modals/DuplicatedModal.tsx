@@ -1,16 +1,35 @@
+import { useRouter } from "next/router";
 import React from "react";
-import { FaCalendar, FaMapMarkerAlt, FaTwitter, FaUserCircle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import BiasChip from "../../../shared/components/BiasChip";
-import { StyledBiasChip } from "../../../shared/components/BiasChip/biasChipStyle";
-import Button from "../../../shared/components/Button";
-import Modal from "../../../shared/components/Modal";
+import {
+	FaCalendar,
+	FaMapMarkerAlt,
+	FaTwitter,
+	FaUserCircle,
+} from "react-icons/fa";
+import { BiasChip, Button, Modal } from "../../../shared/components";
+import { StyledBiasChip } from "../../../shared/components/biasChip/biasChipStyle";
 import { convertDateWithDots } from "../../../shared/utils/dateHandlers";
-import { StyledDuplicatedEvent, StyledDuplicatedModal } from "../styles/requestStyle";
-import type { EventType } from "../../../../shared/types";
+import { StyledDuplicatedEvent, StyledDuplicatedModal } from "../requestStyle";
+import type { EventType } from "../../../shared/types";
 
-const Event = ({ duplicatedEventData, handleClick }: { duplicatedEventData: EventType; handleClick?: () => void }) => {
-	const { images, place, biasesId, requestedBiases, organizer, snsId, districts, startAt, endAt } = duplicatedEventData;
+const Event = ({
+	duplicatedEventData,
+	handleClick,
+}: {
+	duplicatedEventData: EventType;
+	handleClick?: () => void;
+}) => {
+	const {
+		images,
+		place,
+		biasesId,
+		requestedBiases,
+		organizer,
+		snsId,
+		districts,
+		startAt,
+		endAt,
+	} = duplicatedEventData;
 
 	return (
 		<StyledDuplicatedEvent onClick={handleClick}>
@@ -22,7 +41,9 @@ const Event = ({ duplicatedEventData, handleClick }: { duplicatedEventData: Even
 
 				<div className="biases">
 					{requestedBiases
-						? requestedBiases.map((bias) => <StyledBiasChip key={bias.id}>{bias.bias}</StyledBiasChip>)
+						? requestedBiases.map((bias) => (
+								<StyledBiasChip key={bias.id}>{bias.bias}</StyledBiasChip>
+						  ))
 						: biasesId?.map((biasId) => <BiasChip id={biasId} key={biasId} />)}
 				</div>
 
@@ -40,7 +61,8 @@ const Event = ({ duplicatedEventData, handleClick }: { duplicatedEventData: Even
 					</p>
 					<p>
 						<FaCalendar />
-						{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
+						{startAt && convertDateWithDots(startAt)} -{" "}
+						{endAt && convertDateWithDots(endAt)}
 					</p>
 				</div>
 			</div>
@@ -57,8 +79,11 @@ type ModalProps = {
 	resetAllStates: () => void;
 };
 
-const DuplicatedModal = ({ duplicatedEventData, resetAllStates }: ModalProps) => {
-	const navigate = useNavigate();
+const DuplicatedModal = ({
+	duplicatedEventData,
+	resetAllStates,
+}: ModalProps) => {
+	const router = useRouter();
 
 	return (
 		<Modal maxWidth={340} minWidth={340}>
@@ -82,7 +107,7 @@ const DuplicatedModal = ({ duplicatedEventData, resetAllStates }: ModalProps) =>
 						duplicatedEventData={duplicatedEventData}
 						handleClick={
 							duplicatedEventData.isApproved
-								? () => navigate(`/detail/${duplicatedEventData.id}`)
+								? () => router.push(`/detail/${duplicatedEventData.id}`)
 								: () => console.log("승인 대기중")
 						}
 					/>
@@ -90,13 +115,24 @@ const DuplicatedModal = ({ duplicatedEventData, resetAllStates }: ModalProps) =>
 
 				<div className="modalBtnContainer">
 					<Button
-						customStyle={{ width: "100%", height: "48px", fontSize: "14px", fontWeight: "bold", background: "#FFFFFF" }}
-						handleClick={() => navigate("/")}
+						customStyle={{
+							width: "100%",
+							height: "48px",
+							fontSize: "14px",
+							fontWeight: "bold",
+							background: "#FFFFFF",
+						}}
+						handleClick={() => router.push("/")}
 					>
 						메인으로 돌아가기
 					</Button>
 					<Button
-						customStyle={{ width: "100%", height: "48px", fontSize: "14px", fontWeight: "bold" }}
+						customStyle={{
+							width: "100%",
+							height: "48px",
+							fontSize: "14px",
+							fontWeight: "bold",
+						}}
 						handleClick={resetAllStates}
 					>
 						다른 이벤트 중복확인

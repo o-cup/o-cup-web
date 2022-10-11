@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { StyledGoodsInput, StyledInputWrapper, StyledChipContainer } from "./goodsInputStyle";
+import { Icon } from "../../../shared/components";
 import GoodsChipInput from "../GoodsChipInput/GoodsChipInput";
-import Icons from "../../../shared/components/Icon/Icons";
-import { ItemsType } from "../../../../shared/types/request";
 import GoodsSelectBox from "./GoodsSelectBox";
+import {
+	StyledGoodsInput,
+	StyledInputWrapper,
+	StyledChipContainer,
+} from "./goodsInputStyle";
+import type { ItemsType } from "../../../shared/types/request";
 
 type GoodsListValues = {
 	id: number;
@@ -14,7 +18,12 @@ type GoodsListValues = {
 
 type InputProps = {
 	value: GoodsListValues;
-	handleChangeGoods: (index: number, title: string, items: ItemsType[], key?: string) => void;
+	handleChangeGoods: (
+		index: number,
+		title: string,
+		items: ItemsType[],
+		key?: string
+	) => void;
 };
 
 type OptionsType = {
@@ -91,8 +100,10 @@ const GoodsInput = ({ value, handleChangeGoods }: InputProps) => {
 						onChange={(e) => setGoodsTitle(e.target.value, "")}
 					/>
 					<div className="iconContainer">
-						{value.title !== "" && <Icons name="delete" handleClick={() => setGoodsTitle("", "")} />}
-						<Icons name="search" handleClick={handleClickSearch} />
+						{value.title !== "" && (
+							<Icon name="delete" handleClick={() => setGoodsTitle("", "")} />
+						)}
+						<Icon name="search" handleClick={handleClickSearch} />
 					</div>
 				</StyledInputWrapper>
 			) : (
@@ -115,7 +126,11 @@ const GoodsInput = ({ value, handleChangeGoods }: InputProps) => {
 						handleDelete={deleteGoodsChip}
 					/>
 				))}
-				<button type="button" className="chipAddButton" onClick={addGoodsContent}>
+				<button
+					type="button"
+					className="chipAddButton"
+					onClick={addGoodsContent}
+				>
 					<i className="plus" />
 				</button>
 			</StyledChipContainer>

@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useRecoilState } from "recoil";
-import { requestInputsAtom } from "../../../state/atoms";
-import { StyledPlaceInput } from "./placeInputStyle";
-import { StyledSearchListContainer, StyledSearchList } from "../units/searchListStyle";
+import { requestInputsAtom } from "../../../shared/state";
+import {
+	removeKakaoMapKey,
+	setKakaoMapKey,
+} from "../../../shared/utils/kakaoMapHandlers";
 import SearchInput from "../units/SearchInput";
-import { removeKakaoMapKey, setKakaoMapKey } from "../../../shared/utils/kakaoMapHandlers";
+import {
+	StyledSearchListContainer,
+	StyledSearchList,
+} from "../units/searchListStyle";
+import { StyledPlaceInput } from "./placeInputStyle";
 
 type KakaoResult = {
 	id: string; // "1376253571"
@@ -22,7 +28,8 @@ const KakaoAxios = axios.create({
 });
 
 // 법정동 코드 검색
-const bCodeSearch = (params: { query: string }) => KakaoAxios.get("/v2/local/search/address.json", { params });
+const bCodeSearch = (params: { query: string }) =>
+	KakaoAxios.get("/v2/local/search/address.json", { params });
 
 const PlaceInput = () => {
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
@@ -81,7 +88,10 @@ const PlaceInput = () => {
 					...requestInputs,
 					place: {
 						place: placeInfo.place_name,
-						districts: { code: res.data.documents[0].address.b_code, name: `${districtArr[0]} ${districtArr[1]}` },
+						districts: {
+							code: res.data.documents[0].address.b_code,
+							name: `${districtArr[0]} ${districtArr[1]}`,
+						},
 						address: placeInfo.road_address_name,
 					},
 				});
@@ -103,7 +113,11 @@ const PlaceInput = () => {
 			{isSearchOpen && (
 				<StyledSearchListContainer>
 					<div className="inputContainer">
-						<input value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="예) 카페 오컵" />
+						<input
+							value={keyword}
+							onChange={(e) => setKeyword(e.target.value)}
+							placeholder="예) 카페 오컵"
+						/>
 						<div className="buttonContainer">
 							<FaTimes onClick={() => setKeyword("")} />
 							<FaSearch />
@@ -117,7 +131,10 @@ const PlaceInput = () => {
 										<h4>{place.place_name}</h4>
 										<p>{place.road_address_name}</p>
 									</div>
-									<button type="button" onClick={() => handleClickSelect(place)}>
+									<button
+										type="button"
+										onClick={() => handleClickSelect(place)}
+									>
 										선택
 									</button>
 								</li>
@@ -126,7 +143,14 @@ const PlaceInput = () => {
 					)}
 				</StyledSearchListContainer>
 			)}
-			<SearchInput value={requestInputs.place.address} id="address" placeholder="주소" label="" hideLabel hideButton />
+			<SearchInput
+				value={requestInputs.place.address}
+				id="address"
+				placeholder="주소"
+				label=""
+				hideLabel
+				hideButton
+			/>
 		</StyledPlaceInput>
 	);
 };

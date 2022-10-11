@@ -1,9 +1,9 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { requestGoodsListAtom } from "../../../state/atoms";
-import { StyledGoodsContainer } from "./goodsInputStyle";
+import { requestGoodsListAtom } from "../../../shared/state";
 import GoodsInput from "./GoodsInput";
-import { ItemsType } from "../../../../shared/types/request";
+import { StyledGoodsContainer } from "./goodsInputStyle";
+import type { ItemsType } from "../../../shared/types/request";
 
 /*
  *  화면 표현을 위해
@@ -14,7 +14,12 @@ import { ItemsType } from "../../../../shared/types/request";
 const GoodsInputContainer = () => {
 	const [goodsList, setGoodsList] = useRecoilState(requestGoodsListAtom);
 
-	const handleChangeGoods = (index: number, title: string, items: ItemsType[], key?: string) => {
+	const handleChangeGoods = (
+		index: number,
+		title: string,
+		items: ItemsType[],
+		key?: string
+	) => {
 		const goodsData = goodsList.map((g) => {
 			if (g.id === index) {
 				if (key !== undefined) {
@@ -42,7 +47,11 @@ const GoodsInputContainer = () => {
 	return (
 		<StyledGoodsContainer>
 			{goodsList.map((goodsObj) => (
-				<GoodsInput key={goodsObj.id} value={goodsObj} handleChangeGoods={handleChangeGoods} />
+				<GoodsInput
+					key={goodsObj.id}
+					value={goodsObj}
+					handleChangeGoods={handleChangeGoods}
+				/>
 			))}
 			<button type="button" onClick={handleClickAddGoodsTitle}>
 				다른 특전 추가하기

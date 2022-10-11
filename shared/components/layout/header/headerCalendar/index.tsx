@@ -6,7 +6,10 @@ import { Calendar as RCalendar } from "react-date-range-ts";
 
 import { useRecoilState } from "recoil";
 import { dateFilterAtom } from "../../../../state";
-import { convertDateToString, convertStringToDate } from "../../../../utils/dateHandlers";
+import {
+	convertDateToString,
+	convertStringToDate,
+} from "../../../../utils/dateHandlers";
 import { StyledHeaderCalendarContainer } from "../style";
 
 type StateProps = {

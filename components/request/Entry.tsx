@@ -1,19 +1,19 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import { useRecoilState } from "recoil";
-import { requestInputsAtom } from "../../state/atoms";
-import { StyledEntry } from "./styles/requestStyle";
-import { StyledPlaceInput } from "./Place/placeInputStyle";
-import Button from "../../shared/components/Button";
-import BasicInput from "./units/BasicInput";
-import PosterUploader from "./Poster/PosterUploader";
-import PlaceInput from "./Place/PlaceInput";
+import { Button } from "../../shared/components";
+import { requestInputsAtom } from "../../shared/state";
 import ArtistInputContainer from "./Artist/ArtistInputContainer";
+// import DateRangeInput from "./DateRange/DateRangeInput";
+import FcfsGoodsInput from "./FcfsGoods/FcfsGoodsInput";
 import GoodsInputContainer from "./Goods/GoodsInputContainer";
 import HashTagsContainer from "./HashTags/HashTagsContainer";
-import DateRangeInput from "./DateRange/DateRangeInput";
-import FcfsGoodsInput from "./FcfsGoods/FcfsGoodsInput";
 import LuckyDrawInput from "./LuckyDraw/LuckyDrawInput";
+import { StyledPlaceInput } from "./Place/placeInputStyle";
+import PosterUploader from "./Poster/PosterUploader";
+import { StyledEntry } from "./requestStyle";
+import BasicInput from "./units/BasicInput";
 import SearchInput from "./units/SearchInput";
+import type { Dispatch, SetStateAction } from "react";
 
 type EntryProps = {
 	setConfirmModalOpen: Dispatch<SetStateAction<boolean>>;
@@ -24,7 +24,10 @@ const Entry = ({ setConfirmModalOpen, setBottomSheetOpen }: EntryProps) => {
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
 	const { organizer, snsId, link } = requestInputs;
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
+	const handleInputChange = (
+		e: React.ChangeEvent<HTMLInputElement>,
+		id: string
+	) => {
 		setRequestInputs({
 			...requestInputs,
 			[id]: e.currentTarget.value,
@@ -44,12 +47,22 @@ const Entry = ({ setConfirmModalOpen, setBottomSheetOpen }: EntryProps) => {
 				<p>이벤트 등록 시 주의사항</p>
 				<p>
 					오늘의 컵홀더는 특전 증정이 있는 이벤트에 한해 정보를 제공합니다.
-					<b> 따라서 특전 증정이 없는 포토부스, 옥외광고 등의 이벤트는 승인되지 않습니다.</b>
+					<b>
+						{" "}
+						따라서 특전 증정이 없는 포토부스, 옥외광고 등의 이벤트는 승인되지
+						않습니다.
+					</b>
 				</p>
 			</div>
 			<div className="inputsWrapper">
 				<StyledPlaceInput>
-					<SearchInput value={requestInputs.place.place} id="place" placeholder="장소이름" label="장소 *" hideButton />
+					<SearchInput
+						value={requestInputs.place.place}
+						id="place"
+						placeholder="장소이름"
+						label="장소 *"
+						hideButton
+					/>
 					<SearchInput
 						value={requestInputs.place.address}
 						id="address"
@@ -76,7 +89,7 @@ const Entry = ({ setConfirmModalOpen, setBottomSheetOpen }: EntryProps) => {
 					handleInputChange={(e) => handleInputChange(e, "snsId")}
 					handleInputDelete={(e) => handleInputDelete(e, "snsId")}
 				/>
-				<DateRangeInput disabled />
+				{/* <DateRangeInput disabled /> */}
 				<PosterUploader />
 				<HashTagsContainer />
 				<BasicInput
@@ -92,10 +105,16 @@ const Entry = ({ setConfirmModalOpen, setBottomSheetOpen }: EntryProps) => {
 				<LuckyDrawInput />
 			</div>
 			<div className="ctaContainer">
-				<Button customStyle={{ width: "100%", fontWeight: "bold" }} handleClick={() => setBottomSheetOpen(true)}>
+				<Button
+					customStyle={{ width: "100%", fontWeight: "bold" }}
+					handleClick={() => setBottomSheetOpen(true)}
+				>
 					미리보기
 				</Button>
-				<Button customStyle={{ width: "100%", fontWeight: "bold" }} handleClick={() => setConfirmModalOpen(true)}>
+				<Button
+					customStyle={{ width: "100%", fontWeight: "bold" }}
+					handleClick={() => setConfirmModalOpen(true)}
+				>
 					제출하기
 				</Button>
 			</div>

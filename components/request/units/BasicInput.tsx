@@ -1,6 +1,6 @@
 import React from "react";
+import { Label } from "../requestStyle";
 import { DeleteBtn, InputWrapper, StyledBasicInput } from "./basicInputStyle";
-import { Label } from "../styles/requestStyle";
 
 export type InputProps = {
 	value: string;
@@ -24,7 +24,14 @@ const BasicInput = ({
 	<StyledBasicInput>
 		{!hideLabel && <Label htmlFor={id}>{label}</Label>}
 		<InputWrapper className={`inputWrapper ${id}`} hasValue={!!value}>
-			<input type="text" value={value} id={id} placeholder={placeholder} onChange={handleInputChange} className={id} />
+			<input
+				type="text"
+				value={value}
+				id={id}
+				placeholder={placeholder}
+				onChange={handleInputChange}
+				className={id}
+			/>
 			{!!value && <DeleteBtn onClick={handleInputDelete} />}
 		</InputWrapper>
 	</StyledBasicInput>

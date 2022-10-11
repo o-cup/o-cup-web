@@ -1,6 +1,9 @@
-import { uploadPoster, insertEvent } from "../../../shared/apis/common";
-import type { GoodsListType } from "../../../shared/types";
-import type { RequestGoodsListType, RequestType } from "../../../shared/types/request";
+import { uploadPoster, insertEvent } from "../../shared/apis/common";
+import type { GoodsListType } from "../../shared/types";
+import type {
+	RequestGoodsListType,
+	RequestType,
+} from "../../shared/types/request";
 import type React from "react";
 import type { Dispatch } from "react";
 
@@ -15,25 +18,36 @@ type ReqType = {
 };
 
 /** all, random, dDay, firstCome, lucky, extra 형식에 맞추기 */
-export const getGoodsObj = (requestInputs: RequestType, goodsList: RequestGoodsListType[]) => {
+export const getGoodsObj = (
+	requestInputs: RequestType,
+	goodsList: RequestGoodsListType[]
+) => {
 	const result = {} as GoodsListType;
 
 	const { firstCome, lucky } = requestInputs.goods;
-	if (firstCome && (firstCome.type === "A" || firstCome.type === "B" || firstCome.type === "C")) {
+	if (
+		firstCome &&
+		(firstCome.type === "A" || firstCome.type === "B" || firstCome.type === "C")
+	) {
 		result.firstCome = {
 			type: firstCome.type,
 			data: firstCome.data.map((d) => ({
 				...d,
 				items: d.items
 					.filter((item) => item.text !== "")
-					.map((item) => `${item.text}${item.count ? ` (${item.count}명)` : ""}`),
+					.map(
+						(item) => `${item.text}${item.count ? ` (${item.count}명)` : ""}`
+					),
 			})),
 		};
 	}
 	if (lucky) {
 		const tempLuck = lucky
 			.filter((luck) => luck.text !== "")
-			.map((luck) => luck.text && `${luck.text}${luck.count ? ` (${luck.count}명)` : ""}`);
+			.map(
+				(luck) =>
+					luck.text && `${luck.text}${luck.count ? ` (${luck.count}명)` : ""}`
+			);
 		if (tempLuck.length > 0) {
 			result.lucky = tempLuck;
 		}
@@ -41,27 +55,39 @@ export const getGoodsObj = (requestInputs: RequestType, goodsList: RequestGoodsL
 
 	if (goodsList) {
 		goodsList.forEach((goods) => {
-			if (goods.key === "all" || goods.key === "random" || goods.key === "dDay") {
-				const temp = goods.items.filter((item) => item.text !== "").map((item) => `${item.text}`);
+			if (
+				goods.key === "all" ||
+				goods.key === "random" ||
+				goods.key === "dDay"
+			) {
+				const temp = goods.items
+					.filter((item) => item.text !== "")
+					.map((item) => `${item.text}`);
 				if (temp.length > 0) {
 					result[goods.key] = temp;
 				}
 			}
 			if (goods.key === "" && goods.title) {
-				const tempExtraItems = goods.items.filter((item) => item.text !== "").map((item) => `${item.text}`);
+				const tempExtraItems = goods.items
+					.filter((item) => item.text !== "")
+					.map((item) => `${item.text}`);
 				if (tempExtraItems.length > 0) {
 					if (result.extra) {
 						result.extra?.push({
 							index: result.extra.length + 1,
 							title: goods.title,
-							items: goods.items.filter((item) => item.text !== "").map((item) => `${item.text}`),
+							items: goods.items
+								.filter((item) => item.text !== "")
+								.map((item) => `${item.text}`),
 						});
 					} else {
 						result.extra = [
 							{
 								index: 1,
 								title: goods.title,
-								items: goods.items.filter((item) => item.text !== "").map((item) => `${item.text}`),
+								items: goods.items
+									.filter((item) => item.text !== "")
+									.map((item) => `${item.text}`),
 							},
 						];
 					}
@@ -73,7 +99,10 @@ export const getGoodsObj = (requestInputs: RequestType, goodsList: RequestGoodsL
 };
 
 /** 특전 한 종류라도 있으면 return true */
-const hasGoods = (requestInputs: RequestType, goodsList: RequestGoodsListType[]) => {
+const hasGoods = (
+	requestInputs: RequestType,
+	goodsList: RequestGoodsListType[]
+) => {
 	const goodsObj = getGoodsObj(requestInputs, goodsList);
 
 	let result = false;
@@ -91,7 +120,9 @@ const hasGoods = (requestInputs: RequestType, goodsList: RequestGoodsListType[])
 };
 
 /** 포스터 이미지 업로드 후 return [urls] */
-const getPublicUrls = async (tempPosters: { id: number; file: any; result: string }[]) => {
+const getPublicUrls = async (
+	tempPosters: { id: number; file: any; result: string }[]
+) => {
 	const tempImages = tempPosters.filter((poster) => poster.result !== "");
 
 	const posterUrls = [] as string[];
@@ -117,7 +148,8 @@ export const sendReqData = async ({
 	setAlertOpen,
 	setLoading,
 }: ReqType) => {
-	const { place, artist, organizer, snsId, link, hashTags, dateRange } = requestInputs;
+	const { place, artist, organizer, snsId, link, hashTags, dateRange } =
+		requestInputs;
 
 	const requestedBiases = artist.map((a) => ({
 		peopleId: a.peopleId,

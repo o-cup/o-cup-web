@@ -1,9 +1,12 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { requestInputsAtom } from "../../../../state/atoms";
+import { requestInputsAtom } from "../../../../shared/state";
 import GoodsChipCountInput from "../../GoodsChipInput/GoodsChipCountInput";
 import { StyledFcfsContentContainer } from "../fcfsGoodsInputStyle";
-import type { FcfsDataType, ItemsCountType } from "../../../../../shared/types/request";
+import type {
+	FcfsDataType,
+	ItemsCountType,
+} from "../../../../shared/types/request";
 
 type FcfsContentProps = {
 	dataObj: FcfsDataType;
@@ -18,7 +21,12 @@ const FcfsContent = ({ dataObj, highlight }: FcfsContentProps) => {
 	} = requestInputs;
 
 	/* items 배열 변경 */
-	const getUpdatedItem = (items: ItemsCountType[], itemId: number, value: string, name: "text" | "count") =>
+	const getUpdatedItem = (
+		items: ItemsCountType[],
+		itemId: number,
+		value: string,
+		name: "text" | "count"
+	) =>
 		items.map((item) => {
 			if (item.id === itemId) {
 				if (name === "text") {
@@ -53,7 +61,12 @@ const FcfsContent = ({ dataObj, highlight }: FcfsContentProps) => {
 	) => {
 		/* type A */
 		if (!dayKey && firstCome?.data[0].items) {
-			const updatedItems = getUpdatedItem(firstCome.data[0].items, itemId, value, name);
+			const updatedItems = getUpdatedItem(
+				firstCome.data[0].items,
+				itemId,
+				value,
+				name
+			);
 			handleFirstComeData([{ ...firstCome.data[0], items: updatedItems }]);
 		}
 
@@ -81,7 +94,14 @@ const FcfsContent = ({ dataObj, highlight }: FcfsContentProps) => {
 				handleFirstComeData([
 					{
 						...firstCome.data[0],
-						items: [...items, { id: (items[items.length - 1]?.id || 0) + 1, text: "", count: 0 }],
+						items: [
+							...items,
+							{
+								id: (items[items.length - 1]?.id || 0) + 1,
+								text: "",
+								count: 0,
+							},
+						],
 					},
 				]);
 			}
@@ -92,7 +112,10 @@ const FcfsContent = ({ dataObj, highlight }: FcfsContentProps) => {
 			const updatedData = firstCome?.data?.map((data) => {
 				if (data.day === dayKey || data.key === dayKey) {
 					const { items } = data;
-					const updatedItems = [...items, { id: (items[items.length - 1]?.id || 0) + 1, text: "", count: 0 }];
+					const updatedItems = [
+						...items,
+						{ id: (items[items.length - 1]?.id || 0) + 1, text: "", count: 0 },
+					];
 					return { ...data, items: updatedItems };
 				}
 				return data;
@@ -104,7 +127,10 @@ const FcfsContent = ({ dataObj, highlight }: FcfsContentProps) => {
 		}
 	};
 
-	const handleDeleteChip = (index: number, dayKey: string | number | undefined) => {
+	const handleDeleteChip = (
+		index: number,
+		dayKey: string | number | undefined
+	) => {
 		/* type A */
 		if (!dayKey && firstCome?.data[0].items) {
 			const { items } = firstCome.data[0];
@@ -144,7 +170,11 @@ const FcfsContent = ({ dataObj, highlight }: FcfsContentProps) => {
 						handleDeleteChip={handleDeleteChip}
 					/>
 				))}
-				<button type="button" className="chipAddButton" onClick={() => handleAddChip(dataObj.day || dataObj.key)}>
+				<button
+					type="button"
+					className="chipAddButton"
+					onClick={() => handleAddChip(dataObj.day || dataObj.key)}
+				>
 					<i className="plus" />
 				</button>
 			</div>

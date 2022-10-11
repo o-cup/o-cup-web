@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { requestInputsAtom } from "../../../state/atoms";
-import { StyledLuckyInput, StyledLuckyTitle, StyledLuckyContentContainer, StyledContent } from "./luckyInputStyle";
-import Icons from "../../../shared/components/Icon/Icons";
+import { GoodsChip, Icon } from "../../../shared/components";
+import { requestInputsAtom } from "../../../shared/state";
 import GoodsChipCountInput from "../GoodsChipInput/GoodsChipCountInput";
-import GoodsChip from "../../../shared/components/GoodsChip";
+import {
+	StyledLuckyInput,
+	StyledLuckyTitle,
+	StyledLuckyContentContainer,
+	StyledContent,
+} from "./luckyInputStyle";
 
 const LuckyDrawInput = () => {
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
@@ -13,13 +17,13 @@ const LuckyDrawInput = () => {
 	const [hasLucky, setHasLucky] = useState(true);
 	const [isFurtherNotice, setIsFurtherNotice] = useState(false);
 
-  /** 데이터 초기화 시 체크박스 초기화 */
+	/** 데이터 초기화 시 체크박스 초기화 */
 	useEffect(() => {
-		if(!goods.lucky) {
-      setHasLucky(true);
-      setIsFurtherNotice(false);
-    }
-	}, [requestInputs])
+		if (!goods.lucky) {
+			setHasLucky(true);
+			setIsFurtherNotice(false);
+		}
+	}, [requestInputs]);
 
 	/** "럭키드로우 없음" 선택하는 경우 값 초기화 */
 	useEffect(() => {
@@ -69,7 +73,11 @@ const LuckyDrawInput = () => {
 		}
 	}, [isFurtherNotice]);
 
-	const handleInputChange = (value: string, luckyId: number, key: "text" | "count") => {
+	const handleInputChange = (
+		value: string,
+		luckyId: number,
+		key: "text" | "count"
+	) => {
 		const luckyData = goods.lucky?.map((luck) => {
 			if (luck.id === luckyId) {
 				if (key === "text") {
@@ -124,7 +132,10 @@ const LuckyDrawInput = () => {
 				...requestInputs,
 				goods: {
 					...goods,
-					lucky: [...goods.lucky, { id: goods.lucky.length + 1, text: "", count: 0 }],
+					lucky: [
+						...goods.lucky,
+						{ id: goods.lucky.length + 1, text: "", count: 0 },
+					],
 				},
 			});
 		}
@@ -168,16 +179,18 @@ const LuckyDrawInput = () => {
 							/>
 						</div>
 						{luck.id !== 1 && luck.id === goods.lucky?.length && (
-							<Icons name="subtraction" handleClick={handleDeleteLuck} />
+							<Icon name="subtraction" handleClick={handleDeleteLuck} />
 						)}
 					</StyledLuckyContentContainer>
 				))}
 
 				<div className="iconWrapper">
-					<Icons name="plus-circle" handleClick={handleAddLuck} />
+					<Icon name="plus-circle" handleClick={handleAddLuck} />
 				</div>
 
-				<p className="luckyNotice">증정인원 수를 모르는 경우, 인원수 부분을 공란으로 두세요.</p>
+				<p className="luckyNotice">
+					증정인원 수를 모르는 경우, 인원수 부분을 공란으로 두세요.
+				</p>
 			</>
 		);
 	};
@@ -187,19 +200,34 @@ const LuckyDrawInput = () => {
 			<StyledLuckyTitle>
 				<span className="label">럭키드로우</span>
 				<div className="options">
-					<button type="button" onClick={() => {
-            if (!isFurtherNotice) {
-              setHasLucky(true);
-            }
-            setIsFurtherNotice(!isFurtherNotice);
-          }}>
-						{isFurtherNotice ? <Icons name="check_true" /> : <Icons name="check_false" />} <span>추후 공지 예정</span>
+					<button
+						type="button"
+						onClick={() => {
+							if (!isFurtherNotice) {
+								setHasLucky(true);
+							}
+							setIsFurtherNotice(!isFurtherNotice);
+						}}
+					>
+						{isFurtherNotice ? (
+							<Icon name="check_true" />
+						) : (
+							<Icon name="check_false" />
+						)}{" "}
+						<span>추후 공지 예정</span>
 					</button>
-					<button type="button" onClick={() => {
-            setIsFurtherNotice(false);
-            setHasLucky(!hasLucky);
-          }}>
-						{hasLucky ? <Icons name="check_false" /> : <Icons name="check_true" />}
+					<button
+						type="button"
+						onClick={() => {
+							setIsFurtherNotice(false);
+							setHasLucky(!hasLucky);
+						}}
+					>
+						{hasLucky ? (
+							<Icon name="check_false" />
+						) : (
+							<Icon name="check_true" />
+						)}
 						<span>럭키드로우 없음</span>
 					</button>
 				</div>

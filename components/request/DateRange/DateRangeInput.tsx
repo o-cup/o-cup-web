@@ -1,12 +1,19 @@
+import { ko } from "date-fns/locale";
 import React, { useEffect, useState } from "react";
 import { DateRange } from "react-date-range-ts";
-import { ko } from "date-fns/locale";
 import { useRecoilState } from "recoil";
-import { requestInputsAtom } from "../../../state/atoms";
-import "react-date-range-ts/dist/styles.css";
-import "./request-calendar-custom.css";
-import { StyledDateRangeInput, StyledCalendarContainer } from "./dateRangeInputStyle";
-import { convertDateToString, convertDateWithDots, convertStringToDate } from "../../../shared/utils/dateHandlers";
+// import "react-date-range-ts/dist/styles.css";
+// import "./request-calendar-custom.css";
+import { requestInputsAtom } from "../../../shared/state";
+import {
+	convertDateToString,
+	convertDateWithDots,
+	convertStringToDate,
+} from "../../../shared/utils";
+import {
+	StyledDateRangeInput,
+	StyledCalendarContainer,
+} from "./dateRangeInputStyle";
 
 const DateRangeInput = ({ disabled }: { disabled?: boolean }) => {
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
@@ -21,8 +28,12 @@ const DateRangeInput = ({ disabled }: { disabled?: boolean }) => {
 
 	useEffect(() => {
 		setSelectedRange({
-			startDate: dateRange.startAt ? convertStringToDate(dateRange.startAt) : new Date(),
-			endDate: dateRange.endAt ? convertStringToDate(dateRange.endAt) : new Date(),
+			startDate: dateRange.startAt
+				? convertStringToDate(dateRange.startAt)
+				: new Date(),
+			endDate: dateRange.endAt
+				? convertStringToDate(dateRange.endAt)
+				: new Date(),
 			key: "selection",
 		});
 	}, [dateRange]);
@@ -49,7 +60,9 @@ const DateRangeInput = ({ disabled }: { disabled?: boolean }) => {
 					<span>이벤트 기간 *</span>
 					<div className="disabledCalendarInput">
 						{dateRange.startAt && dateRange.endAt
-							? `${convertDateWithDots(dateRange.startAt)} - ${convertDateWithDots(dateRange.endAt)}`
+							? `${convertDateWithDots(
+									dateRange.startAt
+							  )} - ${convertDateWithDots(dateRange.endAt)}`
 							: ""}
 					</div>
 				</div>
@@ -60,7 +73,11 @@ const DateRangeInput = ({ disabled }: { disabled?: boolean }) => {
 		<StyledDateRangeInput>
 			<div className="dateInputContainer">
 				<span>이벤트 기간 *</span>
-				<button type="button" className="calendarOpenInput" onClick={() => setCalendarOpen(!isCalendarOpen)}>
+				<button
+					type="button"
+					className="calendarOpenInput"
+					onClick={() => setCalendarOpen(!isCalendarOpen)}
+				>
 					<input
 						disabled
 						id="dateRange"
@@ -68,7 +85,9 @@ const DateRangeInput = ({ disabled }: { disabled?: boolean }) => {
 						placeholder="날짜 선택하기"
 						value={
 							dateRange.startAt && dateRange.endAt
-								? `${convertDateWithDots(dateRange.startAt)} - ${convertDateWithDots(dateRange.endAt)}`
+								? `${convertDateWithDots(
+										dateRange.startAt
+								  )} - ${convertDateWithDots(dateRange.endAt)}`
 								: ""
 						}
 					/>
@@ -93,7 +112,10 @@ const DateRangeInput = ({ disabled }: { disabled?: boolean }) => {
 					/>
 					<div className="dateCheckContainer">
 						<p>
-							{convertDateWithDots(convertDateToString(selectedRange.startDate))} -{" "}
+							{convertDateWithDots(
+								convertDateToString(selectedRange.startDate)
+							)}{" "}
+							-{" "}
 							{convertDateWithDots(convertDateToString(selectedRange.endDate))}
 						</p>
 						<button type="button" onClick={handleClickSubmit}>

@@ -31,10 +31,17 @@ function PosterView({ images, setPosterViewOpen }: PosterProps) {
 						{pageNum} / {images.length}
 					</span>
 				</div>
-				<Icon name="poster-close" handleClick={() => setPosterViewOpen(false)} />
+				<Icon
+					name="poster-close"
+					handleClick={() => setPosterViewOpen(false)}
+				/>
 			</div>
 
-			<Swiper slidesPerView={1} navigation onSlideChange={(e) => setPageNum(e.activeIndex + 1)}>
+			<Swiper
+				slidesPerView={1}
+				navigation
+				onSlideChange={(e) => setPageNum(e.activeIndex + 1)}
+			>
 				{images.map((img, i) => (
 					<SwiperSlide key={img}>
 						<img src={img} alt={img} />

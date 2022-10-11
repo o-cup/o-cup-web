@@ -1,9 +1,12 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { requestGoodsListAtom } from "../../../../shared/state/atoms";
-import { StyledSearchList, StyledSearchListContainer } from "../units/searchListStyle";
+import { requestGoodsListAtom } from "../../../shared/state";
+import {
+	StyledSearchList,
+	StyledSearchListContainer,
+} from "../units/searchListStyle";
 import { StyledSelectWrapper } from "./goodsInputStyle";
-import type { ItemsType } from "../../../../shared/types/request";
+import type { ItemsType } from "../../../shared/types/request";
 import type { Dispatch, SetStateAction } from "react";
 
 type GoodsListValues = {
@@ -75,7 +78,11 @@ const GoodsSelectBox = ({
 								<button
 									type="button"
 									onClick={() => handleSelectTitle(o)}
-									className={`${goodsList.find((goods) => goods.key === o.key) ? "disabled" : ""}`}
+									className={`${
+										goodsList.find((goods) => goods.key === o.key)
+											? "disabled"
+											: ""
+									}`}
 								>
 									선택
 								</button>

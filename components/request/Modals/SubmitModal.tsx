@@ -1,13 +1,16 @@
 import React from "react";
-import { StyledRequestModal } from "../styles/requestStyle";
-import Modal from "../../../shared/components/Modal";
+import { Modal } from "../../../shared/components";
+import { StyledRequestModal } from "../requestStyle";
 
 type ModalProps = {
 	handleClickContinue: () => void;
 	handleClickFinish: () => void;
 };
 
-const SubmitModal = ({ handleClickContinue, handleClickFinish }: ModalProps) => (
+const SubmitModal = ({
+	handleClickContinue,
+	handleClickFinish,
+}: ModalProps) => (
 	<Modal maxWidth={340} minWidth={340}>
 		<StyledRequestModal>
 			<h4>제출 완료!</h4>

@@ -1,9 +1,15 @@
+import { useRouter } from "next/router";
 import React, { memo, useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { fetchSearchedEvents } from "../../shared/apis/search";
-import { Button, Chip, FilterIcon, Loading, SortIcon } from "../../shared/components";
+import {
+	Button,
+	Chip,
+	FilterIcon,
+	Loading,
+	SortIcon,
+} from "../../shared/components";
 import { searchFiltersAtom, searchInputOptionsAtom } from "../../shared/state";
 import { convertDateWithDots, removeSpace } from "../../shared/utils";
 import Event from "./Event";
@@ -19,7 +25,7 @@ type ResultProps = {
 const initialChipsData = { dateChip: "", distChips: [] };
 
 const Result = ({ biasId }: ResultProps) => {
-	const navigate = useNavigate();
+	const router = useRouter();
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 	const {
 		keyword,
@@ -29,17 +35,32 @@ const Result = ({ biasId }: ResultProps) => {
 	const [sortOpen, setSortOpen] = useState(false);
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
-	const [selectedSortOption, setSelectedSortOption] = useState<ResultSortOptionKeys>("alphabetAsc");
+	const [selectedSortOption, setSelectedSortOption] =
+		useState<ResultSortOptionKeys>("alphabetAsc");
 	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
-	const [chips, setChips] = useState<{ dateChip: string; distChips: RegCodeItem[] }>(initialChipsData);
+	const [chips, setChips] = useState<{
+		dateChip: string;
+		distChips: RegCodeItem[];
+	}>(initialChipsData);
 	const searchInputOptions = useRecoilValue(searchInputOptionsAtom);
 	const searchInputOptionKey = searchInputOptions.find((o) => o.selected)?.key;
 
 	const isModalOpen = calendarOpen || districtSelectorOpen;
-	const dateChipText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
+	const dateChipText =
+		startDate &&
+		`${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
 	const { data: events, isLoading } = useQuery(
-		["resultEvents", keyword, startDate, endDate, biasId, districts, selectedSortOption, searchInputOptionKey],
+		[
+			"resultEvents",
+			keyword,
+			startDate,
+			endDate,
+			biasId,
+			districts,
+			selectedSortOption,
+			searchInputOptionKey,
+		],
 		() =>
 			fetchSearchedEvents({
 				keyword: removeSpace(keyword.trim()),
@@ -72,7 +93,9 @@ const Result = ({ biasId }: ResultProps) => {
 	useEffect(() => {
 		if (!startDate) return;
 
-		const dateText = startDate && `${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
+		const dateText =
+			startDate &&
+			`${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 		setChips((prev) => ({ ...prev, dateChip: dateText }));
 	}, [startDate, endDate]);
 
@@ -92,14 +115,23 @@ const Result = ({ biasId }: ResultProps) => {
 		}
 	}, [filterOpen]);
 
-	const handleDeleteChip = ({ type, code }: { type: "date" | "district"; code?: string }) => {
+	const handleDeleteChip = ({
+		type,
+		code,
+	}: {
+		type: "date" | "district";
+		code?: string;
+	}) => {
 		const newDistChips = chips.distChips.filter((chip) => chip.code !== code);
 
 		switch (type) {
 			case "date":
 				setChips((prev) => ({ ...prev, dateChip: "" }));
 
-				setSearchFilters((prev) => ({ ...prev, date: { startDate: "", endDate: "" } }));
+				setSearchFilters((prev) => ({
+					...prev,
+					date: { startDate: "", endDate: "" },
+				}));
 				break;
 
 			case "district":
@@ -153,7 +185,9 @@ const Result = ({ biasId }: ResultProps) => {
 							key={dist.code}
 							text={dist.name}
 							bgColor="primary"
-							handleDelete={() => handleDeleteChip({ type: "district", code: dist.code })}
+							handleDelete={() =>
+								handleDeleteChip({ type: "district", code: dist.code })
+							}
 						/>
 					))}
 				</div>
@@ -170,7 +204,7 @@ const Result = ({ biasId }: ResultProps) => {
 				<img src="/images/pin_cone.png" alt="request" />
 				<Button
 					customStyle={{ fontWeight: "bold", width: "178px", height: "50px" }}
-					handleClick={() => navigate("/request")}
+					handleClick={() => router.push("/request")}
 				>
 					이벤트 등록하기
 				</Button>

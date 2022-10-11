@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { StyledFcfsGoodsInput, StyledFcfsTitle, StyledFcfsTypeSelector } from "./fcfsGoodsInputStyle";
-import { requestInputsAtom } from "../../../state/atoms";
-import Icons from "../../../shared/components/Icon/Icons";
-import { getDatesInRange } from "../../../shared/utils/dateHandlers";
-import { RequestFcfsType } from "../../../../shared/types/request";
+import { Icon } from "../../../shared/components";
+import { requestInputsAtom } from "../../../shared/state";
+import { getDatesInRange } from "../../../shared/utils";
 import FcfsContent from "./chipContents/FcfsContent";
+import {
+	StyledFcfsGoodsInput,
+	StyledFcfsTitle,
+	StyledFcfsTypeSelector,
+} from "./fcfsGoodsInputStyle";
+import type { RequestFcfsType } from "../../../shared/types/request";
 
 const TYPE = [
 	{ key: "A", content: "매일\n동일해요" },
@@ -44,7 +48,9 @@ const FcfsGoodsInput = () => {
 		goods: { firstCome },
 	} = requestInputs;
 
-	const [hasDateRange, setHasDateRange] = useState(dateRange.startAt && dateRange.endAt);
+	const [hasDateRange, setHasDateRange] = useState(
+		dateRange.startAt && dateRange.endAt
+	);
 
 	/**
 	 * A: 매일 동일해요
@@ -56,9 +62,13 @@ const FcfsGoodsInput = () => {
 
 	const renderCheckbox = (checkType: string) => {
 		if (!hasDateRange) {
-			return <Icons name="check_blank" />;
+			return <Icon name="check_blank" />;
 		}
-		return checkType === type ? <Icons name="check_true" /> : <Icons name="check_false" />;
+		return checkType === type ? (
+			<Icon name="check_true" />
+		) : (
+			<Icon name="check_false" />
+		);
 	};
 
 	const handleFirstCome = (fcfs: RequestFcfsType) => {
@@ -101,7 +111,10 @@ const FcfsGoodsInput = () => {
 		const date = getDatesInRange(dateRange.startAt, dateRange.endAt);
 		DefaultTypeB = {
 			type: "B",
-			data: date.map((d) => ({ day: d.getDate(), items: [{ id: 1, text: "", count: 0 }] })),
+			data: date.map((d) => ({
+				day: d.getDate(),
+				items: [{ id: 1, text: "", count: 0 }],
+			})),
 		};
 
 		if (firstCome?.type === "B") {
@@ -113,7 +126,11 @@ const FcfsGoodsInput = () => {
 		<StyledFcfsGoodsInput>
 			<StyledFcfsTitle>
 				<span className="label">선착특전</span>
-				<div className={`checkOpen ${hasDateRange ? "active" : ""} ${type === "" ? "selected" : "notSelected"}`}>
+				<div
+					className={`checkOpen ${hasDateRange ? "active" : ""} ${
+						type === "" ? "selected" : "notSelected"
+					}`}
+				>
 					<button type="button" onClick={() => setType("")}>
 						{renderCheckbox("")}
 						선착특전 없음
@@ -126,7 +143,9 @@ const FcfsGoodsInput = () => {
 					<button
 						type="button"
 						key={t.key}
-						className={`typeButton ${type === t.key ? "selected" : "notSelected"}`}
+						className={`typeButton ${
+							type === t.key ? "selected" : "notSelected"
+						}`}
 						onClick={() => setType(t.key)}
 					>
 						{renderCheckbox(t.key)}
@@ -145,19 +164,36 @@ const FcfsGoodsInput = () => {
 					if (dataObj.key === "dDay" || dataObj.key === "others") {
 						highlight = TYPE_C[dataObj.key];
 					}
-					return <FcfsContent dataObj={dataObj} highlight={highlight} key={dataObj.day || dataObj.key || i} />;
+					return (
+						<FcfsContent
+							dataObj={dataObj}
+							highlight={highlight}
+							key={dataObj.day || dataObj.key || i}
+						/>
+					);
 				})}
 
 			<div className="fcfsNotice">
-				{!hasDateRange && <p className="dateNotice">위 달력에서 이벤트 기간을 먼저 선택해주세요.</p>}
-				{type === "C" && (
-					<p className="notice">
-						- 선착순이 아닌 기념일특전(생일특전, 당일특전 등)은 아래 일반특전 항목에서 작성해주세요.
+				{!hasDateRange && (
+					<p className="dateNotice">
+						위 달력에서 이벤트 기간을 먼저 선택해주세요.
 					</p>
 				)}
-				{type === "A" && <p className="notice">- 증정 인원수 정보가 없는 경우, 인원수 부분을 공란으로 두세요.</p>}
+				{type === "C" && (
+					<p className="notice">
+						- 선착순이 아닌 기념일특전(생일특전, 당일특전 등)은 아래 일반특전
+						항목에서 작성해주세요.
+					</p>
+				)}
+				{type === "A" && (
+					<p className="notice">
+						- 증정 인원수 정보가 없는 경우, 인원수 부분을 공란으로 두세요.
+					</p>
+				)}
 				{(type === "B" || type === "C") && (
-					<p className="notice">- 증정 인원수나 특전 정보가 없는 경우 해당 부분을 공란으로 두세요.</p>
+					<p className="notice">
+						- 증정 인원수나 특전 정보가 없는 경우 해당 부분을 공란으로 두세요.
+					</p>
 				)}
 			</div>
 		</StyledFcfsGoodsInput>

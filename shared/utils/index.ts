@@ -5,6 +5,7 @@ import {
 	convertStringToDate,
 	isOpenToday,
 	getBirthMonth,
+	getDatesInRange,
 } from "./dateHandlers";
 import { imageOnErrorHandler } from "./imageHandlers";
 import { setMetaTags } from "./metaTagHandlers";
@@ -17,6 +18,7 @@ export {
 	convertDateWithDots,
 	convertStringToDate,
 	isOpenToday,
+	getDatesInRange,
 	getBirthMonth,
 	imageOnErrorHandler,
 	setMetaTags,

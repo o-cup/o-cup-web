@@ -1,13 +1,18 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { requestInputsAtom } from "../../../state/atoms";
-import { StyledArtistContainer } from "./artistInputStyle";
+import { requestInputsAtom } from "../../../shared/state";
 import ArtistInput from "./ArtistInput";
+import { StyledArtistContainer } from "./artistInputStyle";
 
 const ArtistInputContainer = () => {
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
 
-	const handleChangeArtist = (peopleId: number, bias: string, team: string, index: number) => {
+	const handleChangeArtist = (
+		peopleId: number,
+		bias: string,
+		team: string,
+		index: number
+	) => {
 		const artistInputsData = requestInputs.artist.map((artist) => {
 			if (artist.id === index) {
 				return {
@@ -41,7 +46,9 @@ const ArtistInputContainer = () => {
 	};
 
 	const handleDeleteArtist = (artistId: number) => {
-		const data = requestInputs.artist.filter((artist) => artist.id !== artistId);
+		const data = requestInputs.artist.filter(
+			(artist) => artist.id !== artistId
+		);
 		setRequestInputs({
 			...requestInputs,
 			artist: data,

@@ -1,7 +1,8 @@
-import React, { Dispatch, SetStateAction } from "react";
-import { StyledRequestModal } from "../styles/requestStyle";
-import Modal from "../../../shared/components/Modal";
+import React from "react";
+import { Modal } from "../../../shared/components";
 import { LoadingSpinnerWrapper } from "../../../shared/components/Loading/loadingStyle";
+import { StyledRequestModal } from "../requestStyle";
+import type { Dispatch, SetStateAction } from "react";
 
 type ModalProps = {
 	isLoading: boolean;
@@ -9,7 +10,11 @@ type ModalProps = {
 	handleSubmit: () => void;
 };
 
-const ConfirmModal = ({ isLoading, setConfirmModalOpen, handleSubmit }: ModalProps) => (
+const ConfirmModal = ({
+	isLoading,
+	setConfirmModalOpen,
+	handleSubmit,
+}: ModalProps) => (
 	<Modal maxWidth={340} minWidth={340}>
 		<StyledRequestModal>
 			<p>이대로 제출할까요?</p>

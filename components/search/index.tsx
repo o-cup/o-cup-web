@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-// import { useNavigate, useSearchParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { fetchPeople } from "../../shared/apis/common";
 import {
@@ -19,7 +18,6 @@ import { StyledFilter, StyledSearch } from "./styles/searchStyle";
 import type { SearchSortOptionKeys } from "../../shared/types";
 
 const Search = () => {
-	// const navigate = useNavigate();
 	const router = useRouter();
 	// const [searchParams, setSearchParams] = useSearchParams();
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);

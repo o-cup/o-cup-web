@@ -1,9 +1,9 @@
-import React, { Dispatch, SetStateAction } from "react";
-import "./bottomSheet.css";
-
+import React from "react";
+// import "./bottomSheet.css";
 import { BottomSheet as RBottomSheet } from "react-spring-bottom-sheet";
-import "./react-spring-bottom-sheet.css";
-import Icon from "../Icon/Icons";
+// import "./react-spring-bottom-sheet.css";
+import Icon from "../icon";
+import type { Dispatch, SetStateAction } from "react";
 
 type ButtonContent = {
 	title: string;
@@ -20,7 +20,15 @@ type BottomSheetProps = {
 	children: JSX.Element;
 };
 
-function BottomSheet({ open, setOpen, header, close, slider, buttons, children }: BottomSheetProps) {
+function BottomSheet({
+	open,
+	setOpen,
+	header,
+	close,
+	slider,
+	buttons,
+	children,
+}: BottomSheetProps) {
 	function onDismiss() {
 		setOpen(false);
 		return false;

@@ -28,6 +28,17 @@ module.exports = {
 			},
 		],
 
+		"import/order": [
+			"error",
+			{
+				groups: ["builtin", "external", "parent", "sibling", "index", "object", "type"],
+				alphabetize: {
+					order: "asc",
+				},
+			},
+		],
+
+		"@typescript-eslint/consistent-type-imports": ["error", { prefer: "type-imports" }],
 		"@typescript-eslint/no-non-null-assertion": "off",
 	},
 };

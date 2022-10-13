@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle<ThemeType>`
   
   :root {
     --vh: 100%;
-  }ß
+  }
   
   html {
     scroll-behavior: auto;

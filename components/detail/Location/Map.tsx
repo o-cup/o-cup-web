@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import { removeKakaoMapKey, setKakaoMapKey } from "../../../shared/utils/kakaoMapHandlers";
+import {
+	removeKakaoMapKey,
+	setKakaoMapKey,
+} from "../../../shared/utils/kakaoMapHandlers";
 import { StyledMap } from "../styles/locationStyle";
-import type { EventType } from "../../../../shared/types";
+import type { EventType } from "../../../shared/types";
 
 function Map({ address }: Partial<EventType>) {
-	const { kakao } = window as any;
-
 	const container = useRef<HTMLDivElement>(null);
 
 	const searchAddress = address || "서울 중구 세종대로 110";
@@ -17,7 +18,7 @@ function Map({ address }: Partial<EventType>) {
 		};
 	}, []);
 
-	const onLoadKakaoMap = () => {
+	const onLoadKakaoMap = (kakao: any) => {
 		kakao.maps.load(() => {
 			const mapOption = {
 				center: new kakao.maps.LatLng(127.044754852849, 37.5491962171866), // 지도의 중심좌표
@@ -52,14 +53,16 @@ function Map({ address }: Partial<EventType>) {
 	};
 
 	useEffect(() => {
+		const { kakao } = window as any;
+
 		if (kakao) {
 			if (kakao.maps) {
-				onLoadKakaoMap(); // 첫 로딩 시
+				onLoadKakaoMap(kakao); // 첫 로딩 시
 			} else {
 				kakao.addEventListener("load", onLoadKakaoMap); // 새로고침 시
 			}
 		}
-	}, [kakao]);
+	}, []);
 
 	return <StyledMap ref={container} />;
 }

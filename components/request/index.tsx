@@ -9,7 +9,7 @@ import {
 	tempPostersAtom,
 } from "../../shared/state";
 import { setMetaTags } from "../../shared/utils";
-// import DateRangeInput from "./DateRange/DateRangeInput";
+import DateRangeInput from "./DateRange/DateRangeInput";
 import Entry from "./Entry";
 import AlertModal from "./Modals/AlertModal";
 import ConfirmModal from "./Modals/ConfirmModal";
@@ -153,7 +153,7 @@ const Request = () => {
 								</p>
 							</div>
 							<PlaceInput />
-							{/* <DateRangeInput /> */}
+							<DateRangeInput />
 							<div
 								className={`btnContainer ${
 									requestInputs.place.place &&

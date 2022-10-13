@@ -1,22 +1,17 @@
 import { ko } from "date-fns/locale";
 import React from "react";
 import { Calendar as RCalendar } from "react-date-range-ts";
-// import "react-date-range-ts/dist/styles.css";
-// import "./header-calendar-custom.css";
 
 import { useRecoilState } from "recoil";
 import { dateFilterAtom } from "../../../../state";
-import {
-	convertDateToString,
-	convertStringToDate,
-} from "../../../../utils/dateHandlers";
+import { convertDateToString, convertStringToDate } from "../../../../utils";
 import { StyledHeaderCalendarContainer } from "../style";
 
 type StateProps = {
 	setCalendarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function HeaderCalendar({ setCalendarOpen }: StateProps) {
+const HeaderCalendar = ({ setCalendarOpen }: StateProps) => {
 	const [dateFilter, setDateFilter] = useRecoilState(dateFilterAtom);
 
 	const handleChangeDate = (date: Date) => {
@@ -39,6 +34,6 @@ function HeaderCalendar({ setCalendarOpen }: StateProps) {
 			/>
 		</StyledHeaderCalendarContainer>
 	);
-}
+};
 
 export default HeaderCalendar;

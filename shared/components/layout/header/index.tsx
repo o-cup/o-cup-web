@@ -10,7 +10,7 @@ import { convertDateToString, copyToClipboard } from "../../../utils";
 import Icon from "../../icon";
 import Toast from "../../toast";
 import DateSelector from "./DateSelector";
-// import HeaderCalendar from "./HeaderCalendar";
+import HeaderCalendar from "./headerCalendar";
 import { Share, StyledHeader } from "./style";
 
 type Titles = {
@@ -157,7 +157,7 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 					<Toast setToast={setIsToastOpen} text="링크가 복사되었습니다" />
 				)}
 			</StyledHeader>
-			{/* {isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />} */}
+			{isCalendarOpen && <HeaderCalendar setCalendarOpen={setCalendarOpen} />}
 		</>
 	);
 };

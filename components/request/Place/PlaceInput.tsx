@@ -23,7 +23,7 @@ type KakaoResult = {
 const KakaoAxios = axios.create({
 	baseURL: "//dapi.kakao.com",
 	headers: {
-		Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_KEY}`,
+		Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_KEY}`,
 	},
 });
 
@@ -38,8 +38,6 @@ const PlaceInput = () => {
 	const [keyword, setKeyword] = useState("");
 	const [placeList, setPlaceList] = useState([] as KakaoResult[]);
 
-	const { kakao } = window as any;
-
 	useEffect(() => {
 		setKakaoMapKey();
 		return () => {
@@ -47,7 +45,7 @@ const PlaceInput = () => {
 		};
 	}, []);
 
-	const onLoadKakaoMap = (k: string) => {
+	const onLoadKakaoMap = (kakao: any, k: string) => {
 		kakao.maps.load(() => {
 			// 장소 검색 객체를 생성합니다
 			const ps = new kakao.maps.services.Places();
@@ -66,13 +64,15 @@ const PlaceInput = () => {
 	};
 
 	useEffect(() => {
+		const { kakao } = window as any;
+
 		if (
 			window.location.origin === "https://www.o-cup.kr" ||
 			window.location.origin === "https://www.o-cup.com" ||
 			window.location.origin === "http://localhost:3000"
 		) {
 			if (keyword) {
-				onLoadKakaoMap(keyword);
+				onLoadKakaoMap(kakao, keyword);
 			}
 		} else {
 			alert("해당 url에서는 장소등록이 불가능합니다.");

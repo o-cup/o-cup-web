@@ -2,9 +2,12 @@ import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import Icons from "../../shared/components/icon";
 import Layout from "../../shared/components/layout";
-import { dateFilterAtom } from "../../shared/state/atoms";
-import { convertDateToString, convertStringToDate } from "../../shared/utils";
-import { setMetaTags } from "../../shared/utils/metaTagHandlers";
+import { dateFilterAtom } from "../../shared/state";
+import {
+	convertDateToString,
+	convertStringToDate,
+	setMetaTags,
+} from "../../shared/utils";
 import BiasList from "./BiasList";
 import EventSection from "./EventSection";
 import { StyledMain } from "./styles/mainStyle";
@@ -39,9 +42,15 @@ const Main = () => {
 		<Layout page="main">
 			<StyledMain>
 				<div className="dateTitle">
-					<Icons name="left-arrow-circle" handleClick={() => handleChangeDate("prev")} />
+					<Icons
+						name="left-arrow-circle"
+						handleClick={() => handleChangeDate("prev")}
+					/>
 					<p>{isToday ? "오늘" : `${monthIndex + 1}월 ${date}일`}의 이벤트</p>
-					<Icons name="right-arrow-circle" handleClick={() => handleChangeDate("next")} />
+					<Icons
+						name="right-arrow-circle"
+						handleClick={() => handleChangeDate("next")}
+					/>
 				</div>
 				<BiasList />
 				<EventSection />

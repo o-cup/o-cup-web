@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
+import imageCompression from "browser-image-compression";
 import { tempPostersAtom } from "../../../state/atoms";
 import Icons from "../../../shared/components/Icon/Icons";
 import { Poster, StyledPosterUpload } from "./posterUploadStyle";
@@ -16,20 +17,35 @@ const PosterUploader = () => {
 		}
 	}, [tempPosters]);
 
-	const handleUploadClick = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
+	const compressImage = async (file: File) => {
+		const options = {
+			maxSizeMB: 3,
+			maxWidthOrHeight: 1920,
+			useWebWorker: true,
+		};
+
+		const compressed = await imageCompression(file, options);
+		return compressed;
+	};
+
+	const handleUploadClick = async (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
 		const { files } = e.target;
 		if (!files) return;
 
+		const compressedImg = await compressImage(files[0]);
+
 		const reader = new FileReader();
-		reader.readAsDataURL(files[0]);
+		reader.readAsDataURL(compressedImg);
 
 		reader.onloadend = () => {
+			const base64data = reader.result as string;
+
 			const postersData = tempPosters.map((poster) => {
 				if (poster.id === id) {
 					return {
 						...poster,
-						file: files[0],
-						result: `${reader.result}`,
+						file: compressedImg,
+						result: base64data,
 					};
 				}
 				return poster;

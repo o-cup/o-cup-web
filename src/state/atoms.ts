@@ -17,7 +17,7 @@ export const openedBiasAtom = atom({
 	default: [] as number[],
 });
 
-export const tempPostersAtom = atom<{ id: number; file: any; result: string }[]>({
+export const tempPostersAtom = atom<{ id: number; file: File | null; result: string }[]>({
 	key: "tempPostersAtom",
 	default: [{ id: 1, file: null, result: "" }],
 });

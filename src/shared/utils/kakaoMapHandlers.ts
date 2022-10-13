@@ -1,3 +1,4 @@
+/** 사용 안함 */
 export const setKakaoMapKey = () => {
 	if (!document.querySelector("#kakaoMap")) {
 		const kakaoMap = document.createElement("script");

@@ -5,6 +5,7 @@ import { RecoilRoot } from "recoil";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "../shared/styles/gloabalStyle";
 import theme from "../shared/styles/theme";
+import "react-date-range-ts/dist/styles.css";
 import type { AppProps } from "next/app";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
@@ -15,7 +16,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 			<QueryClientProvider client={queryClient}>
 				<ThemeProvider theme={theme}>
 					<GlobalStyle />
-					<Component {...pageProps} />;
+					<Component {...pageProps} />
 					<ReactQueryDevtools initialIsOpen />
 				</ThemeProvider>
 			</QueryClientProvider>

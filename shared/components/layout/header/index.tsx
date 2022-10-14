@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
 	dateFilterAtom,
-	searchedAtom,
+	showResultAtom,
 	searchFiltersAtom,
 } from "../../../state";
 import { convertDateToString, copyToClipboard } from "../../../utils";
@@ -34,10 +34,11 @@ type HeaderProps = {
 
 const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const router = useRouter();
+	const { pathname } = router;
 	const setDateFilter = useSetRecoilState(dateFilterAtom);
 	const searchFilters = useRecoilValue(searchFiltersAtom);
 	const { keyword } = searchFilters;
-	const searched = useRecoilValue(searchedAtom);
+	const isFromSearchResult = useRecoilValue(showResultAtom);
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
 	const [isTooltipOpen, setIsTooltipOpen] = useState(true);
 	const [isToastOpen, setIsToastOpen] = useState(false);
@@ -48,14 +49,14 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 
 	useEffect(() => {
 		if (typeof window !== "undefined") {
-			urlRef.current = `${window.origin}${router.pathname}`;
+			urlRef.current = `${window.origin}${pathname}`;
 		}
 	}, []);
 
 	useEffect(() => {
-		const hideTooltip = page === "search" && searched;
+		const hideTooltip = page === "search" && isFromSearchResult;
 		setIsTooltipOpen(!hideTooltip);
-	}, [page, searched, setIsTooltipOpen]);
+	}, [page, isFromSearchResult, setIsTooltipOpen]);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -101,18 +102,19 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	};
 
 	const goBack = () => {
-		if (window.history.state && window.history.state?.idx > 0) {
-			// navigate(-1);
-			router.back();
-		} else {
-			router.push("/");
-		}
+		router.back();
+
+		// if (window.history.state && window.history.state?.idx > 0) {
+		// 	router.back();
+		// } else {
+		// 	router.push("/");
+		// }
 	};
 
 	const renderTooltip = () => {
 		if (!isTooltipOpen) return null;
 
-		const searchResult = page === "search" && searched;
+		const searchResult = page === "search" && isFromSearchResult;
 		if (searchResult) return null;
 
 		return <span className="tooltip">트위터에 공유하기</span>;

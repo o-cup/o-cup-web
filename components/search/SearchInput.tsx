@@ -1,11 +1,12 @@
+import { useRouter } from "next/router";
 import React, { memo, useEffect, useState } from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { Icon } from "../../shared/components";
 import {
-	searchedAtom,
 	searchFiltersAtom,
 	searchInputOptionsAtom,
+	showResultAtom,
 } from "../../shared/state";
 import { StyledOption, StyledSearchInput } from "./styles/searchInputStyle";
 import type { SearchInputOptionType } from "../../shared/types";
@@ -13,13 +14,13 @@ import type { Dispatch, SetStateAction } from "react";
 
 type SearchInputProps = {
 	setSelectedBiasId: Dispatch<SetStateAction<null | number>>;
-	searched: boolean;
 };
 
-const SearchInput = ({ setSelectedBiasId, searched }: SearchInputProps) => {
+const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
+	const router = useRouter();
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
+	const showResult = useRecoilValue(showResultAtom);
 	const { keyword } = searchFilters;
-	const setSearched = useSetRecoilState(searchedAtom);
 	const [inputValue, setInputValue] = useState("");
 	const [toggle, setToggle] = useState(false);
 	const [selectOptions, setSelectOptions] = useRecoilState<
@@ -39,16 +40,22 @@ const SearchInput = ({ setSelectedBiasId, searched }: SearchInputProps) => {
 		setInputValue(value);
 	};
 
-	const showResult = () => {
+	const submitKeyword = () => {
+		const { pathname } = router;
+
+		router.push({
+			pathname,
+			query: { keyword: inputValue },
+		});
+
 		setSearchFilters((prev) => ({ ...prev, keyword: inputValue }));
-		setSearched(true);
 	};
 
 	const handleEnter = (e: React.KeyboardEvent<HTMLElement>) => {
 		if (e.key !== "Enter") return;
 		e.preventDefault();
 
-		showResult();
+		submitKeyword();
 	};
 
 	const handleDeleteClick = () => {
@@ -67,7 +74,7 @@ const SearchInput = ({ setSelectedBiasId, searched }: SearchInputProps) => {
 	};
 
 	return (
-		<StyledSearchInput searched={searched}>
+		<StyledSearchInput showResult={showResult}>
 			<div
 				className="select"
 				onClick={() => setToggle(!toggle)}
@@ -95,7 +102,7 @@ const SearchInput = ({ setSelectedBiasId, searched }: SearchInputProps) => {
 				onChange={handleInputChange}
 				onKeyDown={handleEnter}
 			/>
-			<Icon name="search" handleClick={() => showResult()} />
+			<Icon name="search" handleClick={() => submitKeyword()} />
 			{keyword && <Icon name="delete" handleClick={handleDeleteClick} />}
 		</StyledSearchInput>
 	);

@@ -1,4 +1,4 @@
+import useClearData from "./useClearData";
 import useRegCodes from "./useRegcodes";
 
-export { useRegCodes };
-export default {};
+export { useRegCodes, useClearData };

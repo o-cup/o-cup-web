@@ -1,6 +1,6 @@
 import {
 	searchFiltersAtom,
-	searchedAtom,
+	showResultAtom,
 	searchInputOptionsAtom,
 	dateFilterAtom,
 	openedBiasAtom,
@@ -11,7 +11,7 @@ import {
 
 export {
 	searchFiltersAtom,
-	searchedAtom,
+	showResultAtom,
 	searchInputOptionsAtom,
 	dateFilterAtom,
 	openedBiasAtom,

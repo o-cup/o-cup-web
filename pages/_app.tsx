@@ -12,15 +12,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 	const [queryClient] = useState(() => new QueryClient());
 
 	return (
-		<RecoilRoot>
-			<QueryClientProvider client={queryClient}>
+		<QueryClientProvider client={queryClient}>
+			<RecoilRoot>
 				<ThemeProvider theme={theme}>
 					<GlobalStyle />
 					<Component {...pageProps} />
 					<ReactQueryDevtools initialIsOpen />
 				</ThemeProvider>
-			</QueryClientProvider>
-		</RecoilRoot>
+			</RecoilRoot>
+		</QueryClientProvider>
 	);
 };
 

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import Icons from "../../shared/components/icon";
 import Layout from "../../shared/components/layout";
+import { useClearData } from "../../shared/hooks";
 import { dateFilterAtom } from "../../shared/state";
 import {
 	convertDateToString,
@@ -14,10 +15,11 @@ import { StyledMain } from "./styles/mainStyle";
 
 const Main = () => {
 	const [dateFilter, setDateFilter] = useRecoilState(dateFilterAtom);
-
 	const isToday = dateFilter === convertDateToString(new Date());
 	const monthIndex = convertStringToDate(dateFilter).getMonth();
 	const date = convertStringToDate(dateFilter).getDate();
+
+	useClearData();
 
 	const handleChangeDate = (type: "prev" | "next") => {
 		const selectedDate = convertStringToDate(dateFilter);

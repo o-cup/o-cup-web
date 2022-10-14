@@ -9,8 +9,8 @@ import {
 	Loading,
 	SortIcon,
 } from "../../shared/components";
-import { searchedAtom, searchFiltersAtom } from "../../shared/state";
-import { getBirthMonth, setMetaTags } from "../../shared/utils";
+import { searchFiltersAtom, showResultAtom } from "../../shared/state";
+import { getBirthMonth } from "../../shared/utils";
 import MonthSelector from "./MonthSelector";
 import Result from "./Result";
 import SearchInput from "./SearchInput";
@@ -19,16 +19,15 @@ import type { SearchSortOptionKeys } from "../../shared/types";
 
 const Search = () => {
 	const router = useRouter();
-	// const [searchParams, setSearchParams] = useSearchParams();
+	const { pathname } = router;
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 	const { keyword } = searchFilters;
-	const [searched, setSearched] = useRecoilState(searchedAtom);
 	const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 	const [searchSortOpen, setSearchSortOpen] = useState(false);
 	const [selectedBiasId, setSelectedBiasId] = useState<number | null>(null);
 	const [selectedOption, setSelectedOption] =
 		useState<SearchSortOptionKeys>("alphabetAsc");
-	const [viewResult, setViewResult] = useState(false);
+	const [showResult, setShowResult] = useRecoilState(showResultAtom);
 
 	const { data: people, isLoading } = useQuery(
 		["people", selectedOption],
@@ -39,7 +38,6 @@ const Search = () => {
 					(item) => getBirthMonth(item.birthday) === selectedMonth
 				);
 
-				// TODO: people 테이블 birthday 컬럼 수정 후 제거(apis 에서 처리)
 				switch (selectedOption) {
 					case "birthdayAsc":
 						biases = biases?.sort(
@@ -59,9 +57,22 @@ const Search = () => {
 				}
 				return biases;
 			},
-			enabled: !searched && !keyword,
+			enabled: !showResult && !keyword,
 		}
 	);
+
+	useEffect(() => {
+		setShowResult(!!keyword);
+
+		if (!keyword) {
+			router.replace(pathname, undefined, { shallow: true });
+		} else {
+			router.push({
+				pathname,
+				query: { keyword },
+			});
+		}
+	}, [keyword]);
 
 	// useEffect(() => {
 	// 	const paramValue = searchParams.get("keyword");
@@ -81,38 +92,6 @@ const Search = () => {
 	// 	};
 	// }, [searchParams, keyword]);
 
-	// useEffect(() => {
-	// 	const paramValue = searchParams.get("keyword");
-	// 	if (paramValue && !viewResult) {
-	// 		setSearchFilters((prev) => ({ ...prev, keyword: paramValue }));
-	// 		setSearched(true);
-	// 		return;
-	// 	}
-
-	// 	if (viewResult) {
-	// 		setSearchParams({ keyword });
-	// 	} else {
-	// 		searchParams.delete("keyword");
-	// 		setSearchParams(searchParams);
-	// 	}
-	// }, [
-	// 	viewResult,
-	// 	setSearchParams,
-	// 	searchParams,
-	// 	setSearchFilters,
-	// 	setSearched,
-	// 	keyword,
-	// 	searched,
-	// ]);
-
-	useEffect(() => {
-		setViewResult(!!(keyword && searched));
-
-		if (!keyword) {
-			setSearched(false);
-		}
-	}, [keyword, searched, setSearched]);
-
 	useEffect(() => {
 		const today = new Date();
 		setSelectedMonth(today.getMonth() + 1);
@@ -121,13 +100,13 @@ const Search = () => {
 	const handleBiasClick = ({ name, id }: { name: string; id: number }) => {
 		setSearchFilters((prev) => ({ ...prev, keyword: name }));
 		setSelectedBiasId(id);
-		setSearched(true);
+		setShowResult(true);
 	};
 
 	const handleBackClick = () => {
-		if (searched) {
+		if (showResult) {
 			setSearchFilters((prev) => ({ ...prev, keyword: "" }));
-			setSearched(false);
+			setShowResult(false);
 			return;
 		}
 		router.push("/");
@@ -138,7 +117,8 @@ const Search = () => {
 	}
 
 	const conditionalRender = () => {
-		if (viewResult) {
+		if (showResult) {
+			console.log("render showResult", showResult);
 			return <Result biasId={selectedBiasId} />;
 		}
 		return (
@@ -178,10 +158,7 @@ const Search = () => {
 		<Layout page="search" handleBackClick={handleBackClick} share>
 			<StyledSearch>
 				<div className="input">
-					<SearchInput
-						setSelectedBiasId={setSelectedBiasId}
-						searched={searched}
-					/>
+					<SearchInput setSelectedBiasId={setSelectedBiasId} />
 				</div>
 
 				{conditionalRender()}

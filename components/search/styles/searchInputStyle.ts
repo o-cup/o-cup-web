@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledSearchInput = styled.div<{ searched: boolean }>`
+export const StyledSearchInput = styled.div<{ showResult: boolean }>`
 	display: flex;
 	align-items: center;
 	position: relative;
@@ -56,7 +56,8 @@ export const StyledSearchInput = styled.div<{ searched: boolean }>`
 		font-size: 16px;
 		background: ${({ theme }) => theme.colors.white};
 		/* padding: 0 45px 0 10px; */
-		padding: ${(props) => (props.searched ? "0 65px 0 10px" : "0 42px 0 10px")};
+		padding: ${(props) =>
+			props.showResult ? "0 65px 0 10px" : "0 42px 0 10px"};
 		width: 100%;
 		border-radius: 32px;
 		line-height: 34px;
@@ -102,7 +103,8 @@ export const StyledOption = styled.li<{ selected: boolean }>`
 	padding: 0 20px;
 	cursor: pointer;
 
-	background-color: ${(props) => (props.selected ? props.theme.colors.softPrimary : "")};
+	background-color: ${(props) =>
+		props.selected ? props.theme.colors.softPrimary : ""};
 `;
 
 export default {};

@@ -38,25 +38,24 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const setDateFilter = useSetRecoilState(dateFilterAtom);
 	const searchFilters = useRecoilValue(searchFiltersAtom);
 	const { keyword } = searchFilters;
-	const isFromSearchResult = useRecoilValue(showResultAtom);
+	const isSearchResultOpened = useRecoilValue(showResultAtom);
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
 	const [isTooltipOpen, setIsTooltipOpen] = useState(true);
 	const [isToastOpen, setIsToastOpen] = useState(false);
-
 	const urlRef = useRef<null | string>("https://www.o-cup.kr");
 
 	const mainPage = page === "main";
 
 	useEffect(() => {
 		if (typeof window !== "undefined") {
-			urlRef.current = `${window.origin}${pathname}`;
+			urlRef.current = `${window.origin}${router.asPath}`;
 		}
 	}, []);
 
 	useEffect(() => {
-		const hideTooltip = page === "search" && isFromSearchResult;
+		const hideTooltip = page === "search" && isSearchResultOpened;
 		setIsTooltipOpen(!hideTooltip);
-	}, [page, isFromSearchResult, setIsTooltipOpen]);
+	}, [page, isSearchResultOpened, setIsTooltipOpen]);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -75,23 +74,24 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 				?.querySelector("meta[name='twitter:description']")
 				?.getAttribute("content") || "오늘의 컵홀더";
 		window.open(
-			`https://twitter.com/intent/tweet?text=${sendText}&url=${urlRef}`,
+			`https://twitter.com/intent/tweet?text=${sendText}&url=${urlRef.current}`,
 			"popup",
 			"width=600, height=360"
 		);
 	};
 
 	const handleShareClick = () => {
-		const isResultShare = !!keyword;
-
-		if (isResultShare) {
+		const isSearchResultShare =
+			pathname.includes("search") && isSearchResultOpened;
+		if (isSearchResultShare) {
 			const encodedKeyword = encodeURIComponent(keyword);
 			const url = `${urlRef.current}?keyword=${encodedKeyword}`;
 			copyToClipboard(url);
 			setIsToastOpen(true);
-		} else {
-			shareTwitter();
+			return;
 		}
+
+		shareTwitter();
 	};
 
 	const handleLogoClick = () => {
@@ -114,7 +114,7 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const renderTooltip = () => {
 		if (!isTooltipOpen) return null;
 
-		const searchResult = page === "search" && isFromSearchResult;
+		const searchResult = page === "search" && isSearchResultOpened;
 		if (searchResult) return null;
 
 		return <span className="tooltip">트위터에 공유하기</span>;
@@ -150,7 +150,7 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 								{isTooltipOpen && (
 									<span className="tooltip">트위터에 공유하기</span>
 								)}
-								{/* {renderTooltip()} */}
+								{renderTooltip()}
 							</Share>
 						)}
 					</div>

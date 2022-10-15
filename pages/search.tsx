@@ -1,6 +1,10 @@
+import dynamic from "next/dynamic";
 import React from "react";
-import Search from "../components/search";
 
-const SearchPage = () => <Search />;
+const DynamicSearch = dynamic(() => import("../components/search"), {
+	ssr: false,
+});
+
+const SearchPage = () => <DynamicSearch />;
 
 export default SearchPage;

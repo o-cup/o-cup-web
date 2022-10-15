@@ -122,8 +122,7 @@ const StyledCalendarContainer = styled.div`
 			justify-content: center;
 			align-items: center;
 			height: 50px;
-			/* padding-top: 10px; */
-			background: #f9f368;
+			background: ${({ theme }) => theme.colors.primary};
 			border-top-left-radius: 4px;
 			border-top-right-radius: 4px;
 		}
@@ -140,9 +139,9 @@ const StyledCalendarContainer = styled.div`
 			height: 18px;
 			margin: 0 0.833em;
 			padding: 0;
-			border: 2px solid #000000;
+			border: 2px solid ${({ theme }) => theme.colors.black};
 			border-radius: 100px;
-			background: #ffffff;
+			background: ${({ theme }) => theme.colors.white};
 		}
 
 		.rdrNextPrevButton i {

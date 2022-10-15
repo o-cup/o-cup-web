@@ -43,7 +43,7 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 	const submitKeyword = () => {
 		const { pathname } = router;
 
-		router.push({
+		router.replace({
 			pathname,
 			query: { keyword: inputValue },
 		});

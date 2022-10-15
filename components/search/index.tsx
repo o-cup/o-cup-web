@@ -19,7 +19,7 @@ import type { SearchSortOptionKeys } from "../../shared/types";
 
 const Search = () => {
 	const router = useRouter();
-	const { pathname } = router;
+	const { pathname, query } = router;
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 	const { keyword } = searchFilters;
 	const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
@@ -62,6 +62,12 @@ const Search = () => {
 	);
 
 	useEffect(() => {
+		if (!query.keyword) {
+			setSearchFilters((prev) => ({ ...prev, keyword: "" }));
+		}
+	}, [query, setSearchFilters]);
+
+	useEffect(() => {
 		setShowResult(!!keyword);
 
 		if (!keyword) {
@@ -72,7 +78,7 @@ const Search = () => {
 				query: { keyword },
 			});
 		}
-	}, [keyword]);
+	}, [keyword, setShowResult]);
 
 	// useEffect(() => {
 	// 	const paramValue = searchParams.get("keyword");

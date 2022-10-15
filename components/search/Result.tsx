@@ -50,8 +50,6 @@ const Result = ({ biasId }: ResultProps) => {
 		startDate &&
 		`${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
-	console.log("keyword", keyword);
-
 	const { data: events, isLoading } = useQuery(
 		[
 			"resultEvents",

@@ -124,7 +124,6 @@ const Search = () => {
 
 	const conditionalRender = () => {
 		if (showResult) {
-			console.log("render showResult", showResult);
 			return <Result biasId={selectedBiasId} />;
 		}
 		return (

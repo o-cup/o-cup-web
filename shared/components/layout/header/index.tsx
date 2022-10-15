@@ -43,9 +43,9 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const [isTooltipOpen, setIsTooltipOpen] = useState(true);
 	const [isToastOpen, setIsToastOpen] = useState(false);
 
-	const mainPage = page === "main";
-
 	const urlRef = useRef<null | string>("https://www.o-cup.kr");
+
+	const mainPage = page === "main";
 
 	useEffect(() => {
 		if (typeof window !== "undefined") {
@@ -86,7 +86,7 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 
 		if (isResultShare) {
 			const encodedKeyword = encodeURIComponent(keyword);
-			const url = `${urlRef}?keyword=${encodedKeyword}`;
+			const url = `${urlRef.current}?keyword=${encodedKeyword}`;
 			copyToClipboard(url);
 			setIsToastOpen(true);
 		} else {

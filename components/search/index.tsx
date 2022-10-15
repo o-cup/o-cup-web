@@ -62,8 +62,15 @@ const Search = () => {
 	);
 
 	useEffect(() => {
-		if (!query.keyword) {
+		const queryKeyword = query.keyword as string;
+
+		if (!queryKeyword) {
 			setSearchFilters((prev) => ({ ...prev, keyword: "" }));
+		} else {
+			setSearchFilters((prev) => ({
+				...prev,
+				keyword: queryKeyword,
+			}));
 		}
 	}, [query, setSearchFilters]);
 

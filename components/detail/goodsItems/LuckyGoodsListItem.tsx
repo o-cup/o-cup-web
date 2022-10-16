@@ -1,6 +1,9 @@
 import React from "react";
-import { StyledGoodsListItem, StyledHighLightItem } from "../styles/goodsInfoStyle";
-import GoodsChip from "../../../shared/components/GoodsChip";
+import {
+	StyledGoodsListItem,
+	StyledHighLightItem,
+} from "../styles/goodsInfoStyle";
+import GoodsChip from "../../../shared/components/goodsChip";
 
 type LuckyProps = {
 	lucky: string[];

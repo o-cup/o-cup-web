@@ -25,6 +25,8 @@ import {
 	StyledRequestBottomSheet,
 } from "./requestStyle";
 import type { EventType } from "../../shared/types";
+import CategoryChip from "../../shared/components/CategoryChip";
+import CategoryInput from "./CategoryInput";
 
 const Request = () => {
 	const router = useRouter();
@@ -73,6 +75,7 @@ const Request = () => {
 	const resetAllStates = () => {
 		setRequestInputs({
 			place: { place: "", address: "", districts: { code: "", name: "" } },
+			category: "",
 			artist: [{ id: 1, peopleId: 0, bias: "", team: "" }],
 			organizer: "",
 			snsId: "",
@@ -152,13 +155,15 @@ const Request = () => {
 									이벤트 등록 전, 중복 확인 먼저 해주세요.
 								</p>
 							</div>
+							<CategoryInput />
 							<PlaceInput />
 							<DateRangeInput />
 							<div
 								className={`btnContainer ${
 									requestInputs.place.place &&
 									requestInputs.dateRange.startAt &&
-									requestInputs.dateRange.endAt
+									requestInputs.dateRange.endAt &&
+									requestInputs.category
 										? ""
 										: "disabled"
 								}`}

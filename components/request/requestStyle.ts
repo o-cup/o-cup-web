@@ -37,6 +37,26 @@ const StyledCheckEvent = styled.div`
 		}
 	}
 
+	> div.categoryContainer {
+		width: 100%;
+
+		> p {
+			font-weight: 400;
+			font-size: 14px;
+			line-height: 19px;
+			margin-bottom: 9px;
+		}
+
+		> ul {
+			display: flex;
+			gap: 12px;
+
+			> li {
+				height: 30px;
+			}
+		}
+	}
+
 	> div.btnContainer {
 		width: 100%;
 

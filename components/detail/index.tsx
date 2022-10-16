@@ -26,8 +26,10 @@ const Detail = () => {
 
 	const { data: people } = useQuery(["bias"], () => fetchPeople());
 
-	const getBiasName = (biasId: number) =>
-		people?.filter((p) => p.id === biasId)[0].name;
+	const getBiasName = (biasId: number) => {
+		if (!biasId) return "응원하는 아티스트";
+		return people?.filter((p) => p.id === biasId)[0].name;
+	};
 
 	const description = `${data?.place}에서 열리는 ${getBiasName(
 		data?.biasesId[0]

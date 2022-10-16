@@ -19,9 +19,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
 	useEffect(() => {
 		setScreenSize();
+		window.addEventListener("resize", () => setScreenSize());
 	}, []);
-
-	window.addEventListener("resize", () => setScreenSize());
 
 	return (
 		<QueryClientProvider client={queryClient}>

@@ -2,7 +2,12 @@ import { useRouter } from "next/router";
 import React, { memo } from "react";
 import { FaTwitter } from "react-icons/fa";
 import { BiasChip, Icon } from "../../shared/components";
-import { convertDateToString, convertDateWithDots, imageOnErrorHandler, isOpenToday } from "../../shared/utils";
+import {
+	convertDateToString,
+	convertDateWithDots,
+	imageOnErrorHandler,
+	isOpenToday,
+} from "../../shared/utils";
 import { StyledEvent } from "./styles/eventStyle";
 import type { EventType } from "../../shared/types";
 
@@ -12,7 +17,18 @@ type EventProps = {
 
 const Event = ({ event }: EventProps) => {
 	const router = useRouter();
-	const { image, place, biasesId, organizer, snsId, districts, startAt, endAt, id } = event;
+	const {
+		image,
+		category,
+		place,
+		biasesId,
+		organizer,
+		snsId,
+		districts,
+		startAt,
+		endAt,
+		id,
+	} = event;
 
 	const today = convertDateToString(new Date());
 	const isDuringEvent = isOpenToday(today, startAt!, endAt!);
@@ -23,7 +39,11 @@ const Event = ({ event }: EventProps) => {
 			<div>
 				<div className="title">
 					<h2>{place}</h2>
-					{isDuringEvent && <i />}
+					<img
+						className="category_icon"
+						alt={category}
+						src={`/images/categories/${category}.png`}
+					/>
 				</div>
 
 				<div className="biases">
@@ -39,7 +59,7 @@ const Event = ({ event }: EventProps) => {
 					</li>
 					<li>
 						<FaTwitter />
-						<p>@{snsId}</p>
+						<p>@{snsId || "-"}</p>
 					</li>
 					<li>
 						<Icon name="place-gray" />
@@ -48,7 +68,9 @@ const Event = ({ event }: EventProps) => {
 					<li>
 						<Icon name="calendar-gray" />
 						<p>
-							{startAt && convertDateWithDots(startAt)} - {endAt && convertDateWithDots(endAt)}
+							{startAt && convertDateWithDots(startAt)} -{" "}
+							{endAt && convertDateWithDots(endAt)}
+							{isDuringEvent && <i className="event_day" />}
 						</p>
 					</li>
 				</ul>

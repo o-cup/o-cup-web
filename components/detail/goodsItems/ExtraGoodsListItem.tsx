@@ -1,8 +1,12 @@
 import React from "react";
+import GoodsChip from "../../../shared/components/goodsChip";
 import { StyledGoodsListItem } from "../styles/goodsInfoStyle";
-import GoodsChip from "../../../shared/components/GoodsChip";
 
-const ExtraGoodsListItem = ({ goodsListItem }: { goodsListItem: { title: string; items: string[] } }) => {
+const ExtraGoodsListItem = ({
+	goodsListItem,
+}: {
+	goodsListItem: { title: string; items: string[] };
+}) => {
 	const { title, items } = goodsListItem;
 
 	return (

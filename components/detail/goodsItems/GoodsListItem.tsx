@@ -1,6 +1,6 @@
 import React from "react";
+import GoodsChip from "../../../shared/components/goodsChip";
 import { StyledGoodsListItem } from "../styles/goodsInfoStyle";
-import GoodsChip from "../../../shared/components/GoodsChip";
 
 type GoodsProps = {
 	title: "all" | "random" | "dDay";

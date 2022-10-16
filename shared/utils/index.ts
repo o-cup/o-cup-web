@@ -8,7 +8,6 @@ import {
 	getDatesInRange,
 } from "./dateHandlers";
 import { imageOnErrorHandler } from "./imageHandlers";
-import { setMetaTags } from "./metaTagHandlers";
 
 export const removeSpace = (str: string) => str.split(" ").join("");
 
@@ -21,5 +20,4 @@ export {
 	getDatesInRange,
 	getBirthMonth,
 	imageOnErrorHandler,
-	setMetaTags,
 };

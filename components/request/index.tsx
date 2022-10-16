@@ -8,7 +8,6 @@ import {
 	requestInputsAtom,
 	tempPostersAtom,
 } from "../../shared/state";
-import { setMetaTags } from "../../shared/utils";
 import DateRangeInput from "./DateRange/DateRangeInput";
 import Entry from "./Entry";
 import AlertModal from "./Modals/AlertModal";
@@ -41,21 +40,10 @@ const Request = () => {
 	const [isSubmitModalOpen, setSubmitModalOpen] = useState(false);
 	const [isAlertOpen, setAlertOpen] = useState(false);
 	const [isBottomSheetOpen, setBottomSheetOpen] = useState(false);
-	// const isMobile = useMediaQuery("(max-width: 720px)");
 
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
 	const [goodsList, setGoodsList] = useRecoilState(requestGoodsListAtom);
 	const [tempPosters, setTempPosters] = useRecoilState(tempPostersAtom);
-
-	useEffect(() => {
-		setMetaTags({
-			title: "오늘의 컵홀더 | 장소등록",
-			description: "응원하는 아티스트의 생일 이벤트를 등록해주세요!",
-		});
-		return () => {
-			setMetaTags({});
-		};
-	}, []);
 
 	const handleSubmit = () => {
 		setLoading(true);

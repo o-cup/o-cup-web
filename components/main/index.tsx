@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRecoilState } from "recoil";
 import Icons from "../../shared/components/icon";
 import Layout from "../../shared/components/layout";
 import { useClearData } from "../../shared/hooks";
 import { dateFilterAtom } from "../../shared/state";
-import {
-	convertDateToString,
-	convertStringToDate,
-	setMetaTags,
-} from "../../shared/utils";
+import { convertDateToString, convertStringToDate } from "../../shared/utils";
 import BiasList from "./BiasList";
 import EventSection from "./EventSection";
 import { StyledMain } from "./styles/mainStyle";
@@ -33,12 +29,12 @@ const Main = () => {
 		setDateFilter(convertDateToString(result));
 	};
 
-	useEffect(() => {
-		setMetaTags({});
-		return () => {
-			setMetaTags({});
-		};
-	}, []);
+	// useEffect(() => {
+	// 	setMetaTags({});
+	// 	return () => {
+	// 		setMetaTags({});
+	// 	};
+	// }, []);
 
 	return (
 		<Layout page="main">

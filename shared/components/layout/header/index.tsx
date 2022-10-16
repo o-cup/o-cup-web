@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
 	dateFilterAtom,
@@ -30,9 +30,10 @@ type HeaderProps = {
 	page: string;
 	share?: boolean;
 	handleBackClick?: () => void;
+	description?: string;
 };
 
-const Header = ({ page, share, handleBackClick }: HeaderProps) => {
+const Header = ({ page, share, handleBackClick, description }: HeaderProps) => {
 	const router = useRouter();
 	const { pathname } = router;
 	const setDateFilter = useSetRecoilState(dateFilterAtom);
@@ -42,15 +43,7 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
 	const [isTooltipOpen, setIsTooltipOpen] = useState(true);
 	const [isToastOpen, setIsToastOpen] = useState(false);
-	const urlRef = useRef<null | string>("https://www.o-cup.kr");
-
 	const mainPage = page === "main";
-
-	useEffect(() => {
-		if (typeof window !== "undefined") {
-			urlRef.current = `${window.origin}${router.asPath}`;
-		}
-	}, []);
 
 	useEffect(() => {
 		const hideTooltip = page === "search" && isSearchResultOpened;
@@ -69,12 +62,9 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	}, []);
 
 	const shareTwitter = () => {
-		const sendText =
-			document
-				?.querySelector("meta[name='twitter:description']")
-				?.getAttribute("content") || "오늘의 컵홀더";
+		const currentUrl = window.document.location.href;
 		window.open(
-			`https://twitter.com/intent/tweet?text=${sendText}&url=${urlRef.current}`,
+			`https://twitter.com/intent/tweet?text=${description}&url=${currentUrl}`,
 			"popup",
 			"width=600, height=360"
 		);
@@ -83,9 +73,10 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const handleShareClick = () => {
 		const isSearchResultShare =
 			pathname.includes("search") && isSearchResultOpened;
+
 		if (isSearchResultShare) {
 			const encodedKeyword = encodeURIComponent(keyword);
-			const url = `${urlRef.current}?keyword=${encodedKeyword}`;
+			const url = `${window.origin}?keyword=${encodedKeyword}`;
 			copyToClipboard(url);
 			setIsToastOpen(true);
 			return;
@@ -167,6 +158,7 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 Header.defaultProps = {
 	share: false,
 	handleBackClick: null,
+	description: "",
 };
 
 export default Header;

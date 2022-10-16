@@ -10,7 +10,8 @@ class MyDocument extends Document {
 		try {
 			ctx.renderPage = () =>
 				originalRenderPage({
-					enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+					enhanceApp: (App) => (props) =>
+						sheet.collectStyles(<App {...props} />),
 				});
 
 			const initialProps = await Document.getInitialProps(ctx);
@@ -31,7 +32,25 @@ class MyDocument extends Document {
 	render() {
 		return (
 			<Html lang="ko">
-				<Head>{/* <link rel="stylesheet" href="/fonts/font.css" /> */}</Head>
+				<Head>
+					<meta charSet="utf-8" />
+					<meta
+						name="viewport"
+						content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
+					/>
+					<meta name="keywords" content="" />
+					<meta name="theme-color" content="#ffffff" />
+					<meta
+						name="naver-site-verification"
+						content="10acbc20bd9fc3f9871a0ff13ed7dbd6dbe90876"
+					/>
+
+					{/* <!-- google fonts --> */}
+					<link
+						href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Noto+Sans:wght@300;400;500;600;700;800&display=swap"
+						rel="stylesheet"
+					/>
+				</Head>
 				<body>
 					<Main />
 					<NextScript />

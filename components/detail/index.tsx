@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 import { fetchEventById, fetchPeople } from "../../shared/apis/common";
 import { Layout, Loading } from "../../shared/components";
-import { setMetaTags } from "../../shared/utils";
 import DetailMainInfo from "./DetailMainInfo";
 import EventNearHere from "./EventNearHere";
 import GoodsInfo from "./GoodsInfo";
@@ -30,19 +29,9 @@ const Detail = () => {
 	const getBiasName = (biasId: number) =>
 		people?.filter((p) => p.id === biasId)[0].name;
 
-	useEffect(() => {
-		if (data?.place && data?.biasesId[0] && people) {
-			setMetaTags({
-				title: "오늘의 컵홀더 | 상세보기",
-				description: `${data.place}에서 열리는 ${getBiasName(
-					data?.biasesId[0]
-				)}의 이벤트를 오늘의 컵홀더에서 확인해보세요!`,
-			});
-		}
-		return () => {
-			setMetaTags({});
-		};
-	}, [data, people]);
+	const description = `${data?.place}에서 열리는 ${getBiasName(
+		data?.biasesId[0]
+	)}의 이벤트를 오늘의 컵홀더에서 확인해보세요!`;
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -50,7 +39,7 @@ const Detail = () => {
 
 	if (isLoading || !data)
 		return (
-			<Layout page="detail">
+			<Layout page="detail" description={description}>
 				<Loading />
 			</Layout>
 		);
@@ -58,7 +47,7 @@ const Detail = () => {
 	const { biasesId, districts, address, goods, tweetUrl } = data;
 
 	return (
-		<Layout page="detail" share>
+		<Layout page="detail" share description={description}>
 			<StyledDetail>
 				<div className="detailInfo">
 					<div className="mainInfo">

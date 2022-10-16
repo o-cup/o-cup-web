@@ -87,24 +87,6 @@ const Search = () => {
 		}
 	}, [keyword, setShowResult]);
 
-	// useEffect(() => {
-	// 	const paramValue = searchParams.get("keyword");
-	// 	if (keyword && paramValue) {
-	// 		setMetaTags({
-	// 			title: "오늘의 컵홀더 | 검색하기",
-	// 			description: `${keyword}의 생일 이벤트를 확인해보세요!`,
-	// 		});
-	// 	} else {
-	// 		setMetaTags({
-	// 			title: "오늘의 컵홀더 | 검색하기",
-	// 			description: "응원하는 아티스트의 생일 이벤트를 검색해보세요!",
-	// 		});
-	// 	}
-	// 	return () => {
-	// 		setMetaTags({});
-	// 	};
-	// }, [searchParams, keyword]);
-
 	useEffect(() => {
 		const today = new Date();
 		setSelectedMonth(today.getMonth() + 1);

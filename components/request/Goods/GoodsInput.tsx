@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Icon } from "../../../shared/components";
-import GoodsChipInput from "../GoodsChipInput/GoodsChipInput";
-import GoodsSelectBox from "./GoodsSelectBox";
 import {
 	StyledGoodsInput,
 	StyledInputWrapper,
 	StyledChipContainer,
 } from "./goodsInputStyle";
-import type { ItemsType } from "../../../shared/types/request";
+import GoodsChipInput from "../GoodsChipInput/GoodsChipInput";
+import Icon from "../../../shared/components/icon";
+import { ItemsType } from "../../../shared/types/request";
+import GoodsSelectBox from "./GoodsSelectBox";
 
 type GoodsListValues = {
 	id: number;
@@ -91,7 +91,6 @@ const GoodsInput = ({ value, handleChangeGoods }: InputProps) => {
 
 	return (
 		<StyledGoodsInput>
-			{value.id === 1 && <span className="label">특전</span>}
 			{isDirectInputOpen ? (
 				<StyledInputWrapper>
 					<input

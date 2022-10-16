@@ -33,7 +33,8 @@ export const StyledBias = styled.li`
 		padding: 12px 20px 10px 0;
 	}
 
-	> a {
+	> a,
+	> div#search {
 		height: 100%;
 		display: flex;
 		flex-direction: column;
@@ -77,7 +78,8 @@ export const StyledBias = styled.li`
 `;
 
 export const StyledBirthDayHat = styled.span`
-	background: ${(props) => `url("/images/hats/${props.color}.png") no-repeat 50% / contain`};
+	background: ${(props) =>
+		`url("/images/hats/${props.color}.png") no-repeat 50% / contain`};
 	position: absolute;
 	width: 34px;
 	height: 35px;

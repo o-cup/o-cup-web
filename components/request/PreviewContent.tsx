@@ -6,7 +6,7 @@ import {
 	requestInputsAtom,
 	tempPostersAtom,
 } from "../../shared/state";
-import EventMain from "../detail/EventMain";
+import DetailMainInfo from "../detail/DetailMainInfo";
 import GoodsInfo from "../detail/GoodsInfo";
 import Location from "../detail/Location";
 import TwitterInfo from "../detail/TwitterInfo";
@@ -17,14 +17,23 @@ const PreviewContent = () => {
 	const goodsList = useRecoilValue(requestGoodsListAtom);
 	const tempPosters = useRecoilValue(tempPostersAtom);
 
-	const { place, artist, organizer, snsId, link, hashTags, dateRange } =
-		requestInputs;
+	const {
+		place,
+		category,
+		artist,
+		organizer,
+		snsId,
+		link,
+		hashTags,
+		dateRange,
+	} = requestInputs;
 
 	return (
 		<div className="previewContent">
-			<EventMain
+			<DetailMainInfo
 				data={{
 					place: place.place || "카페이름",
+					category: category || "A",
 					biasesId: [],
 					requestedBiases: artist[0].bias
 						? artist

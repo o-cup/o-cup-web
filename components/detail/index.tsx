@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 import { fetchEventById, fetchPeople } from "../../shared/apis/common";
 import { Layout, Loading } from "../../shared/components";
-import EventMain from "./EventMain";
+import DetailMainInfo from "./DetailMainInfo";
 import EventNearHere from "./EventNearHere";
 import GoodsInfo from "./GoodsInfo";
 import Location from "./Location";
@@ -51,7 +51,7 @@ const Detail = () => {
 			<StyledDetail>
 				<div className="detailInfo">
 					<div className="mainInfo">
-						<EventMain data={data} />
+						<DetailMainInfo data={data} />
 					</div>
 					<div className="subInfo">
 						<TwitterInfo data={data} />

@@ -61,6 +61,7 @@ export type RequestGoodsListType = {
 
 export type RequestType = {
 	place: RequestPlaceType;
+	category: "A" | "B" | "C" | "D" | "E" | "";
 	artist: RequestArtistType[];
 	organizer: string;
 	snsId: string;

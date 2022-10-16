@@ -2,8 +2,6 @@ import { ko } from "date-fns/locale";
 import React, { useEffect, useState } from "react";
 import { DateRange } from "react-date-range-ts";
 import { useRecoilState } from "recoil";
-// import "react-date-range-ts/dist/styles.css";
-// import "./request-calendar-custom.css";
 import { requestInputsAtom } from "../../../shared/state";
 import {
 	convertDateToString,

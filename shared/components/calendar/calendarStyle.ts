@@ -1,16 +1,8 @@
 import styled from "styled-components";
+import { StyledCalendarContainer } from "../../../components/request/DateRange/dateRangeInputStyle";
 
-export const StyledCalendar = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 100%;
-	gap: 6px;
-
-	.rdrMonthAndYearWrapper {
-		position: relative;
-		height: 50px;
-	}
+export const StyledCalendar = styled(StyledCalendarContainer)`
+	border: 0;
 
 	& > div:first-child {
 		width: fit-content;
@@ -26,6 +18,10 @@ export const StyledCalendar = styled.div`
 		top: 14px;
 		right: 15px;
 		z-index: 1;
+	}
+
+	.rdrMonthAndYearPickers {
+		font-size: 14px;
 	}
 
 	.dateCheckContainer {

@@ -12,11 +12,15 @@ module.exports = {
 		"plugin:jsx-a11y/recommended",
 	],
 	rules: {
-		"react/jsx-filename-extension": [1, { extensions: [".js", ".jsx", ".ts", ".tsx"] }],
+		"react/jsx-filename-extension": [
+			1,
+			{ extensions: [".js", ".jsx", ".ts", ".tsx"] },
+		],
 		"no-console": ["warn", { allow: ["warn", "error"] }],
 		quotes: ["error", "double"],
 		"react/function-component-definition": "off",
 		"react/jsx-props-no-spreading": "off",
+		"react-hooks/exhaustive-deps": "off",
 
 		"import/extensions": [
 			"error",
@@ -31,14 +35,25 @@ module.exports = {
 		"import/order": [
 			"error",
 			{
-				groups: ["builtin", "external", "parent", "sibling", "index", "object", "type"],
+				groups: [
+					"builtin",
+					"external",
+					"parent",
+					"sibling",
+					"index",
+					"object",
+					"type",
+				],
 				alphabetize: {
 					order: "asc",
 				},
 			},
 		],
 
-		"@typescript-eslint/consistent-type-imports": ["error", { prefer: "type-imports" }],
+		"@typescript-eslint/consistent-type-imports": [
+			"error",
+			{ prefer: "type-imports" },
+		],
 		"@typescript-eslint/no-non-null-assertion": "off",
 	},
 };

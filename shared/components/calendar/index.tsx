@@ -1,6 +1,6 @@
 import { ko } from "date-fns/locale";
 import React from "react";
-// import { DateRange } from "react-date-range-ts";
+import { DateRange } from "react-date-range-ts";
 import { ResetModalBtn } from "../../../components/search/styles/searchStyle";
 import { convertDateToString, convertDateWithDots } from "../../utils";
 import Icon from "../icon";
@@ -42,7 +42,7 @@ const Calendar = ({
 				handleClick={() => setCalendarOpen(false)}
 			/>
 
-			{/* <DateRange
+			<DateRange
 				className="request-calendar"
 				editableDateInputs
 				moveRangeOnFirstSelection={false}
@@ -54,7 +54,7 @@ const Calendar = ({
 				minDate={new Date(2022, 7, 1)}
 				monthDisplayFormat="yyyy.MMM"
 				dateDisplayFormat="yyyy.MM.dd"
-			/> */}
+			/>
 			<div className="dateCheckContainer">
 				<div className="dateRange">
 					<p>

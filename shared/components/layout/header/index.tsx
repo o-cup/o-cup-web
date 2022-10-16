@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
 	dateFilterAtom,
-	searchedAtom,
+	showResultAtom,
 	searchFiltersAtom,
 } from "../../../state";
 import { convertDateToString, copyToClipboard } from "../../../utils";
@@ -34,28 +34,28 @@ type HeaderProps = {
 
 const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	const router = useRouter();
+	const { pathname } = router;
 	const setDateFilter = useSetRecoilState(dateFilterAtom);
 	const searchFilters = useRecoilValue(searchFiltersAtom);
 	const { keyword } = searchFilters;
-	const searched = useRecoilValue(searchedAtom);
+	const isSearchResultOpened = useRecoilValue(showResultAtom);
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
 	const [isTooltipOpen, setIsTooltipOpen] = useState(true);
 	const [isToastOpen, setIsToastOpen] = useState(false);
+	const urlRef = useRef<null | string>("https://www.o-cup.kr");
 
 	const mainPage = page === "main";
 
-	const urlRef = useRef<null | string>("https://www.o-cup.kr");
-
 	useEffect(() => {
 		if (typeof window !== "undefined") {
-			urlRef.current = `${window.origin}${router.pathname}`;
+			urlRef.current = `${window.origin}${router.asPath}`;
 		}
 	}, []);
 
 	useEffect(() => {
-		const hideTooltip = page === "search" && searched;
+		const hideTooltip = page === "search" && isSearchResultOpened;
 		setIsTooltipOpen(!hideTooltip);
-	}, [page, searched, setIsTooltipOpen]);
+	}, [page, isSearchResultOpened, setIsTooltipOpen]);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -74,23 +74,24 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 				?.querySelector("meta[name='twitter:description']")
 				?.getAttribute("content") || "오늘의 컵홀더";
 		window.open(
-			`https://twitter.com/intent/tweet?text=${sendText}&url=${urlRef}`,
+			`https://twitter.com/intent/tweet?text=${sendText}&url=${urlRef.current}`,
 			"popup",
 			"width=600, height=360"
 		);
 	};
 
 	const handleShareClick = () => {
-		const isResultShare = !!keyword;
-
-		if (isResultShare) {
+		const isSearchResultShare =
+			pathname.includes("search") && isSearchResultOpened;
+		if (isSearchResultShare) {
 			const encodedKeyword = encodeURIComponent(keyword);
-			const url = `${urlRef}?keyword=${encodedKeyword}`;
+			const url = `${urlRef.current}?keyword=${encodedKeyword}`;
 			copyToClipboard(url);
 			setIsToastOpen(true);
-		} else {
-			shareTwitter();
+			return;
 		}
+
+		shareTwitter();
 	};
 
 	const handleLogoClick = () => {
@@ -101,18 +102,19 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 	};
 
 	const goBack = () => {
-		if (window.history.state && window.history.state?.idx > 0) {
-			// navigate(-1);
-			router.back();
-		} else {
-			router.push("/");
-		}
+		router.back();
+
+		// if (window.history.state && window.history.state?.idx > 0) {
+		// 	router.back();
+		// } else {
+		// 	router.push("/");
+		// }
 	};
 
 	const renderTooltip = () => {
 		if (!isTooltipOpen) return null;
 
-		const searchResult = page === "search" && searched;
+		const searchResult = page === "search" && isSearchResultOpened;
 		if (searchResult) return null;
 
 		return <span className="tooltip">트위터에 공유하기</span>;
@@ -148,7 +150,7 @@ const Header = ({ page, share, handleBackClick }: HeaderProps) => {
 								{isTooltipOpen && (
 									<span className="tooltip">트위터에 공유하기</span>
 								)}
-								{/* {renderTooltip()} */}
+								{renderTooltip()}
 							</Share>
 						)}
 					</div>

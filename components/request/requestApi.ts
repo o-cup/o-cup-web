@@ -98,27 +98,6 @@ export const getGoodsObj = (
 	return result;
 };
 
-/** 특전 한 종류라도 있으면 return true */
-const hasGoods = (
-	requestInputs: RequestType,
-	goodsList: RequestGoodsListType[]
-) => {
-	const goodsObj = getGoodsObj(requestInputs, goodsList);
-
-	let result = false;
-	if (
-		(goodsObj.all && goodsObj.all?.length > 0) ||
-		(goodsObj.random && goodsObj.random?.length > 0) ||
-		(goodsObj.dDay && goodsObj.dDay?.length > 0) ||
-		(goodsObj.extra && goodsObj.extra?.length > 0) ||
-		(goodsObj.lucky && goodsObj.lucky?.length > 0) ||
-		(goodsObj.firstCome?.type && goodsObj.firstCome?.data.length > 0)
-	) {
-		result = true;
-	}
-	return result;
-};
-
 /** 포스터 이미지 업로드 후 return [urls] */
 const getPublicUrls = async (
 	tempPosters: { id: number; file: any; result: string }[]
@@ -176,8 +155,8 @@ export const sendReqData = async ({
 		!dateRange.startAt ||
 		images.length === 0 ||
 		!link
-		// || !hasGoods(requestInputs, goodsList)
 	) {
+		setLoading(false);
 		setConfirmModalOpen(false);
 		setAlertOpen(true);
 		return;

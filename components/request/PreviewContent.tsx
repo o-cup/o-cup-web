@@ -17,14 +17,23 @@ const PreviewContent = () => {
 	const goodsList = useRecoilValue(requestGoodsListAtom);
 	const tempPosters = useRecoilValue(tempPostersAtom);
 
-	const { place, artist, organizer, snsId, link, hashTags, dateRange } =
-		requestInputs;
+	const {
+		place,
+		category,
+		artist,
+		organizer,
+		snsId,
+		link,
+		hashTags,
+		dateRange,
+	} = requestInputs;
 
 	return (
 		<div className="previewContent">
 			<DetailMainInfo
 				data={{
 					place: place.place || "카페이름",
+					category: category || "A",
 					biasesId: [],
 					requestedBiases: artist[0].bias
 						? artist

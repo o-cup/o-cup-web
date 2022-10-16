@@ -3,7 +3,6 @@ import { useRecoilState } from "recoil";
 import { Button } from "../../shared/components";
 import { requestInputsAtom } from "../../shared/state";
 import ArtistInputContainer from "./Artist/ArtistInputContainer";
-// import DateRangeInput from "./DateRange/DateRangeInput";
 import FcfsGoodsInput from "./FcfsGoods/FcfsGoodsInput";
 import GoodsInputContainer from "./Goods/GoodsInputContainer";
 import HashTagsContainer from "./HashTags/HashTagsContainer";

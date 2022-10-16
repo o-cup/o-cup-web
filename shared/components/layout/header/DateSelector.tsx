@@ -1,5 +1,5 @@
 import React from "react";
-import Icons from "../../icon";
+import Icon from "../../icon";
 import { StyledDateSelector } from "./style";
 
 type StateProps = {
@@ -10,7 +10,10 @@ type StateProps = {
 function DateSelector({ isCalendarOpen, setCalendarOpen }: StateProps) {
 	return (
 		<StyledDateSelector>
-			<Icons name="calendar_header" handleClick={() => setCalendarOpen(!isCalendarOpen)} />
+			<Icon
+				name="calendar_header"
+				handleClick={() => setCalendarOpen(!isCalendarOpen)}
+			/>
 		</StyledDateSelector>
 	);
 }

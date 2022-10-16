@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { RecoilRoot } from "recoil";
@@ -10,6 +10,18 @@ import type { AppProps } from "next/app";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
 	const [queryClient] = useState(() => new QueryClient());
+
+	/** 100vh 맞춤 */
+	function setScreenSize() {
+		const vh = window.innerHeight * 0.01;
+		document.documentElement.style.setProperty("--vh", `${vh}px`);
+	}
+
+	useEffect(() => {
+		setScreenSize();
+	}, []);
+
+	window.addEventListener("resize", () => setScreenSize());
 
 	return (
 		<QueryClientProvider client={queryClient}>

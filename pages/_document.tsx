@@ -38,6 +38,7 @@ class MyDocument extends Document {
 						name="viewport"
 						content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
 					/>
+					<meta name="keywords" content="" />
 					<meta name="theme-color" content="#ffffff" />
 					<meta
 						name="naver-site-verification"

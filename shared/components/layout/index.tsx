@@ -58,6 +58,27 @@ const Layout: React.FC<LayoutProps> = ({
 					content={description || headContents[pathname].description}
 				/>
 
+				<meta property="og:type" content="website" />
+				<meta property="og:title" content="페이지 제목" />
+				<meta property="og:description" content="페이지 설명" />
+				<meta
+					property="og:image"
+					content="https://www.o-cup.kr/images/ocup_profile.jpg"
+				/>
+				<meta property="og:url" content="o-cup.kr" />
+
+				<meta name="twitter:card" content="summary" />
+				<meta name="twitter:title" content={defaultTitle} />
+				<meta
+					name="twitter:description"
+					content={description || headContents[pathname].description}
+				/>
+				<meta
+					name="twitter:image"
+					content="https://www.o-cup.kr/images/ocup_profile.jpg"
+				/>
+				<meta name="twitter:site" content="o-cup.kr" />
+
 				<title>{headContents[pathname].title}</title>
 			</Head>
 			<Header

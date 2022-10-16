@@ -10,7 +10,7 @@ function Map({ address }: Partial<EventType>) {
 	const searchAddress = address || "서울 중구 세종대로 110";
 
 	const onLoadKakaoMap = () => {
-		kakao.maps.load(() => {
+		kakao?.maps?.load(() => {
 			const mapOption = {
 				center: new kakao.maps.LatLng(127.044754852849, 37.5491962171866), // 지도의 중심좌표
 				level: address ? 2 : 40, // 지도의 확대 레벨

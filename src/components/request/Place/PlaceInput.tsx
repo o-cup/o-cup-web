@@ -33,7 +33,7 @@ const PlaceInput = () => {
 	const { kakao } = window as any;
 
 	const onLoadKakaoMap = (k: string) => {
-		kakao.maps.load(() => {
+		kakao?.maps?.load(() => {
 			// 장소 검색 객체를 생성합니다
 			const ps = new kakao.maps.services.Places();
 

@@ -25,7 +25,6 @@ import {
 	StyledRequestBottomSheet,
 } from "./requestStyle";
 import type { EventType } from "../../shared/types";
-import CategoryChip from "../../shared/components/CategoryChip";
 import CategoryInput from "./CategoryInput";
 
 const Request = () => {

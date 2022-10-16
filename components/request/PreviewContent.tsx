@@ -6,7 +6,7 @@ import {
 	requestInputsAtom,
 	tempPostersAtom,
 } from "../../shared/state";
-import EventMain from "../detail/EventMain";
+import DetailMainInfo from "../detail/DetailMainInfo";
 import GoodsInfo from "../detail/GoodsInfo";
 import Location from "../detail/Location";
 import TwitterInfo from "../detail/TwitterInfo";
@@ -22,7 +22,7 @@ const PreviewContent = () => {
 
 	return (
 		<div className="previewContent">
-			<EventMain
+			<DetailMainInfo
 				data={{
 					place: place.place || "카페이름",
 					biasesId: [],

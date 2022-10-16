@@ -6,6 +6,7 @@ type CategoryChipProps = {
 	handleClick?: (e: any) => void;
 	selected?: boolean;
 	opacity?: number;
+	disabled?: boolean; // 클릭방지
 };
 
 export const CATEGORY_TITLE = {
@@ -21,12 +22,14 @@ const CategoryChip = ({
 	handleClick,
 	selected,
 	opacity,
+	disabled,
 }: CategoryChipProps) => (
 	<StyledCategoryChip
 		type={type}
 		onClick={handleClick}
 		className={selected ? "selected" : ""}
 		opacity={opacity}
+		disabled={disabled}
 	>
 		<p>{CATEGORY_TITLE[type]}</p>
 		<span className="shadow" />
@@ -37,5 +40,6 @@ CategoryChip.defaultProps = {
 	handleClick: () => console.log("click"),
 	selected: false,
 	opacity: 1,
+	disabled: false,
 };
 export default CategoryChip;

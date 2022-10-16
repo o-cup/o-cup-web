@@ -98,27 +98,6 @@ export const getGoodsObj = (
 	return result;
 };
 
-/** 특전 한 종류라도 있으면 return true */
-const hasGoods = (
-	requestInputs: RequestType,
-	goodsList: RequestGoodsListType[]
-) => {
-	const goodsObj = getGoodsObj(requestInputs, goodsList);
-
-	let result = false;
-	if (
-		(goodsObj.all && goodsObj.all?.length > 0) ||
-		(goodsObj.random && goodsObj.random?.length > 0) ||
-		(goodsObj.dDay && goodsObj.dDay?.length > 0) ||
-		(goodsObj.extra && goodsObj.extra?.length > 0) ||
-		(goodsObj.lucky && goodsObj.lucky?.length > 0) ||
-		(goodsObj.firstCome?.type && goodsObj.firstCome?.data.length > 0)
-	) {
-		result = true;
-	}
-	return result;
-};
-
 /** 포스터 이미지 업로드 후 return [urls] */
 const getPublicUrls = async (
 	tempPosters: { id: number; file: any; result: string }[]
@@ -148,8 +127,16 @@ export const sendReqData = async ({
 	setAlertOpen,
 	setLoading,
 }: ReqType) => {
-	const { place, artist, organizer, snsId, link, hashTags, dateRange } =
-		requestInputs;
+	const {
+		place,
+		artist,
+		organizer,
+		snsId,
+		link,
+		hashTags,
+		dateRange,
+		category,
+	} = requestInputs;
 
 	const requestedBiases = artist.map((a) => ({
 		peopleId: a.peopleId,
@@ -162,20 +149,22 @@ export const sendReqData = async ({
 	// 필수값 비워져 있을 때 경고 팝업
 	if (
 		!place.place ||
+		!category ||
 		!requestedBiases[0].bias ||
 		!organizer ||
 		!dateRange.startAt ||
 		images.length === 0 ||
-		!link ||
-		!hasGoods(requestInputs, goodsList)
+		!link
 	) {
+		setLoading(false);
+		setConfirmModalOpen(false);
 		setAlertOpen(true);
 		return;
 	}
 
 	const eventParams = {
 		place: place.place,
-		category: "A", // TODO: 카테고리 수정 필요
+		category,
 		organizer,
 		snsId,
 		districts: place.districts,

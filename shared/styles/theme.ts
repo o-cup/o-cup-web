@@ -15,6 +15,33 @@ const theme: DefaultTheme = {
 		red: "#CF0000",
 		eventDay: "#5eff50",
 	},
+	category: {
+		A: {
+			// 카페
+			primary: "#E3DB0B",
+			background: "#F9F368",
+		},
+		B: {
+			// 꽃집
+			primary: "#EF865A",
+			background: "#FBB090",
+		},
+		C: {
+			// 식당
+			primary: "#84D7AE",
+			background: "#BEEAD4",
+		},
+		D: {
+			// 포토부스
+			primary: "#8A8FF8",
+			background: "#B8BBFA",
+		},
+		E: {
+			// 기타
+			primary: "#F773C5",
+			background: "#FBB1DF",
+		},
+	},
 	device: {
 		mobile: "screen and (max-width: 720px)",
 		desktop: "screen and (min-width: 721px)",

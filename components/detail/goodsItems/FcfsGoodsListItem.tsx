@@ -1,7 +1,10 @@
 import React from "react";
-import GoodsChip from "../../../shared/components/GoodsChip";
-import { StyledGoodsListItem, StyledHighLightItem } from "../styles/goodsInfoStyle";
-import type { FirstComeType } from "../../../../shared/types";
+import GoodsChip from "../../../shared/components/goodsChip";
+import {
+	StyledGoodsListItem,
+	StyledHighLightItem,
+} from "../styles/goodsInfoStyle";
+import type { FirstComeType } from "../../../shared/types";
 
 type FcfsProps = {
 	fcfs: FirstComeType;
@@ -22,7 +25,9 @@ const FcfsGoodsListItem = ({ fcfs }: FcfsProps) => {
 						if (d.key === "dDay" || d.key === "others") {
 							return (
 								<StyledHighLightItem key={d.key} className={d.key}>
-									<div className={`labelContainer length_${TYPE_C[d.key].length}`}>
+									<div
+										className={`labelContainer length_${TYPE_C[d.key].length}`}
+									>
 										<p className="highlight">{TYPE_C[d.key]}</p>
 									</div>
 									<div className="chipContainer">

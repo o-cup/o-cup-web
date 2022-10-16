@@ -1,7 +1,16 @@
 import styled from "styled-components";
 
-const StyledEventMain = styled.div`
+const StyledDetailMainInfo = styled.div`
 	position: relative;
+`;
+
+const StyledDetailCategory = styled.span<{ type: string }>`
+	background: ${(props) => props.theme.category[props.type].primary};
+	width: 6px;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
 `;
 
 const StyledDetailTextContainer = styled.div`
@@ -62,7 +71,7 @@ const StyledDetailTextContainer = styled.div`
 				display: flex;
 				align-items: center;
 				margin-left: 8px;
-
+				white-space: nowrap;
 				font-size: 10px;
 				color: #19ca09;
 
@@ -122,5 +131,10 @@ const StyledDetailImgContainer = styled.div`
 		}
 	}
 `;
-export { StyledEventMain, StyledDetailTextContainer, StyledDetailImgContainer };
+export {
+	StyledDetailMainInfo,
+	StyledDetailCategory,
+	StyledDetailTextContainer,
+	StyledDetailImgContainer,
+};
 export default {};

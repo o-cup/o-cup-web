@@ -13,16 +13,25 @@ const BiasList = () => {
 	const openedBias = useRecoilValue(openedBiasAtom);
 	const dateFilter = useRecoilValue(dateFilterAtom);
 
-	const { data: people, isLoading } = useQuery(["people", dateFilter], () => fetchPeople(), {
-		select: (data) => {
-			const biasesData = data?.filter((item) => openedBias.includes(item.id)) || [];
+	const { data: people, isLoading } = useQuery(
+		["people", dateFilter],
+		() => fetchPeople(),
+		{
+			select: (data) => {
+				const biasesData =
+					data?.filter((item) => openedBias.includes(item.id)) || [];
 
-			const birthdayPeople = biasesData?.filter((bias) => bias.birthday.slice(-4) === dateFilter.slice(-4));
-			const biases = biasesData.filter((bias) => !birthdayPeople.includes(bias));
+				const birthdayPeople = biasesData?.filter(
+					(bias) => bias.birthday.slice(-4) === dateFilter.slice(-4)
+				);
+				const biases = biasesData.filter(
+					(bias) => !birthdayPeople.includes(bias)
+				);
 
-			return [...birthdayPeople, ...biases];
-		},
-	});
+				return [...birthdayPeople, ...biases];
+			},
+		}
+	);
 
 	if (isLoading) {
 		return <Loading />;
@@ -41,10 +50,12 @@ const BiasList = () => {
 				))
 			) : (
 				<StyledBias className="active" onClick={() => router.push("/search")}>
-					<div>
-						<img id="search" src="/images/icons/search.png" alt="search" />
+					<div id="search">
+						<div>
+							<img id="search" src="/images/icons/search.png" alt="search" />
+						</div>
+						<p>검색하기</p>
 					</div>
-					<p>검색하기</p>
 				</StyledBias>
 			)}
 		</StyledBiasList>

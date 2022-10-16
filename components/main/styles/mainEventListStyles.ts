@@ -8,13 +8,24 @@ export const StyledMainEvents = styled.section`
 	> div {
 		display: flex;
 		flex-direction: column;
-		gap: 10px;
+		gap: 12px;
 
 		> p {
 			font-weight: 700;
 			font-size: 16px;
 			line-height: 20px;
 			padding: 0 20px;
+		}
+
+		> ul.category {
+			padding: 0 20px;
+			display: flex;
+			gap: 12px;
+			margin-bottom: 4px;
+
+			> li {
+				height: 34px;
+			}
 		}
 	}
 `;
@@ -38,6 +49,15 @@ export const StyledMainLists = styled.ul`
 	}
 `;
 
+export const StyledCategoryBorder = styled.span<{ type: string }>`
+	background: ${(props) => props.theme.category[props.type].primary};
+	width: 100%;
+	height: 6px;
+	position: absolute;
+	top: 0;
+	left: 0;
+`;
+
 export const StyledMainListItem = styled.li`
 	background: ${(props) => props.theme.colors.white};
 	border: 2px solid #000000;
@@ -58,7 +78,7 @@ export const StyledMainListItem = styled.li`
 			width: 176px;
 			height: 235px;
 			object-fit: cover;
-			object-position: 90% 10%;
+			//object-position: 90% 10%;
 			vertical-align: center;
 		}
 

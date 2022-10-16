@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { fetchEventById, fetchPeople } from "../../shared/apis/common";
 import { Layout, Loading } from "../../shared/components";
 import { setMetaTags } from "../../shared/utils";
-import EventMain from "./EventMain";
+import DetailMainInfo from "./DetailMainInfo";
 import EventNearHere from "./EventNearHere";
 import GoodsInfo from "./GoodsInfo";
 import Location from "./Location";
@@ -31,7 +31,7 @@ const Detail = () => {
 		people?.filter((p) => p.id === biasId)[0].name;
 
 	useEffect(() => {
-		if (data?.place) {
+		if (data?.place && data?.biasesId[0] && people) {
 			setMetaTags({
 				title: "오늘의 컵홀더 | 상세보기",
 				description: `${data.place}에서 열리는 ${getBiasName(
@@ -42,7 +42,7 @@ const Detail = () => {
 		return () => {
 			setMetaTags({});
 		};
-	}, [data]);
+	}, [data, people]);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -62,7 +62,7 @@ const Detail = () => {
 			<StyledDetail>
 				<div className="detailInfo">
 					<div className="mainInfo">
-						<EventMain data={data} />
+						<DetailMainInfo data={data} />
 					</div>
 					<div className="subInfo">
 						<TwitterInfo data={data} />

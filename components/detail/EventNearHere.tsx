@@ -3,7 +3,10 @@ import React from "react";
 import { useQuery } from "react-query";
 import { fetchEvents } from "../../shared/apis/common";
 import { imageOnErrorHandler } from "../../shared/utils";
-import { EventNearHereList, StyledEventNearHere } from "./styles/eventNearHereStyle";
+import {
+	EventNearHereList,
+	StyledEventNearHere,
+} from "./styles/eventNearHereStyle";
 import type { EventType } from "../../shared/types";
 
 function EventNearHere({ biasesId, districts }: Partial<EventType>) {
@@ -15,7 +18,11 @@ function EventNearHere({ biasesId, districts }: Partial<EventType>) {
 		select: (data) =>
 			data?.filter((item) => {
 				if (biasesId && biasesId[0]) {
-					return item.id !== eid && item.districts.name === districts?.name && item.biasesId[0] === biasesId[0];
+					return (
+						item.id !== eid &&
+						item.districts.name === districts?.name &&
+						item.biasesId[0] === biasesId[0]
+					);
 				}
 				return null;
 			}),
@@ -31,13 +38,28 @@ function EventNearHere({ biasesId, districts }: Partial<EventType>) {
 			<ul>
 				{nearEvent &&
 					nearEvent.map((event) => {
-						const { id: eventId, images, place, organizer } = event;
+						const { id: eventId, category, images, place, organizer } = event;
 						const previewUrl = (images && images[0]) || "";
 						return (
-							<EventNearHereList key={eventId} onClick={() => router.push(`/detail/${eventId}`)}>
-								{previewUrl && <img alt={previewUrl} src={previewUrl} onError={imageOnErrorHandler} />}
+							<EventNearHereList
+								key={eventId}
+								onClick={() => router.push(`/detail/${eventId}`)}
+							>
+								{previewUrl && (
+									<img
+										alt={previewUrl}
+										src={previewUrl}
+										onError={imageOnErrorHandler}
+									/>
+								)}
 								<div>
-									<p className="near_place">{place}</p>
+									<div className="near_title">
+										<img
+											alt={category}
+											src={`/images/categories/${category}.png`}
+										/>
+										<p className="near_place">{place}</p>
+									</div>
 									<p className="near_organizer">{organizer}</p>
 								</div>
 							</EventNearHereList>

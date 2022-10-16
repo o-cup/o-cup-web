@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledBiasChip = styled.span`
 	font-size: 13px;
-	line-height: 17px;
+	line-height: 19px;
 	font-weight: 700;
 	color: ${({ theme }) => theme.colors.white};
 	background: ${({ theme }) => theme.colors.black};

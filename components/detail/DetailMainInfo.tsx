@@ -5,14 +5,15 @@ import {
 	convertDateToString,
 	convertDateWithDots,
 	isOpenToday,
-} from "../../shared/utils/dateHandlers";
-import { imageOnErrorHandler } from "../../shared/utils/imageHandlers";
+	imageOnErrorHandler,
+} from "../../shared/utils";
 import PosterView from "./PosterView";
 import {
 	StyledDetailImgContainer,
 	StyledDetailTextContainer,
-	StyledEventMain,
-} from "./styles/eventMainStyle";
+	StyledDetailMainInfo,
+	StyledDetailCategory,
+} from "./styles/detailMainInfoStyle";
 import type { EventType } from "../../shared/types";
 
 type EventMainProps = {
@@ -20,9 +21,10 @@ type EventMainProps = {
 	posterPopupDisabled?: boolean;
 };
 
-const EventMain = ({ data, posterPopupDisabled }: EventMainProps) => {
+const DetailMainInfo = ({ data, posterPopupDisabled }: EventMainProps) => {
 	const {
 		place,
+		category,
 		biasesId,
 		organizer,
 		startAt,
@@ -40,8 +42,9 @@ const EventMain = ({ data, posterPopupDisabled }: EventMainProps) => {
 	const isDuringEvent = isOpenToday(today, startAt, endAt);
 
 	return (
-		<StyledEventMain>
+		<StyledDetailMainInfo>
 			<StyledDetailTextContainer>
+				<StyledDetailCategory type={category || "A"} />
 				<div className="title">
 					<p>{place}</p>
 					<div className="chipContainer">
@@ -95,12 +98,12 @@ const EventMain = ({ data, posterPopupDisabled }: EventMainProps) => {
 			{!posterPopupDisabled && isPosterViewOpen && images && (
 				<PosterView images={images} setPosterViewOpen={setPosterViewOpen} />
 			)}
-		</StyledEventMain>
+		</StyledDetailMainInfo>
 	);
 };
 
-EventMain.defaultProps = {
+DetailMainInfo.defaultProps = {
 	posterPopupDisabled: false,
 };
 
-export default EventMain;
+export default DetailMainInfo;

@@ -36,6 +36,7 @@ const BiasList = () => {
 	if (isLoading) {
 		return <Loading />;
 	}
+
 	return (
 		<StyledBiasList>
 			{people && people?.length ? (

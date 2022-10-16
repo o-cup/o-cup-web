@@ -54,6 +54,10 @@ const Layout: React.FC<LayoutProps> = ({
 		<StyledLayout>
 			<Head>
 				<meta
+					name="viewport"
+					content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
+				/>
+				<meta
 					name="description"
 					content={description || headContents[pathname].description}
 				/>

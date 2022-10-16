@@ -6,8 +6,8 @@ import { Layout, Loading } from "../../shared/components";
 import DetailMainInfo from "./DetailMainInfo";
 import EventNearHere from "./EventNearHere";
 import GoodsInfo from "./GoodsInfo";
-import Location from "./Location";
 import TwitterInfo from "./TwitterInfo";
+import Location from "./location";
 import { StyledDetail } from "./styles";
 import type { EventType } from "../../shared/types";
 
@@ -39,12 +39,13 @@ const Detail = () => {
 		window.scrollTo(0, 0);
 	}, []);
 
-	if (isLoading || !data)
+	if (isLoading || !data) {
 		return (
 			<Layout page="detail" description={description}>
 				<Loading />
 			</Layout>
 		);
+	}
 
 	const { biasesId, districts, address, goods, tweetUrl } = data;
 

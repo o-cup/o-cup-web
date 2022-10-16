@@ -29,13 +29,6 @@ const Main = () => {
 		setDateFilter(convertDateToString(result));
 	};
 
-	// useEffect(() => {
-	// 	setMetaTags({});
-	// 	return () => {
-	// 		setMetaTags({});
-	// 	};
-	// }, []);
-
 	return (
 		<Layout page="main">
 			<StyledMain>

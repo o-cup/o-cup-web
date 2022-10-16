@@ -59,6 +59,7 @@ const EventSection = () => {
 	if (isLoading) {
 		return <Loading />;
 	}
+
 	return (
 		<>
 			<StyledMainEvents>

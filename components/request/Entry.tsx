@@ -43,17 +43,6 @@ const Entry = ({ setConfirmModalOpen, setBottomSheetOpen }: EntryProps) => {
 
 	return (
 		<StyledEntry>
-			<div className="notice">
-				<p>이벤트 등록 시 주의사항</p>
-				<p>
-					오늘의 컵홀더는 특전 증정이 있는 이벤트에 한해 정보를 제공합니다.
-					<b>
-						{" "}
-						따라서 특전 증정이 없는 포토부스, 옥외광고 등의 이벤트는 승인되지
-						않습니다.
-					</b>
-				</p>
-			</div>
 			<div className="inputsWrapper">
 				<StyledPlaceInput>
 					<SearchInput

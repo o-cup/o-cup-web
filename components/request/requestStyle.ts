@@ -79,34 +79,6 @@ const StyledEntry = styled.div`
 	width: 100%;
 	//}
 
-	.notice {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-		font-size: 12px;
-		width: 100%;
-		font-weight: 400;
-
-		p:first-child {
-			width: 140px;
-			height: 28px;
-			background-color: ${({ theme }) => theme.colors.black};
-			color: ${({ theme }) => theme.colors.white};
-			font-weight: 700;
-			border-radius: 30px;
-			text-align: center;
-			line-height: 28px;
-		}
-
-		p:not(:first-child) {
-			line-height: 16px;
-		}
-
-		b {
-			font-weight: 700;
-		}
-	}
-
 	.inputsWrapper {
 		display: flex;
 		flex-direction: column;

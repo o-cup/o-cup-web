@@ -1,7 +1,7 @@
 import React from "react";
 import { useRecoilState } from "recoil";
+import { CategoryChip } from "../../../shared/components";
 import { requestInputsAtom } from "../../../shared/state/atoms";
-import CategoryChip from "../../../shared/components/CategoryChip";
 
 export const CATEGORY_TYPES = ["A", "B", "C", "D", "E"] as (
 	| "A"

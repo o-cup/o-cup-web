@@ -1,9 +1,9 @@
+import { format } from "date-fns";
 import { useRouter } from "next/router";
 import React, { memo } from "react";
 import { FaTwitter } from "react-icons/fa";
 import { BiasChip, Icon } from "../../shared/components";
 import {
-	convertDateToString,
 	convertDateWithDots,
 	imageOnErrorHandler,
 	isOpenToday,
@@ -29,26 +29,30 @@ const Event = ({ event }: EventProps) => {
 		endAt,
 		id,
 	} = event;
-
-	const today = convertDateToString(new Date());
+	const today = format(new Date(), "yyyyMMdd");
 	const isDuringEvent = isOpenToday(today, startAt!, endAt!);
+	const isEnd = today > endAt!;
+	const fileName = isEnd ? `${category}_disabled` : category;
 
 	return (
-		<StyledEvent onClick={() => router.push(`/detail/${id}`)}>
-			<img alt={place} src={image} onError={imageOnErrorHandler} />
+		<StyledEvent onClick={() => router.push(`/detail/${id}`)} isEnd={isEnd}>
+			<div className="poster">
+				<img alt={place} src={image} onError={imageOnErrorHandler} />
+			</div>
+
 			<div>
 				<div className="title">
 					<h2>{place}</h2>
 					<img
 						className="category_icon"
 						alt={category}
-						src={`/images/categories/${category}.png`}
+						src={`/images/categories/${fileName}.png`}
 					/>
 				</div>
 
 				<div className="biases">
 					{biasesId?.map((biasId) => (
-						<BiasChip id={biasId} key={biasId} />
+						<BiasChip id={biasId} key={biasId} disabled={isEnd} />
 					))}
 				</div>
 

@@ -36,6 +36,28 @@ class MyDocument extends Document {
 					<meta charSet="utf-8" />
 					<meta name="keywords" content="" />
 					<meta name="theme-color" content="#ffffff" />
+					<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+					<link rel="icon" href="/images/logo/favicon.ico" />
+					<link
+						rel="apple-touch-icon"
+						sizes="180x180"
+						href="/images/logo/apple-touch-icon.png"
+					/>
+					<link
+						rel="icon"
+						type="image/png"
+						sizes="32x32"
+						href="/images/logo/favicon-32x32.png"
+					/>
+					<link
+						rel="icon"
+						type="image/png"
+						sizes="16x16"
+						href="/images/logo/favicon-16x16.png"
+					/>
+					<link rel="manifest" href="/images/logo/site.webmanifest" />
+
 					<meta
 						name="naver-site-verification"
 						content="10acbc20bd9fc3f9871a0ff13ed7dbd6dbe90876"

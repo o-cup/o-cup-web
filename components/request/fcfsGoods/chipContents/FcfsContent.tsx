@@ -1,7 +1,7 @@
 import React from "react";
 import { useRecoilState } from "recoil";
 import { requestInputsAtom } from "../../../../shared/state";
-import GoodsChipCountInput from "../../GoodsChipInput/GoodsChipCountInput";
+import GoodsChipCountInput from "../../goodsChipInput/GoodsChipCountInput";
 import { StyledFcfsContentContainer } from "../fcfsGoodsInputStyle";
 import type {
 	FcfsDataType,

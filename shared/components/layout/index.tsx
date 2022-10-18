@@ -63,8 +63,11 @@ const Layout: React.FC<LayoutProps> = ({
 				/>
 
 				<meta property="og:type" content="website" />
-				<meta property="og:title" content="페이지 제목" />
-				<meta property="og:description" content="페이지 설명" />
+				<meta property="og:title" content="오늘의 컵홀더" />
+				<meta
+					property="og:description"
+					content="응원하는 아티스트의 생일 이벤트를 한눈에 확인해보세요!"
+				/>
 				<meta
 					property="og:image"
 					content="https://www.o-cup.kr/images/ocup_profile.jpg"
@@ -82,6 +85,22 @@ const Layout: React.FC<LayoutProps> = ({
 					content="https://www.o-cup.kr/images/ocup_profile.jpg"
 				/>
 				<meta name="twitter:site" content="o-cup.kr" />
+
+				{(page === "detail" || page === "request" || page === "duplicate") && (
+					<>
+						<script
+							async
+							id="kakaoMap"
+							src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aa90b5cd8734fb0ed66e4f3aab95a147&autoload=false&libraries=services"
+						></script>
+						<script
+							async
+							id="kakaoJS"
+							type="text/javascript"
+							src="https://developers.kakao.com/sdk/js/kakao.js"
+						></script>
+					</>
+				)}
 
 				<title>{headContents[pathname].title}</title>
 			</Head>

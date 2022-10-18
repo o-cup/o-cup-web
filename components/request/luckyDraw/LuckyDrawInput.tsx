@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { GoodsChip, Icon } from "../../../shared/components";
 import { requestInputsAtom } from "../../../shared/state";
-import GoodsChipCountInput from "../GoodsChipInput/GoodsChipCountInput";
+import GoodsChipCountInput from "../goodsChipInput/GoodsChipCountInput";
 import {
 	StyledLuckyInput,
 	StyledLuckyTitle,

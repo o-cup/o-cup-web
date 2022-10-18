@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StyledCalendarContainer } from "../../../components/request/DateRange/dateRangeInputStyle";
+import { StyledCalendarContainer } from "../../../components/request/dateRange/dateRangeInputStyle";
 
 export const StyledCalendar = styled(StyledCalendarContainer)`
 	border: 0;

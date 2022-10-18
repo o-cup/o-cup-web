@@ -113,11 +113,6 @@ const Request = () => {
 	useEffect(() => {
 		window.scrollTo(0, 0);
 
-		alert(
-			"현재 이벤트 신청 기능에 장애가 발생하고 있습니다.\n" +
-				"카카오 장애 복구 이후 정상화될 예정이니 양해 부탁드립니다."
-		);
-
 		return () => {
 			// 이벤트 등록 session 정보 초기화
 			resetAllStates();

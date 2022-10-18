@@ -8,13 +8,13 @@ import {
 	requestInputsAtom,
 	tempPostersAtom,
 } from "../../shared/state";
-import DateRangeInput from "./DateRange/DateRangeInput";
+import DateRangeInput from "./dateRange/DateRangeInput";
 import Entry from "./Entry";
-import AlertModal from "./Modals/AlertModal";
-import ConfirmModal from "./Modals/ConfirmModal";
-import DuplicatedModal from "./Modals/DuplicatedModal";
-import SubmitModal from "./Modals/SubmitModal";
-import PlaceInput from "./Place/PlaceInput";
+import AlertModal from "./modals/AlertModal";
+import ConfirmModal from "./modals/ConfirmModal";
+import DuplicatedModal from "./modals/DuplicatedModal";
+import SubmitModal from "./modals/SubmitModal";
+import PlaceInput from "./place/PlaceInput";
 import PreviewContent from "./PreviewContent";
 import { sendReqData } from "./requestApi";
 import {
@@ -24,7 +24,7 @@ import {
 	StyledRequestBottomSheet,
 } from "./requestStyle";
 import type { EventType } from "../../shared/types";
-import CategoryInput from "./CategoryInput";
+import CategoryInput from "./categoryInput";
 
 const Request = () => {
 	const router = useRouter();

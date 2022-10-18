@@ -3,10 +3,6 @@ import React, { useEffect, useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useRecoilState } from "recoil";
 import { requestInputsAtom } from "../../../shared/state";
-import {
-	removeKakaoMapKey,
-	setKakaoMapKey,
-} from "../../../shared/utils/kakaoMapHandlers";
 import SearchInput from "../units/SearchInput";
 import {
 	StyledSearchListContainer,
@@ -37,13 +33,6 @@ const PlaceInput = () => {
 	const [isSearchOpen, setSearchOpen] = useState(false);
 	const [keyword, setKeyword] = useState("");
 	const [placeList, setPlaceList] = useState([] as KakaoResult[]);
-
-	useEffect(() => {
-		setKakaoMapKey();
-		return () => {
-			removeKakaoMapKey();
-		};
-	}, []);
 
 	const onLoadKakaoMap = (kakao: any, k: string) => {
 		kakao?.maps?.load(() => {

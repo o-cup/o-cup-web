@@ -1,8 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import {
-	removeKakaoMapKey,
-	setKakaoMapKey,
-} from "../../../shared/utils/kakaoMapHandlers";
 import { StyledMap } from "../styles/locationStyle";
 import type { EventType } from "../../../shared/types";
 
@@ -10,13 +6,6 @@ function Map({ address }: Partial<EventType>) {
 	const container = useRef<HTMLDivElement>(null);
 
 	const searchAddress = address || "서울 중구 세종대로 110";
-
-	useEffect(() => {
-		setKakaoMapKey();
-		return () => {
-			removeKakaoMapKey();
-		};
-	}, []);
 
 	const onLoadKakaoMap = (kakao: any) => {
 		kakao?.maps?.load(() => {

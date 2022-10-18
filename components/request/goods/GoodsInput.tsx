@@ -4,7 +4,7 @@ import {
 	StyledInputWrapper,
 	StyledChipContainer,
 } from "./goodsInputStyle";
-import GoodsChipInput from "../GoodsChipInput/GoodsChipInput";
+import GoodsChipInput from "../goodsChipInput/GoodsChipInput";
 import Icon from "../../../shared/components/icon";
 import { ItemsType } from "../../../shared/types/request";
 import GoodsSelectBox from "./GoodsSelectBox";

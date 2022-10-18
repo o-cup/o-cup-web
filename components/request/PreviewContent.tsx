@@ -8,7 +8,7 @@ import {
 } from "../../shared/state";
 import DetailMainInfo from "../detail/DetailMainInfo";
 import GoodsInfo from "../detail/GoodsInfo";
-import Location from "../detail/Location";
+import Location from "../detail/location";
 import TwitterInfo from "../detail/TwitterInfo";
 import { getGoodsObj } from "./requestApi";
 

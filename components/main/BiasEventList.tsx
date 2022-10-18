@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { CategoryChip } from "../../shared/components";
 import { dateFilterAtom } from "../../shared/state";
+import { EventType, PeopleType } from "../../shared/types";
+import EventListItem from "./EventListItem";
+import { StyledMainLists } from "./styles/mainEventListStyles";
+import { CATEGORY_TYPES } from "../request/categoryInput";
+import CategoryChip from "../../shared/components/CategoryChip";
 import {
 	convertDateToString,
 	convertStringToDate,

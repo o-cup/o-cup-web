@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "../../../shared/components";
-import { LoadingSpinnerWrapper } from "../../../shared/components/Loading/loadingStyle";
+import { LoadingSpinnerWrapper } from "../../../shared/components/loading/loadingStyle";
 import { StyledRequestModal } from "../requestStyle";
 import type { Dispatch, SetStateAction } from "react";
 

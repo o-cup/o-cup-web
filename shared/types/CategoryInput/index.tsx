@@ -1,9 +1,15 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { requestInputsAtom } from "../../../state/atoms";
-import CategoryChip from "../../../shared/components/CategoryChip";
+import { CategoryChip } from "../../components";
+import { requestInputsAtom } from "../../state";
 
-export const CATEGORY_TYPES = ["A", "B", "C", "D", "E"] as ("A" | "B" | "C" | "D" | "E")[];
+export const CATEGORY_TYPES = ["A", "B", "C", "D", "E"] as (
+	| "A"
+	| "B"
+	| "C"
+	| "D"
+	| "E"
+)[];
 
 const CategoryInput = () => {
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
@@ -17,8 +23,15 @@ const CategoryInput = () => {
 						<CategoryChip
 							type={category}
 							selected={requestInputs.category === category}
-							opacity={requestInputs.category !== category && requestInputs.category !== "" ? 0.5 : 1}
-							handleClick={() => setRequestInputs({ ...requestInputs, category })}
+							opacity={
+								requestInputs.category !== category &&
+								requestInputs.category !== ""
+									? 0.5
+									: 1
+							}
+							handleClick={() =>
+								setRequestInputs({ ...requestInputs, category })
+							}
 						/>
 					</li>
 				))}

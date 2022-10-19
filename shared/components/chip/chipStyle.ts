@@ -1,16 +1,18 @@
 import styled from "styled-components";
-import { ColorsType, CustomStyleType } from "../../../types";
+import type { ColorsType, CustomStyleType } from "../../types";
 
 type StyledChipProps = {
 	customStyle?: CustomStyleType;
 	bgColor: ColorsType;
 };
 
-export const StyledChip = styled.span.attrs(({ customStyle }: StyledChipProps) => ({
-	style: {
-		...customStyle,
-	},
-}))<StyledChipProps>`
+export const StyledChip = styled.span.attrs(
+	({ customStyle }: StyledChipProps) => ({
+		style: {
+			...customStyle,
+		},
+	})
+)<StyledChipProps>`
 	width: fit-content;
 	height: 30px;
 	border: 2px solid #000;

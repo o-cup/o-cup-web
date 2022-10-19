@@ -1,13 +1,17 @@
-import React, { SetStateAction, useState, Dispatch, memo } from "react";
+import React, { useState, memo } from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { Month, StyledMonthSelector } from "./styles/monthSelectorStyle";
+import type { SetStateAction, Dispatch } from "react";
 
 type MonthSelectorProps = {
 	selectedMonth: number | null;
 	setSelectedMonth: Dispatch<SetStateAction<number | null>>;
 };
 
-const MonthSelector = ({ selectedMonth, setSelectedMonth }: MonthSelectorProps) => {
+const MonthSelector = ({
+	selectedMonth,
+	setSelectedMonth,
+}: MonthSelectorProps) => {
 	const [toggle, setToggle] = useState(false);
 
 	const months = Array.from({ length: 12 }, (_, i) => i + 1);
@@ -24,7 +28,11 @@ const MonthSelector = ({ selectedMonth, setSelectedMonth }: MonthSelectorProps) 
 			<h2>{`${selectedMonth}월 생일 아티스트를 찾아보세요.`}</h2>
 			<div className="toggle">
 				<p>다른 생일 달 아티스트 찾아보기</p>
-				{toggle ? <FaCaretUp onClick={handleToggleClick} /> : <FaCaretDown onClick={handleToggleClick} />}
+				{toggle ? (
+					<FaCaretUp onClick={handleToggleClick} />
+				) : (
+					<FaCaretDown onClick={handleToggleClick} />
+				)}
 			</div>
 
 			{toggle && (

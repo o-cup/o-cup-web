@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledCategoryChip } from "./categoryChipStyle";
+import { StyledCategoryChip } from "./style";
 
 type CategoryChipProps = {
 	type: "A" | "B" | "C" | "D" | "E";
@@ -17,7 +17,13 @@ export const CATEGORY_TITLE = {
 	E: "기타",
 };
 
-const CategoryChip = ({ type, handleClick, selected, opacity, disabled }: CategoryChipProps) => (
+const CategoryChip = ({
+	type,
+	handleClick,
+	selected,
+	opacity,
+	disabled,
+}: CategoryChipProps) => (
 	<StyledCategoryChip
 		type={type}
 		onClick={handleClick}

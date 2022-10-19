@@ -42,7 +42,9 @@ const Event = ({
 				<div className="biases">
 					{requestedBiases
 						? requestedBiases.map((bias) => (
-								<StyledBiasChip key={bias.id}>{bias.bias}</StyledBiasChip>
+								<StyledBiasChip key={bias.id} disabled={false}>
+									{bias.bias}
+								</StyledBiasChip>
 						  ))
 						: biasesId?.map((biasId) => <BiasChip id={biasId} key={biasId} />)}
 				</div>

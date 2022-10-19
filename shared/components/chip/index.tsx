@@ -10,7 +10,12 @@ type ChipProps = {
 	handleDelete?: () => void;
 };
 
-const Chip = ({ text, customStyle, bgColor = "white", handleDelete }: ChipProps) => (
+const Chip = ({
+	text,
+	customStyle,
+	bgColor = "white",
+	handleDelete,
+}: ChipProps) => (
 	<StyledChip customStyle={customStyle} bgColor={bgColor}>
 		{text}
 		{handleDelete && <Icon name="delete" handleClick={handleDelete} />}

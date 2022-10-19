@@ -1,6 +1,6 @@
 import React from "react";
-import { CustomStyleType } from "../../../types";
 import { StyledButton } from "./buttonStyle";
+import type { CustomStyleType } from "../../types";
 
 type ButtonProps = {
 	children: string;

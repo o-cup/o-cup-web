@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
+import { Icon } from "../../../shared/components";
 import { requestGoodsListAtom } from "../../../shared/state";
 import GoodsInput from "./GoodsInput";
 import { StyledGoodsContainer, StyledGoodsTitle } from "./goodsInputStyle";
 import type { ItemsType } from "../../../shared/types/request";
-import { Icon } from "../../../shared/components";
 
 /*
  *  화면 표현을 위해

@@ -1,15 +1,17 @@
 import styled from "styled-components";
-import { CustomStyleType } from "../../../types";
+import type { CustomStyleType } from "../../types";
 
 type ButtonProps = {
 	customStyle?: CustomStyleType;
 };
 
-export const StyledButton = styled.button.attrs(({ customStyle }: ButtonProps) => ({
-	style: {
-		...customStyle,
-	},
-}))<ButtonProps>`
+export const StyledButton = styled.button.attrs(
+	({ customStyle }: ButtonProps) => ({
+		style: {
+			...customStyle,
+		},
+	})
+)<ButtonProps>`
 	height: 77px;
 	background: ${({ theme }) => theme.colors.primary};
 	color: ${({ theme }) => theme.colors.black};

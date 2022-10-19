@@ -1,13 +1,13 @@
 import React, { useState } from "react";
+import Icon from "../../../shared/components/icon";
+import GoodsChipInput from "../goodsChipInput/GoodsChipInput";
+import GoodsSelectBox from "./GoodsSelectBox";
 import {
 	StyledGoodsInput,
 	StyledInputWrapper,
 	StyledChipContainer,
 } from "./goodsInputStyle";
-import GoodsChipInput from "../goodsChipInput/GoodsChipInput";
-import Icon from "../../../shared/components/icon";
-import { ItemsType } from "../../../shared/types/request";
-import GoodsSelectBox from "./GoodsSelectBox";
+import type { ItemsType } from "../../../shared/types/request";
 
 type GoodsListValues = {
 	id: number;

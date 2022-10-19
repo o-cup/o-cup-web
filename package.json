@@ -43,7 +43,7 @@
   "scripts": {
     "dev": "next",
     "start": "next start",
-    "next build": "next build",
+    "build": "next build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint './src/**/*.{ts,tsx,js,jsx}'",

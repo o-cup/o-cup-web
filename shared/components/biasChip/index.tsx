@@ -7,7 +7,7 @@ type BiasChipProps = {
 	id: number;
 	previewName?: string;
 	dots?: boolean;
-	disabled: boolean;
+	disabled?: boolean;
 };
 
 const BiasChip = ({
@@ -21,7 +21,7 @@ const BiasChip = ({
 	});
 
 	return (
-		<StyledBiasChip disabled={disabled}>
+		<StyledBiasChip disabled={disabled || false}>
 			{name || previewName || id}
 			{dots && "..."}
 		</StyledBiasChip>
@@ -31,6 +31,7 @@ const BiasChip = ({
 BiasChip.defaultProps = {
 	previewName: "",
 	dots: false,
+	disabled: false,
 };
 
 export default BiasChip;

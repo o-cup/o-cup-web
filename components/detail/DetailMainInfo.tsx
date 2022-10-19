@@ -16,7 +16,7 @@ import {
 } from "./styles/detailMainInfoStyle";
 import type { EventType } from "../../shared/types";
 
-type DetailMainInfoProps = {
+type EventMainProps = {
 	data: Partial<EventType>;
 	posterPopupDisabled?: boolean;
 };

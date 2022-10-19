@@ -51,7 +51,9 @@ const DetailMainInfo = ({ data, posterPopupDisabled }: EventMainProps) => {
 						{requestedBiases
 							? requestedBiases.map((bias) =>
 									bias.bias ? (
-										<StyledBiasChip key={bias.id}>{bias.bias}</StyledBiasChip>
+										<StyledBiasChip key={bias.id} disabled={false}>
+											{bias.bias}
+										</StyledBiasChip>
 									) : null
 							  )
 							: biasesId?.map((biasId) => (

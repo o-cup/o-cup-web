@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
+import { CategoryChip } from "../../shared/components";
 import { dateFilterAtom } from "../../shared/state";
-import { EventType, PeopleType } from "../../shared/types";
-import EventListItem from "./EventListItem";
-import { StyledMainLists } from "./styles/mainEventListStyles";
-import { CATEGORY_TYPES } from "../request/categoryInput";
-import CategoryChip from "../../shared/components/CategoryChip";
 import {
 	convertDateToString,
 	convertStringToDate,
 	isBeforeToday,
 } from "../../shared/utils/dateHandlers";
+import { CATEGORY_TYPES } from "../request/categoryInput";
+import EventListItem from "./EventListItem";
+import { StyledMainLists } from "./styles/mainEventListStyles";
+import type { EventType, PeopleType } from "../../shared/types";
 
 type BiasEventListProps = {
 	id: string;
@@ -65,7 +65,7 @@ const BiasEventList = ({ id, bias, events }: BiasEventListProps) => {
 					<li key={category}>
 						<CategoryChip
 							type={category}
-							opacity={openedCategory?.includes(category) ? 1 : 0.5}
+							opacity={openedCategory?.includes(category) ? 1 : 0.4}
 							disabled={!openedCategory?.includes(category)}
 							selected={selectedCategory?.includes(category)}
 							handleClick={() => handleClickCategory(category)}

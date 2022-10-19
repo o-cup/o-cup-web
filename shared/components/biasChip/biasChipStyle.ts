@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
-const StyledBiasChip = styled.span`
+const StyledBiasChip = styled.span<{ disabled: boolean }>`
 	font-size: 13px;
 	line-height: 19px;
 	font-weight: 700;
 	color: ${({ theme }) => theme.colors.white};
-	background: ${({ theme }) => theme.colors.black};
+	background: ${({ theme, disabled }) =>
+		disabled ? theme.colors.disabled : theme.colors.black};
 	padding: 4px 12px;
 	border-radius: 24px;
 	white-space: nowrap;

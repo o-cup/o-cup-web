@@ -3,6 +3,7 @@ import BiasProfile from "./biasProfile";
 import BottomSheet from "./bottomSheet";
 import Button from "./button";
 import Calendar from "./calendar";
+import CategoryChip from "./categoryChip";
 import Chip from "./chip";
 import FilterIcon from "./filterIcon";
 import GoodsChip from "./goodsChip";
@@ -28,4 +29,5 @@ export {
 	Modal,
 	BottomSheet,
 	GoodsChip,
+	CategoryChip,
 };

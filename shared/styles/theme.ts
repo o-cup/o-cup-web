@@ -1,4 +1,4 @@
-import { DefaultTheme } from "styled-components";
+import type { DefaultTheme } from "styled-components";
 
 const theme: DefaultTheme = {
 	font: {
@@ -14,6 +14,7 @@ const theme: DefaultTheme = {
 		gray: "#6a6a6a",
 		red: "#CF0000",
 		eventDay: "#5eff50",
+		disabled: "#7a7a7a",
 	},
 	category: {
 		A: {

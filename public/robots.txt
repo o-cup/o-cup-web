@@ -6,6 +6,15 @@ Allow:/
 User-agent: Yeti
 Allow:/
 
-# Certain social media sites are whitelisted to allow crawlers to access page markup when links to /images are shared.
+# 네이버 검색로봇
+User-agent: Yeti
+Allow: /
+
+# 구글
+User-agent: Googlebot
+User-agent: AdsBot-Google
+Allow: /
+
+# 트위터
 User-agent: Twitterbot
 Allow: /images

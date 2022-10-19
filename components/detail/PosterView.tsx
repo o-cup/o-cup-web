@@ -14,6 +14,10 @@ type PosterProps = {
 
 function PosterView({ images, setPosterViewOpen }: PosterProps) {
 	SwiperCore.use([Navigation]);
+
+	const [swiper, setSwiper] = useState<SwiperCore>();
+	const [zoomLevel, setZoomLevel] = useState(1);
+
 	const [pageNum, setPageNum] = useState(1);
 
 	useEffect(() => {
@@ -22,6 +26,24 @@ function PosterView({ images, setPosterViewOpen }: PosterProps) {
 			document.body.style.overflow = "auto";
 		};
 	}, []);
+
+	/** 화면 scale 구하기 */
+	useEffect(() => {
+		function handleResize() {
+			setZoomLevel(window.visualViewport.scale);
+		}
+		window.visualViewport.addEventListener("resize", handleResize);
+		handleResize();
+		return () =>
+			window.visualViewport.removeEventListener("resize", handleResize);
+	}, []);
+
+	/** swiper 스와이프 방지 */
+	useEffect(() => {
+		if (swiper) {
+			swiper.allowTouchMove = zoomLevel <= 1;
+		}
+	}, [zoomLevel, swiper]);
 
 	return (
 		<StyledPosterView>
@@ -38,8 +60,9 @@ function PosterView({ images, setPosterViewOpen }: PosterProps) {
 			</div>
 
 			<Swiper
+				onSwiper={setSwiper}
 				slidesPerView={1}
-				navigation
+				navigation={zoomLevel <= 1}
 				onSlideChange={(e) => setPageNum(e.activeIndex + 1)}
 			>
 				{images.map((img, i) => (

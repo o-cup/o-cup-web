@@ -3,7 +3,7 @@ import { StyledCategoryChip } from "./style";
 
 type CategoryChipProps = {
 	type: "A" | "B" | "C" | "D" | "E";
-	handleClick?: (e: any) => void;
+	handleClick?: (e: React.MouseEvent) => void;
 	selected?: boolean;
 	opacity?: number;
 	disabled?: boolean; // 클릭방지
@@ -37,7 +37,7 @@ const CategoryChip = ({
 );
 
 CategoryChip.defaultProps = {
-	handleClick: () => console.log("click"),
+	handleClick: null,
 	selected: false,
 	opacity: 1,
 	disabled: false,

@@ -10,7 +10,7 @@ import type { Dispatch } from "react";
 type ReqType = {
 	requestInputs: RequestType;
 	goodsList: RequestGoodsListType[];
-	tempPosters: { id: number; file: any; result: string }[];
+	tempPosters: { id: number; file: File; result: string }[];
 	setSubmitModalOpen: Dispatch<React.SetStateAction<boolean>>;
 	setConfirmModalOpen: Dispatch<React.SetStateAction<boolean>>;
 	setAlertOpen: Dispatch<React.SetStateAction<boolean>>;
@@ -100,7 +100,7 @@ export const getGoodsObj = (
 
 /** 포스터 이미지 업로드 후 return [urls] */
 const getPublicUrls = async (
-	tempPosters: { id: number; file: any; result: string }[]
+	tempPosters: { id: number; file: File; result: string }[]
 ) => {
 	const tempImages = tempPosters.filter((poster) => poster.result !== "");
 
@@ -181,7 +181,7 @@ export const sendReqData = async ({
 		views: 0,
 	};
 
-	const eventData = await insertEvent(eventParams);
+	await insertEvent(eventParams);
 
 	setLoading(false);
 	setConfirmModalOpen(false);

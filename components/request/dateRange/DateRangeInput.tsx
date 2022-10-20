@@ -36,6 +36,7 @@ const DateRangeInput = ({ disabled }: { disabled?: boolean }) => {
 		});
 	}, [dateRange]);
 
+	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	const handleSelectRange = (ranges: any) => {
 		setSelectedRange(ranges.selection);
 	};

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Script from "next/script";
 import { useRouter } from "next/router";
 import React from "react";
 import Content from "./content";
@@ -52,10 +53,23 @@ const Layout: React.FC<LayoutProps> = ({
 
 	return (
 		<StyledLayout>
+			{(page === "detail" || page === "request" || page === "duplicate") && (
+				<>
+					<Script
+						id="kakaoMap"
+						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aa90b5cd8734fb0ed66e4f3aab95a147&autoload=false&libraries=services"
+					/>
+					<Script
+						id="kakaoJS"
+						type="text/javascript"
+						src="https://developers.kakao.com/sdk/js/kakao.js"
+					/>
+				</>
+			)}
 			<Head>
 				<meta
 					name="viewport"
-					content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
+					content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
 				/>
 				<meta
 					name="description"
@@ -85,23 +99,6 @@ const Layout: React.FC<LayoutProps> = ({
 					content="https://www.o-cup.kr/images/ocup_profile.jpg"
 				/>
 				<meta name="twitter:site" content="o-cup.kr" />
-
-				{(page === "detail" || page === "request" || page === "duplicate") && (
-					<>
-						<script
-							async
-							id="kakaoMap"
-							src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aa90b5cd8734fb0ed66e4f3aab95a147&autoload=false&libraries=services"
-						/>
-						<script
-							async
-							id="kakaoJS"
-							type="text/javascript"
-							src="https://developers.kakao.com/sdk/js/kakao.js"
-						/>
-					</>
-				)}
-
 				<title>{headContents[pathname].title}</title>
 			</Head>
 			<Header

@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import React from "react";
 
 export const StyledCategoryChip = styled.div<{
 	type: "A" | "B" | "C" | "D" | "E";
+	handleClick?: (e: React.MouseEvent) => void;
 	selected?: boolean;
 	opacity?: number;
 	disabled?: boolean;

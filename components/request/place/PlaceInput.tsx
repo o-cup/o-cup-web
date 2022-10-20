@@ -1,3 +1,4 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
@@ -9,6 +10,12 @@ import {
 	StyledSearchList,
 } from "../units/searchListStyle";
 import { StyledPlaceInput } from "./placeInputStyle";
+
+declare global {
+	interface Window {
+		kakao: any;
+	}
+}
 
 type KakaoResult = {
 	id: string; // "1376253571"
@@ -34,14 +41,17 @@ const PlaceInput = () => {
 	const [keyword, setKeyword] = useState("");
 	const [placeList, setPlaceList] = useState([] as KakaoResult[]);
 
-	const onLoadKakaoMap = (kakao: any, k: string) => {
-		kakao?.maps?.load(() => {
+	const onLoadKakaoMap = (k: string) => {
+		window.kakao?.maps?.load(() => {
 			// 장소 검색 객체를 생성합니다
-			const ps = new kakao.maps.services.Places();
+			const ps = new window.kakao.maps.services.Places();
 
 			// 키워드 검색 완료 시 호출되는 콜백함수 입니다
-			function placesSearchCB(data: any, status: string) {
-				if (status === kakao.maps.services.Status.OK) {
+			function placesSearchCB(
+				data: React.SetStateAction<KakaoResult[]>,
+				status: string
+			) {
+				if (status === window.kakao.maps.services.Status.OK) {
 					setPlaceList(data);
 					// console.log(data);
 				}
@@ -53,18 +63,16 @@ const PlaceInput = () => {
 	};
 
 	useEffect(() => {
-		const { kakao } = window as any;
-
 		if (
 			window.location.origin === "https://www.o-cup.kr" ||
 			window.location.origin === "https://www.o-cup.com" ||
 			window.location.origin === "http://localhost:3000"
 		) {
 			if (keyword) {
-				onLoadKakaoMap(kakao, keyword);
+				onLoadKakaoMap(keyword);
 			}
-		} else {
-			alert("해당 url에서는 장소등록이 불가능합니다.");
+			// } else {
+			// alert("해당 url에서는 장소등록이 불가능합니다.");
 		}
 	}, [keyword]);
 

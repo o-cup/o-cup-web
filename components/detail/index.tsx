@@ -9,14 +9,13 @@ import GoodsInfo from "./GoodsInfo";
 import TwitterInfo from "./TwitterInfo";
 import Location from "./location";
 import { StyledDetail } from "./styles";
-import type { EventType } from "../../shared/types";
 
 const Detail = () => {
 	const router = useRouter();
 	const { query } = router;
 	const eid = query.eid as string;
 
-	const { data, isLoading }: EventType | any = useQuery(
+	const { data: eventData, isLoading } = useQuery(
 		["detail", eid],
 		() => fetchEventById({ id: eid }),
 		{
@@ -31,15 +30,15 @@ const Detail = () => {
 		return people?.filter((p) => p.id === biasId)[0].name;
 	};
 
-	const description = `${data?.place}에서 열리는 ${getBiasName(
-		data?.biasesId[0]
+	const description = `${eventData?.place}에서 열리는 ${getBiasName(
+		eventData?.biasesId[0]
 	)}의 이벤트를 오늘의 컵홀더에서 확인해보세요!`;
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
 
-	if (isLoading || !data) {
+	if (isLoading || !eventData) {
 		return (
 			<Layout page="detail" description={description}>
 				<Loading />
@@ -47,17 +46,17 @@ const Detail = () => {
 		);
 	}
 
-	const { biasesId, districts, address, goods, tweetUrl } = data;
+	const { biasesId, districts, address, goods, tweetUrl } = eventData;
 
 	return (
 		<Layout page="detail" share description={description}>
 			<StyledDetail>
 				<div className="detailInfo">
 					<div className="mainInfo">
-						<DetailMainInfo data={data} />
+						<DetailMainInfo data={eventData} />
 					</div>
 					<div className="subInfo">
-						<TwitterInfo data={data} />
+						<TwitterInfo data={eventData} />
 						<GoodsInfo goods={goods} tweetUrl={tweetUrl} />
 						<Location address={address} />
 					</div>

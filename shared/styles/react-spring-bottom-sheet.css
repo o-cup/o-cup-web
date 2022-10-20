@@ -161,3 +161,68 @@
   /* Allows interactions on the rest of the page before the close transition is finished */
   pointer-events: none;
 }
+
+
+/** custom */
+.bottom-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 16px 24px;
+  position: relative;
+  background: rgba(252, 251, 247, 0.9);
+  backdrop-filter: blur(4px);
+}
+
+.bottom-header p.title {
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.bottom-header button.close {
+  position: absolute;
+  background: none;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+}
+
+.bottom-header.slider:before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 36px;
+  height: 4px;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  background-color: hsla(0, 0%, 0%, 0.14);
+  background-color: var(--rsbs-handle-bg, hsla(0, 0%, 0%, 0.14));
+}
+
+.bottom-footer {
+  display: flex;
+  justify-content: stretch;
+  width: 100%;
+  margin-top: 12px;
+  padding: 0 24px;
+}
+
+.bottom-footer button {
+  flex: 1 1 50%;
+  height: 72px;
+  background: #f9f368;
+  color: #000000;
+  border: 2px solid #000000;
+  border-radius: 70px;
+  box-shadow: 0 4px 0 #000000;
+  font-size: 18px;
+  margin-bottom: 4px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+}

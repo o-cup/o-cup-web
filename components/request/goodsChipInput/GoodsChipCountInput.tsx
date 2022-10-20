@@ -6,8 +6,16 @@ type GoodsChipProps = {
 	value: string;
 	count: number;
 	dayKey?: string | number | undefined;
-	handleChange: (value: string, luckyId: number, name: "text" | "count", dayKey?: string | number | undefined) => void;
-	handleDeleteChip?: (index: number, dayKey?: string | number | undefined) => void;
+	handleChange: (
+		value: string,
+		luckyId: number,
+		name: "text" | "count",
+		dayKey?: string | number | undefined
+	) => void;
+	handleDeleteChip?: (
+		index: number,
+		dayKey?: string | number | undefined
+	) => void;
 	handleDeleteValue?: (index: number) => void;
 };
 
@@ -92,8 +100,8 @@ const GoodsChipCountInput = ({
 
 GoodsChipCountInput.defaultProps = {
 	dayKey: undefined,
-	handleDeleteChip: () => console.log("delete"),
-	handleDeleteValue: () => console.log("delete"),
+	handleDeleteChip: () => null,
+	handleDeleteValue: () => null,
 };
 
 export default GoodsChipCountInput;

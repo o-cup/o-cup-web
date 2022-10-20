@@ -23,16 +23,16 @@ const Detail = () => {
 		}
 	);
 
-	const { data: people } = useQuery(["bias"], () => fetchPeople());
+	// const { data: people } = useQuery(["bias"], () => fetchPeople());
 
-	const getBiasName = (biasId: number) => {
-		if (!biasId) return "응원하는 아티스트";
-		return people?.filter((p) => p.id === biasId)[0].name;
-	};
+	// const getBiasName = (biasId: number) => {
+	// 	if (!biasId) return "응원하는 아티스트";
+	// 	return people?.filter((p) => p.id === biasId)[0].name;
+	// };
 
-	const description = `${eventData?.place}에서 열리는 ${getBiasName(
-		eventData?.biasesId[0]
-	)}의 이벤트를 오늘의 컵홀더에서 확인해보세요!`;
+	// const description = `${eventData?.place}에서 열리는 ${getBiasName(
+	// 	eventData?.biasesId[0]
+	// )}의 이벤트를 오늘의 컵홀더에서 확인해보세요!`;
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -40,7 +40,7 @@ const Detail = () => {
 
 	if (isLoading || !eventData) {
 		return (
-			<Layout page="detail" description={description}>
+			<Layout page="detail">
 				<Loading />
 			</Layout>
 		);
@@ -49,7 +49,7 @@ const Detail = () => {
 	const { biasesId, districts, address, goods, tweetUrl } = eventData;
 
 	return (
-		<Layout page="detail" share description={description}>
+		<Layout page="detail" share>
 			<StyledDetail>
 				<div className="detailInfo">
 					<div className="mainInfo">

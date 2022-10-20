@@ -7,7 +7,6 @@ import Header from "./header";
 import { StyledLayout } from "./layoutStyle";
 
 type LayoutProps = {
-	description?: string;
 	children: JSX.Element;
 	page: string;
 	share?: boolean;
@@ -41,7 +40,6 @@ const headContents = {
 } as HeadContentsType;
 
 const Layout: React.FC<LayoutProps> = ({
-	description,
 	children,
 	page,
 	share,
@@ -57,10 +55,7 @@ const Layout: React.FC<LayoutProps> = ({
 					name="viewport"
 					content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
 				/>
-				<meta
-					name="description"
-					content={description || headContents[pathname].description}
-				/>
+				<meta name="description" content={headContents[pathname].description} />
 
 				<meta property="og:type" content="website" />
 				<meta property="og:title" content="오늘의 컵홀더" />
@@ -78,7 +73,7 @@ const Layout: React.FC<LayoutProps> = ({
 				<meta name="twitter:title" content={defaultTitle} />
 				<meta
 					name="twitter:description"
-					content={description || headContents[pathname].description}
+					content={headContents[pathname].description}
 				/>
 				<meta
 					name="twitter:image"
@@ -104,12 +99,7 @@ const Layout: React.FC<LayoutProps> = ({
 
 				<title>{headContents[pathname].title}</title>
 			</Head>
-			<Header
-				page={page}
-				share={share}
-				handleBackClick={handleBackClick}
-				description={description}
-			/>
+			<Header page={page} share={share} handleBackClick={handleBackClick} />
 			<Content>{children}</Content>
 			<Footer />
 		</StyledLayout>
@@ -119,7 +109,6 @@ const Layout: React.FC<LayoutProps> = ({
 Layout.defaultProps = {
 	share: false,
 	handleBackClick: undefined,
-	description: "",
 };
 
 export default Layout;

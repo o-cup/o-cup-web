@@ -1,6 +1,6 @@
 import Head from "next/head";
-import Script from "next/script";
 import { useRouter } from "next/router";
+import Script from "next/script";
 import React from "react";
 import Content from "./content";
 import Footer from "./footer";
@@ -67,7 +67,7 @@ const Layout: React.FC<LayoutProps> = ({
 			<Head>
 				<meta
 					name="viewport"
-					content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
+					content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
 				/>
 				<meta name="description" content={headContents[pathname].description} />
 

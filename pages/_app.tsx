@@ -6,6 +6,7 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "../shared/styles/gloabalStyle";
 import theme from "../shared/styles/theme";
 import "react-date-range-ts/dist/styles.css";
+import "../shared/styles/react-spring-bottom-sheet.css";
 import type { AppProps } from "next/app";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {

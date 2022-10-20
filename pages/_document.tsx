@@ -36,7 +36,6 @@ class MyDocument extends Document {
 					<meta charSet="utf-8" />
 					<meta name="keywords" content="" />
 					<meta name="theme-color" content="#ffffff" />
-					<meta name="viewport" content="width=device-width,initial-scale=1" />
 
 					<link rel="icon" href="/images/logo/favicon.ico" />
 					<link

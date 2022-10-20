@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { FaTwitter } from "react-icons/fa";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+// import { LazyLoadImage } from "react-lazy-load-image-component";
 // import "react-lazy-load-image-component/src/effects/blur.css";
 import Icon from "../../shared/components/icon";
 import { convertDateWithDots, imageOnErrorHandler } from "../../shared/utils";

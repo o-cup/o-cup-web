@@ -65,7 +65,7 @@ function PosterView({ images, setPosterViewOpen }: PosterProps) {
 				navigation={zoomLevel <= 1}
 				onSlideChange={(e) => setPageNum(e.activeIndex + 1)}
 			>
-				{images.map((img, i) => (
+				{images.map((img) => (
 					<SwiperSlide key={img}>
 						<img src={img} alt={img} />
 					</SwiperSlide>

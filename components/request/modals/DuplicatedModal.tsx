@@ -73,7 +73,7 @@ const Event = ({
 };
 
 Event.defaultProps = {
-	handleClick: () => console.log("click"),
+	handleClick: () => null,
 };
 
 type ModalProps = {
@@ -107,10 +107,9 @@ const DuplicatedModal = ({
 				{duplicatedEventData && (
 					<Event
 						duplicatedEventData={duplicatedEventData}
-						handleClick={
-							duplicatedEventData.isApproved
-								? () => router.push(`/detail/${duplicatedEventData.id}`)
-								: () => console.log("승인 대기중")
+						handleClick={() =>
+							duplicatedEventData.isApproved &&
+							router.push(`/detail/${duplicatedEventData.id}`)
 						}
 					/>
 				)}

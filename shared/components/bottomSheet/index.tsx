@@ -1,7 +1,5 @@
 import React from "react";
-// import "./bottomSheet.css";
 import { BottomSheet as RBottomSheet } from "react-spring-bottom-sheet";
-// import "./react-spring-bottom-sheet.css";
 import Icon from "../icon";
 import type { Dispatch, SetStateAction } from "react";
 

@@ -10,6 +10,7 @@
         "displayName": true,
         "pure": true
       }
-    ]
+    ],
+    ["styled-components", { "ssr": true }]
   ]
 }

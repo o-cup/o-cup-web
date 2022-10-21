@@ -1,4 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
+import Script from "next/script";
 import React from "react";
 import { ServerStyleSheet } from "styled-components";
 import type { DocumentContext } from "next/document";
@@ -71,6 +72,16 @@ class MyDocument extends Document {
 				<body>
 					<Main />
 					<NextScript />
+					<Script
+						id="Adsense-id"
+						data-ad-client="ca-pub-2524496852271657"
+						async
+						// strategy="afterInteractive"
+						onError={(e) => {
+							console.error("Script failed to load", e);
+						}}
+						src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+					/>
 				</body>
 			</Html>
 		);

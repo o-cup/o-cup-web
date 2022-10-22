@@ -19,8 +19,7 @@ import type { SearchSortOptionKeys } from "../../shared/types";
 
 const Search = () => {
 	const router = useRouter();
-	const { pathname, query } = router;
-	const queryKeyword = query.keyword as string;
+	const { pathname } = router;
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 	const { keyword } = searchFilters;
 	const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
@@ -29,7 +28,6 @@ const Search = () => {
 	const [selectedOption, setSelectedOption] =
 		useState<SearchSortOptionKeys>("alphabetAsc");
 	const [showResult, setShowResult] = useRecoilState(showResultAtom);
-
 	const [isMounted, setIsMounted] = useState(false);
 
 	useEffect(() => {
@@ -69,28 +67,17 @@ const Search = () => {
 	);
 
 	useEffect(() => {
-		if (!queryKeyword) {
-			setSearchFilters((prev) => ({ ...prev, keyword: "" }));
-		} else {
-			setSearchFilters((prev) => ({
-				...prev,
-				keyword: queryKeyword,
-			}));
-		}
-	}, [queryKeyword]);
-
-	useEffect(() => {
 		setShowResult(!!keyword);
 
 		if (!keyword) {
-			router.replace(pathname);
+			router.replace(pathname, undefined, { shallow: true });
 		} else {
 			router.push({
 				pathname,
 				query: { keyword },
 			});
 		}
-	}, [keyword, setShowResult]);
+	}, [keyword]);
 
 	useEffect(() => {
 		const today = new Date();

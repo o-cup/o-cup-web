@@ -1,14 +1,25 @@
 import { supabase } from "../../supabaseClient";
 import { ITEMS_PER_PAGE } from "../constants";
 import { isOpenToday } from "../utils/dateHandlers";
-import type { EventType, FetchEventParams, SearchSortOptionKeys } from "../types";
+import type {
+	EventType,
+	FetchEventParams,
+	SearchSortOptionKeys,
+} from "../types";
 
-const fetchEvents = async ({ pageParam = 1, infinite = false, date }: FetchEventParams) => {
+const fetchEvents = async ({
+	pageParam = 1,
+	infinite = false,
+	date,
+}: FetchEventParams) => {
 	let query = supabase.from("place_sort").select("*").eq("isApproved", true);
 
 	if (infinite) {
 		const endAt = pageParam * ITEMS_PER_PAGE;
-		const startAt = endAt - ITEMS_PER_PAGE === 0 ? endAt - ITEMS_PER_PAGE : endAt - ITEMS_PER_PAGE + 1;
+		const startAt =
+			endAt - ITEMS_PER_PAGE === 0
+				? endAt - ITEMS_PER_PAGE
+				: endAt - ITEMS_PER_PAGE + 1;
 		query = query.range(startAt, endAt);
 	}
 
@@ -34,7 +45,10 @@ const fetchEvents = async ({ pageParam = 1, infinite = false, date }: FetchEvent
  * @returns {EventType}
  */
 const fetchEventById = async ({ id }: { id?: string }) => {
-	const { data, error } = await supabase.from("events").select("*").eq("id", id);
+	const { data, error } = await supabase
+		.from("events")
+		.select("*")
+		.eq("id", id);
 	if (error) {
 		throw new Error(`${error.message}: ${error.details}`);
 	}
@@ -69,7 +83,9 @@ const fetchPeople = async (sortOption?: SearchSortOptionKeys) => {
  * 이벤트 등록 신청
  * */
 const insertEvent = async (eventData: Partial<EventType>) => {
-	const { data, error } = await supabase.from("events").insert([{ ...eventData }]);
+	const { data, error } = await supabase
+		.from("events")
+		.insert([{ ...eventData }]);
 	if (error) {
 		throw new Error(`${error.message}: ${error.details}`);
 	}
@@ -82,7 +98,11 @@ const insertEvent = async (eventData: Partial<EventType>) => {
  * @returns {string} name
  * */
 const fetchBiases = async ({ id }: { id: number }) => {
-	const { data: bias } = await supabase.from("people").select("name").eq("id", id).single();
+	const { data: bias } = await supabase
+		.from("people")
+		.select("name")
+		.eq("id", id)
+		.single();
 	return bias?.name;
 };
 
@@ -93,10 +113,12 @@ const fetchBiases = async ({ id }: { id: number }) => {
  */
 const uploadPoster = async (file: any) => {
 	const fileName = `public/image${Date.now()}.png`;
-	const { data, error } = await supabase.storage.from("posters").upload(fileName, file, {
-		cacheControl: "3600",
-		upsert: false,
-	});
+	const { data, error } = await supabase.storage
+		.from("posters")
+		.upload(fileName, file, {
+			cacheControl: "3600",
+			upsert: false,
+		});
 
 	const { publicURL } = supabase.storage.from("posters").getPublicUrl(fileName);
 	return publicURL;
@@ -124,5 +146,24 @@ const fetchDuplicatedEvent = async ({
 	return data?.[0];
 };
 
-export { fetchEvents, fetchEventById, fetchPeople, insertEvent, fetchBiases, uploadPoster, fetchDuplicatedEvent };
+const fetchBiasData = async (id: number) => {
+	const { data } = await supabase.from("people").select("*").eq("id", id);
+	const { name, profilePic } = data?.[0] || {};
+
+	return {
+		name,
+		image: profilePic,
+	};
+};
+
+export {
+	fetchEvents,
+	fetchEventById,
+	fetchPeople,
+	insertEvent,
+	fetchBiases,
+	uploadPoster,
+	fetchDuplicatedEvent,
+	fetchBiasData,
+};
 export default {};

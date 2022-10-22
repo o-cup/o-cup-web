@@ -6,5 +6,6 @@ export const DEFAULT_POSTER_URL =
 
 export const DEFAULT_TITLE = "오늘의 컵홀더";
 export const DEFAULT_URL = "o-cup.kr";
+export const LOGO_URL = "https://www.o-cup.kr/images/ocup_profile.jpg";
 
 export default {};

@@ -22,7 +22,7 @@ const SearchPage = ({ queryKeyword }: { queryKeyword: string }) => {
 
 	useEffect(() => {
 		const baseUrl = `${window.origin}/search`;
-		setUrl(keyword ? `${baseUrl}?queryKeyword=${queryKeyword}` : baseUrl);
+		setUrl(keyword ? `${baseUrl}?keyword=${queryKeyword}` : baseUrl);
 	}, [queryKeyword]);
 
 	useEffect(() => {

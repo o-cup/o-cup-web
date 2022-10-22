@@ -1,25 +1,41 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Search from "../components/search";
 import { DEFAULT_TITLE, LOGO_URL } from "../shared/constants";
 import { searchFiltersAtom } from "../shared/state";
+import type { GetServerSidePropsContext } from "next";
 // import type { GetServerSidePropsContext } from "next";
 
-const SearchPage = () => {
-	const searchFilter = useRecoilValue(searchFiltersAtom);
+const SearchPage = ({ queryKeyword }: { queryKeyword: string }) => {
+	const router = useRouter();
+	const { pathname } = router;
+	const [searchFilter, setSearchFilter] = useRecoilState(searchFiltersAtom);
 	const { keyword } = searchFilter;
 	const [url, setUrl] = useState("");
 
-	const title = `${keyword || DEFAULT_TITLE} | 검색하기`;
+	const title = `${queryKeyword || DEFAULT_TITLE} | 검색하기`;
 	const description = `${
-		keyword || "응원하는 아티스트"
+		queryKeyword || "응원하는 아티스트"
 	}의 생일 이벤트를 검색해보세요!`;
 
 	useEffect(() => {
 		const baseUrl = `${window.origin}/search`;
-		setUrl(keyword ? `${baseUrl}?keyword=${keyword}` : baseUrl);
-	}, [keyword]);
+		setUrl(keyword ? `${baseUrl}?queryKeyword=${queryKeyword}` : baseUrl);
+	}, [queryKeyword]);
+
+	useEffect(() => {
+		setSearchFilter((prev) => ({
+			...prev,
+			keyword: queryKeyword,
+		}));
+
+		router.push({
+			pathname,
+			query: { keyword: queryKeyword },
+		});
+	}, [queryKeyword]);
 
 	return (
 		<>
@@ -48,17 +64,17 @@ const SearchPage = () => {
 	);
 };
 
-// export const getServerSideProps = async (
-// 	context: GetServerSidePropsContext
-// ) => {
-// 	const { query } = context;
-// 	const keyword = query.keyword as string;
+export const getServerSideProps = async (
+	context: GetServerSidePropsContext
+) => {
+	const { query } = context;
+	const keyword = query.keyword as string;
 
-// 	return {
-// 		props: {
-// 			queryKeyword: keyword || "",
-// 		},
-// 	};
-// };
+	return {
+		props: {
+			queryKeyword: keyword || "",
+		},
+	};
+};
 
 export default SearchPage;

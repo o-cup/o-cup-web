@@ -1,27 +1,25 @@
-import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { useQuery } from "react-query";
-import { fetchEventById, fetchPeople } from "../../shared/apis/common";
-import { Layout, Loading } from "../../shared/components";
+import { Layout } from "../../shared/components";
 import DetailMainInfo from "./DetailMainInfo";
 import EventNearHere from "./EventNearHere";
 import GoodsInfo from "./GoodsInfo";
 import TwitterInfo from "./TwitterInfo";
 import Location from "./location";
 import { StyledDetail } from "./styles";
+import type { EventType } from "../../shared/types";
 
-const Detail = () => {
-	const router = useRouter();
-	const { query } = router;
-	const eid = query.eid as string;
+type DetailProps = {
+	data: EventType;
+};
 
-	const { data: eventData, isLoading } = useQuery(
-		["detail", eid],
-		() => fetchEventById({ id: eid }),
-		{
-			enabled: !!eid,
-		}
-	);
+const Detail = ({ data }: DetailProps) => {
+	// const { data: eventData, isLoading } = useQuery(
+	// 	["detail", eid],
+	// 	() => fetchEventById({ id: eid }),
+	// 	{
+	// 		enabled: !!eid,
+	// 	}
+	// );
 
 	// const { data: people } = useQuery(["bias"], () => fetchPeople());
 
@@ -38,25 +36,25 @@ const Detail = () => {
 		window.scrollTo(0, 0);
 	}, []);
 
-	if (isLoading || !eventData) {
-		return (
-			<Layout page="detail">
-				<Loading />
-			</Layout>
-		);
-	}
+	// if (isLoading || !data) {
+	// 	return (
+	// 		<Layout page="detail">
+	// 			<Loading />
+	// 		</Layout>
+	// 	);
+	// }
 
-	const { biasesId, districts, address, goods, tweetUrl } = eventData;
+	const { biasesId, districts, address, goods, tweetUrl } = data;
 
 	return (
 		<Layout page="detail" share>
 			<StyledDetail>
 				<div className="detailInfo">
 					<div className="mainInfo">
-						<DetailMainInfo data={eventData} />
+						<DetailMainInfo data={data} />
 					</div>
 					<div className="subInfo">
-						<TwitterInfo data={eventData} />
+						<TwitterInfo data={data} />
 						<GoodsInfo goods={goods} tweetUrl={tweetUrl} />
 						<Location address={address} />
 					</div>

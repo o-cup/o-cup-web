@@ -6,6 +6,7 @@ import Content from "./content";
 import Footer from "./footer";
 import Header from "./header";
 import { StyledLayout } from "./layoutStyle";
+import type { GetServerSidePropsContext } from "next";
 
 type LayoutProps = {
 	children: JSX.Element;
@@ -64,7 +65,7 @@ const Layout: React.FC<LayoutProps> = ({
 					/>
 				</>
 			)}
-			<Head>
+			{/* <Head>
 				<meta
 					name="viewport"
 					content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
@@ -95,7 +96,7 @@ const Layout: React.FC<LayoutProps> = ({
 				/>
 				<meta name="twitter:site" content="o-cup.kr" />
 				<title>{headContents[pathname].title}</title>
-			</Head>
+			</Head> */}
 			<Header page={page} share={share} handleBackClick={handleBackClick} />
 			<Content>{children}</Content>
 			<Footer />

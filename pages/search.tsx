@@ -1,15 +1,15 @@
 import Head from "next/head";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import Search from "../components/search";
 import { DEFAULT_TITLE, LOGO_URL } from "../shared/constants";
 import { searchFiltersAtom } from "../shared/state";
+import type { GetServerSidePropsContext } from "next";
 
 const SearchPage = () => {
 	const searchFilter = useRecoilValue(searchFiltersAtom);
 	const { keyword } = searchFilter;
-	const urlRef = useRef("");
-	const url = urlRef.current;
+	const [url, setUrl] = useState("");
 
 	const title = `${keyword || DEFAULT_TITLE} | 검색하기`;
 	const description = `${
@@ -18,8 +18,7 @@ const SearchPage = () => {
 
 	useEffect(() => {
 		const baseUrl = `${window.origin}/search`;
-
-		urlRef.current = keyword ? `${baseUrl}?keyword=${keyword}` : baseUrl;
+		setUrl(keyword ? `${baseUrl}?keyword=${keyword}` : baseUrl);
 	}, [keyword]);
 
 	return (
@@ -47,6 +46,19 @@ const SearchPage = () => {
 			<Search />
 		</>
 	);
+};
+
+export const getServerSideProps = async (
+	context: GetServerSidePropsContext
+) => {
+	const { query } = context;
+	const keyword = query.keyword as string;
+
+	return {
+		props: {
+			queryKeyword: keyword || "",
+		},
+	};
 };
 
 export default SearchPage;

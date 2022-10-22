@@ -76,7 +76,7 @@ const Header = ({ page, share, handleBackClick, description }: HeaderProps) => {
 
 		if (isSearchResultShare) {
 			const encodedKeyword = encodeURIComponent(keyword);
-			const url = `${window.origin}?keyword=${encodedKeyword}`;
+			const url = `${window.origin}/search?keyword=${encodedKeyword}`;
 			copyToClipboard(url);
 			setIsToastOpen(true);
 			return;

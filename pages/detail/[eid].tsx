@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Detail from "../../components/detail";
 import { fetchBiasData, fetchEventById } from "../../shared/apis/common";
 import { DEFAULT_TITLE, DEFAULT_URL } from "../../shared/constants";
@@ -16,10 +16,17 @@ type DetailPageProps = {
 };
 
 const DetailPage = ({ detailData, metaData }: DetailPageProps) => {
+	const [url, setUrl] = useState(DEFAULT_URL);
 	const { place, names, poster } = metaData;
 
 	const title = `${DEFAULT_TITLE} | 상세보기`;
 	const description = `${place}에서 열리는 ${names}의 이벤트를 오늘의 컵홀더에서 확인해보세요!`;
+
+	useEffect(() => {
+		const baseUrl = `${window.origin}`;
+		setUrl(`${baseUrl}/detail/${detailData.id}`);
+	}, [metaData]);
+
 	return (
 		<>
 			<Head>
@@ -34,13 +41,13 @@ const DetailPage = ({ detailData, metaData }: DetailPageProps) => {
 				<meta property="og:title" content={title} />
 				<meta property="og:description" content={description} />
 				<meta property="og:image" content={poster} />
-				<meta property="og:url" content={DEFAULT_URL} />
+				<meta property="og:url" content={url} />
 
 				<meta name="twitter:card" content="summary" />
 				<meta name="twitter:title" content={title} />
 				<meta name="twitter:description" content={description} />
 				<meta name="twitter:image" content={poster} />
-				<meta name="twitter:site" content={DEFAULT_URL} />
+				<meta name="twitter:site" content={url} />
 			</Head>
 			<Detail data={detailData} />;
 		</>

@@ -13,36 +13,9 @@ type DetailProps = {
 };
 
 const Detail = ({ data }: DetailProps) => {
-	// const { data: eventData, isLoading } = useQuery(
-	// 	["detail", eid],
-	// 	() => fetchEventById({ id: eid }),
-	// 	{
-	// 		enabled: !!eid,
-	// 	}
-	// );
-
-	// const { data: people } = useQuery(["bias"], () => fetchPeople());
-
-	// const getBiasName = (biasId: number) => {
-	// 	if (!biasId) return "응원하는 아티스트";
-	// 	return people?.filter((p) => p.id === biasId)[0].name;
-	// };
-
-	// const description = `${eventData?.place}에서 열리는 ${getBiasName(
-	// 	eventData?.biasesId[0]
-	// )}의 이벤트를 오늘의 컵홀더에서 확인해보세요!`;
-
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
-
-	// if (isLoading || !data) {
-	// 	return (
-	// 		<Layout page="detail">
-	// 			<Loading />
-	// 		</Layout>
-	// 	);
-	// }
 
 	const { biasesId, districts, address, goods, tweetUrl } = data;
 

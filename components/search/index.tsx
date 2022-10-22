@@ -30,6 +30,12 @@ const Search = () => {
 		useState<SearchSortOptionKeys>("alphabetAsc");
 	const [showResult, setShowResult] = useRecoilState(showResultAtom);
 
+	const [isMounted, setIsMounted] = useState(false);
+
+	useEffect(() => {
+		setIsMounted(true);
+	}, []);
+
 	const { data: people, isLoading } = useQuery(
 		["people", selectedOption],
 		() => fetchPeople(selectedOption),
@@ -77,7 +83,7 @@ const Search = () => {
 		setShowResult(!!keyword);
 
 		if (!keyword) {
-			router.replace(pathname, undefined, { shallow: true });
+			router.replace(pathname);
 		} else {
 			router.push({
 				pathname,
@@ -105,6 +111,10 @@ const Search = () => {
 		}
 		router.push("/");
 	};
+
+	// Hydration Error Handling
+	if (!isMounted) return null;
+	if (typeof window === "undefined") return null;
 
 	if (isLoading) {
 		return <Loading />;

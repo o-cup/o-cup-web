@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import Search from "../components/search";
 import { DEFAULT_TITLE, LOGO_URL } from "../shared/constants";
 import { searchFiltersAtom } from "../shared/state";
-import type { GetServerSidePropsContext } from "next";
+// import type { GetServerSidePropsContext } from "next";
 
 const SearchPage = () => {
 	const searchFilter = useRecoilValue(searchFiltersAtom);
@@ -48,17 +48,17 @@ const SearchPage = () => {
 	);
 };
 
-export const getServerSideProps = async (
-	context: GetServerSidePropsContext
-) => {
-	const { query } = context;
-	const keyword = query.keyword as string;
+// export const getServerSideProps = async (
+// 	context: GetServerSidePropsContext
+// ) => {
+// 	const { query } = context;
+// 	const keyword = query.keyword as string;
 
-	return {
-		props: {
-			queryKeyword: keyword || "",
-		},
-	};
-};
+// 	return {
+// 		props: {
+// 			queryKeyword: keyword || "",
+// 		},
+// 	};
+// };
 
 export default SearchPage;

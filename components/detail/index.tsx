@@ -22,7 +22,9 @@ const Detail = ({ data }: DetailProps) => {
 
 	useEffect(() => {
 		/** 조회수 업데이트 */
-		updateViews(id, views).then();
+		if (!window.location.href.includes("localhost")) {
+			updateViews(id, views).then();
+		}
 	}, []);
 
 	return (

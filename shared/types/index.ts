@@ -35,7 +35,7 @@ export type GoodsListType = {
 };
 
 export type EventType = {
-	id: number;
+	id: string;
 	createdAt: string;
 	place: string;
 	biasesId: number[];

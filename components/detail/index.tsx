@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { updateViews } from "../../shared/apis/common";
 import { Layout } from "../../shared/components";
 import DetailMainInfo from "./DetailMainInfo";
 import EventNearHere from "./EventNearHere";
@@ -17,7 +18,12 @@ const Detail = ({ data }: DetailProps) => {
 		window.scrollTo(0, 0);
 	}, []);
 
-	const { biasesId, districts, address, goods, tweetUrl } = data;
+	const { id, biasesId, districts, address, goods, tweetUrl, views } = data;
+
+	useEffect(() => {
+		/** 조회수 업데이트 */
+		updateViews(id, views).then();
+	}, []);
 
 	return (
 		<Layout page="detail" share>

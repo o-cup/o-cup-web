@@ -1,3 +1,4 @@
+import router from "next/router";
 import Script from "next/script";
 import React, { useState, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -9,7 +10,6 @@ import theme from "../shared/styles/theme";
 import "react-date-range-ts/dist/styles.css";
 import "../shared/styles/react-spring-bottom-sheet.css";
 import type { AppProps } from "next/app";
-import router from "next/router";
 
 declare global {
 	interface Window {
@@ -18,9 +18,11 @@ declare global {
 }
 
 const pageView = (url: string) => {
-	window.gtag("config", process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
-		page_path: url,
-	});
+	if (typeof window !== "undefined") {
+		window.gtag("config", process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
+			page_path: url,
+		});
+	}
 };
 
 const MyApp = ({ Component, pageProps }: AppProps) => {

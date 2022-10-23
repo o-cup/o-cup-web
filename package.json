@@ -69,6 +69,7 @@
     ]
   },
   "devDependencies": {
+    "@types/gtag.js": "0.0.12",
     "@types/react-date-range": "^1.4.4",
     "@types/react-helmet": "^6.1.5",
     "@types/react-lazy-load-image-component": "^1.5.2",

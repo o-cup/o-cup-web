@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import Search from "../components/search";
 import { DEFAULT_TITLE, LOGO_URL } from "../shared/constants";
 import { searchFiltersAtom } from "../shared/state";

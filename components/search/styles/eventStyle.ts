@@ -133,6 +133,7 @@ export const StyledEvent = styled.li<{ isEnd: boolean }>`
 						margin-right: 0;
 						background-color: ${({ theme }) => theme.colors.eventDay};
 						display: inline-block;
+						border-radius: 50%;
 					}
 				}
 			}

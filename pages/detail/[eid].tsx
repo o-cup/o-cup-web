@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Detail from "../../components/detail";
 import { fetchBiasData, fetchEventById } from "../../shared/apis/common";
 import { DEFAULT_TITLE, DEFAULT_URL } from "../../shared/constants";

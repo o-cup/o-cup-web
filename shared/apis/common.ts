@@ -146,6 +146,10 @@ const fetchDuplicatedEvent = async ({
 	return data?.[0];
 };
 
+/**
+ * 인물 id로 인물 이름과 프로필사진 반환
+ * @param id
+ */
 const fetchBiasData = async (id: number) => {
 	const { data } = await supabase.from("people").select("*").eq("id", id);
 	const { name, profilePic } = data?.[0] || {};
@@ -154,6 +158,22 @@ const fetchBiasData = async (id: number) => {
 		name,
 		image: profilePic,
 	};
+};
+
+/**
+ * 상세페이지 조회수 업데이트
+ * @param id event id
+ * @param prevViews 기존 조회수
+ */
+const updateViews = async (id: string, prevViews: number) => {
+	const { data, error } = await supabase
+		.from("events")
+		.update({ views: prevViews + 1 })
+		.eq("id", id);
+	if (error) {
+		throw new Error(`${error.message}: ${error.details}`);
+	}
+	return data;
 };
 
 export {
@@ -165,5 +185,6 @@ export {
 	uploadPoster,
 	fetchDuplicatedEvent,
 	fetchBiasData,
+	updateViews,
 };
 export default {};

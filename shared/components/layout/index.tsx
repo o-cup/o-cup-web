@@ -23,10 +23,12 @@ const Layout: React.FC<LayoutProps> = ({
 			<>
 				<Script
 					id="kakaoMap"
+					strategy="beforeInteractive"
 					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aa90b5cd8734fb0ed66e4f3aab95a147&autoload=false&libraries=services"
 				/>
 				<Script
 					id="kakaoJS"
+					strategy="beforeInteractive"
 					type="text/javascript"
 					src="https://developers.kakao.com/sdk/js/kakao.js"
 				/>

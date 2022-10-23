@@ -13,6 +13,7 @@ import {
 import { searchFiltersAtom, searchInputOptionsAtom } from "../../shared/state";
 import { convertDateWithDots, removeSpace } from "../../shared/utils";
 import Event from "./Event";
+import FilterBottomSheet from "./FilterBottomSheet";
 import SearchModal from "./SearchModal";
 import { StyledResult } from "./styles/resultStyle";
 import type { ResultSortOptionKeys } from "../../shared/types";
@@ -42,6 +43,7 @@ const Result = ({ biasId }: ResultProps) => {
 		dateChip: string;
 		distChips: RegCodeItem[];
 	}>(initialChipsData);
+	const [bottomSheetOpen, setBottomSheetOpen] = useState(true);
 	const searchInputOptions = useRecoilValue(searchInputOptionsAtom);
 	const searchInputOptionKey = searchInputOptions.find((o) => o.selected)?.key;
 
@@ -159,6 +161,7 @@ const Result = ({ biasId }: ResultProps) => {
 						setIsOpened={setFilterOpen}
 						setCalendarOpen={setCalendarOpen}
 						setDistrictSelectorOpen={setDistrictSelectorOpen}
+						setBottomSheetOpen={setBottomSheetOpen}
 					/>
 					<SortIcon
 						type="result"
@@ -215,6 +218,13 @@ const Result = ({ biasId }: ResultProps) => {
 					type={calendarOpen ? "calendar" : "districtSelector"}
 					setCalendarOpen={setCalendarOpen}
 					setDisctrictSelectorOpen={setDistrictSelectorOpen}
+				/>
+			)}
+
+			{bottomSheetOpen && (
+				<FilterBottomSheet
+					isOpen={bottomSheetOpen}
+					setIsOpen={setBottomSheetOpen}
 				/>
 			)}
 		</StyledResult>

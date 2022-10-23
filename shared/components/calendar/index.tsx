@@ -1,7 +1,7 @@
 import { ko } from "date-fns/locale";
 import React from "react";
 import { DateRange } from "react-date-range-ts";
-import { ResetModalBtn } from "../../../components/search/styles/searchStyle";
+import { ResetButton } from "../../../components/search/styles/searchStyle";
 import { convertDateToString, convertDateWithDots } from "../../utils";
 import Icon from "../icon";
 import { StyledCalendar } from "./calendarStyle";
@@ -33,10 +33,10 @@ const Calendar = ({
 
 	return (
 		<StyledCalendar>
-			<ResetModalBtn onClick={handleClickReset}>
+			<ResetButton onClick={handleClickReset}>
 				<Icon name="reset" />
 				<span>초기화</span>
-			</ResetModalBtn>
+			</ResetButton>
 			<Icon
 				name="delete-circle-black"
 				handleClick={() => setCalendarOpen(false)}

@@ -16,6 +16,7 @@ type BottomSheetProps = {
 	slider?: boolean;
 	buttons?: ButtonContent;
 	children: JSX.Element;
+	customHeader?: JSX.Element;
 };
 
 function BottomSheet({
@@ -26,32 +27,41 @@ function BottomSheet({
 	slider,
 	buttons,
 	children,
+	customHeader,
 }: BottomSheetProps) {
 	function onDismiss() {
 		setOpen(false);
 		return false;
 	}
 
+	const getHeaderElements = () => {
+		if (customHeader) {
+			return customHeader;
+		}
+
+		return (
+			<div className={`bottom-header ${slider ? "slider" : ""}`}>
+				{header && <p className="title">{header}</p>}
+				{close && (
+					<button
+						type="button"
+						className="close"
+						onClick={() => {
+							setOpen(false);
+						}}
+					>
+						<Icon name="delete-circle-black" />
+					</button>
+				)}
+			</div>
+		);
+	};
+
 	return (
 		<RBottomSheet
 			open={open}
 			onDismiss={() => onDismiss()}
-			header={
-				<div className={`bottom-header ${slider ? "slider" : ""}`}>
-					{header && <p className="title">{header}</p>}
-					{close && (
-						<button
-							type="button"
-							className="close"
-							onClick={() => {
-								setOpen(false);
-							}}
-						>
-							<Icon name="delete-circle-black" />
-						</button>
-					)}
-				</div>
-			}
+			header={getHeaderElements()}
 			footer={
 				<div className="bottom-footer">
 					{buttons ? (
@@ -77,8 +87,9 @@ BottomSheet.defaultProps = {
 	slider: false,
 	buttons: {
 		title: "",
-		handleClick: () => console.log("click!"),
+		handleClick: null,
 	},
+	customHeader: null,
 };
 
 export default React.memo(BottomSheet);

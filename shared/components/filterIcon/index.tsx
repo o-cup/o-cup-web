@@ -8,10 +8,19 @@ type FilterIconProps = {
 	setIsOpened: Dispatch<SetStateAction<boolean>>;
 	setCalendarOpen: Dispatch<SetStateAction<boolean>>;
 	setDistrictSelectorOpen: Dispatch<SetStateAction<boolean>>;
+	setBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const FilterIcon = ({ isOpened, setIsOpened, setCalendarOpen, setDistrictSelectorOpen }: FilterIconProps) => (
-	<StyledFilterIcon onClick={() => setIsOpened(!isOpened)} className="sort">
+// TODO: 컴포넌트 제거
+const FilterIcon = ({
+	isOpened,
+	setIsOpened,
+	setCalendarOpen,
+	setDistrictSelectorOpen,
+	setBottomSheetOpen,
+}: FilterIconProps) => (
+	// <StyledFilterIcon onClick={() => setIsOpened(!isOpened)} className="sort">
+	<StyledFilterIcon onClick={() => setBottomSheetOpen(true)} className="sort">
 		<Icon name="filter" />
 		{isOpened && (
 			<ul>

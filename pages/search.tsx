@@ -43,7 +43,7 @@ const SearchPage = ({ queryKeyword }: { queryKeyword: string }) => {
 				<title>{title}</title>
 				<meta
 					name="viewport"
-					content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
+					content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
 				/>
 				<meta name="description" content={description} />
 

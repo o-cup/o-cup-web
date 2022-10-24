@@ -49,7 +49,7 @@ const DetailPage = ({ detailData, metaData }: DetailPageProps) => {
 				<meta name="twitter:image" content={poster} />
 				<meta name="twitter:site" content={url} />
 			</Head>
-			<Detail data={detailData} />;
+			<Detail data={detailData} />
 		</>
 	);
 };

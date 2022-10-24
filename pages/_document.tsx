@@ -67,6 +67,16 @@ class MyDocument extends Document {
 						href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Noto+Sans:wght@300;400;500;600;700;800&display=swap"
 						rel="stylesheet"
 					/>
+
+					<script
+						id="Adsense-id"
+						data-ad-client="ca-pub-2524496852271657"
+						async
+						onError={(e) => {
+							console.error("Script failed to load", e);
+						}}
+						src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+					/>
 				</Head>
 				<body>
 					<Main />

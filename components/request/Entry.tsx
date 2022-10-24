@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import { Button } from "../../shared/components";
 import { requestInputsAtom } from "../../shared/state";
 import ArtistInputContainer from "./artist/ArtistInputContainer";
+import DateRangeInput from "./dateRange/DateRangeInput";
 import FcfsGoodsInput from "./fcfsGoods/FcfsGoodsInput";
 import GoodsInputContainer from "./goods/GoodsInputContainer";
 import HashTagsContainer from "./hashTags/HashTagsContainer";
@@ -77,7 +78,7 @@ const Entry = ({ setConfirmModalOpen, setBottomSheetOpen }: EntryProps) => {
 					handleInputChange={(e) => handleInputChange(e, "snsId")}
 					handleInputDelete={(e) => handleInputDelete(e, "snsId")}
 				/>
-				{/* <DateRangeInput disabled /> */}
+				<DateRangeInput disabled />
 				<PosterUploader />
 				<HashTagsContainer />
 				<BasicInput

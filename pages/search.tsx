@@ -82,12 +82,12 @@ export const getServerSideProps = async (
 	const { query } = context;
 	const keyword = query.keyword as string;
 
-	const { profilePic } = await fetchBiasDataByKeyword(keyword);
+	const biasData = await fetchBiasDataByKeyword(keyword);
 
 	return {
 		props: {
 			queryKeyword: keyword || "",
-			biasImgSrc: profilePic,
+			biasImgSrc: biasData?.profilePic || "",
 		},
 	};
 };

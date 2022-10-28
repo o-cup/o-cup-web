@@ -25,7 +25,7 @@ const SearchPage = ({ queryKeyword, biasImgSrc }: SearchPageProps) => {
 	const selectOptionKey = selectOptions.find((o) => o.selected)?.key || "bias";
 
 	const title = `${queryKeyword || DEFAULT_TITLE} | 검색하기`;
-	const imgSrc = selectOptionKey === "bias" ? biasImgSrc : LOGO_URL;
+	const imgSrc = selectOptionKey === "bias" && keyword ? biasImgSrc : LOGO_URL;
 
 	const description = generateMetaDescription({
 		type: selectOptionKey,
@@ -62,13 +62,13 @@ const SearchPage = ({ queryKeyword, biasImgSrc }: SearchPageProps) => {
 				<meta property="og:type" content="website" />
 				<meta property="og:title" content={title} />
 				<meta property="og:description" content={description} />
-				<meta property="og:image" content={imgSrc} />
+				<meta property="og:image" content={imgSrc || LOGO_URL} />
 				<meta property="og:url" content={url} />
 
 				<meta name="twitter:card" content="summary" />
 				<meta name="twitter:title" content={title} />
 				<meta name="twitter:description" content={description} />
-				<meta name="twitter:image" content={imgSrc} />
+				<meta name="twitter:image" content={imgSrc || LOGO_URL} />
 				<meta name="twitter:site" content={url} />
 			</Head>
 			<Search />

@@ -3,22 +3,31 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import Search from "../components/search";
+import { generateMetaDescription } from "../components/search/hooks";
+import { fetchBiasDataByKeyword } from "../shared/apis/search";
 import { DEFAULT_TITLE, LOGO_URL } from "../shared/constants";
 import { searchFiltersAtom } from "../shared/state";
 import type { GetServerSidePropsContext } from "next";
-// import type { GetServerSidePropsContext } from "next";
 
-const SearchPage = ({ queryKeyword }: { queryKeyword: string }) => {
+type SearchPageProps = {
+	queryKeyword: string;
+	biasImgSrc: string;
+};
+
+const SearchPage = ({ queryKeyword, biasImgSrc }: SearchPageProps) => {
 	const router = useRouter();
 	const { pathname } = router;
 	const [searchFilter, setSearchFilter] = useRecoilState(searchFiltersAtom);
-	const { keyword } = searchFilter;
+	const { type, keyword } = searchFilter;
 	const [url, setUrl] = useState("");
 
 	const title = `${queryKeyword || DEFAULT_TITLE} | 검색하기`;
-	const description = `${
-		queryKeyword || "응원하는 아티스트"
-	}의 생일 이벤트를 검색해보세요!`;
+	const imgSrc = type === "bias" ? biasImgSrc : LOGO_URL;
+
+	const description = generateMetaDescription({
+		type,
+		keyword: queryKeyword,
+	});
 
 	useEffect(() => {
 		const baseUrl = `${window.origin}/search`;
@@ -50,13 +59,16 @@ const SearchPage = ({ queryKeyword }: { queryKeyword: string }) => {
 				<meta property="og:type" content="website" />
 				<meta property="og:title" content={title} />
 				<meta property="og:description" content={description} />
-				<meta property="og:image" content={LOGO_URL} />
+				<meta
+					property="og:image"
+					content={type === "bias" ? imgSrc : LOGO_URL}
+				/>
 				<meta property="og:url" content={url} />
 
 				<meta name="twitter:card" content="summary" />
 				<meta name="twitter:title" content={title} />
 				<meta name="twitter:description" content={description} />
-				<meta name="twitter:image" content={LOGO_URL} />
+				<meta name="twitter:image" content={imgSrc} />
 				<meta name="twitter:site" content={url} />
 			</Head>
 			<Search />
@@ -70,9 +82,12 @@ export const getServerSideProps = async (
 	const { query } = context;
 	const keyword = query.keyword as string;
 
+	const { profilePic } = await fetchBiasDataByKeyword(keyword);
+
 	return {
 		props: {
 			queryKeyword: keyword || "",
+			biasImgSrc: profilePic,
 		},
 	};
 };

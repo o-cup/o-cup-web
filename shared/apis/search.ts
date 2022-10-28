@@ -1,6 +1,6 @@
 import axios from "axios";
 import { supabase } from "../../supabaseClient";
-import { removeSpace } from "../utils";
+import { getBiasIdByKeyword, removeSpace } from "../utils";
 import { isDateRangeOverlaps } from "../utils/dateHandlers";
 import type { RegCodeItem, SearchInputOptionKey } from "../types";
 
@@ -35,24 +35,13 @@ const fetchSearchedEvents = async ({
 	if (!keyword) return data;
 
 	if (searchInputOptionKey === "bias") {
-		const { data: biasData } = await supabase.from("people").select("*");
+		const { data: biasesData } = await supabase.from("people").select("*");
 
-		const searchedBiasId = biasData?.filter((row) => {
-			const { name, enName, koName, realName } = row;
-
-			if (
-				removeSpace(name).toUpperCase().includes(keyword.toUpperCase()) ||
-				(enName &&
-					removeSpace(enName).toUpperCase().includes(keyword.toUpperCase())) ||
-				(koName && koName.includes(keyword)) ||
-				(realName && realName.includes(keyword))
-			) {
-				return true;
-			}
-			return false;
+		const biasId = getBiasIdByKeyword({
+			biasesData: biasesData || [],
+			keyword,
 		});
 
-		const biasId = searchedBiasId?.map((bias) => bias.id);
 		if (biasId?.length) {
 			data = allEvents?.filter((event) => event.biasesId.includes(biasId[0]));
 		}
@@ -137,4 +126,27 @@ const fetchEventsByBiasId = async (id: number) => {
 	return data;
 };
 
-export { fetchRegcodes, fetchSearchedEvents, fetchEventsByBiasId };
+const fetchBiasDataByKeyword = async (keyword: string) => {
+	const { data: biasesData } = await supabase.from("people").select("*");
+
+	const biasData = biasesData?.find((bd) => {
+		if (
+			bd.name.includes(keyword) ||
+			bd.enName?.includes(keyword) ||
+			bd.koName?.includes(keyword) ||
+			bd.realName?.includes(keyword)
+		) {
+			return true;
+		}
+		return false;
+	});
+
+	return biasData;
+};
+
+export {
+	fetchRegcodes,
+	fetchSearchedEvents,
+	fetchEventsByBiasId,
+	fetchBiasDataByKeyword,
+};

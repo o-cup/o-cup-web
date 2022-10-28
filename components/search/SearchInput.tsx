@@ -26,6 +26,7 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 	const [selectOptions, setSelectOptions] = useRecoilState<
 		SearchInputOptionType[]
 	>(searchInputOptionsAtom);
+	const selectOptionKey = selectOptions.find((o) => o.selected)?.key;
 	const selectedOptionValue = selectOptions.find((o) => o.selected)?.value;
 
 	useEffect(() => {
@@ -48,7 +49,13 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 			query: { keyword: inputValue },
 		});
 
-		setSearchFilters((prev) => ({ ...prev, keyword: inputValue }));
+		if (!selectOptionKey) return;
+
+		setSearchFilters((prev) => ({
+			...prev,
+			type: selectOptionKey,
+			keyword: inputValue,
+		}));
 	};
 
 	const handleEnter = (e: React.KeyboardEvent<HTMLElement>) => {

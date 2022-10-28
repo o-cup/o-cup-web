@@ -1,12 +1,12 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Search from "../components/search";
 import { generateMetaDescription } from "../components/search/hooks";
 import { fetchBiasDataByKeyword } from "../shared/apis/search";
 import { DEFAULT_TITLE, LOGO_URL } from "../shared/constants";
-import { searchFiltersAtom } from "../shared/state";
+import { searchFiltersAtom, searchInputOptionsAtom } from "../shared/state";
 import type { GetServerSidePropsContext } from "next";
 
 type SearchPageProps = {
@@ -18,14 +18,17 @@ const SearchPage = ({ queryKeyword, biasImgSrc }: SearchPageProps) => {
 	const router = useRouter();
 	const { pathname } = router;
 	const [searchFilter, setSearchFilter] = useRecoilState(searchFiltersAtom);
-	const { type, keyword } = searchFilter;
+	const { keyword } = searchFilter;
+	const selectOptions = useRecoilValue(searchInputOptionsAtom);
 	const [url, setUrl] = useState("");
 
+	const selectOptionKey = selectOptions.find((o) => o.selected)?.key || "bias";
+
 	const title = `${queryKeyword || DEFAULT_TITLE} | 검색하기`;
-	const imgSrc = type === "bias" ? biasImgSrc : LOGO_URL;
+	const imgSrc = selectOptionKey === "bias" ? biasImgSrc : LOGO_URL;
 
 	const description = generateMetaDescription({
-		type,
+		type: selectOptionKey,
 		keyword: queryKeyword,
 	});
 
@@ -59,10 +62,7 @@ const SearchPage = ({ queryKeyword, biasImgSrc }: SearchPageProps) => {
 				<meta property="og:type" content="website" />
 				<meta property="og:title" content={title} />
 				<meta property="og:description" content={description} />
-				<meta
-					property="og:image"
-					content={type === "bias" ? imgSrc : LOGO_URL}
-				/>
+				<meta property="og:image" content={imgSrc} />
 				<meta property="og:url" content={url} />
 
 				<meta name="twitter:card" content="summary" />

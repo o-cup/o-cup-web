@@ -77,12 +77,6 @@ export const getServerSideProps = async (
 	const { query } = context;
 	const keyword = query.keyword as string;
 
-	if (!keyword) {
-		return {
-			props: {},
-		};
-	}
-
 	return {
 		props: {
 			queryKeyword: keyword,

@@ -7,6 +7,7 @@ import {
 	Button,
 	Chip,
 	FilterIcon,
+	Icon,
 	Loading,
 	SortIcon,
 } from "../../shared/components";
@@ -156,13 +157,7 @@ const Result = ({ biasId }: ResultProps) => {
 			<div className="menu">
 				<p>{`검색 결과 총 ${events?.length || 0}개`}</p>
 				<div className="icons">
-					<FilterIcon
-						isOpened={filterOpen}
-						setIsOpened={setFilterOpen}
-						setCalendarOpen={setCalendarOpen}
-						setDistrictSelectorOpen={setDistrictSelectorOpen}
-						setBottomSheetOpen={setBottomSheetOpen}
-					/>
+					<Icon name="filter" handleClick={() => setBottomSheetOpen(true)} />
 					<SortIcon
 						type="result"
 						isOpened={sortOpen}

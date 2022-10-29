@@ -173,7 +173,7 @@ const StyledCalendarContainer = styled.div`
 		}
 
 		.rdrMonth {
-			padding: 0 0.833em 1.666em 0.833em;
+			padding: 5px 0;
 		}
 
 		.rdrMonth .rdrWeekDays {

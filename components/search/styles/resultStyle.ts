@@ -25,6 +25,11 @@ export const StyledResult = styled.div`
 			justify-content: flex-end;
 			align-items: center;
 			gap: 10px;
+
+			i {
+				min-width: 24px;
+				max-width: 24px;
+			}
 		}
 	}
 

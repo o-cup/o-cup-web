@@ -6,11 +6,19 @@ const StyledCustomHeader = styled.div`
 	position: relative;
 
 	h2 {
-		width: 100%;
+		display: inline-block;
+		width: fit-content;
 		font-size: 18px;
 		font-weight: bold;
 		line-height: 24px;
 		text-align: center;
+	}
+
+	i.arrow-left {
+		position: absolute;
+		left: 24px;
+		top: calc(50% - 9px);
+		transform: translateY(-50%);
 	}
 
 	div.reset {
@@ -23,10 +31,10 @@ const StyledCustomHeader = styled.div`
 `;
 
 const StyledFilter = styled.div`
-	border: 1px solid blue;
 	height: 88px;
 	padding: 0 20px;
 	display: flex;
+	cursor: pointer;
 
 	.text {
 		display: flex;
@@ -69,8 +77,7 @@ const StyledFilter = styled.div`
 `;
 
 const StyledFilterBottomSheet = styled.div`
-	border: 1px solid blue;
-	max-height: 60vh;
+	height: 380px;
 `;
 
 export { StyledCustomHeader, StyledFilter, StyledFilterBottomSheet };

@@ -79,7 +79,7 @@ export const getServerSideProps = async (
 
 	return {
 		props: {
-			queryKeyword: keyword,
+			queryKeyword: keyword || "",
 		},
 	};
 };

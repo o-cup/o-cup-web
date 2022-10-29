@@ -33,15 +33,6 @@ const Calendar = ({
 
 	return (
 		<StyledCalendar>
-			<ResetButton onClick={handleClickReset}>
-				<Icon name="reset" />
-				<span>초기화</span>
-			</ResetButton>
-			<Icon
-				name="delete-circle-black"
-				handleClick={() => setCalendarOpen(false)}
-			/>
-
 			<DateRange
 				className="request-calendar"
 				editableDateInputs
@@ -65,9 +56,6 @@ const Calendar = ({
 						{convertDateWithDots(convertDateToString(selectedRange.endDate))}
 					</p>
 				</div>
-				<button type="button" onClick={handleClickSubmit}>
-					적용
-				</button>
 			</div>
 		</StyledCalendar>
 	);

@@ -96,6 +96,11 @@ export const StyledIcon = styled.i`
 		width: 24px;
 	}
 
+	&.arrow-left {
+		background: url("/images/icons/arrow-left.png") no-repeat;
+		background-size: contain;
+	}
+
 	&.arrow-right {
 		background: url("/images/icons/arrow-right.png") no-repeat;
 		background-size: contain;

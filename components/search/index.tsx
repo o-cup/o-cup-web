@@ -11,7 +11,6 @@ import {
 } from "../../shared/components";
 import { searchFiltersAtom, showResultAtom } from "../../shared/state";
 import { getBirthMonth } from "../../shared/utils";
-import { setMetaTags } from "../../shared/utils/metaTags";
 import MonthSelector from "./MonthSelector";
 import Result from "./Result";
 import SearchInput from "./SearchInput";

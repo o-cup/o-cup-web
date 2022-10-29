@@ -32,7 +32,7 @@ const Search = () => {
 	const [showResult, setShowResult] = useRecoilState(showResultAtom);
 	const [isMounted, setIsMounted] = useState(false);
 
-	useSetMetaTags();
+	// useSetMetaTags();
 
 	useEffect(() => {
 		setIsMounted(true);

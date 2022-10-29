@@ -3,22 +3,27 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import Search from "../components/search";
-import { DEFAULT_TITLE, LOGO_URL } from "../shared/constants";
+import { LOGO_URL } from "../shared/constants";
 import { searchFiltersAtom } from "../shared/state";
+import {
+	generateSSRMetaDescription,
+	generateSSRMetaTitle,
+} from "../shared/utils/metaTags";
 import type { GetServerSidePropsContext } from "next";
-// import type { GetServerSidePropsContext } from "next";
 
-const SearchPage = ({ queryKeyword }: { queryKeyword: string }) => {
+type SearchPageProps = {
+	queryKeyword: string;
+};
+
+const SearchPage = ({ queryKeyword }: SearchPageProps) => {
 	const router = useRouter();
 	const { pathname } = router;
 	const [searchFilter, setSearchFilter] = useRecoilState(searchFiltersAtom);
 	const { keyword } = searchFilter;
 	const [url, setUrl] = useState("");
 
-	const title = `${queryKeyword || DEFAULT_TITLE} | 검색하기`;
-	const description = `${
-		queryKeyword || "응원하는 아티스트"
-	}의 생일 이벤트를 검색해보세요!`;
+	const title = generateSSRMetaTitle({ page: "search", keyword: queryKeyword });
+	const description = generateSSRMetaDescription({ page: "search" });
 
 	useEffect(() => {
 		const baseUrl = `${window.origin}/search`;
@@ -26,6 +31,8 @@ const SearchPage = ({ queryKeyword }: { queryKeyword: string }) => {
 	}, [queryKeyword]);
 
 	useEffect(() => {
+		if (!queryKeyword) return;
+
 		setSearchFilter((prev) => ({
 			...prev,
 			keyword: queryKeyword,
@@ -43,7 +50,7 @@ const SearchPage = ({ queryKeyword }: { queryKeyword: string }) => {
 				<title>{title}</title>
 				<meta
 					name="viewport"
-					content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
+					content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
 				/>
 				<meta name="description" content={description} />
 
@@ -72,7 +79,7 @@ export const getServerSideProps = async (
 
 	return {
 		props: {
-			queryKeyword: keyword || "",
+			queryKeyword: keyword,
 		},
 	};
 };

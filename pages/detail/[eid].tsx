@@ -2,7 +2,11 @@ import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import Detail from "../../components/detail";
 import { fetchBiasData, fetchEventById } from "../../shared/apis/common";
-import { DEFAULT_TITLE, DEFAULT_URL } from "../../shared/constants";
+import { DEFAULT_URL } from "../../shared/constants";
+import {
+	generateSSRMetaDescription,
+	generateSSRMetaTitle,
+} from "../../shared/utils/metaTags";
 import type { EventType } from "../../shared/types";
 import type { GetServerSidePropsContext } from "next";
 
@@ -19,8 +23,12 @@ const DetailPage = ({ detailData, metaData }: DetailPageProps) => {
 	const [url, setUrl] = useState(DEFAULT_URL);
 	const { place, names, poster } = metaData;
 
-	const title = `${DEFAULT_TITLE} | 상세보기`;
-	const description = `${place}에서 열리는 ${names}의 이벤트를 오늘의 컵홀더에서 확인해보세요!`;
+	const title = generateSSRMetaTitle({ page: "detail" });
+	const description = generateSSRMetaDescription({
+		page: "detail",
+		place,
+		names,
+	});
 
 	useEffect(() => {
 		const baseUrl = `${window.origin}`;
@@ -33,7 +41,7 @@ const DetailPage = ({ detailData, metaData }: DetailPageProps) => {
 				<title>{title}</title>
 				<meta
 					name="viewport"
-					content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
+					content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
 				/>
 				<meta name="description" content={description} />
 
@@ -49,7 +57,7 @@ const DetailPage = ({ detailData, metaData }: DetailPageProps) => {
 				<meta name="twitter:image" content={poster} />
 				<meta name="twitter:site" content={url} />
 			</Head>
-			<Detail data={detailData} />;
+			<Detail data={detailData} />
 		</>
 	);
 };

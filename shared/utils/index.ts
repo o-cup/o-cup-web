@@ -8,8 +8,7 @@ import {
 	getDatesInRange,
 } from "./dateHandlers";
 import { imageOnErrorHandler } from "./imageHandlers";
-
-export const removeSpace = (str: string) => str.split(" ").join("");
+import { getBiasIdByKeyword, removeSpace } from "./searchHelper";
 
 export {
 	copyToClipboard,
@@ -20,4 +19,6 @@ export {
 	getDatesInRange,
 	getBirthMonth,
 	imageOnErrorHandler,
+	getBiasIdByKeyword,
+	removeSpace,
 };

@@ -48,7 +48,10 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 			query: { keyword: inputValue },
 		});
 
-		setSearchFilters((prev) => ({ ...prev, keyword: inputValue }));
+		setSearchFilters((prev) => ({
+			...prev,
+			keyword: inputValue,
+		}));
 	};
 
 	const handleEnter = (e: React.KeyboardEvent<HTMLElement>) => {

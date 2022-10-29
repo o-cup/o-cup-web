@@ -73,17 +73,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 				}}
 			/>
 
-			<Script
-				id="Adsense-id"
-				data-ad-client="ca-pub-2524496852271657"
-				async
-				// strategy="afterInteractive"
-				onError={(e) => {
-					console.error("Script failed to load", e);
-				}}
-				src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-			/>
-
 			<QueryClientProvider client={queryClient}>
 				<RecoilRoot>
 					<ThemeProvider theme={theme}>

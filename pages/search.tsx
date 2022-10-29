@@ -3,10 +3,12 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Search from "../components/search";
-import { generateMetaDescription } from "../components/search/hooks";
-import { fetchBiasDataByKeyword } from "../shared/apis/search";
-import { DEFAULT_TITLE, LOGO_URL } from "../shared/constants";
+import { LOGO_URL } from "../shared/constants";
 import { searchFiltersAtom, searchInputOptionsAtom } from "../shared/state";
+import {
+	generateSSRMetaDescription,
+	generateSSRMetaTitle,
+} from "../shared/utils/metaTags";
 import type { GetServerSidePropsContext } from "next";
 
 type SearchPageProps = {
@@ -24,13 +26,10 @@ const SearchPage = ({ queryKeyword, biasImgSrc }: SearchPageProps) => {
 
 	const selectOptionKey = selectOptions.find((o) => o.selected)?.key || "bias";
 
-	const title = `${queryKeyword || DEFAULT_TITLE} | 검색하기`;
+	const title = generateSSRMetaTitle({ page: "search", keyword: queryKeyword });
 	const imgSrc = selectOptionKey === "bias" && keyword ? biasImgSrc : LOGO_URL;
 
-	const description = generateMetaDescription({
-		type: selectOptionKey,
-		keyword: queryKeyword,
-	});
+	const description = generateSSRMetaDescription({ page: "search" });
 
 	useEffect(() => {
 		const baseUrl = `${window.origin}/search`;
@@ -82,12 +81,9 @@ export const getServerSideProps = async (
 	const { query } = context;
 	const keyword = query.keyword as string;
 
-	const biasData = await fetchBiasDataByKeyword(keyword);
-
 	return {
 		props: {
 			queryKeyword: keyword || "",
-			biasImgSrc: biasData?.profilePic || "",
 		},
 	};
 };

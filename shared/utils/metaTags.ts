@@ -71,6 +71,8 @@ export const setMetaTags = ({
 	description: string;
 	imageUrl: string;
 }) => {
+	if (typeof window !== "object") return;
+
 	// set title
 	document.title = title;
 	document

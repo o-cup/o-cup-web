@@ -11,7 +11,7 @@ import {
 	setMetaTags,
 } from "../../../shared/utils/metaTags";
 
-const useSetResultMetaTags = async () => {
+const useSetMetaTags = async () => {
 	const searchFilters = useRecoilValue(searchFiltersAtom);
 	const { keyword } = searchFilters;
 	const searchTypes = useRecoilValue(searchInputOptionsAtom);
@@ -61,4 +61,4 @@ const useSetResultMetaTags = async () => {
 	});
 };
 
-export default useSetResultMetaTags;
+export default useSetMetaTags;

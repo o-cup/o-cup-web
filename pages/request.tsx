@@ -1,12 +1,15 @@
 import Head from "next/head";
 import React from "react";
 import Request from "../components/request";
-import { DEFAULT_TITLE, DEFAULT_URL, LOGO_URL } from "../shared/constants";
+import { DEFAULT_URL, LOGO_URL } from "../shared/constants";
+import {
+	generateSSRMetaDescription,
+	generateSSRMetaTitle,
+} from "../shared/utils/metaTags";
 
 const RequestPage = () => {
-	const title = `${DEFAULT_TITLE} | 등록하기`;
-	const description = "응원하는 아티스트의 생일 이벤트를 신청해보세요!";
-
+	const title = generateSSRMetaTitle({ page: "request" });
+	const description = generateSSRMetaDescription({ page: "request" });
 	return (
 		<>
 			<Head>

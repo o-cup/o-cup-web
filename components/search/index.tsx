@@ -11,9 +11,11 @@ import {
 } from "../../shared/components";
 import { searchFiltersAtom, showResultAtom } from "../../shared/state";
 import { getBirthMonth } from "../../shared/utils";
+import { setMetaTags } from "../../shared/utils/metaTags";
 import MonthSelector from "./MonthSelector";
 import Result from "./Result";
 import SearchInput from "./SearchInput";
+import useSetMetaTags from "./hooks/useSetMetaTags";
 import { StyledFilter, StyledSearch } from "./styles/searchStyle";
 import type { SearchSortOptionKeys } from "../../shared/types";
 
@@ -29,6 +31,8 @@ const Search = () => {
 		useState<SearchSortOptionKeys>("alphabetAsc");
 	const [showResult, setShowResult] = useRecoilState(showResultAtom);
 	const [isMounted, setIsMounted] = useState(false);
+
+	useSetMetaTags();
 
 	useEffect(() => {
 		setIsMounted(true);

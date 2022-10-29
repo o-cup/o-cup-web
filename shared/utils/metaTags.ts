@@ -48,7 +48,7 @@ export const generateSSRMetaDescription = ({
 			break;
 
 		case "search":
-			description = "응원하는 아티스트의 생일 이벤트를 검색해보세요!";
+			description = `${names}의 생일 이벤트를 검색해보세요!`;
 			break;
 
 		case "request":

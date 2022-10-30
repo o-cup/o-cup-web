@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { BottomSheet, Calendar, Icon } from "../../../shared/components";
-import DistrictSelector from "../DistrictSelector";
 import { ResetButton } from "../styles/searchStyle";
+import Categories from "./Categories";
+import DistrictSelector from "./DistrictSelector";
 import Filter from "./Filter";
-import { StyledCustomHeader, StyledFilterBottomSheet } from "./style";
+import {
+	StyledCustomHeader,
+	StyledFilterBottomSheet,
+} from "./styles/filterBottomSheetStyle";
 import type { DateRangeType, RegCodeItem } from "../../../shared/types";
 import type { SetStateAction, Dispatch } from "react";
 
@@ -115,6 +119,7 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 						// handleSubmit={() => handleSubmit({ modal: "district" })}
 					/>
 				)}
+				{currentFilter === "category" && <Categories />}
 			</StyledFilterBottomSheet>
 		</BottomSheet>
 	);

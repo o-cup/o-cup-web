@@ -1,4 +1,5 @@
 import React from "react";
+import { CATEGORY_DATA } from "../../constants";
 import { StyledCategoryChip } from "./style";
 
 type CategoryChipProps = {
@@ -7,14 +8,6 @@ type CategoryChipProps = {
 	selected?: boolean;
 	opacity?: number;
 	disabled?: boolean; // 클릭방지
-};
-
-export const CATEGORY_TITLE = {
-	A: "카페",
-	B: "꽃집",
-	C: "식당",
-	D: "포토부스",
-	E: "기타",
 };
 
 const CategoryChip = ({
@@ -31,7 +24,7 @@ const CategoryChip = ({
 		opacity={opacity}
 		disabled={disabled}
 	>
-		<p>{CATEGORY_TITLE[type]}</p>
+		<p>{CATEGORY_DATA[type]}</p>
 		<span className="shadow" />
 	</StyledCategoryChip>
 );

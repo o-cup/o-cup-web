@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon } from "../../../shared/components";
-import { StyledFilter } from "./style";
+import { StyledFilter } from "./styles/filterBottomSheetStyle";
 import type { Dispatch, SetStateAction } from "react";
 
 type FilterProps = {

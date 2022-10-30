@@ -1,10 +1,10 @@
 import React, { memo, useEffect, useState } from "react";
-import { Icon } from "../../shared/components";
-import { MAX_DISTRICT_CHIPS } from "../../shared/constants";
-import { useRegCodes } from "../../shared/hooks";
-import divisionData from "./divisions";
+import { Icon } from "../../../shared/components";
+import { MAX_DISTRICT_CHIPS } from "../../../shared/constants";
+import { useRegCodes } from "../../../shared/hooks";
+import divisionData from "../divisions";
 import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
-import type { RegCodeItem } from "./types";
+import type { RegCodeItem } from "../types";
 import type { Dispatch, SetStateAction } from "react";
 
 type DistrictSelectorProps = {

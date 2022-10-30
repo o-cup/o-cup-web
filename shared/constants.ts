@@ -10,4 +10,12 @@ export const DEFAULT_DESCRIPTION =
 export const DEFAULT_URL = "o-cup.kr";
 export const LOGO_URL = "https://www.o-cup.kr/images/ocup_profile.jpg";
 
+export const CATEGORY_DATA = {
+	A: "카페",
+	B: "꽃집",
+	C: "식당",
+	D: "포토부스",
+	E: "기타",
+} as Record<string, string>;
+
 export default {};

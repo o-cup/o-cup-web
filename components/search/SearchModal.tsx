@@ -3,7 +3,7 @@ import React, { memo, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { Calendar, Modal } from "../../shared/components";
 import { searchFiltersAtom } from "../../shared/state";
-import DistrictSelector from "./DistrictSelector";
+import DistrictSelector from "./FilterBottomSheet/DistrictSelector";
 import type { DateRangeType } from "../../shared/types";
 import type { RegCodeItem, SearchModalProps } from "./types";
 

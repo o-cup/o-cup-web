@@ -3,32 +3,6 @@ import { Icon } from "../../../shared/components";
 import { StyledFilter } from "./style";
 import type { Dispatch, SetStateAction } from "react";
 
-// type FiltersType = {
-// 	[key: string]: {
-// 		icon: string;
-// 		name: string;
-// 		status: string;
-// 	};
-// };
-
-// const filters = {
-// 	calendar: {
-// 		icon: "calendar",
-// 		name: "날짜",
-// 		status: "미선택",
-// 	},
-// 	district: {
-// 		icon: "place",
-// 		name: "지역",
-// 		status: "미선택",
-// 	},
-// 	category: {
-// 		icon: "category",
-// 		name: "이벤트 종류",
-// 		status: "미선택",
-// 	},
-// } as FiltersType;
-
 type FilterProps = {
 	type: string | null;
 	data: any;

@@ -113,7 +113,6 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 						selectedDists={selectedDists}
 						setSelectedDists={setSelectedDists}
 						// handleSubmit={() => handleSubmit({ modal: "district" })}
-						// setDisctrictSelectorOpen={setDisctrictSelectorOpen}
 					/>
 				)}
 			</StyledFilterBottomSheet>

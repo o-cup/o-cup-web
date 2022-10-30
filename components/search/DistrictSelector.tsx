@@ -4,29 +4,26 @@ import { MAX_DISTRICT_CHIPS } from "../../shared/constants";
 import { useRegCodes } from "../../shared/hooks";
 import divisionData from "./divisions";
 import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
-import { ResetModalBtn } from "./styles/searchStyle";
 import type { RegCodeItem } from "./types";
 import type { Dispatch, SetStateAction } from "react";
 
 type DistrictSelectorProps = {
-	handleSubmit: () => void;
+	// handleSubmit: () => void;
 	selectedDists: RegCodeItem[];
 	setSelectedDists: Dispatch<SetStateAction<RegCodeItem[]>>;
-	setDisctrictSelectorOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const isAllDist = (code: string) => code.substring(2, 4) === "00";
 
 const DistrictSelector = ({
-	handleSubmit,
 	selectedDists,
 	setSelectedDists,
-	setDisctrictSelectorOpen,
 }: DistrictSelectorProps) => {
 	const [divisionList, setDivisionList] = useState<RegCodeItem[]>([]);
 	const [districtList, setDistrictList] = useState<RegCodeItem[]>([]);
 
-	const selectedDiv = divisionList.find((div) => div.selected) || divisionData[0];
+	const selectedDiv =
+		divisionList.find((div) => div.selected) || divisionData[0];
 
 	const districtData = useRegCodes(selectedDiv!);
 
@@ -53,7 +50,10 @@ const DistrictSelector = ({
 	}, [districtList, setSelectedDists, selectedDiv]);
 
 	const handleDivClick = (div: RegCodeItem) => {
-		const newData = divisionList.map((item) => ({ ...item, selected: item.code === div.code }));
+		const newData = divisionList.map((item) => ({
+			...item,
+			selected: item.code === div.code,
+		}));
 		setDivisionList(newData);
 
 		const isDuplicated = selectedDists.find((dist) => dist.code === "all");
@@ -64,7 +64,10 @@ const DistrictSelector = ({
 
 	const handleDistClick = (dist: RegCodeItem) => {
 		if (isAllDist(dist.code) && selectedDists.length > 0) {
-			const newList = districtList.map((item) => ({ ...item, selected: item.code === dist.code }));
+			const newList = districtList.map((item) => ({
+				...item,
+				selected: item.code === dist.code,
+			}));
 			setDistrictList(newList);
 			return;
 		}
@@ -99,22 +102,21 @@ const DistrictSelector = ({
 	};
 
 	const handleResetClick = () => {
-		const newDistrictData = districtList.map((dist) => ({ ...dist, selected: isAllDist(dist.code) }));
+		const newDistrictData = districtList.map((dist) => ({
+			...dist,
+			selected: isAllDist(dist.code),
+		}));
 		setDistrictList(newDistrictData);
 	};
 
 	return (
 		<StyledDistrictSelector>
 			<div className="title">
-				<ResetModalBtn onClick={handleResetClick}>
-					<Icon name="reset" />
-					<span>초기화</span>
-				</ResetModalBtn>
 				<h2 className="nations">
 					대한민국
 					{/* <FaCaretDown /> */}
 				</h2>
-				<Icon name="delete-circle-black" handleClick={() => setDisctrictSelectorOpen(false)} />
+				<p>최대 3개까지 선택 가능</p>
 			</div>
 
 			<div className="districts">
@@ -154,12 +156,6 @@ const DistrictSelector = ({
 							</span>
 						</span>
 					))}
-				</div>
-				<div className="submit">
-					<p>최대 3개까지 선택 가능합니다.</p>
-					<button type="button" onClick={handleSubmit}>
-						적용
-					</button>
 				</div>
 			</div>
 		</StyledDistrictSelector>

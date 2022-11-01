@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { CATEGORY_DATA } from "../../../shared/constants";
 import StyledCategories from "./styles/categoriesStyle";
+import type { CategoriesStateType } from "../types";
+import type { Dispatch, SetStateAction } from "react";
 
-type CategoriesStateType = Record<string, boolean>;
+type CategoriesProps = {
+	categories: CategoriesStateType;
+	setCategories: Dispatch<SetStateAction<CategoriesStateType>>;
+};
 
-const Categories = () => {
-	const [categories, setCategories] = useState<CategoriesStateType>({
-		A: false,
-		B: false,
-		C: false,
-		D: false,
-		E: false,
-	});
-
+const Categories = ({ categories, setCategories }: CategoriesProps) => {
 	const handleIconClick = (category: string) => {
 		setCategories((prev) => ({
 			...prev,

@@ -12,4 +12,6 @@ export type RegCodeItem = {
 	selected?: boolean;
 };
 
+export type CategoriesStateType = Record<string, boolean>;
+
 export default {};

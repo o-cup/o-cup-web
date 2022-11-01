@@ -29,13 +29,13 @@ const SearchModal = ({
 
 		switch (modal) {
 			case "dateRange":
-				setSearchFilters((prev) => ({
-					...prev,
-					date: {
-						startDate: format(startDate, "yyyyMMdd"),
-						endDate: format(endDate, "yyyyMMdd"),
-					},
-				}));
+				// setSearchFilters((prev) => ({
+				// 	...prev,
+				// 	date: {
+				// 		startDate: format(startDate, "yyyyMMdd"),
+				// 		endDate: format(endDate, "yyyyMMdd"),
+				// 	},
+				// }));
 
 				setCalendarOpen(false);
 				break;
@@ -74,8 +74,8 @@ const SearchModal = ({
 						<DistrictSelector
 							selectedDists={selectedDists}
 							setSelectedDists={setSelectedDists}
-							handleSubmit={() => handleSubmit({ modal: "district" })}
-							setDisctrictSelectorOpen={setDisctrictSelectorOpen}
+							// handleSubmit={() => handleSubmit({ modal: "district" })}
+							// setDisctrictSelectorOpen={setDisctrictSelectorOpen}
 						/>
 					</Modal>
 				);

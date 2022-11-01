@@ -49,9 +49,9 @@ const Result = ({ biasId }: ResultProps) => {
 	const searchInputOptionKey = searchInputOptions.find((o) => o.selected)?.key;
 
 	const isModalOpen = calendarOpen || districtSelectorOpen;
-	const dateChipText =
-		startDate &&
-		`${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
+	// const dateChipText =
+	// 	startDate &&
+	// 	`${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
 	const { data: events, isLoading } = useQuery(
 		[
@@ -129,12 +129,12 @@ const Result = ({ biasId }: ResultProps) => {
 
 		switch (type) {
 			case "date":
-				setChips((prev) => ({ ...prev, dateChip: "" }));
+				// setChips((prev) => ({ ...prev, dateChip: "" }));
 
-				setSearchFilters((prev) => ({
-					...prev,
-					date: { startDate: "", endDate: "" },
-				}));
+				// setSearchFilters((prev) => ({
+				// 	...prev,
+				// 	date: { startDate: "", endDate: "" },
+				// }));
 				break;
 
 			case "district":
@@ -148,9 +148,9 @@ const Result = ({ biasId }: ResultProps) => {
 
 	const chip = chips.dateChip || chips.distChips.length > 0;
 
-	if (isLoading) {
-		return <Loading />;
-	}
+	// if (isLoading) {
+	// 	return <Loading />;
+	// }
 
 	return (
 		<StyledResult>
@@ -172,7 +172,7 @@ const Result = ({ biasId }: ResultProps) => {
 				<div className="chips">
 					{chips.dateChip && (
 						<Chip
-							text={dateChipText}
+							// text={dateChipText}
 							bgColor="primary"
 							customStyle={{ fontSize: "12px" }}
 							handleDelete={() => handleDeleteChip({ type: "date" })}

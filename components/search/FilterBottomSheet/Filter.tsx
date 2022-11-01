@@ -5,21 +5,27 @@ import type { Dispatch, SetStateAction } from "react";
 
 type FilterProps = {
 	type: string | null;
-	data: any;
+	filterTypeData: any;
 	setCurrentFilter: Dispatch<SetStateAction<string | null>>;
+	text: string;
 };
 
-const Filter = ({ type, data, setCurrentFilter }: FilterProps) => {
+const Filter = ({
+	type,
+	filterTypeData,
+	setCurrentFilter,
+	text,
+}: FilterProps) => {
 	if (!type) return null;
 
 	return (
 		<StyledFilter onClick={() => setCurrentFilter(type)}>
 			<div className="text">
 				<div>
-					<Icon name={data.icon} />
-					<p>{data.name}</p>
+					<Icon name={filterTypeData.icon} />
+					<p>{filterTypeData.name}</p>
 				</div>
-				<small>미선택</small>
+				<small>{text || "미선택"}</small>
 			</div>
 			<div className="icon">
 				<Icon name="arrow-right" />

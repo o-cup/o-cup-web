@@ -56,10 +56,11 @@ export const requestGoodsListAtom = atom<RequestGoodsListType[]>({
 export type SearchFiltersAtomType = {
 	keyword: string;
 	date: {
-		startDate: string;
-		endDate: string;
+		startDate: Date | null;
+		endDate: Date | null;
 	};
 	districts: RegCodeItem[];
+	categories: Record<string, boolean>;
 };
 
 export const searchFiltersAtom = atom<SearchFiltersAtomType>({
@@ -67,10 +68,17 @@ export const searchFiltersAtom = atom<SearchFiltersAtomType>({
 	default: {
 		keyword: "",
 		date: {
-			startDate: "",
-			endDate: "",
+			startDate: null,
+			endDate: null,
 		},
 		districts: [],
+		categories: {
+			A: false,
+			B: false,
+			C: false,
+			D: false,
+			E: false,
+		},
 	},
 	effects: [sessionAtom],
 });

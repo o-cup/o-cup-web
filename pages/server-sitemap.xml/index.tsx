@@ -1,4 +1,3 @@
-// pages/server-sitemap.xml/index.tsx
 import { getServerSideSitemap } from "next-sitemap";
 import { supabase } from "../../supabaseClient";
 import type { EventType, PeopleType } from "../../shared/types";
@@ -6,7 +5,7 @@ import type { GetServerSideProps } from "next";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const { data: events } = await supabase
-		.from("place_sort")
+		.from("events")
 		.select("*")
 		.eq("isApproved", true);
 	const { data: people } = await supabase.from("people").select("*");

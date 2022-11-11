@@ -5,7 +5,7 @@ import Layout from "../../shared/components/layout";
 import { useClearData } from "../../shared/hooks";
 import { dateFilterAtom } from "../../shared/state";
 import { convertDateToString, convertStringToDate } from "../../shared/utils";
-import BiasList from "./BiasList";
+import BiasList from "./biasList/BiasList";
 import EventSection from "./EventSection";
 import { StyledMain } from "./styles/mainStyle";
 

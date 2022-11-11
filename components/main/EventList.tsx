@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import SwiperCore from "swiper";
-import FreeMode from "swiper";
+import { FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CategoryChip } from "../../shared/components";
 import { dateFilterAtom } from "../../shared/state";
@@ -18,8 +17,8 @@ import {
 } from "./styles/mainEventListStyles";
 import type { EventType, PeopleType } from "../../shared/types";
 
-import "swiper/swiper-bundle.min.css";
-import "swiper/swiper.min.css";
+import "swiper/css";
+import "swiper/css/free-mode";
 
 type BiasEventListProps = {
 	id: string;
@@ -28,8 +27,6 @@ type BiasEventListProps = {
 };
 
 const EventList = ({ id, bias, events }: BiasEventListProps) => {
-	SwiperCore.use([FreeMode]);
-
 	const dateFilter = useRecoilValue(dateFilterAtom);
 	const [openedCategory, setOpenedCategory] = useState<
 		("A" | "B" | "C" | "D" | "E")[]
@@ -95,6 +92,7 @@ const EventList = ({ id, bias, events }: BiasEventListProps) => {
 					slidesOffsetBefore={20}
 					slidesOffsetAfter={20}
 					className="mainSwiper"
+					modules={[FreeMode]}
 				>
 					{selectedCategory.length === 0
 						? events?.map((event) => (

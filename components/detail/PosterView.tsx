@@ -13,8 +13,6 @@ type PosterProps = {
 };
 
 function PosterView({ images, setPosterViewOpen }: PosterProps) {
-	SwiperCore.use([Navigation]);
-
 	const [swiper, setSwiper] = useState<SwiperCore>();
 	const [zoomLevel, setZoomLevel] = useState(1);
 
@@ -64,6 +62,7 @@ function PosterView({ images, setPosterViewOpen }: PosterProps) {
 				slidesPerView={1}
 				navigation={zoomLevel <= 1}
 				onSlideChange={(e) => setPageNum(e.activeIndex + 1)}
+				modules={[Navigation]}
 			>
 				{images.map((img) => (
 					<SwiperSlide key={img}>

@@ -1,9 +1,7 @@
-import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
 import { useRecoilValue } from "recoil";
-import SwiperCore from "swiper";
-import FreeMode from "swiper";
+import { FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { fetchPeople } from "../../../shared/apis/common";
 import { Loading } from "../../../shared/components";
@@ -12,13 +10,10 @@ import { StyledBiasSwiper } from "../styles/biasStyles";
 import Bias from "./Bias";
 import SearchIcon from "./SearchIcon";
 
-import "swiper/swiper-bundle.min.css";
-import "swiper/swiper.min.css";
+import "swiper/css";
+import "swiper/css/free-mode";
 
 const BiasList = () => {
-	SwiperCore.use([FreeMode]);
-
-	const router = useRouter();
 	const openedBias = useRecoilValue(openedBiasAtom);
 	const dateFilter = useRecoilValue(dateFilterAtom);
 
@@ -55,6 +50,7 @@ const BiasList = () => {
 				slidesOffsetBefore={20}
 				slidesOffsetAfter={20}
 				className="biasSwiper"
+				modules={[FreeMode]}
 			>
 				{people && people?.length ? (
 					people.map((person) => (

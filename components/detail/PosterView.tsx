@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import SwiperCore, { Navigation } from "swiper";
+import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Icon } from "../../shared/components";
 import { StyledPosterView } from "./styles/posterViewStyle";
+import type SwiperCore from "swiper";
 
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";

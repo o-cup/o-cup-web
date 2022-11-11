@@ -17,8 +17,8 @@ import {
 } from "./styles/mainEventListStyles";
 import type { EventType, PeopleType } from "../../shared/types";
 
-import "swiper/css";
-import "swiper/css/free-mode";
+import "swiper/swiper-bundle.min.css";
+import "swiper/swiper.min.css";
 
 type BiasEventListProps = {
 	id: string;

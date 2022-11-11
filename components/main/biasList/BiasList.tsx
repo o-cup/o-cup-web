@@ -10,8 +10,8 @@ import { StyledBiasSwiper } from "../styles/biasStyles";
 import Bias from "./Bias";
 import SearchIcon from "./SearchIcon";
 
-import "swiper/css";
-import "swiper/css/free-mode";
+import "swiper/swiper-bundle.min.css";
+import "swiper/swiper.min.css";
 
 const BiasList = () => {
 	const openedBias = useRecoilValue(openedBiasAtom);

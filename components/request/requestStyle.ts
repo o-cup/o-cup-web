@@ -179,7 +179,7 @@ const StyledRequestModal = styled.div`
 			line-height: 16px;
 			text-align: center;
 			padding: 6px 12px;
-			width: 116px;
+			min-width: 116px;
 
 			&.alertBtn {
 				width: 72px;

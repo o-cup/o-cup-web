@@ -12,7 +12,7 @@ type CategoryChipProps = {
 export const CATEGORY_TITLE = {
 	A: "카페",
 	B: "꽃집",
-	C: "식당",
+	C: "음식점",
 	D: "포토부스",
 	E: "기타",
 };

@@ -4,8 +4,8 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { fetchEvents, fetchPeople } from "../../shared/apis/common";
 import { Loading } from "../../shared/components";
 import { dateFilterAtom, openedBiasAtom } from "../../shared/state";
-import EventList from "./EventList";
 import EmptyDefault from "./EmptyDefault";
+import EventList from "./EventList";
 import { StyledMainEventSection } from "./styles/mainEventListStyles";
 
 const EventSection = () => {

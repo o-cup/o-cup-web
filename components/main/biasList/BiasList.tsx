@@ -2,15 +2,15 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
 import { useRecoilValue } from "recoil";
-import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import FreeMode from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { fetchPeople } from "../../../shared/apis/common";
 import { Loading } from "../../../shared/components";
 import { openedBiasAtom, dateFilterAtom } from "../../../shared/state";
+import { StyledBiasSwiper } from "../styles/biasStyles";
 import Bias from "./Bias";
 import SearchIcon from "./SearchIcon";
-import { StyledBiasSwiper } from "../styles/biasStyles";
 
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";

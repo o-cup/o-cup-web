@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import FreeMode from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { CategoryChip } from "../../shared/components";
 import { dateFilterAtom } from "../../shared/state";
 import {

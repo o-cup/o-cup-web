@@ -28,7 +28,7 @@ const theme: DefaultTheme = {
 			background: "#FBB090",
 		},
 		C: {
-			// 식당
+			// 음식점
 			primary: "#84D7AE",
 			background: "#BEEAD4",
 		},

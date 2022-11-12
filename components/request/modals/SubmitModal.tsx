@@ -17,7 +17,7 @@ const SubmitModal = ({
 			<p>내용 검토 후 1-4일 이내 업로드 됩니다.</p>
 			<div className="modalBtnContainer">
 				<button type="button" onClick={handleClickContinue}>
-					다른 카페 등록하기
+					다른 이벤트 등록하기
 				</button>
 				<button type="button" onClick={handleClickFinish}>
 					메인으로 돌아가기

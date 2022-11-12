@@ -4,7 +4,7 @@ import { StyledCalendarContainer } from "../../../components/request/dateRange/d
 export const StyledCalendar = styled(StyledCalendarContainer)`
 	border: 0;
 
-	.request-calendar .rdrMonthAndYearWrapper {
+	.custom-calendar .rdrMonthAndYearWrapper {
 		background: ${({ theme }) => theme.colors.background};
 	}
 

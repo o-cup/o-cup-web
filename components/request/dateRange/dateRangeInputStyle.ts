@@ -110,7 +110,7 @@ const StyledCalendarContainer = styled.div`
 		}
 	}
 
-	.request-calendar {
+	.custom-calendar {
 		&.rdrCalendarWrapper {
 			color: #000000;
 			font-size: 12px;

@@ -68,8 +68,8 @@ export const searchFiltersAtom = atom<SearchFiltersAtomType>({
 	default: {
 		keyword: "",
 		date: {
-			startDate: null,
-			endDate: null,
+			startDate: new Date(),
+			endDate: new Date(),
 		},
 		districts: [],
 		categories: {

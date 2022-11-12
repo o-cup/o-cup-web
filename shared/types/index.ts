@@ -81,8 +81,8 @@ export type CustomStyleType = ReturnType<typeof css> | React.CSSProperties;
 export type ColorsType = "white" | "black" | "gray" | "primary";
 
 export type DateRangeType = {
-	startDate: Date | null;
-	endDate: Date | null;
+	startDate: Date;
+	endDate: Date;
 	key: string;
 };
 

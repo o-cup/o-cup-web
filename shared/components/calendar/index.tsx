@@ -1,44 +1,30 @@
 import { ko } from "date-fns/locale";
 import React from "react";
 import { DateRange } from "react-date-range-ts";
-import { ResetButton } from "../../../components/search/styles/searchStyle";
 import { convertDateToString, convertDateWithDots } from "../../utils";
-import Icon from "../icon";
 import { StyledCalendar } from "./calendarStyle";
 import type { DateRangeType } from "../../types";
 import type { Dispatch, SetStateAction } from "react";
 
 type CalendarProps = {
-	selectedRange: any;
-	handleSelectRange: any;
-	handleClickSubmit: any;
-	setCalendarOpen: Dispatch<SetStateAction<boolean>>;
+	selectedRange: DateRangeType;
 	setSelectedRange: Dispatch<SetStateAction<DateRangeType>>;
 };
 
-const Calendar = ({
-	selectedRange,
-	handleSelectRange,
-	handleClickSubmit,
-	setCalendarOpen,
-	setSelectedRange,
-}: CalendarProps) => {
-	const handleClickReset = () => {
-		setSelectedRange({
-			startDate: new Date(),
-			endDate: new Date(),
-			key: "selection",
-		});
+const Calendar = ({ selectedRange, setSelectedRange }: CalendarProps) => {
+	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+	const handleDateChange = (range: any) => {
+		setSelectedRange(range.selection);
 	};
 
 	return (
 		<StyledCalendar>
 			<DateRange
-				className="request-calendar"
+				className="custom-calendar"
 				editableDateInputs
 				moveRangeOnFirstSelection={false}
 				ranges={[selectedRange]}
-				onChange={handleSelectRange}
+				onChange={handleDateChange}
 				locale={ko}
 				showMonthAndYearPickers={false}
 				showDateDisplay={false}

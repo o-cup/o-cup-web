@@ -45,8 +45,8 @@ const filterData = {
 const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 	const [currentFilter, setCurrentFilter] = useState<string | null>(null);
 	const [selectedRange, setSelectedRange] = useState<DateRangeType>({
-		startDate: null,
-		endDate: null,
+		startDate: new Date(),
+		endDate: new Date(),
 		key: "selection",
 	});
 	const [selectedDists, setSelectedDists] = useState<RegCodeItem[]>([]);
@@ -59,12 +59,6 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 	});
 
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
-
-	// console.log("searchFilter", searchFilter);
-
-	const handleSelectRange = ({ selection }: { selection: DateRangeType }) => {
-		setSelectedRange(selection);
-	};
 
 	const headerElements = (
 		<StyledCustomHeader>
@@ -112,7 +106,7 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 			(c) => searchFilters.categories[c]
 		);
 
-		console.log("selectedCategories", selectedCategories);
+		// console.log("selectedCategories", selectedCategories);
 
 		switch (filterType) {
 			case "calendar":
@@ -166,7 +160,6 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 					<Calendar
 						selectedRange={selectedRange}
 						setSelectedRange={setSelectedRange}
-						handleSelectRange={handleSelectRange}
 					/>
 				)}
 

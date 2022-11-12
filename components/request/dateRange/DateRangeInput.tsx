@@ -97,7 +97,7 @@ const DateRangeInput = ({ disabled }: { disabled?: boolean }) => {
 			{isCalendarOpen && (
 				<StyledCalendarContainer>
 					<DateRange
-						className="request-calendar"
+						className="custom-calendar"
 						editableDateInputs
 						moveRangeOnFirstSelection={false}
 						ranges={[selectedRange]}

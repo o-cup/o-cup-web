@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
+import { FreeMode } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { CategoryChip } from "../../shared/components";
 import { dateFilterAtom } from "../../shared/state";
 import {
@@ -9,8 +11,14 @@ import {
 } from "../../shared/utils/dateHandlers";
 import { CATEGORY_TYPES } from "../request/categoryInput";
 import EventListItem from "./EventListItem";
-import { StyledMainLists } from "./styles/mainEventListStyles";
+import {
+	StyledMainEventList,
+	StyledMainSwiper,
+} from "./styles/mainEventListStyles";
 import type { EventType, PeopleType } from "../../shared/types";
+
+import "swiper/swiper-bundle.min.css";
+import "swiper/swiper.min.css";
 
 type BiasEventListProps = {
 	id: string;
@@ -18,7 +26,7 @@ type BiasEventListProps = {
 	events: EventType[];
 };
 
-const BiasEventList = ({ id, bias, events }: BiasEventListProps) => {
+const EventList = ({ id, bias, events }: BiasEventListProps) => {
 	const dateFilter = useRecoilValue(dateFilterAtom);
 	const [openedCategory, setOpenedCategory] = useState<
 		("A" | "B" | "C" | "D" | "E")[]
@@ -58,8 +66,11 @@ const BiasEventList = ({ id, bias, events }: BiasEventListProps) => {
 	};
 
 	return (
-		<div id={id}>
-			<p>{getEventTitle()}</p>
+		<StyledMainEventList id={id}>
+			<div className="title">
+				<p>{getEventTitle()}</p>
+				<span>({events.length}건)</span>
+			</div>
 			<ul className="category">
 				{CATEGORY_TYPES.map((category) => (
 					<li key={category}>
@@ -73,17 +84,33 @@ const BiasEventList = ({ id, bias, events }: BiasEventListProps) => {
 					</li>
 				))}
 			</ul>
-			<StyledMainLists>
-				{selectedCategory.length === 0
-					? events?.map((event) => (
-							<EventListItem event={event} key={event.id} />
-					  ))
-					: events
-							?.filter((event) => selectedCategory.includes(event.category))
-							.map((event) => <EventListItem event={event} key={event.id} />)}
-			</StyledMainLists>
-		</div>
+			<StyledMainSwiper>
+				<Swiper
+					freeMode
+					slidesPerView="auto"
+					spaceBetween={20}
+					slidesOffsetBefore={20}
+					slidesOffsetAfter={20}
+					className="mainSwiper"
+					modules={[FreeMode]}
+				>
+					{selectedCategory.length === 0
+						? events?.map((event) => (
+								<SwiperSlide key={event.id}>
+									<EventListItem event={event} key={event.id} />
+								</SwiperSlide>
+						  ))
+						: events
+								?.filter((event) => selectedCategory.includes(event.category))
+								.map((event) => (
+									<SwiperSlide key={event.id}>
+										<EventListItem event={event} key={event.id} />
+									</SwiperSlide>
+								))}
+				</Swiper>
+			</StyledMainSwiper>
+		</StyledMainEventList>
 	);
 };
 
-export default BiasEventList;
+export default EventList;

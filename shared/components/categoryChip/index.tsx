@@ -10,6 +10,14 @@ type CategoryChipProps = {
 	disabled?: boolean; // 클릭방지
 };
 
+export const CATEGORY_TITLE = {
+	A: "카페",
+	B: "꽃집",
+	C: "음식점",
+	D: "포토부스",
+	E: "기타",
+};
+
 const CategoryChip = ({
 	type,
 	handleClick,

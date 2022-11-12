@@ -1,20 +1,26 @@
-# Allow everything.
+# *
 User-agent: *
-Allow:/
+Allow: /
 
-# 네이버 검색로봇
-User-agent: Yeti
-Allow:/
-
-# 네이버 검색로봇
+# Yeti
 User-agent: Yeti
 Allow: /
 
-# 구글
+# Googlebot
 User-agent: Googlebot
+Allow: /
+
+# AdsBot-Google
 User-agent: AdsBot-Google
 Allow: /
 
-# 트위터
+# Twitterbot
 User-agent: Twitterbot
-Allow: /images
+Allow: /
+
+# Host
+Host: https://www.o-cup.kr
+
+# Sitemaps
+Sitemap: https://www.o-cup.kr/sitemap.xml
+Sitemap: https://www.o-cup.kr/server-sitemap.xml

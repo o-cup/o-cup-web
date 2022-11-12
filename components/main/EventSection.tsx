@@ -4,9 +4,9 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { fetchEvents, fetchPeople } from "../../shared/apis/common";
 import { Loading } from "../../shared/components";
 import { dateFilterAtom, openedBiasAtom } from "../../shared/state";
-import BiasEventList from "./BiasEventList";
 import EmptyDefault from "./EmptyDefault";
-import { StyledMainEvents } from "./styles/mainEventListStyles";
+import EventList from "./EventList";
+import { StyledMainEventSection } from "./styles/mainEventListStyles";
 
 const EventSection = () => {
 	const dateFilter = useRecoilValue(dateFilterAtom);
@@ -62,9 +62,9 @@ const EventSection = () => {
 
 	return (
 		<>
-			<StyledMainEvents>
+			<StyledMainEventSection>
 				{openedPeople?.map((bias) => (
-					<BiasEventList
+					<EventList
 						key={bias.id}
 						id={`bias_${bias.id}`}
 						bias={bias}
@@ -75,7 +75,7 @@ const EventSection = () => {
 						}
 					/>
 				))}
-			</StyledMainEvents>
+			</StyledMainEventSection>
 			<EmptyDefault size={events && events.length > 0 ? "small" : "default"} />
 		</>
 	);

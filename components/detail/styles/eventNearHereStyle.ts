@@ -12,33 +12,20 @@ const StyledEventNearHere = styled.div`
 		padding-left: 20px;
 	}
 
-	> ul {
-		display: flex;
-		overflow-x: auto;
-		overflow-y: hidden;
-		-ms-overflow-style: none;
-		scrollbar-width: none;
+	.nearSwiper,
+	.swiper-wrapper {
+		width: 100%;
+		margin: 0;
+	}
 
-		&::-webkit-scrollbar {
-			display: none;
-		}
-
-		&::before {
-			content: "";
-			border-left: 20px solid transparent;
-		}
-
-		&::after {
-			content: "";
-			border-right: 20px solid transparent;
-		}
+	.swiper-slide {
+		width: 120px;
 	}
 `;
 
-const EventNearHereList = styled.li`
+const EventNearHereList = styled.div`
 	background: ${({ theme }) => theme.colors.white};
 	border: 2px solid #000000;
-	margin-right: 20px;
 	margin-bottom: 4px;
 	position: relative;
 	box-shadow: 4px 4px 0 #000000;

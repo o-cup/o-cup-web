@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
+import { FreeMode } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { fetchEvents } from "../../shared/apis/common";
 import { imageOnErrorHandler } from "../../shared/utils";
 import {
@@ -8,6 +10,9 @@ import {
 	StyledEventNearHere,
 } from "./styles/eventNearHereStyle";
 import type { EventType } from "../../shared/types";
+
+import "swiper/swiper-bundle.min.css";
+import "swiper/swiper.min.css";
 
 function EventNearHere({ biasesId, districts }: Partial<EventType>) {
 	const router = useRouter();
@@ -35,37 +40,46 @@ function EventNearHere({ biasesId, districts }: Partial<EventType>) {
 	return (
 		<StyledEventNearHere>
 			<p className="title">{districts?.name || "가까운"} 연관 이벤트</p>
-			<ul>
+			<Swiper
+				freeMode
+				slidesPerView="auto"
+				spaceBetween={20}
+				slidesOffsetBefore={20}
+				slidesOffsetAfter={20}
+				className="nearSwiper"
+				modules={[FreeMode]}
+			>
 				{nearEvent &&
 					nearEvent.map((event) => {
 						const { id: eventId, category, images, place, organizer } = event;
 						const previewUrl = (images && images[0]) || "";
 						return (
-							<EventNearHereList
-								key={eventId}
-								onClick={() => router.push(`/detail/${eventId}`)}
-							>
-								{previewUrl && (
-									<img
-										alt={previewUrl}
-										src={previewUrl}
-										onError={imageOnErrorHandler}
-									/>
-								)}
-								<div>
-									<div className="near_title">
+							<SwiperSlide key={eventId}>
+								<EventNearHereList
+									onClick={() => router.push(`/detail/${eventId}`)}
+								>
+									{previewUrl && (
 										<img
-											alt={category}
-											src={`/images/categories/${category}.png`}
+											alt={previewUrl}
+											src={previewUrl}
+											onError={imageOnErrorHandler}
 										/>
-										<p className="near_place">{place}</p>
+									)}
+									<div>
+										<div className="near_title">
+											<img
+												alt={category}
+												src={`/images/categories/${category}.png`}
+											/>
+											<p className="near_place">{place}</p>
+										</div>
+										<p className="near_organizer">{organizer}</p>
 									</div>
-									<p className="near_organizer">{organizer}</p>
-								</div>
-							</EventNearHereList>
+								</EventNearHereList>
+							</SwiperSlide>
 						);
 					})}
-			</ul>
+			</Swiper>
 		</StyledEventNearHere>
 	);
 }

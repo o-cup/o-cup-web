@@ -1,37 +1,30 @@
 import styled from "styled-components";
 
-export const StyledBiasList = styled.ul`
+export const StyledBiasSwiper = styled.div`
 	display: flex;
-	overflow-x: auto;
-	overflow-y: hidden;
-	-ms-overflow-style: none;
-	scrollbar-width: none;
+	width: 100%;
 	height: 112px;
-	align-items: center;
 	margin-bottom: 14px;
 
-	&::-webkit-scrollbar {
-		display: none;
+	.biasSwiper,
+	.swiper-wrapper {
+		width: 100%;
+		height: 112px;
+		margin: 0;
 	}
 
-	&::before {
-		content: "";
-		border-left: 20px solid transparent;
+	.swiper-slide {
+		width: 68px;
 	}
 `;
 
-export const StyledBias = styled.li`
+export const StyledBias = styled.div`
 	cursor: pointer;
 	position: relative;
 	z-index: 1;
 	height: 100%;
 	display: flex;
 	padding: 12px 0 10px;
-	margin-right: 20px;
-
-	&:last-child {
-		padding: 12px 20px 10px 0;
-	}
 
 	> a,
 	> div#search {

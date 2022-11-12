@@ -112,20 +112,26 @@ const Request = () => {
 
 	// 중복 확인하기
 	const checkDuplicate = () => {
-		fetchDuplicatedEvent({
-			place: requestInputs.place.place,
-			dateRange: requestInputs.dateRange,
-		}).then((res) => {
-			if (res) {
-				setDuplicatedEventOpen(true);
-				setDuplicatedEventData(res);
-			} else {
-				// 중복검사 통과
-				window.scrollTo(0, 0);
-				setChecked(true);
-				setToast(true);
-			}
-		});
+		// 포토부스 선택 시 중복검사 패스
+		if (requestInputs.category === "D") {
+			window.scrollTo(0, 0);
+			setChecked(true);
+		} else {
+			fetchDuplicatedEvent({
+				place: requestInputs.place.place,
+				dateRange: requestInputs.dateRange,
+			}).then((res) => {
+				if (res) {
+					setDuplicatedEventOpen(true);
+					setDuplicatedEventData(res);
+				} else {
+					// 중복검사 통과
+					window.scrollTo(0, 0);
+					setChecked(true);
+					setToast(true);
+				}
+			});
+		}
 	};
 
 	if (!isChecked) {

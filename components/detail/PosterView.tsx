@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import SwiperCore, { Navigation } from "swiper";
+import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Icon } from "../../shared/components";
 import { StyledPosterView } from "./styles/posterViewStyle";
+import type SwiperCore from "swiper";
 
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
@@ -13,8 +14,6 @@ type PosterProps = {
 };
 
 function PosterView({ images, setPosterViewOpen }: PosterProps) {
-	SwiperCore.use([Navigation]);
-
 	const [swiper, setSwiper] = useState<SwiperCore>();
 	const [zoomLevel, setZoomLevel] = useState(1);
 
@@ -64,6 +63,7 @@ function PosterView({ images, setPosterViewOpen }: PosterProps) {
 				slidesPerView={1}
 				navigation={zoomLevel <= 1}
 				onSlideChange={(e) => setPageNum(e.activeIndex + 1)}
+				modules={[Navigation]}
 			>
 				{images.map((img) => (
 					<SwiperSlide key={img}>

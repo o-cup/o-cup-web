@@ -1,51 +1,61 @@
 import styled from "styled-components";
 
-export const StyledMainEvents = styled.section`
+export const StyledMainEventSection = styled.section`
 	display: flex;
 	flex-direction: column;
 	gap: 36px;
+`;
 
-	> div {
+export const StyledMainEventList = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+
+	> .title {
 		display: flex;
-		flex-direction: column;
-		gap: 12px;
+		padding: 0 20px;
+		gap: 4px;
 
 		> p {
 			font-weight: 700;
 			font-size: 16px;
 			line-height: 20px;
-			padding: 0 20px;
 		}
 
-		> ul.category {
-			padding: 0 20px;
-			display: flex;
-			gap: 12px;
-			margin-bottom: 4px;
+		> span {
+			font-weight: 500;
+			font-size: 13px;
+			line-height: 20px;
+			color: ${({ theme }) => theme.colors.gray};
+		}
+	}
 
-			> li {
-				height: 34px;
-			}
+	> ul.category {
+		padding: 0 20px;
+		display: flex;
+		gap: 12px;
+		margin-bottom: 4px;
+
+		> li {
+			height: 34px;
 		}
 	}
 `;
 
-export const StyledMainLists = styled.ul`
+export const StyledMainSwiper = styled.div`
 	display: flex;
-	gap: 20px;
-	padding-bottom: 4px; // 그림자 표현
-	overflow-x: auto;
-	overflow-y: hidden;
-	-ms-overflow-style: none;
-	scrollbar-width: none;
+	width: 100%;
+	margin-bottom: 14px;
 
-	&::-webkit-scrollbar {
-		display: none;
+	.mainSwiper,
+	.swiper-wrapper {
+		width: 100%;
+		margin: 0;
 	}
 
-	&::after {
-		content: "";
-		border-right: 20px solid transparent;
+	.swiper-slide {
+		width: 214px;
+		padding-bottom: 4px; // 그림자
 	}
 `;
 
@@ -58,7 +68,7 @@ export const StyledCategoryBorder = styled.span<{ type: string }>`
 	left: 0;
 `;
 
-export const StyledMainListItem = styled.li`
+export const StyledMainListItem = styled.div`
 	background: ${(props) => props.theme.colors.white};
 	border: 2px solid #000000;
 	padding: 16px;
@@ -69,16 +79,11 @@ export const StyledMainListItem = styled.li`
 	max-width: 214px;
 	min-width: 214px;
 
-	&:first-child {
-		margin-left: 20px;
-	}
-
 	.imgContainer {
 		img {
 			width: 176px;
 			height: 235px;
 			object-fit: cover;
-			//object-position: 90% 10%;
 			vertical-align: center;
 		}
 

@@ -7,6 +7,7 @@ export type InputProps = {
 	id: string;
 	placeholder: string;
 	handleClickSearchBtn?: (e: React.FormEvent<HTMLButtonElement>) => void;
+	handleClickInput?: () => void;
 	hideLabel?: boolean;
 	hideButton?: boolean;
 	shortBtn?: boolean;
@@ -18,13 +19,14 @@ const SearchInput = ({
 	id,
 	placeholder,
 	handleClickSearchBtn,
+	handleClickInput,
 	hideLabel = false,
 	hideButton = false,
 	shortBtn = false,
 }: InputProps) => (
 	<StyledSearchInput>
 		{!hideLabel && <Label htmlFor={id}>{label}</Label>}
-		<InputWrapper>
+		<InputWrapper onClick={handleClickInput}>
 			<input
 				disabled
 				type="text"
@@ -47,6 +49,7 @@ const SearchInput = ({
 
 SearchInput.defaultProps = {
 	handleClickSearchBtn: () => null,
+	handleClickInput: () => null,
 	hideLabel: false,
 	hideButton: false,
 	shortBtn: false,

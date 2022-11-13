@@ -44,7 +44,7 @@ const DetailMainInfo = ({ data, posterPopupDisabled }: EventMainProps) => {
 	return (
 		<StyledDetailMainInfo>
 			<StyledDetailTextContainer>
-				<StyledDetailCategory type={category || "A"} />
+				{category && <StyledDetailCategory type={category} />}
 				<div className="title">
 					<p>{place}</p>
 					<div className="chipContainer">

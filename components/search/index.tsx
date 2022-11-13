@@ -1,4 +1,3 @@
-import { BUILD_ID_FILE } from "next/dist/shared/lib/constants";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
@@ -23,7 +22,7 @@ const Search = () => {
 	const router = useRouter();
 	const { pathname } = router;
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
-	const { keyword, bid, type } = searchFilters;
+	const { placeName, bid, searchType } = searchFilters;
 	const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 	const [searchSortOpen, setSearchSortOpen] = useState(false);
 	const [selectedBiasId, setSelectedBiasId] = useState<number | null>(null);
@@ -66,23 +65,27 @@ const Search = () => {
 				}
 				return biases;
 			},
-			enabled: !showResult && !keyword,
+			// enabled: !showResult && !keyword,
 		}
 	);
 
 	useEffect(() => {
-		setShowResult(!!keyword && !!bid);
-
-		if (!keyword || !bid) {
+		if (!bid) {
 			router.replace("/search");
+			setShowResult(false);
 			return;
 		}
 
 		router.push({
 			pathname,
-			query: { type, bid },
+			query: { type: searchType, bid },
 		});
-	}, [keyword, bid]);
+
+		setShowResult(true);
+		console.log("???");
+	}, [bid, searchType]);
+
+	console.log("showResult", showResult);
 
 	useEffect(() => {
 		const today = new Date();

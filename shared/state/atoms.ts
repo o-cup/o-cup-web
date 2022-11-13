@@ -54,8 +54,8 @@ export const requestGoodsListAtom = atom<RequestGoodsListType[]>({
 });
 
 export type SearchFiltersAtomType = {
-	searchType: "bias" | "place";
-	keyword: string;
+	searchType: string;
+	placeName: string;
 	bid: number | null;
 	date: {
 		startDate: string;
@@ -68,7 +68,7 @@ export const searchFiltersAtom = atom<SearchFiltersAtomType>({
 	key: "searchFilters",
 	default: {
 		searchType: "bias",
-		keyword: "",
+		placeName: "",
 		bid: null,
 		date: {
 			startDate: "",

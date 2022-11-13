@@ -31,7 +31,7 @@ const Result = ({ biasId }: ResultProps) => {
 	const {
 		searchType,
 		bid,
-		keyword,
+		placeName,
 		date: { startDate, endDate },
 		districts,
 	} = searchFilters;
@@ -57,7 +57,7 @@ const Result = ({ biasId }: ResultProps) => {
 		[
 			"resultEvents",
 			searchType,
-			keyword,
+			// placeName,
 			bid,
 			startDate,
 			endDate,
@@ -68,7 +68,7 @@ const Result = ({ biasId }: ResultProps) => {
 		() =>
 			fetchSearchedEvents({
 				searchType,
-				keyword: removeSpace(keyword.trim()),
+				// placeName: removeSpace(placeName.trim()),
 				bid: bid!,
 				date: { startDate, endDate },
 				biasId,
@@ -98,7 +98,7 @@ const Result = ({ biasId }: ResultProps) => {
 						return eventsData;
 				}
 			},
-			enabled: !!keyword,
+			// enabled: !!keyword && !!bid,
 		}
 	);
 

@@ -4,13 +4,16 @@ import { fetchPeople } from "../../../shared/apis/common";
 import type { AutoCompleteDataType } from "../types";
 
 type useAutoCompleteProps = {
-	type: "bias" | "place";
+	searchType: "bias" | "place";
 	keyword: string;
 };
 
-const useAutoComplete = ({ type = "bias", keyword }: useAutoCompleteProps) => {
+const useAutoComplete = ({
+	searchType = "bias",
+	keyword,
+}: useAutoCompleteProps) => {
 	const { data: biasesData } = useQuery("biases", () => fetchPeople(), {
-		enabled: !!keyword || type === "bias",
+		enabled: !!keyword || searchType === "bias",
 		refetchOnWindowFocus: false,
 		refetchOnMount: false,
 	});

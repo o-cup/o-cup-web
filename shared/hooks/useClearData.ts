@@ -1,3 +1,4 @@
+import { devNull } from "os";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { searchFiltersAtom, showResultAtom } from "../state/atoms";

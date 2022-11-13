@@ -18,25 +18,34 @@ type SearchInputProps = {
 	setSelectedBiasId: Dispatch<SetStateAction<null | number>>;
 };
 
+const searchTypeOptions = [
+	{ key: "bias", name: "아티스트" },
+	{ key: "place", name: "장소이름" },
+];
+
 const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 	const router = useRouter();
+	const { pathname } = router;
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
-	const showResult = useRecoilValue(showResultAtom);
-	const { keyword } = searchFilters;
+	const { placeName, searchType } = searchFilters;
 	const [inputValue, setInputValue] = useState("");
 	const [toggle, setToggle] = useState(false);
 	const [openAutoComplete, setOpenAutoComplete] = useState(false);
+	const [showResult, setShowResult] = useRecoilState(showResultAtom);
 
-	const [selectOptions, setSelectOptions] = useRecoilState<
-		SearchInputOptionType[]
-	>(searchInputOptionsAtom);
+	const searchTypeText =
+		searchTypeOptions.find((o) => o.key === searchType)?.name || "아티스트";
 
-	const selectedOptionKey =
-		selectOptions.find((o) => o.selected)?.key || "bias";
-	const selectedOptionValue = selectOptions.find((o) => o.selected)?.value;
+	// const [selectOptions, setSelectOptions] = useRecoilState<
+	// 	SearchInputOptionType[]
+	// >(searchInputOptionsAtom);
+
+	// const selectedOptionKey =
+	// 	selectOptions.find((o) => o.selected)?.key || "bias";
+	// const selectedOptionValue = selectOptions.find((o) => o.selected)?.value;
 
 	const autoCompleteList = useAutoComplete({
-		type: selectedOptionKey,
+		searchType: "bias",
 		keyword: inputValue,
 	});
 
@@ -44,9 +53,9 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 		setOpenAutoComplete(!!autoCompleteList.length);
 	}, [autoCompleteList]);
 
-	useEffect(() => {
-		setInputValue(keyword);
-	}, [keyword]);
+	// useEffect(() => {
+	// 	setInputValue(keyword);
+	// }, [keyword]);
 
 	const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
 		const { value } = e.currentTarget;
@@ -75,7 +84,7 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 	// 	submitKeyword();
 	// };
 
-	console.log("openAutoComplete", openAutoComplete);
+	// console.log("openAutoComplete", openAutoComplete);
 
 	const handleDeleteClick = () => {
 		setInputValue("");
@@ -88,23 +97,16 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 	};
 
 	const handleOptionClick = (key: string) => {
-		const newData = selectOptions.map((o) => ({
-			...o,
-			selected: key === o.key,
-		}));
-		setSelectOptions(newData);
-
+		setSearchFilters((prev) => ({ ...prev, searchType: key }));
 		setToggle(false);
 	};
 
 	const handleAutoCompleteClick = (biasData: AutoCompleteDataType) => {
-		if (!selectedOptionKey) return;
-
-		console.log("-------selectedOptionKey", selectedOptionKey);
+		if (!searchType) return;
 
 		setSearchFilters((prev) => ({
 			...prev,
-			searchType: selectedOptionKey,
+			searchType,
 			bid: biasData.id,
 		}));
 
@@ -118,18 +120,18 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 				onClick={() => setToggle(!toggle)}
 				role="presentation"
 			>
-				<p>{selectedOptionValue}</p>
+				<p>{searchTypeText}</p>
 				{toggle ? <FaCaretUp /> : <FaCaretDown />}
 			</div>
 			{toggle && (
 				<ul className="category">
-					{selectOptions.map((o) => (
+					{searchTypeOptions.map((o) => (
 						<StyledOption
 							key={o.key}
-							selected={o.selected}
+							selected={o.key === searchType}
 							onClick={() => handleOptionClick(o.key)}
 						>
-							{o.value}
+							{o.name}
 						</StyledOption>
 					))}
 				</ul>

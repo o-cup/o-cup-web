@@ -5,9 +5,9 @@ import { isDateRangeOverlaps } from "../utils/dateHandlers";
 import type { RegCodeItem, SearchInputOptionKey } from "../types";
 
 export type FetchSearchedEventParams = {
-	searchType: "bias" | "place";
+	searchType: string;
 	bid?: number;
-	keyword?: string;
+	placeName?: string;
 	date?: { startDate: string; endDate: string };
 	biasId?: number | null;
 	districts?: RegCodeItem[];
@@ -17,7 +17,7 @@ export type FetchSearchedEventParams = {
 export const fetchSearchedEvents = async ({
 	searchType,
 	bid,
-	keyword,
+	placeName,
 	date,
 	districts,
 }: FetchSearchedEventParams) => {
@@ -27,27 +27,18 @@ export const fetchSearchedEvents = async ({
 		.eq("isApproved", true);
 	let data;
 
-	if (!keyword) return data;
-
 	if (searchType === "bias") {
-		// const { data: biasesData } = await supabase.from("people").select("*").eq("id", bid);
-
-		// const biasId = getBiasIdByKeyword({
-		// 	biasesData: biasesData || [],
-		// 	keyword,
-		// }
-		// console.log("biasesData", biasesData);
-
 		data = allEvents?.filter((event) => event.biasesId.includes(bid));
-		console.log("data", data);
 	}
 
 	if (searchType === "place") {
+		if (!placeName) return;
+
 		data = allEvents?.filter((event) => {
 			const { place } = event;
 			if (
 				place &&
-				removeSpace(place).toUpperCase().includes(keyword.toUpperCase())
+				removeSpace(place).toUpperCase().includes(placeName.toUpperCase())
 			) {
 				return true;
 			}

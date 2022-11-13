@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Icon } from "../../shared/components";
@@ -8,8 +8,10 @@ import {
 	searchInputOptionsAtom,
 	showResultAtom,
 } from "../../shared/state";
+import useAutoComplete from "./hooks/useAutoComplete";
 import { StyledOption, StyledSearchInput } from "./styles/searchInputStyle";
-import type { SearchInputOptionType } from "../../shared/types";
+import type { PeopleType, SearchInputOptionType } from "../../shared/types";
+import type { AutoCompleteDataType } from "./types";
 import type { Dispatch, SetStateAction } from "react";
 
 type SearchInputProps = {
@@ -23,10 +25,24 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 	const { keyword } = searchFilters;
 	const [inputValue, setInputValue] = useState("");
 	const [toggle, setToggle] = useState(false);
+	const [openAutoComplete, setOpenAutoComplete] = useState(false);
+
 	const [selectOptions, setSelectOptions] = useRecoilState<
 		SearchInputOptionType[]
 	>(searchInputOptionsAtom);
+
+	const selectedOptionKey =
+		selectOptions.find((o) => o.selected)?.key || "bias";
 	const selectedOptionValue = selectOptions.find((o) => o.selected)?.value;
+
+	const autoCompleteList = useAutoComplete({
+		type: selectedOptionKey,
+		keyword: inputValue,
+	});
+
+	useEffect(() => {
+		setOpenAutoComplete(!!autoCompleteList.length);
+	}, [autoCompleteList]);
 
 	useEffect(() => {
 		setInputValue(keyword);
@@ -34,35 +50,40 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 
 	const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
 		const { value } = e.currentTarget;
-		if (!value) {
-			setInputValue("");
-		}
-		setInputValue(value);
+
+		setInputValue(value || "");
 	};
 
-	const submitKeyword = () => {
-		const { pathname } = router;
+	// const submitKeyword = () => {
+	// 	const { pathname } = router;
 
-		router.replace({
-			pathname,
-			query: { keyword: inputValue },
-		});
+	// 	router.replace({
+	// 		pathname,
+	// 		query: { keyword: inputValue },
+	// 	});
 
-		setSearchFilters((prev) => ({
-			...prev,
-			keyword: inputValue,
-		}));
-	};
+	// 	setSearchFilters((prev) => ({
+	// 		...prev,
+	// 		keyword: inputValue,
+	// 	}));
+	// };
 
-	const handleEnter = (e: React.KeyboardEvent<HTMLElement>) => {
-		if (e.key !== "Enter") return;
-		e.preventDefault();
+	// const handleEnter = (e: React.KeyboardEvent<HTMLElement>) => {
+	// 	if (e.key !== "Enter") return;
+	// 	e.preventDefault();
 
-		submitKeyword();
-	};
+	// 	submitKeyword();
+	// };
+
+	console.log("openAutoComplete", openAutoComplete);
 
 	const handleDeleteClick = () => {
-		setSearchFilters((prev) => ({ ...prev, keyword: "" }));
+		setInputValue("");
+		setSearchFilters((prev) => ({
+			...prev,
+			bid: null,
+		}));
+
 		setSelectedBiasId(null);
 	};
 
@@ -76,6 +97,20 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 		setToggle(false);
 	};
 
+	const handleAutoCompleteClick = (biasData: AutoCompleteDataType) => {
+		if (!selectedOptionKey) return;
+
+		console.log("-------selectedOptionKey", selectedOptionKey);
+
+		setSearchFilters((prev) => ({
+			...prev,
+			searchType: selectedOptionKey,
+			bid: biasData.id,
+		}));
+
+		setOpenAutoComplete(false);
+	};
+
 	return (
 		<StyledSearchInput showResult={showResult}>
 			<div
@@ -87,7 +122,7 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 				{toggle ? <FaCaretUp /> : <FaCaretDown />}
 			</div>
 			{toggle && (
-				<ul>
+				<ul className="category">
 					{selectOptions.map((o) => (
 						<StyledOption
 							key={o.key}
@@ -103,10 +138,23 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 				value={inputValue}
 				placeholder="검색어를 입력해주세요."
 				onChange={handleInputChange}
-				onKeyDown={handleEnter}
+				// onKeyDown={handleEnter}
 			/>
-			<Icon name="search" handleClick={() => submitKeyword()} />
-			{keyword && <Icon name="delete" handleClick={handleDeleteClick} />}
+			{openAutoComplete ? (
+				<ul className="autoComplete">
+					{autoCompleteList.map((row, index) => (
+						<li
+							key={row.id}
+							role="presentation"
+							onClick={() => handleAutoCompleteClick(row)}
+						>
+							<p>{row.text}</p>
+							<Icon name="arrow-up-right" />
+						</li>
+					))}
+				</ul>
+			) : null}
+			{inputValue && <Icon name="delete" handleClick={handleDeleteClick} />}
 		</StyledSearchInput>
 	);
 };

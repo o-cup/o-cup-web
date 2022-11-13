@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { useRouter } from "next/router";
 import React, { memo, useEffect, useState } from "react";
 import { useQuery } from "react-query";
@@ -28,6 +29,8 @@ const Result = ({ biasId }: ResultProps) => {
 	const router = useRouter();
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 	const {
+		searchType,
+		bid,
 		keyword,
 		date: { startDate, endDate },
 		districts,
@@ -53,17 +56,20 @@ const Result = ({ biasId }: ResultProps) => {
 	const { data: events, isLoading } = useQuery(
 		[
 			"resultEvents",
+			searchType,
 			keyword,
+			bid,
 			startDate,
 			endDate,
-			biasId,
 			districts,
 			selectedSortOption,
 			searchInputOptionKey,
 		],
 		() =>
 			fetchSearchedEvents({
+				searchType,
 				keyword: removeSpace(keyword.trim()),
+				bid: bid!,
 				date: { startDate, endDate },
 				biasId,
 				districts,
@@ -71,11 +77,17 @@ const Result = ({ biasId }: ResultProps) => {
 			}),
 		{
 			select: (data) => {
-				const eventsData = data?.map((e) => {
-					const event = { ...e, image: e.images[0] };
-					delete event.images;
-					return event;
-				});
+				const eventsData = data
+					?.map((e) => {
+						const today = format(new Date(), "yyyyMMdd");
+						const isEnd = today > e.endAt!;
+
+						const event = { ...e, image: e.images[0], isEnd };
+						delete event.images;
+						return event;
+					})
+					.sort((a) => (a.isEnd ? 1 : -1));
+
 				switch (selectedSortOption) {
 					case "dateAsc":
 						return eventsData?.sort((a, b) => a.startAt - b.startAt);

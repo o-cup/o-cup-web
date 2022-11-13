@@ -1,3 +1,4 @@
+import { BUILD_ID_FILE } from "next/dist/shared/lib/constants";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
@@ -11,7 +12,6 @@ import {
 } from "../../shared/components";
 import { searchFiltersAtom, showResultAtom } from "../../shared/state";
 import { getBirthMonth } from "../../shared/utils";
-import { setMetaTags } from "../../shared/utils/metaTags";
 import MonthSelector from "./MonthSelector";
 import Result from "./Result";
 import SearchInput from "./SearchInput";
@@ -23,7 +23,7 @@ const Search = () => {
 	const router = useRouter();
 	const { pathname } = router;
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
-	const { keyword } = searchFilters;
+	const { keyword, bid, type } = searchFilters;
 	const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 	const [searchSortOpen, setSearchSortOpen] = useState(false);
 	const [selectedBiasId, setSelectedBiasId] = useState<number | null>(null);
@@ -71,17 +71,18 @@ const Search = () => {
 	);
 
 	useEffect(() => {
-		setShowResult(!!keyword);
+		setShowResult(!!keyword && !!bid);
 
-		if (!keyword) {
-			router.replace(pathname, undefined, { shallow: true });
-		} else {
-			router.push({
-				pathname,
-				query: { keyword },
-			});
+		if (!keyword || !bid) {
+			router.replace("/search");
+			return;
 		}
-	}, [keyword]);
+
+		router.push({
+			pathname,
+			query: { type, bid },
+		});
+	}, [keyword, bid]);
 
 	useEffect(() => {
 		const today = new Date();

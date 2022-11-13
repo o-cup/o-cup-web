@@ -1,3 +1,4 @@
+import type { PeopleType } from "../../shared/types";
 import type { Dispatch, SetStateAction } from "react";
 
 export type SearchModalProps = {
@@ -11,5 +12,9 @@ export type RegCodeItem = {
 	name: string;
 	selected?: boolean;
 };
+
+export type AutoCompleteDataType = {
+	text: string;
+} & PeopleType;
 
 export default {};

@@ -1,16 +1,8 @@
 import React, { memo, useEffect, useState } from "react";
-import { Icon } from "../../../shared/components";
-import { MAX_DISTRICT_CHIPS } from "../../../shared/constants";
 import { DIVISIONS_DATA } from "../divisions";
 import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
-import type {
-	DistrictType,
-	DivisionType,
-	SelectedDistrictType,
-} from "../types";
+import type { DistrictType, DivisionType } from "../types";
 import type { Dispatch, SetStateAction } from "react";
-
-// TODO: useRegCode 제거
 
 type DistrictSelectorProps = {
 	selectedDists: DistrictType[];
@@ -29,33 +21,38 @@ const DistrictSelector = ({
 
 	const districtList = divisionList.find((d) => d.selected)?.districts || [];
 
-	useEffect(() => {
-		// 선택 지역이 없으면 전국 선택으로 자동 설정됨
-		if (!selectedDists.length) {
-			const newData = divisionList.map((div) => ({
-				...div,
-				selected: isAllDiv(div.code),
-			}));
-			setDivisionList(newData);
-		}
-	}, [selectedDists]);
+	useEffect(
+		function setInitialChip() {
+			if (!selectedDists.length) {
+				const newData = divisionList.map((div) => ({
+					...div,
+					selected: isAllDiv(div.code),
+				}));
+				setDivisionList(newData);
+			}
+		},
+		[selectedDists]
+	);
 
-	useEffect(() => {
-		// 선택 칩 업데이트
-		if (!districtList.length) {
-			setSelectedDists([{ name: "전국", code: "0000000000", selected: true }]);
-			return;
-		}
+	useEffect(
+		function updateChipList() {
+			if (!districtList.length) {
+				setSelectedDists([
+					{ name: "전국", code: "0000000000", selected: true },
+				]);
+				return;
+			}
+			const selectedDivName =
+				divisionList.find((div) => div.selected)?.name || "";
 
-		const selectedDivName =
-			divisionList.find((div) => div.selected)?.name || "";
+			const newData = districtList
+				.filter((dist) => dist.selected && !isAllDiv(dist.code))
+				.map((dist) => ({ ...dist, name: `${selectedDivName} ${dist.name}` }));
 
-		const newData = districtList
-			.filter((dist) => dist.selected && !isAllDiv(dist.code))
-			.map((dist) => ({ ...dist, name: `${selectedDivName} ${dist.name}` }));
-
-		setSelectedDists(newData);
-	}, [districtList]);
+			setSelectedDists(newData);
+		},
+		[districtList]
+	);
 
 	const handleDivClick = (code: string) => {
 		const newData = divisionList.map((d) => ({
@@ -136,10 +133,7 @@ const DistrictSelector = ({
 	return (
 		<StyledDistrictSelector>
 			<div className="title">
-				<h2 className="nations">
-					대한민국
-					{/* <FaCaretDown /> */}
-				</h2>
+				<h2 className="nations">대한민국</h2>
 				<p>최대 3개까지 선택 가능</p>
 			</div>
 

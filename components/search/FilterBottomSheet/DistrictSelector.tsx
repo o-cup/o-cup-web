@@ -1,112 +1,136 @@
 import React, { memo, useEffect, useState } from "react";
 import { Icon } from "../../../shared/components";
 import { MAX_DISTRICT_CHIPS } from "../../../shared/constants";
-import { useRegCodes } from "../../../shared/hooks";
-import divisionData from "../divisions";
+import { DIVISIONS_DATA } from "../divisions";
 import { StyledDistrictSelector } from "./styles/districtSelectorStyle";
-import type { RegCodeItem } from "../types";
+import type {
+	DistrictType,
+	DivisionType,
+	SelectedDistrictType,
+} from "../types";
 import type { Dispatch, SetStateAction } from "react";
 
+// TODO: useRegCode 제거
+
 type DistrictSelectorProps = {
-	// handleSubmit: () => void;
-	selectedDists: RegCodeItem[];
-	setSelectedDists: Dispatch<SetStateAction<RegCodeItem[]>>;
+	selectedDists: DistrictType[];
+	setSelectedDists: Dispatch<SetStateAction<DistrictType[]>>;
 };
 
+const isAllDiv = (code: string) => code.substring(0, 2) === "00";
 const isAllDist = (code: string) => code.substring(2, 4) === "00";
 
 const DistrictSelector = ({
 	selectedDists,
 	setSelectedDists,
 }: DistrictSelectorProps) => {
-	const [divisionList, setDivisionList] = useState<RegCodeItem[]>([]);
-	const [districtList, setDistrictList] = useState<RegCodeItem[]>([]);
+	const [divisionList, setDivisionList] =
+		useState<DivisionType[]>(DIVISIONS_DATA);
 
-	const selectedDiv =
-		divisionList.find((div) => div.selected) || divisionData[0];
-
-	const districtData = useRegCodes(selectedDiv!);
+	const districtList = divisionList.find((d) => d.selected)?.districts || [];
 
 	useEffect(() => {
-		if (divisionData) {
-			setDivisionList(divisionData);
-		}
-	}, []);
-
-	useEffect(() => {
-		if (districtData.length) {
-			setDistrictList(districtData);
-		}
-	}, [districtData]);
-
-	useEffect(() => {
-		if (!districtList.length) return;
-
-		const selected = districtList
-			.filter((dist) => dist.selected)
-			.map((dist) => ({ ...dist, name: `${selectedDiv.name} ${dist.name}` }));
-
-		setSelectedDists(selected);
-	}, [districtList, setSelectedDists, selectedDiv]);
-
-	const handleDivClick = (div: RegCodeItem) => {
-		const newData = divisionList.map((item) => ({
-			...item,
-			selected: item.code === div.code,
-		}));
-		setDivisionList(newData);
-
-		const isDuplicated = selectedDists.find((dist) => dist.code === "all");
-		if (div.code === "all" && !isDuplicated) {
-			setSelectedDists([{ code: "all", name: "전국" }, ...selectedDists]);
-		}
-	};
-
-	const handleDistClick = (dist: RegCodeItem) => {
-		if (isAllDist(dist.code) && selectedDists.length > 0) {
-			const newList = districtList.map((item) => ({
-				...item,
-				selected: item.code === dist.code,
+		// 선택 지역이 없으면 전국 선택으로 자동 설정됨
+		if (!selectedDists.length) {
+			const newData = divisionList.map((div) => ({
+				...div,
+				selected: isAllDiv(div.code),
 			}));
-			setDistrictList(newList);
+			setDivisionList(newData);
+		}
+	}, [selectedDists]);
+
+	useEffect(() => {
+		// 선택 칩 업데이트
+		if (!districtList.length) {
+			setSelectedDists([{ name: "전국", code: "0000000000", selected: true }]);
 			return;
 		}
 
-		if (selectedDists.length >= MAX_DISTRICT_CHIPS) return;
+		const selectedDivName =
+			divisionList.find((div) => div.selected)?.name || "";
 
-		const isDuplicated = selectedDists.find((item) => item.code === dist.code);
-		if (isDuplicated) return;
+		const newData = districtList
+			.filter((dist) => dist.selected && !isAllDiv(dist.code))
+			.map((dist) => ({ ...dist, name: `${selectedDivName} ${dist.name}` }));
 
-		const newData = districtList.map((item: RegCodeItem) => {
-			if (!isAllDist(dist.code) && isAllDist(item.code)) {
+		setSelectedDists(newData);
+	}, [districtList]);
+
+	const handleDivClick = (code: string) => {
+		const newData = divisionList.map((d) => ({
+			...d,
+			selected: d.code === code,
+			districts: d.districts.map((dist) => ({
+				...dist,
+				selected: isAllDist(dist.code),
+			})),
+		}));
+
+		setDivisionList(newData);
+	};
+
+	const handleDistClick = (code: string) => {
+		if (isAllDist(code)) {
+			const newData = divisionList.map((div) => {
+				if (div.selected) {
+					return {
+						...div,
+						districts: div.districts.map((dist) => ({
+							...dist,
+							selected: isAllDist(dist.code) ? !dist.selected : false,
+						})),
+					};
+				}
+				return div;
+			});
+
+			setDivisionList(newData);
+			return;
+		}
+
+		const selected = districtList.filter((d) => d.selected).map((d) => d.code);
+		if (selectedDists.length >= 3 && !selected.includes(code)) return;
+
+		const newData = divisionList.map((div) => {
+			if (div.selected) {
 				return {
-					...item,
-					selected: false,
+					...div,
+					districts: div.districts.map((dist) => {
+						if (isAllDist(dist.code)) {
+							return {
+								...dist,
+								selected: false,
+							};
+						}
+						return {
+							...dist,
+							selected: dist.code === code ? !dist.selected : dist.selected,
+						};
+					}),
 				};
 			}
-			return {
-				...item,
-				selected: item.code === dist.code ? true : item.selected,
-			};
+			return div;
 		});
 
-		setDistrictList(newData);
+		setDivisionList(newData);
 	};
 
-	const handleDeleteClick = (dist: RegCodeItem) => {
-		const newData = districtList.map((item) => ({
-			...item,
-			selected: item.code === dist.code ? false : item.selected,
-		}));
-		setDistrictList(newData);
-	};
+	const handleDeleteClick = (code: string) => {
+		const newData = divisionList.map((div) => {
+			if (div.selected) {
+				return {
+					...div,
+					districts: div.districts.map((d) => ({
+						...d,
+						selected: d.code === code ? false : d.selected,
+					})),
+				};
+			}
+			return div;
+		});
 
-	const handleResetClick = () => {
-		const newDistrictData = districtList.map((dist) => ({
-			...dist,
-			selected: isAllDist(dist.code),
-		}));
-		setDistrictList(newDistrictData);
+		setDivisionList(newData);
 	};
 
 	return (
@@ -121,23 +145,23 @@ const DistrictSelector = ({
 
 			<div className="districts">
 				<ul className="main">
-					{divisionData?.map((div: RegCodeItem) => (
+					{divisionList?.map((div: DivisionType) => (
 						<li
 							key={div.code}
 							role="presentation"
-							onClick={() => handleDivClick(div)}
-							className={div.code === selectedDiv.code ? "selected" : ""}
+							onClick={() => handleDivClick(div.code)}
+							className={div.selected ? "selected" : ""}
 						>
 							{div.name}
 						</li>
 					))}
 				</ul>
 				<ul className="sub">
-					{districtList.map((dist: RegCodeItem) => (
+					{districtList.map((dist: DistrictType) => (
 						<li
 							key={dist.code}
 							role="presentation"
-							onClick={() => handleDistClick(dist)}
+							onClick={() => handleDistClick(dist.code)}
 							className={dist.selected ? "selected" : ""}
 						>
 							{dist.name}
@@ -151,7 +175,10 @@ const DistrictSelector = ({
 					{selectedDists.map((dist) => (
 						<span className="chip" key={dist.code}>
 							<span>{dist.name}</span>
-							<span role="presentation" onClick={() => handleDeleteClick(dist)}>
+							<span
+								role="presentation"
+								onClick={() => handleDeleteClick(dist.code)}
+							>
 								X
 							</span>
 						</span>

@@ -11,8 +11,8 @@ import {
 	StyledCustomHeader,
 	StyledFilterBottomSheet,
 } from "./styles/filterBottomSheetStyle";
-import type { DateRangeType, RegCodeItem } from "../../../shared/types";
-import type { CategoriesStateType } from "../types";
+import type { DateRangeType } from "../../../shared/types";
+import type { CategoriesStateType, DistrictType } from "../types";
 import type { SetStateAction, Dispatch } from "react";
 
 type FilterBottomSheetProps = {
@@ -49,7 +49,7 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 		endDate: new Date(),
 		key: "selection",
 	});
-	const [selectedDists, setSelectedDists] = useState<RegCodeItem[]>([]);
+	const [selectedDists, setSelectedDists] = useState<DistrictType[]>([]);
 	const [categories, setCategories] = useState<CategoriesStateType>({
 		A: false,
 		B: false,
@@ -59,6 +59,8 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 	});
 
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
+
+	console.log("selectedDists", selectedDists);
 
 	const headerElements = (
 		<StyledCustomHeader>

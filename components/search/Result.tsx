@@ -18,7 +18,7 @@ import FilterBottomSheet from "./FilterBottomSheet";
 import SearchModal from "./SearchModal";
 import { StyledResult } from "./styles/resultStyle";
 import type { ResultSortOptionKeys } from "../../shared/types";
-import type { RegCodeItem } from "./types";
+import type { DistrictType } from "./types";
 
 type ResultProps = {
 	biasId?: number | null;
@@ -42,7 +42,7 @@ const Result = ({ biasId }: ResultProps) => {
 	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
 	const [chips, setChips] = useState<{
 		dateChip: string;
-		distChips: RegCodeItem[];
+		distChips: DistrictType[];
 	}>(initialChipsData);
 	const [bottomSheetOpen, setBottomSheetOpen] = useState(true);
 	const searchInputOptions = useRecoilValue(searchInputOptionsAtom);
@@ -52,6 +52,8 @@ const Result = ({ biasId }: ResultProps) => {
 	// const dateChipText =
 	// 	startDate &&
 	// 	`${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
+
+	console.log("result chips", chips);
 
 	const { data: events, isLoading } = useQuery(
 		[

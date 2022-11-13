@@ -6,10 +6,22 @@ export type SearchModalProps = {
 	setDisctrictSelectorOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-export type RegCodeItem = {
+export type DistrictType = {
+	name: string;
+	code: string;
+	selected: boolean;
+};
+
+export type DivisionType = {
 	code: string;
 	name: string;
-	selected?: boolean;
+	selected: boolean;
+	districts: DistrictType[];
+};
+
+export type SelectedDistrictType = {
+	code: string;
+	name: string;
 };
 
 export type CategoriesStateType = Record<string, boolean>;

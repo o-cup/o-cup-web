@@ -153,7 +153,6 @@ const Search = () => {
 				<div className="input">
 					<SearchInput setSelectedBiasId={setSelectedBiasId} />
 				</div>
-
 				{conditionalRender()}
 			</StyledSearch>
 		</Layout>

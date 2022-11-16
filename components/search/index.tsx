@@ -29,6 +29,7 @@ const Search = () => {
 	const [selectedOption, setSelectedOption] =
 		useState<SearchSortOptionKeys>("alphabetAsc");
 	const [showResult, setShowResult] = useRecoilState(showResultAtom);
+	const [openAutoComplete, setOpenAutoComplete] = useState(false);
 	const [isMounted, setIsMounted] = useState(false);
 
 	useSetMetaTags();
@@ -82,10 +83,7 @@ const Search = () => {
 		});
 
 		setShowResult(true);
-		console.log("???");
 	}, [bid, searchType]);
-
-	console.log("showResult", showResult);
 
 	useEffect(() => {
 		const today = new Date();
@@ -93,18 +91,24 @@ const Search = () => {
 	}, []);
 
 	const handleBiasClick = ({ name, id }: { name: string; id: number }) => {
-		setSearchFilters((prev) => ({ ...prev, keyword: name }));
+		setSearchFilters((prev) => ({ ...prev, bid: id, keyword: name }));
 		setSelectedBiasId(id);
 		setShowResult(true);
+		setOpenAutoComplete(false);
 	};
 
 	const handleBackClick = () => {
 		if (showResult) {
-			setSearchFilters((prev) => ({ ...prev, keyword: "" }));
+			setSearchFilters((prev) => ({
+				...prev,
+				keyword: "",
+				bid: null,
+				placeName: "",
+			}));
 			setShowResult(false);
 			return;
 		}
-		router.push("/");
+		router.push("/search");
 	};
 
 	// Hydration Error Handling
@@ -156,7 +160,11 @@ const Search = () => {
 		<Layout page="search" handleBackClick={handleBackClick} share>
 			<StyledSearch>
 				<div className="input">
-					<SearchInput setSelectedBiasId={setSelectedBiasId} />
+					<SearchInput
+						setSelectedBiasId={setSelectedBiasId}
+						openAutoComplete={openAutoComplete}
+						setOpenAutoComplete={setOpenAutoComplete}
+					/>
 				</div>
 
 				{conditionalRender()}

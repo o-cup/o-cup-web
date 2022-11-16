@@ -53,7 +53,6 @@ const PlaceInput = () => {
 			) {
 				if (status === window.kakao.maps.services.Status.OK) {
 					setPlaceList(data);
-					// console.log(data);
 				}
 			}
 

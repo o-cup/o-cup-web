@@ -1,21 +1,18 @@
 import { useRouter } from "next/router";
-import React, { memo, useEffect, useRef, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { Icon } from "../../shared/components";
-import {
-	searchFiltersAtom,
-	searchInputOptionsAtom,
-	showResultAtom,
-} from "../../shared/state";
+import { searchFiltersAtom, showResultAtom } from "../../shared/state";
 import useAutoComplete from "./hooks/useAutoComplete";
 import { StyledOption, StyledSearchInput } from "./styles/searchInputStyle";
-import type { PeopleType, SearchInputOptionType } from "../../shared/types";
 import type { AutoCompleteDataType } from "./types";
 import type { Dispatch, SetStateAction } from "react";
 
 type SearchInputProps = {
 	setSelectedBiasId: Dispatch<SetStateAction<null | number>>;
+	openAutoComplete: boolean;
+	setOpenAutoComplete: Dispatch<SetStateAction<boolean>>;
 };
 
 const searchTypeOptions = [
@@ -23,68 +20,44 @@ const searchTypeOptions = [
 	{ key: "place", name: "장소이름" },
 ];
 
-const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
+const SearchInput = ({
+	setSelectedBiasId,
+	openAutoComplete,
+	setOpenAutoComplete,
+}: SearchInputProps) => {
 	const router = useRouter();
 	const { pathname } = router;
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
-	const { placeName, searchType } = searchFilters;
+	const { placeName, keyword, searchType } = searchFilters;
 	const [inputValue, setInputValue] = useState("");
 	const [toggle, setToggle] = useState(false);
-	const [openAutoComplete, setOpenAutoComplete] = useState(false);
 	const [showResult, setShowResult] = useRecoilState(showResultAtom);
+	const [autoCompleteEnabled, setAutoCompleteEnabled] = useState(false);
 
 	const searchTypeText =
 		searchTypeOptions.find((o) => o.key === searchType)?.name || "아티스트";
 
-	// const [selectOptions, setSelectOptions] = useRecoilState<
-	// 	SearchInputOptionType[]
-	// >(searchInputOptionsAtom);
-
-	// const selectedOptionKey =
-	// 	selectOptions.find((o) => o.selected)?.key || "bias";
-	// const selectedOptionValue = selectOptions.find((o) => o.selected)?.value;
-
 	const autoCompleteList = useAutoComplete({
 		searchType: "bias",
 		keyword: inputValue,
+		enabled: autoCompleteEnabled,
 	});
 
 	useEffect(() => {
-		setOpenAutoComplete(!!autoCompleteList.length);
-	}, [autoCompleteList]);
+		setInputValue(keyword);
+	}, [keyword]);
 
-	// useEffect(() => {
-	// 	setInputValue(keyword);
-	// }, [keyword]);
+	useEffect(() => {
+		setOpenAutoComplete(!!autoCompleteList.length);
+	}, [autoCompleteList, showResult]);
 
 	const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
 		const { value } = e.currentTarget;
 
 		setInputValue(value || "");
+		setAutoCompleteEnabled(!!value);
+		setShowResult(false);
 	};
-
-	// const submitKeyword = () => {
-	// 	const { pathname } = router;
-
-	// 	router.replace({
-	// 		pathname,
-	// 		query: { keyword: inputValue },
-	// 	});
-
-	// 	setSearchFilters((prev) => ({
-	// 		...prev,
-	// 		keyword: inputValue,
-	// 	}));
-	// };
-
-	// const handleEnter = (e: React.KeyboardEvent<HTMLElement>) => {
-	// 	if (e.key !== "Enter") return;
-	// 	e.preventDefault();
-
-	// 	submitKeyword();
-	// };
-
-	// console.log("openAutoComplete", openAutoComplete);
 
 	const handleDeleteClick = () => {
 		setInputValue("");
@@ -110,7 +83,10 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 			bid: biasData.id,
 		}));
 
+		setInputValue(biasData.name);
 		setOpenAutoComplete(false);
+		setAutoCompleteEnabled(false);
+		setShowResult(true);
 	};
 
 	return (
@@ -140,11 +116,10 @@ const SearchInput = ({ setSelectedBiasId }: SearchInputProps) => {
 				value={inputValue}
 				placeholder="검색어를 입력해주세요."
 				onChange={handleInputChange}
-				// onKeyDown={handleEnter}
 			/>
-			{openAutoComplete ? (
+			{openAutoComplete && !showResult ? (
 				<ul className="autoComplete">
-					{autoCompleteList.map((row, index) => (
+					{autoCompleteList.map((row) => (
 						<li
 							key={row.id}
 							role="presentation"

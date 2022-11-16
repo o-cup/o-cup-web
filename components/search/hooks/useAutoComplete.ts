@@ -6,11 +6,13 @@ import type { AutoCompleteDataType } from "../types";
 type useAutoCompleteProps = {
 	searchType: "bias" | "place";
 	keyword: string;
+	enabled: boolean;
 };
 
 const useAutoComplete = ({
 	searchType = "bias",
 	keyword,
+	enabled,
 }: useAutoCompleteProps) => {
 	const { data: biasesData } = useQuery("biases", () => fetchPeople(), {
 		enabled: !!keyword || searchType === "bias",
@@ -21,7 +23,6 @@ const useAutoComplete = ({
 		AutoCompleteDataType[] | []
 	>([]);
 
-	// type === "bias"
 	useEffect(() => {
 		if (!keyword) {
 			setAutoCompleteData([]);
@@ -52,6 +53,8 @@ const useAutoComplete = ({
 			setAutoCompleteData(result);
 		}
 	}, [keyword]);
+
+	if (!enabled) return [];
 
 	return autoCompleteData;
 };

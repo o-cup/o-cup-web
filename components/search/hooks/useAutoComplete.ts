@@ -56,7 +56,7 @@ const useAutoComplete = ({
 
 	if (!enabled) return [];
 
-	return autoCompleteData;
+	return autoCompleteData.filter((_, index) => index < 5);
 };
 
 export default useAutoComplete;

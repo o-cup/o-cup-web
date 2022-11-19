@@ -1,5 +1,6 @@
 import axios from "axios";
 import { supabase } from "../../supabaseClient";
+import { SearchFiltersAtomType } from "../state/atoms";
 import { getBiasIdByKeyword, removeSpace } from "../utils";
 import { isDateRangeOverlaps } from "../utils/dateHandlers";
 import type { RegCodeItem, SearchInputOptionKey } from "../types";
@@ -32,7 +33,7 @@ export const fetchSearchedEvents = async ({
 	}
 
 	if (searchType === "place") {
-		if (!placeName) return;
+		if (!placeName) return [];
 
 		data = allEvents?.filter((event) => {
 			const { place } = event;
@@ -45,23 +46,6 @@ export const fetchSearchedEvents = async ({
 			return false;
 		});
 	}
-
-	// if (searchInputOptionKey === "organizer") {
-	// 	data = allEvents?.filter((event) => {
-	// 		const { organizer, snsId } = event;
-	// 		if (
-	// 			(organizer &&
-	// 				removeSpace(organizer)
-	// 					.toUpperCase()
-	// 					.includes(keyword.toUpperCase())) ||
-	// 			(snsId &&
-	// 				removeSpace(snsId).toUpperCase().includes(keyword.toUpperCase()))
-	// 		) {
-	// 			return true;
-	// 		}
-	// 		return false;
-	// 	});
-	// }
 
 	if (date?.startDate) {
 		const { startDate, endDate } = date;

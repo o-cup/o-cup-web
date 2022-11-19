@@ -38,7 +38,7 @@ const SearchInput = ({
 		searchTypeOptions.find((o) => o.key === searchType)?.name || "아티스트";
 
 	const autoCompleteList = useAutoComplete({
-		searchType: "bias",
+		searchType,
 		keyword: inputValue,
 		enabled: autoCompleteEnabled,
 	});

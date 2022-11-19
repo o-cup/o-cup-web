@@ -1,9 +1,6 @@
-import { format } from "date-fns";
 import { useRouter } from "next/router";
 import React, { memo, useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { fetchSearchedEvents } from "../../shared/apis/search";
+import { useRecoilState } from "recoil";
 import {
 	Button,
 	Chip,
@@ -11,10 +8,11 @@ import {
 	Loading,
 	SortIcon,
 } from "../../shared/components";
-import { searchFiltersAtom, searchInputOptionsAtom } from "../../shared/state";
-import { convertDateWithDots, removeSpace } from "../../shared/utils";
+import { searchFiltersAtom } from "../../shared/state";
+import { convertDateWithDots } from "../../shared/utils";
 import Event from "./Event";
 import SearchModal from "./SearchModal";
+import useSearchResult from "./hooks/useSearchResult";
 import { StyledResult } from "./styles/resultStyle";
 import type { ResultSortOptionKeys } from "../../shared/types";
 import type { RegCodeItem } from "./types";
@@ -29,78 +27,28 @@ const Result = ({ biasId }: ResultProps) => {
 	const router = useRouter();
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 	const {
-		searchType,
-		bid,
-		placeName,
 		date: { startDate, endDate },
 		districts,
 	} = searchFilters;
 	const [sortOpen, setSortOpen] = useState(false);
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
-	const [selectedSortOption, setSelectedSortOption] =
+	const [sortOption, setSortOption] =
 		useState<ResultSortOptionKeys>("alphabetAsc");
 	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
 	const [chips, setChips] = useState<{
 		dateChip: string;
 		distChips: RegCodeItem[];
 	}>(initialChipsData);
-	const searchInputOptions = useRecoilValue(searchInputOptionsAtom);
-	const searchInputOptionKey = searchInputOptions.find((o) => o.selected)?.key;
 
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	const dateChipText =
 		startDate &&
 		`${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
-	const { data: events, isLoading } = useQuery(
-		[
-			"resultEvents",
-			searchType,
-			// placeName,
-			bid,
-			startDate,
-			endDate,
-			districts,
-			selectedSortOption,
-			searchInputOptionKey,
-		],
-		() =>
-			fetchSearchedEvents({
-				searchType,
-				// placeName: removeSpace(placeName.trim()),
-				bid: bid!,
-				date: { startDate, endDate },
-				biasId,
-				districts,
-				searchInputOptionKey,
-			}),
-		{
-			select: (data) => {
-				const eventsData = data
-					?.map((e) => {
-						const today = format(new Date(), "yyyyMMdd");
-						const isEnd = today > e.endAt!;
-
-						const event = { ...e, image: e.images[0], isEnd };
-						delete event.images;
-						return event;
-					})
-					.sort((a) => (a.isEnd ? 1 : -1));
-
-				switch (selectedSortOption) {
-					case "dateAsc":
-						return eventsData?.sort((a, b) => a.startAt - b.startAt);
-					case "dateDsc":
-						return eventsData?.sort((a, b) => b.startAt - a.startAt);
-					case "alphabetAsc":
-					default:
-						return eventsData;
-				}
-			},
-			// enabled: !!keyword && !!bid,
-		}
-	);
+	const { isLoading, events } = useSearchResult({
+		sortOption,
+	});
 
 	useEffect(() => {
 		if (!startDate) return;
@@ -167,8 +115,8 @@ const Result = ({ biasId }: ResultProps) => {
 				<p>{`검색 결과 총 ${events?.length || 0}개`}</p>
 				<div className="icons">
 					<FilterIcon
-						isOpened={filterOpen}
-						setIsOpened={setFilterOpen}
+						isOpen={filterOpen}
+						setIsOpen={setFilterOpen}
 						setCalendarOpen={setCalendarOpen}
 						setDistrictSelectorOpen={setDistrictSelectorOpen}
 					/>
@@ -176,8 +124,8 @@ const Result = ({ biasId }: ResultProps) => {
 						type="result"
 						isOpened={sortOpen}
 						setIsOpened={setSortOpen}
-						setSelectedResultOption={setSelectedSortOption}
-						selectedOption={selectedSortOption}
+						setSelectedResultOption={setSortOption}
+						selectedOption={sortOption}
 					/>
 				</div>
 			</div>

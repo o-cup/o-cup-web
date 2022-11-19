@@ -40,7 +40,7 @@ const Search = () => {
 
 	const { data: people, isLoading } = useQuery(
 		["people", selectedOption],
-		() => fetchPeople(selectedOption),
+		fetchPeople,
 		{
 			select: (data) => {
 				let biases = data?.filter(
@@ -66,7 +66,6 @@ const Search = () => {
 				}
 				return biases;
 			},
-			// enabled: !showResult && !keyword,
 		}
 	);
 

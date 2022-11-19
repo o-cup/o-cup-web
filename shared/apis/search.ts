@@ -1,7 +1,5 @@
-import axios from "axios";
 import { supabase } from "../../supabaseClient";
-import { SearchFiltersAtomType } from "../state/atoms";
-import { getBiasIdByKeyword, removeSpace } from "../utils";
+import { removeSpace } from "../utils";
 import { isDateRangeOverlaps } from "../utils/dateHandlers";
 import type { RegCodeItem, SearchInputOptionKey } from "../types";
 
@@ -112,4 +110,9 @@ export const fetchBiasDataByKeyword = async (keyword: string) => {
 	});
 
 	return biasData;
+};
+
+export const fetchPlaceData = async () => {
+	const { data } = await supabase.from("events");
+	return data?.map((item) => item.place);
 };

@@ -28,7 +28,7 @@ const SearchInput = ({
 	const router = useRouter();
 	const { pathname } = router;
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
-	const { placeName, keyword, searchType } = searchFilters;
+	const { searchType } = searchFilters;
 	const [inputValue, setInputValue] = useState("");
 	const [toggle, setToggle] = useState(false);
 	const [showResult, setShowResult] = useRecoilState(showResultAtom);
@@ -42,10 +42,6 @@ const SearchInput = ({
 		keyword: inputValue,
 		enabled: autoCompleteEnabled,
 	});
-
-	useEffect(() => {
-		setInputValue(keyword);
-	}, [keyword]);
 
 	useEffect(() => {
 		setOpenAutoComplete(!!autoCompleteList.length);
@@ -64,9 +60,11 @@ const SearchInput = ({
 		setSearchFilters((prev) => ({
 			...prev,
 			bid: null,
+			placeName: "",
 		}));
 
 		setSelectedBiasId(null);
+		setShowResult(false);
 	};
 
 	const handleOptionClick = (key: string) => {
@@ -74,7 +72,7 @@ const SearchInput = ({
 		setToggle(false);
 	};
 
-	const handleAutoCompleteClick = (biasData: AutoCompleteDataType) => {
+	const handleAutoCompletedBiasClick = (biasData: AutoCompleteDataType) => {
 		if (!searchType) return;
 
 		setSearchFilters((prev) => ({
@@ -84,6 +82,18 @@ const SearchInput = ({
 		}));
 
 		setInputValue(biasData.name);
+		setOpenAutoComplete(false);
+		setAutoCompleteEnabled(false);
+		setShowResult(true);
+	};
+
+	const handleAutoCompletedPlaceClick = (placeName: string) => {
+		setSearchFilters((prev) => ({
+			...prev,
+			placeName,
+		}));
+
+		setInputValue(placeName);
 		setOpenAutoComplete(false);
 		setAutoCompleteEnabled(false);
 		setShowResult(true);
@@ -121,11 +131,15 @@ const SearchInput = ({
 				<ul className="autoComplete">
 					{autoCompleteList.map((row) => (
 						<li
-							key={row.id}
+							key={row.id || row}
 							role="presentation"
-							onClick={() => handleAutoCompleteClick(row)}
+							onClick={() =>
+								searchType === "bias"
+									? handleAutoCompletedBiasClick(row)
+									: handleAutoCompletedPlaceClick(row)
+							}
 						>
-							<p>{row.text}</p>
+							<p>{row.text || row}</p>
 							<Icon name="arrow-up-right" />
 						</li>
 					))}

@@ -14,7 +14,6 @@ import { getBirthMonth } from "../../shared/utils";
 import MonthSelector from "./MonthSelector";
 import Result from "./Result";
 import SearchInput from "./SearchInput";
-import useSetMetaTags from "./hooks/useSetMetaTags";
 import { StyledFilter, StyledSearch } from "./styles/searchStyle";
 import type { SearchSortOptionKeys } from "../../shared/types";
 
@@ -31,8 +30,6 @@ const Search = () => {
 	const [showResult, setShowResult] = useRecoilState(showResultAtom);
 	const [openAutoComplete, setOpenAutoComplete] = useState(false);
 	const [isMounted, setIsMounted] = useState(false);
-
-	useSetMetaTags();
 
 	useEffect(() => {
 		setIsMounted(true);

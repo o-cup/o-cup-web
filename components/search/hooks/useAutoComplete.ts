@@ -56,7 +56,7 @@ const useAutoComplete = ({
 			enabled: !!keyword && searchType === "place",
 			select: (data) => {
 				const filtered = data?.filter((placeName, i) =>
-					removeSpace(placeName).includes(removeSpace(keyword))
+					removeSpace(placeName).includes(keyword)
 				);
 
 				const set = new Set(filtered);

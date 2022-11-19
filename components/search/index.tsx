@@ -21,7 +21,7 @@ const Search = () => {
 	const router = useRouter();
 	const { pathname } = router;
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
-	const { placeName, bid, searchType } = searchFilters;
+	const { bid, searchType } = searchFilters;
 	const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 	const [searchSortOpen, setSearchSortOpen] = useState(false);
 	const [selectedBiasId, setSelectedBiasId] = useState<number | null>(null);
@@ -87,7 +87,12 @@ const Search = () => {
 	}, []);
 
 	const handleBiasClick = ({ name, id }: { name: string; id: number }) => {
-		setSearchFilters((prev) => ({ ...prev, bid: id, keyword: name }));
+		setSearchFilters((prev) => ({
+			...prev,
+			searchType: "bias",
+			bid: id,
+			biasName: name,
+		}));
 		setSelectedBiasId(id);
 		setShowResult(true);
 		setOpenAutoComplete(false);

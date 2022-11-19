@@ -4,6 +4,7 @@ import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { useRecoilState } from "recoil";
 import { Icon } from "../../shared/components";
 import { searchFiltersAtom, showResultAtom } from "../../shared/state";
+import { removeSpace } from "../../shared/utils";
 import useAutoComplete from "./hooks/useAutoComplete";
 import { StyledOption, StyledSearchInput } from "./styles/searchInputStyle";
 import type { AutoCompleteDataType } from "./types";
@@ -28,7 +29,7 @@ const SearchInput = ({
 	const router = useRouter();
 	const { pathname } = router;
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
-	const { searchType } = searchFilters;
+	const { biasName, searchType } = searchFilters;
 	const [inputValue, setInputValue] = useState("");
 	const [toggle, setToggle] = useState(false);
 	const [showResult, setShowResult] = useRecoilState(showResultAtom);
@@ -39,9 +40,13 @@ const SearchInput = ({
 
 	const autoCompleteList = useAutoComplete({
 		searchType,
-		keyword: inputValue,
+		keyword: removeSpace(inputValue),
 		enabled: autoCompleteEnabled,
 	});
+
+	useEffect(() => {
+		setInputValue(biasName);
+	}, [biasName]);
 
 	useEffect(() => {
 		setOpenAutoComplete(!!autoCompleteList.length);
@@ -68,7 +73,27 @@ const SearchInput = ({
 	};
 
 	const handleOptionClick = (key: string) => {
-		setSearchFilters((prev) => ({ ...prev, searchType: key }));
+		switch (searchType) {
+			case "bias":
+				setSearchFilters((prev) => ({
+					...prev,
+					searchType: key,
+					placeName: "",
+				}));
+				break;
+
+			case "place":
+				setSearchFilters((prev) => ({
+					...prev,
+					searchType: key,
+					bid: null,
+					biasName: "",
+				}));
+				break;
+
+			default:
+				break;
+		}
 		setToggle(false);
 	};
 

@@ -77,7 +77,7 @@ BottomSheet.defaultProps = {
 	slider: false,
 	buttons: {
 		title: "",
-		handleClick: () => console.log("click!"),
+		handleClick: null,
 	},
 };
 

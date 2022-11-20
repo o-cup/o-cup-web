@@ -48,8 +48,6 @@ const SearchInput = ({
 	});
 
 	useEffect(() => {
-		console.log("biasName", biasName);
-
 		setInputValue(biasName);
 	}, [biasName]);
 

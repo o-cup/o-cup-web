@@ -14,6 +14,8 @@ type SearchInputProps = {
 	setSelectedBiasId: Dispatch<SetStateAction<null | number>>;
 	openAutoComplete: boolean;
 	setOpenAutoComplete: Dispatch<SetStateAction<boolean>>;
+	inputValue: string;
+	setInputValue: Dispatch<SetStateAction<string>>;
 };
 
 const searchTypeOptions = [
@@ -25,12 +27,13 @@ const SearchInput = ({
 	setSelectedBiasId,
 	openAutoComplete,
 	setOpenAutoComplete,
+	inputValue,
+	setInputValue,
 }: SearchInputProps) => {
 	const router = useRouter();
 	const { pathname } = router;
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 	const { biasName, searchType } = searchFilters;
-	const [inputValue, setInputValue] = useState("");
 	const [toggle, setToggle] = useState(false);
 	const [showResult, setShowResult] = useRecoilState(showResultAtom);
 	const [autoCompleteEnabled, setAutoCompleteEnabled] = useState(false);
@@ -45,6 +48,8 @@ const SearchInput = ({
 	});
 
 	useEffect(() => {
+		console.log("biasName", biasName);
+
 		setInputValue(biasName);
 	}, [biasName]);
 
@@ -110,6 +115,11 @@ const SearchInput = ({
 		setOpenAutoComplete(false);
 		setAutoCompleteEnabled(false);
 		setShowResult(true);
+
+		router.push({
+			pathname,
+			query: { type: "bias", bid: biasData.id },
+		});
 	};
 
 	const handleAutoCompletedPlaceClick = (placeName: string) => {
@@ -122,6 +132,11 @@ const SearchInput = ({
 		setOpenAutoComplete(false);
 		setAutoCompleteEnabled(false);
 		setShowResult(true);
+
+		router.push({
+			pathname,
+			query: { type: "place", name: placeName },
+		});
 	};
 
 	return (

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { fetchPeople } from "../../shared/apis/common";
 import {
 	BiasProfile,
@@ -14,26 +14,29 @@ import { getBirthMonth } from "../../shared/utils";
 import MonthSelector from "./MonthSelector";
 import Result from "./Result";
 import SearchInput from "./SearchInput";
+import useHanleDirectAccess from "./hooks/useHandleDirectAccess";
 import { StyledFilter, StyledSearch } from "./styles/searchStyle";
 import type { SearchSortOptionKeys } from "../../shared/types";
 
 const Search = () => {
 	const router = useRouter();
 	const { pathname } = router;
-	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
-	const { bid, searchType } = searchFilters;
+	const setSearchFilters = useSetRecoilState(searchFiltersAtom);
+	const [showResult, setShowResult] = useRecoilState(showResultAtom);
 	const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 	const [searchSortOpen, setSearchSortOpen] = useState(false);
 	const [selectedBiasId, setSelectedBiasId] = useState<number | null>(null);
 	const [selectedOption, setSelectedOption] =
 		useState<SearchSortOptionKeys>("alphabetAsc");
-	const [showResult, setShowResult] = useRecoilState(showResultAtom);
+	const [inputValue, setInputValue] = useState("");
 	const [openAutoComplete, setOpenAutoComplete] = useState(false);
 	const [isMounted, setIsMounted] = useState(false);
 
 	useEffect(() => {
 		setIsMounted(true);
 	}, []);
+
+	useHanleDirectAccess();
 
 	const { data: people, isLoading } = useQuery(
 		["people", selectedOption],
@@ -67,21 +70,6 @@ const Search = () => {
 	);
 
 	useEffect(() => {
-		if (!bid) {
-			router.replace("/search");
-			setShowResult(false);
-			return;
-		}
-
-		router.push({
-			pathname,
-			query: { type: searchType, bid },
-		});
-
-		setShowResult(true);
-	}, [bid, searchType]);
-
-	useEffect(() => {
 		const today = new Date();
 		setSelectedMonth(today.getMonth() + 1);
 	}, []);
@@ -96,6 +84,11 @@ const Search = () => {
 		setSelectedBiasId(id);
 		setShowResult(true);
 		setOpenAutoComplete(false);
+
+		router.push({
+			pathname,
+			query: { type: "bias", bid: id },
+		});
 	};
 
 	const handleBackClick = () => {
@@ -104,12 +97,17 @@ const Search = () => {
 				...prev,
 				keyword: "",
 				bid: null,
+				biasName: "",
 				placeName: "",
 			}));
+
 			setShowResult(false);
+			setInputValue("");
+			router.push("/search");
 			return;
 		}
-		router.push("/search");
+
+		router.push("/");
 	};
 
 	// Hydration Error Handling
@@ -165,6 +163,8 @@ const Search = () => {
 						setSelectedBiasId={setSelectedBiasId}
 						openAutoComplete={openAutoComplete}
 						setOpenAutoComplete={setOpenAutoComplete}
+						inputValue={inputValue}
+						setInputValue={setInputValue}
 					/>
 				</div>
 

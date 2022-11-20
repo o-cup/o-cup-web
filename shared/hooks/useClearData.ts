@@ -1,4 +1,3 @@
-import { devNull } from "os";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { searchFiltersAtom, showResultAtom } from "../state/atoms";
@@ -8,7 +7,13 @@ const useClearData = () => {
 	const setShowResult = useSetRecoilState(showResultAtom);
 
 	useEffect(() => {
-		setSearchFilters((prev) => ({ ...prev, keyword: "" }));
+		setSearchFilters((prev) => ({
+			...prev,
+			searchType: "bias",
+			bid: null,
+			biasName: "",
+			placeName: "",
+		}));
 		setShowResult(false);
 	}, [setSearchFilters, setShowResult]);
 };

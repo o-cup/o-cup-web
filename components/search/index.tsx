@@ -119,7 +119,7 @@ const Search = () => {
 
 	const conditionalRender = () => {
 		if (showResult) {
-			return <Result biasId={selectedBiasId} />;
+			return <Result />;
 		}
 		return (
 			<StyledFilter>

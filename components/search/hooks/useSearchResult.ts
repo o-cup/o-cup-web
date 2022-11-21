@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { useQuery } from "react-query";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { fetchSearchedEvents } from "../../../shared/apis/search";
 import { searchFiltersAtom } from "../../../shared/state";
 import { removeSpace } from "../../../shared/utils";
@@ -11,7 +11,7 @@ type useSearchResultProps = {
 };
 
 const useSearchResult = ({ sortOption }: useSearchResultProps) => {
-	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
+	const searchFilters = useRecoilValue(searchFiltersAtom);
 	const {
 		searchType,
 		bid,

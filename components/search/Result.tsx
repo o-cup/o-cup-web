@@ -17,13 +17,9 @@ import { StyledResult } from "./styles/resultStyle";
 import type { ResultSortOptionKeys } from "../../shared/types";
 import type { RegCodeItem } from "./types";
 
-type ResultProps = {
-	biasId?: number | null;
-};
-
 const initialChipsData = { dateChip: "", distChips: [] };
 
-const Result = ({ biasId }: ResultProps) => {
+const Result = () => {
 	const router = useRouter();
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 	const {

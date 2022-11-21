@@ -1,6 +1,9 @@
 import type { PeopleType } from "../types/index";
 
-export const removeSpace = (str: string) => str.split(" ").join("");
+export const removeSpace = (str: string) => {
+	if (!str) return "";
+	return str.split(" ").join("");
+};
 
 export const getBiasIdByKeyword = ({
 	biasesData,

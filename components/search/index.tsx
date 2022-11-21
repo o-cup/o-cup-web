@@ -95,7 +95,6 @@ const Search = () => {
 		if (showResult) {
 			setSearchFilters((prev) => ({
 				...prev,
-				keyword: "",
 				bid: null,
 				biasName: "",
 				placeName: "",

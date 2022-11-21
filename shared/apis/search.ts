@@ -116,3 +116,12 @@ export const fetchPlaceData = async () => {
 	const { data } = await supabase.from("events");
 	return data?.map((item) => item.place);
 };
+
+export const fetchBiasNameById = async (id: number) => {
+	const { data: biasData } = await supabase
+		.from("people")
+		.select("*")
+		.eq("id", id);
+
+	return biasData?.[0].name;
+};

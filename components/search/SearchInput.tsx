@@ -33,7 +33,7 @@ const SearchInput = ({
 	const router = useRouter();
 	const { pathname } = router;
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
-	const { biasName, searchType } = searchFilters;
+	const { biasName, placeName, searchType } = searchFilters;
 	const [toggle, setToggle] = useState(false);
 	const [showResult, setShowResult] = useRecoilState(showResultAtom);
 	const [autoCompleteEnabled, setAutoCompleteEnabled] = useState(false);
@@ -43,13 +43,21 @@ const SearchInput = ({
 
 	const autoCompleteList = useAutoComplete({
 		searchType,
-		keyword: removeSpace(inputValue),
+		keyword: removeSpace(inputValue) || "",
 		enabled: autoCompleteEnabled,
 	});
 
 	useEffect(() => {
-		setInputValue(biasName);
+		if (biasName) {
+			setInputValue(biasName);
+		}
 	}, [biasName]);
+
+	useEffect(() => {
+		if (placeName) {
+			setInputValue(placeName);
+		}
+	}, [placeName]);
 
 	useEffect(() => {
 		setOpenAutoComplete(!!autoCompleteList.length);
@@ -61,6 +69,10 @@ const SearchInput = ({
 		setInputValue(value || "");
 		setAutoCompleteEnabled(!!value);
 		setShowResult(false);
+
+		if (!value) {
+			router.push("/search");
+		}
 	};
 
 	const handleDeleteClick = () => {
@@ -120,20 +132,20 @@ const SearchInput = ({
 		});
 	};
 
-	const handleAutoCompletedPlaceClick = (placeName: string) => {
+	const handleAutoCompletedPlaceClick = (data: string) => {
 		setSearchFilters((prev) => ({
 			...prev,
-			placeName,
+			placeName: data,
 		}));
 
-		setInputValue(placeName);
+		setInputValue(data);
 		setOpenAutoComplete(false);
 		setAutoCompleteEnabled(false);
 		setShowResult(true);
 
 		router.push({
 			pathname,
-			query: { type: "place", name: placeName },
+			query: { type: "place", name: data },
 		});
 	};
 
@@ -161,7 +173,7 @@ const SearchInput = ({
 				</ul>
 			)}
 			<input
-				value={inputValue}
+				value={inputValue || ""}
 				placeholder="검색어를 입력해주세요."
 				onChange={handleInputChange}
 			/>

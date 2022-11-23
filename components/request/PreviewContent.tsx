@@ -33,7 +33,7 @@ const PreviewContent = () => {
 			<DetailMainInfo
 				data={{
 					place: place.place || "카페이름",
-					category: category || "A",
+					category: category || undefined,
 					biasesId: [],
 					requestedBiases: artist[0].bias
 						? artist

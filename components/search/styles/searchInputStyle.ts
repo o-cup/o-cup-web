@@ -67,13 +67,11 @@ export const StyledSearchInput = styled.div<{ showResult: boolean }>`
 		position: absolute;
 
 		width: 440px;
-		top: 38px;
+		top: 36px;
 		left: -2px;
 
 		z-index: 1;
-		/* border: 2px solid #000; */
 		border: 2px solid #000;
-		border-top: none;
 		border-radius: 4px;
 
 		background-color: white;

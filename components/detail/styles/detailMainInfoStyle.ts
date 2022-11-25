@@ -31,7 +31,7 @@ const StyledDetailTextContainer = styled.div`
 
 		> p {
 			font-size: 24px;
-			line-height: 32px;
+			line-height: 28px;
 			font-weight: 700;
 		}
 

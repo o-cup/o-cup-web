@@ -212,7 +212,7 @@ const StyledDuplicatedModal = styled.div`
 `;
 
 const StyledDuplicatedEvent = styled.div`
-	height: 174px;
+	height: 166px;
 	border: 2px solid #000;
 	padding: 10px;
 	display: flex;
@@ -225,7 +225,7 @@ const StyledDuplicatedEvent = styled.div`
 	margin-top: 40px;
 
 	img {
-		width: 104px;
+		width: 100px;
 		height: 100%;
 		object-fit: cover;
 	}
@@ -233,7 +233,7 @@ const StyledDuplicatedEvent = styled.div`
 	> div {
 		display: flex;
 		flex-direction: column;
-		width: 170px;
+		flex: 1 1 0;
 
 		.title {
 			display: flex;
@@ -244,6 +244,12 @@ const StyledDuplicatedEvent = styled.div`
 				font-weight: 700;
 				font-size: 16px;
 				line-height: 22px;
+			}
+
+			> img {
+				width: 22px;
+				min-width: 22px;
+				height: 22px;
 			}
 		}
 
@@ -259,7 +265,8 @@ const StyledDuplicatedEvent = styled.div`
 			height: 100%;
 			display: flex;
 			flex-direction: column;
-			justify-content: space-around;
+			justify-content: flex-end;
+			gap: 2px;
 			overflow: hidden;
 
 			p {
@@ -267,13 +274,13 @@ const StyledDuplicatedEvent = styled.div`
 				align-items: center;
 				font-weight: 500;
 				font-size: 12px;
-				line-height: 16px;
+				line-height: 20px;
 				color: ${({ theme }) => theme.colors.gray};
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
 
-				svg {
+				i {
 					margin-right: 5px;
 					min-width: 14px;
 				}

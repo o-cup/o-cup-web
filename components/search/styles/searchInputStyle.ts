@@ -7,9 +7,9 @@ export const StyledSearchInput = styled.div<{ showResult: boolean }>`
 	width: 100%;
 
 	border: 1px solid red;
-	height: 38px;
+	height: 40px;
 	border: 2px solid #000;
-	border-radius: 32px;
+	border-radius: 4px;
 	background-color: #fff;
 
 	.select {
@@ -40,13 +40,13 @@ export const StyledSearchInput = styled.div<{ showResult: boolean }>`
 		}
 	}
 
-	ul {
+	ul.category {
 		position: absolute;
 		background-color: #fff;
 
 		width: 106px;
 
-		top: 38px;
+		top: 40px;
 		left: -2px;
 
 		z-index: 1;
@@ -55,26 +55,50 @@ export const StyledSearchInput = styled.div<{ showResult: boolean }>`
 	input {
 		font-size: 16px;
 		background: ${({ theme }) => theme.colors.white};
-		/* padding: 0 45px 0 10px; */
 		padding: ${(props) =>
 			props.showResult ? "0 65px 0 10px" : "0 42px 0 10px"};
 		width: 100%;
-		border-radius: 32px;
 		line-height: 34px;
 	}
 
-	i.search {
+	ul.autoComplete {
+		width: calc(100% + 4px);
+
 		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-		right: 17px;
+
+		top: 36px;
+		left: -2px;
+
+		z-index: 1;
+		border: 2px solid #000;
+		border-radius: 4px;
+
+		background-color: white;
+
+		li {
+			height: 40px;
+			line-height: 40px;
+			padding: 0 15px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			cursor: pointer;
+
+			i.arrow-up-right {
+				width: 20px;
+			}
+
+			&:nth-child(2n) {
+				background: #f6f6f6;
+			}
+		}
 	}
 
 	i.delete {
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
-		right: 40px;
+		right: 12px;
 	}
 
 	> button {

@@ -59,23 +59,11 @@ const fetchEventById = async ({ id }: { id?: string }) => {
  * 인물 데이터 반환
  * @returns {PeopleType}
  */
-const fetchPeople = async (sortOption?: SearchSortOptionKeys) => {
-	let query = supabase.from("people").select("*");
-
-	switch (sortOption) {
-		case "birthdayAsc":
-			break;
-
-		case "birthdayDsc":
-			break;
-
-		case "alphabetAsc":
-		default:
-			query = query.order("name", { ascending: true });
-			break;
-	}
-
-	const { data } = await query;
+const fetchPeople = async () => {
+	const { data } = await supabase
+		.from("people")
+		.select("*")
+		.order("name", { ascending: true });
 	return data;
 };
 

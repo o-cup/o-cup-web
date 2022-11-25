@@ -6,7 +6,7 @@ import LuckyGoodsListItem from "./goodsItems/LuckyGoodsListItem";
 import { StyledGoodsInfo } from "./styles/goodsInfoStyle";
 import type { EventType } from "../../shared/types";
 
-function GoodsInfo({ goods, tweetUrl }: Partial<EventType>) {
+function GoodsInfo({ goods }: Partial<EventType>) {
 	const hasGoods = () => {
 		let result = false;
 		if (goods) {
@@ -51,17 +51,8 @@ function GoodsInfo({ goods, tweetUrl }: Partial<EventType>) {
 
 			<p className="notice">
 				상기 특전에 관한 내용은 실제와 다를 수 있으니 반드시 주최 측 포스터 및
-				트위터 공지를 확인하세요.
+				공지를 확인하세요.
 			</p>
-			{tweetUrl && (
-				<button
-					className="tweetOpenBtn"
-					type="button"
-					onClick={() => tweetUrl && window.open(tweetUrl)}
-				>
-					특전 자세히 보기
-				</button>
-			)}
 		</StyledGoodsInfo>
 	);
 }

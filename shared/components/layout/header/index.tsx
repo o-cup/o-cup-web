@@ -38,7 +38,7 @@ const Header = ({ page, share, handleBackClick, description }: HeaderProps) => {
 	const { pathname } = router;
 	const setDateFilter = useSetRecoilState(dateFilterAtom);
 	const searchFilters = useRecoilValue(searchFiltersAtom);
-	const { keyword } = searchFilters;
+	const { searchType, bid, placeName } = searchFilters;
 	const isSearchResultOpened = useRecoilValue(showResultAtom);
 	const [isCalendarOpen, setCalendarOpen] = useState(false);
 	const [isTooltipOpen, setIsTooltipOpen] = useState(true);
@@ -75,8 +75,24 @@ const Header = ({ page, share, handleBackClick, description }: HeaderProps) => {
 			pathname.includes("search") && isSearchResultOpened;
 
 		if (isSearchResultShare) {
-			const encodedKeyword = encodeURIComponent(keyword);
-			const url = `${window.origin}/search?keyword=${encodedKeyword}`;
+			const baseUrl = `${window.origin}/search`;
+			let url = "";
+
+			switch (searchType) {
+				case "bias":
+					url = `${baseUrl}?type=${searchType}&bid=${bid}`;
+					break;
+
+				case "place":
+					url = `${baseUrl}?type=${searchType}&name=${encodeURIComponent(
+						placeName
+					)}`;
+					break;
+
+				default:
+					break;
+			}
+
 			copyToClipboard(url);
 			setIsToastOpen(true);
 			return;

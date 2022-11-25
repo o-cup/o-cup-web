@@ -17,22 +17,6 @@ const StyledGoodsInfo = styled.div`
 		line-height: 15px;
 		color: ${({ theme }) => theme.colors.black};
 	}
-
-	> button.tweetOpenBtn {
-		display: block;
-		margin-left: auto;
-		margin-top: 20px;
-		background: ${({ theme }) => theme.colors.primary};
-		color: ${({ theme }) => theme.colors.black};
-		border: 2px solid #000000;
-		border-radius: 30px;
-		box-shadow: 0 3px 0 #000000;
-		font-weight: 500;
-		font-size: 14px;
-		line-height: 18px;
-		padding: 6px 16px;
-		cursor: pointer;
-	}
 `;
 
 const StyledGoodsListItem = styled.div`

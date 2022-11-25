@@ -7,7 +7,13 @@ const useClearData = () => {
 	const setShowResult = useSetRecoilState(showResultAtom);
 
 	useEffect(() => {
-		setSearchFilters((prev) => ({ ...prev, keyword: "" }));
+		setSearchFilters((prev) => ({
+			...prev,
+			searchType: "bias",
+			bid: null,
+			biasName: "",
+			placeName: "",
+		}));
 		setShowResult(false);
 	}, [setSearchFilters, setShowResult]);
 };

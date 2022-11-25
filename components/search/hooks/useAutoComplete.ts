@@ -35,6 +35,8 @@ const useAutoComplete = ({
 				});
 
 				const result = filteredByKeyword
+					?.filter((bias) => bias.name === keyword)
+					.concat(filteredByKeyword.filter((bias) => bias.name !== keyword))
 					?.filter((_, i) => i < 5)
 					.map((bd) => {
 						const teamText = bd.team ? bd.team.join(", ") : "";

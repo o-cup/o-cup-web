@@ -117,19 +117,22 @@ const ArtistInput = ({
 						</div>
 					</div>
 					<StyledSearchList>
-						{people?.map((bias) => (
-							<li key={bias.id}>
-								<div>
-									<p>
-										{bias.name}
-										{bias.team ? ` (${bias.team?.join(", ")})` : ""}
-									</p>
-								</div>
-								<button type="button" onClick={() => handleClickSelect(bias)}>
-									선택
-								</button>
-							</li>
-						))}
+						{people
+							?.filter((bias) => bias.name === keyword)
+							.concat(people.filter((bias) => bias.name !== keyword))
+							.map((bias) => (
+								<li key={bias.id}>
+									<div>
+										<p>
+											{bias.name}
+											{bias.team ? ` (${bias.team?.join(", ")})` : ""}
+										</p>
+									</div>
+									<button type="button" onClick={() => handleClickSelect(bias)}>
+										선택
+									</button>
+								</li>
+							))}
 						<li>
 							<div>
 								<p>직접 입력하기</p>

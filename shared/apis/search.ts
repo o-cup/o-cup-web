@@ -1,30 +1,25 @@
 import axios from "axios";
 import { supabase } from "../../supabaseClient";
-import { getBiasIdByKeyword, removeSpace } from "../utils";
+import { removeSpace } from "../utils";
 import { isDateRangeOverlaps } from "../utils/dateHandlers";
 import type { RegCodeItem, SearchInputOptionKey } from "../types";
 
-const fetchRegcodes = async (code?: string) => {
-	const param = !code ? "*00000000" : `${code.split("0")[0]}*000000`;
-	const res = await axios.get(
-		`https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=${param}`
-	);
-	return res;
-};
-
 export type FetchSearchedEventParams = {
-	keyword?: string;
+	searchType: string;
+	bid?: number;
+	placeName?: string;
 	date?: { startDate: string; endDate: string };
 	biasId?: number | null;
 	districts?: RegCodeItem[];
 	searchInputOptionKey?: SearchInputOptionKey;
 };
 
-const fetchSearchedEvents = async ({
-	keyword,
+export const fetchSearchedEvents = async ({
+	searchType,
+	bid,
+	placeName,
 	date,
 	districts,
-	searchInputOptionKey,
 }: FetchSearchedEventParams) => {
 	const { data: allEvents } = await supabase
 		.from("place_sort")
@@ -32,44 +27,18 @@ const fetchSearchedEvents = async ({
 		.eq("isApproved", true);
 	let data;
 
-	if (!keyword) return data;
-
-	if (searchInputOptionKey === "bias") {
-		const { data: biasesData } = await supabase.from("people").select("*");
-
-		const biasId = getBiasIdByKeyword({
-			biasesData: biasesData || [],
-			keyword,
-		});
-
-		if (biasId?.length) {
-			data = allEvents?.filter((event) => event.biasesId.includes(biasId[0]));
-		}
+	if (searchType === "bias") {
+		data = allEvents?.filter((event) => event.biasesId.includes(bid));
 	}
 
-	if (searchInputOptionKey === "place") {
+	if (searchType === "place") {
+		if (!placeName) return [];
+
 		data = allEvents?.filter((event) => {
 			const { place } = event;
 			if (
 				place &&
-				removeSpace(place).toUpperCase().includes(keyword.toUpperCase())
-			) {
-				return true;
-			}
-			return false;
-		});
-	}
-
-	if (searchInputOptionKey === "organizer") {
-		data = allEvents?.filter((event) => {
-			const { organizer, snsId } = event;
-			if (
-				(organizer &&
-					removeSpace(organizer)
-						.toUpperCase()
-						.includes(keyword.toUpperCase())) ||
-				(snsId &&
-					removeSpace(snsId).toUpperCase().includes(keyword.toUpperCase()))
+				removeSpace(place).toUpperCase().includes(placeName.toUpperCase())
 			) {
 				return true;
 			}
@@ -116,7 +85,7 @@ const fetchSearchedEvents = async ({
 	return data;
 };
 
-const fetchEventsByBiasId = async (id: number) => {
+export const fetchEventsByBiasId = async (id: number) => {
 	const query = supabase
 		.from("place_sort")
 		.select("*")
@@ -126,7 +95,7 @@ const fetchEventsByBiasId = async (id: number) => {
 	return data;
 };
 
-const fetchBiasDataByKeyword = async (keyword: string) => {
+export const fetchBiasDataByKeyword = async (keyword: string) => {
 	const { data: biasesData } = await supabase.from("people").select("*");
 
 	const biasData = biasesData?.find((bd) => {
@@ -144,9 +113,24 @@ const fetchBiasDataByKeyword = async (keyword: string) => {
 	return biasData;
 };
 
-export {
-	fetchRegcodes,
-	fetchSearchedEvents,
-	fetchEventsByBiasId,
-	fetchBiasDataByKeyword,
+export const fetchPlaceData = async () => {
+	const { data } = await supabase.from("events");
+	return data?.map((item) => item.place);
+};
+
+export const fetchBiasNameById = async (id: number) => {
+	const { data: biasData } = await supabase
+		.from("people")
+		.select("*")
+		.eq("id", id);
+
+	return biasData?.[0].name;
+};
+
+export const fetchRegcodes = async (code?: string) => {
+	const param = !code ? "*00000000" : `${code.split("0")[0]}*000000`;
+	const res = await axios.get(
+		`https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=${param}`
+	);
+	return res;
 };

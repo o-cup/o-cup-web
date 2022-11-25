@@ -228,6 +228,11 @@ export const StyledIcon = styled.i`
 		height: 20px;
 		width: 20px;
 	}
+
+	&.arrow-up-right {
+		background: url("/images/icons/arrow-up-right.svg") no-repeat;
+		background-size: contain;
+	}
 `;
 
 export default {};

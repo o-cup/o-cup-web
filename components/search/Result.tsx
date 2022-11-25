@@ -1,8 +1,6 @@
 import { useRouter } from "next/router";
 import React, { memo, useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { fetchSearchedEvents } from "../../shared/apis/search";
+import { useRecoilState } from "recoil";
 import {
 	Button,
 	Chip,
@@ -10,85 +8,43 @@ import {
 	Loading,
 	SortIcon,
 } from "../../shared/components";
-import { searchFiltersAtom, searchInputOptionsAtom } from "../../shared/state";
-import { convertDateWithDots, removeSpace } from "../../shared/utils";
+import { searchFiltersAtom } from "../../shared/state";
+import { convertDateWithDots } from "../../shared/utils";
 import Event from "./Event";
 import SearchModal from "./SearchModal";
+import useSearchResult from "./hooks/useSearchResult";
 import { StyledResult } from "./styles/resultStyle";
 import type { ResultSortOptionKeys } from "../../shared/types";
 import type { RegCodeItem } from "./types";
 
-type ResultProps = {
-	biasId?: number | null;
-};
-
 const initialChipsData = { dateChip: "", distChips: [] };
 
-const Result = ({ biasId }: ResultProps) => {
+const Result = () => {
 	const router = useRouter();
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 	const {
-		keyword,
 		date: { startDate, endDate },
 		districts,
 	} = searchFilters;
 	const [sortOpen, setSortOpen] = useState(false);
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
-	const [selectedSortOption, setSelectedSortOption] =
+	const [sortOption, setSortOption] =
 		useState<ResultSortOptionKeys>("alphabetAsc");
 	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
 	const [chips, setChips] = useState<{
 		dateChip: string;
 		distChips: RegCodeItem[];
 	}>(initialChipsData);
-	const searchInputOptions = useRecoilValue(searchInputOptionsAtom);
-	const searchInputOptionKey = searchInputOptions.find((o) => o.selected)?.key;
 
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	const dateChipText =
 		startDate &&
 		`${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
-	const { data: events, isLoading } = useQuery(
-		[
-			"resultEvents",
-			keyword,
-			startDate,
-			endDate,
-			biasId,
-			districts,
-			selectedSortOption,
-			searchInputOptionKey,
-		],
-		() =>
-			fetchSearchedEvents({
-				keyword: removeSpace(keyword.trim()),
-				date: { startDate, endDate },
-				biasId,
-				districts,
-				searchInputOptionKey,
-			}),
-		{
-			select: (data) => {
-				const eventsData = data?.map((e) => {
-					const event = { ...e, image: e.images[0] };
-					delete event.images;
-					return event;
-				});
-				switch (selectedSortOption) {
-					case "dateAsc":
-						return eventsData?.sort((a, b) => a.startAt - b.startAt);
-					case "dateDsc":
-						return eventsData?.sort((a, b) => b.startAt - a.startAt);
-					case "alphabetAsc":
-					default:
-						return eventsData;
-				}
-			},
-			enabled: !!keyword,
-		}
-	);
+	const { isLoading, events } = useSearchResult({
+		sortOption,
+	});
 
 	useEffect(() => {
 		if (!startDate) return;
@@ -155,8 +111,8 @@ const Result = ({ biasId }: ResultProps) => {
 				<p>{`검색 결과 총 ${events?.length || 0}개`}</p>
 				<div className="icons">
 					<FilterIcon
-						isOpened={filterOpen}
-						setIsOpened={setFilterOpen}
+						isOpen={filterOpen}
+						setIsOpen={setFilterOpen}
 						setCalendarOpen={setCalendarOpen}
 						setDistrictSelectorOpen={setDistrictSelectorOpen}
 					/>
@@ -164,8 +120,8 @@ const Result = ({ biasId }: ResultProps) => {
 						type="result"
 						isOpened={sortOpen}
 						setIsOpened={setSortOpen}
-						setSelectedResultOption={setSelectedSortOption}
-						selectedOption={selectedSortOption}
+						setSelectedResultOption={setSortOption}
+						selectedOption={sortOption}
 					/>
 				</div>
 			</div>

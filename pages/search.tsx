@@ -1,10 +1,8 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import React from "react";
 import Search from "../components/search";
-import { LOGO_URL } from "../shared/constants";
-import { searchFiltersAtom } from "../shared/state";
+import { fetchBiasNameById } from "../shared/apis/search";
+import { DEFAULT_URL, LOGO_URL } from "../shared/constants";
 import {
 	generateSSRMetaDescription,
 	generateSSRMetaTitle,
@@ -12,37 +10,16 @@ import {
 import type { GetServerSidePropsContext } from "next";
 
 type SearchPageProps = {
-	queryKeyword: string;
+	biasName: string;
+	placeName: string;
 };
 
-const SearchPage = ({ queryKeyword }: SearchPageProps) => {
-	const router = useRouter();
-	const { pathname } = router;
-	const [searchFilter, setSearchFilter] = useRecoilState(searchFiltersAtom);
-	const { keyword } = searchFilter;
-	const [url, setUrl] = useState("");
-
-	const title = generateSSRMetaTitle({ page: "search", keyword: queryKeyword });
+const SearchPage = ({ biasName, placeName }: SearchPageProps) => {
+	const title = generateSSRMetaTitle({
+		page: "search",
+		keyword: biasName || placeName,
+	});
 	const description = generateSSRMetaDescription({ page: "search" });
-
-	useEffect(() => {
-		const baseUrl = `${window.origin}/search`;
-		setUrl(keyword ? `${baseUrl}?keyword=${queryKeyword}` : baseUrl);
-	}, [queryKeyword]);
-
-	useEffect(() => {
-		if (!queryKeyword) return;
-
-		setSearchFilter((prev) => ({
-			...prev,
-			keyword: queryKeyword,
-		}));
-
-		router.push({
-			pathname,
-			query: { keyword: queryKeyword },
-		});
-	}, [queryKeyword]);
 
 	return (
 		<>
@@ -58,13 +35,13 @@ const SearchPage = ({ queryKeyword }: SearchPageProps) => {
 				<meta property="og:title" content={title} />
 				<meta property="og:description" content={description} />
 				<meta property="og:image" content={LOGO_URL} />
-				<meta property="og:url" content={url} />
+				<meta property="og:url" content={DEFAULT_URL} />
 
 				<meta name="twitter:card" content="summary" />
 				<meta name="twitter:title" content={title} />
 				<meta name="twitter:description" content={description} />
 				<meta name="twitter:image" content={LOGO_URL} />
-				<meta name="twitter:site" content={url} />
+				<meta name="twitter:site" content={DEFAULT_URL} />
 			</Head>
 			<Search />
 		</>
@@ -75,13 +52,15 @@ export const getServerSideProps = async (
 	context: GetServerSidePropsContext
 ) => {
 	const { query } = context;
-	const keyword = query.keyword as string;
+	const bid = query.bid as string;
+	const name = query.name as string;
 
-	console.log("keyword", keyword);
+	const biasName = await fetchBiasNameById(Number(bid));
 
 	return {
 		props: {
-			queryKeyword: keyword || "",
+			biasName: biasName || "",
+			placeName: name || "",
 		},
 	};
 };

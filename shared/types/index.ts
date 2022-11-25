@@ -92,7 +92,7 @@ export type SearchSortOptionKeys =
 	| "birthdayDsc";
 export type ResultSortOptionKeys = "dateAsc" | "dateDsc" | "alphabetAsc";
 
-export type SearchInputOptionKey = "bias" | "place" | "organizer";
+export type SearchInputOptionKey = "bias" | "place";
 
 export type SearchInputOptionType = {
 	key: SearchInputOptionKey;

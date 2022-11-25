@@ -13,6 +13,7 @@ function TwitterInfo({ data }: TwitterInfoProps) {
 			<div className="account">
 				<button
 					className="link"
+					type="button"
 					onClick={() => tweetUrl && window.open(tweetUrl)}
 				>
 					<span>@{snsId}님의 공지 바로가기</span>

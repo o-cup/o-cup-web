@@ -140,7 +140,7 @@ const Search = () => {
 				<ul className="biases">
 					{people?.map((bias) => (
 						<BiasProfile
-							key={bias.name}
+							key={bias.id}
 							biasName={bias.name}
 							imgUrl={bias.profilePic}
 							handleClick={() =>

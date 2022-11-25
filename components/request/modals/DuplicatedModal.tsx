@@ -1,12 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
-import {
-	FaCalendar,
-	FaMapMarkerAlt,
-	FaTwitter,
-	FaUserCircle,
-} from "react-icons/fa";
-import { BiasChip, Button, Modal } from "../../../shared/components";
+import { BiasChip, Button, Modal, Icon } from "../../../shared/components";
 import { StyledBiasChip } from "../../../shared/components/biasChip/biasChipStyle";
 import { convertDateWithDots } from "../../../shared/utils/dateHandlers";
 import { StyledDuplicatedEvent, StyledDuplicatedModal } from "../requestStyle";
@@ -21,10 +15,10 @@ const Event = ({
 }) => {
 	const {
 		images,
+		category,
 		place,
 		biasesId,
 		requestedBiases,
-		organizer,
 		snsId,
 		districts,
 		startAt,
@@ -37,6 +31,7 @@ const Event = ({
 			<div>
 				<div className="title">
 					<h2>{place}</h2>
+					<img alt={category} src={`/images/categories/${category}.png`} />
 				</div>
 
 				<div className="biases">
@@ -51,18 +46,14 @@ const Event = ({
 
 				<div className="extraInfo">
 					<p>
-						<FaUserCircle />
-						{organizer}
+						<Icon name="host-gray" />@{snsId}
 					</p>
 					<p>
-						<FaTwitter />@{snsId}
-					</p>
-					<p>
-						<FaMapMarkerAlt />
+						<Icon name="place-gray" />
 						{districts.name}
 					</p>
 					<p>
-						<FaCalendar />
+						<Icon name="calendar-gray" />
 						{startAt && convertDateWithDots(startAt)} -{" "}
 						{endAt && convertDateWithDots(endAt)}
 					</p>

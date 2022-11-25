@@ -56,7 +56,7 @@ const FormPage = ({
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
 	const goodsList = useRecoilValue(requestGoodsListAtom);
 	const tempPosters = useRecoilValue(tempPostersAtom);
-	const { organizer, snsId, link } = requestInputs;
+	const { snsId, link } = requestInputs;
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -130,14 +130,14 @@ const FormPage = ({
 								/>
 							</StyledPlaceInput>
 							<ArtistInputContainer />
-							<BasicInput
+							{/* <BasicInput
 								label="주최자 닉네임 *"
 								value={organizer}
 								id="organizer"
 								placeholder="오늘의 컵홀더"
 								handleInputChange={(e) => handleInputChange(e, "organizer")}
 								handleInputDelete={(e) => handleInputDelete(e, "organizer")}
-							/>
+							/> */}
 							<BasicInput
 								label="주최자 트위터 계정"
 								value={snsId}

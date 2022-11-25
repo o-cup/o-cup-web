@@ -1,7 +1,6 @@
 import { format } from "date-fns";
 import { useRouter } from "next/router";
 import React, { memo } from "react";
-import { FaTwitter } from "react-icons/fa";
 import { BiasChip, Icon } from "../../shared/components";
 import {
 	convertDateWithDots,
@@ -22,7 +21,6 @@ const Event = ({ event }: EventProps) => {
 		category,
 		place,
 		biasesId,
-		organizer,
 		snsId,
 		districts,
 		startAt,
@@ -59,10 +57,6 @@ const Event = ({ event }: EventProps) => {
 				<ul className="extraInfo">
 					<li>
 						<Icon name="host-gray" />
-						<p>{organizer}</p>
-					</li>
-					<li>
-						<FaTwitter />
 						<p>@{snsId || "-"}</p>
 					</li>
 					<li>

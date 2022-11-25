@@ -26,7 +26,7 @@ const DetailMainInfo = ({ data, posterPopupDisabled }: EventMainProps) => {
 		place,
 		category,
 		biasesId,
-		organizer,
+		snsId,
 		startAt,
 		endAt,
 		images,
@@ -64,7 +64,7 @@ const DetailMainInfo = ({ data, posterPopupDisabled }: EventMainProps) => {
 				<ul>
 					<li>
 						<Icon name="host" />
-						<p>{organizer}</p>
+						<p>{snsId ? `@${snsId}` : "-"}</p>
 					</li>
 					<li>
 						<Icon name="place" />

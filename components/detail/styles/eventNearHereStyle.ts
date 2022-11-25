@@ -67,7 +67,7 @@ const EventNearHereList = styled.div`
 			}
 		}
 
-		> p.near_organizer {
+		> p.near_id {
 			font-weight: 400;
 			font-size: 10px;
 			line-height: 14px;

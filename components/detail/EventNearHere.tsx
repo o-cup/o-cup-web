@@ -51,7 +51,7 @@ function EventNearHere({ biasesId, districts }: Partial<EventType>) {
 			>
 				{nearEvent &&
 					nearEvent.map((event) => {
-						const { id: eventId, category, images, place, organizer } = event;
+						const { id: eventId, category, images, place, snsId } = event;
 						const previewUrl = (images && images[0]) || "";
 						return (
 							<SwiperSlide key={eventId}>
@@ -73,7 +73,7 @@ function EventNearHere({ biasesId, districts }: Partial<EventType>) {
 											/>
 											<p className="near_place">{place}</p>
 										</div>
-										<p className="near_organizer">{organizer}</p>
+										<p className="near_id">@{snsId}</p>
 									</div>
 								</EventNearHereList>
 							</SwiperSlide>

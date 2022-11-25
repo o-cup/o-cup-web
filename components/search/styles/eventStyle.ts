@@ -6,7 +6,7 @@ export const StyledEvent = styled.li<{ isEnd: boolean }>`
 
 	min-width: 320px;
 	width: 100%;
-	height: 184px;
+	height: 166px;
 	padding: 10px;
 	background-color: ${({ theme }) => theme.colors.white};
 	border: 2px solid
@@ -27,8 +27,8 @@ export const StyledEvent = styled.li<{ isEnd: boolean }>`
 	}
 
 	.poster {
-		min-width: 110px;
-		width: 110px;
+		min-width: 100px;
+		width: 100px;
 		position: relative;
 
 		img {
@@ -63,7 +63,7 @@ export const StyledEvent = styled.li<{ isEnd: boolean }>`
 	& > div {
 		display: flex;
 		flex-direction: column;
-		max-width: calc(100% - 125px);
+		max-width: calc(100% - 115px);
 		width: 100%;
 
 		.title {
@@ -94,7 +94,6 @@ export const StyledEvent = styled.li<{ isEnd: boolean }>`
 		.biases {
 			display: flex;
 			gap: 5px;
-			margin-bottom: 14px;
 		}
 
 		ul.extraInfo {
@@ -102,7 +101,8 @@ export const StyledEvent = styled.li<{ isEnd: boolean }>`
 			display: flex;
 			flex-direction: column;
 			flex: 1 1 0;
-			justify-content: space-between;
+			justify-content: flex-end;
+			gap: 2px;
 
 			li {
 				display: flex;

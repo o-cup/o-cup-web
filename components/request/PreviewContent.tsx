@@ -17,16 +17,8 @@ const PreviewContent = () => {
 	const goodsList = useRecoilValue(requestGoodsListAtom);
 	const tempPosters = useRecoilValue(tempPostersAtom);
 
-	const {
-		place,
-		category,
-		artist,
-		organizer,
-		snsId,
-		link,
-		hashTags,
-		dateRange,
-	} = requestInputs;
+	const { place, category, artist, snsId, link, hashTags, dateRange } =
+		requestInputs;
 
 	return (
 		<div className="previewContent">
@@ -38,7 +30,6 @@ const PreviewContent = () => {
 					requestedBiases: artist[0].bias
 						? artist
 						: [{ id: 1, peopleId: 0, bias: "아티스트 이름", team: "" }],
-					organizer: organizer || "주최자 닉네임",
 					snsId: snsId || "ocup_official",
 					startAt: dateRange.startAt || "20220000",
 					endAt: dateRange.endAt || "20220000",
@@ -53,7 +44,6 @@ const PreviewContent = () => {
 			/>
 			<TwitterInfo
 				data={{
-					organizer: organizer || "주최자 닉네임",
 					snsId: snsId || "ocup_official",
 					hashTags: hashTags[0].text ? hashTags.map((h) => h.text) : [""],
 				}}

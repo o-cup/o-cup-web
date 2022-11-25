@@ -1,5 +1,4 @@
 import React from "react";
-import { FaTwitter } from "react-icons/fa";
 import { StyledTwitterInfo } from "./styles/twitterInfoStyle";
 import type { EventType } from "../../shared/types";
 
@@ -8,17 +7,20 @@ type TwitterInfoProps = {
 };
 
 function TwitterInfo({ data }: TwitterInfoProps) {
-	const { organizer, snsId, hashTags } = data;
+	const { snsId, hashTags, tweetUrl } = data;
 	return (
 		<StyledTwitterInfo>
 			<div className="account">
-				<p className="organizer">{organizer}</p>
-				<p className="snsId">
-					<FaTwitter />
-					{snsId ? `@${snsId}` : "-"}
-				</p>
+				<button
+					className="link"
+					onClick={() => tweetUrl && window.open(tweetUrl)}
+				>
+					<span>@{snsId}님의 공지 바로가기</span>
+				</button>
 			</div>
-			<div className="hashTags">{hashTags?.map((tag) => (tag === "" ? null : <p key={tag}>#{tag}</p>))}</div>
+			<div className="hashTags">
+				{hashTags?.map((tag) => (tag === "" ? null : <p key={tag}>#{tag}</p>))}
+			</div>
 		</StyledTwitterInfo>
 	);
 }

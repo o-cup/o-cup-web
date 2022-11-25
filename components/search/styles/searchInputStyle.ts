@@ -62,11 +62,10 @@ export const StyledSearchInput = styled.div<{ showResult: boolean }>`
 	}
 
 	ul.autoComplete {
-		width: 100%;
+		width: calc(100% + 4px);
 
 		position: absolute;
 
-		width: 440px;
 		top: 36px;
 		left: -2px;
 

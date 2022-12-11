@@ -12,8 +12,8 @@ const StyledCheckEvent = styled.div`
 	align-items: center;
 	width: 100%;
 	max-width: 480px;
-	gap: 64px;
-	padding: 32px 20px;
+	gap: 30px;
+	padding: 0 20px;
 	margin: 0 auto;
 
 	> div.checkNotice {
@@ -30,7 +30,7 @@ const StyledCheckEvent = styled.div`
 
 		> p {
 			font-weight: 500;
-			font-size: 14px;
+			font-size: 13px;
 			line-height: 19px;
 			text-align: center;
 			color: #000000;
@@ -68,7 +68,6 @@ const StyledCheckEvent = styled.div`
 `;
 
 const StyledEntry = styled.div`
-	//width: 50%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -91,12 +90,6 @@ const StyledEntry = styled.div`
 		width: 100%;
 		gap: 20px;
 		margin-top: 30px;
-
-		/* @media ${({ theme }) => theme.device.desktop} {
-			> button:first-child {
-				display: none;
-			}
-		} */
 	}
 `;
 

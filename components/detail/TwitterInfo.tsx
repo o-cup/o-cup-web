@@ -16,7 +16,7 @@ function TwitterInfo({ data }: TwitterInfoProps) {
 					type="button"
 					onClick={() => tweetUrl && window.open(tweetUrl)}
 				>
-					<span>@{snsId}님의 공지 바로가기</span>
+					<span>@{snsId} 님의 공지 바로가기</span>
 				</button>
 			</div>
 			<div className="hashTags">

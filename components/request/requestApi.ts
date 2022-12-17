@@ -127,16 +127,8 @@ export const sendReqData = async ({
 	setAlertOpen,
 	setLoading,
 }: ReqType) => {
-	const {
-		place,
-		artist,
-		organizer,
-		snsId,
-		link,
-		hashTags,
-		dateRange,
-		category,
-	} = requestInputs;
+	const { place, artist, snsId, link, hashTags, dateRange, category } =
+		requestInputs;
 
 	const requestedBiases = artist.map((a) => ({
 		peopleId: a.peopleId,
@@ -151,7 +143,6 @@ export const sendReqData = async ({
 		!place.place ||
 		!category ||
 		!requestedBiases[0].bias ||
-		!organizer ||
 		!dateRange.startAt ||
 		images.length === 0 ||
 		!link
@@ -165,7 +156,7 @@ export const sendReqData = async ({
 	const eventParams = {
 		place: place.place,
 		category,
-		organizer,
+		organizer: "",
 		snsId,
 		districts: place.districts,
 		address: place.address,

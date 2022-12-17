@@ -131,4 +131,4 @@ DateRangeInput.defaultProps = {
 	disabled: false,
 };
 
-export default DateRangeInput;
+export default React.memo(DateRangeInput);

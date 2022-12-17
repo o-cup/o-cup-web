@@ -9,30 +9,33 @@ export const StyledTwitterInfo = styled.div`
 	gap: 20px;
 
 	.account {
-		width: fit-content;
+		display: flex;
+		align-items: center;
+		width: 100%;
 		background: ${({ theme }) => theme.colors.white};
 		border: 2px solid #000000;
-		padding: 16px;
+		border-radius: 30px;
 		position: relative;
-		box-shadow: 4px 4px 0 #000000;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 17px;
+		cursor: pointer;
 
-		> p.organizer {
-			font-size: 14px;
-			line-height: 19px;
-			font-weight: 700;
-		}
+		> button {
+			flex: 1 1 50%;
+			display: flex;
+			align-items: center;
+			background: none;
+			padding: 16px;
 
-		> p.snsId {
-			font-weight: 500;
-			font-size: 12px;
-			line-height: 15px;
-			margin-top: 10px;
-
-			> svg {
-				width: 20px;
-				height: 20px;
-				margin-right: 10px;
-				vertical-align: middle;
+			> span {
+				font-family: "Montserrat", "Noto Sans", sans-serif;
+				width: 100%;
+				text-align: center;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				color: #000;
 			}
 		}
 	}

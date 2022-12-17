@@ -1,8 +1,6 @@
 import { useRouter } from "next/router";
 import React, { memo, useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { fetchSearchedEvents } from "../../shared/apis/search";
+import { useRecoilState } from "recoil";
 import {
 	Button,
 	Chip,
@@ -11,42 +9,35 @@ import {
 	Loading,
 	SortIcon,
 } from "../../shared/components";
-import { searchFiltersAtom, searchInputOptionsAtom } from "../../shared/state";
-import { convertDateWithDots, removeSpace } from "../../shared/utils";
+import { searchFiltersAtom } from "../../shared/state";
+import { convertDateWithDots } from "../../shared/utils";
 import Event from "./Event";
 import FilterBottomSheet from "./FilterBottomSheet";
 import SearchModal from "./SearchModal";
+import useSearchResult from "./hooks/useSearchResult";
 import { StyledResult } from "./styles/resultStyle";
 import type { ResultSortOptionKeys } from "../../shared/types";
 import type { DistrictType } from "./types";
 
-type ResultProps = {
-	biasId?: number | null;
-};
-
 const initialChipsData = { dateChip: "", distChips: [] };
 
-const Result = ({ biasId }: ResultProps) => {
+const Result = () => {
 	const router = useRouter();
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 	const {
-		keyword,
 		date: { startDate, endDate },
 		districts,
 	} = searchFilters;
 	const [sortOpen, setSortOpen] = useState(false);
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [calendarOpen, setCalendarOpen] = useState(false);
-	const [selectedSortOption, setSelectedSortOption] =
+	const [sortOption, setSortOption] =
 		useState<ResultSortOptionKeys>("alphabetAsc");
 	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
 	const [chips, setChips] = useState<{
 		dateChip: string;
 		distChips: DistrictType[];
 	}>(initialChipsData);
-	const [bottomSheetOpen, setBottomSheetOpen] = useState(true);
-	const searchInputOptions = useRecoilValue(searchInputOptionsAtom);
-	const searchInputOptionKey = searchInputOptions.find((o) => o.selected)?.key;
 
 	const isModalOpen = calendarOpen || districtSelectorOpen;
 	// const dateChipText =
@@ -55,57 +46,20 @@ const Result = ({ biasId }: ResultProps) => {
 
 	console.log("result chips", chips);
 
-	const { data: events, isLoading } = useQuery(
-		[
-			"resultEvents",
-			keyword,
-			startDate,
-			endDate,
-			biasId,
-			districts,
-			selectedSortOption,
-			searchInputOptionKey,
-		],
-		() =>
-			fetchSearchedEvents({
-				keyword: removeSpace(keyword.trim()),
-				date: { startDate, endDate },
-				biasId,
-				districts,
-				searchInputOptionKey,
-			}),
-		{
-			select: (data) => {
-				const eventsData = data?.map((e) => {
-					const event = { ...e, image: e.images[0] };
-					delete event.images;
-					return event;
-				});
-				switch (selectedSortOption) {
-					case "dateAsc":
-						return eventsData?.sort((a, b) => a.startAt - b.startAt);
-					case "dateDsc":
-						return eventsData?.sort((a, b) => b.startAt - a.startAt);
-					case "alphabetAsc":
-					default:
-						return eventsData;
-				}
-			},
-			enabled: !!keyword,
-		}
-	);
+	const { isLoading, events } = useSearchResult({
+		sortOption,
+	});
 
 	useEffect(() => {
-		if (!startDate) return;
-
-		const dateText =
-			startDate &&
-			`${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
-		setChips((prev) => ({ ...prev, dateChip: dateText }));
+		// if (!startDate) return;
+		// const dateText =
+		// 	startDate &&
+		// 	`${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
+		// setChips((prev) => ({ ...prev, dateChip: dateText }));
 	}, [startDate, endDate]);
 
 	useEffect(() => {
-		setChips((prev) => ({ ...prev, distChips: districts }));
+		// setChips((prev) => ({ ...prev, distChips: districts }));
 	}, [districts]);
 
 	useEffect(() => {
@@ -159,13 +113,18 @@ const Result = ({ biasId }: ResultProps) => {
 			<div className="menu">
 				<p>{`검색 결과 총 ${events?.length || 0}개`}</p>
 				<div className="icons">
-					<Icon name="filter" handleClick={() => setBottomSheetOpen(true)} />
+					<FilterIcon
+						isOpen={filterOpen}
+						setIsOpen={setFilterOpen}
+						setCalendarOpen={setCalendarOpen}
+						setDistrictSelectorOpen={setDistrictSelectorOpen}
+					/>
 					<SortIcon
 						type="result"
 						isOpened={sortOpen}
 						setIsOpened={setSortOpen}
-						setSelectedResultOption={setSelectedSortOption}
-						selectedOption={selectedSortOption}
+						setSelectedResultOption={setSortOption}
+						selectedOption={sortOption}
 					/>
 				</div>
 			</div>
@@ -175,6 +134,7 @@ const Result = ({ biasId }: ResultProps) => {
 					{chips.dateChip && (
 						<Chip
 							// text={dateChipText}
+							text="테스트"
 							bgColor="primary"
 							customStyle={{ fontSize: "12px" }}
 							handleDelete={() => handleDeleteChip({ type: "date" })}
@@ -218,12 +178,12 @@ const Result = ({ biasId }: ResultProps) => {
 				/>
 			)}
 
-			{bottomSheetOpen && (
+			{/* {bottomSheetOpen && (
 				<FilterBottomSheet
 					isOpen={bottomSheetOpen}
 					setIsOpen={setBottomSheetOpen}
 				/>
-			)}
+			)} */}
 		</StyledResult>
 	);
 };

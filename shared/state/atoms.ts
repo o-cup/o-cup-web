@@ -54,7 +54,10 @@ export const requestGoodsListAtom = atom<RequestGoodsListType[]>({
 });
 
 export type SearchFiltersAtomType = {
-	keyword: string;
+	searchType: string;
+	bid: number | null;
+	biasName: string;
+	placeName: string;
 	date: {
 		startDate: Date | null;
 		endDate: Date | null;
@@ -66,7 +69,10 @@ export type SearchFiltersAtomType = {
 export const searchFiltersAtom = atom<SearchFiltersAtomType>({
 	key: "searchFilters",
 	default: {
-		keyword: "",
+		searchType: "bias",
+		bid: null,
+		biasName: "",
+		placeName: "",
 		date: {
 			startDate: new Date(),
 			endDate: new Date(),
@@ -94,7 +100,6 @@ export const searchInputOptionsAtom = atom<SearchInputOptionType[]>({
 	default: [
 		{ key: "bias", value: "아티스트", selected: true },
 		{ key: "place", value: "장소이름", selected: false },
-		{ key: "organizer", value: "주최자ID", selected: false },
 	],
 });
 

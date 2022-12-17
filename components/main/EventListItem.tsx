@@ -1,8 +1,5 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { FaTwitter } from "react-icons/fa";
-// import { LazyLoadImage } from "react-lazy-load-image-component";
-// import "react-lazy-load-image-component/src/effects/blur.css";
 import Icon from "../../shared/components/icon";
 import { convertDateWithDots, imageOnErrorHandler } from "../../shared/utils";
 import {
@@ -18,17 +15,8 @@ type EventListItemProps = {
 const EventListItem = ({ event }: EventListItemProps) => {
 	const router = useRouter();
 
-	const {
-		id,
-		place,
-		image,
-		category,
-		organizer,
-		snsId,
-		districts,
-		startAt,
-		endAt,
-	} = event;
+	const { id, place, image, category, snsId, districts, startAt, endAt } =
+		event;
 
 	return (
 		<StyledMainListItem onClick={() => router.push(`/detail/${id}`)}>
@@ -43,10 +31,6 @@ const EventListItem = ({ event }: EventListItemProps) => {
 			<ul className="textContainer">
 				<li>
 					<Icon name="host-gray" />
-					<p>{organizer}</p>
-				</li>
-				<li>
-					<FaTwitter />
 					<p>{snsId ? `@${snsId}` : "-"}</p>
 				</li>
 				<li>

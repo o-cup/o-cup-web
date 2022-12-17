@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { fetchPeople } from "../../shared/apis/common";
 import {
 	BiasProfile,
@@ -14,32 +14,33 @@ import { getBirthMonth } from "../../shared/utils";
 import MonthSelector from "./MonthSelector";
 import Result from "./Result";
 import SearchInput from "./SearchInput";
-import useSetMetaTags from "./hooks/useSetMetaTags";
+import useHanleDirectAccess from "./hooks/useHandleDirectAccess";
 import { StyledFilter, StyledSearch } from "./styles/searchStyle";
 import type { SearchSortOptionKeys } from "../../shared/types";
 
 const Search = () => {
 	const router = useRouter();
 	const { pathname } = router;
-	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
-	const { keyword } = searchFilters;
+	const setSearchFilters = useSetRecoilState(searchFiltersAtom);
+	const [showResult, setShowResult] = useRecoilState(showResultAtom);
 	const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 	const [searchSortOpen, setSearchSortOpen] = useState(false);
 	const [selectedBiasId, setSelectedBiasId] = useState<number | null>(null);
 	const [selectedOption, setSelectedOption] =
 		useState<SearchSortOptionKeys>("alphabetAsc");
-	const [showResult, setShowResult] = useRecoilState(showResultAtom);
+	const [inputValue, setInputValue] = useState("");
+	const [openAutoComplete, setOpenAutoComplete] = useState(false);
 	const [isMounted, setIsMounted] = useState(false);
-
-	useSetMetaTags();
 
 	useEffect(() => {
 		setIsMounted(true);
 	}, []);
 
+	useHanleDirectAccess();
+
 	const { data: people, isLoading } = useQuery(
 		["people", selectedOption],
-		() => fetchPeople(selectedOption),
+		fetchPeople,
 		{
 			select: (data) => {
 				let biases = data?.filter(
@@ -65,22 +66,8 @@ const Search = () => {
 				}
 				return biases;
 			},
-			enabled: !showResult && !keyword,
 		}
 	);
-
-	useEffect(() => {
-		setShowResult(!!keyword);
-
-		if (!keyword) {
-			router.replace(pathname, undefined, { shallow: true });
-		} else {
-			router.push({
-				pathname,
-				query: { keyword },
-			});
-		}
-	}, [keyword]);
 
 	useEffect(() => {
 		const today = new Date();
@@ -88,17 +75,37 @@ const Search = () => {
 	}, []);
 
 	const handleBiasClick = ({ name, id }: { name: string; id: number }) => {
-		setSearchFilters((prev) => ({ ...prev, keyword: name }));
+		setSearchFilters((prev) => ({
+			...prev,
+			searchType: "bias",
+			bid: id,
+			biasName: name,
+		}));
 		setSelectedBiasId(id);
 		setShowResult(true);
+		setOpenAutoComplete(false);
+
+		router.push({
+			pathname,
+			query: { type: "bias", bid: id },
+		});
 	};
 
 	const handleBackClick = () => {
 		if (showResult) {
-			setSearchFilters((prev) => ({ ...prev, keyword: "" }));
+			setSearchFilters((prev) => ({
+				...prev,
+				bid: null,
+				biasName: "",
+				placeName: "",
+			}));
+
 			setShowResult(false);
+			setInputValue("");
+			router.push("/search");
 			return;
 		}
+
 		router.push("/");
 	};
 
@@ -112,7 +119,7 @@ const Search = () => {
 
 	const conditionalRender = () => {
 		if (showResult) {
-			return <Result biasId={selectedBiasId} />;
+			return <Result />;
 		}
 		return (
 			<StyledFilter>
@@ -133,7 +140,7 @@ const Search = () => {
 				<ul className="biases">
 					{people?.map((bias) => (
 						<BiasProfile
-							key={bias.name}
+							key={bias.id}
 							biasName={bias.name}
 							imgUrl={bias.profilePic}
 							handleClick={() =>
@@ -151,7 +158,13 @@ const Search = () => {
 		<Layout page="search" handleBackClick={handleBackClick} share>
 			<StyledSearch>
 				<div className="input">
-					<SearchInput setSelectedBiasId={setSelectedBiasId} />
+					<SearchInput
+						setSelectedBiasId={setSelectedBiasId}
+						openAutoComplete={openAutoComplete}
+						setOpenAutoComplete={setOpenAutoComplete}
+						inputValue={inputValue}
+						setInputValue={setInputValue}
+					/>
 				</div>
 				{conditionalRender()}
 			</StyledSearch>

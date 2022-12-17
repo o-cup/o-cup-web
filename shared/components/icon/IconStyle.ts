@@ -240,6 +240,9 @@ export const StyledIcon = styled.i`
 
 	&.category {
 		background: url("/images/icons/category-smile.png") no-repeat;
+	}
+	&.arrow-up-right {
+		background: url("/images/icons/arrow-up-right.svg") no-repeat;
 		background-size: contain;
 	}
 `;

@@ -60,11 +60,9 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 
-	console.log("selectedDists", selectedDists);
-
 	const headerElements = (
 		<StyledCustomHeader>
-			<Icon name="arrow-left" handleClick={() => setCurrentFilter(null)} />
+			{/* <Icon name="arrow-left" handleClick={() => setCurrentFilter(null)} /> */}
 			<h2>{currentFilter ? filterData[currentFilter].name : "필터"}</h2>
 			<ResetButton onClick={() => console.log("초기화")} className="reset">
 				<Icon name="reset" />
@@ -87,10 +85,18 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 		setCurrentFilter(null);
 	};
 
+	const handleClickLeftButton = () => {
+		if (currentFilter) {
+			setCurrentFilter(null);
+		} else {
+			setIsOpen(false);
+		}
+	};
+
 	const buttonElements = (
 		<div className="buttons">
-			<button type="button" onClick={() => setIsOpen(false)} className="close">
-				닫기
+			<button type="button" onClick={handleClickLeftButton} className="close">
+				{currentFilter ? "이전" : "닫기"}
 			</button>
 			<button type="button" onClick={handleSubmitClick}>
 				적용하기
@@ -104,9 +110,9 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 		const { startDate, endDate } = searchFilters.date;
 		// const selectedCategories = searchFilters.categories;
 
-		const selectedCategories = Object.keys(categories).filter(
-			(c) => searchFilters.categories[c]
-		);
+		// const selectedCategories = Object.keys(categories).filter(
+		// 	(c) => searchFilters.categories[c]
+		// );
 
 		// console.log("selectedCategories", selectedCategories);
 

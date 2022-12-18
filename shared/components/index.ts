@@ -5,7 +5,6 @@ import Button from "./button";
 import Calendar from "./calendar";
 import CategoryChip from "./categoryChip";
 import Chip from "./chip";
-import FilterIcon from "./filterIcon";
 import GoodsChip from "./goodsChip";
 import Icon from "./icon";
 import Layout from "./layout";
@@ -17,7 +16,6 @@ import Toast from "./toast";
 export {
 	Icon,
 	SortIcon,
-	FilterIcon,
 	BiasChip,
 	Loading,
 	Toast,

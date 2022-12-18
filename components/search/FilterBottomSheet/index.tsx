@@ -60,11 +60,21 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 
+	const handleResetClick = () => {
+		switch (currentFilter) {
+			case "calendar":
+				break;
+
+			default:
+				break;
+		}
+	};
+
 	const headerElements = (
 		<StyledCustomHeader>
 			{/* <Icon name="arrow-left" handleClick={() => setCurrentFilter(null)} /> */}
 			<h2>{currentFilter ? filterData[currentFilter].name : "필터"}</h2>
-			<ResetButton onClick={() => console.log("초기화")} className="reset">
+			<ResetButton onClick={handleResetClick} className="reset">
 				<Icon name="reset" />
 				<span>초기화</span>
 			</ResetButton>
@@ -72,6 +82,11 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 	);
 
 	const handleSubmitClick = () => {
+		if (currentFilter) {
+			setCurrentFilter(null);
+			return;
+		}
+
 		setSearchFilters((prev) => ({
 			...prev,
 			date: {
@@ -81,8 +96,6 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 			districts: selectedDists,
 			categories,
 		}));
-
-		setCurrentFilter(null);
 	};
 
 	const handleClickLeftButton = () => {

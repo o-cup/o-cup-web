@@ -1,14 +1,7 @@
 import { useRouter } from "next/router";
 import React, { memo, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import {
-	Button,
-	Chip,
-	FilterIcon,
-	Icon,
-	Loading,
-	SortIcon,
-} from "../../shared/components";
+import { Button, Chip, Icon, Loading, SortIcon } from "../../shared/components";
 import { searchFiltersAtom } from "../../shared/state";
 import { convertDateWithDots } from "../../shared/utils";
 import Event from "./Event";
@@ -38,28 +31,29 @@ const Result = () => {
 		dateChip: string;
 		distChips: DistrictType[];
 	}>(initialChipsData);
+	const [isFilterOpen, setIsFilterOpen] = useState(false);
 
 	const isModalOpen = calendarOpen || districtSelectorOpen;
-	// const dateChipText =
-	// 	startDate &&
-	// 	`${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
-
-	console.log("result chips", chips);
+	const dateChipText =
+		startDate &&
+		`${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
 
 	const { isLoading, events } = useSearchResult({
 		sortOption,
 	});
 
+	console.log("events", events);
+
 	useEffect(() => {
-		// if (!startDate) return;
-		// const dateText =
-		// 	startDate &&
-		// 	`${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
-		// setChips((prev) => ({ ...prev, dateChip: dateText }));
+		if (!startDate) return;
+		const dateText =
+			startDate &&
+			`${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
+		setChips((prev) => ({ ...prev, dateChip: dateText }));
 	}, [startDate, endDate]);
 
 	useEffect(() => {
-		// setChips((prev) => ({ ...prev, distChips: districts }));
+		setChips((prev) => ({ ...prev, distChips: districts }));
 	}, [districts]);
 
 	useEffect(() => {
@@ -85,12 +79,12 @@ const Result = () => {
 
 		switch (type) {
 			case "date":
-				// setChips((prev) => ({ ...prev, dateChip: "" }));
+				setChips((prev) => ({ ...prev, dateChip: "" }));
 
-				// setSearchFilters((prev) => ({
-				// 	...prev,
-				// 	date: { startDate: "", endDate: "" },
-				// }));
+				setSearchFilters((prev) => ({
+					...prev,
+					date: { startDate: "", endDate: "" },
+				}));
 				break;
 
 			case "district":
@@ -104,21 +98,16 @@ const Result = () => {
 
 	const chip = chips.dateChip || chips.distChips.length > 0;
 
-	// if (isLoading) {
-	// 	return <Loading />;
-	// }
+	if (isLoading) {
+		return <Loading />;
+	}
 
 	return (
 		<StyledResult>
 			<div className="menu">
 				<p>{`검색 결과 총 ${events?.length || 0}개`}</p>
 				<div className="icons">
-					<FilterIcon
-						isOpen={filterOpen}
-						setIsOpen={setFilterOpen}
-						setCalendarOpen={setCalendarOpen}
-						setDistrictSelectorOpen={setDistrictSelectorOpen}
-					/>
+					<Icon name="filter" handleClick={() => setIsFilterOpen(true)} />
 					<SortIcon
 						type="result"
 						isOpened={sortOpen}
@@ -133,8 +122,7 @@ const Result = () => {
 				<div className="chips">
 					{chips.dateChip && (
 						<Chip
-							// text={dateChipText}
-							text="테스트"
+							text={dateChipText}
 							bgColor="primary"
 							customStyle={{ fontSize: "12px" }}
 							handleDelete={() => handleDeleteChip({ type: "date" })}
@@ -184,6 +172,7 @@ const Result = () => {
 					setIsOpen={setBottomSheetOpen}
 				/>
 			)} */}
+			<FilterBottomSheet isOpen={isFilterOpen} setIsOpen={setIsFilterOpen} />
 		</StyledResult>
 	);
 };

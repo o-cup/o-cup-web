@@ -21,38 +21,30 @@ const DistrictSelector = ({
 
 	const districtList = divisionList.find((d) => d.selected)?.districts || [];
 
-	useEffect(
-		function setInitialChip() {
-			if (!selectedDists.length) {
-				const newData = divisionList.map((div) => ({
-					...div,
-					selected: isAllDiv(div.code),
-				}));
-				setDivisionList(newData);
-			}
-		},
-		[selectedDists]
-	);
+	useEffect(() => {
+		if (!selectedDists.length) {
+			const newData = divisionList.map((div) => ({
+				...div,
+				selected: isAllDiv(div.code),
+			}));
+			setDivisionList(newData);
+		}
+	}, [selectedDists]);
 
-	useEffect(
-		function updateChipList() {
-			if (!districtList.length) {
-				setSelectedDists([
-					{ name: "전국", code: "0000000000", selected: true },
-				]);
-				return;
-			}
-			const selectedDivName =
-				divisionList.find((div) => div.selected)?.name || "";
+	useEffect(() => {
+		if (!districtList.length) {
+			// setSelectedDists([{ name: "전국", code: "0000000000", selected: true }]);
+			return;
+		}
+		const selectedDivName =
+			divisionList.find((div) => div.selected)?.name || "";
 
-			const newData = districtList
-				.filter((dist) => dist.selected && !isAllDiv(dist.code))
-				.map((dist) => ({ ...dist, name: `${selectedDivName} ${dist.name}` }));
+		const newData = districtList
+			.filter((dist) => dist.selected && !isAllDiv(dist.code))
+			.map((dist) => ({ ...dist, name: `${selectedDivName} ${dist.name}` }));
 
-			setSelectedDists(newData);
-		},
-		[districtList]
-	);
+		setSelectedDists(newData);
+	}, [districtList]);
 
 	const handleDivClick = (code: string) => {
 		const newData = divisionList.map((d) => ({

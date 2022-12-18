@@ -1,6 +1,6 @@
 import { format } from "date-fns";
-import React, { useEffect, useState } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import React, { useState } from "react";
+import { useRecoilState } from "recoil";
 import { BottomSheet, Calendar, Icon } from "../../../shared/components";
 import { searchFiltersAtom } from "../../../shared/state";
 import { ResetButton } from "../styles/searchStyle";
@@ -15,21 +15,11 @@ import type { DateRangeType } from "../../../shared/types";
 import type {
 	CategoriesStateType,
 	DistrictType,
+	FilterBottomSheetProps,
+	FiltersType,
 	TempSearchFiltersType,
 } from "../types";
-import type { SetStateAction, Dispatch } from "react";
 
-type FilterBottomSheetProps = {
-	isOpen: boolean;
-	setIsOpen: Dispatch<SetStateAction<boolean>>;
-};
-
-type FiltersType = {
-	[key: string]: {
-		icon: string;
-		name: string;
-	};
-};
 const filterData = {
 	calendar: {
 		icon: "calendar",
@@ -74,19 +64,7 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 			categories: initialCategoryData,
 		});
 
-	// useEffect(() => {
-	// 	setTempSearchFilters((prev) => ({
-	// 		...prev,
-	// 		date: {
-	// 			startDate: null,
-	// 			endDate: null,
-	// 		},
-	// 		districts: [],
-	// 		categories: initialCategoryData,
-	// 	}));
-	// }, []);
-
-	// console.log("selectedRange", selectedRange);
+	console.log("selectedDists", selectedDists);
 
 	const handleResetClick = () => {
 		if (!currentFilter) {
@@ -118,7 +96,6 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 		switch (currentFilter) {
 			case "calendar":
 				console.log("달력 초기화");
-				// setSelectedRange({prev => ({...prev, startDate: new Date(), endDate: new Date() }));
 				setSelectedRange((prev) => ({
 					...prev,
 					startDate: new Date(),
@@ -144,15 +121,14 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 
 	const handleSubmitClick = () => {
 		if (!currentFilter) {
-			// setSearchFilters((prev) => ({
-			// 	...prev,
-			// 	date: {
-			// 		startDate: selectedRange.startDate,
-			// 		endDate: selectedRange.endDate,
-			// 	},
-			// 	districts: selectedDists,
-			// 	categories,
-			// }));
+			setSearchFilters((prev) => ({
+				...prev,
+				date: {
+					...tempSearchFilters.date,
+				},
+				districts: tempSearchFilters.districts,
+				categories,
+			}));
 			setIsOpen(false);
 			return;
 		}
@@ -161,14 +137,19 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 
 		switch (currentFilter) {
 			case "calendar":
-				// console.log("selectedRange", selectedRange);
-
 				setTempSearchFilters((prev) => ({
 					...prev,
 					date: {
 						startDate: selectedRange.startDate,
 						endDate: selectedRange.endDate,
 					},
+				}));
+				break;
+
+			case "district":
+				setTempSearchFilters((prev) => ({
+					...prev,
+					districts: selectedDists,
 				}));
 				break;
 
@@ -181,17 +162,41 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 		if (currentFilter) {
 			setCurrentFilter(null);
 		} else {
-			setTempSearchFilters((prev) => ({
-				...prev,
-				date: {
-					startDate: null,
-					endDate: null,
-				},
-				districts: [],
-				categories: initialCategoryData,
-			}));
+			// setTempSearchFilters((prev) => ({
+			// 	...prev,
+			// 	date: {
+			// 		startDate: null,
+			// 		endDate: null,
+			// 	},
+			// 	districts: [],
+			// 	categories: initialCategoryData,
+			// }));
 
 			setIsOpen(false);
+		}
+
+		if (!currentFilter) {
+			setIsOpen(false);
+			return;
+		}
+
+		setCurrentFilter(null);
+
+		switch (currentFilter) {
+			case "calendar":
+				setSelectedRange((prev) => ({
+					...prev,
+					startDate: new Date(),
+					endDate: new Date(),
+				}));
+				break;
+
+			case "district":
+				setSelectedDists([]);
+				break;
+
+			default:
+				break;
 		}
 	};
 
@@ -209,7 +214,8 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 	const generateSelectedCreteriasText = (filterType: string) => {
 		let text = "미선택";
 
-		const { startDate, endDate } = tempSearchFilters.date;
+		const { date, districts } = tempSearchFilters;
+		const { startDate, endDate } = date;
 		// const selectedCategories = searchFilters.categories;
 
 		// const selectedCategories = Object.keys(categories).filter(
@@ -229,8 +235,8 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 				break;
 
 			case "district":
-				if (searchFilters.districts.length > 0) {
-					text = searchFilters.districts.map((dist) => dist.name).join(", ");
+				if (districts.length > 0) {
+					text = districts.map((dist) => dist.name).join(", ");
 				}
 				break;
 
@@ -255,8 +261,6 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 			<StyledFilterBottomSheet>
 				{!currentFilter &&
 					["calendar", "district", "category"].map((filter) => (
-						// const {date, districts, categories } = searchFilter;
-
 						<Filter
 							key={filter}
 							type={filter}

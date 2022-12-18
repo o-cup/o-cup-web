@@ -30,6 +30,18 @@ export type AutoCompleteDataType = {
 	text: string;
 } & PeopleType;
 
+export type FilterBottomSheetProps = {
+	isOpen: boolean;
+	setIsOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+export type FiltersType = {
+	[key: string]: {
+		icon: string;
+		name: string;
+	};
+};
+
 export type TempSearchFiltersType = {
 	date: {
 		startDate: Date | null;

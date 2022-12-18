@@ -1,5 +1,5 @@
 export const DIVISIONS_DATA = [
-	{ code: "0000000000", name: "전국", districts: [] },
+	// { code: "0000000000", name: "전국", districts: [] },
 	{
 		code: "1100000000",
 		name: "서울",

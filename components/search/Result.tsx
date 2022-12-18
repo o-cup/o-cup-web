@@ -55,9 +55,7 @@ const Result = () => {
 	}, [startDate, endDate]);
 
 	useEffect(() => {
-		if (districts.length) {
-			setChips((prev) => ({ ...prev, distChips: districts }));
-		}
+		setChips((prev) => ({ ...prev, distChips: districts }));
 	}, [districts]);
 
 	useEffect(() => {

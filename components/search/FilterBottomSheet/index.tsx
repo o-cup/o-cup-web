@@ -95,8 +95,6 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 					...prev,
 					startDate: new Date(),
 					endDate: new Date(),
-					// startDate: null,
-					// endDate: null,
 				}));
 				break;
 

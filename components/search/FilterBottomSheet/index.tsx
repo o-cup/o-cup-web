@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import React, { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { BottomSheet, Calendar, Icon } from "../../../shared/components";
 import { CATEGORY_DATA } from "../../../shared/constants";
 import { searchFiltersAtom } from "../../../shared/state";
@@ -54,7 +54,7 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 	const [selectedDists, setSelectedDists] = useState<DistrictType[]>([]);
 	const [categories, setCategories] =
 		useState<CategoriesStateType>(initialCategoryData);
-	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
+	const setSearchFilters = useSetRecoilState(searchFiltersAtom);
 	const [tempSearchFilters, setTempSearchFilters] =
 		useState<TempSearchFiltersType>({
 			date: {
@@ -64,9 +64,6 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 			districts: [],
 			categories: initialCategoryData,
 		});
-
-	console.log("selectedRange", selectedRange);
-	console.log("tempSearchFilters", tempSearchFilters);
 
 	const handleResetClick = () => {
 		if (!currentFilter) {

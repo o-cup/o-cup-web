@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { BottomSheet, Calendar, Icon } from "../../../shared/components";
 import { searchFiltersAtom } from "../../../shared/state";
@@ -12,7 +12,11 @@ import {
 	StyledFilterBottomSheet,
 } from "./styles/filterBottomSheetStyle";
 import type { DateRangeType } from "../../../shared/types";
-import type { CategoriesStateType, DistrictType } from "../types";
+import type {
+	CategoriesStateType,
+	DistrictType,
+	TempSearchFiltersType,
+} from "../types";
 import type { SetStateAction, Dispatch } from "react";
 
 type FilterBottomSheetProps = {
@@ -26,7 +30,6 @@ type FiltersType = {
 		name: string;
 	};
 };
-
 const filterData = {
 	calendar: {
 		icon: "calendar",
@@ -42,6 +45,14 @@ const filterData = {
 	},
 } as FiltersType;
 
+const initialCategoryData = {
+	A: false,
+	B: false,
+	C: false,
+	D: false,
+	E: false,
+};
+
 const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 	const [currentFilter, setCurrentFilter] = useState<string | null>(null);
 	const [selectedRange, setSelectedRange] = useState<DateRangeType>({
@@ -50,19 +61,69 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 		key: "selection",
 	});
 	const [selectedDists, setSelectedDists] = useState<DistrictType[]>([]);
-	const [categories, setCategories] = useState<CategoriesStateType>({
-		A: false,
-		B: false,
-		C: false,
-		D: false,
-		E: false,
-	});
-
+	const [categories, setCategories] =
+		useState<CategoriesStateType>(initialCategoryData);
 	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
+	const [tempSearchFilters, setTempSearchFilters] =
+		useState<TempSearchFiltersType>({
+			date: {
+				startDate: null,
+				endDate: null,
+			},
+			districts: [],
+			categories: initialCategoryData,
+		});
+
+	// useEffect(() => {
+	// 	setTempSearchFilters((prev) => ({
+	// 		...prev,
+	// 		date: {
+	// 			startDate: null,
+	// 			endDate: null,
+	// 		},
+	// 		districts: [],
+	// 		categories: initialCategoryData,
+	// 	}));
+	// }, []);
+
+	// console.log("selectedRange", selectedRange);
 
 	const handleResetClick = () => {
+		if (!currentFilter) {
+			setTempSearchFilters((prev) => ({
+				...prev,
+				date: {
+					startDate: null,
+					endDate: null,
+				},
+				districts: [],
+				categories: {
+					A: false,
+					B: false,
+					C: false,
+					D: false,
+					E: false,
+				},
+			}));
+
+			setSelectedRange((prev) => ({
+				...prev,
+				startDate: new Date(),
+				endDate: new Date(),
+			}));
+
+			return;
+		}
+
 		switch (currentFilter) {
 			case "calendar":
+				console.log("달력 초기화");
+				// setSelectedRange({prev => ({...prev, startDate: new Date(), endDate: new Date() }));
+				setSelectedRange((prev) => ({
+					...prev,
+					startDate: new Date(),
+					endDate: new Date(),
+				}));
 				break;
 
 			default:
@@ -82,26 +143,54 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 	);
 
 	const handleSubmitClick = () => {
-		if (currentFilter) {
-			setCurrentFilter(null);
+		if (!currentFilter) {
+			// setSearchFilters((prev) => ({
+			// 	...prev,
+			// 	date: {
+			// 		startDate: selectedRange.startDate,
+			// 		endDate: selectedRange.endDate,
+			// 	},
+			// 	districts: selectedDists,
+			// 	categories,
+			// }));
+			setIsOpen(false);
 			return;
 		}
 
-		setSearchFilters((prev) => ({
-			...prev,
-			date: {
-				startDate: selectedRange.startDate,
-				endDate: selectedRange.endDate,
-			},
-			districts: selectedDists,
-			categories,
-		}));
+		setCurrentFilter(null);
+
+		switch (currentFilter) {
+			case "calendar":
+				// console.log("selectedRange", selectedRange);
+
+				setTempSearchFilters((prev) => ({
+					...prev,
+					date: {
+						startDate: selectedRange.startDate,
+						endDate: selectedRange.endDate,
+					},
+				}));
+				break;
+
+			default:
+				break;
+		}
 	};
 
 	const handleClickLeftButton = () => {
 		if (currentFilter) {
 			setCurrentFilter(null);
 		} else {
+			setTempSearchFilters((prev) => ({
+				...prev,
+				date: {
+					startDate: null,
+					endDate: null,
+				},
+				districts: [],
+				categories: initialCategoryData,
+			}));
+
 			setIsOpen(false);
 		}
 	};
@@ -120,7 +209,7 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 	const generateSelectedCreteriasText = (filterType: string) => {
 		let text = "미선택";
 
-		const { startDate, endDate } = searchFilters.date;
+		const { startDate, endDate } = tempSearchFilters.date;
 		// const selectedCategories = searchFilters.categories;
 
 		// const selectedCategories = Object.keys(categories).filter(

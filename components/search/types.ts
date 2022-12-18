@@ -30,4 +30,13 @@ export type AutoCompleteDataType = {
 	text: string;
 } & PeopleType;
 
+export type TempSearchFiltersType = {
+	date: {
+		startDate: Date | null;
+		endDate: Date | null;
+	};
+	districts: DistrictType[];
+	categories: Record<string, boolean>;
+};
+
 export default {};

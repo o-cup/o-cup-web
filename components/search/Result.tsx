@@ -1,9 +1,9 @@
+import { format } from "date-fns";
 import { useRouter } from "next/router";
 import React, { memo, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { Button, Chip, Icon, Loading, SortIcon } from "../../shared/components";
 import { searchFiltersAtom } from "../../shared/state";
-import { convertDateWithDots } from "../../shared/utils";
 import Event from "./Event";
 import FilterBottomSheet from "./FilterBottomSheet";
 import SearchModal from "./SearchModal";
@@ -34,26 +34,30 @@ const Result = () => {
 	const [isFilterOpen, setIsFilterOpen] = useState(false);
 
 	const isModalOpen = calendarOpen || districtSelectorOpen;
+
 	const dateChipText =
-		startDate &&
-		`${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
+		(startDate &&
+			endDate &&
+			`${format(new Date(startDate), "yyyy.MM.dd")} - ${format(
+				new Date(endDate),
+				"yyyy.MM.dd"
+			)}`) ||
+		"";
 
 	const { isLoading, events } = useSearchResult({
 		sortOption,
 	});
 
-	console.log("events", events);
-
 	useEffect(() => {
-		if (!startDate) return;
-		const dateText =
-			startDate &&
-			`${convertDateWithDots(startDate)} ~ ${convertDateWithDots(endDate)}`;
-		setChips((prev) => ({ ...prev, dateChip: dateText }));
+		if (dateChipText) {
+			setChips((prev) => ({ ...prev, dateChip: dateChipText }));
+		}
 	}, [startDate, endDate]);
 
 	useEffect(() => {
-		setChips((prev) => ({ ...prev, distChips: districts }));
+		if (districts.length) {
+			setChips((prev) => ({ ...prev, distChips: districts }));
+		}
 	}, [districts]);
 
 	useEffect(() => {
@@ -83,7 +87,7 @@ const Result = () => {
 
 				setSearchFilters((prev) => ({
 					...prev,
-					date: { startDate: "", endDate: "" },
+					date: { startDate: null, endDate: null },
 				}));
 				break;
 
@@ -166,12 +170,6 @@ const Result = () => {
 				/>
 			)}
 
-			{/* {bottomSheetOpen && (
-				<FilterBottomSheet
-					isOpen={bottomSheetOpen}
-					setIsOpen={setBottomSheetOpen}
-				/>
-			)} */}
 			<FilterBottomSheet isOpen={isFilterOpen} setIsOpen={setIsFilterOpen} />
 		</StyledResult>
 	);

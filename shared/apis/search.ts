@@ -2,7 +2,8 @@ import axios from "axios";
 import { supabase } from "../../supabaseClient";
 import { removeSpace } from "../utils";
 import { isDateRangeOverlaps } from "../utils/dateHandlers";
-import type { RegCodeItem, SearchInputOptionKey } from "../types";
+import type { DistrictType } from "../../components/search/types";
+import type { SearchInputOptionKey } from "../types";
 
 export type FetchSearchedEventParams = {
 	searchType: string;
@@ -10,7 +11,7 @@ export type FetchSearchedEventParams = {
 	placeName?: string;
 	date?: { startDate: string; endDate: string };
 	biasId?: number | null;
-	districts?: RegCodeItem[];
+	districts?: DistrictType[];
 	searchInputOptionKey?: SearchInputOptionKey;
 };
 

@@ -36,7 +36,10 @@ const useSearchResult = ({ sortOption }: useSearchResultProps) => {
 				searchType,
 				placeName: removeSpace(placeName.trim()),
 				bid: bid!,
-				date: { startDate, endDate },
+				date: {
+					startDate: format(new Date(startDate!), "yyyyMMdd"),
+					endDate: format(new Date(endDate!), "yyyyMMdd"),
+				},
 				districts,
 			}),
 		{

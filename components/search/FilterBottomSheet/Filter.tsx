@@ -18,6 +18,15 @@ const Filter = ({
 }: FilterProps) => {
 	if (!type) return null;
 
+	const getDiscription = () => {
+		if (type === "category") {
+			const isAll = text.split(",").length === 5;
+			return isAll ? "전체" : text;
+		}
+
+		return text || "미선택";
+	};
+
 	return (
 		<StyledFilter onClick={() => setCurrentFilter(type)}>
 			<div className="text">
@@ -25,7 +34,7 @@ const Filter = ({
 					<Icon name={filterTypeData.icon} />
 					<p>{filterTypeData.name}</p>
 				</div>
-				<small>{text || "미선택"}</small>
+				<small>{getDiscription()}</small>
 			</div>
 			<div className="icon">
 				<Icon name="arrow-right" />

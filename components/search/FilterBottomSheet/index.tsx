@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
 import { BottomSheet, Calendar, Icon } from "../../../shared/components";
+import { CATEGORY_DATA } from "../../../shared/constants";
 import { searchFiltersAtom } from "../../../shared/state";
 import { ResetButton } from "../styles/searchStyle";
 import Categories from "./Categories";
@@ -36,11 +37,11 @@ const filterData = {
 } as FiltersType;
 
 const initialCategoryData = {
-	A: false,
-	B: false,
-	C: false,
-	D: false,
-	E: false,
+	A: true,
+	B: true,
+	C: true,
+	D: true,
+	E: true,
 };
 
 const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
@@ -64,7 +65,8 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 			categories: initialCategoryData,
 		});
 
-	console.log("selectedDists", selectedDists);
+	console.log("selectedRange", selectedRange);
+	console.log("tempSearchFilters", tempSearchFilters);
 
 	const handleResetClick = () => {
 		if (!currentFilter) {
@@ -75,13 +77,7 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 					endDate: null,
 				},
 				districts: [],
-				categories: {
-					A: false,
-					B: false,
-					C: false,
-					D: false,
-					E: false,
-				},
+				categories: initialCategoryData,
 			}));
 
 			setSelectedRange((prev) => ({
@@ -90,19 +86,29 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 				endDate: new Date(),
 			}));
 
+			setSelectedDists([]);
+			setCategories(initialCategoryData);
+
 			return;
 		}
 
 		switch (currentFilter) {
 			case "calendar":
-				console.log("달력 초기화");
 				setSelectedRange((prev) => ({
 					...prev,
 					startDate: new Date(),
 					endDate: new Date(),
+					// startDate: null,
+					// endDate: null,
 				}));
 				break;
 
+			case "district":
+				break;
+
+			case "category":
+				setCategories(initialCategoryData);
+				break;
 			default:
 				break;
 		}
@@ -153,30 +159,39 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 				}));
 				break;
 
+			case "category":
+				setTempSearchFilters((prev) => ({
+					...prev,
+					categories,
+				}));
+				break;
+
 			default:
 				break;
 		}
 	};
 
 	const handleClickLeftButton = () => {
-		if (currentFilter) {
-			setCurrentFilter(null);
-		} else {
-			// setTempSearchFilters((prev) => ({
-			// 	...prev,
-			// 	date: {
-			// 		startDate: null,
-			// 		endDate: null,
-			// 	},
-			// 	districts: [],
-			// 	categories: initialCategoryData,
-			// }));
-
-			setIsOpen(false);
-		}
-
 		if (!currentFilter) {
 			setIsOpen(false);
+			setTempSearchFilters((prev) => ({
+				...prev,
+				date: {
+					startDate: null,
+					endDate: null,
+				},
+				districts: [],
+				categories: initialCategoryData,
+			}));
+
+			setSelectedRange((prev) => ({
+				...prev,
+				startDate: new Date(),
+				endDate: new Date(),
+			}));
+
+			setSelectedDists([]);
+			setCategories(initialCategoryData);
 			return;
 		}
 
@@ -193,6 +208,10 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 
 			case "district":
 				setSelectedDists([]);
+				break;
+
+			case "category":
+				setCategories(initialCategoryData);
 				break;
 
 			default:
@@ -216,13 +235,10 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 
 		const { date, districts } = tempSearchFilters;
 		const { startDate, endDate } = date;
-		// const selectedCategories = searchFilters.categories;
 
-		// const selectedCategories = Object.keys(categories).filter(
-		// 	(c) => searchFilters.categories[c]
-		// );
-
-		// console.log("selectedCategories", selectedCategories);
+		const selectedCategoryText = Object.keys(tempSearchFilters.categories)
+			.map((c) => tempSearchFilters.categories[c] && CATEGORY_DATA[c])
+			.filter(Boolean);
 
 		switch (filterType) {
 			case "calendar":
@@ -241,11 +257,13 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 				break;
 
 			case "category":
+				text = selectedCategoryText.join(", ");
 				break;
 
 			default:
 				break;
 		}
+
 		return text;
 	};
 

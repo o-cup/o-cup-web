@@ -1,7 +1,8 @@
 import { atom } from "recoil";
 import { convertDateToString } from "../utils";
 import { sessionAtom } from "./recoilUtils";
-import type { RegCodeItem, SearchInputOptionType } from "../types";
+import type { DistrictType } from "../../components/search/types";
+import type { SearchInputOptionType } from "../types";
 import type { RequestGoodsListType, RequestType } from "../types/request";
 
 const today = new Date();
@@ -62,7 +63,7 @@ export type SearchFiltersAtomType = {
 		startDate: Date | null;
 		endDate: Date | null;
 	};
-	districts: RegCodeItem[];
+	districts: DistrictType[];
 	categories: Record<string, boolean>;
 };
 

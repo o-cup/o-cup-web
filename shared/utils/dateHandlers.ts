@@ -61,7 +61,10 @@ export const isOpenToday = (today: string, startAt: string, endAt: string) => {
  */
 export const convertDateWithDots = (dateString: string) => {
 	if (dateString.length === 8) {
-		return `${dateString.slice(0, 4)}.${dateString.slice(4, 6)}.${dateString.slice(6, 8)}`;
+		return `${dateString.slice(0, 4)}.${dateString.slice(
+			4,
+			6
+		)}.${dateString.slice(6, 8)}`;
 	}
 	return dateString;
 };
@@ -81,7 +84,12 @@ export const getDatesInRange = (startAt: string, endAt: string) => {
 	return dates;
 };
 
-export const isDateRangeOverlaps = (start: string, end: string, eventStart: string, eventEnd: string) => {
+export const isDateRangeOverlaps = (
+	start: string,
+	end: string,
+	eventStart: string,
+	eventEnd: string
+) => {
 	if (start <= eventStart && eventStart <= end) return true;
 	if (start <= eventEnd && eventEnd <= end) return true;
 	if (eventStart < start && end < eventEnd) return true;

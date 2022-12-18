@@ -6,7 +6,6 @@ import { Button, Chip, Icon, Loading, SortIcon } from "../../shared/components";
 import { searchFiltersAtom } from "../../shared/state";
 import Event from "./Event";
 import FilterBottomSheet from "./FilterBottomSheet";
-import SearchModal from "./SearchModal";
 import useSearchResult from "./hooks/useSearchResult";
 import { StyledResult } from "./styles/resultStyle";
 import type { ResultSortOptionKeys } from "../../shared/types";
@@ -23,17 +22,13 @@ const Result = () => {
 	} = searchFilters;
 	const [sortOpen, setSortOpen] = useState(false);
 	const [filterOpen, setFilterOpen] = useState(false);
-	const [calendarOpen, setCalendarOpen] = useState(false);
 	const [sortOption, setSortOption] =
 		useState<ResultSortOptionKeys>("alphabetAsc");
-	const [districtSelectorOpen, setDistrictSelectorOpen] = useState(false);
 	const [chips, setChips] = useState<{
 		dateChip: string;
 		distChips: DistrictType[];
 	}>(initialChipsData);
 	const [isFilterOpen, setIsFilterOpen] = useState(false);
-
-	const isModalOpen = calendarOpen || districtSelectorOpen;
 
 	const dateChipText =
 		(startDate &&
@@ -159,14 +154,6 @@ const Result = () => {
 					이벤트 등록하기
 				</Button>
 			</div>
-
-			{isModalOpen && (
-				<SearchModal
-					type={calendarOpen ? "calendar" : "districtSelector"}
-					setCalendarOpen={setCalendarOpen}
-					setDisctrictSelectorOpen={setDistrictSelectorOpen}
-				/>
-			)}
 
 			<FilterBottomSheet isOpen={isFilterOpen} setIsOpen={setIsFilterOpen} />
 		</StyledResult>

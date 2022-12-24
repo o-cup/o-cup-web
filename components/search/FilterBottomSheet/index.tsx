@@ -37,11 +37,11 @@ const filterData = {
 } as FiltersType;
 
 const initialCategoryData = {
-	A: true,
-	B: true,
-	C: true,
-	D: true,
-	E: true,
+	A: false,
+	B: false,
+	C: false,
+	D: false,
+	E: false,
 };
 
 const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {

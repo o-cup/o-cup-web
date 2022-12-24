@@ -18,6 +18,7 @@ const useSearchResult = ({ sortOption }: useSearchResultProps) => {
 		placeName,
 		date: { startDate, endDate },
 		districts,
+		categories,
 	} = searchFilters;
 
 	const { data: events, isLoading } = useQuery(
@@ -30,6 +31,7 @@ const useSearchResult = ({ sortOption }: useSearchResultProps) => {
 			endDate,
 			districts,
 			sortOption,
+			categories,
 		],
 		() =>
 			fetchSearchedEvents({
@@ -41,6 +43,7 @@ const useSearchResult = ({ sortOption }: useSearchResultProps) => {
 					endDate: endDate ? format(new Date(endDate), "yyyyMMdd") : "",
 				},
 				districts,
+				categories,
 			}),
 		{
 			select: (data) => {

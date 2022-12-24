@@ -19,12 +19,15 @@ const Filter = ({
 	if (!type) return null;
 
 	const getDiscription = () => {
-		if (type === "category") {
-			const isAll = text.split(",").length === 5;
-			return isAll ? "전체" : text;
+		let description = "미선택";
+
+		const isAll = text.split(",").length === 5;
+
+		if (type === "category" && isAll) {
+			description = isAll ? "전체" : text;
 		}
 
-		return text || "미선택";
+		return text || description;
 	};
 
 	return (

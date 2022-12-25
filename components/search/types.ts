@@ -35,11 +35,6 @@ export type AutoCompleteDataType = {
 	text: string;
 } & PeopleType;
 
-export type FilterBottomSheetProps = {
-	isOpen: boolean;
-	setIsOpen: Dispatch<SetStateAction<boolean>>;
-};
-
 export type FiltersType = {
 	[key: string]: {
 		icon: string;
@@ -56,6 +51,13 @@ export type TempSearchFiltersType = {
 	};
 	districts: DistrictType[];
 	categories: CategoryDataType[];
+};
+
+export type FilterBottomSheetProps = {
+	isOpen: boolean;
+	setIsOpen: Dispatch<SetStateAction<boolean>>;
+	tempSearchFilters: TempSearchFiltersType;
+	setTempSearchFilters: Dispatch<SetStateAction<TempSearchFiltersType>>;
 };
 
 export default {};

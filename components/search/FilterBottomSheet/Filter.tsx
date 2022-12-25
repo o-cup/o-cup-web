@@ -1,6 +1,12 @@
 import React from "react";
 import { Icon } from "../../../shared/components";
 import { StyledFilter } from "./styles/filterBottomSheetStyle";
+import type { DateRangeType } from "../../../shared/types";
+import type {
+	CategoryDataType,
+	DistrictType,
+	TempSearchFiltersType,
+} from "../types";
 import type { Dispatch, SetStateAction } from "react";
 
 type FilterProps = {
@@ -8,6 +14,10 @@ type FilterProps = {
 	filterTypeData: any;
 	setCurrentFilter: Dispatch<SetStateAction<string | null>>;
 	text: string;
+	tempSearchFilters: TempSearchFiltersType;
+	setSelectedRange: Dispatch<SetStateAction<DateRangeType>>;
+	setSelectedDists: Dispatch<SetStateAction<DistrictType[]>>;
+	setSelectedCategories: Dispatch<SetStateAction<CategoryDataType[]>>;
 };
 
 const Filter = ({
@@ -15,6 +25,10 @@ const Filter = ({
 	filterTypeData,
 	setCurrentFilter,
 	text,
+	tempSearchFilters,
+	setSelectedRange,
+	setSelectedDists,
+	setSelectedCategories,
 }: FilterProps) => {
 	if (!type) return null;
 
@@ -30,8 +44,38 @@ const Filter = ({
 		return text || description;
 	};
 
+	const handleClick = () => {
+		setCurrentFilter(type);
+
+		const { date, districts, categories } = tempSearchFilters;
+		const { startDate, endDate } = date;
+
+		switch (type) {
+			case "calendar":
+				if (startDate && endDate) {
+					setSelectedRange({
+						startDate,
+						endDate,
+						key: "selection",
+					});
+				}
+				break;
+
+			case "district":
+				setSelectedDists(districts);
+				break;
+
+			case "category":
+				setSelectedCategories(categories);
+				break;
+
+			default:
+				break;
+		}
+	};
+
 	return (
-		<StyledFilter onClick={() => setCurrentFilter(type)}>
+		<StyledFilter onClick={handleClick}>
 			<div className="text">
 				<div>
 					<Icon name={filterTypeData.icon} />

@@ -1,10 +1,10 @@
 import { format } from "date-fns";
 import React, { useState } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { BottomSheet, Calendar, Icon } from "../../../shared/components";
-import { CATEGORY_DATA } from "../../../shared/constants";
 import { searchFiltersAtom } from "../../../shared/state";
 import { ResetButton } from "../styles/searchStyle";
+import { initialCategoryData } from "../utils";
 import Categories from "./Categories";
 import DistrictSelector from "./DistrictSelector";
 import Filter from "./Filter";
@@ -18,7 +18,6 @@ import type {
 	DistrictType,
 	FilterBottomSheetProps,
 	FiltersType,
-	TempSearchFiltersType,
 } from "../types";
 
 const filterData = {
@@ -36,13 +35,12 @@ const filterData = {
 	},
 } as FiltersType;
 
-const initialCategoryData = ["A", "B", "C", "D", "E"].map((c) => ({
-	code: c,
-	name: CATEGORY_DATA[c],
-	selected: false,
-}));
-
-const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
+const FilterBottomSheet = ({
+	isOpen,
+	setIsOpen,
+	tempSearchFilters,
+	setTempSearchFilters,
+}: FilterBottomSheetProps) => {
 	const [currentFilter, setCurrentFilter] = useState<string | null>(null);
 	const [selectedRange, setSelectedRange] = useState<DateRangeType>({
 		startDate: new Date(),
@@ -50,19 +48,9 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 		key: "selection",
 	});
 	const [selectedDists, setSelectedDists] = useState<DistrictType[]>([]);
-	const [categories, setCategories] =
+	const [selectedCategories, setSelectedCategories] =
 		useState<CategoryDataType[]>(initialCategoryData);
-	// const setSearchFilters = useSetRecoilState(searchFiltersAtom);
-	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
-	const [tempSearchFilters, setTempSearchFilters] =
-		useState<TempSearchFiltersType>({
-			date: {
-				startDate: null,
-				endDate: null,
-			},
-			districts: [],
-			categories: initialCategoryData,
-		});
+	const setSearchFilters = useSetRecoilState(searchFiltersAtom);
 
 	const handleResetClick = () => {
 		if (!currentFilter) {
@@ -83,7 +71,7 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 			}));
 
 			setSelectedDists([]);
-			setCategories(initialCategoryData);
+			setSelectedCategories(initialCategoryData);
 
 			return;
 		}
@@ -101,7 +89,7 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 				break;
 
 			case "category":
-				setCategories(initialCategoryData);
+				setSelectedCategories(initialCategoryData);
 				break;
 			default:
 				break;
@@ -127,7 +115,7 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 					...tempSearchFilters.date,
 				},
 				districts: tempSearchFilters.districts,
-				categories,
+				categories: tempSearchFilters.categories,
 			}));
 			setIsOpen(false);
 			return;
@@ -156,7 +144,7 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 			case "category":
 				setTempSearchFilters((prev) => ({
 					...prev,
-					categories,
+					categories: selectedCategories,
 				}));
 				break;
 
@@ -185,7 +173,7 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 			}));
 
 			setSelectedDists([]);
-			setCategories(initialCategoryData);
+			setSelectedCategories(initialCategoryData);
 			return;
 		}
 
@@ -205,7 +193,7 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 				break;
 
 			case "category":
-				setCategories(initialCategoryData);
+				setSelectedCategories(initialCategoryData);
 				break;
 
 			default:
@@ -230,7 +218,7 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 		const { date, districts } = tempSearchFilters;
 		const { startDate, endDate } = date;
 
-		const selectedCategories = tempSearchFilters.categories.filter(
+		const tempSelectedCategories = tempSearchFilters.categories.filter(
 			(c) => c.selected
 		);
 
@@ -251,7 +239,7 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 				break;
 
 			case "category":
-				text = selectedCategories?.map((c) => c.name).join(", ");
+				text = tempSelectedCategories?.map((c) => c.name).join(", ");
 				break;
 
 			default:
@@ -279,6 +267,10 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 							filterTypeData={filterData[filter]}
 							setCurrentFilter={setCurrentFilter}
 							text={generateSelectedCreteriasText(filter)}
+							tempSearchFilters={tempSearchFilters}
+							setSelectedRange={setSelectedRange}
+							setSelectedDists={setSelectedDists}
+							setSelectedCategories={setSelectedCategories}
 						/>
 					))}
 
@@ -296,7 +288,10 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 					/>
 				)}
 				{currentFilter === "category" && (
-					<Categories categories={categories} setCategories={setCategories} />
+					<Categories
+						selectedCategories={selectedCategories}
+						setSelectedCategories={setSelectedCategories}
+					/>
 				)}
 			</StyledFilterBottomSheet>
 		</BottomSheet>

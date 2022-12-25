@@ -8,7 +8,9 @@ import Event from "./Event";
 import FilterBottomSheet from "./FilterBottomSheet";
 import useSearchResult from "./hooks/useSearchResult";
 import { StyledResult } from "./styles/resultStyle";
+import { initialCategoryData } from "./utils";
 import type { ResultSortOptionKeys } from "../../shared/types";
+import type { TempSearchFiltersType } from "./types";
 
 const Result = () => {
 	const router = useRouter();
@@ -23,6 +25,15 @@ const Result = () => {
 	const [sortOption, setSortOption] =
 		useState<ResultSortOptionKeys>("alphabetAsc");
 	const [isFilterOpen, setIsFilterOpen] = useState(false);
+	const [tempSearchFilters, setTempSearchFilters] =
+		useState<TempSearchFiltersType>({
+			date: {
+				startDate: null,
+				endDate: null,
+			},
+			districts: [],
+			categories: initialCategoryData,
+		});
 
 	const { isLoading, events } = useSearchResult({
 		sortOption,
@@ -39,6 +50,11 @@ const Result = () => {
 			setSortOpen(false);
 		}
 	}, [filterOpen]);
+
+	const handleFilterIconClick = () => {
+		setIsFilterOpen(true);
+		setTempSearchFilters(searchFilters);
+	};
 
 	const handleDeleteChip = ({
 		type,
@@ -89,7 +105,7 @@ const Result = () => {
 			<div className="menu">
 				<p>{`검색 결과 총 ${events?.length || 0}개`}</p>
 				<div className="icons">
-					<Icon name="filter" handleClick={() => setIsFilterOpen(true)} />
+					<Icon name="filter" handleClick={handleFilterIconClick} />
 					<SortIcon
 						type="result"
 						isOpened={sortOpen}
@@ -157,7 +173,12 @@ const Result = () => {
 				</Button>
 			</div>
 
-			<FilterBottomSheet isOpen={isFilterOpen} setIsOpen={setIsFilterOpen} />
+			<FilterBottomSheet
+				isOpen={isFilterOpen}
+				setIsOpen={setIsFilterOpen}
+				tempSearchFilters={tempSearchFilters}
+				setTempSearchFilters={setTempSearchFilters}
+			/>
 		</StyledResult>
 	);
 };

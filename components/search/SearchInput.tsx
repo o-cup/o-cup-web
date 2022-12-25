@@ -11,7 +11,6 @@ import type { AutoCompleteDataType } from "./types";
 import type { Dispatch, SetStateAction } from "react";
 
 type SearchInputProps = {
-	setSelectedBiasId: Dispatch<SetStateAction<null | number>>;
 	openAutoComplete: boolean;
 	setOpenAutoComplete: Dispatch<SetStateAction<boolean>>;
 	inputValue: string;
@@ -24,7 +23,6 @@ const searchTypeOptions = [
 ];
 
 const SearchInput = ({
-	setSelectedBiasId,
 	openAutoComplete,
 	setOpenAutoComplete,
 	inputValue,
@@ -83,7 +81,6 @@ const SearchInput = ({
 			placeName: "",
 		}));
 
-		setSelectedBiasId(null);
 		setShowResult(false);
 	};
 

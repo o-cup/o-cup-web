@@ -1,3 +1,5 @@
+import { CATEGORY_DATA } from "../../../shared/constants";
+
 type generateOgDescriptionProps = {
 	type: "bias" | "place" | "organizer";
 	keyword: string;
@@ -27,5 +29,11 @@ export const generateMetaDescription = ({
 	}
 	return text;
 };
+
+export const initialCategoryData = ["A", "B", "C", "D", "E"].map((c) => ({
+	code: c,
+	name: CATEGORY_DATA[c],
+	selected: false,
+}));
 
 export default {};

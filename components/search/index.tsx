@@ -25,7 +25,6 @@ const Search = () => {
 	const [showResult, setShowResult] = useRecoilState(showResultAtom);
 	const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 	const [searchSortOpen, setSearchSortOpen] = useState(false);
-	const [selectedBiasId, setSelectedBiasId] = useState<number | null>(null);
 	const [selectedOption, setSelectedOption] =
 		useState<SearchSortOptionKeys>("alphabetAsc");
 	const [inputValue, setInputValue] = useState("");
@@ -81,7 +80,6 @@ const Search = () => {
 			bid: id,
 			biasName: name,
 		}));
-		setSelectedBiasId(id);
 		setShowResult(true);
 		setOpenAutoComplete(false);
 
@@ -165,7 +163,6 @@ const Search = () => {
 			<StyledSearch>
 				<div className="input">
 					<SearchInput
-						setSelectedBiasId={setSelectedBiasId}
 						openAutoComplete={openAutoComplete}
 						setOpenAutoComplete={setOpenAutoComplete}
 						inputValue={inputValue}

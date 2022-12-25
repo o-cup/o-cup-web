@@ -4,17 +4,20 @@ import type { CategoryDataType } from "../types";
 import type { Dispatch, SetStateAction } from "react";
 
 type CategoriesProps = {
-	categories: CategoryDataType[];
-	setCategories: Dispatch<SetStateAction<CategoryDataType[]>>;
+	selectedCategories: CategoryDataType[];
+	setSelectedCategories: Dispatch<SetStateAction<CategoryDataType[]>>;
 };
 
-const Categories = ({ categories, setCategories }: CategoriesProps) => {
+const Categories = ({
+	selectedCategories,
+	setSelectedCategories,
+}: CategoriesProps) => {
 	const handleIconClick = (code: string) => {
-		const newData = categories.map((c) => ({
+		const newData = selectedCategories.map((c) => ({
 			...c,
 			selected: c.code === code ? !c.selected : c.selected,
 		}));
-		setCategories(newData);
+		setSelectedCategories(newData);
 	};
 
 	return (
@@ -25,7 +28,7 @@ const Categories = ({ categories, setCategories }: CategoriesProps) => {
 			</div>
 
 			<div className="icons">
-				{categories.map((c: CategoryDataType) => {
+				{selectedCategories.map((c: CategoryDataType) => {
 					const imgSrc = `/images/categories/${
 						c.selected ? `${c.code}` : `${c.code}_disabled`
 					}.png`;

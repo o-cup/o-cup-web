@@ -1,20 +1,20 @@
 import React from "react";
-import { CATEGORY_DATA } from "../../../shared/constants";
 import StyledCategories from "./styles/categoriesStyle";
-import type { CategoriesStateType } from "../types";
+import type { CategoryDataType } from "../types";
 import type { Dispatch, SetStateAction } from "react";
 
 type CategoriesProps = {
-	categories: CategoriesStateType;
-	setCategories: Dispatch<SetStateAction<CategoriesStateType>>;
+	categories: CategoryDataType[];
+	setCategories: Dispatch<SetStateAction<CategoryDataType[]>>;
 };
 
 const Categories = ({ categories, setCategories }: CategoriesProps) => {
-	const handleIconClick = (category: string) => {
-		setCategories((prev) => ({
-			...prev,
-			[category]: !prev[category],
+	const handleIconClick = (code: string) => {
+		const newData = categories.map((c) => ({
+			...c,
+			selected: c.code === code ? !c.selected : c.selected,
 		}));
+		setCategories(newData);
 	};
 
 	return (
@@ -25,21 +25,20 @@ const Categories = ({ categories, setCategories }: CategoriesProps) => {
 			</div>
 
 			<div className="icons">
-				{Object.keys(categories).map((c) => {
-					const name = CATEGORY_DATA[c];
+				{categories.map((c: CategoryDataType) => {
 					const imgSrc = `/images/categories/${
-						categories[c] ? `${c}` : `${c}_disabled`
+						c.selected ? `${c.code}` : `${c.code}_disabled`
 					}.png`;
 
 					return (
-						<p key={c} className={categories[c] ? "selected" : ""}>
+						<p key={c.code} className={c.selected ? "selected" : ""}>
 							<img
-								alt={c}
+								alt={c.code}
 								src={imgSrc}
-								onClick={() => handleIconClick(c)}
+								onClick={() => handleIconClick(c.code)}
 								role="presentation"
 							/>
-							{name}
+							{c.name}
 						</p>
 					);
 				})}

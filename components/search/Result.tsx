@@ -1,17 +1,14 @@
-import { format } from "date-fns";
 import { useRouter } from "next/router";
 import React, { memo, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { Button, Chip, Icon, Loading, SortIcon } from "../../shared/components";
 import { searchFiltersAtom } from "../../shared/state";
+import { getDateRangeText } from "../../shared/utils/dateHandlers";
 import Event from "./Event";
 import FilterBottomSheet from "./FilterBottomSheet";
 import useSearchResult from "./hooks/useSearchResult";
 import { StyledResult } from "./styles/resultStyle";
 import type { ResultSortOptionKeys } from "../../shared/types";
-import type { DistrictType } from "./types";
-
-const initialChipsData = { dateChip: "", distChips: [] };
 
 const Result = () => {
 	const router = useRouter();
@@ -19,39 +16,17 @@ const Result = () => {
 	const {
 		date: { startDate, endDate },
 		districts,
+		categories,
 	} = searchFilters;
 	const [sortOpen, setSortOpen] = useState(false);
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [sortOption, setSortOption] =
 		useState<ResultSortOptionKeys>("alphabetAsc");
-	const [chips, setChips] = useState<{
-		dateChip: string;
-		distChips: DistrictType[];
-	}>(initialChipsData);
 	const [isFilterOpen, setIsFilterOpen] = useState(false);
-
-	const dateChipText =
-		(startDate &&
-			endDate &&
-			`${format(new Date(startDate), "yyyy.MM.dd")} - ${format(
-				new Date(endDate),
-				"yyyy.MM.dd"
-			)}`) ||
-		"";
 
 	const { isLoading, events } = useSearchResult({
 		sortOption,
 	});
-
-	useEffect(() => {
-		if (dateChipText) {
-			setChips((prev) => ({ ...prev, dateChip: dateChipText }));
-		}
-	}, [startDate, endDate]);
-
-	useEffect(() => {
-		setChips((prev) => ({ ...prev, distChips: districts }));
-	}, [districts]);
 
 	useEffect(() => {
 		if (sortOpen) {
@@ -69,15 +44,17 @@ const Result = () => {
 		type,
 		code,
 	}: {
-		type: "date" | "district";
+		type: "date" | "district" | "category";
 		code?: string;
 	}) => {
-		const newDistChips = chips.distChips.filter((chip) => chip.code !== code);
+		const newDistrictData = districts.filter((d) => d.code !== code);
+		const newCategoryData = categories.map((c) => ({
+			...c,
+			selected: c.code === code ? false : c.selected,
+		}));
 
 		switch (type) {
 			case "date":
-				setChips((prev) => ({ ...prev, dateChip: "" }));
-
 				setSearchFilters((prev) => ({
 					...prev,
 					date: { startDate: null, endDate: null },
@@ -85,7 +62,15 @@ const Result = () => {
 				break;
 
 			case "district":
-				setSearchFilters((prev) => ({ ...prev, districts: newDistChips }));
+				setSearchFilters((prev) => ({ ...prev, districts: newDistrictData }));
+
+				break;
+
+			case "category":
+				setSearchFilters((prev) => ({
+					...prev,
+					categories: newCategoryData,
+				}));
 				break;
 
 			default:
@@ -93,11 +78,11 @@ const Result = () => {
 		}
 	};
 
-	const chip = chips.dateChip || chips.distChips.length > 0;
-
 	if (isLoading) {
 		return <Loading />;
 	}
+
+	const selectedCategories = categories.filter((c) => c.selected);
 
 	return (
 		<StyledResult>
@@ -115,28 +100,45 @@ const Result = () => {
 				</div>
 			</div>
 
-			{chip && (
-				<div className="chips">
-					{chips.dateChip && (
-						<Chip
-							text={dateChipText}
-							bgColor="primary"
-							customStyle={{ fontSize: "12px" }}
-							handleDelete={() => handleDeleteChip({ type: "date" })}
-						/>
-					)}
-					{chips.distChips.map((dist) => (
-						<Chip
-							key={dist.code}
-							text={dist.name}
-							bgColor="primary"
-							handleDelete={() =>
-								handleDeleteChip({ type: "district", code: dist.code })
-							}
-						/>
-					))}
-				</div>
-			)}
+			<div className="chips">
+				{startDate && endDate && (
+					<Chip
+						key="date"
+						text={getDateRangeText(startDate, endDate)}
+						handleDelete={() =>
+							handleDeleteChip({
+								type: "date",
+							})
+						}
+					/>
+				)}
+
+				{districts?.map((district) => (
+					<Chip
+						key={district.code}
+						text={district.name}
+						handleDelete={() =>
+							handleDeleteChip({
+								type: "district",
+								code: district.code,
+							})
+						}
+					/>
+				))}
+
+				{selectedCategories?.map((category) => (
+					<Chip
+						key={category.code}
+						text={category.name}
+						handleDelete={() =>
+							handleDeleteChip({
+								type: "category",
+								code: category.code,
+							})
+						}
+					/>
+				))}
+			</div>
 
 			<ul className="events">
 				{events?.map((event) => (

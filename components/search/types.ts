@@ -25,7 +25,12 @@ export type SelectedDistrictType = {
 	name: string;
 };
 
-export type CategoriesStateType = Record<string, boolean>;
+export type CategoryDataType = {
+	code: string;
+	name: string;
+	selected: boolean;
+};
+
 export type AutoCompleteDataType = {
 	text: string;
 } & PeopleType;
@@ -42,13 +47,15 @@ export type FiltersType = {
 	};
 };
 
+export type CategoryType = "A" | "B" | "C" | "D" | "E";
+
 export type TempSearchFiltersType = {
 	date: {
 		startDate: Date | null;
 		endDate: Date | null;
 	};
 	districts: DistrictType[];
-	categories: Record<string, boolean>;
+	categories: CategoryDataType[];
 };
 
 export default {};

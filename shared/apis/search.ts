@@ -2,7 +2,10 @@ import axios from "axios";
 import { supabase } from "../../supabaseClient";
 import { removeSpace } from "../utils";
 import { isDateRangeOverlaps } from "../utils/dateHandlers";
-import type { DistrictType } from "../../components/search/types";
+import type {
+	CategoryDataType,
+	DistrictType,
+} from "../../components/search/types";
 import type { SearchInputOptionKey } from "../types";
 
 export type FetchSearchedEventParams = {
@@ -12,7 +15,7 @@ export type FetchSearchedEventParams = {
 	date?: { startDate: string; endDate: string };
 	biasId?: number | null;
 	districts?: DistrictType[];
-	categories: Record<string, boolean>;
+	categories: CategoryDataType[];
 	searchInputOptionKey?: SearchInputOptionKey;
 };
 
@@ -84,15 +87,15 @@ export const fetchSearchedEvents = async ({
 			return codes.includes(distCode);
 		});
 	}
-	const selectedCategories = Object.keys(categories).reduce((acc, cur) => {
-		if (categories[cur]) {
-			acc.push(cur);
-		}
-		return acc;
-	}, [] as string[]);
 
-	if (selectedCategories.length) {
-		data = data?.filter((event) => selectedCategories.includes(event.category));
+	const selectedCategoryCodes = categories
+		.filter((c) => c.selected)
+		.map((c) => c.code);
+
+	if (selectedCategoryCodes.length) {
+		data = data?.filter((event) =>
+			selectedCategoryCodes.includes(event.category)
+		);
 	}
 
 	return data;

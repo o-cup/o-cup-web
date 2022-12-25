@@ -1,7 +1,11 @@
 import { atom } from "recoil";
+import { CATEGORY_DATA } from "../constants";
 import { convertDateToString } from "../utils";
 import { sessionAtom } from "./recoilUtils";
-import type { DistrictType } from "../../components/search/types";
+import type {
+	CategoryDataType,
+	DistrictType,
+} from "../../components/search/types";
 import type { SearchInputOptionType } from "../types";
 import type { RequestGoodsListType, RequestType } from "../types/request";
 
@@ -64,7 +68,7 @@ export type SearchFiltersAtomType = {
 		endDate: Date | null;
 	};
 	districts: DistrictType[];
-	categories: Record<string, boolean>;
+	categories: CategoryDataType[];
 };
 
 export const searchFiltersAtom = atom<SearchFiltersAtomType>({
@@ -79,13 +83,11 @@ export const searchFiltersAtom = atom<SearchFiltersAtomType>({
 			endDate: new Date(),
 		},
 		districts: [],
-		categories: {
-			A: false,
-			B: false,
-			C: false,
-			D: false,
-			E: false,
-		},
+		categories: ["A", "B", "C", "D", "E"].map((c) => ({
+			code: c,
+			name: CATEGORY_DATA[c],
+			selected: false,
+		})),
 	},
 	effects: [sessionAtom],
 });

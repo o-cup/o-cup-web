@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import React, { useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { BottomSheet, Calendar, Icon } from "../../../shared/components";
 import { CATEGORY_DATA } from "../../../shared/constants";
 import { searchFiltersAtom } from "../../../shared/state";
@@ -14,7 +14,7 @@ import {
 } from "./styles/filterBottomSheetStyle";
 import type { DateRangeType } from "../../../shared/types";
 import type {
-	CategoriesStateType,
+	CategoryDataType,
 	DistrictType,
 	FilterBottomSheetProps,
 	FiltersType,
@@ -36,13 +36,11 @@ const filterData = {
 	},
 } as FiltersType;
 
-const initialCategoryData = {
-	A: false,
-	B: false,
-	C: false,
-	D: false,
-	E: false,
-};
+const initialCategoryData = ["A", "B", "C", "D", "E"].map((c) => ({
+	code: c,
+	name: CATEGORY_DATA[c],
+	selected: false,
+}));
 
 const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 	const [currentFilter, setCurrentFilter] = useState<string | null>(null);
@@ -53,8 +51,9 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 	});
 	const [selectedDists, setSelectedDists] = useState<DistrictType[]>([]);
 	const [categories, setCategories] =
-		useState<CategoriesStateType>(initialCategoryData);
-	const setSearchFilters = useSetRecoilState(searchFiltersAtom);
+		useState<CategoryDataType[]>(initialCategoryData);
+	// const setSearchFilters = useSetRecoilState(searchFiltersAtom);
+	const [searchFilters, setSearchFilters] = useRecoilState(searchFiltersAtom);
 	const [tempSearchFilters, setTempSearchFilters] =
 		useState<TempSearchFiltersType>({
 			date: {
@@ -231,9 +230,9 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 		const { date, districts } = tempSearchFilters;
 		const { startDate, endDate } = date;
 
-		const selectedCategoryText = Object.keys(tempSearchFilters.categories)
-			.map((c) => tempSearchFilters.categories[c] && CATEGORY_DATA[c])
-			.filter(Boolean);
+		const selectedCategories = tempSearchFilters.categories.filter(
+			(c) => c.selected
+		);
 
 		switch (filterType) {
 			case "calendar":
@@ -252,7 +251,7 @@ const FilterBottomSheet = ({ isOpen, setIsOpen }: FilterBottomSheetProps) => {
 				break;
 
 			case "category":
-				text = selectedCategoryText.join(", ");
+				text = selectedCategories?.map((c) => c.name).join(", ");
 				break;
 
 			default:

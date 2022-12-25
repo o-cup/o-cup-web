@@ -98,6 +98,12 @@ const Search = () => {
 				bid: null,
 				biasName: "",
 				placeName: "",
+				date: {
+					startDate: null,
+					endDate: null,
+				},
+				districts: [],
+				categories: [],
 			}));
 
 			setShowResult(false);

@@ -68,6 +68,7 @@ const useSearchResult = ({ sortOption }: useSearchResultProps) => {
 						return eventsData;
 				}
 			},
+			refetchOnWindowFocus: false,
 		}
 	);
 

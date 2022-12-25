@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 /**
  * 날짜 문자열을 Date 객체로 변환
  * @param {string} dateString YYYYMMDD 형식
@@ -110,3 +112,13 @@ export const isBeforeToday = (day: string) => {
 };
 
 export default {};
+
+/**
+ * @param {Date}
+ * @returns {string} // YYYY.MM.DD - YYYY.MM.DD
+ */
+export const getDateRangeText = (startDate: Date, endDate: Date) =>
+	`${format(new Date(startDate), "yyyy.MM.dd")} - ${format(
+		new Date(endDate),
+		"yyyy.MM.dd"
+	)}`;

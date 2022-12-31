@@ -86,6 +86,7 @@ const FilterBottomSheet = ({
 				break;
 
 			case "district":
+				setSelectedDists([]);
 				break;
 
 			case "category":

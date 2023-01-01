@@ -109,8 +109,6 @@ const StyledPreview = styled.div`
 	display: none;
 	//}
 
-	border: 1px solid red;
-
 	.previewContent {
 		width: 100%;
 	}
@@ -125,8 +123,6 @@ const StyledRequestBottomSheet = styled.div`
 		display: flex;
 		flex-direction: column;
 		gap: 40px;
-
-		border: 1px solid red;
 	}
 `;
 

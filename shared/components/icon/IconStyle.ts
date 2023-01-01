@@ -101,6 +101,16 @@ export const StyledIcon = styled.i`
 		background-size: contain;
 	}
 
+	&.arrow-right {
+		background: url("/images/icons/arrow-right.png") no-repeat;
+		background-size: contain;
+	}
+
+	&.back {
+		background: url("/images/icons/back.png") no-repeat;
+		background-size: contain;
+	}
+
 	&.place {
 		display: flex;
 		background: url("/images/icons/place.png") no-repeat;
@@ -187,9 +197,8 @@ export const StyledIcon = styled.i`
 
 	&.calendar {
 		background: url("/images/icons/calendar.png") no-repeat;
-		width: 16px;
 		min-width: 16px;
-		height: 16px;
+		min-height: 16px;
 		background-size: contain;
 	}
 
@@ -229,6 +238,9 @@ export const StyledIcon = styled.i`
 		width: 20px;
 	}
 
+	&.category {
+		background: url("/images/icons/category-smile.png") no-repeat;
+	}
 	&.arrow-up-right {
 		background: url("/images/icons/arrow-up-right.svg") no-repeat;
 		background-size: contain;

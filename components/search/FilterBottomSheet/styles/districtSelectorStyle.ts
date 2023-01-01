@@ -1,18 +1,18 @@
 import styled from "styled-components";
 
 const StyledDistrictSelector = styled.div`
+	padding: 0 20px;
+
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background-color: ${({ theme }) => theme.colors.primary};
+	background-color: ${({ theme }) => theme.colors.background};
 
 	.title {
 		display: flex;
 		width: 100%;
 		justify-content: space-between;
-		position: relative;
-		padding: 0 15px;
 		align-items: center;
 		height: 50px;
 
@@ -20,36 +20,21 @@ const StyledDistrictSelector = styled.div`
 			font-size: 14px;
 			font-weight: bold;
 			text-align: center;
-
-			display: flex;
-			align-items: center;
-			gap: 3px;
-
-			position: absolute;
-			left: 0;
-			right: 0;
-			margin: 0 auto;
-			width: fit-content;
 		}
 
-		i.delete-circle-black {
-			width: 18px;
-			height: 18px;
+		p {
+			font-size: 10px;
+			color: ${({ theme }) => theme.colors.gray};
 		}
-	}
-
-	h6 {
-		font-size: 12px;
 	}
 
 	.districts {
 		display: flex;
 		width: 100%;
-		height: 100%;
+		height: 250px;
 
 		ul {
 			width: 50%;
-			height: 310px;
 			overflow: scroll;
 			background-color: ${({ theme }) => theme.colors.white};
 
@@ -57,6 +42,20 @@ const StyledDistrictSelector = styled.div`
 
 			::-webkit-scrollbar {
 				display: none;
+			}
+
+			&.main {
+				border: 1px solid #c4c4c4;
+				border-right: 0.5px solid #c4c4c4;
+				border-top-left-radius: 5px;
+				border-bottom-left-radius: 5px;
+			}
+
+			&.sub {
+				border: 1px solid #c4c4c4;
+				border-left: 0.5px solid #c4c4c4;
+				border-top-right-radius: 5px;
+				border-bottom-right-radius: 5px;
 			}
 
 			li {
@@ -78,8 +77,8 @@ const StyledDistrictSelector = styled.div`
 		display: flex;
 		flex-direction: column;
 
-		height: 132px;
-		padding: 15px;
+		height: 80px;
+		padding: 10px 0;
 
 		.chips {
 			display: flex;
@@ -95,15 +94,14 @@ const StyledDistrictSelector = styled.div`
 				justify-content: space-between;
 				align-items: center;
 				height: 30px;
-				background-color: ${({ theme }) => theme.colors.white};
+				background-color: ${({ theme }) => theme.colors.primary};
 				width: fit-content;
-				border: 2px solid #000;
 				font-size: 12px;
 				font-weight: bold;
 				border-radius: 30px;
 				gap: 6px;
 				cursor: pointer;
-				padding: 0 10px;
+				padding: 0 15px;
 			}
 		}
 

@@ -69,7 +69,7 @@ function EventNearHere({ biasesId, districts }: Partial<EventType>) {
 										<div className="near_title">
 											<img
 												alt={category}
-												src={`/images/categories/${category}.png`}
+												src={`/images/categories/${category}.svg`}
 											/>
 											<p className="near_place">{place}</p>
 										</div>

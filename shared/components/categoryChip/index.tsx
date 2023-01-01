@@ -1,4 +1,5 @@
 import React from "react";
+import { CATEGORY_DATA } from "../../constants";
 import { StyledCategoryChip } from "./style";
 
 type CategoryChipProps = {
@@ -31,7 +32,7 @@ const CategoryChip = ({
 		opacity={opacity}
 		disabled={disabled}
 	>
-		<p>{CATEGORY_TITLE[type]}</p>
+		<p>{CATEGORY_DATA[type]}</p>
 		<span className="shadow" />
 	</StyledCategoryChip>
 );

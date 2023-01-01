@@ -50,7 +50,7 @@ export const StyledFilter = styled.div`
 	}
 `;
 
-export const ResetModalBtn = styled.div`
+export const ResetButton = styled.div`
 	display: flex;
 	align-items: center;
 	font-size: 10px;

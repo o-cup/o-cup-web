@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
+import { initialCategoryData } from "../constants";
 import { searchFiltersAtom, showResultAtom } from "../state/atoms";
 
 const useClearData = () => {
@@ -13,6 +14,8 @@ const useClearData = () => {
 			bid: null,
 			biasName: "",
 			placeName: "",
+			districts: [],
+			categories: initialCategoryData,
 		}));
 		setShowResult(false);
 	}, [setSearchFilters, setShowResult]);

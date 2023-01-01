@@ -1,7 +1,12 @@
 import { atom } from "recoil";
+import { CATEGORY_DATA } from "../constants";
 import { convertDateToString } from "../utils";
 import { sessionAtom } from "./recoilUtils";
-import type { RegCodeItem, SearchInputOptionType } from "../types";
+import type {
+	CategoryDataType,
+	DistrictType,
+} from "../../components/search/types";
+import type { SearchInputOptionType } from "../types";
 import type { RequestGoodsListType, RequestType } from "../types/request";
 
 const today = new Date();
@@ -59,10 +64,11 @@ export type SearchFiltersAtomType = {
 	biasName: string;
 	placeName: string;
 	date: {
-		startDate: string;
-		endDate: string;
+		startDate: Date | null;
+		endDate: Date | null;
 	};
-	districts: RegCodeItem[];
+	districts: DistrictType[];
+	categories: CategoryDataType[];
 };
 
 export const searchFiltersAtom = atom<SearchFiltersAtomType>({
@@ -73,10 +79,15 @@ export const searchFiltersAtom = atom<SearchFiltersAtomType>({
 		biasName: "",
 		placeName: "",
 		date: {
-			startDate: "",
-			endDate: "",
+			startDate: null,
+			endDate: null,
 		},
 		districts: [],
+		categories: ["A", "B", "C", "D", "E"].map((c) => ({
+			code: c,
+			name: CATEGORY_DATA[c],
+			selected: false,
+		})),
 	},
 	effects: [sessionAtom],
 });

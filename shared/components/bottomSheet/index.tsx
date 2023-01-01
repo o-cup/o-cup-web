@@ -16,6 +16,8 @@ type BottomSheetProps = {
 	slider?: boolean;
 	buttons?: ButtonContent;
 	children: JSX.Element;
+	customHeader?: JSX.Element;
+	customButtons?: JSX.Element;
 };
 
 function BottomSheet({
@@ -26,45 +28,60 @@ function BottomSheet({
 	slider,
 	buttons,
 	children,
+	customHeader,
+	customButtons,
 }: BottomSheetProps) {
-	function onDismiss() {
+	const onDismiss = () => {
 		setOpen(false);
 		return false;
-	}
+	};
+
+	const getHeaderElements = () => {
+		if (customHeader) {
+			return customHeader;
+		}
+
+		return (
+			<div className={`bottom-header ${slider ? "slider" : ""}`}>
+				{header && <p className="title">{header}</p>}
+				{close && (
+					<button
+						type="button"
+						className="close"
+						onClick={() => {
+							setOpen(false);
+						}}
+					>
+						<Icon name="delete-circle-black" />
+					</button>
+				)}
+			</div>
+		);
+	};
+
+	const getButtonElements = () => {
+		if (customButtons) {
+			return customButtons;
+		}
+
+		return buttons ? (
+			<button type="button" onClick={buttons.handleClick}>
+				{buttons.title}
+			</button>
+		) : (
+			""
+		);
+	};
 
 	return (
 		<RBottomSheet
 			open={open}
 			onDismiss={() => onDismiss()}
-			header={
-				<div className={`bottom-header ${slider ? "slider" : ""}`}>
-					{header && <p className="title">{header}</p>}
-					{close && (
-						<button
-							type="button"
-							className="close"
-							onClick={() => {
-								setOpen(false);
-							}}
-						>
-							<Icon name="delete-circle-black" />
-						</button>
-					)}
-				</div>
-			}
-			footer={
-				<div className="bottom-footer">
-					{buttons ? (
-						<button type="button" onClick={buttons.handleClick}>
-							{buttons.title}
-						</button>
-					) : (
-						""
-					)}
-				</div>
-			}
+			header={getHeaderElements()}
+			footer={<div className="bottom-footer">{getButtonElements()}</div>}
 			initialFocusRef={false}
 			snapPoints={({ headerHeight, minHeight }) => [headerHeight + minHeight]}
+			scrollLocking={false}
 		>
 			{children}
 		</RBottomSheet>
@@ -79,6 +96,8 @@ BottomSheet.defaultProps = {
 		title: "",
 		handleClick: null,
 	},
+	customHeader: null,
+	customButtons: null,
 };
 
 export default React.memo(BottomSheet);

@@ -2,7 +2,11 @@ import axios from "axios";
 import { supabase } from "../../supabaseClient";
 import { removeSpace } from "../utils";
 import { isDateRangeOverlaps } from "../utils/dateHandlers";
-import type { RegCodeItem, SearchInputOptionKey } from "../types";
+import type {
+	CategoryDataType,
+	DistrictType,
+} from "../../components/search/types";
+import type { SearchInputOptionKey } from "../types";
 
 export type FetchSearchedEventParams = {
 	searchType: string;
@@ -10,7 +14,8 @@ export type FetchSearchedEventParams = {
 	placeName?: string;
 	date?: { startDate: string; endDate: string };
 	biasId?: number | null;
-	districts?: RegCodeItem[];
+	districts?: DistrictType[];
+	categories: CategoryDataType[];
 	searchInputOptionKey?: SearchInputOptionKey;
 };
 
@@ -20,6 +25,7 @@ export const fetchSearchedEvents = async ({
 	placeName,
 	date,
 	districts,
+	categories,
 }: FetchSearchedEventParams) => {
 	const { data: allEvents } = await supabase
 		.from("place_sort")
@@ -60,27 +66,37 @@ export const fetchSearchedEvents = async ({
 		});
 	}
 
-	if (!districts?.length) return data;
+	if (districts?.length) {
+		const isAllDist =
+			districts?.length === 1 && districts[0].code.slice(-8) === "00000000";
+		if (isAllDist) {
+			const searchedDist = districts?.[0].code;
 
-	const isAllDist =
-		districts?.length === 1 && districts[0].code.slice(-8) === "00000000";
-	if (isAllDist) {
-		const searchedDist = districts?.[0].code;
+			data = data?.filter((event) => {
+				const distCode = event.districts.code.substring(0, 2);
+				return searchedDist.includes(distCode);
+			});
+
+			return data;
+		}
+
+		const codes = districts.map((dist) => dist.code.substring(0, 4));
 
 		data = data?.filter((event) => {
-			const distCode = event.districts.code.substring(0, 2);
-			return searchedDist.includes(distCode);
+			const distCode = event.districts.code.substring(0, 4);
+			return codes.includes(distCode);
 		});
-
-		return data;
 	}
 
-	const codes = districts.map((dist) => dist.code.substring(0, 4));
+	const selectedCategoryCodes = categories
+		.filter((c) => c.selected)
+		.map((c) => c.code);
 
-	data = data?.filter((event) => {
-		const distCode = event.districts.code.substring(0, 4);
-		return codes.includes(distCode);
-	});
+	if (selectedCategoryCodes.length) {
+		data = data?.filter((event) =>
+			selectedCategoryCodes.includes(event.category)
+		);
+	}
 
 	return data;
 };

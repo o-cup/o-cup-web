@@ -126,6 +126,7 @@ const Result = () => {
 								type: "date",
 							})
 						}
+						bgColor="white"
 					/>
 				)}
 
@@ -139,6 +140,7 @@ const Result = () => {
 								code: district.code,
 							})
 						}
+						bgColor="white"
 					/>
 				))}
 
@@ -152,6 +154,7 @@ const Result = () => {
 								code: category.code,
 							})
 						}
+						bgColor="white"
 					/>
 				))}
 			</div>

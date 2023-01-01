@@ -35,7 +35,7 @@ const Result = () => {
 			categories: initialCategoryData,
 		});
 
-	const { isLoading, events } = useSearchResult({
+	const { isLoading, events, endedEvents } = useSearchResult({
 		sortOption,
 	});
 
@@ -157,7 +157,7 @@ const Result = () => {
 			</div>
 
 			<ul className="events">
-				{events?.map((event) => (
+				{[...events, ...endedEvents]?.map((event) => (
 					<Event key={event.id} event={event} />
 				))}
 			</ul>

@@ -25,6 +25,8 @@ export const StyledChip = styled.span.attrs(
 	align-items: center;
 	white-space: nowrap;
 
+	background-color: ${({ theme, bgColor }) => theme.colors[bgColor]};
+
 	i.delete {
 		width: 14px;
 		height: 14px;

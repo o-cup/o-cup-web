@@ -8,10 +8,10 @@ import {
 	isOpenToday,
 } from "../../shared/utils";
 import { StyledEvent } from "./styles/eventStyle";
-import type { EventType } from "../../shared/types";
+import type { ResultType } from "./hooks/useSearchResult";
 
 type EventProps = {
-	event: Partial<EventType> & { image: string };
+	event: ResultType;
 };
 
 const Event = ({ event }: EventProps) => {

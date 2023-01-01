@@ -34,13 +34,11 @@ const Filter = ({
 
 	const getDiscription = () => {
 		let description = "미선택";
-
 		const isAll = text.split(",").length === 5;
 
 		if (type === "category" && isAll) {
 			description = isAll ? "전체" : text;
 		}
-
 		return text || description;
 	};
 

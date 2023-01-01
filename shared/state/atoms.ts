@@ -79,8 +79,8 @@ export const searchFiltersAtom = atom<SearchFiltersAtomType>({
 		biasName: "",
 		placeName: "",
 		date: {
-			startDate: new Date(),
-			endDate: new Date(),
+			startDate: null,
+			endDate: null,
 		},
 		districts: [],
 		categories: ["A", "B", "C", "D", "E"].map((c) => ({

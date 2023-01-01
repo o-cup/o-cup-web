@@ -1,5 +1,6 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
+import styled from "styled-components";
 import { DEFAULT_POSTER_URL } from "../../shared/constants";
 import {
 	requestGoodsListAtom,
@@ -10,7 +11,10 @@ import DetailMainInfo from "../detail/DetailMainInfo";
 import GoodsInfo from "../detail/GoodsInfo";
 import TwitterInfo from "../detail/TwitterInfo";
 import Location from "../detail/location";
+import { StyledDetail } from "../detail/styles";
 import { getGoodsObj } from "./requestApi";
+
+const StyledPreview = styled(StyledDetail)``;
 
 const PreviewContent = () => {
 	const requestInputs = useRecoilValue(requestInputsAtom);
@@ -21,7 +25,7 @@ const PreviewContent = () => {
 		requestInputs;
 
 	return (
-		<div className="previewContent">
+		<StyledPreview>
 			<DetailMainInfo
 				data={{
 					place: place.place || "카페이름",
@@ -42,18 +46,20 @@ const PreviewContent = () => {
 				}}
 				posterPopupDisabled
 			/>
-			<TwitterInfo
-				data={{
-					snsId: snsId || "ocup_official",
-					hashTags: hashTags[0].text ? hashTags.map((h) => h.text) : [""],
-				}}
-			/>
-			<GoodsInfo
-				goods={getGoodsObj(requestInputs, goodsList)}
-				tweetUrl={link}
-			/>
-			<Location address={place.address} />
-		</div>
+			<div className="subInfo">
+				<TwitterInfo
+					data={{
+						snsId: snsId || "ocup_official",
+						hashTags: hashTags[0].text ? hashTags.map((h) => h.text) : [""],
+					}}
+				/>
+				<GoodsInfo
+					goods={getGoodsObj(requestInputs, goodsList)}
+					tweetUrl={link}
+				/>
+				<Location address={place.address} />
+			</div>
+		</StyledPreview>
 	);
 };
 

@@ -58,6 +58,8 @@ const StyledDetailTextContainer = styled.div`
 			align-items: center;
 
 			i {
+				width: 16px;
+				height: 16px;
 				margin-right: 8px;
 			}
 

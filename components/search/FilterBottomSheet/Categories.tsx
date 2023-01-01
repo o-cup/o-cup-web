@@ -31,7 +31,7 @@ const Categories = ({
 				{selectedCategories.map((c: CategoryDataType) => {
 					const imgSrc = `/images/categories/${
 						c.selected ? `${c.code}` : `${c.code}_disabled`
-					}.png`;
+					}.svg`;
 
 					return (
 						<p key={c.code} className={c.selected ? "selected" : ""}>

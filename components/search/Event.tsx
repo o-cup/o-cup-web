@@ -44,7 +44,7 @@ const Event = ({ event }: EventProps) => {
 					<img
 						className="category_icon"
 						alt={category}
-						src={`/images/categories/${fileName}.png`}
+						src={`/images/categories/${fileName}.svg`}
 					/>
 				</div>
 

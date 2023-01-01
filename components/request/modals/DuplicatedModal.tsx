@@ -31,7 +31,7 @@ const Event = ({
 			<div>
 				<div className="title">
 					<h2>{place}</h2>
-					<img alt={category} src={`/images/categories/${category}.png`} />
+					<img alt={category} src={`/images/categories/${category}.svg`} />
 				</div>
 
 				<div className="biases">

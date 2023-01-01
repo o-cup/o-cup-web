@@ -81,6 +81,7 @@ function BottomSheet({
 			footer={<div className="bottom-footer">{getButtonElements()}</div>}
 			initialFocusRef={false}
 			snapPoints={({ headerHeight, minHeight }) => [headerHeight + minHeight]}
+			scrollLocking={false}
 		>
 			{children}
 		</RBottomSheet>

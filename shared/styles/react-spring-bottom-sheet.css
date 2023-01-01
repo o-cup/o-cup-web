@@ -162,6 +162,7 @@
   pointer-events: none;
 }
 
+/* [data-body-scroll-lock-ignore="true"] */
 
 /** custom */
 .bottom-header {

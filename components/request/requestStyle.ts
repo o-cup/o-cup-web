@@ -12,8 +12,8 @@ const StyledCheckEvent = styled.div`
 	align-items: center;
 	width: 100%;
 	max-width: 480px;
-	gap: 64px;
-	padding: 32px 20px;
+	gap: 32px;
+	padding: 0 20px;
 	margin: 0 auto;
 
 	> div.checkNotice {
@@ -21,7 +21,8 @@ const StyledCheckEvent = styled.div`
 		flex-direction: column;
 		align-items: center;
 		gap: 12px;
-		padding: 12px;
+		padding: 40px 0;
+		width: 100%;
 
 		> img {
 			width: 24px;
@@ -33,7 +34,7 @@ const StyledCheckEvent = styled.div`
 			font-size: 14px;
 			line-height: 19px;
 			text-align: center;
-			color: #000000;
+			color: #000;
 		}
 	}
 
@@ -68,21 +69,17 @@ const StyledCheckEvent = styled.div`
 `;
 
 const StyledEntry = styled.div`
-	//width: 50%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 30px;
+	gap: 32px;
 	padding: 32px 20px;
-
-	//@media ${({ theme }) => theme.device.mobile} {
 	width: 100%;
-	//}
 
 	.inputsWrapper {
 		display: flex;
 		flex-direction: column;
-		gap: 30px;
+		gap: 32px;
 		width: 100%;
 	}
 
@@ -91,12 +88,6 @@ const StyledEntry = styled.div`
 		width: 100%;
 		gap: 20px;
 		margin-top: 30px;
-
-		/* @media ${({ theme }) => theme.device.desktop} {
-			> button:first-child {
-				display: none;
-			}
-		} */
 	}
 `;
 
@@ -118,6 +109,8 @@ const StyledPreview = styled.div`
 	display: none;
 	//}
 
+	border: 1px solid red;
+
 	.previewContent {
 		width: 100%;
 	}
@@ -132,6 +125,8 @@ const StyledRequestBottomSheet = styled.div`
 		display: flex;
 		flex-direction: column;
 		gap: 40px;
+
+		border: 1px solid red;
 	}
 `;
 

@@ -7,7 +7,7 @@ const theme: DefaultTheme = {
 	},
 	colors: {
 		primary: "#f9f368",
-		softPrimary: "rgba(249, 243, 104, 0.3)",
+		softPrimary: "rgba(249, 243, 104, 0.5)",
 		background: "#fcfbf7",
 		white: "#fff",
 		black: "#000",

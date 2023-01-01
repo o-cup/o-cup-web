@@ -132,7 +132,7 @@ const Header = ({ page, share, handleBackClick, description }: HeaderProps) => {
 			<StyledHeader mainPage={mainPage}>
 				<div id="header">
 					{page !== "main" ? (
-						<Icon name="arrow-left" handleClick={handleBackClick || goBack} />
+						<Icon name="back" handleClick={handleBackClick || goBack} />
 					) : (
 						<Icon name="logo" handleClick={handleLogoClick} />
 					)}

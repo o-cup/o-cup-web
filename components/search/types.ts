@@ -7,14 +7,57 @@ export type SearchModalProps = {
 	setDisctrictSelectorOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-export type RegCodeItem = {
+export type DistrictType = {
+	name: string;
+	code: string;
+	selected: boolean;
+};
+
+export type DivisionType = {
 	code: string;
 	name: string;
-	selected?: boolean;
+	selected: boolean;
+	districts: DistrictType[];
+};
+
+export type SelectedDistrictType = {
+	code: string;
+	name: string;
+};
+
+export type CategoryDataType = {
+	code: string;
+	name: string;
+	selected: boolean;
 };
 
 export type AutoCompleteDataType = {
 	text: string;
 } & PeopleType;
+
+export type FiltersType = {
+	[key: string]: {
+		icon: string;
+		name: string;
+	};
+};
+
+export type CategoryType = "A" | "B" | "C" | "D" | "E";
+
+export type TempSearchFiltersType = {
+	date: {
+		startDate: Date | null;
+		endDate: Date | null;
+	};
+	districts: DistrictType[];
+	categories: CategoryDataType[];
+};
+
+export type FilterBottomSheetProps = {
+	isOpen: boolean;
+	setIsOpen: Dispatch<SetStateAction<boolean>>;
+	tempSearchFilters: TempSearchFiltersType;
+	setTempSearchFilters: Dispatch<SetStateAction<TempSearchFiltersType>>;
+};
 
 export default {};

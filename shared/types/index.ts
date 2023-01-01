@@ -106,10 +106,4 @@ export type SearchModalProps = {
 	setDisctrictSelectorOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-export type RegCodeItem = {
-	code: string;
-	name: string;
-	selected?: boolean;
-};
-
 export default {};

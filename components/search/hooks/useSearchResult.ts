@@ -71,13 +71,8 @@ const useSearchResult = ({ sortOption }: useSearchResultProps) => {
 	const unavailables = result?.filter((el) => el.isEnd);
 
 	useEffect(() => {
-		if (availables?.length) {
-			setEvents(availables);
-		}
-
-		if (unavailables?.length) {
-			setEndedEvents(unavailables);
-		}
+		setEvents(availables?.length ? availables : []);
+		setEndedEvents(unavailables?.length ? unavailables : []);
 	}, [result]);
 
 	useEffect(() => {

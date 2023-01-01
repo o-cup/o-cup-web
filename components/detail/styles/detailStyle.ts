@@ -14,21 +14,6 @@ const StyledDetail = styled.div`
 		padding: 20px 20px 0 20px;
 	}
 
-	/* div.mainInfo,
-		div.subInfo {
-			width: 100%;
-			max-width: 720px;
-		} */
-
-	/* @media ${({ theme }) => theme.device.desktop} {
-			flex-direction: row;
-
-			div.mainInfo,
-			div.subInfo {
-				width: 50%;
-			}
-		} */
-
 	.subInfo {
 		display: flex;
 		flex-direction: column;

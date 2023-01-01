@@ -2,13 +2,13 @@ import { useRouter } from "next/router";
 import React, { memo, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { Button, Chip, Icon, Loading, SortIcon } from "../../shared/components";
+import { initialCategoryData } from "../../shared/constants";
 import { searchFiltersAtom } from "../../shared/state";
 import { getDateRangeText } from "../../shared/utils/dateHandlers";
 import Event from "./Event";
 import FilterBottomSheet from "./FilterBottomSheet";
 import useSearchResult from "./hooks/useSearchResult";
 import { StyledResult } from "./styles/resultStyle";
-import { initialCategoryData } from "./utils";
 import type { ResultSortOptionKeys } from "../../shared/types";
 import type { TempSearchFiltersType } from "./types";
 

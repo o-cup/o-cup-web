@@ -18,4 +18,10 @@ export const CATEGORY_DATA = {
 	E: "기타",
 } as Record<string, string>;
 
+export const initialCategoryData = ["A", "B", "C", "D", "E"].map((c) => ({
+	code: c,
+	name: CATEGORY_DATA[c],
+	selected: false,
+}));
+
 export default {};

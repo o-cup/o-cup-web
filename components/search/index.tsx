@@ -9,6 +9,7 @@ import {
 	Loading,
 	SortIcon,
 } from "../../shared/components";
+import { initialCategoryData } from "../../shared/constants";
 import { searchFiltersAtom, showResultAtom } from "../../shared/state";
 import { getBirthMonth } from "../../shared/utils";
 import MonthSelector from "./MonthSelector";
@@ -101,7 +102,7 @@ const Search = () => {
 					endDate: null,
 				},
 				districts: [],
-				categories: [],
+				categories: initialCategoryData,
 			}));
 
 			setShowResult(false);

@@ -109,13 +109,11 @@ const Header = ({ page, share, handleBackClick, description }: HeaderProps) => {
 	};
 
 	const goBack = () => {
-		router.back();
-
-		// if (window.history.state && window.history.state?.idx > 0) {
-		// 	router.back();
-		// } else {
-		// 	router.push("/");
-		// }
+		if (window.history.state && window.history.state?.idx > 0) {
+			router.back();
+		} else {
+			router.push("/");
+		}
 	};
 
 	const renderTooltip = () => {

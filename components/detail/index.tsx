@@ -1,6 +1,9 @@
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
+import { useRecoilValue } from "recoil";
 import { updateViews } from "../../shared/apis/common";
 import { Layout } from "../../shared/components";
+import { searchFiltersAtom } from "../../shared/state";
 import DetailMainInfo from "./DetailMainInfo";
 import EventNearHere from "./EventNearHere";
 import GoodsInfo from "./GoodsInfo";
@@ -14,6 +17,9 @@ type DetailProps = {
 };
 
 const Detail = ({ data }: DetailProps) => {
+	const router = useRouter();
+	const searchFilters = useRecoilValue(searchFiltersAtom);
+
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
@@ -27,8 +33,17 @@ const Detail = ({ data }: DetailProps) => {
 		}
 	}, []);
 
+	const handleBackClick = () => {
+		const { bid, placeName } = searchFilters;
+		if (!bid && !placeName) {
+			router.push("/");
+			return;
+		}
+		router.back();
+	};
+
 	return (
-		<Layout page="detail" share>
+		<Layout page="detail" share handleBackClick={handleBackClick}>
 			<StyledDetail>
 				<div className="detailInfo">
 					<div className="mainInfo">

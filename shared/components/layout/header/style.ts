@@ -44,9 +44,10 @@ export const StyledHeader = styled.header<{ mainPage: boolean }>`
 			gap: 18px;
 		}
 
-		i.search_header {
-			width: 20px;
-			height: 20px;
+		img.search {
+			width: 24px;
+			height: 24px;
+			cursor: pointer;
 		}
 	}
 `;

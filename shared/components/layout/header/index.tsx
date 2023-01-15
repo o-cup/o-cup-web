@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -140,10 +141,13 @@ const Header = ({ page, share, handleBackClick, description }: HeaderProps) => {
 							/>
 						)}
 						{(mainPage || page === "detail") && (
-							<Icon
-								name="search_header"
-								handleClick={() => router.push("/search")}
-							/>
+							<Link href="/search">
+								<img
+									src="/images/icons/search.png"
+									alt="search"
+									className="search"
+								/>
+							</Link>
 						)}
 						{share && (
 							<Share>

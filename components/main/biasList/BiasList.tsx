@@ -1,5 +1,5 @@
 import React from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useRecoilValue } from "recoil";
 import { FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,6 +14,7 @@ import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
 
 const BiasList = () => {
+	const queryClient = useQueryClient();
 	const openedBias = useRecoilValue(openedBiasAtom);
 	const dateFilter = useRecoilValue(dateFilterAtom);
 
@@ -34,6 +35,7 @@ const BiasList = () => {
 
 				return [...birthdayPeople, ...biases];
 			},
+			initialData: queryClient.getQueryData("people"),
 		}
 	);
 

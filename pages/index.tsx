@@ -1,6 +1,8 @@
 import Head from "next/head";
 import React from "react";
+import { dehydrate, QueryClient } from "react-query";
 import Main from "../components/main";
+import { fetchEvents, fetchPeople } from "../shared/apis/common";
 import {
 	DEFAULT_DESCRIPTION,
 	DEFAULT_TITLE,
@@ -34,5 +36,17 @@ const Index = () => (
 		<Main />
 	</>
 );
+
+export const getServerSideProps = async () => {
+	const queryClient = new QueryClient();
+	await queryClient.prefetchQuery("people", () => fetchPeople());
+	await queryClient.prefetchQuery("events", () => fetchEvents({}));
+
+	return {
+		props: {
+			dehydrateState: dehydrate(queryClient),
+		},
+	};
+};
 
 export default Index;

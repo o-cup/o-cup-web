@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { fetchEvents, fetchPeople } from "../../shared/apis/common";
 import { Loading } from "../../shared/components";
@@ -9,6 +9,7 @@ import EventList from "./EventList";
 import { StyledMainEventSection } from "./styles/mainEventListStyles";
 
 const EventSection = () => {
+	const queryClient = useQueryClient();
 	const dateFilter = useRecoilValue(dateFilterAtom);
 	const [openedBias, setOpenedBias] = useRecoilState(openedBiasAtom);
 
@@ -20,6 +21,7 @@ const EventSection = () => {
 			}),
 		{
 			select: (data) => data?.map((e) => ({ ...e, image: e.images[0] })),
+			initialData: queryClient.getQueryData("events"),
 		}
 	);
 

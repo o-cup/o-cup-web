@@ -1,7 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Icon from "../../shared/components/icon";
-import { convertDateWithDots, imageOnErrorHandler } from "../../shared/utils";
+import { convertDateWithDots } from "../../shared/utils";
 import {
 	StyledMainListItem,
 	StyledCategoryBorder,
@@ -16,16 +17,23 @@ const EventListItem = ({ event }: EventListItemProps) => {
 	const { id, place, image, category, snsId, districts, startAt, endAt } =
 		event;
 
+	if (!image) return null;
+
 	return (
 		<Link href={`/detail/${id}`}>
 			<StyledMainListItem>
 				<StyledCategoryBorder type={category} />
 				<div className="imgContainer">
-					<img alt={image} src={image} onError={imageOnErrorHandler} />
+					<Image
+						src={image}
+						alt="poster"
+						width={176}
+						height={235}
+						layout="intrinsic"
+					/>
 				</div>
 				<div className="title">
 					<p>{place}</p>
-					{/* <BiasChip id={biasesId[0]} key={biasesId[0]} dots={biasesId.length > 1} /> */}
 				</div>
 				<ul className="textContainer">
 					<li>

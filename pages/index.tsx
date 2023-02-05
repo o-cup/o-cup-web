@@ -37,7 +37,7 @@ const Index = () => (
 	</>
 );
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
 	const queryClient = new QueryClient();
 	await queryClient.prefetchQuery("people", () => fetchPeople());
 	await queryClient.prefetchQuery("events", () => fetchEvents({}));

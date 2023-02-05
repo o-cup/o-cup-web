@@ -22,7 +22,10 @@ const EmptyDefault = ({ size = "default" }: EmptyType) => {
 					<img src="/images/main_none.png" alt="empty" />
 				</div>
 			)}
-			<Button customStyle={{ width: "280px", fontWeight: "bold" }} handleClick={() => router.push("/request")}>
+			<Button
+				customStyle={{ width: "280px", fontWeight: "bold" }}
+				handleClick={() => router.push("/request")}
+			>
 				이벤트 등록하기
 			</Button>
 		</StyledEmptyMain>

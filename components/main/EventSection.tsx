@@ -78,7 +78,11 @@ const EventSection = () => {
 					/>
 				))}
 			</StyledMainEventSection>
-			<EmptyDefault size={events && events.length > 0 ? "small" : "default"} />
+			{openedPeople?.length ? (
+				<EmptyDefault
+					size={events && events.length > 0 ? "small" : "default"}
+				/>
+			) : null}
 		</>
 	);
 };

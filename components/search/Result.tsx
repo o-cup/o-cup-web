@@ -5,8 +5,8 @@ import { Button, Chip, Icon, Loading, SortIcon } from "../../shared/components";
 import { initialCategoryData } from "../../shared/constants";
 import { searchFiltersAtom } from "../../shared/state";
 import { getDateRangeText } from "../../shared/utils/dateHandlers";
-import Event from "./Event";
 import FilterBottomSheet from "./FilterBottomSheet";
+import ResultEventItem from "./ResultEventItem";
 import useSearchResult from "./hooks/useSearchResult";
 import { StyledResult } from "./styles/resultStyle";
 import type { ResultSortOptionKeys } from "../../shared/types";
@@ -161,7 +161,7 @@ const Result = () => {
 
 			<ul className="events">
 				{[...events, ...endedEvents]?.map((event) => (
-					<Event key={event.id} event={event} />
+					<ResultEventItem key={event.id} event={event} />
 				))}
 			</ul>
 

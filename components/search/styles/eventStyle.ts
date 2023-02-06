@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledEvent = styled.li<{ isEnd: boolean }>`
+export const StyledResultEventItem = styled.li<{ isEnd: boolean }>`
 	display: flex;
 	gap: 20px;
 
@@ -91,9 +91,14 @@ export const StyledEvent = styled.li<{ isEnd: boolean }>`
 			}
 		}
 
-		.biases {
+		.biasChips {
 			display: flex;
 			gap: 5px;
+			overflow-x: scroll;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
 		}
 
 		ul.extraInfo {

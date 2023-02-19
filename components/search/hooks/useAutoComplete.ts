@@ -25,6 +25,7 @@ const useAutoComplete = ({
 				const filteredByKeyword = data?.filter((bd) => {
 					if (
 						bd.name.includes(keyword) ||
+						bd.name.includes(keyword.toUpperCase()) ||
 						bd.enName?.includes(keyword) ||
 						bd.koName?.includes(keyword) ||
 						bd.realName?.includes(keyword)

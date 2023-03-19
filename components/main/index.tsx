@@ -1,5 +1,6 @@
 import React from "react";
 import { useRecoilState } from "recoil";
+import KaKaoAdFit from "../../shared/components/KaKaoAdFit";
 import Icons from "../../shared/components/icon";
 import Layout from "../../shared/components/layout";
 import { useClearData } from "../../shared/hooks";
@@ -44,6 +45,7 @@ const Main = () => {
 					/>
 				</div>
 				<BiasList />
+				<KaKaoAdFit />
 				<EventSection />
 			</StyledMain>
 		</Layout>

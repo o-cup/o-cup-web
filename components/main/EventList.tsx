@@ -68,7 +68,6 @@ const EventList = ({ id, bias, events }: BiasEventListProps) => {
 
 	return (
 		<StyledMainEventList id={id}>
-			<KaKaoAdFit />
 			<div className="title">
 				<p>{getEventTitle()}</p>
 				<span>({events.length}건)</span>

@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 import { FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CategoryChip } from "../../shared/components";
+import KaKaoAdFit from "../../shared/components/KaKaoAdFit";
 import { dateFilterAtom } from "../../shared/state";
 import {
 	convertDateToString,
@@ -67,6 +68,7 @@ const EventList = ({ id, bias, events }: BiasEventListProps) => {
 
 	return (
 		<StyledMainEventList id={id}>
+			<KaKaoAdFit />
 			<div className="title">
 				<p>{getEventTitle()}</p>
 				<span>({events.length}건)</span>

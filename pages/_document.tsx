@@ -90,14 +90,6 @@ class MyDocument extends Document {
 					/>
 				</Head>
 				<body>
-					<ins
-						className="kakao_ad_area"
-						style={{ display: "none" }}
-						data-ad-unit="DAN-eloyaCOUNzkG0TLf" // AdFit에서 발급 받은 광고단위코드 값
-						data-ad-width="320" // 광고단위 가로 사이즈
-						data-ad-height="100" // 광고단위 세로 사이즈
-					/>
-
 					<script
 						async
 						type="text/javascript"

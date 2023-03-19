@@ -4,6 +4,7 @@ export const StyledMainEventSection = styled.section`
 	display: flex;
 	flex-direction: column;
 	gap: 36px;
+	padding-top: 15px;
 `;
 
 export const StyledMainEventList = styled.div`

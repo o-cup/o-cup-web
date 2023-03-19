@@ -4,7 +4,7 @@ export const StyledBiasSwiper = styled.div`
 	display: flex;
 	width: 100%;
 	height: 112px;
-	margin-bottom: 14px;
+	margin-bottom: 6px;
 
 	.biasSwiper,
 	.swiper-wrapper {

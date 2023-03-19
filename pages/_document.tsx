@@ -82,8 +82,27 @@ class MyDocument extends Document {
 						}}
 						src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
 					/>
+
+					<script
+						async
+						type="text/javascript"
+						src="//t1.daumcdn.net/kas/static/ba.min.js"
+					/>
 				</Head>
 				<body>
+					<ins
+						className="kakao_ad_area"
+						style={{ display: "none" }}
+						data-ad-unit="DAN-eloyaCOUNzkG0TLf" // AdFit에서 발급 받은 광고단위코드 값
+						data-ad-width="320" // 광고단위 가로 사이즈
+						data-ad-height="100" // 광고단위 세로 사이즈
+					/>
+
+					<script
+						async
+						type="text/javascript"
+						src="//t1.daumcdn.net/kas/static/ba.min.js"
+					/>
 					<Main />
 					<NextScript />
 				</body>

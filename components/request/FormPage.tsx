@@ -130,14 +130,6 @@ const FormPage = ({
 								/>
 							</StyledPlaceInput>
 							<ArtistInputContainer />
-							{/* <BasicInput
-								label="주최자 닉네임 *"
-								value={organizer}
-								id="organizer"
-								placeholder="오늘의 컵홀더"
-								handleInputChange={(e) => handleInputChange(e, "organizer")}
-								handleInputDelete={(e) => handleInputDelete(e, "organizer")}
-							/> */}
 							<BasicInput
 								label="주최자 트위터 계정"
 								value={snsId}

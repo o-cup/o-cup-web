@@ -79,7 +79,7 @@ const StyledEntry = styled.div`
 	.inputsWrapper {
 		display: flex;
 		flex-direction: column;
-		gap: 32px;
+		gap: 48px;
 		width: 100%;
 	}
 

@@ -83,6 +83,11 @@ const GoodsInputContainer = () => {
 					<button type="button" onClick={handleClickAddGoodsTitle}>
 						다른 특전 추가하기
 					</button>
+					<p className="warning">
+						특전 정보 미입력 시, 이벤트 승인이 불가합니다.
+						<br />
+						특전이 없는 이벤트의 경우에만 해당 부분을 공란으로 남겨두세요.
+					</p>
 				</>
 			)}
 		</StyledGoodsContainer>

@@ -19,12 +19,21 @@ const StyledGoodsContainer = styled.div`
 		border-radius: 70px;
 		box-shadow: 0 4px 0 #000000;
 		font-weight: 500;
-		font-size: 12px;
-		line-height: 16px;
-		padding: 10px 16px;
+		font-size: 14px;
+		line-height: 19px;
+		padding: 12px;
+		width: 100%;
 		display: inline-block;
-		margin-left: auto;
 		margin-top: -16px;
+	}
+
+	> p.warning {
+		font-style: normal;
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 18px;
+		color: #7a7a7a;
+		margin-top: 16px;
 	}
 `;
 

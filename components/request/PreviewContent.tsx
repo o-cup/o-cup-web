@@ -7,11 +7,11 @@ import {
 	requestInputsAtom,
 	tempPostersAtom,
 } from "../../shared/state";
-import DetailMainInfo from "../detail/DetailMainInfo";
-import GoodsInfo from "../detail/GoodsInfo";
-import TwitterInfo from "../detail/TwitterInfo";
-import Location from "../detail/location";
 import { StyledDetail } from "../detail/styles";
+import PreviewDetailMainInfo from "./PreviewDetailMainInfo";
+import PreviewGoodsInfo from "./PreviewGoodsInfo";
+import PreviewLocation from "./PreviewLocation";
+import PreviewTwitterInfo from "./PreviewTwitterInfo";
 import { getGoodsObj } from "./requestApi";
 
 const StyledPreview = styled(StyledDetail)``;
@@ -26,7 +26,7 @@ const PreviewContent = () => {
 
 	return (
 		<StyledPreview>
-			<DetailMainInfo
+			<PreviewDetailMainInfo
 				data={{
 					place: place.place || "카페이름",
 					category: category || undefined,
@@ -47,17 +47,17 @@ const PreviewContent = () => {
 				posterPopupDisabled
 			/>
 			<div className="subInfo">
-				<TwitterInfo
+				<PreviewTwitterInfo
 					data={{
 						snsId: snsId || "ocup_official",
 						hashTags: hashTags[0].text ? hashTags.map((h) => h.text) : [""],
 					}}
 				/>
-				<GoodsInfo
+				<PreviewGoodsInfo
 					goods={getGoodsObj(requestInputs, goodsList)}
 					tweetUrl={link}
 				/>
-				<Location address={place.address} />
+				<PreviewLocation address={place.address} />
 			</div>
 		</StyledPreview>
 	);

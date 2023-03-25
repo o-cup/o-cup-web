@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useQueryClient } from "react-query";
 import { BiasChip, Icon } from "../../shared/components";
 import { StyledBiasChip } from "../../shared/components/biasChip/biasChipStyle";
 import {
@@ -8,20 +7,21 @@ import {
 	isOpenToday,
 	imageOnErrorHandler,
 } from "../../shared/utils";
-import PosterView from "./PosterView";
+import PosterView from "../detail/PosterView";
 import {
-	StyledDetailImgContainer,
-	StyledDetailTextContainer,
-	StyledDetailMainInfo,
 	StyledDetailCategory,
-} from "./styles/detailMainInfoStyle";
+	StyledDetailImgContainer,
+	StyledDetailMainInfo,
+	StyledDetailTextContainer,
+} from "../detail/styles/detailMainInfoStyle";
 import type { EventType } from "../../shared/types";
 
-const DetailMainInfo = () => {
-	const queryClient = useQueryClient();
-	const [isPosterViewOpen, setPosterViewOpen] = useState(false);
+type EventMainProps = {
+	data: Partial<EventType>;
+	posterPopupDisabled?: boolean;
+};
 
-	const data = queryClient.getQueryData(["detail"]) as EventType;
+const DetailMainInfo = ({ data, posterPopupDisabled }: EventMainProps) => {
 	const {
 		place,
 		category,
@@ -34,8 +34,11 @@ const DetailMainInfo = () => {
 		requestedBiases,
 	} = data;
 
-	if (!startAt || !endAt) return null;
+	const [isPosterViewOpen, setPosterViewOpen] = useState(false);
+
 	const today = convertDateToString(new Date());
+
+	if (!startAt || !endAt) return null;
 	const isDuringEvent = isOpenToday(today, startAt, endAt);
 
 	return (
@@ -94,7 +97,7 @@ const DetailMainInfo = () => {
 				</StyledDetailImgContainer>
 			)}
 
-			{isPosterViewOpen && images && (
+			{!posterPopupDisabled && isPosterViewOpen && images && (
 				<PosterView images={images} setPosterViewOpen={setPosterViewOpen} />
 			)}
 		</StyledDetailMainInfo>

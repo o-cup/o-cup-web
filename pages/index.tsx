@@ -42,10 +42,12 @@ export const getStaticProps = async () => {
 	await queryClient.prefetchQuery("people", () => fetchPeople());
 	await queryClient.prefetchQuery("events", () => fetchEvents({}));
 
+	const dehydratedState = JSON.parse(JSON.stringify(dehydrate(queryClient)));
+
 	return {
 		props: {
-			dehydrateState: dehydrate(queryClient),
-			revalidate: 60,
+			dehydratedState,
+			revalidate: 1000 * 60 * 60, // 1 hour
 		},
 	};
 };

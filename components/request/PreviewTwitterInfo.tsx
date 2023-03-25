@@ -1,15 +1,13 @@
 import React from "react";
-import { useQueryClient } from "react-query";
-import { StyledTwitterInfo } from "./styles/twitterInfoStyle";
+import { StyledTwitterInfo } from "../detail/styles/twitterInfoStyle";
 import type { EventType } from "../../shared/types";
 
-function TwitterInfo() {
-	const queryClient = useQueryClient();
+type TwitterInfoProps = {
+	data: Partial<EventType>;
+};
 
-	const { snsId, hashTags, tweetUrl } = queryClient.getQueryData([
-		"detail",
-	]) as EventType;
-
+function PreviewTwitterInfo({ data }: TwitterInfoProps) {
+	const { snsId, hashTags, tweetUrl } = data;
 	return (
 		<StyledTwitterInfo>
 			<div className="account">
@@ -28,4 +26,4 @@ function TwitterInfo() {
 	);
 }
 
-export default TwitterInfo;
+export default PreviewTwitterInfo;

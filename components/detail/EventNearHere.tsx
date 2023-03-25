@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { fetchEvents } from "../../shared/apis/common";
@@ -14,12 +14,16 @@ import type { EventType } from "../../shared/types";
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
 
-function EventNearHere({ biasesId, districts }: Partial<EventType>) {
+function EventNearHere() {
 	const router = useRouter();
 	const { eid } = router.query;
 
-	const { data: nearEvent } = useQuery(["event", eid], fetchEvents, {
-		enabled: !!eid,
+	const queryClient = useQueryClient();
+	const { biasesId, districts } = queryClient.getQueryData([
+		"detail",
+	]) as EventType;
+
+	const { data: nearEvent } = useQuery(["event"], fetchEvents, {
 		select: (data) =>
 			data?.filter((item) => {
 				if (biasesId && biasesId[0]) {

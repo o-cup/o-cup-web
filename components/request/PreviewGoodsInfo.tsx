@@ -1,16 +1,12 @@
 import React from "react";
-import { useQueryClient } from "react-query";
-import ExtraGoodsListItem from "./goodsItems/ExtraGoodsListItem";
-import FcfsGoodsListItem from "./goodsItems/FcfsGoodsListItem";
-import GoodsListItem from "./goodsItems/GoodsListItem";
-import LuckyGoodsListItem from "./goodsItems/LuckyGoodsListItem";
-import { StyledGoodsInfo } from "./styles/goodsInfoStyle";
+import ExtraGoodsListItem from "../detail/goodsItems/ExtraGoodsListItem";
+import FcfsGoodsListItem from "../detail/goodsItems/FcfsGoodsListItem";
+import GoodsListItem from "../detail/goodsItems/GoodsListItem";
+import LuckyGoodsListItem from "../detail/goodsItems/LuckyGoodsListItem";
+import { StyledGoodsInfo } from "../detail/styles/goodsInfoStyle";
 import type { EventType } from "../../shared/types";
 
-const GoodsInfo = () => {
-	const queryClient = useQueryClient();
-	const { goods } = queryClient.getQueryData(["detail"]) as EventType;
-
+function PreviewGoodsInfo({ goods }: Partial<EventType>) {
 	const hasGoods = () => {
 		let result = false;
 		if (goods) {
@@ -59,6 +55,6 @@ const GoodsInfo = () => {
 			</p>
 		</StyledGoodsInfo>
 	);
-};
+}
 
-export default GoodsInfo;
+export default PreviewGoodsInfo;

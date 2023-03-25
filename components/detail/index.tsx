@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
+import { useQueryClient } from "react-query";
 import { useRecoilValue } from "recoil";
 import { updateViews } from "../../shared/apis/common";
 import { Layout } from "../../shared/components";
@@ -10,13 +11,8 @@ import GoodsInfo from "./GoodsInfo";
 import TwitterInfo from "./TwitterInfo";
 import Location from "./location";
 import { StyledDetail } from "./styles";
-import type { EventType } from "../../shared/types";
 
-type DetailProps = {
-	data: EventType;
-};
-
-const Detail = ({ data }: DetailProps) => {
+const Detail = () => {
 	const router = useRouter();
 	const searchFilters = useRecoilValue(searchFiltersAtom);
 
@@ -24,12 +20,10 @@ const Detail = ({ data }: DetailProps) => {
 		window.scrollTo(0, 0);
 	}, []);
 
-	const { id, biasesId, districts, address, goods, tweetUrl, views } = data;
-
 	useEffect(() => {
 		/** 조회수 업데이트 */
 		if (!window.location.href.includes("localhost")) {
-			updateViews(id, views).then();
+			// updateViews(id, views).then();
 		}
 	}, []);
 
@@ -47,15 +41,15 @@ const Detail = ({ data }: DetailProps) => {
 			<StyledDetail>
 				<div className="detailInfo">
 					<div className="mainInfo">
-						<DetailMainInfo data={data} />
+						<DetailMainInfo />
 					</div>
 					<div className="subInfo">
-						<TwitterInfo data={data} />
-						<GoodsInfo goods={goods} tweetUrl={tweetUrl} />
-						<Location address={address} />
+						<TwitterInfo />
+						<GoodsInfo />
+						<Location />
 					</div>
 				</div>
-				<EventNearHere biasesId={biasesId} districts={districts} />
+				<EventNearHere />
 			</StyledDetail>
 		</Layout>
 	);

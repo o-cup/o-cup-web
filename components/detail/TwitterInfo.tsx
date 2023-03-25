@@ -1,13 +1,15 @@
 import React from "react";
+import { useQueryClient } from "react-query";
 import { StyledTwitterInfo } from "./styles/twitterInfoStyle";
 import type { EventType } from "../../shared/types";
 
-type TwitterInfoProps = {
-	data: Partial<EventType>;
-};
+function TwitterInfo() {
+	const queryClient = useQueryClient();
 
-function TwitterInfo({ data }: TwitterInfoProps) {
-	const { snsId, hashTags, tweetUrl } = data;
+	const { snsId, hashTags, tweetUrl } = queryClient.getQueryData([
+		"detail",
+	]) as EventType;
+
 	return (
 		<StyledTwitterInfo>
 			<div className="account">

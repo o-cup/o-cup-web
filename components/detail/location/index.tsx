@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { FaRegCopy } from "react-icons/fa";
+import { useQueryClient } from "react-query";
 import { Toast } from "../../../shared/components";
 import { copyToClipboard } from "../../../shared/utils/copyHandlers";
 import { StyledLocation } from "../styles/locationStyle";
 import Map from "./Map";
 import type { EventType } from "../../../shared/types";
 
-function Location({ address }: Partial<EventType>) {
+const Location = () => {
 	const [isToast, setToast] = useState(false);
+	const queryClient = useQueryClient();
+	const { address } = queryClient.getQueryData(["detail"]) as EventType;
 
 	const handleClickCopy = () => {
 		if (address) {
@@ -29,6 +32,6 @@ function Location({ address }: Partial<EventType>) {
 			{isToast && <Toast setToast={setToast} text="주소가 복사되었습니다" />}
 		</>
 	);
-}
+};
 
 export default Location;

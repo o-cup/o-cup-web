@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaRegCopy } from "react-icons/fa";
 import { Toast } from "../../shared/components";
+import { copyToClipboard } from "../../shared/utils";
 import Map from "../detail/location/Map";
 import { StyledLocation } from "../detail/styles/locationStyle";
 import type { EventType } from "../../shared/types";

@@ -1,7 +1,7 @@
 import router from "next/router";
 import Script from "next/script";
 import React, { useState, useEffect } from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { RecoilRoot } from "recoil";
 import { ThemeProvider } from "styled-components";
@@ -25,7 +25,10 @@ const pageView = (url: string) => {
 	}
 };
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const MyApp = ({
+	Component,
+	pageProps,
+}: AppProps<{ dehydratedState: unknown }>) => {
 	const [queryClient] = useState(() => new QueryClient());
 
 	/** 100vh 맞춤 */
@@ -88,7 +91,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 				<RecoilRoot>
 					<ThemeProvider theme={theme}>
 						<GlobalStyle />
-						<Component {...pageProps} />
+						<Hydrate state={pageProps.dehydratedState}>
+							<Component {...pageProps} />
+						</Hydrate>
 						<ReactQueryDevtools initialIsOpen />
 					</ThemeProvider>
 				</RecoilRoot>

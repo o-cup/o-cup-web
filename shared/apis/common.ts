@@ -138,8 +138,15 @@ const fetchDuplicatedEvent = async ({
  * 인물 id로 인물 이름과 프로필사진 반환
  * @param id
  */
-const fetchBiasData = async (id: number) => {
+const fetchBiasData = async (id: string) => {
+	console.log("fetch-----");
+
+	console.log("id", id);
+
 	const { data } = await supabase.from("people").select("*").eq("id", id);
+
+	console.log("data", data);
+
 	const { name, profilePic } = data?.[0] || {};
 
 	return {

@@ -17,7 +17,6 @@ const StyledDetail = styled.div`
 	.subInfo {
 		display: flex;
 		flex-direction: column;
-		gap: 40px;
 	}
 `;
 

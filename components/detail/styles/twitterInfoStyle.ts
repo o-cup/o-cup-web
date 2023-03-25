@@ -47,6 +47,7 @@ export const StyledTwitterInfo = styled.div`
 		flex-wrap: wrap;
 		display: flex;
 		gap: 10px;
+		margin-bottom: 30px;
 
 		p {
 			display: block;

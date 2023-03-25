@@ -4,6 +4,7 @@ const StyledGoodsInfo = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+	margin-bottom: 40px;
 
 	> p.title {
 		font-weight: 700;

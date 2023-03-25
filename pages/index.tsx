@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import Head from "next/head";
 import React from "react";
 import { dehydrate, QueryClient } from "react-query";
@@ -37,17 +38,18 @@ const Index = () => (
 	</>
 );
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
 	const queryClient = new QueryClient();
 	await queryClient.prefetchQuery("people", () => fetchPeople());
-	await queryClient.prefetchQuery("events", () => fetchEvents({}));
+	await queryClient.prefetchQuery("events", () =>
+		fetchEvents({ date: format(new Date(), "yyyyMMdd") })
+	);
 
 	const dehydratedState = JSON.parse(JSON.stringify(dehydrate(queryClient)));
 
 	return {
 		props: {
 			dehydratedState,
-			revalidate: 1000 * 60 * 60, // 1 hour
 		},
 	};
 };

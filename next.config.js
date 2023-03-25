@@ -11,7 +11,7 @@ const nextConfig = {
 	},
 	// next/image 사용을 위한 CDN host 정의
 	images: {
-		domains: ["qxcfvgkruqxdxfhrkgzu.supabase.co"],
+		domains: ["qxcfvgkruqxdxfhrkgzu.supabase.co", "pbs.twimg.com"],
 	},
 };
 

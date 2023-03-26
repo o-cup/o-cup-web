@@ -139,14 +139,7 @@ const fetchDuplicatedEvent = async ({
  * @param id
  */
 const fetchBiasData = async (id: string) => {
-	console.log("fetch-----");
-
-	console.log("id", id);
-
 	const { data } = await supabase.from("people").select("*").eq("id", id);
-
-	console.log("data", data);
-
 	const { name, profilePic } = data?.[0] || {};
 
 	return {

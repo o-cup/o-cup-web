@@ -3,10 +3,8 @@ import styled from "styled-components";
 export const StyledTwitterInfo = styled.div`
 	position: relative;
 	padding: 20px 0 0 0;
-
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
 
 	.account {
 		display: flex;
@@ -20,6 +18,7 @@ export const StyledTwitterInfo = styled.div`
 		font-size: 14px;
 		line-height: 17px;
 		cursor: pointer;
+		margin-bottom: 10px;
 
 		> button {
 			flex: 1 1 50%;
@@ -47,7 +46,8 @@ export const StyledTwitterInfo = styled.div`
 		flex-wrap: wrap;
 		display: flex;
 		gap: 10px;
-		margin-bottom: 30px;
+		margin-top: 10px;
+		margin-bottom: 20px;
 
 		p {
 			display: block;

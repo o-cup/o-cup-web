@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-const KakaoAdFit = () => {
+const KakaoAdFitMain = () => {
 	// 최초 1회만 광고를 불러오기 위한 변수
 	const adRef = useRef<boolean>(false);
 
@@ -33,4 +33,4 @@ const KakaoAdFit = () => {
 	return <aside className="aside__kakaoAdFit" />;
 };
 
-export default React.memo(KakaoAdFit);
+export default React.memo(KakaoAdFitMain);

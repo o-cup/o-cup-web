@@ -9,6 +9,7 @@ function TwitterInfo() {
 	const { snsId, hashTags, tweetUrl } = queryClient.getQueryData([
 		"detail",
 	]) as EventType;
+	const tags = hashTags.filter(Boolean);
 
 	return (
 		<StyledTwitterInfo>
@@ -21,9 +22,13 @@ function TwitterInfo() {
 					<span>@{snsId} 님의 공지 바로가기</span>
 				</button>
 			</div>
-			<div className="hashTags">
-				{hashTags?.map((tag) => (tag === "" ? null : <p key={tag}>#{tag}</p>))}
-			</div>
+			{tags?.length ? (
+				<div className="hashTags">
+					{tags?.map((tag) => (
+						<p key={tag}>#{tag}</p>
+					))}
+				</div>
+			) : null}
 		</StyledTwitterInfo>
 	);
 }

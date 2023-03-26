@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CategoryChip } from "../../shared/components";
-import KaKaoAdFit from "../../shared/components/KaKaoAdFit";
+import KaKaoAdFit from "../../shared/components/KaKaoAdFit/KakaoAdFitMain";
 import { dateFilterAtom } from "../../shared/state";
 import {
 	convertDateToString,

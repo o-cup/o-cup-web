@@ -1,5 +1,6 @@
 import React from "react";
 import { useRecoilState } from "recoil";
+import KakaoAdFit from "../../shared/components/KakaoAdFit";
 import Icons from "../../shared/components/icon";
 import Layout from "../../shared/components/layout";
 import { useClearData } from "../../shared/hooks";
@@ -8,7 +9,6 @@ import { convertDateToString, convertStringToDate } from "../../shared/utils";
 import EventSection from "./EventSection";
 import BiasList from "./biasList/BiasList";
 import { StyledMain } from "./styles/mainStyle";
-import KakaoAdFit from "../../shared/components/KakaoAdFit";
 
 const Main = () => {
 	const [dateFilter, setDateFilter] = useRecoilState(dateFilterAtom);

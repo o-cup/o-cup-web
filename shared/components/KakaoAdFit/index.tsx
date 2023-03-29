@@ -1,10 +1,12 @@
+/* eslint-disable react/require-default-props */
 import React, { useEffect, useRef } from "react";
 
 type KakaoAdFitProps = {
 	unitCode: string;
+	height?: string;
 };
 
-const KakaoAdFit = ({ unitCode }: KakaoAdFitProps) => {
+const KakaoAdFit = ({ unitCode, height = "100" }: KakaoAdFitProps) => {
 	// 최초 1회만 광고를 불러오기 위한 변수
 	const adRef = useRef<boolean>(false);
 
@@ -21,7 +23,7 @@ const KakaoAdFit = ({ unitCode }: KakaoAdFitProps) => {
 		ins.style.display = "none;";
 
 		ins.setAttribute("data-ad-width", "320");
-		ins.setAttribute("data-ad-height", "100");
+		ins.setAttribute("data-ad-height", height);
 		ins.setAttribute("data-ad-unit", unitCode);
 
 		script.async = true;

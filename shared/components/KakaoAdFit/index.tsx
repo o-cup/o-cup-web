@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from "react";
 
-const KakaoAdFitMain = () => {
+type KakaoAdFitProps = {
+	unitCode: string;
+};
+
+const KakaoAdFit = ({ unitCode }: KakaoAdFitProps) => {
 	// 최초 1회만 광고를 불러오기 위한 변수
 	const adRef = useRef<boolean>(false);
 
@@ -18,7 +22,7 @@ const KakaoAdFitMain = () => {
 
 		ins.setAttribute("data-ad-width", "320");
 		ins.setAttribute("data-ad-height", "100");
-		ins.setAttribute("data-ad-unit", "DAN-eloyaCOUNzkG0TLf");
+		ins.setAttribute("data-ad-unit", unitCode);
 
 		script.async = true;
 		script.type = "text/javascript";
@@ -33,4 +37,4 @@ const KakaoAdFitMain = () => {
 	return <aside className="aside__kakaoAdFit" />;
 };
 
-export default React.memo(KakaoAdFitMain);
+export default React.memo(KakaoAdFit);

@@ -1,10 +1,8 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { useQueryClient } from "react-query";
 import { useRecoilValue } from "recoil";
-import { updateViews } from "../../shared/apis/common";
 import { Layout } from "../../shared/components";
-import KakaoAdFitDetail from "../../shared/components/KaKaoAdFit/KakaoAdFitDetail";
+import KakaoAdFit from "../../shared/components/KakaoAdFit";
 import { searchFiltersAtom } from "../../shared/state";
 import DetailMainInfo from "./DetailMainInfo";
 import EventNearHere from "./EventNearHere";
@@ -46,7 +44,7 @@ const Detail = () => {
 					</div>
 					<div className="subInfo">
 						<TwitterInfo />
-						<KakaoAdFitDetail />
+						<KakaoAdFit unitCode="DAN-cpJdkBHzfnPt01D6" />
 						<GoodsInfo />
 						<Location />
 					</div>

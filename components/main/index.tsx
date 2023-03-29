@@ -1,6 +1,6 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import KakaoAdFitMain from "../../shared/components/KaKaoAdFit/KakaoAdFitMain";
+import KakaoAdFit from "../../shared/components/KakaoAdFit";
 import Icons from "../../shared/components/icon";
 import Layout from "../../shared/components/layout";
 import { useClearData } from "../../shared/hooks";
@@ -45,7 +45,7 @@ const Main = () => {
 					/>
 				</div>
 				<BiasList />
-				<KakaoAdFitMain />
+				<KakaoAdFit unitCode="DAN-eloyaCOUNzkG0TLf" />
 				<EventSection />
 			</StyledMain>
 		</Layout>

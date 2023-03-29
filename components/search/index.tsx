@@ -9,6 +9,7 @@ import {
 	Loading,
 	SortIcon,
 } from "../../shared/components";
+import KakaoAdFit from "../../shared/components/KakaoAdFit";
 import { initialCategoryData } from "../../shared/constants";
 import { searchFiltersAtom, showResultAtom } from "../../shared/state";
 import { getBirthMonth } from "../../shared/utils";
@@ -155,6 +156,7 @@ const Search = () => {
 						/>
 					))}
 				</ul>
+				<KakaoAdFit unitCode="DAN-XIa6eGUHiz3Rkqbq" height="250" />
 			</StyledFilter>
 		);
 	};

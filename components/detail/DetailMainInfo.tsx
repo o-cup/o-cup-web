@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
 import { BiasChip, Icon } from "../../shared/components";
@@ -86,7 +87,15 @@ const DetailMainInfo = () => {
 			</StyledDetailTextContainer>
 			{images && images.length > 0 && (
 				<StyledDetailImgContainer onClick={() => setPosterViewOpen(true)}>
-					<img alt={images[0]} src={images[0]} onError={imageOnErrorHandler} />
+					<Image
+						src={images[0]}
+						width={436}
+						height={616}
+						layout="responsive"
+						objectFit="cover"
+						alt="poster"
+						onError={imageOnErrorHandler}
+					/>
 
 					<div className="imgZoom">
 						<img alt="zoom" src="/images/icons/zoom_white.png" />

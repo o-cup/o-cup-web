@@ -1,7 +1,8 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
-import { BiasChip, Icon } from "../../shared/components";
+import styled from "styled-components";
+import { Icon } from "../../shared/components";
 import { StyledBiasChip } from "../../shared/components/biasChip/biasChipStyle";
 import {
 	convertDateToString,
@@ -21,19 +22,9 @@ import type { EventType } from "../../shared/types";
 const DetailMainInfo = () => {
 	const queryClient = useQueryClient();
 	const [isPosterViewOpen, setPosterViewOpen] = useState(false);
-
 	const data = queryClient.getQueryData(["detail"]) as EventType;
-	const {
-		place,
-		category,
-		biasesId,
-		snsId,
-		startAt,
-		endAt,
-		images,
-		address,
-		requestedBiases,
-	} = data;
+	const biasNames = queryClient.getQueryData(["biasNames"]) as string[];
+	const { place, category, snsId, startAt, endAt, images, address } = data;
 
 	if (!startAt || !endAt) return null;
 	const today = convertDateToString(new Date());
@@ -46,17 +37,11 @@ const DetailMainInfo = () => {
 				<div className="title">
 					<p>{place}</p>
 					<div className="chipContainer">
-						{requestedBiases
-							? requestedBiases.map((bias) =>
-									bias.bias ? (
-										<StyledBiasChip key={bias.id} disabled={false}>
-											{bias.bias}
-										</StyledBiasChip>
-									) : null
-							  )
-							: biasesId?.map((biasId) => (
-									<BiasChip id={biasId} key={biasId} />
-							  ))}
+						{biasNames?.map((biasName) => (
+							<Styled.DetailBiasChip key={biasName}>
+								{biasName}
+							</Styled.DetailBiasChip>
+						))}
 					</div>
 				</div>
 				<ul>
@@ -115,3 +100,7 @@ DetailMainInfo.defaultProps = {
 };
 
 export default DetailMainInfo;
+
+const Styled = {
+	DetailBiasChip: styled(StyledBiasChip)``,
+};

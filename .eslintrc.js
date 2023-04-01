@@ -17,6 +17,7 @@ module.exports = {
 			{ extensions: [".js", ".jsx", ".ts", ".tsx"] },
 		],
 		"no-console": ["warn", { allow: ["warn", "error"] }],
+		"no-use-before-define": "off",
 		quotes: ["error", "double"],
 		"react/function-component-definition": "off",
 		"react/jsx-props-no-spreading": "off",

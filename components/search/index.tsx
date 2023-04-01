@@ -142,7 +142,6 @@ const Search = () => {
 						selectedOption={selectedOption}
 					/>
 				</div>
-
 				<ul className="biases">
 					{people?.map((bias) => (
 						<BiasProfile

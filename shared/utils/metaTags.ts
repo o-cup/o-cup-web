@@ -32,7 +32,7 @@ export const generateSSRMetaTitle = ({
 type GenerateMetaDescriptionProps = {
 	page: string;
 	place?: string;
-	names?: string;
+	names?: string[];
 };
 
 export const generateSSRMetaDescription = ({

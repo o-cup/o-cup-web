@@ -30,6 +30,7 @@ const EventListItem = ({ event }: EventListItemProps) => {
 						width={176}
 						height={235}
 						layout="intrinsic"
+						loading="lazy"
 					/>
 				</div>
 				<div className="title">

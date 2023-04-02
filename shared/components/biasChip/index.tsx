@@ -18,7 +18,7 @@ const BiasChip = ({
 	disabled,
 	text,
 }: BiasChipProps) => {
-	const { data: name } = useQuery(["bias"], () => fetchBiases({ id }), {
+	const { data: name } = useQuery(["bias", id], () => fetchBiases({ id }), {
 		enabled: !!id || !!text,
 	});
 

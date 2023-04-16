@@ -3,13 +3,17 @@ import Head from "next/head";
 import React from "react";
 import { dehydrate, QueryClient } from "react-query";
 import Main from "../components/main";
-import { fetchEvents, fetchPeople } from "../shared/apis/common";
+import {
+	fetchEventsByDate,
+	getBiasListData,
+} from "../components/main/fetchers";
 import {
 	DEFAULT_DESCRIPTION,
 	DEFAULT_TITLE,
 	DEFAULT_URL,
 	LOGO_URL,
 } from "../shared/constants";
+import type { EventType } from "../shared/types";
 
 const Index = () => (
 	<>
@@ -40,11 +44,20 @@ const Index = () => (
 
 export const getServerSideProps = async () => {
 	const queryClient = new QueryClient();
-	await queryClient.prefetchQuery("people", () => fetchPeople());
-	await queryClient.prefetchQuery("events", () =>
-		fetchEvents({ date: format(new Date(), "yyyyMMdd") })
+	const today = format(new Date(), "yyyyMMdd");
+	await queryClient.prefetchQuery(["eventsByDate"], () =>
+		fetchEventsByDate(today)
 	);
-
+	await queryClient.prefetchQuery(["bidsByDate"], () => {
+		const events = queryClient.getQueryData(["eventsByDate"]);
+		const bids = Array.from(
+			new Set(events?.map((event: EventType) => event.biasesId).flat())
+		);
+		return bids;
+	});
+	await queryClient.prefetchQuery(["biasListByDate"], () =>
+		getBiasListData(today)
+	);
 	const dehydratedState = JSON.parse(JSON.stringify(dehydrate(queryClient)));
 
 	return {

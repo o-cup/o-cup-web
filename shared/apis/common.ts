@@ -160,35 +160,6 @@ const updateViews = async (id: string, prevViews: number) => {
 	return data;
 };
 
-export const fetchEventsByDate = async (date: string) => {
-	const { data } = await supabase
-		.from("events")
-		.select("*")
-		.eq("isApproved", true)
-		.lte("startAt", date)
-		.gte("endAt", date);
-
-	return data;
-};
-
-export const fetchBiasDataById = async (bids: string[]) => {
-	const { data } = await supabase
-		.from("people")
-		.select("*")
-		.in("id", bids)
-		.order("name", { ascending: true });
-	return data;
-};
-
-export const getBiasListData = async (date: string) => {
-	const events = await fetchEventsByDate(date);
-	const bids = Array.from(
-		new Set(events?.map((event) => event.biasesId).flat())
-	);
-	const biasData = await fetchBiasDataById(bids);
-	return biasData;
-};
-
 export {
 	fetchEvents,
 	fetchEventById,

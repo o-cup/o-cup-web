@@ -1,44 +1,22 @@
 import React from "react";
-import { useQuery } from "react-query";
-import { useRecoilValue } from "recoil";
+import { useQueryClient } from "react-query";
 import { FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { getBiasListData } from "../../../shared/apis/common";
-import { Loading } from "../../../shared/components";
-import { dateFilterAtom } from "../../../shared/state";
 import { StyledBiasSwiper } from "../styles/biasStyles";
 import Bias from "./Bias";
 import SearchIcon from "./SearchIcon";
 
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
+import type { PeopleType } from "../../../shared/types";
 
 const BiasList = () => {
-	const dateFilter = useRecoilValue(dateFilterAtom);
+	const queryClient = useQueryClient();
+	// const dateFilter = useRecoilValue(dateFilterAtom);
 
-	const { data: biasListData, isLoading } = useQuery(
-		["eventsByDate", dateFilter],
-		() => getBiasListData(dateFilter),
-		{
-			select: (data) => {
-				if (!data) return [];
-				const birthdayItems = data.filter(
-					(item) => item.birthday.slice(-4) === dateFilter.slice(-4)
-				);
-				const sortedArray = [
-					...birthdayItems,
-					...data.filter(
-						(item) => item.birthday.slice(-4) !== dateFilter.slice(-4)
-					),
-				];
-				return sortedArray;
-			},
-		}
-	);
-
-	if (isLoading) {
-		return <Loading />;
-	}
+	const biasListData = queryClient.getQueryData([
+		"biasListByDate",
+	]) as PeopleType[];
 
 	return (
 		<StyledBiasSwiper>

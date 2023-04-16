@@ -45,11 +45,11 @@ const Index = () => (
 export const getServerSideProps = async () => {
 	const queryClient = new QueryClient();
 	const today = format(new Date(), "yyyyMMdd");
-	await queryClient.prefetchQuery(["eventsByDate"], () =>
+	await queryClient.prefetchQuery(["eventListByDate"], () =>
 		fetchEventsByDate(today)
 	);
 	await queryClient.prefetchQuery(["bidsByDate"], () => {
-		const events = queryClient.getQueryData(["eventsByDate"]);
+		const events = queryClient.getQueryData(["eventListByDate"]);
 		const bids = Array.from(
 			new Set(events?.map((event: EventType) => event.biasesId).flat())
 		);

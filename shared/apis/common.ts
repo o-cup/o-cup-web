@@ -1,11 +1,7 @@
 import { supabase } from "../../supabaseClient";
 import { ITEMS_PER_PAGE } from "../constants";
 import { isOpenToday } from "../utils/dateHandlers";
-import type {
-	EventType,
-	FetchEventParams,
-	SearchSortOptionKeys,
-} from "../types";
+import type { EventType, FetchEventParams } from "../types";
 
 const fetchEvents = async ({
 	pageParam = 1,
@@ -162,6 +158,35 @@ const updateViews = async (id: string, prevViews: number) => {
 		throw new Error(`${error.message}: ${error.details}`);
 	}
 	return data;
+};
+
+export const fetchEventsByDate = async (date: string) => {
+	const { data } = await supabase
+		.from("events")
+		.select("*")
+		.eq("isApproved", true)
+		.lte("startAt", date)
+		.gte("endAt", date);
+
+	return data;
+};
+
+export const fetchBiasDataById = async (bids: string[]) => {
+	const { data } = await supabase
+		.from("people")
+		.select("*")
+		.in("id", bids)
+		.order("name", { ascending: true });
+	return data;
+};
+
+export const getBiasListData = async (date: string) => {
+	const events = await fetchEventsByDate(date);
+	const bids = Array.from(
+		new Set(events?.map((event) => event.biasesId).flat())
+	);
+	const biasData = await fetchBiasDataById(bids);
+	return biasData;
 };
 
 export {

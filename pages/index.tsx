@@ -49,9 +49,9 @@ export const getServerSideProps = async () => {
 		fetchEventsByDate(today)
 	);
 	await queryClient.prefetchQuery(["bidsByDate"], () => {
-		const events = queryClient.getQueryData(["eventListByDate"]);
+		const events = queryClient.getQueryData(["eventListByDate"]) as EventType[];
 		const bids = Array.from(
-			new Set(events?.map((event: EventType) => event.biasesId).flat())
+			new Set(events?.map((event) => event.biasesId).flat())
 		);
 		return bids;
 	});

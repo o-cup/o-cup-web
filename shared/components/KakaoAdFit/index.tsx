@@ -36,7 +36,7 @@ const KakaoAdFit = ({ unitCode, height = "100" }: KakaoAdFitProps) => {
 		// 광고 로딩 여부 상태 변경
 		adRef.current = true;
 	}, []);
-	return <aside className="aside__kakaoAdFit" />;
+	return <aside className="aside__kakaoAdFit" style={{ minHeight: "105px" }} />;
 };
 
 export default React.memo(KakaoAdFit);

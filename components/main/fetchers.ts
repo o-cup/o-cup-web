@@ -8,7 +8,7 @@ export const fetchEventsByDate = async (date: string) => {
 		.lte("startAt", date)
 		.gte("endAt", date);
 
-	return data;
+	return data?.map((item) => ({ ...item, image: item.images[0] }));
 };
 
 export const fetchBiasDataById = async (bids: string[]) => {

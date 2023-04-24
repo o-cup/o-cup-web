@@ -1,11 +1,7 @@
 import { supabase } from "../../supabaseClient";
 import { ITEMS_PER_PAGE } from "../constants";
 import { isOpenToday } from "../utils/dateHandlers";
-import type {
-	EventType,
-	FetchEventParams,
-	SearchSortOptionKeys,
-} from "../types";
+import type { EventType, FetchEventParams } from "../types";
 
 const fetchEvents = async ({
 	pageParam = 1,

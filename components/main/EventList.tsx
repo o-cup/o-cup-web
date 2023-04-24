@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useQuery } from "react-query";
 import { useRecoilValue } from "recoil";
 import { FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { fetchBiasNameById } from "../../shared/apis/search";
 import { CategoryChip } from "../../shared/components";
 import { dateFilterAtom } from "../../shared/state";
 import {
@@ -21,12 +23,12 @@ import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
 
 type BiasEventListProps = {
-	id: string;
-	bias: PeopleType;
+	biasData: PeopleType;
 	events: EventType[];
+	id: string;
 };
 
-const EventList = ({ id, bias, events }: BiasEventListProps) => {
+const EventList = ({ biasData, events, id }: BiasEventListProps) => {
 	const dateFilter = useRecoilValue(dateFilterAtom);
 	const [openedCategory, setOpenedCategory] = useState<
 		("A" | "B" | "C" | "D" | "E")[]
@@ -39,10 +41,18 @@ const EventList = ({ id, bias, events }: BiasEventListProps) => {
 	// const monthIndex = convertStringToDate(dateFilter).getMonth();
 	const date = convertStringToDate(dateFilter).getDate();
 
+	const { data: biasName } = useQuery(
+		["biasName", biasData],
+		() => fetchBiasNameById(Number(biasData.id)),
+		{
+			enabled: !!biasData,
+		}
+	);
+
 	const getEventTitle = () =>
 		`${isToday ? "오늘" : `${date}일에`} ${
 			isBeforeToday(dateFilter) ? "열린" : "열리는"
-		} ${bias.name} 이벤트`;
+		} ${biasName} 이벤트`;
 
 	/** 이벤트 존재하는 카테고리만 활성화 */
 	useEffect(() => {

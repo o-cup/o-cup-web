@@ -1,11 +1,7 @@
 import { supabase } from "../../supabaseClient";
 import { ITEMS_PER_PAGE } from "../constants";
 import { isOpenToday } from "../utils/dateHandlers";
-import type {
-	EventType,
-	FetchEventParams,
-	SearchSortOptionKeys,
-} from "../types";
+import type { EventType, FetchEventParams } from "../types";
 
 const fetchEvents = async ({
 	pageParam = 1,
@@ -139,14 +135,7 @@ const fetchDuplicatedEvent = async ({
  * @param id
  */
 const fetchBiasData = async (id: string) => {
-	console.log("fetch-----");
-
-	console.log("id", id);
-
 	const { data } = await supabase.from("people").select("*").eq("id", id);
-
-	console.log("data", data);
-
 	const { name, profilePic } = data?.[0] || {};
 
 	return {

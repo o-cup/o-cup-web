@@ -32,7 +32,7 @@ export const generateSSRMetaTitle = ({
 type GenerateMetaDescriptionProps = {
 	page: string;
 	place?: string;
-	names?: string;
+	names?: string[];
 };
 
 export const generateSSRMetaDescription = ({
@@ -41,10 +41,11 @@ export const generateSSRMetaDescription = ({
 	names,
 }: GenerateMetaDescriptionProps) => {
 	let description = DEFAULT_DESCRIPTION;
+	const nameText = names?.join(", ");
 
 	switch (page) {
 		case "detail":
-			description = `${place}에서 열리는 ${names} 이벤트를 오늘의 컵홀더에서 확인해보세요!`;
+			description = `${place}에서 열리는 ${nameText} 이벤트를 오늘의 컵홀더에서 확인해보세요!`;
 			break;
 
 		case "search":

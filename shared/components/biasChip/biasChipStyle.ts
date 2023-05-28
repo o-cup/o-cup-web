@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledBiasChip = styled.span<{ disabled: boolean }>`
+export const StyledBiasChip = styled.span<{ disabled?: boolean }>`
 	font-size: 13px;
 	line-height: 19px;
 	font-weight: 700;
@@ -14,5 +14,4 @@ const StyledBiasChip = styled.span<{ disabled: boolean }>`
 	height: 26px;
 `;
 
-export { StyledBiasChip };
 export default {};

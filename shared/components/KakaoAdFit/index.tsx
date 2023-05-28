@@ -1,6 +1,12 @@
+/* eslint-disable react/require-default-props */
 import React, { useEffect, useRef } from "react";
 
-const KakaoAdFit = () => {
+type KakaoAdFitProps = {
+	unitCode: string;
+	height?: string;
+};
+
+const KakaoAdFit = ({ unitCode, height = "100" }: KakaoAdFitProps) => {
 	// 최초 1회만 광고를 불러오기 위한 변수
 	const adRef = useRef<boolean>(false);
 
@@ -17,8 +23,8 @@ const KakaoAdFit = () => {
 		ins.style.display = "none;";
 
 		ins.setAttribute("data-ad-width", "320");
-		ins.setAttribute("data-ad-height", "100");
-		ins.setAttribute("data-ad-unit", "DAN-eloyaCOUNzkG0TLf");
+		ins.setAttribute("data-ad-height", height);
+		ins.setAttribute("data-ad-unit", unitCode);
 
 		script.async = true;
 		script.type = "text/javascript";
@@ -30,7 +36,7 @@ const KakaoAdFit = () => {
 		// 광고 로딩 여부 상태 변경
 		adRef.current = true;
 	}, []);
-	return <aside className="aside__kakaoAdFit" />;
+	return <aside className="aside__kakaoAdFit" style={{ minHeight: "105px" }} />;
 };
 
 export default React.memo(KakaoAdFit);

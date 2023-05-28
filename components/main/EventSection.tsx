@@ -1,52 +1,18 @@
 import React, { useEffect } from "react";
 import { useQuery, useQueryClient } from "react-query";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { fetchEvents, fetchPeople } from "../../shared/apis/common";
-import { Loading } from "../../shared/components";
-import { dateFilterAtom, openedBiasAtom } from "../../shared/state";
+import { useSetRecoilState } from "recoil";
+import { openedBiasAtom } from "../../shared/state";
 import EmptyDefault from "./EmptyDefault";
 import EventList from "./EventList";
 import { StyledMainEventSection } from "./styles/mainEventListStyles";
+import type { EventType, PeopleType } from "../../shared/types";
 
 const EventSection = () => {
 	const queryClient = useQueryClient();
-	const dateFilter = useRecoilValue(dateFilterAtom);
-	const [openedBias, setOpenedBias] = useRecoilState(openedBiasAtom);
+	const setOpenedBias = useSetRecoilState(openedBiasAtom);
 
-	const { data: events, isLoading } = useQuery(
-		["events", dateFilter],
-		() =>
-			fetchEvents({
-				date: dateFilter,
-			}),
-		{
-			select: (data) => data?.map((e) => ({ ...e, image: e.images[0] })),
-			initialData: queryClient.getQueryData("events"),
-		}
-	);
-
-	const { data: openedPeople } = useQuery(
-		["bias", openedBias],
-		() => fetchPeople(),
-		{
-			select: (data) => {
-				const birthdayPeople =
-					data?.filter(
-						(bias) =>
-							openedBias.includes(bias.id) &&
-							bias.birthday.slice(-4) === dateFilter.slice(-4)
-					) || [];
-				const noneBirthdayPeople =
-					data?.filter(
-						(bias) =>
-							openedBias.includes(bias.id) &&
-							bias.birthday.slice(-4) !== dateFilter.slice(-4)
-					) || [];
-
-				return [...birthdayPeople, ...noneBirthdayPeople];
-			},
-		}
-	);
+	const events = queryClient.getQueryData("eventListByDate") as EventType[];
+	const biasList = queryClient.getQueryData("biasListByDate") as PeopleType[];
 
 	/** 이벤트 목록에서 인물 id 추출 */
 	useEffect(() => {
@@ -58,27 +24,23 @@ const EventSection = () => {
 		setOpenedBias(Array.from(biasSet));
 	}, [events, setOpenedBias]);
 
-	if (isLoading) {
-		return <Loading />;
-	}
-
 	return (
 		<>
 			<StyledMainEventSection>
-				{openedPeople?.map((bias) => (
+				{biasList?.map((item) => (
 					<EventList
-						key={bias.id}
-						id={`bias_${bias.id}`}
-						bias={bias}
+						biasData={item}
+						key={item.id}
+						id={`bias_${item.id}`}
 						events={
 							events
-								? events.filter((event) => event.biasesId.includes(bias.id))
+								? events.filter((event) => event.biasesId.includes(item.id))
 								: []
 						}
 					/>
 				))}
 			</StyledMainEventSection>
-			{openedPeople?.length ? (
+			{biasList?.length ? (
 				<EmptyDefault
 					size={events && events.length > 0 ? "small" : "default"}
 				/>

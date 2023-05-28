@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useQuery, useQueryClient } from "react-query";
 import { useRecoilState } from "recoil";
-import KaKaoAdFit from "../../shared/components/KaKaoAdFit";
+import KakaoAdFit from "../../shared/components/KakaoAdFit";
 import Icons from "../../shared/components/icon";
 import Layout from "../../shared/components/layout";
 import { useClearData } from "../../shared/hooks";
@@ -8,6 +9,7 @@ import { dateFilterAtom } from "../../shared/state";
 import { convertDateToString, convertStringToDate } from "../../shared/utils";
 import EventSection from "./EventSection";
 import BiasList from "./biasList/BiasList";
+import { fetchEventsByDate, getBiasListData } from "./fetchers";
 import { StyledMain } from "./styles/mainStyle";
 
 const Main = () => {
@@ -17,6 +19,19 @@ const Main = () => {
 	const date = convertStringToDate(dateFilter).getDate();
 
 	useClearData();
+
+	const { refetch: refetchBiasList } = useQuery(["biasListByDate"], () =>
+		getBiasListData(dateFilter)
+	);
+
+	const { refetch: refetchEventsList } = useQuery(["eventListByDate"], () =>
+		fetchEventsByDate(dateFilter)
+	);
+
+	useEffect(() => {
+		refetchBiasList();
+		refetchEventsList();
+	}, [dateFilter]);
 
 	const handleChangeDate = (type: "prev" | "next") => {
 		const selectedDate = convertStringToDate(dateFilter);
@@ -45,7 +60,7 @@ const Main = () => {
 					/>
 				</div>
 				<BiasList />
-				<KaKaoAdFit />
+				<KakaoAdFit unitCode="DAN-eloyaCOUNzkG0TLf" />
 				<EventSection />
 			</StyledMain>
 		</Layout>

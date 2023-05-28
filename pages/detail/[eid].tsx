@@ -15,7 +15,7 @@ const DetailPage = () => {
 	const queryClient = useQueryClient();
 	const [url, setUrl] = useState(DEFAULT_URL);
 
-	const biasNames = queryClient.getQueryData(["biasNames"]) as string;
+	const biasNames = queryClient.getQueryData(["biasNames"]) as string[];
 	const { place, images, id } = queryClient.getQueryData([
 		"detail",
 	]) as EventType;

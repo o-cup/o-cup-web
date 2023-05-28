@@ -8,6 +8,7 @@ type BiasChipProps = {
 	previewName?: string;
 	dots?: boolean;
 	disabled?: boolean;
+	text?: string;
 };
 
 const BiasChip = ({
@@ -15,14 +16,15 @@ const BiasChip = ({
 	previewName,
 	dots = false,
 	disabled,
+	text,
 }: BiasChipProps) => {
-	const { data: name } = useQuery(["bias"], () => fetchBiases({ id }), {
-		enabled: !!id,
+	const { data: name } = useQuery(["bias", id], () => fetchBiases({ id }), {
+		enabled: !!id || !!text,
 	});
 
 	return (
 		<StyledBiasChip disabled={disabled || false}>
-			{name || previewName || id}
+			{text || name || previewName || id}
 			{dots && "..."}
 		</StyledBiasChip>
 	);
@@ -32,6 +34,7 @@ BiasChip.defaultProps = {
 	previewName: "",
 	dots: false,
 	disabled: false,
+	text: "",
 };
 
 export default BiasChip;

@@ -48,6 +48,12 @@ export const StyledFilter = styled.div`
 		row-gap: 20px;
 		padding: 12px 0;
 	}
+
+	.aside__kakaoAdFit {
+		display: flex;
+		justify-content: center;
+		margin-top: 20px;
+	}
 `;
 
 export const ResetButton = styled.div`

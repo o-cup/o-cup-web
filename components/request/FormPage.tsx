@@ -161,12 +161,11 @@ const FormPage = ({
 								placeholder="ocup"
 								handleInputChange={(e) => handleInputChange(e, "snsId")}
 								handleInputDelete={(e) => handleInputDelete(e, "snsId")}
-								// disabled={!!snsIdFromLink}
 							/>
 							<PosterUploader />
 							<HashTagsContainer />
 							<FcfsGoodsInput />
-							<GoodsInputContainer />ß
+							<GoodsInputContainer />
 							<LuckyDrawInput />
 						</div>
 						<div className="ctaContainer">

@@ -65,7 +65,11 @@ export const StyledBias = styled.div`
 			text-align: center;
 			font-size: 14px;
 			line-height: 14px;
+			width: 100%;
+			max-width: 65px;
 			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 	}
 `;

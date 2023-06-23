@@ -56,7 +56,7 @@ const FormPage = ({
 	const [requestInputs, setRequestInputs] = useRecoilState(requestInputsAtom);
 	const goodsList = useRecoilValue(requestGoodsListAtom);
 	const tempPosters = useRecoilValue(tempPostersAtom);
-	const { snsId, link } = requestInputs;
+	const { link, snsId } = requestInputs;
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -66,9 +66,24 @@ const FormPage = ({
 		e: React.ChangeEvent<HTMLInputElement>,
 		id: string
 	) => {
+		const { value } = e.currentTarget;
+
+		if (id === "link") {
+			const snsIdFromLink = value.includes("twitter")
+				? value.split("/")[3]
+				: "";
+
+			setRequestInputs({
+				...requestInputs,
+				link: value,
+				snsId: snsIdFromLink,
+			});
+			return;
+		}
+
 		setRequestInputs({
 			...requestInputs,
-			[id]: e.currentTarget.value,
+			[id]: value,
 		});
 	};
 
@@ -130,17 +145,7 @@ const FormPage = ({
 								/>
 							</StyledPlaceInput>
 							<ArtistInputContainer />
-							<BasicInput
-								label="주최자 트위터 계정"
-								value={snsId}
-								id="snsId"
-								placeholder="ocup"
-								handleInputChange={(e) => handleInputChange(e, "snsId")}
-								handleInputDelete={(e) => handleInputDelete(e, "snsId")}
-							/>
 							<DateRangeInput disabled />
-							<PosterUploader />
-							<HashTagsContainer />
 							<BasicInput
 								label="이벤트 트윗 링크 *"
 								value={link}
@@ -149,9 +154,19 @@ const FormPage = ({
 								handleInputChange={(e) => handleInputChange(e, "link")}
 								handleInputDelete={(e) => handleInputDelete(e, "link")}
 							/>
-							<FcfsGoodsInput />
-							<GoodsInputContainer />
-							<LuckyDrawInput />
+							<BasicInput
+								label="주최자 트위터 계정"
+								value={snsId}
+								id="snsId"
+								placeholder="ocup"
+								handleInputChange={(e) => handleInputChange(e, "snsId")}
+								handleInputDelete={(e) => handleInputDelete(e, "snsId")}
+							/>
+							<PosterUploader />
+							<HashTagsContainer />
+							{/* <FcfsGoodsInput /> */}
+							{/* <GoodsInputContainer /> */}
+							{/* <LuckyDrawInput /> */}
 						</div>
 						<div className="ctaContainer">
 							<Button

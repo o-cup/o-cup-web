@@ -2,11 +2,10 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { Layout } from "../../shared/components";
-import KakaoAdFit from "../../shared/components/KakaoAdFit";
+import KakaoAdFit from "../../shared/components/kakaoAdFit";
 import { searchFiltersAtom } from "../../shared/state";
 import DetailMainInfo from "./DetailMainInfo";
 import EventNearHere from "./EventNearHere";
-import GoodsInfo from "./GoodsInfo";
 import TwitterInfo from "./TwitterInfo";
 import Location from "./location";
 import { StyledDetail } from "./styles";
@@ -44,9 +43,9 @@ const Detail = () => {
 					</div>
 					<div className="subInfo">
 						<TwitterInfo />
-						<KakaoAdFit unitCode="DAN-cpJdkBHzfnPt01D6" />
-						<GoodsInfo />
+						{/* <GoodsInfo /> */}
 						<Location />
+						<KakaoAdFit unitCode="DAN-cpJdkBHzfnPt01D6" />
 					</div>
 				</div>
 				<EventNearHere />

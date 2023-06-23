@@ -9,7 +9,7 @@ import {
 	Loading,
 	SortIcon,
 } from "../../shared/components";
-import KakaoAdFit from "../../shared/components/KakaoAdFit";
+import KakaoAdFit from "../../shared/components/kakaoAdFit";
 import { initialCategoryData } from "../../shared/constants";
 import { searchFiltersAtom, showResultAtom } from "../../shared/state";
 import { getBirthMonth } from "../../shared/utils";

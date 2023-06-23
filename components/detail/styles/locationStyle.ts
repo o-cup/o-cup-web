@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const StyledLocation = styled.div`
+	margin-bottom: 40px;
+
 	> p.title {
 		font-weight: 700;
 		font-size: 20px;

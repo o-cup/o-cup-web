@@ -44,9 +44,9 @@ const Detail = () => {
 					</div>
 					<div className="subInfo">
 						<TwitterInfo />
-						<KakaoAdFit unitCode="DAN-cpJdkBHzfnPt01D6" />
-						<GoodsInfo />
+						{/* <GoodsInfo /> */}
 						<Location />
+						<KakaoAdFit unitCode="DAN-cpJdkBHzfnPt01D6" />
 					</div>
 				</div>
 				<EventNearHere />

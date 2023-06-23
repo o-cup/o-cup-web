@@ -164,9 +164,9 @@ const FormPage = ({
 							/>
 							<PosterUploader />
 							<HashTagsContainer />
-							<FcfsGoodsInput />
-							<GoodsInputContainer />
-							<LuckyDrawInput />
+							{/* <FcfsGoodsInput /> */}
+							{/* <GoodsInputContainer /> */}
+							{/* <LuckyDrawInput /> */}
 						</div>
 						<div className="ctaContainer">
 							<Button

@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
-import KakaoAdFit from "../../shared/components/KakaoAdFit";
 import Icons from "../../shared/components/icon";
+import KakaoAdFit from "../../shared/components/kakaoAdFit";
 import Layout from "../../shared/components/layout";
 import { useClearData } from "../../shared/hooks";
 import { dateFilterAtom } from "../../shared/state";

@@ -1,8 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { fetchPeople } from "../../shared/apis/common";
 import {
 	BiasProfile,
 	Layout,
@@ -12,10 +10,10 @@ import {
 import KakaoAdFit from "../../shared/components/kakaoAdFit";
 import { initialCategoryData } from "../../shared/constants";
 import { searchFiltersAtom, showResultAtom } from "../../shared/state";
-import { getBirthMonth } from "../../shared/utils";
 import MonthSelector from "./MonthSelector";
 import Result from "./Result";
 import SearchInput from "./SearchInput";
+import useBiasList from "./hooks/useBiasList";
 import useHanleDirectAccess from "./hooks/useHandleDirectAccess";
 import { StyledFilter, StyledSearch } from "./styles/searchStyle";
 import type { SearchSortOptionKeys } from "../../shared/types";
@@ -39,36 +37,10 @@ const Search = () => {
 
 	useHanleDirectAccess();
 
-	const { data: people, isLoading } = useQuery(
-		["people", selectedOption],
-		fetchPeople,
-		{
-			select: (data) => {
-				let biases = data?.filter(
-					(item) => getBirthMonth(item.birthday) === selectedMonth
-				);
-
-				switch (selectedOption) {
-					case "birthdayAsc":
-						biases = biases?.sort(
-							(a, b) => a.birthday.slice(-4) - b.birthday.slice(-4)
-						);
-						break;
-
-					case "birthdayDsc":
-						biases = biases?.sort(
-							(a, b) => b.birthday.slice(-4) - a.birthday.slice(-4)
-						);
-						break;
-
-					case "alphabetAsc":
-					default:
-						break;
-				}
-				return biases;
-			},
-		}
-	);
+	const { biasList, isLoading } = useBiasList({
+		selectedOption,
+		selectedMonth,
+	});
 
 	useEffect(() => {
 		const today = new Date();
@@ -143,7 +115,7 @@ const Search = () => {
 					/>
 				</div>
 				<ul className="biases">
-					{people?.map((bias) => (
+					{biasList?.map((bias: any) => (
 						<BiasProfile
 							key={bias.id}
 							biasName={bias.name}
